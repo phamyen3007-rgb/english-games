@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exercise 6 – Option B</title>
+  <style>
+    :root {
+      --primary: #0f766e;
+      --primary-dark: #115e59;
+      --secondary: #2563eb;
+      --bg: #f0fdfa;
+      --card: #ffffff;
+      --text: #16302d;
+      --muted: #64748b;
+      --border: #cbd5e1;
+      --correct: #15803d;
+      --correct-bg: #dcfce7;
+      --wrong: #b91c1c;
+      --wrong-bg: #fee2e2;
+      --soft: #ecfeff;
+      --shadow: 0 18px 45px rgba(15, 118, 110, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.10), transparent 30%),
+        linear-gradient(135deg, #ecfeff, #f0fdfa 55%, #eff6ff);
+      color: var(--text);
+      padding: 24px;
+    }
+
+    .app {
+      width: min(900px, 100%);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .title-wrap h1 {
+      margin: 0;
+      font-size: clamp(1.45rem, 3vw, 2.1rem);
+      color: var(--primary-dark);
+    }
+
+    .title-wrap p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .score-box {
+      min-width: 116px;
+      text-align: center;
+      background: var(--card);
+      border: 1px solid rgba(15, 118, 110, 0.18);
+      border-radius: 16px;
+      padding: 10px 16px;
+      box-shadow: 0 8px 24px rgba(15, 118, 110, 0.08);
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .progress-wrap {
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(15, 118, 110, 0.14);
+      border-radius: 999px;
+      height: 14px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transition: width 0.35s ease;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: clamp(20px, 4vw, 34px);
+      border: 1px solid rgba(15, 118, 110, 0.12);
+    }
+
+    .question-number {
+      display: inline-block;
+      padding: 7px 12px;
+      background: var(--soft);
+      color: var(--primary-dark);
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .question-text {
+      font-size: clamp(1.05rem, 2.3vw, 1.28rem);
+      line-height: 1.65;
+      margin: 0 0 22px;
+      font-weight: 600;
+    }
+
+    .options {
+      display: grid;
+      gap: 12px;
+    }
+
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      border: 2px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      border-radius: 16px;
+      padding: 15px 16px;
+      font-size: 1rem;
+      line-height: 1.45;
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+      border-color: var(--primary);
+      background: #f8fffe;
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+    }
+
+    .option-btn.correct {
+      border-color: var(--correct);
+      background: var(--correct-bg);
+      color: #14532d;
+      font-weight: 700;
+    }
+
+    .option-btn.wrong {
+      border-color: var(--wrong);
+      background: var(--wrong-bg);
+      color: #7f1d1d;
+      font-weight: 700;
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 20px;
+      border-radius: 16px;
+      padding: 16px;
+      line-height: 1.55;
+      border-left: 6px solid var(--primary);
+      background: #f8fafc;
+    }
+
+    .feedback.show {
+      display: block;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .feedback.correct-feedback {
+      border-left-color: var(--correct);
+      background: var(--correct-bg);
+    }
+
+    .feedback.wrong-feedback {
+      border-left-color: var(--wrong);
+      background: var(--wrong-bg);
+    }
+
+    .feedback-title {
+      margin: 0 0 6px;
+      font-weight: 800;
+    }
+
+    .feedback p {
+      margin: 4px 0;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+    }
+
+    .next-btn,
+    .restart-btn {
+      border: 0;
+      border-radius: 14px;
+      padding: 12px 22px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: white;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+    }
+
+    .next-btn {
+      display: none;
+    }
+
+    .next-btn.show {
+      display: inline-block;
+    }
+
+    .result {
+      display: none;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .result.show {
+      display: block;
+    }
+
+    .result-icon {
+      font-size: 4rem;
+      margin-bottom: 8px;
+    }
+
+    .result h2 {
+      margin: 0 0 10px;
+      color: var(--primary-dark);
+      font-size: 2rem;
+    }
+
+    .final-score {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin: 12px 0;
+    }
+
+    .result-message {
+      color: var(--muted);
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 14px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+      }
+
+      .score-box {
+        min-width: 92px;
+        padding: 9px 10px;
+      }
+
+      .card {
+        border-radius: 18px;
+      }
+
+      .option-btn {
+        padding: 13px 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <div class="topbar">
+      <div class="title-wrap">
+        <h1>Exercise 6 – Option B</h1>
+        <p>Choose the best option to complete each sentence.</p>
+      </div>
+      <div class="score-box" id="scoreBox">Score: 0/5</div>
+    </div>
+
+    <div class="progress-wrap" aria-label="Quiz progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <section class="card">
+      <div id="quizScreen">
+        <div class="question-number" id="questionNumber"></div>
+        <p class="question-text" id="questionText"></p>
+        <div class="options" id="options"></div>
+
+        <div class="feedback" id="feedback" aria-live="polite">
+          <p class="feedback-title" id="feedbackTitle"></p>
+          <p id="correctAnswerText"></p>
+          <p id="explanationText"></p>
+        </div>
+
+        <div class="controls">
+          <button class="next-btn" id="nextBtn" type="button">Next Question →</button>
+        </div>
+      </div>
+
+      <div class="result" id="resultScreen">
+        <div class="result-icon" id="resultIcon">🎉</div>
+        <h2>Quiz Completed!</h2>
+        <div class="final-score" id="finalScore"></div>
+        <p class="result-message" id="resultMessage"></p>
+        <button class="restart-btn" id="restartBtn" type="button">Play Again</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const quizData = [
+      {
+        question: "A happy family is built on love, trust, and honest communication. (1) ____________. Children who grow up in such an environment are more likely to become confident and caring adults.",
+        options: [
+          "Good communication, which some people take for granted, makes small tasks harder to ignore.",
+          "Some families avoid conflict, which can reduce openness and mutual understanding.",
+          "A family that communicates openly and respectfully often builds strong bonds that last a lifetime.",
+          "Children may copy behavior from adults who rarely express what they really feel."
+        ],
+        answer: 2,
+        explanation: "Đáp án C bổ sung ý về giao tiếp cởi mở, giúp xây dựng mối quan hệ gia đình bền vững."
+      },
+      {
+        question: "Helping with household chores teaches children more than just practical skills. These everyday activities (2) ____________. As a result, children become more independent and responsible as they grow up.",
+        options: [
+          "are supporting kids when they complete the most basic home duties together.",
+          "help children develop essential life skills and learn to be responsible family members.",
+          "mean doing the same housework again and again without improving their personalities.",
+          "provide chances that create individual habits and gain trust from other members."
+        ],
+        answer: 1,
+        explanation: "Đáp án B cho thấy việc làm nhà giúp trẻ phát triển kỹ năng sống và tinh thần trách nhiệm."
+      },
+      {
+        question: "Families often become closer by spending quality time together. Even simple actions like carrying groceries or (3) ____________.",
+        options: [
+          "to give kind advice after they experience stress or failure.",
+          "making other people calm and bringing peace to busy routines.",
+          "cheering them up after a long day—can make a big difference.",
+          "comfort a sibling when things go wrong at school."
+        ],
+        answer: 2,
+        explanation: "Sau “like” cần dạng V-ing song song với “carrying”. Đáp án C tạo thành câu hoàn chỉnh."
+      },
+      {
+        question: "In families (4) ____________, children usually feel safe, valued, and understood. They are more willing to share their feelings and solve problems together.",
+        options: [
+          "where members support each other through both challenges and celebrations.",
+          "that encourage members to be more focused on digital communication than face-to-face conversations.",
+          "which help children become more independent and more attached to their parents.",
+          "sharing fake feelings and precious experiences in each day at family meals."
+        ],
+        answer: 0,
+        explanation: "Đáp án A dùng “where” để mở đầu mệnh đề quan hệ chỉ nơi chốn: trong những gia đình mà các thành viên hỗ trợ nhau."
+      },
+      {
+        question: "Strong families are built over time through trust, kindness, and (5) ____________.",
+        options: [
+          "create opportunities for integration and equality for everyone in family traditions.",
+          "shared experiences within a family that build a strong, united home.",
+          "mutual understanding among family members makes family affection more prevalent.",
+          "a family experiencing difficult challenges together creates lasting memories and gratitude."
+        ],
+        answer: 1,
+        explanation: "Sau “through trust, kindness, and” cần một cụm danh từ. “Shared experiences” đúng cả ngữ pháp và ý nghĩa."
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
+
+    const questionNumber = document.getElementById("questionNumber");
+    const questionText = document.getElementById("questionText");
+    const optionsContainer = document.getElementById("options");
+    const feedback = document.getElementById("feedback");
+    const feedbackTitle = document.getElementById("feedbackTitle");
+    const correctAnswerText = document.getElementById("correctAnswerText");
+    const explanationText = document.getElementById("explanationText");
+    const nextBtn = document.getElementById("nextBtn");
+    const scoreBox = document.getElementById("scoreBox");
+    const progressBar = document.getElementById("progressBar");
+    const quizScreen = document.getElementById("quizScreen");
+    const resultScreen = document.getElementById("resultScreen");
+    const finalScore = document.getElementById("finalScore");
+    const resultMessage = document.getElementById("resultMessage");
+    const resultIcon = document.getElementById("resultIcon");
+    const restartBtn = document.getElementById("restartBtn");
+
+    function renderQuestion() {
+      answered = false;
+      const item = quizData[currentQuestion];
+
+      questionNumber.textContent = `Question ${currentQuestion + 1} of ${quizData.length}`;
+      questionText.textContent = item.question;
+      optionsContainer.innerHTML = "";
+      feedback.className = "feedback";
+      nextBtn.classList.remove("show");
+
+      item.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "option-btn";
+        button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+        button.addEventListener("click", () => selectAnswer(index));
+        optionsContainer.appendChild(button);
+      });
+
+      progressBar.style.width = `${(currentQuestion / quizData.length) * 100}%`;
+      scoreBox.textContent = `Score: ${score}/${quizData.length}`;
+    }
+
+    function selectAnswer(selectedIndex) {
+      if (answered) return;
+      answered = true;
+
+      const item = quizData[currentQuestion];
+      const buttons = [...optionsContainer.querySelectorAll(".option-btn")];
+      const isCorrect = selectedIndex === item.answer;
+
+      buttons.forEach((button, index) => {
+        button.disabled = true;
+        if (index === item.answer) {
+          button.classList.add("correct");
+        } else if (index === selectedIndex) {
+          button.classList.add("wrong");
+        }
+      });
+
+      if (isCorrect) {
+        score++;
+        feedbackTitle.textContent = "✅ Correct!";
+        feedback.className = "feedback show correct-feedback";
+      } else {
+        feedbackTitle.textContent = "❌ Not quite!";
+        feedback.className = "feedback show wrong-feedback";
+      }
+
+      const answerLetter = String.fromCharCode(65 + item.answer);
+      correctAnswerText.textContent = `Correct answer: ${answerLetter}`;
+      explanationText.textContent = `Giải thích: ${item.explanation}`;
+      scoreBox.textContent = `Score: ${score}/${quizData.length}`;
+      progressBar.style.width = `${((currentQuestion + 1) / quizData.length) * 100}%`;
+
+      nextBtn.textContent =
+        currentQuestion === quizData.length - 1 ? "See Result →" : "Next Question →";
+      nextBtn.classList.add("show");
+    }
+
+    function showResult() {
+      quizScreen.style.display = "none";
+      resultScreen.classList.add("show");
+      finalScore.textContent = `Your score: ${score}/${quizData.length}`;
+
+      const percentage = (score / quizData.length) * 100;
+
+      if (percentage === 100) {
+        resultIcon.textContent = "🏆";
+        resultMessage.textContent = "Excellent! You answered every question correctly.";
+      } else if (percentage >= 80) {
+        resultIcon.textContent = "🌟";
+        resultMessage.textContent = "Great job! You understand the lesson very well.";
+      } else if (percentage >= 60) {
+        resultIcon.textContent = "👍";
+        resultMessage.textContent = "Good effort! Review the explanations and try again.";
+      } else {
+        resultIcon.textContent = "💪";
+        resultMessage.textContent = "Keep practising. Read each explanation carefully and play again.";
+      }
+    }
+
+    nextBtn.addEventListener("click", () => {
+      if (!answered) return;
+
+      if (currentQuestion < quizData.length - 1) {
+        currentQuestion++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    restartBtn.addEventListener("click", () => {
+      currentQuestion = 0;
+      score = 0;
+      answered = false;
+      resultScreen.classList.remove("show");
+      quizScreen.style.display = "block";
+      renderQuestion();
+    });
+
+    renderQuestion();
+  </script>
+</body>
+</html>
