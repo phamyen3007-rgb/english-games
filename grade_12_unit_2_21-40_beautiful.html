@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade 12 - Unit 2 - Questions 21-40</title>
+  <style>
+    :root{
+      --navy:#0f172a;
+      --blue:#2563eb;
+      --cyan:#06b6d4;
+      --green:#10b981;
+      --purple:#7c3aed;
+      --pink:#ec4899;
+      --yellow:#f59e0b;
+      --red:#ef4444;
+      --white:#ffffff;
+      --soft:#f8fafc;
+      --muted:#64748b;
+      --border:#dbeafe;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Inter, Arial, Helvetica, sans-serif;
+      color:var(--navy);
+      background:
+        radial-gradient(circle at 10% 20%, rgba(37,99,235,.22), transparent 28%),
+        radial-gradient(circle at 85% 15%, rgba(236,72,153,.18), transparent 25%),
+        radial-gradient(circle at 80% 85%, rgba(16,185,129,.18), transparent 28%),
+        linear-gradient(135deg,#eef6ff 0%,#f5f3ff 48%,#ecfeff 100%);
+      padding:24px;
+      overflow-x:hidden;
+    }
+
+    body::before,
+    body::after{
+      content:"";
+      position:fixed;
+      z-index:-1;
+      border-radius:50%;
+      filter:blur(10px);
+      opacity:.45;
+      animation:float 8s ease-in-out infinite;
+    }
+
+    body::before{
+      width:180px;
+      height:180px;
+      background:linear-gradient(135deg,var(--cyan),var(--blue));
+      top:5%;
+      left:-60px;
+    }
+
+    body::after{
+      width:220px;
+      height:220px;
+      background:linear-gradient(135deg,var(--pink),var(--purple));
+      bottom:-80px;
+      right:-70px;
+      animation-delay:1.5s;
+    }
+
+    @keyframes float{
+      0%,100%{transform:translateY(0) rotate(0)}
+      50%{transform:translateY(-18px) rotate(8deg)}
+    }
+
+    .app{
+      width:min(920px,100%);
+      margin:0 auto;
+    }
+
+    .hero{
+      position:relative;
+      padding:28px;
+      border-radius:30px;
+      color:white;
+      overflow:hidden;
+      background:linear-gradient(135deg,#1d4ed8 0%,#0f766e 55%,#7c3aed 100%);
+      box-shadow:0 22px 60px rgba(30,64,175,.25);
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      width:240px;
+      height:240px;
+      right:-70px;
+      top:-100px;
+      border-radius:50%;
+      background:rgba(255,255,255,.12);
+    }
+
+    .hero-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 13px;
+      border-radius:999px;
+      background:rgba(255,255,255,.16);
+      border:1px solid rgba(255,255,255,.22);
+      font-size:14px;
+      font-weight:800;
+      letter-spacing:.3px;
+      backdrop-filter:blur(10px);
+    }
+
+    .hero h1{
+      margin:16px 0 8px;
+      font-size:clamp(30px,5vw,48px);
+      line-height:1.05;
+    }
+
+    .hero p{
+      max-width:650px;
+      margin:0;
+      font-size:17px;
+      line-height:1.6;
+      color:rgba(255,255,255,.9);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:20px;
+    }
+
+    .stat{
+      padding:14px;
+      border-radius:18px;
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.2);
+      backdrop-filter:blur(10px);
+    }
+
+    .stat strong{
+      display:block;
+      font-size:22px;
+    }
+
+    .stat span{
+      font-size:13px;
+      color:rgba(255,255,255,.82);
+    }
+
+    .toolbar{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:16px;
+      align-items:center;
+      margin:18px 0;
+      padding:16px 18px;
+      border-radius:22px;
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(255,255,255,.9);
+      box-shadow:0 14px 34px rgba(15,23,42,.08);
+      backdrop-filter:blur(14px);
+    }
+
+    .progress-label{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:8px;
+      font-size:14px;
+      font-weight:800;
+    }
+
+    .progress-track{
+      height:14px;
+      border-radius:999px;
+      overflow:hidden;
+      background:#e2e8f0;
+    }
+
+    .progress-bar{
+      width:0;
+      height:100%;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--blue),var(--cyan),var(--green));
+      transition:width .4s ease;
+      position:relative;
+    }
+
+    .progress-bar::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+      animation:shine 1.8s linear infinite;
+    }
+
+    @keyframes shine{
+      from{transform:translateX(-100%)}
+      to{transform:translateX(100%)}
+    }
+
+    .score-pill{
+      min-width:120px;
+      text-align:center;
+      padding:12px 16px;
+      border-radius:18px;
+      color:white;
+      font-weight:900;
+      background:linear-gradient(135deg,var(--purple),var(--pink));
+      box-shadow:0 10px 24px rgba(124,58,237,.25);
+    }
+
+    .quiz-card{
+      position:relative;
+      padding:30px;
+      border-radius:30px;
+      background:rgba(255,255,255,.92);
+      border:1px solid rgba(255,255,255,.95);
+      box-shadow:0 25px 65px rgba(15,23,42,.13);
+      backdrop-filter:blur(16px);
+      animation:pop .35s ease;
+    }
+
+    @keyframes pop{
+      from{opacity:0;transform:scale(.97) translateY(8px)}
+      to{opacity:1;transform:scale(1) translateY(0)}
+    }
+
+    .question-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:18px;
+    }
+
+    .question-number{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 13px;
+      border-radius:999px;
+      color:#1d4ed8;
+      background:#dbeafe;
+      font-weight:900;
+    }
+
+    .topic-chip{
+      padding:8px 12px;
+      border-radius:999px;
+      background:#ecfdf5;
+      color:#047857;
+      font-size:13px;
+      font-weight:800;
+    }
+
+    .question{
+      margin:0 0 24px;
+      font-size:clamp(21px,3vw,28px);
+      line-height:1.45;
+    }
+
+    .options{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .option{
+      position:relative;
+      min-height:74px;
+      padding:16px 18px 16px 62px;
+      text-align:left;
+      font-size:17px;
+      line-height:1.35;
+      color:var(--navy);
+      cursor:pointer;
+      border:2px solid #e2e8f0;
+      border-radius:20px;
+      background:linear-gradient(180deg,#ffffff,#f8fafc);
+      box-shadow:0 8px 18px rgba(15,23,42,.05);
+      transition:.22s ease;
+    }
+
+    .option:hover:not(:disabled){
+      transform:translateY(-3px);
+      border-color:#93c5fd;
+      box-shadow:0 14px 26px rgba(37,99,235,.12);
+    }
+
+    .letter{
+      position:absolute;
+      left:14px;
+      top:50%;
+      transform:translateY(-50%);
+      width:34px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      border-radius:12px;
+      color:white;
+      font-weight:900;
+      background:linear-gradient(135deg,var(--blue),var(--purple));
+    }
+
+    .option.correct{
+      color:#065f46;
+      border-color:#34d399;
+      background:linear-gradient(180deg,#ecfdf5,#d1fae5);
+      box-shadow:0 12px 28px rgba(16,185,129,.18);
+    }
+
+    .option.correct .letter{
+      background:linear-gradient(135deg,#059669,#10b981);
+    }
+
+    .option.wrong{
+      color:#991b1b;
+      border-color:#f87171;
+      background:linear-gradient(180deg,#fef2f2,#fee2e2);
+      animation:shake .32s ease;
+    }
+
+    .option.wrong .letter{
+      background:linear-gradient(135deg,#dc2626,#ef4444);
+    }
+
+    @keyframes shake{
+      0%,100%{transform:translateX(0)}
+      25%{transform:translateX(-5px)}
+      75%{transform:translateX(5px)}
+    }
+
+    .option:disabled{cursor:not-allowed}
+
+    .feedback{
+      display:none;
+      margin-top:20px;
+      padding:18px;
+      border-radius:20px;
+      line-height:1.55;
+      font-size:16px;
+    }
+
+    .feedback.show{
+      display:block;
+      animation:slide .3s ease;
+    }
+
+    @keyframes slide{
+      from{opacity:0;transform:translateY(8px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    .feedback.good{
+      color:#065f46;
+      border:1px solid #6ee7b7;
+      background:linear-gradient(135deg,#ecfdf5,#d1fae5);
+    }
+
+    .feedback.bad{
+      color:#9a3412;
+      border:1px solid #fdba74;
+      background:linear-gradient(135deg,#fff7ed,#ffedd5);
+    }
+
+    .actions{
+      display:flex;
+      justify-content:flex-end;
+      margin-top:18px;
+    }
+
+    .next-btn,
+    .restart-btn{
+      border:0;
+      border-radius:16px;
+      padding:14px 24px;
+      color:white;
+      font-size:16px;
+      font-weight:900;
+      cursor:pointer;
+      background:linear-gradient(135deg,var(--blue),var(--purple));
+      box-shadow:0 12px 26px rgba(79,70,229,.25);
+      transition:.2s ease;
+    }
+
+    .next-btn:hover,
+    .restart-btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 16px 32px rgba(79,70,229,.32);
+    }
+
+    .next-btn{display:none}
+    .next-btn.show{display:inline-block}
+
+    .result{
+      text-align:center;
+      padding:12px 6px 4px;
+    }
+
+    .trophy{
+      width:92px;
+      height:92px;
+      margin:0 auto 14px;
+      display:grid;
+      place-items:center;
+      border-radius:28px;
+      font-size:46px;
+      background:linear-gradient(135deg,#fef3c7,#fde68a);
+      box-shadow:0 16px 34px rgba(245,158,11,.2);
+    }
+
+    .result h2{
+      margin:0;
+      font-size:34px;
+    }
+
+    .result-score{
+      margin:12px 0;
+      font-size:72px;
+      font-weight:1000;
+      background:linear-gradient(135deg,var(--blue),var(--purple),var(--pink));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .result p{
+      color:var(--muted);
+      font-size:17px;
+      margin-bottom:20px;
+    }
+
+    @media(max-width:700px){
+      body{padding:14px}
+      .hero{padding:22px}
+      .stats{grid-template-columns:1fr 1fr 1fr}
+      .toolbar{grid-template-columns:1fr}
+      .score-pill{justify-self:end}
+      .quiz-card{padding:22px}
+      .options{grid-template-columns:1fr}
+      .question-top{align-items:flex-start;flex-direction:column}
+    }
+
+    @media(max-width:480px){
+      .stats{grid-template-columns:1fr}
+      .question{font-size:20px}
+      .option{font-size:16px}
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <div class="hero-badge">🎮 INTERACTIVE HOMEWORK</div>
+      <h1>Grade 12 – Unit 2</h1>
+      <p>A Multicultural World • Practice Set 21–40</p>
+
+      <div class="stats">
+        <div class="stat">
+          <strong>10</strong>
+          <span>Selected questions</span>
+        </div>
+        <div class="stat">
+          <strong>4</strong>
+          <span>Options each</span>
+        </div>
+        <div class="stat">
+          <strong>100%</strong>
+          <span>Instant feedback</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <div>
+        <div class="progress-label">
+          <span id="progressText">Question 1 of 10</span>
+          <span id="percentText">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
+      <div class="score-pill" id="scoreText">⭐ 0 / 10</div>
+    </section>
+
+    <section class="quiz-card" id="quizCard">
+      <div class="question-top">
+        <div class="question-number" id="questionNumber">Question 1</div>
+        <div class="topic-chip">Unit 2 Vocabulary & Grammar</div>
+      </div>
+
+      <h2 class="question" id="questionText"></h2>
+      <div class="options" id="optionsContainer"></div>
+
+      <div class="feedback" id="feedback" aria-live="polite"></div>
+
+      <div class="actions">
+        <button class="next-btn" id="nextButton" type="button">Next Question →</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const quizData = [
+      {
+        question: "The local dish was so __________ that many visitors asked the chef for the recipe.",
+        options: ["tasteful", "tasty", "tastily", "tasting"],
+        answer: 1,
+        explanation: "Tasty là tính từ mang nghĩa “ngon”. Sau “was so” cần một tính từ."
+      },
+      {
+        question: "By taking part in traditional games, young people can better __________ the cultural values of their community.",
+        options: ["appreciate", "refuse", "prevent", "ignore"],
+        answer: 0,
+        explanation: "Appreciate cultural values = trân trọng các giá trị văn hóa."
+      },
+      {
+        question: "The international festival was organized to celebrate __________ and encourage respect among different communities.",
+        options: ["cultural diversity", "language difficulty", "personal confusion", "social restriction"],
+        answer: 0,
+        explanation: "Cultural diversity = sự đa dạng văn hóa, phù hợp với mục đích của lễ hội quốc tế."
+      },
+      {
+        question: "Wearing traditional clothes during important ceremonies is a long-established __________ in this region.",
+        options: ["booth", "custom", "ingredient", "performance"],
+        answer: 1,
+        explanation: "Custom = phong tục. Long-established custom = phong tục có từ lâu đời."
+      },
+      {
+        question: "Studying abroad was such a valuable __________ that it completely changed her view of other cultures.",
+        options: ["origin", "experience", "tradition", "characteristic"],
+        answer: 1,
+        explanation: "A valuable experience = một trải nghiệm quý giá."
+      },
+      {
+        question: "The cultural show successfully __________ folk music with modern dance, creating an unforgettable performance.",
+        options: ["blended", "divided", "removed", "separated"],
+        answer: 0,
+        explanation: "Blend A with B = kết hợp A với B."
+      },
+      {
+        question: "Traditional festivals are an important __________ of a community’s history and cultural identity.",
+        options: ["reflection", "confusion", "restriction", "barrier"],
+        answer: 0,
+        explanation: "A reflection of = sự phản ánh của. Lễ hội phản ánh lịch sử và bản sắc cộng đồng."
+      },
+      {
+        question: "Although they spoke different languages, the visitors managed to __________ local people through gestures and simple English.",
+        options: ["interact with", "give up", "depend on", "take after"],
+        answer: 0,
+        explanation: "Interact with local people = giao tiếp, tương tác với người dân địa phương."
+      },
+      {
+        question: "A __________ may make it difficult for tourists to understand local people when travelling abroad.",
+        options: ["language barrier", "barrier language", "language difficulty barrier", "barrier of speaking"],
+        answer: 0,
+        explanation: "Language barrier là cụm từ đúng, nghĩa là rào cản ngôn ngữ."
+      },
+      {
+        question: "Living in a __________ neighbourhood gives children opportunities to learn about different customs and beliefs.",
+        options: ["multicultural", "unfamiliarity", "traditionalism", "cultural shock"],
+        answer: 0,
+        explanation: "Multicultural neighbourhood = khu dân cư đa văn hóa."
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
+
+    const questionNumber = document.getElementById("questionNumber");
+    const questionText = document.getElementById("questionText");
+    const optionsContainer = document.getElementById("optionsContainer");
+    const feedback = document.getElementById("feedback");
+    const nextButton = document.getElementById("nextButton");
+    const progressBar = document.getElementById("progressBar");
+    const scoreText = document.getElementById("scoreText");
+    const progressText = document.getElementById("progressText");
+    const percentText = document.getElementById("percentText");
+    const quizCard = document.getElementById("quizCard");
+
+    function renderQuestion(){
+      answered = false;
+      const item = quizData[currentQuestion];
+
+      questionNumber.textContent = `Question ${currentQuestion + 1}`;
+      questionText.textContent = item.question;
+      progressText.textContent = `Question ${currentQuestion + 1} of ${quizData.length}`;
+      percentText.textContent = `${Math.round((currentQuestion / quizData.length) * 100)}%`;
+
+      optionsContainer.innerHTML = "";
+      feedback.className = "feedback";
+      feedback.innerHTML = "";
+      nextButton.className = "next-btn";
+      nextButton.textContent =
+        currentQuestion === quizData.length - 1 ? "View Result →" : "Next Question →";
+
+      progressBar.style.width = `${(currentQuestion / quizData.length) * 100}%`;
+      scoreText.textContent = `⭐ ${score} / ${quizData.length}`;
+
+      item.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "option";
+        button.innerHTML = `
+          <span class="letter">${String.fromCharCode(65 + index)}</span>
+          <span>${option}</span>
+        `;
+        button.addEventListener("click", () => selectAnswer(index));
+        optionsContainer.appendChild(button);
+      });
+    }
+
+    function selectAnswer(selectedIndex){
+      if(answered) return;
+      answered = true;
+
+      const item = quizData[currentQuestion];
+      const optionButtons = [...document.querySelectorAll(".option")];
+
+      optionButtons.forEach((button, index) => {
+        button.disabled = true;
+        if(index === item.answer){
+          button.classList.add("correct");
+        }
+      });
+
+      if(selectedIndex === item.answer){
+        score++;
+        feedback.className = "feedback show good";
+        feedback.innerHTML = `<strong>✅ Correct!</strong><br>${item.explanation}`;
+      }else{
+        optionButtons[selectedIndex].classList.add("wrong");
+        feedback.className = "feedback show bad";
+        feedback.innerHTML = `
+          <strong>❌ Not quite.</strong><br>
+          Correct answer: <strong>${String.fromCharCode(65 + item.answer)}. ${item.options[item.answer]}</strong><br>
+          ${item.explanation}
+        `;
+      }
+
+      scoreText.textContent = `⭐ ${score} / ${quizData.length}`;
+      progressBar.style.width = `${((currentQuestion + 1) / quizData.length) * 100}%`;
+      percentText.textContent = `${Math.round(((currentQuestion + 1) / quizData.length) * 100)}%`;
+      nextButton.className = "next-btn show";
+    }
+
+    function showResult(){
+      let message;
+      let emoji;
+
+      if(score === 10){
+        message = "Perfect! You completed every question correctly.";
+        emoji = "🏆";
+      }else if(score >= 8){
+        message = "Excellent work! You understand this lesson very well.";
+        emoji = "🌟";
+      }else if(score >= 6){
+        message = "Good job! Review the explanations and try again.";
+        emoji = "👏";
+      }else{
+        message = "Keep practising. You will improve with another attempt.";
+        emoji = "💪";
+      }
+
+      quizCard.innerHTML = `
+        <div class="result">
+          <div class="trophy">${emoji}</div>
+          <h2>Homework Completed!</h2>
+          <div class="result-score">${score}/10</div>
+          <p>${message}</p>
+          <button class="restart-btn" id="restartButton" type="button">🔄 Play Again</button>
+        </div>
+      `;
+
+      document.getElementById("restartButton").addEventListener("click", () => {
+        window.location.reload();
+      });
+    }
+
+    nextButton.addEventListener("click", () => {
+      if(!answered) return;
+
+      if(currentQuestion < quizData.length - 1){
+        currentQuestion++;
+        quizCard.style.animation = "none";
+        void quizCard.offsetWidth;
+        quizCard.style.animation = "pop .35s ease";
+        renderQuestion();
+      }else{
+        showResult();
+      }
+    });
+
+    renderQuestion();
+  </script>
+</body>
+</html>
