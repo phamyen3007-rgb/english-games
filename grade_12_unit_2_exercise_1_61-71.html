@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grade 12 - Unit 2 - Exercise 1 - Questions 61-71</title>
+  <style>
+    :root{
+      --ink:#172033; --muted:#667085; --paper:#fffdf8; --line:#e8e2d9;
+      --navy:#102a43; --teal:#0f766e; --gold:#f59e0b; --rose:#e11d48;
+      --good:#15803d; --bad:#c2410c; --blue:#2563eb;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100vh; font-family:Inter,Arial,sans-serif; color:var(--ink);
+      background:
+        radial-gradient(circle at 10% 15%,rgba(56,189,248,.20),transparent 25%),
+        radial-gradient(circle at 90% 10%,rgba(245,158,11,.18),transparent 24%),
+        radial-gradient(circle at 80% 90%,rgba(20,184,166,.18),transparent 26%),
+        linear-gradient(145deg,#0b1f35,#123c52 55%,#0f615b);
+      padding:18px;
+    }
+    button{font:inherit}
+    .app{width:min(980px,100%);margin:auto}
+    .top{
+      display:flex;justify-content:space-between;align-items:center;gap:12px;color:white;margin-bottom:14px
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand-icon{width:50px;height:50px;border-radius:16px;display:grid;place-items:center;font-size:27px;
+      background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2)}
+    h1{font-size:clamp(18px,3vw,28px);margin:0}
+    .subtitle{margin:4px 0 0;color:rgba(255,255,255,.75);font-size:14px}
+    .sound{border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.12);color:white;
+      border-radius:14px;padding:10px 13px;cursor:pointer;font-weight:800}
+    .hud{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+    .hud-item{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.17);
+      color:white;border-radius:16px;padding:11px 13px;backdrop-filter:blur(10px)}
+    .hud-item small{display:block;opacity:.7;margin-bottom:3px}.hud-item strong{font-size:20px}
+    .route{display:flex;gap:6px;margin:0 0 13px;align-items:center}
+    .stop{height:9px;flex:1;border-radius:99px;background:rgba(255,255,255,.16);overflow:hidden}
+    .stop.done,.stop.active{background:linear-gradient(90deg,#38bdf8,#fbbf24)}
+    .card{
+      background:var(--paper);border-radius:28px;padding:clamp(20px,4vw,38px);
+      min-height:590px;box-shadow:0 25px 65px rgba(0,0,0,.25);position:relative;overflow:hidden
+    }
+    .stamp{position:absolute;right:24px;top:20px;font-size:54px;opacity:.12;transform:rotate(9deg)}
+    .chapter{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:15px}
+    .pill{display:inline-flex;border-radius:999px;padding:7px 11px;font-size:13px;font-weight:850}
+    .country{background:#e0f2fe;color:#075985}.mode{background:#fef3c7;color:#92400e}
+    .story{font-size:16px;color:#475467;line-height:1.65;border-left:4px solid #f59e0b;padding-left:14px;margin:0 0 18px}
+    .question{font-size:clamp(21px,3vw,30px);line-height:1.4;margin:0 0 22px}
+    .choices{display:grid;gap:12px}
+    .choice,.tile,.pair{
+      border:2px solid var(--line);background:white;border-radius:17px;padding:14px 16px;
+      cursor:pointer;text-align:left;transition:.18s ease;color:var(--ink)
+    }
+    .choice{display:flex;align-items:center;gap:12px;font-size:17px}
+    .choice:hover:not(:disabled),.tile:hover:not(:disabled),.pair:hover:not(:disabled){
+      transform:translateY(-2px);border-color:#93c5fd;box-shadow:0 8px 18px rgba(37,99,235,.10)
+    }
+    .letter{width:35px;height:35px;border-radius:11px;display:grid;place-items:center;background:#f1f5f9;font-weight:900;flex:0 0 35px}
+    .correct{border-color:#22c55e!important;background:#ecfdf3!important;color:#166534!important}
+    .wrong{border-color:#fb7185!important;background:#fff1f2!important;color:#9f1239!important}
+    .selected{border-color:#2563eb!important;background:#eff6ff!important}
+    .workspace{display:flex;gap:9px;flex-wrap:wrap;min-height:66px;border:2px dashed #cbd5e1;border-radius:16px;padding:11px;margin-bottom:13px;background:#f8fafc}
+    .tile{padding:11px 14px;font-weight:800}
+    .tile.used{opacity:.35;pointer-events:none}
+    .match-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+    .pair{text-align:center;font-weight:800;min-height:54px}
+    .feedback{display:none;margin-top:17px;padding:15px 17px;border-radius:16px;line-height:1.55}
+    .feedback.show{display:block}.feedback.good{background:#ecfdf3;border:1px solid #86efac;color:#166534}
+    .feedback.bad{background:#fff7ed;border:1px solid #fdba74;color:#9a3412}
+    .controls{display:flex;justify-content:space-between;gap:10px;margin-top:18px;flex-wrap:wrap}
+    .btn{border:0;border-radius:15px;padding:12px 18px;font-weight:850;cursor:pointer}
+    .btn-secondary{background:#eef2f7;color:#334155}.btn-primary{background:linear-gradient(135deg,#2563eb,#7c3aed);color:white}
+    .hidden{display:none!important}
+    .lucky{display:none;text-align:center;padding:55px 10px}.lucky.show{display:block}
+    .box{font-size:100px;cursor:pointer;display:inline-block;animation:bob 1.2s ease-in-out infinite}
+    @keyframes bob{50%{transform:translateY(-12px) rotate(2deg)}}
+    .boss-banner{background:linear-gradient(135deg,#450a0a,#9f1239);color:white;border-radius:18px;padding:13px 16px;margin-bottom:15px;font-weight:900;text-align:center;letter-spacing:.5px}
+    .result{text-align:center;padding:30px 0}.trophy{font-size:82px}.result h2{font-size:34px;margin:8px 0}
+    .passport{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:22px auto;max-width:600px}
+    .passport span{padding:10px 5px;border:2px dashed #d6b36a;border-radius:12px;background:#fffbeb;font-size:13px;font-weight:800}
+    .confetti{position:fixed;top:-20px;width:9px;height:15px;z-index:20;animation:fall linear forwards}
+    @keyframes fall{to{transform:translateY(110vh) rotate(700deg)}}
+    @media(max-width:650px){
+      body{padding:10px}.hud{grid-template-columns:1fr 1fr}.card{min-height:650px;border-radius:22px}
+      .match-grid{grid-template-columns:1fr}.passport{grid-template-columns:repeat(2,1fr)}
+      .top{align-items:flex-start}.subtitle{display:none}
+    }
+  </style>
+</head>
+<body>
+<main class="app">
+  <header class="top">
+    <div class="brand">
+      <div class="brand-icon">🧳</div>
+      <div><h1>Grade 12 – Unit 2 – Exercise 1 – Questions 61–71</h1>
+      <p class="subtitle">World Culture Quest • 11 challenges</p></div>
+    </div>
+    <button id="soundBtn" class="sound" type="button">🔊 Sound</button>
+  </header>
+
+  <section class="hud">
+    <div class="hud-item"><small>LEVEL</small><strong id="level">1</strong></div>
+    <div class="hud-item"><small>XP</small><strong id="xp">0</strong></div>
+    <div class="hud-item"><small>COINS</small><strong id="coins">0 🪙</strong></div>
+    <div class="hud-item"><small>HEARTS</small><strong id="hearts">3 ❤️</strong></div>
+  </section>
+  <div id="route" class="route"></div>
+
+  <section class="card">
+    <div class="stamp" id="stamp">🌍</div>
+    <div id="game"></div>
+    <div id="lucky" class="lucky">
+      <h2>🎁 Lucky Stop!</h2>
+      <p>You have reached the halfway point. Open the mystery box.</p>
+      <div id="box" class="box">🎁</div>
+      <p id="luckyText"></p>
+      <button id="continueLucky" class="btn btn-primary hidden" type="button">Continue the journey →</button>
+    </div>
+    <div id="result" class="result hidden"></div>
+  </section>
+</main>
+
+<script>
+const challenges = [
+  {
+    country:"Vietnam 🇻🇳", mode:"Quick Choice", icon:"🎨",
+    story:"At the opening gallery, paintings, dishes and musical instruments from many communities are displayed together.",
+    q:"The __________ of cultural diversity is clearly visible throughout the exhibition.",
+    type:"mcq", options:["richness","exposure","simplicity","influence"], answer:0,
+    explain:"Richness of cultural diversity = sự phong phú của đa dạng văn hóa."
+  },
+  {
+    country:"Japan 🇯🇵", mode:"Word Builder", icon:"🎎",
+    story:"A guide explains that every community celebrates important moments in a special manner.",
+    q:"Build the correct phrase: Each culture has its __________ of celebrating special occasions.",
+    type:"order", words:["own","unique","way"], answerText:"own unique way",
+    explain:"Trật tự đúng: own + adjective + noun → own unique way."
+  },
+  {
+    country:"India 🇮🇳", mode:"Grammar Gate", icon:"🪔",
+    story:"The Diwali guide compares past celebrations with the larger community events held today.",
+    q:"__________, the festival was mainly celebrated through family gatherings.",
+    type:"mcq", options:["Traditional","Traditionally","Tradition","Traditionalist"], answer:1,
+    explain:"Traditionally là trạng từ, bổ nghĩa cho cả mệnh đề."
+  },
+  {
+    country:"Mexico 🇲🇽", mode:"Identity Lab", icon:"🌮",
+    story:"Food, clothing and festivals reveal how people understand who they are.",
+    q:"Cultural __________ is often reflected in everyday traditions.",
+    type:"mcq", options:["heritage","diversity","identity","traditional"], answer:2,
+    explain:"Cultural identity = bản sắc văn hóa; phù hợp với ý 'who we are'."
+  },
+  {
+    country:"Brazil 🇧🇷", mode:"Respect Check", icon:"🎭",
+    story:"A visitor repeatedly criticizes a local custom without trying to understand it.",
+    q:"Such complaining is both __________ and disrespectful.",
+    type:"mcq", options:["happy","childish","pointless","unreasonable"], answer:3,
+    explain:"Unreasonable = vô lý, không hợp lý; phù hợp nhất với thái độ phê phán thiếu căn cứ."
+  },
+  {
+    country:"France 🇫🇷", mode:"Permit Patrol", icon:"🗼",
+    story:"At a street fair, an unregistered seller begins offering souvenirs without permission.",
+    q:"Selling souvenirs without a permit is considered __________.",
+    type:"mcq", options:["unfair","uncommon","risky","illegal"], answer:3,
+    explain:"Illegal = trái pháp luật; không có giấy phép."
+  },
+  {
+    country:"Egypt 🇪🇬", mode:"Collocation Match", icon:"🏺",
+    story:"Two groups misunderstand each other during a cultural workshop. You must choose the calm solution.",
+    q:"Match the phrase with its meaning.",
+    type:"match", left:["deal with"], right:["handle a problem calmly","discover information","stop trying"], answerRight:0,
+    explain:"Deal with = giải quyết/xử lý một vấn đề."
+  },
+  {
+    country:"South Korea 🇰🇷", mode:"Trend Tracker", icon:"🎶",
+    story:"More schools are organizing multicultural fairs, and student participation increases every year.",
+    q:"There is a growing __________ to hold multicultural fairs.",
+    type:"mcq", options:["trend","belief","custom","activity"], answer:0,
+    explain:"A growing trend = một xu hướng đang phát triển."
+  },
+  {
+    country:"Morocco 🇲🇦", mode:"Phrasal Verb Hunt", icon:"🧵",
+    story:"You join a craft workshop because you want to learn more about traditional weaving.",
+    q:"Complete the phrasal verb: I attended the workshop to find __________ more.",
+    type:"mcq", options:["out","to","with","full"], answer:0,
+    explain:"Find out = tìm hiểu, khám phá thông tin."
+  },
+  {
+    country:"Canada 🇨🇦", mode:"Mindset Mission", icon:"🍁",
+    story:"Your host family invites you to join traditions that are unfamiliar but meaningful.",
+    q:"Keeping an open __________ helps you respect different cultural traditions.",
+    type:"mcq", options:["mind","attitude","viewpoint","perspective"], answer:0,
+    explain:"Cụm cố định: keep an open mind = giữ tư duy cởi mở."
+  },
+  {
+    country:"FINAL BOSS 👹", mode:"Boss Battle", icon:"⚔️",
+    story:"To complete the World Culture Quest, connect traditional food with the identity of the people who created it.",
+    q:"The __________ between cuisine and identity becomes clear when we explore traditional dishes and their origins.",
+    type:"mcq", options:["connection","difference","similarity","influence"], answer:0,
+    explain:"Connection between A and B = mối liên hệ giữa A và B."
+  }
+];
+
+let current=0, xp=0, coins=0, hearts=3, soundOn=true, selectedOrder=[], matchSelected=null, audio;
+const game=document.getElementById("game"), result=document.getElementById("result"), lucky=document.getElementById("lucky");
+
+function tone(kind){
+  if(!soundOn)return;
+  try{
+    audio=audio||new(window.AudioContext||window.webkitAudioContext)();
+    const now=audio.currentTime;
+    const notes=kind==="good"?[523,659,784]:kind==="finish"?[392,523,659,784]:[210,145];
+    notes.forEach((f,i)=>{
+      const o=audio.createOscillator(),g=audio.createGain();
+      o.type=kind==="bad"?"sawtooth":"sine";o.frequency.value=f;
+      g.gain.setValueAtTime(.001,now+i*.09);g.gain.exponentialRampToValueAtTime(.14,now+i*.09+.02);
+      g.gain.exponentialRampToValueAtTime(.001,now+i*.09+.18);
+      o.connect(g);g.connect(audio.destination);o.start(now+i*.09);o.stop(now+i*.09+.2);
+    });
+  }catch(e){}
+}
+function hud(){
+  document.getElementById("xp").textContent=xp;
+  document.getElementById("coins").textContent=coins+" 🪙";
+  document.getElementById("hearts").textContent=hearts+" ❤️";
+  document.getElementById("level").textContent=Math.floor(xp/300)+1;
+  [...document.querySelectorAll(".stop")].forEach((s,i)=>s.className="stop "+(i<current?"done":i===current?"active":""));
+}
+function buildRoute(){
+  document.getElementById("route").innerHTML=challenges.map(()=>'<span class="stop"></span>').join("");
+}
+function layout(c, body){
+  const boss=current===challenges.length-1?'<div class="boss-banner">👹 FINAL BOSS BATTLE • 300 XP</div>':'';
+  game.innerHTML=`${boss}<div class="chapter"><span class="pill country">${c.country}</span><span class="pill mode">${c.mode}</span></div>
+  <p class="story">${c.story}</p><h2 class="question">${c.q}</h2>${body}
+  <div id="feedback" class="feedback" aria-live="polite"></div>
+  <div class="controls"><button id="resetBtn" class="btn btn-secondary hidden" type="button">↺ Reset</button>
+  <button id="nextBtn" class="btn btn-primary hidden" type="button">${current===challenges.length-1?"Defeat the boss →":"Next destination →"}</button></div>`;
+  document.getElementById("stamp").textContent=c.icon;
+  const next=document.getElementById("nextBtn"); next.addEventListener("click",advance);
+}
+function render(){
+  hud(); selectedOrder=[]; matchSelected=null;
+  const c=challenges[current];
+  if(c.type==="mcq"){
+    layout(c,`<div class="choices">${c.options.map((o,i)=>`<button class="choice" data-i="${i}" type="button"><span class="letter">${String.fromCharCode(65+i)}</span>${o}</button>`).join("")}</div>`);
+    document.querySelectorAll(".choice").forEach(b=>b.addEventListener("click",()=>checkMCQ(+b.dataset.i)));
+  }else if(c.type==="order"){
+    layout(c,`<div id="workspace" class="workspace"><span style="color:#94a3b8">Tap words in the correct order...</span></div>
+    <div class="choices" style="grid-template-columns:repeat(3,1fr)">${c.words.map((w,i)=>`<button class="tile" data-i="${i}" type="button">${w}</button>`).join("")}</div>
+    <div class="controls" style="justify-content:flex-start"><button id="checkOrder" class="btn btn-primary" type="button">Check phrase</button></div>`);
+    document.querySelectorAll(".tile").forEach(b=>b.addEventListener("click",()=>addWord(b)));
+    document.getElementById("checkOrder").addEventListener("click",checkOrder);
+    document.getElementById("resetBtn").classList.remove("hidden");
+    document.getElementById("resetBtn").addEventListener("click",render);
+  }else{
+    layout(c,`<div class="match-grid">
+      <button class="pair selected" type="button">${c.left[0]}</button>
+      <div>${c.right.map((r,i)=>`<button class="pair" style="width:100%;margin-bottom:9px" data-i="${i}" type="button">${r}</button>`).join("")}</div>
+    </div>`);
+    document.querySelectorAll(".pair[data-i]").forEach(b=>b.addEventListener("click",()=>checkMatch(+b.dataset.i,b)));
+  }
+}
+function finishAnswer(ok, explanation, correctLabel=""){
+  const f=document.getElementById("feedback");
+  document.querySelectorAll(".choice,.tile,.pair").forEach(b=>b.disabled=true);
+  if(ok){
+    const reward=current===challenges.length-1?300:100;
+    xp+=reward;coins+=current===challenges.length-1?250:50;
+    f.className="feedback good show";f.innerHTML=`<strong>✅ Mission complete! +${reward} XP</strong><br>${explanation}`;
+    tone("good");
+  }else{
+    hearts=Math.max(0,hearts-1);
+    f.className="feedback bad show";f.innerHTML=`<strong>❌ Mission missed.</strong> ${correctLabel}<br>${explanation}`;
+    tone("bad");
+  }
+  document.getElementById("nextBtn").classList.remove("hidden");hud();
+}
+function checkMCQ(i){
+  const c=challenges[current],bs=[...document.querySelectorAll(".choice")];
+  bs.forEach(b=>b.disabled=true);bs[c.answer].classList.add("correct");
+  if(i!==c.answer)bs[i].classList.add("wrong");
+  finishAnswer(i===c.answer,c.explain,`Correct answer: <strong>${c.options[c.answer]}</strong>.`);
+}
+function addWord(btn){
+  btn.classList.add("used");selectedOrder.push(btn.textContent);
+  document.getElementById("workspace").innerHTML=selectedOrder.map(w=>`<span class="tile selected">${w}</span>`).join("");
+}
+function checkOrder(){
+  const c=challenges[current],made=selectedOrder.join(" ");
+  document.getElementById("checkOrder").disabled=true;
+  finishAnswer(made===c.answerText,c.explain,`Correct phrase: <strong>${c.answerText}</strong>.`);
+}
+function checkMatch(i,b){
+  const c=challenges[current];b.classList.add(i===c.answerRight?"correct":"wrong");
+  document.querySelectorAll(".pair[data-i]")[c.answerRight].classList.add("correct");
+  finishAnswer(i===c.answerRight,c.explain,`Correct meaning: <strong>${c.right[c.answerRight]}</strong>.`);
+}
+function advance(){
+  if(current===4){showLucky();return}
+  if(current<challenges.length-1){current++;render()}else showResult();
+}
+function showLucky(){
+  game.classList.add("hidden");lucky.classList.add("show");
+}
+document.getElementById("box").addEventListener("click",function(){
+  if(this.dataset.open)return;this.dataset.open="1";this.textContent="✨";
+  const prize=100;coins+=prize;document.getElementById("luckyText").innerHTML=`You found <strong>${prize} bonus coins!</strong> 🪙`;
+  document.getElementById("continueLucky").classList.remove("hidden");tone("good");hud();
+});
+document.getElementById("continueLucky").addEventListener("click",()=>{
+  lucky.classList.remove("show");game.classList.remove("hidden");current++;render();
+});
+function showResult(){
+  game.classList.add("hidden");result.classList.remove("hidden");
+  const max=1400,rank=xp>=1300?"World Culture Master":xp>=900?"Global Explorer":"Culture Adventurer";
+  result.innerHTML=`<div class="trophy">🏆</div><h2>${rank}</h2>
+  <p>You completed all 11 destinations.</p>
+  <h3>${xp} XP • ${coins} coins • ${hearts} hearts left</h3>
+  <div class="passport">${challenges.slice(0,10).map(c=>`<span>${c.country}</span>`).join("")}</div>
+  <button id="restart" class="btn btn-primary" type="button">↻ Play again</button>`;
+  document.getElementById("restart").addEventListener("click",()=>location.reload());
+  tone("finish");confetti();
+}
+function confetti(){
+  const colors=["#38bdf8","#f59e0b","#34d399","#fb7185","#a78bfa"];
+  for(let i=0;i<80;i++){
+    const p=document.createElement("i");p.className="confetti";p.style.left=Math.random()*100+"vw";
+    p.style.background=colors[i%colors.length];p.style.animationDuration=2.5+Math.random()*2+"s";
+    p.style.animationDelay=Math.random()*.8+"s";document.body.appendChild(p);setTimeout(()=>p.remove(),5200);
+  }
+}
+document.getElementById("soundBtn").addEventListener("click",e=>{
+  soundOn=!soundOn;e.target.textContent=soundOn?"🔊 Sound":"🔇 Muted";if(soundOn)tone("good");
+});
+buildRoute();render();
+</script>
+</body>
+</html>
