@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sentence Arrangement Game - Option C</title>
+  <style>
+    :root {
+      --primary: #0f766e;
+      --primary-light: #ccfbf1;
+      --secondary: #2563eb;
+      --correct: #15803d;
+      --correct-bg: #dcfce7;
+      --wrong: #b91c1c;
+      --wrong-bg: #fee2e2;
+      --text: #172033;
+      --muted: #64748b;
+      --panel: #ffffff;
+      --page: #eff6ff;
+      --border: #cbd5e1;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, #dbeafe 0, transparent 38%),
+        radial-gradient(circle at bottom right, #ccfbf1 0, transparent 38%),
+        var(--page);
+      padding: 22px;
+    }
+
+    .app {
+      width: min(900px, 100%);
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.65rem, 4vw, 2.5rem);
+      color: var(--primary);
+    }
+
+    .header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .progress-wrap {
+      height: 14px;
+      background: #dbe4ef;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--secondary), var(--primary));
+      transition: width .35s ease;
+    }
+
+    .counter, .score {
+      font-weight: 700;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid rgba(148, 163, 184, .45);
+      border-radius: 22px;
+      padding: clamp(20px, 4vw, 34px);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, .10);
+      animation: appear .35s ease;
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .question-label {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      color: #0f172a;
+      background: var(--primary-light);
+      font-weight: 700;
+    }
+
+    .sentences {
+      display: grid;
+      gap: 9px;
+      margin-bottom: 22px;
+      line-height: 1.55;
+      font-size: 1.05rem;
+    }
+
+    .sentence {
+      padding: 10px 12px;
+      border-left: 4px solid var(--primary);
+      background: #f8fafc;
+      border-radius: 8px;
+    }
+
+    .options {
+      display: grid;
+      gap: 12px;
+    }
+
+    .option {
+      width: 100%;
+      border: 2px solid var(--border);
+      background: #fff;
+      border-radius: 14px;
+      padding: 14px 16px;
+      text-align: left;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+    }
+
+    .option:hover:not(:disabled) {
+      transform: translateY(-2px);
+      border-color: var(--secondary);
+      background: #eff6ff;
+    }
+
+    .option:disabled { cursor: default; }
+
+    .option.correct {
+      color: var(--correct);
+      border-color: var(--correct);
+      background: var(--correct-bg);
+    }
+
+    .option.wrong {
+      color: var(--wrong);
+      border-color: var(--wrong);
+      background: var(--wrong-bg);
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      line-height: 1.5;
+    }
+
+    .feedback.show { display: block; }
+
+    .feedback.good {
+      background: var(--correct-bg);
+      border: 1px solid #86efac;
+      color: #14532d;
+    }
+
+    .feedback.bad {
+      background: var(--wrong-bg);
+      border: 1px solid #fca5a5;
+      color: #7f1d1d;
+    }
+
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .next-btn, .restart-btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 12px 22px;
+      color: white;
+      background: var(--primary);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .15s ease, opacity .15s ease;
+    }
+
+    .next-btn:hover, .restart-btn:hover { transform: translateY(-1px); }
+    .next-btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+
+    .result {
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .result .emoji { font-size: 4rem; }
+    .result h2 {
+      margin: 10px 0;
+      color: var(--primary);
+      font-size: 2rem;
+    }
+
+    .result-score {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 14px 0 22px;
+    }
+
+    .review {
+      text-align: left;
+      margin: 24px 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .review-item {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 12px; }
+      .topbar { grid-template-columns: 1fr 1fr; }
+      .progress-wrap { grid-column: 1 / -1; order: 3; }
+      .score { text-align: right; }
+      .card { border-radius: 16px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+    <header class="header">
+      <h1>Sentence Arrangement Challenge</h1>
+      <p>Choose the best arrangement to make a coherent exchange or text.</p>
+    </header>
+
+    <section class="topbar" aria-label="Game progress">
+      <div class="progress-wrap">
+        <div id="progressBar" class="progress-bar"></div>
+      </div>
+      <div id="counter" class="counter">Question 1/5</div>
+      <div id="score" class="score">Score: 0</div>
+    </section>
+
+    <section id="gameCard" class="card">
+      <div id="questionArea"></div>
+
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+
+      <div class="controls">
+        <button id="nextBtn" class="next-btn" type="button" disabled>Next</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const quizData = [
+      {
+        sentences: [
+          "a. Mia: Yes, I usually sweep the floor and water the plants after school.",
+          "b. Kevin: That's fantastic! Every small task helps make your family happier.",
+          "c. Kevin: Mia, do you often help your parents around the house?"
+        ],
+        options: ["b-a-c", "a-c-b", "c-a-b", "c-b-a"],
+        answer: 2,
+        explanation: "Kevin hỏi trước (c), Mia trả lời (a), sau đó Kevin phản hồi (b)."
+      },
+      {
+        sentences: [
+          "a. Nam: You shouldn't have to do everything by yourself.",
+          "b. Sarah: I know. I hope my sister will help more in the future.",
+          "c. Sarah: I usually clean the house while my sister spends most of her time watching TV.",
+          "d. Nam: Have you talked to her about sharing the chores?"
+        ],
+        options: ["c-d-b-a", "d-c-a-b", "c-a-d-b", "a-c-d-b"],
+        answer: 2,
+        explanation: "Sarah nêu vấn đề (c), Nam nhận xét (a), hỏi thêm (d), rồi Sarah trả lời (b)."
+      },
+      {
+        intro: "Dear Linda,",
+        sentences: [
+          "a. They always encourage me to try my best and never give up.",
+          "b. I feel lucky to have such a caring and supportive family.",
+          "c. I hope you and your family are doing well.",
+          "d. Whenever I have problems, my parents are always there to help me.",
+          "e. Recently, I've been thinking about how important family support is."
+        ],
+        outro: "Best wishes,<br>Minh",
+        options: ["c-d-a-e-b", "c-e-d-a-b", "c-a-e-b-d", "c-b-e-d-a"],
+        answer: 1,
+        explanation: "Lời hỏi thăm (c) → giới thiệu chủ đề (e) → ví dụ (d) → bổ sung (a) → kết luận (b)."
+      },
+      {
+        sentences: [
+          "a. Because of this, everyone enjoys spending time together after finishing the chores.",
+          "b. In my family, everyone has their own responsibilities around the house.",
+          "c. My father repairs broken furniture, my mother cooks delicious meals, and my older brother takes out the rubbish.",
+          "d. I usually wash the dishes and clean my bedroom every weekend.",
+          "e. Working together helps us become more responsible and caring."
+        ],
+        options: ["b-c-d-a-e", "c-b-d-a-e", "b-a-c-d-e", "d-c-b-e-a"],
+        answer: 0,
+        explanation: "Câu chủ đề (b) → việc của các thành viên (c) → việc của người viết (d) → kết quả (a) → kết luận (e)."
+      },
+      {
+        sentences: [
+          "a. As a result, we understand the value of teamwork and responsibility.",
+          "b. Every member of my family contributes to keeping our house clean and comfortable.",
+          "c. My parents prepare meals, while my younger sister waters the flowers every afternoon.",
+          "d. I vacuum the living room, make my bed, and sometimes help wash the car.",
+          "e. These shared responsibilities make our family life happier and more meaningful."
+        ],
+        options: ["b-c-d-e-a", "b-d-c-a-e", "d-c-b-a-e", "c-b-d-e-a"],
+        answer: 1,
+        explanation: "Giới thiệu chủ đề (b) → việc của người viết (d) → việc của người khác (c) → kết quả/bài học (a) → kết luận (e)."
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
+    const userAnswers = [];
+
+    const questionArea = document.getElementById("questionArea");
+    const feedback = document.getElementById("feedback");
+    const nextBtn = document.getElementById("nextBtn");
+    const progressBar = document.getElementById("progressBar");
+    const counter = document.getElementById("counter");
+    const scoreText = document.getElementById("score");
+    const gameCard = document.getElementById("gameCard");
+
+    function renderQuestion() {
+      answered = false;
+      nextBtn.disabled = true;
+      feedback.className = "feedback";
+      feedback.innerHTML = "";
+
+      const q = quizData[currentQuestion];
+      const letters = ["A", "B", "C", "D"];
+
+      questionArea.innerHTML = `
+        <div class="question-label">Question ${currentQuestion + 1}</div>
+        ${q.intro ? `<p><strong>${q.intro}</strong></p>` : ""}
+        <div class="sentences">
+          ${q.sentences.map(sentence => `<div class="sentence">${sentence}</div>`).join("")}
+        </div>
+        ${q.outro ? `<p>${q.outro}</p>` : ""}
+        <div class="options">
+          ${q.options.map((option, index) => `
+            <button class="option" type="button" data-index="${index}">
+              ${letters[index]}. ${option}
+            </button>
+          `).join("")}
+        </div>
+      `;
+
+      document.querySelectorAll(".option").forEach(button => {
+        button.addEventListener("click", () => selectAnswer(Number(button.dataset.index)));
+      });
+
+      updateStatus();
+    }
+
+    function selectAnswer(selectedIndex) {
+      if (answered) return;
+      answered = true;
+
+      const q = quizData[currentQuestion];
+      const buttons = [...document.querySelectorAll(".option")];
+      const isCorrect = selectedIndex === q.answer;
+
+      buttons.forEach((button, index) => {
+        button.disabled = true;
+        if (index === q.answer) button.classList.add("correct");
+        if (index === selectedIndex && !isCorrect) button.classList.add("wrong");
+      });
+
+      if (isCorrect) {
+        score++;
+        feedback.className = "feedback show good";
+        feedback.innerHTML = `<strong>Correct!</strong><br>${q.explanation}`;
+      } else {
+        feedback.className = "feedback show bad";
+        feedback.innerHTML = `<strong>Not correct.</strong> The correct answer is <strong>${["A","B","C","D"][q.answer]}. ${q.options[q.answer]}</strong>.<br>${q.explanation}`;
+      }
+
+      userAnswers.push({
+        question: currentQuestion + 1,
+        correct: isCorrect,
+        selected: selectedIndex,
+        answer: q.answer
+      });
+
+      nextBtn.disabled = false;
+      scoreText.textContent = `Score: ${score}`;
+    }
+
+    function updateStatus() {
+      counter.textContent = `Question ${currentQuestion + 1}/${quizData.length}`;
+      scoreText.textContent = `Score: ${score}`;
+      progressBar.style.width = `${((currentQuestion + 1) / quizData.length) * 100}%`;
+      nextBtn.textContent = currentQuestion === quizData.length - 1 ? "See Result" : "Next";
+    }
+
+    function showResult() {
+      const percent = Math.round((score / quizData.length) * 100);
+      let emoji = "🌟";
+      let message = "Excellent work!";
+
+      if (percent < 80) {
+        emoji = "👍";
+        message = "Good effort!";
+      }
+      if (percent < 60) {
+        emoji = "📚";
+        message = "Keep practising!";
+      }
+
+      gameCard.innerHTML = `
+        <div class="result">
+          <div class="emoji">${emoji}</div>
+          <h2>${message}</h2>
+          <div class="result-score">You got ${score}/${quizData.length} correct (${percent}%).</div>
+
+          <div class="review">
+            ${userAnswers.map(item => `
+              <div class="review-item">
+                <strong>Question ${item.question}:</strong>
+                ${item.correct ? "✅ Correct" : `❌ Incorrect — Correct answer: ${["A","B","C","D"][item.answer]}`}
+              </div>
+            `).join("")}
+          </div>
+
+          <button id="restartBtn" class="restart-btn" type="button">Play Again</button>
+        </div>
+      `;
+
+      document.getElementById("restartBtn").addEventListener("click", restartGame);
+      counter.textContent = "Completed";
+      progressBar.style.width = "100%";
+    }
+
+    function restartGame() {
+      currentQuestion = 0;
+      score = 0;
+      answered = false;
+      userAnswers.length = 0;
+
+      gameCard.innerHTML = `
+        <div id="questionArea"></div>
+        <div id="feedback" class="feedback" aria-live="polite"></div>
+        <div class="controls">
+          <button id="nextBtn" class="next-btn" type="button" disabled>Next</button>
+        </div>
+      `;
+
+      window.location.reload();
+    }
+
+    nextBtn.addEventListener("click", () => {
+      if (!answered) return;
+
+      if (currentQuestion < quizData.length - 1) {
+        currentQuestion++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    renderQuestion();
+  </script>
+</body>
+</html>
