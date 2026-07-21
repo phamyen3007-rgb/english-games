@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grade 12 - Unit 2 - Exercise 1 (41-60)</title>
+  <style>
+    :root{
+      --bg1:#081b33;
+      --bg2:#123d5a;
+      --bg3:#0d6b68;
+      --card:rgba(255,255,255,.96);
+      --text:#122033;
+      --muted:#637083;
+      --primary:#2563eb;
+      --secondary:#7c3aed;
+      --correct:#16a34a;
+      --wrong:#dc2626;
+      --border:#dbe4ef;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Inter, Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(56,189,248,.24), transparent 27%),
+        radial-gradient(circle at 88% 12%, rgba(168,85,247,.20), transparent 25%),
+        radial-gradient(circle at 80% 88%, rgba(34,197,94,.18), transparent 26%),
+        linear-gradient(135deg,var(--bg1),var(--bg2) 52%,var(--bg3));
+      padding:22px;
+      overflow-x:hidden;
+    }
+
+    .orb{
+      position:fixed;
+      border-radius:50%;
+      filter:blur(4px);
+      opacity:.25;
+      pointer-events:none;
+      animation:float 8s ease-in-out infinite;
+    }
+
+    .orb.one{width:180px;height:180px;background:#60a5fa;left:-55px;top:22%}
+    .orb.two{width:220px;height:220px;background:#c084fc;right:-85px;top:35%;animation-delay:-3s}
+    .orb.three{width:150px;height:150px;background:#34d399;left:15%;bottom:-70px;animation-delay:-5s}
+
+    @keyframes float{
+      0%,100%{transform:translateY(0) scale(1)}
+      50%{transform:translateY(-24px) scale(1.05)}
+    }
+
+    .app{
+      width:min(920px,100%);
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:16px;
+      color:#fff;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .logo{
+      width:48px;
+      height:48px;
+      display:grid;
+      place-items:center;
+      border-radius:16px;
+      background:rgba(255,255,255,.16);
+      border:1px solid rgba(255,255,255,.24);
+      font-size:25px;
+      backdrop-filter:blur(12px);
+    }
+
+    .brand h1{
+      margin:0;
+      font-size:clamp(18px,3vw,27px);
+    }
+
+    .brand p{
+      margin:4px 0 0;
+      color:rgba(255,255,255,.76);
+      font-size:14px;
+    }
+
+    .sound-btn{
+      border:1px solid rgba(255,255,255,.24);
+      background:rgba(255,255,255,.14);
+      color:#fff;
+      border-radius:14px;
+      padding:11px 14px;
+      cursor:pointer;
+      font-weight:700;
+      backdrop-filter:blur(12px);
+    }
+
+    .dashboard{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-bottom:14px;
+    }
+
+    .stat{
+      background:rgba(255,255,255,.13);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.18);
+      backdrop-filter:blur(12px);
+      border-radius:18px;
+      padding:14px 16px;
+    }
+
+    .stat span{
+      display:block;
+      color:rgba(255,255,255,.72);
+      font-size:13px;
+      margin-bottom:5px;
+    }
+
+    .stat strong{
+      font-size:22px;
+    }
+
+    .progress-shell{
+      height:12px;
+      background:rgba(255,255,255,.17);
+      border-radius:999px;
+      overflow:hidden;
+      margin-bottom:16px;
+      border:1px solid rgba(255,255,255,.12);
+    }
+
+    .progress-bar{
+      height:100%;
+      width:10%;
+      border-radius:inherit;
+      background:linear-gradient(90deg,#38bdf8,#a78bfa,#34d399);
+      transition:width .45s ease;
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:30px;
+      padding:clamp(22px,5vw,40px);
+      box-shadow:0 26px 65px rgba(0,0,0,.24);
+      min-height:500px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      width:180px;
+      height:180px;
+      border-radius:50%;
+      right:-80px;
+      top:-85px;
+      background:linear-gradient(135deg,rgba(37,99,235,.12),rgba(124,58,237,.10));
+    }
+
+    .question-tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 13px;
+      border-radius:999px;
+      background:#e8efff;
+      color:#1d4ed8;
+      font-weight:800;
+      font-size:14px;
+      margin-bottom:18px;
+    }
+
+    .question{
+      font-size:clamp(21px,3.3vw,31px);
+      line-height:1.4;
+      margin:0 0 26px;
+      position:relative;
+      z-index:1;
+    }
+
+    .answers{
+      display:grid;
+      gap:13px;
+    }
+
+    .answer{
+      width:100%;
+      border:2px solid var(--border);
+      background:#fff;
+      color:var(--text);
+      border-radius:18px;
+      padding:16px 18px;
+      display:flex;
+      align-items:center;
+      gap:13px;
+      text-align:left;
+      cursor:pointer;
+      font-size:17px;
+      transition:.2s ease;
+    }
+
+    .answer:hover:not(:disabled){
+      transform:translateY(-2px);
+      border-color:#93b4fa;
+      background:#f7faff;
+      box-shadow:0 10px 22px rgba(37,99,235,.10);
+    }
+
+    .letter{
+      width:36px;
+      height:36px;
+      flex:0 0 36px;
+      display:grid;
+      place-items:center;
+      border-radius:12px;
+      background:#eef2f7;
+      font-weight:900;
+    }
+
+    .answer.correct{
+      border-color:var(--correct);
+      background:#ecfdf3;
+      color:#166534;
+      animation:correctPulse .45s ease;
+    }
+
+    .answer.correct .letter{
+      background:var(--correct);
+      color:white;
+    }
+
+    .answer.wrong{
+      border-color:var(--wrong);
+      background:#fff1f2;
+      color:#991b1b;
+      animation:shake .36s ease;
+    }
+
+    .answer.wrong .letter{
+      background:var(--wrong);
+      color:white;
+    }
+
+    @keyframes shake{
+      0%,100%{transform:translateX(0)}
+      25%{transform:translateX(-7px)}
+      75%{transform:translateX(7px)}
+    }
+
+    @keyframes correctPulse{
+      50%{transform:scale(1.015)}
+    }
+
+    .feedback{
+      display:none;
+      margin-top:20px;
+      border-radius:18px;
+      padding:16px 18px;
+      line-height:1.55;
+      animation:slideUp .32s ease;
+    }
+
+    .feedback.show{display:block}
+    .feedback.good{background:#ecfdf3;color:#166534;border:1px solid #86efac}
+    .feedback.bad{background:#fff7ed;color:#9a3412;border:1px solid #fdba74}
+
+    @keyframes slideUp{
+      from{opacity:0;transform:translateY(10px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    .actions{
+      display:flex;
+      justify-content:flex-end;
+      margin-top:20px;
+    }
+
+    .next-btn,.restart-btn{
+      display:none;
+      border:0;
+      border-radius:16px;
+      padding:14px 22px;
+      background:linear-gradient(135deg,var(--primary),var(--secondary));
+      color:white;
+      font-size:16px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 12px 25px rgba(37,99,235,.25);
+    }
+
+    .next-btn.show,.restart-btn.show{display:inline-flex}
+
+    .result{
+      display:none;
+      text-align:center;
+      padding:24px 0 5px;
+    }
+
+    .result.show{display:block}
+
+    .trophy{
+      font-size:76px;
+      animation:bounce 1.3s ease infinite;
+    }
+
+    @keyframes bounce{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-10px)}
+    }
+
+    .result h2{
+      font-size:34px;
+      margin:12px 0 8px;
+    }
+
+    .score-circle{
+      width:155px;
+      height:155px;
+      margin:22px auto;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:conic-gradient(#2563eb 0deg,#7c3aed 250deg,#e5e7eb 250deg);
+      position:relative;
+    }
+
+    .score-circle::after{
+      content:"";
+      position:absolute;
+      inset:12px;
+      border-radius:50%;
+      background:white;
+    }
+
+    .score-text{
+      position:relative;
+      z-index:2;
+      font-size:32px;
+      font-weight:900;
+    }
+
+    .result-message{
+      color:var(--muted);
+      font-size:18px;
+      margin-bottom:24px;
+    }
+
+    .confetti{
+      position:fixed;
+      width:10px;
+      height:16px;
+      top:-20px;
+      z-index:10;
+      animation:fall linear forwards;
+      pointer-events:none;
+    }
+
+    @keyframes fall{
+      to{transform:translateY(110vh) rotate(720deg);opacity:.9}
+    }
+
+    @media(max-width:600px){
+      body{padding:12px}
+      .topbar{align-items:flex-start}
+      .brand p{display:none}
+      .dashboard{grid-template-columns:1fr 1fr}
+      .stat:last-child{grid-column:1/-1}
+      .card{border-radius:24px;min-height:540px}
+      .answer{padding:14px;font-size:16px}
+    }
+  </style>
+</head>
+<body>
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+
+  <main class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">🌍</div>
+        <div>
+          <h1>Grade 12 – Unit 2 – Exercise 1 (41–60)</h1>
+          <p>A Multicultural World • Homework Challenge</p>
+        </div>
+      </div>
+      <button id="soundBtn" class="sound-btn" type="button">🔊 Sound On</button>
+    </header>
+
+    <section class="dashboard">
+      <div class="stat"><span>QUESTION</span><strong id="questionStat">1 / 10</strong></div>
+      <div class="stat"><span>SCORE</span><strong id="scoreStat">0</strong></div>
+      <div class="stat"><span>STREAK</span><strong id="streakStat">0 🔥</strong></div>
+    </section>
+
+    <div class="progress-shell" aria-label="Quiz progress">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+
+    <section class="card">
+      <div id="quizArea">
+        <div class="question-tag">✨ Choose the best answer</div>
+        <h2 id="questionText" class="question"></h2>
+        <div id="answers" class="answers"></div>
+        <div id="feedback" class="feedback" aria-live="polite"></div>
+        <div class="actions">
+          <button id="nextBtn" class="next-btn" type="button">Next question →</button>
+        </div>
+      </div>
+
+      <div id="resultArea" class="result">
+        <div class="trophy">🏆</div>
+        <h2>Challenge completed!</h2>
+        <div id="scoreCircle" class="score-circle">
+          <div id="finalScore" class="score-text">0/10</div>
+        </div>
+        <p id="resultMessage" class="result-message"></p>
+        <button id="restartBtn" class="restart-btn show" type="button">↻ Play again</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const quizData = [
+      {
+        question: "Traditional folk games have __________ greater attention from young people through social media campaigns.",
+        options: ["gained", "brought", "taken", "made"],
+        answer: 0,
+        explanation: "Gain attention = nhận được hoặc thu hút sự chú ý."
+      },
+      {
+        question: "The cultural exhibition attracted thousands of visitors __________ its impressive collection of traditional costumes.",
+        options: ["despite", "because of", "although", "instead of"],
+        answer: 1,
+        explanation: "Because of + noun phrase = bởi vì. Sau chỗ trống là cụm danh từ."
+      },
+      {
+        question: "__________ an international food festival allows visitors to discover dishes from many different cultures.",
+        options: ["Attend", "Attended", "Attending", "To attending"],
+        answer: 2,
+        explanation: "V-ing có thể đứng đầu câu làm chủ ngữ: Attending ... allows ..."
+      },
+      {
+        question: "The audience was completely captivated __________ the dancers’ graceful movements and colourful costumes.",
+        options: ["for", "with", "by", "at"],
+        answer: 2,
+        explanation: "Cụm cố định: be captivated by = bị cuốn hút bởi."
+      },
+      {
+        question: "The school organized several activities to bring students from different cultural backgrounds __________.",
+        options: ["apart", "together", "away", "behind"],
+        answer: 1,
+        explanation: "Bring people together = gắn kết mọi người."
+      },
+      {
+        question: "Interest in handmade products is currently __________ as more young people support local craftsmen.",
+        options: ["on the rise", "on the wane", "in danger", "out of date"],
+        answer: 0,
+        explanation: "On the rise = đang gia tăng."
+      },
+      {
+        question: "International students may need time to __________ unfamiliar customs when they first move abroad.",
+        options: ["adapt to", "give rise to", "take after", "put up"],
+        answer: 0,
+        explanation: "Adapt to = thích nghi với."
+      },
+      {
+        question: "The festival provided a wide __________ of activities, from cooking demonstrations to traditional games.",
+        options: ["amount", "level", "range", "number"],
+        answer: 2,
+        explanation: "Cụm cố định: a wide range of = nhiều loại."
+      },
+      {
+        question: "Visitors bought handmade souvenirs from a small __________ near the entrance to the cultural fair.",
+        options: ["booth", "shelf", "crowd", "ingredient"],
+        answer: 0,
+        explanation: "Booth = gian hàng tại hội chợ."
+      },
+      {
+        question: "Researchers are studying the __________ of the ancient tradition to understand how it developed.",
+        options: ["influence", "origin", "appreciation", "popularity"],
+        answer: 1,
+        explanation: "Origin = nguồn gốc."
+      }
+    ];
+
+    let current = 0;
+    let score = 0;
+    let streak = 0;
+    let answered = false;
+    let soundOn = true;
+    let audioContext;
+
+    const questionText = document.getElementById("questionText");
+    const answersBox = document.getElementById("answers");
+    const feedback = document.getElementById("feedback");
+    const nextBtn = document.getElementById("nextBtn");
+    const restartBtn = document.getElementById("restartBtn");
+    const quizArea = document.getElementById("quizArea");
+    const resultArea = document.getElementById("resultArea");
+    const questionStat = document.getElementById("questionStat");
+    const scoreStat = document.getElementById("scoreStat");
+    const streakStat = document.getElementById("streakStat");
+    const progressBar = document.getElementById("progressBar");
+    const finalScore = document.getElementById("finalScore");
+    const resultMessage = document.getElementById("resultMessage");
+    const scoreCircle = document.getElementById("scoreCircle");
+    const soundBtn = document.getElementById("soundBtn");
+
+    function playTone(type){
+      if(!soundOn) return;
+      try{
+        audioContext = audioContext || new (window.AudioContext || window.webkitAudioContext)();
+        const now = audioContext.currentTime;
+
+        if(type === "correct"){
+          [523.25, 659.25, 783.99].forEach((freq, i) => {
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            osc.type = "sine";
+            osc.frequency.value = freq;
+            gain.gain.setValueAtTime(0.001, now + i * 0.08);
+            gain.gain.exponentialRampToValueAtTime(0.18, now + i * 0.08 + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.08 + 0.16);
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            osc.start(now + i * 0.08);
+            osc.stop(now + i * 0.08 + 0.18);
+          });
+        } else if(type === "wrong"){
+          const osc = audioContext.createOscillator();
+          const gain = audioContext.createGain();
+          osc.type = "sawtooth";
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.exponentialRampToValueAtTime(120, now + 0.28);
+          gain.gain.setValueAtTime(0.14, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+          osc.connect(gain);
+          gain.connect(audioContext.destination);
+          osc.start(now);
+          osc.stop(now + 0.31);
+        } else if(type === "finish"){
+          [392, 523.25, 659.25, 783.99].forEach((freq, i) => {
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            osc.type = "triangle";
+            osc.frequency.value = freq;
+            gain.gain.setValueAtTime(0.001, now + i * 0.12);
+            gain.gain.exponentialRampToValueAtTime(0.16, now + i * 0.12 + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.12 + 0.25);
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            osc.start(now + i * 0.12);
+            osc.stop(now + i * 0.12 + 0.27);
+          });
+        }
+      }catch(e){}
+    }
+
+    function renderQuestion(){
+      answered = false;
+      feedback.className = "feedback";
+      feedback.innerHTML = "";
+      nextBtn.classList.remove("show");
+
+      const item = quizData[current];
+      questionText.textContent = item.question;
+      answersBox.innerHTML = "";
+
+      item.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "answer";
+        button.innerHTML = `<span class="letter">${String.fromCharCode(65 + index)}</span><span>${option}</span>`;
+        button.addEventListener("click", () => selectAnswer(index, button));
+        answersBox.appendChild(button);
+      });
+
+      questionStat.textContent = `${current + 1} / ${quizData.length}`;
+      scoreStat.textContent = score;
+      streakStat.textContent = `${streak} 🔥`;
+      progressBar.style.width = `${((current + 1) / quizData.length) * 100}%`;
+    }
+
+    function selectAnswer(selected, selectedButton){
+      if(answered) return;
+      answered = true;
+
+      const item = quizData[current];
+      const buttons = [...answersBox.querySelectorAll(".answer")];
+      buttons.forEach(btn => btn.disabled = true);
+
+      if(selected === item.answer){
+        selectedButton.classList.add("correct");
+        score++;
+        streak++;
+        feedback.className = "feedback good show";
+        feedback.innerHTML = `<strong>✅ Correct!</strong><br>${item.explanation}`;
+        playTone("correct");
+      } else {
+        selectedButton.classList.add("wrong");
+        buttons[item.answer].classList.add("correct");
+        streak = 0;
+        feedback.className = "feedback bad show";
+        feedback.innerHTML = `<strong>❌ Not quite.</strong> The correct answer is <strong>${String.fromCharCode(65 + item.answer)}. ${item.options[item.answer]}</strong>.<br>${item.explanation}`;
+        playTone("wrong");
+      }
+
+      scoreStat.textContent = score;
+      streakStat.textContent = `${streak} 🔥`;
+      nextBtn.textContent = current === quizData.length - 1 ? "See result →" : "Next question →";
+      nextBtn.classList.add("show");
+    }
+
+    function showResult(){
+      quizArea.style.display = "none";
+      resultArea.classList.add("show");
+      finalScore.textContent = `${score}/${quizData.length}`;
+
+      const percent = Math.round((score / quizData.length) * 100);
+      const angle = percent * 3.6;
+      scoreCircle.style.background = `conic-gradient(#2563eb 0deg, #7c3aed ${angle}deg, #e5e7eb ${angle}deg)`;
+
+      if(percent === 100){
+        resultMessage.textContent = "Perfect score! Excellent work! 🌟";
+      } else if(percent >= 80){
+        resultMessage.textContent = "Great job! You have mastered most of the lesson.";
+      } else if(percent >= 60){
+        resultMessage.textContent = "Good effort! Review the explanations and try again.";
+      } else {
+        resultMessage.textContent = "Keep practising. You will improve with every attempt!";
+      }
+
+      playTone("finish");
+      launchConfetti();
+    }
+
+    function launchConfetti(){
+      const colors = ["#38bdf8","#a78bfa","#34d399","#fbbf24","#fb7185"];
+      for(let i = 0; i < 70; i++){
+        const piece = document.createElement("div");
+        piece.className = "confetti";
+        piece.style.left = Math.random() * 100 + "vw";
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDuration = (2.4 + Math.random() * 2.2) + "s";
+        piece.style.animationDelay = (Math.random() * .8) + "s";
+        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 5200);
+      }
+    }
+
+    nextBtn.addEventListener("click", () => {
+      if(current < quizData.length - 1){
+        current++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    restartBtn.addEventListener("click", () => {
+      current = 0;
+      score = 0;
+      streak = 0;
+      quizArea.style.display = "block";
+      resultArea.classList.remove("show");
+      renderQuestion();
+    });
+
+    soundBtn.addEventListener("click", () => {
+      soundOn = !soundOn;
+      soundBtn.textContent = soundOn ? "🔊 Sound On" : "🔇 Sound Off";
+      if(soundOn) playTone("correct");
+    });
+
+    renderQuestion();
+  </script>
+</body>
+</html>
