@@ -209,6 +209,67 @@
       font-size:14px;
     }
 
+
+    .section-actions{display:flex;align-items:center;gap:10px}
+    .grade-lock{
+      border:0;border-radius:999px;padding:8px 12px;background:#0f172a;color:white;
+      font-weight:800;cursor:pointer;box-shadow:0 8px 18px rgba(15,23,42,.14);transition:.2s ease
+    }
+    .grade-lock:hover{transform:translateY(-2px)}
+    .grade-lock.unlocked{background:#047857}
+    .game-card.locked{position:relative}
+    .game-card.locked::after{
+      content:"🔒";position:absolute;top:16px;right:16px;width:38px;height:38px;
+      display:grid;place-items:center;border-radius:13px;background:#f1f5f9;
+      box-shadow:0 7px 16px rgba(15,23,42,.08)
+    }
+    .game-card.unlocked::after{content:"🔓";background:#d1fae5}
+    .modal-backdrop{
+      position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;
+      padding:18px;background:rgba(15,23,42,.65);backdrop-filter:blur(8px)
+    }
+    .modal-backdrop.show{display:flex}
+    .login-modal{
+      width:min(430px,100%);background:white;border-radius:28px;padding:26px;
+      box-shadow:0 30px 90px rgba(0,0,0,.3);animation:modalIn .22s ease
+    }
+    @keyframes modalIn{
+      from{opacity:0;transform:translateY(16px) scale(.97)}
+      to{opacity:1;transform:translateY(0) scale(1)}
+    }
+    .login-icon{
+      width:64px;height:64px;display:grid;place-items:center;margin:0 auto 14px;
+      border-radius:21px;font-size:32px;background:linear-gradient(135deg,#dbeafe,#ede9fe)
+    }
+    .login-modal h3{margin:0;text-align:center;font-size:26px}
+    .login-modal p{margin:8px 0 20px;text-align:center;color:var(--muted);line-height:1.5}
+    .password-wrap{position:relative}
+    #gradePassword{
+      width:100%;border:2px solid #dbeafe;border-radius:16px;padding:14px 52px 14px 16px;
+      font-size:18px;letter-spacing:3px;outline:none
+    }
+    #gradePassword:focus{border-color:#60a5fa;box-shadow:0 0 0 4px rgba(96,165,250,.17)}
+    #gradePassword.shake{animation:shake .32s ease;border-color:#ef4444}
+    @keyframes shake{
+      0%,100%{transform:translateX(0)}
+      25%{transform:translateX(-7px)}
+      50%{transform:translateX(7px)}
+      75%{transform:translateX(-4px)}
+    }
+    .toggle-password{
+      position:absolute;top:50%;right:10px;transform:translateY(-50%);
+      border:0;background:transparent;font-size:21px;cursor:pointer;padding:7px
+    }
+    .login-error{
+      min-height:22px;margin:9px 2px 0;color:#dc2626;font-size:14px;
+      font-weight:700;text-align:left!important
+    }
+    .modal-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+    .modal-btn{border:0;border-radius:15px;padding:12px 15px;font-weight:900;cursor:pointer}
+    .cancel-btn{background:#f1f5f9;color:#334155}
+    .login-btn{background:linear-gradient(135deg,#2563eb,#7c3aed);color:white}
+    .login-note{margin:14px 0 0!important;font-size:12px;color:#94a3b8!important}
+
     @media(max-width:850px){
       .grid{grid-template-columns:1fr 1fr}
     }
@@ -236,17 +297,20 @@
     <section class="grade-section">
       <div class="section-title">
         <h2>📘 Grade 10</h2>
-        <span class="count">2 games</span>
+        <div class="section-actions">
+          <span class="count">2 games</span>
+          <button class="grade-lock" type="button" data-unlock-grade="10">🔒 Log in</button>
+        </div>
       </div>
       <div class="grid">
-        <a class="game-card" data-title="exercise 6 option b grade 10" href="exercise_6_option_b_game.html">
+        <a class="game-card locked" data-grade="10" data-title="exercise 6 option b grade 10" href="exercise_6_option_b_game.html">
           <div class="icon blue">🧩</div>
           <h3>Exercise 6 – Option B</h3>
           <p>Interactive reading and vocabulary practice.</p>
           <span class="play">Play now →</span>
         </a>
 
-        <a class="game-card" data-title="exercise 8 option c grade 10" href="exercise_8_option_c_game.html">
+        <a class="game-card locked" data-grade="10" data-title="exercise 8 option c grade 10" href="exercise_8_option_c_game.html">
           <div class="icon green">📖</div>
           <h3>Exercise 8 – Option C</h3>
           <p>Practice reading comprehension with instant feedback.</p>
@@ -258,7 +322,10 @@
     <section class="grade-section">
       <div class="section-title">
         <h2>📗 Grade 11</h2>
-        <span class="count">Coming soon</span>
+        <div class="section-actions">
+          <span class="count">Coming soon</span>
+          <button class="grade-lock" type="button" data-unlock-grade="11">🔒 Log in</button>
+        </div>
       </div>
       <div class="empty">Chưa có game lớp 11. Game mới sẽ được thêm vào đây.</div>
     </section>
@@ -266,38 +333,41 @@
     <section class="grade-section">
       <div class="section-title">
         <h2>📕 Grade 12</h2>
-        <span class="count">6 games</span>
+        <div class="section-actions">
+          <span class="count">8 games</span>
+          <button class="grade-lock" type="button" data-unlock-grade="12">🔒 Log in</button>
+        </div>
       </div>
       <div class="grid">
-        <a class="game-card" data-title="grade 12 unit 2 homework questions 1 20" href="grade_12_unit_2_homework_game.html">
+        <a class="game-card locked" data-grade="12" data-title="grade 12 unit 2 homework questions 1 20" href="grade_12_unit_2_homework_game.html">
           <div class="icon purple">🌍</div>
           <h3>Unit 2 – Homework – Questions 1–20</h3>
           <p>A Multicultural World – selected practice questions.</p>
           <span class="play">Play now →</span>
         </a>
 
-        <a class="game-card" data-title="grade 12 unit 2 questions 21 40 beautiful" href="grade_12_unit_2_21-40_beautiful.html">
+        <a class="game-card locked" data-grade="12" data-title="grade 12 unit 2 questions 21 40 beautiful" href="grade_12_unit_2_21-40_beautiful.html">
           <div class="icon orange">🏆</div>
           <h3>Unit 2 – Exercise 1 – Questions 21–40</h3>
           <p>Vocabulary and grammar practice with a modern game interface.</p>
           <span class="play">Play now →</span>
         </a>
 
-        <a class="game-card" data-title="grade 12 unit 2 exercise 1 questions 41 60 homework" href="grade_12_unit_2_exercise_1_41-60.html">
+        <a class="game-card locked" data-grade="12" data-title="grade 12 unit 2 exercise 1 questions 41 60 homework" href="grade_12_unit_2_exercise_1_41-60.html">
           <div class="icon pink">🎯</div>
           <h3>Unit 2 – Exercise 1 – Questions 41–60</h3>
           <p>Homework challenge with sound, instant feedback, score and streak.</p>
           <span class="play">Play now →</span>
         </a>
 
-        <a class="game-card" data-title="grade 12 unit 2 exercise 1 questions 61 71 world culture quest" href="grade_12_unit_2_exercise_1_61-71.html">
+        <a class="game-card locked" data-grade="12" data-title="grade 12 unit 2 exercise 1 questions 61 71 world culture quest" href="grade_12_unit_2_exercise_1_61-71.html">
           <div class="icon green">🧳</div>
           <h3>Unit 2 – Exercise 1 – Questions 61–71</h3>
           <p>World Culture Quest with mixed challenges, XP, coins and a boss battle.</p>
           <span class="play">Play now →</span>
         </a>
 
-        <a class="game-card" data-title="grade 12 unit 2 exercise 2 option b closest meaning synonym mission" href="grade_12_unit_2_exercise_2_option_b.html">
+        <a class="game-card locked" data-grade="12" data-title="grade 12 unit 2 exercise 2 option b closest meaning synonym mission" href="grade_12_unit_2_exercise_2_option_b.html">
           <div class="icon blue">🕵️</div>
           <h3>Unit 2 – Exercise 2 – Option B</h3>
           <p>Global Synonym Mission with XP, combo, hearts and a final boss.</p>
@@ -305,10 +375,25 @@
         </a>
 
 
-        <a class="game-card" data-title="grade 12 unit 2 exercise 2 option c closest meaning cultural code mission" href="grade_12_unit_2_exercise_2_option_c.html">
+        <a class="game-card locked" data-grade="12" data-title="grade 12 unit 2 exercise 2 option c closest meaning cultural code mission" href="grade_12_unit_2_exercise_2_option_c.html">
           <div class="icon purple">🎭</div>
           <h3>Unit 2 – Exercise 2 – Option C</h3>
           <p>Cultural Code Mission with a purple-orange theme, new sounds, XP, combo and hearts.</p>
+          <span class="play">Play now →</span>
+        </a>
+
+
+        <a class="game-card locked" data-grade="12" data-title="grade 12 unit 2 exercise 3 option b opposite meaning challenge" href="grade_12_unit_2_exercise_3_option_b.html">
+          <div class="icon orange">⚔️</div>
+          <h3>Unit 2 – Exercise 3 – Option B</h3>
+          <p>Opposite Meaning Challenge with XP, combo, hearts and instant Vietnamese explanations.</p>
+          <span class="play">Play now →</span>
+        </a>
+
+        <a class="game-card locked" data-grade="12" data-title="grade 12 unit 2 exercise 3 option c advanced opposite meaning" href="grade_12_unit_2_exercise_3_option_c.html">
+          <div class="icon pink">👑</div>
+          <h3>Unit 2 – Exercise 3 – Option C</h3>
+          <p>Advanced Opposite Meaning Challenge with academic vocabulary and a final mission.</p>
           <span class="play">Play now →</span>
         </a>
 
@@ -321,18 +406,152 @@
     </footer>
   </main>
 
+  <div id="loginBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+    <div class="login-modal">
+      <div class="login-icon">🔐</div>
+      <h3 id="loginTitle">Grade login</h3>
+      <p id="loginMessage">Enter the class password to open the games.</p>
+      <form id="loginForm">
+        <div class="password-wrap">
+          <input id="gradePassword" type="password" inputmode="numeric" autocomplete="current-password"
+                 placeholder="Enter password" maxlength="12" aria-label="Class password" />
+          <button id="togglePassword" class="toggle-password" type="button" aria-label="Show or hide password">👁️</button>
+        </div>
+        <p id="loginError" class="login-error"></p>
+        <div class="modal-buttons">
+          <button id="cancelLogin" class="modal-btn cancel-btn" type="button">Cancel</button>
+          <button class="modal-btn login-btn" type="submit">Unlock grade</button>
+        </div>
+      </form>
+      <p class="login-note">The grade remains unlocked until this browser tab is closed.</p>
+    </div>
+  </div>
+
   <script>
+    const gradePasswords = {"10":"103007","11":"113007","12":"123007"};
+
     const searchInput = document.getElementById("search");
     const cards = [...document.querySelectorAll(".game-card")];
+    const gradeButtons = [...document.querySelectorAll("[data-unlock-grade]")];
+    const backdrop = document.getElementById("loginBackdrop");
+    const loginForm = document.getElementById("loginForm");
+    const passwordInput = document.getElementById("gradePassword");
+    const loginTitle = document.getElementById("loginTitle");
+    const loginMessage = document.getElementById("loginMessage");
+    const loginError = document.getElementById("loginError");
+    const togglePassword = document.getElementById("togglePassword");
+    const cancelLogin = document.getElementById("cancelLogin");
+
+    let requestedGrade = "";
+    let pendingHref = "";
+
+    function isUnlocked(grade){
+      return sessionStorage.getItem("grade_" + grade + "_unlocked") === "yes";
+    }
+
+    function refreshLocks(){
+      cards.forEach(card => {
+        const grade = card.dataset.grade;
+        if(!grade) return;
+        const unlocked = isUnlocked(grade);
+        card.classList.toggle("locked", !unlocked);
+        card.classList.toggle("unlocked", unlocked);
+      });
+
+      gradeButtons.forEach(button => {
+        const grade = button.dataset.unlockGrade;
+        const unlocked = isUnlocked(grade);
+        button.classList.toggle("unlocked", unlocked);
+        button.textContent = unlocked ? "🔓 Unlocked" : "🔒 Log in";
+      });
+    }
+
+    function openLogin(grade, href = ""){
+      requestedGrade = grade;
+      pendingHref = href;
+      loginTitle.textContent = "Grade " + grade + " login";
+      loginMessage.textContent = "Enter the password for Grade " + grade + " to open its games.";
+      loginError.textContent = "";
+      passwordInput.value = "";
+      passwordInput.type = "password";
+      togglePassword.textContent = "👁️";
+      backdrop.classList.add("show");
+      setTimeout(() => passwordInput.focus(), 80);
+    }
+
+    function closeLogin(){
+      backdrop.classList.remove("show");
+      requestedGrade = "";
+      pendingHref = "";
+      loginError.textContent = "";
+      passwordInput.classList.remove("shake");
+    }
+
+    cards.forEach(card => {
+      card.addEventListener("click", event => {
+        const grade = card.dataset.grade;
+        if(!grade || isUnlocked(grade)) return;
+        event.preventDefault();
+        openLogin(grade, card.getAttribute("href"));
+      });
+    });
+
+    gradeButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const grade = button.dataset.unlockGrade;
+        if(isUnlocked(grade)){
+          sessionStorage.removeItem("grade_" + grade + "_unlocked");
+          refreshLocks();
+          return;
+        }
+        openLogin(grade);
+      });
+    });
+
+    loginForm.addEventListener("submit", event => {
+      event.preventDefault();
+      const entered = passwordInput.value.trim();
+
+      if(entered === gradePasswords[requestedGrade]){
+        sessionStorage.setItem("grade_" + requestedGrade + "_unlocked", "yes");
+        const destination = pendingHref;
+        closeLogin();
+        refreshLocks();
+        if(destination) window.location.href = destination;
+      }else{
+        loginError.textContent = "Incorrect password. Please try again.";
+        passwordInput.classList.remove("shake");
+        void passwordInput.offsetWidth;
+        passwordInput.classList.add("shake");
+        passwordInput.select();
+      }
+    });
+
+    togglePassword.addEventListener("click", () => {
+      const showing = passwordInput.type === "text";
+      passwordInput.type = showing ? "password" : "text";
+      togglePassword.textContent = showing ? "👁️" : "🙈";
+      passwordInput.focus();
+    });
+
+    cancelLogin.addEventListener("click", closeLogin);
+    backdrop.addEventListener("click", event => {
+      if(event.target === backdrop) closeLogin();
+    });
+
+    document.addEventListener("keydown", event => {
+      if(event.key === "Escape" && backdrop.classList.contains("show")) closeLogin();
+    });
 
     searchInput.addEventListener("input", () => {
       const keyword = searchInput.value.trim().toLowerCase();
-
       cards.forEach(card => {
         const title = card.dataset.title.toLowerCase();
         card.style.display = title.includes(keyword) ? "block" : "none";
       });
     });
+
+    refreshLocks();
   </script>
 </body>
 </html>
