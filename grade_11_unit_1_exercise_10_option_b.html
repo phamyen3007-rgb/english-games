@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 11 Unit 1 Exercise 10 Option B</title>
+<style>
+:root {
+  --green:#1f9d68; --green-dark:#11744a; --blue:#2f7ed8; --navy:#17324d;
+  --cream:#f7fbf8; --line:#dbe9e3; --red:#e55368; --gold:#f1b823;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; min-height:100vh; font-family:Inter,Segoe UI,Arial,sans-serif;
+  color:var(--navy);
+  background:
+    radial-gradient(circle at 10% 10%,rgba(31,157,104,.16),transparent 28%),
+    radial-gradient(circle at 90% 0%,rgba(47,126,216,.18),transparent 28%),
+    linear-gradient(135deg,#edfff4,#eef7ff);
+  padding:18px;
+}
+.app{max-width:1220px;margin:auto}
+.hero{
+  background:linear-gradient(135deg,var(--green),var(--blue));color:white;
+  border-radius:24px;padding:22px 26px;box-shadow:0 18px 45px rgba(31,73,101,.18);
+}
+.hero-row{display:flex;justify-content:space-between;align-items:center;gap:16px}
+h1{margin:0;font-size:clamp(1.45rem,3vw,2.25rem)} .subtitle{margin-top:7px;opacity:.92}
+.sound{border:0;border-radius:13px;padding:10px 14px;background:#ffffff25;color:white;font-size:1.05rem;cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.stat{background:#ffffff20;border:1px solid #ffffff35;border-radius:14px;padding:10px;text-align:center;font-weight:800}
+.progress-wrap{margin-top:14px} .progress-meta{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:7px}
+.progress{height:11px;background:#ffffff35;border-radius:999px;overflow:hidden}
+.progress>div{height:100%;width:0;background:#fff;transition:.35s}
+.layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(380px,.95fr);gap:18px;margin-top:18px;align-items:start}
+.panel{background:#ffffffea;border:1px solid rgba(255,255,255,.8);border-radius:22px;box-shadow:0 14px 35px rgba(39,88,111,.12)}
+.passage-panel{position:sticky;top:18px;max-height:calc(100vh - 36px);display:flex;flex-direction:column}
+.panel-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.panel-head h2{margin:0;font-size:1.2rem}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+.tool-btn{border:1px solid var(--line);background:white;color:var(--navy);border-radius:10px;padding:8px 10px;font-weight:700;cursor:pointer}
+.passage-body{overflow:auto;padding:18px 20px 24px;line-height:1.78}
+.paragraph{padding:12px 13px;border-radius:13px;transition:.3s;margin-bottom:10px}
+.paragraph::before{content:attr(data-label);font-weight:900;color:var(--green-dark);margin-right:8px}
+.paragraph.highlight{background:#fff4b8;box-shadow:inset 0 0 0 2px #f0ca48}
+mark.answer-mark{background:#ffd95b;padding:2px 3px;border-radius:4px}
+.question-panel{padding:20px}
+.mini-map{display:grid;grid-template-columns:repeat(8,1fr);gap:7px;margin-bottom:16px}
+.dot{border:0;border-radius:10px;padding:8px 0;background:#edf3f6;color:#6d8090;font-weight:900}
+.dot.current{background:var(--blue);color:white} .dot.done{background:#dff6e9;color:var(--green-dark)}
+.q-label{display:inline-block;background:#e5f5ec;color:var(--green-dark);border-radius:999px;padding:8px 12px;font-weight:900;margin-bottom:13px}
+.question{font-size:1.08rem;line-height:1.65;font-weight:750;margin-bottom:16px}
+.option{width:100%;display:block;text-align:left;border:2px solid #dfe9ee;border-radius:14px;background:#fbfdff;padding:14px 15px;margin:10px 0;cursor:pointer;font-size:1rem;line-height:1.45;transition:.2s}
+.option:hover:not(:disabled){transform:translateY(-2px);border-color:#83c9a7}
+.option.correct{background:#e9faef;border-color:var(--green);color:#115b38}
+.option.wrong{background:#fff0f3;border-color:var(--red);color:#98293d}
+.feedback{display:none;margin-top:16px;padding:15px 16px;border-radius:13px;line-height:1.55}
+.feedback.show{display:block} .feedback.good{background:#e9faef;border-left:5px solid var(--green)} .feedback.bad{background:#fff0f3;border-left:5px solid var(--red)}
+.actions{display:flex;justify-content:space-between;gap:10px;margin-top:15px}
+.primary,.secondary,.restart{border:0;border-radius:12px;padding:12px 17px;font-weight:900;cursor:pointer}
+.primary{background:linear-gradient(135deg,var(--green),var(--blue));color:white;display:none}
+.primary.show{display:inline-block}
+.secondary{background:#eef5fa;color:var(--navy);display:none} .secondary.show{display:inline-block}
+.result,.gameover{display:none;text-align:center;padding:34px 24px} .result.show,.gameover.show{display:block}
+.big{font-size:3rem;font-weight:950;color:var(--green-dark);margin:8px 0}
+.skill-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}
+.skill{background:#f4faf7;border:1px solid var(--line);border-radius:14px;padding:14px}
+.restart{background:linear-gradient(135deg,var(--green),var(--blue));color:#fff}
+.confetti{position:fixed;top:-20px;width:9px;height:15px;z-index:9999;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@media(max-width:900px){
+  body{padding:8px} .layout{grid-template-columns:1fr}
+  .passage-panel{position:relative;top:auto;max-height:none}
+  .passage-body{max-height:42vh}
+}
+@media(max-width:620px){
+  .stats{grid-template-columns:repeat(2,1fr)} .mini-map{grid-template-columns:repeat(4,1fr)}
+  .skill-grid{grid-template-columns:repeat(2,1fr)} .hero,.question-panel{padding:16px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <section class="hero">
+    <div class="hero-row">
+      <div><h1>📖 Living a Healthy Life</h1><div class="subtitle">Grade 11 • Unit 1 • Exercise 10 • Option B</div></div>
+      <button class="sound" id="soundBtn">🔊</button>
+    </div>
+    <div class="stats">
+      <div class="stat">XP<br><span id="xp">0</span></div>
+      <div class="stat">Coins<br><span id="coins">0</span> 🪙</div>
+      <div class="stat">Combo<br><span id="combo">0</span>×</div>
+      <div class="stat">Hearts<br><span id="hearts">❤️❤️❤️</span></div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-meta"><span id="progressText">Question 1 of 8</span><span id="percentText">0%</span></div>
+      <div class="progress"><div id="progressBar"></div></div>
+    </div>
+  </section>
+
+  <section class="layout">
+    <aside class="panel passage-panel">
+      <div class="panel-head">
+        <h2>📘 Reading Passage</h2>
+        <div class="tools">
+          <button class="tool-btn" id="clearBtn">Clear Highlight</button>
+          <button class="tool-btn" id="topBtn">Top</button>
+        </div>
+      </div>
+      <div class="passage-body" id="passageBody"></div>
+    </aside>
+
+    <section class="panel">
+      <div class="question-panel" id="questionPanel">
+        <div class="mini-map" id="miniMap"></div>
+        <div class="q-label" id="qLabel"></div>
+        <div class="question" id="question"></div>
+        <div id="options"></div>
+        <div class="feedback" id="feedback"></div>
+        <div class="actions">
+          <button class="secondary" id="locateBtn">📍 Locate Answer</button>
+          <button class="primary" id="nextBtn">Next ➜</button>
+        </div>
+      </div>
+
+      <div class="result" id="result">
+        <h2>🎉 Reading Mission Complete!</h2>
+        <div class="big" id="finalScore"></div>
+        <p id="resultMessage"></p>
+        <div class="skill-grid">
+          <div class="skill"><b>Vocabulary</b><br><span id="skillVocab"></span></div>
+          <div class="skill"><b>Reference</b><br><span id="skillRef"></span></div>
+          <div class="skill"><b>Detail</b><br><span id="skillDetail"></span></div>
+          <div class="skill"><b>Main Idea</b><br><span id="skillMain"></span></div>
+        </div>
+        <p><b id="finalXp"></b> XP • <b id="finalCoins"></b> Coins • Best combo: <b id="bestCombo"></b>×</p>
+        <button class="restart" id="restartBtn">Play Again</button>
+      </div>
+
+      <div class="gameover" id="gameover">
+        <h2>💔 Game Over</h2>
+        <p>You have run out of hearts. Review the passage and try again.</p>
+        <button class="restart" id="restartOverBtn">Restart</button>
+      </div>
+    </section>
+  </section>
+</div>
+
+<script>
+const passage = {"title": "Living a Healthy Life", "paragraphs": ["Living a healthy lifestyle is important for both your body and your mind. Besides exercising regularly, people should eat nutritious food that provides enough vitamins and minerals. Eating too much fast food or sugary snacks can increase the risk of obesity, heart disease, and other health problems. Therefore, choosing healthy meals every day can help people enjoy a longer and healthier life.", "Regular exercise is another key to good health. Simple activities such as walking, jogging, cycling, or doing stretching exercises can strengthen muscles and improve blood circulation. Experts also recommend exercising several times a week instead of doing all the exercise in one day. Making small changes and repeating healthy habits regularly can lead to better results over time.", "People should also pay attention to their health by having regular medical checkups. Early examinations help doctors discover diseases before they become serious. In addition, washing hands, eating clean food, and getting vaccinated can prevent bacteria and viruses from spreading. These healthy habits help protect both individuals and the people around them.", "In the end, staying healthy requires balance and regular effort. By eating well, exercising regularly, and taking care of your health, you can reduce health risks and enjoy a better quality of life."]};
+const questions = [{"q": "According to the passage, which of the following is NOT mentioned as a healthy habit?", "options": ["Exercising regularly several times a week.", "Drinking enough water every day.", "Having regular medical checkups.", "Getting recommended vaccines."], "answer": 1, "explanation": "Đoạn văn nhắc đến tập thể dục, khám sức khỏe và tiêm vắc-xin, nhưng không đề cập uống đủ nước.", "target": {"type": "multi", "paragraphs": [1, 2]}}, {"q": "The word \"regularly\" in paragraph 2 is closest in meaning to ______.", "options": ["in a careful way", "from time to time", "on a frequent basis", "only once"], "answer": 2, "explanation": "Regularly = thường xuyên, đều đặn.", "target": {"type": "word", "paragraph": 1, "text": "regularly"}}, {"q": "The word \"These\" in paragraph 3 refers to ______.", "options": ["healthy daily habits", "serious diseases", "harmful bacteria and viruses", "regular medical examinations"], "answer": 0, "explanation": "These chỉ các thói quen lành mạnh vừa được nhắc đến: rửa tay, ăn sạch, tiêm vắc-xin.", "target": {"type": "phrase", "paragraph": 2, "text": "These healthy habits"}}, {"q": "The phrase \"pay attention to their health\" in paragraph 3 is closest in meaning to ______.", "options": ["exercise harder every day", "take care of their health carefully", "visit the doctor every week", "take medicine immediately"], "answer": 1, "explanation": "Cụm này có nghĩa là quan tâm, chăm sóc sức khỏe cẩn thận.", "target": {"type": "phrase", "paragraph": 2, "text": "pay attention to their health"}}, {"q": "Which of the following best paraphrases the sentence: \"Making small changes and repeating healthy habits regularly can lead to better results over time.\"", "options": ["Healthy habits should only be followed for a short time.", "Small but regular actions can improve your health gradually.", "Only difficult exercises can make people healthier.", "Good health depends mainly on taking medicine."], "answer": 1, "explanation": "Ý tác giả là những thay đổi nhỏ nhưng duy trì đều đặn sẽ mang lại kết quả lâu dài.", "target": {"type": "sentence", "paragraph": 1, "text": "Making small changes and repeating healthy habits regularly can lead to better results over time."}}, {"q": "Which of the following statements is TRUE according to the passage?", "options": ["Fast food is the only cause of heart disease.", "People should exercise only once a week.", "Healthy habits can help prevent many diseases.", "Medical checkups are necessary only for sick people."], "answer": 2, "explanation": "Đoạn văn cho biết các thói quen lành mạnh giúp giảm nguy cơ mắc bệnh và bảo vệ sức khỏe.", "target": {"type": "multi", "paragraphs": [2, 3]}}, {"q": "In which paragraph does the writer discuss the benefits of regular exercise?", "options": ["Paragraph 1", "Paragraph 2", "Paragraph 3", "Paragraph 4"], "answer": 1, "explanation": "Đoạn 2 nói về các hoạt động thể dục và lợi ích của việc tập luyện thường xuyên.", "target": {"type": "paragraph", "paragraph": 1}}, {"q": "What is the main idea of the passage?", "options": ["A balanced lifestyle helps people stay healthy.", "Exercise is more important than healthy eating.", "Doctors play the most important role in good health.", "People should completely avoid all processed foods."], "answer": 0, "explanation": "Toàn bài nhấn mạnh rằng lối sống cân bằng với chế độ ăn uống và tập luyện hợp lý giúp duy trì sức khỏe tốt.", "target": {"type": "all"}}];
+let current=0, score=0, xp=0, coins=0, combo=0, bestCombo=0, hearts=3, locked=false, soundOn=true;
+const answered = Array(questions.length).fill(false);
+const $ = id => document.getElementById(id);
+
+function renderPassage(){
+  $("passageBody").innerHTML = passage.paragraphs.map((p,i)=>
+    `<p class="paragraph" id="p${i}" data-label="P${i+1}">${p}</p>`
+  ).join("");
+}
+
+function renderMiniMap(){
+  $("miniMap").innerHTML = "";
+  questions.forEach((_,i)=>{
+    const b=document.createElement("button");
+    b.className="dot"+(i===current?" current":"")+(answered[i]?" done":"");
+    b.textContent=i+1;
+    b.disabled=true;
+    $("miniMap").appendChild(b);
+  });
+}
+
+function updateStats(){
+  $("xp").textContent=xp;
+  $("coins").textContent=coins;
+  $("combo").textContent=combo;
+  $("hearts").textContent="❤️".repeat(hearts)+"🖤".repeat(3-hearts);
+  const pct=Math.round((current/questions.length)*100);
+  $("progressBar").style.width=pct+"%";
+  $("progressText").textContent=`Question ${Math.min(current+1,questions.length)} of ${questions.length}`;
+  $("percentText").textContent=pct+"%";
+}
+
+function renderQuestion(){
+  locked=false;
+  renderMiniMap();
+  const q=questions[current];
+  $("qLabel").textContent=`Question ${current+1}`;
+  $("question").textContent=q.q;
+  $("options").innerHTML="";
+  $("feedback").className="feedback";
+  $("feedback").innerHTML="";
+  $("nextBtn").className="primary";
+  $("locateBtn").className="secondary";
+  q.options.forEach((text,index)=>{
+    const b=document.createElement("button");
+    b.className="option";
+    b.innerHTML=`<b>${String.fromCharCode(65+index)}.</b> ${text}`;
+    b.onclick=()=>selectAnswer(index,b);
+    $("options").appendChild(b);
+  });
+  updateStats();
+}
+
+function selectAnswer(index,btn){
+  if(locked)return;
+  locked=true; answered[current]=true;
+  const q=questions[current];
+  const buttons=[...document.querySelectorAll(".option")];
+  buttons.forEach(b=>b.disabled=true);
+  buttons[q.answer].classList.add("correct");
+  if(index===q.answer){
+    score++; combo++; bestCombo=Math.max(bestCombo,combo);
+    const bonus=combo>=3?10:0; xp+=20+bonus; coins+=5+combo;
+    $("feedback").className="feedback good show";
+    $("feedback").innerHTML=`✅ Correct!<br>${q.explanation}`;
+    tone("good");
+  }else{
+    btn.classList.add("wrong"); hearts--; combo=0;
+    $("feedback").className="feedback bad show";
+    $("feedback").innerHTML=`❌ Correct answer: <b>${String.fromCharCode(65+q.answer)}</b><br>${q.explanation}`;
+    tone("bad");
+  }
+  updateStats(); renderMiniMap();
+  $("locateBtn").className="secondary show";
+  if(hearts<=0 && current<questions.length-1){
+    setTimeout(showGameOver,650);
+  }else{
+    $("nextBtn").className="primary show";
+    $("nextBtn").textContent=current===questions.length-1?"See Results 🎉":"Next ➜";
+  }
+}
+
+function clearHighlights(){
+  renderPassage();
+}
+
+function markPhrase(paragraphIndex,text){
+  const p=$("p"+paragraphIndex);
+  if(!p)return;
+  p.classList.add("highlight");
+  p.innerHTML=p.innerHTML.replace(text,`<mark class="answer-mark">${text}</mark>`);
+  p.scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+function locateAnswer(){
+  clearHighlights();
+  const t=questions[current].target;
+  if(t.type==="word"||t.type==="phrase"||t.type==="sentence"){
+    markPhrase(t.paragraph,t.text);
+  }else if(t.type==="paragraph"){
+    const p=$("p"+t.paragraph); p.classList.add("highlight"); p.scrollIntoView({behavior:"smooth",block:"center"});
+  }else if(t.type==="multi"){
+    t.paragraphs.forEach(i=>$("p"+i).classList.add("highlight"));
+    $("p"+t.paragraphs[0]).scrollIntoView({behavior:"smooth",block:"center"});
+  }else{
+    document.querySelectorAll(".paragraph").forEach(p=>p.classList.add("highlight"));
+    $("passageBody").scrollTo({top:0,behavior:"smooth"});
+  }
+}
+
+$("locateBtn").onclick=locateAnswer;
+$("clearBtn").onclick=clearHighlights;
+$("topBtn").onclick=()=>$("passageBody").scrollTo({top:0,behavior:"smooth"});
+$("nextBtn").onclick=()=>{clearHighlights();current++;current>=questions.length?finish():renderQuestion();};
+
+function showGameOver(){
+  $("questionPanel").style.display="none";
+  $("gameover").className="gameover show";
+}
+
+function stars(n,max){
+  const filled=Math.max(1,Math.round((n/max)*5));
+  return "⭐".repeat(filled)+"☆".repeat(5-filled);
+}
+
+function finish(){
+  $("questionPanel").style.display="none";
+  $("result").className="result show";
+  $("progressBar").style.width="100%"; $("percentText").textContent="100%"; $("progressText").textContent="Completed";
+  $("finalScore").textContent=`${score}/${questions.length}`;
+  $("finalXp").textContent=xp; $("finalCoins").textContent=coins; $("bestCombo").textContent=bestCombo;
+  $("resultMessage").textContent=score===8?"Perfect reading score!":score>=6?"Excellent work!":score>=4?"Good effort. Review the highlighted evidence.":"Read the explanations and try again.";
+  $("skillVocab").textContent=stars([1,3].filter(i=>answered[i]).length,2);
+  $("skillRef").textContent=stars(answered[2]?1:0,1);
+  $("skillDetail").textContent=stars([0,5,6].filter(i=>answered[i]).length,3);
+  $("skillMain").textContent=stars(answered[7]?1:0,1);
+  tone("finish"); confetti();
+}
+
+function reset(){
+  current=score=xp=coins=combo=bestCombo=0; hearts=3; locked=false;
+  answered.fill(false);
+  $("questionPanel").style.display="block";
+  $("result").className="result"; $("gameover").className="gameover";
+  renderPassage(); renderQuestion();
+}
+$("restartBtn").onclick=reset; $("restartOverBtn").onclick=reset;
+$("soundBtn").onclick=()=>{soundOn=!soundOn;$("soundBtn").textContent=soundOn?"🔊":"🔇"};
+
+function tone(type){
+  if(!soundOn)return;
+  const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+  const ctx=new AC(),o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);
+  o.frequency.value=type==="good"?620:type==="bad"?190:760;
+  g.gain.setValueAtTime(.11,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.35);
+  o.start();o.stop(ctx.currentTime+.36);
+}
+
+function confetti(){
+  for(let i=0;i<80;i++){
+    const c=document.createElement("div");c.className="confetti";
+    c.style.left=Math.random()*100+"vw";c.style.background=`hsl(${Math.random()*360},80%,60%)`;
+    c.style.animationDuration=(2.4+Math.random()*2.2)+"s";document.body.appendChild(c);
+    setTimeout(()=>c.remove(),5000);
+  }
+}
+
+renderPassage(); renderQuestion();
+</script>
+</body>
+</html>
