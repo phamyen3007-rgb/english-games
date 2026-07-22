@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade 12 - Unit 2 - Exercise 2 - Option C</title>
+  <style>
+    :root{
+      --bg:#24123d;
+      --panel:#3b1f5f;
+      --panel-2:#5b2d75;
+      --text:#f8fafc;
+      --muted:#bfd1e4;
+      --gold:#fb923c;
+      --blue:#c084fc;
+      --green:#2dd4bf;
+      --red:#f43f5e;
+      --white:#ffffff;
+      --ink:#102033;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Arial,Helvetica,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 10%,rgba(192,132,252,.22),transparent 24%),
+        radial-gradient(circle at 90% 18%,rgba(251,146,60,.19),transparent 22%),
+        radial-gradient(circle at 70% 88%,rgba(45,212,191,.15),transparent 24%),
+        linear-gradient(145deg,#170d2b,#3b1f5f 55%,#713f12);
+      padding:18px;
+    }
+    button{font:inherit}
+    .app{width:min(980px,100%);margin:auto}
+    .top{
+      display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:14px
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:54px;height:54px;border-radius:18px;display:grid;place-items:center;font-size:30px;
+      background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18)
+    }
+    h1{margin:0;font-size:clamp(20px,3vw,30px)}
+    .sub{margin:4px 0 0;color:rgba(255,255,255,.72);font-size:14px}
+    .sound{
+      border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.1);color:#fff;
+      border-radius:14px;padding:10px 14px;cursor:pointer;font-weight:800
+    }
+    .hud{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px
+    }
+    .hud-card{
+      background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);
+      border-radius:16px;padding:11px 13px;backdrop-filter:blur(10px)
+    }
+    .hud-card small{display:block;color:rgba(255,255,255,.66);margin-bottom:4px}
+    .hud-card strong{font-size:20px}
+    .track{display:flex;gap:7px;margin-bottom:13px}
+    .dot{height:9px;flex:1;background:rgba(255,255,255,.13);border-radius:999px}
+    .dot.done,.dot.active{background:linear-gradient(90deg,var(--blue),var(--gold))}
+    .card{
+      min-height:600px;background:#fffdf7;color:var(--ink);border-radius:28px;
+      padding:clamp(22px,4vw,38px);box-shadow:0 26px 70px rgba(0,0,0,.28);position:relative;overflow:hidden
+    }
+    .stamp{
+      position:absolute;right:24px;top:18px;font-size:58px;opacity:.12;transform:rotate(8deg)
+    }
+    .mission{
+      display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px
+    }
+    .pill{
+      display:inline-flex;align-items:center;padding:7px 11px;border-radius:999px;font-size:13px;font-weight:900
+    }
+    .location{background:#e0f2fe;color:#075985}
+    .mode{background:#fef3c7;color:#92400e}
+    .story{
+      color:#526173;line-height:1.65;border-left:4px solid var(--gold);padding-left:14px;margin:0 0 18px
+    }
+    .instruction{
+      margin:0 0 12px;color:#334155;font-size:15px;font-weight:800
+    }
+    .question{
+      font-size:clamp(21px,3vw,31px);line-height:1.4;margin:0 0 22px
+    }
+    .underlined{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px}
+    .choices{display:grid;gap:12px}
+    .choice{
+      border:2px solid #e7e2d9;background:#fff;border-radius:17px;padding:14px 16px;
+      cursor:pointer;text-align:left;display:flex;align-items:center;gap:12px;color:var(--ink);
+      font-size:17px;transition:.18s
+    }
+    .choice:hover:not(:disabled){
+      transform:translateY(-2px);border-color:#93c5fd;box-shadow:0 8px 18px rgba(37,99,235,.1)
+    }
+    .letter{
+      width:36px;height:36px;border-radius:11px;background:#eef2f7;display:grid;place-items:center;
+      font-weight:900;flex:0 0 36px
+    }
+    .correct{border-color:#22c55e!important;background:#ecfdf3!important;color:#166534!important}
+    .wrong{border-color:#fb7185!important;background:#fff1f2!important;color:#9f1239!important}
+    .feedback{display:none;margin-top:17px;padding:15px 17px;border-radius:16px;line-height:1.55}
+    .feedback.show{display:block}
+    .feedback.good{background:#ecfdf3;border:1px solid #86efac;color:#166534}
+    .feedback.bad{background:#fff7ed;border:1px solid #fdba74;color:#9a3412}
+    .controls{display:flex;justify-content:flex-end;margin-top:18px}
+    .btn{
+      border:0;border-radius:15px;padding:12px 18px;font-weight:900;cursor:pointer
+    }
+    .btn-primary{background:linear-gradient(135deg,#7e22ce,#ea580c);color:#fff}
+    .hidden{display:none!important}
+    .achievement{
+      position:fixed;right:18px;bottom:18px;z-index:20;background:#111827;color:white;
+      border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:14px 16px;
+      box-shadow:0 18px 40px rgba(0,0,0,.28);transform:translateY(130%);transition:.35s
+    }
+    .achievement.show{transform:translateY(0)}
+    .result{text-align:center;padding:24px 0}
+    .trophy{font-size:88px}
+    .result h2{font-size:35px;margin:8px 0}
+    .badge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px auto;max-width:630px}
+    .badge-item{
+      border:2px dashed #d4af37;border-radius:15px;padding:14px 8px;background:#fffbeb;font-weight:900
+    }
+    .confetti{
+      position:fixed;top:-20px;width:9px;height:15px;z-index:30;animation:fall linear forwards
+    }
+    @keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+    @media(max-width:650px){
+      body{padding:10px}.hud{grid-template-columns:1fr 1fr}.card{min-height:650px;border-radius:22px}
+      .badge-grid{grid-template-columns:1fr 1fr}.sub{display:none}
+    }
+  </style>
+</head>
+<body>
+<main class="app">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">🎭</div>
+      <div>
+        <h1>Grade 12 – Unit 2 – Exercise 2 – Option C</h1>
+        <p class="sub">Cultural Code Mission</p>
+      </div>
+    </div>
+    <button id="soundBtn" class="sound" type="button">🔊 Sound</button>
+  </header>
+
+  <section class="hud">
+    <div class="hud-card"><small>MISSION</small><strong id="missionNo">1/6</strong></div>
+    <div class="hud-card"><small>XP</small><strong id="xp">0</strong></div>
+    <div class="hud-card"><small>COMBO</small><strong id="combo">0 🔥</strong></div>
+    <div class="hud-card"><small>HEARTS</small><strong id="hearts">3 ❤️</strong></div>
+  </section>
+
+  <div id="track" class="track"></div>
+
+  <section class="card">
+    <div id="stamp" class="stamp">🌍</div>
+    <div id="game"></div>
+    <div id="result" class="result hidden"></div>
+  </section>
+</main>
+
+<div id="achievement" class="achievement"></div>
+
+<script>
+const questions = [
+  {
+    place:"Festival Archive 🏮", mode:"Missing Detail", icon:"📜",
+    story:"A festival programme contains an outdated activity. Choose the word with the closest meaning to open the first cultural code.",
+    sentence:'Many schools have decided to <span class="underlined">leave out</span> outdated activities from the annual festival.',
+    options:["include","remove","organize","celebrate"], answer:1,
+    explain:"Leave out = remove/omit: loại bỏ, bỏ đi."
+  },
+  {
+    place:"Vietnamese Food Court 🍜", mode:"Flavour Code", icon:"🥢",
+    story:"Visitors are describing traditional dishes. Decode the adjective that has the same meaning.",
+    sentence:'Traditional Vietnamese dishes are not only healthy but also <span class="underlined">tasty</span>.',
+    options:["delicious","expensive","ordinary","fresh"], answer:0,
+    explain:"Tasty = delicious: ngon."
+  },
+  {
+    place:"Cultural Gallery 🌍", mode:"Variety Scanner", icon:"🧩",
+    story:"The gallery displays many customs, languages and traditions. Find the synonym that completes the scanner.",
+    sentence:'Cultural <span class="underlined">diversity</span> makes every country unique and attractive.',
+    options:["popularity","variety","tradition","identity"], answer:1,
+    explain:"Diversity = variety: sự đa dạng."
+  },
+  {
+    place:"International Welcome Hall ✈️", mode:"New Customs", icon:"🧳",
+    story:"Foreign visitors are seeing local customs for the first time. Identify the closest meaning of the underlined word.",
+    sentence:'At first, the local customs seemed <span class="underlined">unfamiliar</span> to the foreign visitors.',
+    options:["interesting","strange","useful","common"], answer:1,
+    explain:"Unfamiliar = strange: xa lạ, không quen thuộc."
+  },
+  {
+    place:"Culture Learning Studio 📚", mode:"Value Signal", icon:"💡",
+    story:"Students are learning why cultural awareness matters. Unlock the signal by finding the synonym.",
+    sentence:'Students should <span class="underlined">appreciate</span> the importance of learning about different cultures.',
+    options:["value","avoid","forget","question"], answer:0,
+    explain:"Appreciate = value: trân trọng, đánh giá cao."
+  },
+  {
+    place:"Final Respect Gate 👑", mode:"Final Culture Code", icon:"🔐",
+    story:"The final gate tests respectful communication. Choose the word closest in meaning to the underlined adjective.",
+    sentence:'Making jokes about another country\'s traditions is often considered <span class="underlined">insulting</span>.',
+    options:["humorous","respectful","offensive","acceptable"], answer:2,
+    explain:"Insulting = offensive: mang tính xúc phạm."
+  }
+];
+
+let current=0, xp=0, combo=0, hearts=3, soundOn=true, audioCtx;
+const game=document.getElementById("game");
+const result=document.getElementById("result");
+
+function buildTrack(){
+  document.getElementById("track").innerHTML=questions.map(()=>'<span class="dot"></span>').join("");
+}
+function updateHud(){
+  document.getElementById("missionNo").textContent=(current+1)+"/"+questions.length;
+  document.getElementById("xp").textContent=xp;
+  document.getElementById("combo").textContent=combo+" 🔥";
+  document.getElementById("hearts").textContent=hearts+" ❤️";
+  [...document.querySelectorAll(".dot")].forEach((d,i)=>{
+    d.className="dot "+(i<current?"done":i===current?"active":"");
+  });
+}
+function tone(kind){
+  if(!soundOn)return;
+  try{
+    audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();
+    const now=audioCtx.currentTime;
+
+    function play(freq,start,duration,type,volume){
+      const osc=audioCtx.createOscillator();
+      const gain=audioCtx.createGain();
+      osc.type=type;
+      osc.frequency.setValueAtTime(freq,now+start);
+      gain.gain.setValueAtTime(.001,now+start);
+      gain.gain.exponentialRampToValueAtTime(volume,now+start+.015);
+      gain.gain.exponentialRampToValueAtTime(.001,now+start+duration);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now+start);
+      osc.stop(now+start+duration+.03);
+    }
+
+    if(kind==="good"){
+      play(659,.00,.16,"triangle",.12);
+      play(880,.08,.18,"triangle",.11);
+      play(1047,.17,.26,"sine",.10);
+    }else if(kind==="finish"){
+      play(392,.00,.20,"triangle",.10);
+      play(523,.10,.22,"triangle",.11);
+      play(659,.20,.24,"triangle",.12);
+      play(784,.31,.34,"sine",.11);
+      play(1047,.46,.48,"sine",.09);
+    }else{
+      play(180,.00,.14,"square",.08);
+      play(135,.11,.25,"sawtooth",.07);
+    }
+  }catch(e){}
+}
+function showAchievement(text){
+  const a=document.getElementById("achievement");
+  a.innerHTML="🏅 <strong>"+text+"</strong>";
+  a.classList.add("show");
+  setTimeout(()=>a.classList.remove("show"),1800);
+}
+function render(){
+  updateHud();
+  const q=questions[current];
+  document.getElementById("stamp").textContent=q.icon;
+  const boss=current===questions.length-1?'<div style="background:linear-gradient(135deg,#4c0519,#9f1239);color:white;border-radius:18px;padding:13px 16px;margin-bottom:15px;font-weight:900;text-align:center">👑 FINAL BOSS • 250 XP</div>':'';
+  game.innerHTML=`
+    ${boss}
+    <div class="mission">
+      <span class="pill location">${q.place}</span>
+      <span class="pill mode">${q.mode}</span>
+    </div>
+    <p class="story">${q.story}</p>
+    <p class="instruction">Mark the letter A, B, C, or D to indicate the word CLOSEST in meaning to the underlined word.</p>
+    <h2 class="question">${q.sentence}</h2>
+    <div class="choices">
+      ${q.options.map((o,i)=>`<button class="choice" data-i="${i}" type="button"><span class="letter">${String.fromCharCode(65+i)}</span>${o}</button>`).join("")}
+    </div>
+    <div id="feedback" class="feedback" aria-live="polite"></div>
+    <div class="controls"><button id="nextBtn" class="btn btn-primary hidden" type="button">${current===questions.length-1?"Complete mission →":"Next mission →"}</button></div>
+  `;
+  document.querySelectorAll(".choice").forEach(btn=>{
+    btn.addEventListener("click",()=>checkAnswer(Number(btn.dataset.i)));
+  });
+  document.getElementById("nextBtn").addEventListener("click",next);
+}
+function checkAnswer(i){
+  const q=questions[current];
+  const buttons=[...document.querySelectorAll(".choice")];
+  buttons.forEach(b=>b.disabled=true);
+  buttons[q.answer].classList.add("correct");
+  const feedback=document.getElementById("feedback");
+  const correct=i===q.answer;
+  if(correct){
+    combo++;
+    const reward=(current===questions.length-1?250:100)+(combo>=3?50:0);
+    xp+=reward;
+    feedback.className="feedback good show";
+    feedback.innerHTML=`<strong>✅ Mission cleared! +${reward} XP</strong><br>${q.explain}`;
+    tone("good");
+    if(combo===3)showAchievement("Culture Code Streak ×3");
+    if(current===questions.length-1)showAchievement("Final Code Unlocked");
+  }else{
+    combo=0;
+    hearts=Math.max(0,hearts-1);
+    buttons[i].classList.add("wrong");
+    feedback.className="feedback bad show";
+    feedback.innerHTML=`<strong>❌ Incorrect.</strong> Correct answer: <strong>${q.options[q.answer]}</strong>.<br>${q.explain}`;
+    tone("bad");
+  }
+  document.getElementById("nextBtn").classList.remove("hidden");
+  updateHud();
+}
+function next(){
+  if(current<questions.length-1){
+    current++;render();
+  }else{
+    showResult();
+  }
+}
+function showResult(){
+  game.classList.add("hidden");
+  result.classList.remove("hidden");
+  const rank=xp>=750?"Cultural Code Master":xp>=500?"Global Culture Agent":"Culture Explorer";
+  result.innerHTML=`
+    <div class="trophy">🏆</div>
+    <h2>${rank}</h2>
+    <p>You completed all six cultural synonym codes.</p>
+    <h3>${xp} XP • ${hearts} hearts left</h3>
+    <div class="badge-grid">
+      <div class="badge-item">📜 Detail Decoder</div>
+      <div class="badge-item">🥢 Flavour Expert</div>
+      <div class="badge-item">🧩 Diversity Scout</div>
+      <div class="badge-item">🧳 Culture Traveller</div>
+      <div class="badge-item">💡 Value Expert</div>
+      <div class="badge-item">🔐 Code Master</div>
+    </div>
+    <button id="restart" class="btn btn-primary" type="button">↻ Play again</button>
+  `;
+  document.getElementById("restart").addEventListener("click",()=>location.reload());
+  tone("finish");
+  confetti();
+}
+function confetti(){
+  const colors=["#c084fc","#fb923c","#2dd4bf","#f43f5e","#facc15"];
+  for(let i=0;i<85;i++){
+    const p=document.createElement("i");
+    p.className="confetti";
+    p.style.left=Math.random()*100+"vw";
+    p.style.background=colors[i%colors.length];
+    p.style.animationDuration=2.6+Math.random()*2+"s";
+    p.style.animationDelay=Math.random()*.7+"s";
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),5200);
+  }
+}
+document.getElementById("soundBtn").addEventListener("click",e=>{
+  soundOn=!soundOn;
+  e.target.textContent=soundOn?"🔊 Sound":"🔇 Muted";
+  if(soundOn)tone("good");
+});
+
+buildTrack();
+render();
+</script>
+</body>
+</html>
