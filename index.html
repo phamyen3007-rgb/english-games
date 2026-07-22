@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>English Games</title>
+  <title>English Games • Updated Grade 11</title>
   <style>
     :root{
       --bg1:#eef6ff;
@@ -323,7 +323,7 @@
       <div class="section-title">
         <h2>📗 Grade 11</h2>
         <div class="section-actions">
-          <span class="count">2 games</span>
+          <span class="count">4 games</span>
           <button class="grade-lock" type="button" data-unlock-grade="11">🔒 Log in</button>
         </div>
       </div>
@@ -339,6 +339,20 @@
           <div class="icon blue">🧠</div>
           <h3>Unit 1 – Exercise 9 – Option C</h3>
           <p>A more challenging passage-completion game with relative and participle clauses.</p>
+          <span class="play">Play now →</span>
+        </a>
+
+        <a class="game-card locked" data-grade="11" data-title="grade 11 unit 1 exercise 10 option b living a healthy life reading comprehension" href="grade_11_unit_1_exercise_10_option_b.html">
+          <div class="icon green">📘</div>
+          <h3>Unit 1 – Exercise 10 – Option B</h3>
+          <p>Reading comprehension with a fixed passage panel, highlighted evidence and instant explanations.</p>
+          <span class="play">Play now →</span>
+        </a>
+
+        <a class="game-card locked" data-grade="11" data-title="grade 11 unit 1 exercise 10 option c building better health habits reading comprehension" href="grade_11_unit_1_exercise_10_option_c.html">
+          <div class="icon purple">🩺</div>
+          <h3>Unit 1 – Exercise 10 – Option C</h3>
+          <p>Advanced reading practice with a fixed passage, answer-location highlights, XP, coins and skill review.</p>
           <span class="play">Play now →</span>
         </a>
       </div>
@@ -416,7 +430,7 @@
     </section>
 
     <footer>
-      Created for English learners • Phạm Thị Ngọc Yến
+      Created for English learners • Phạm Thị Ngọc Yến • Updated 22/07/2026
     </footer>
   </main>
 
@@ -565,6 +579,15 @@
       });
     });
 
+    function refreshGameCounts(){
+      document.querySelectorAll(".grade-section").forEach(section => {
+        const count = section.querySelectorAll(".game-card").length;
+        const badge = section.querySelector(".count");
+        if(badge) badge.textContent = count + (count === 1 ? " game" : " games");
+      });
+    }
+
+    refreshGameCounts();
     refreshLocks();
   </script>
 </body>
