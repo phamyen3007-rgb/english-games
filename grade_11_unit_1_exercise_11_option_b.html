@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 11 Unit 1 Exercise 11 Option B</title>
+<style>
+:root {
+  --orange:#f28b30; --orange-dark:#b95f11; --teal:#1e9c8f; --navy:#17324d;
+  --line:#e7e4dc; --red:#e55368; --green:#229b63;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; min-height:100vh; font-family:Inter,Segoe UI,Arial,sans-serif;
+  color:var(--navy);
+  background:
+    radial-gradient(circle at 10% 10%,rgba(242,139,48,.18),transparent 28%),
+    radial-gradient(circle at 90% 0%,rgba(30,156,143,.17),transparent 28%),
+    linear-gradient(135deg,#fff8ee,#effcf9);
+  padding:18px;
+}
+.app{max-width:1220px;margin:auto}
+.hero{
+  background:linear-gradient(135deg,var(--orange),var(--teal));color:white;
+  border-radius:24px;padding:22px 26px;box-shadow:0 18px 45px rgba(31,73,101,.18);
+}
+.hero-row{display:flex;justify-content:space-between;align-items:center;gap:16px}
+h1{margin:0;font-size:clamp(1.45rem,3vw,2.25rem)} .subtitle{margin-top:7px;opacity:.92}
+.sound{border:0;border-radius:13px;padding:10px 14px;background:#ffffff25;color:white;font-size:1.05rem;cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.stat{background:#ffffff20;border:1px solid #ffffff35;border-radius:14px;padding:10px;text-align:center;font-weight:800}
+.progress-wrap{margin-top:14px} .progress-meta{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:7px}
+.progress{height:11px;background:#ffffff35;border-radius:999px;overflow:hidden}
+.progress>div{height:100%;width:0;background:#fff;transition:.35s}
+.layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(380px,.95fr);gap:18px;margin-top:18px;align-items:start}
+.panel{background:#ffffffeb;border:1px solid rgba(255,255,255,.9);border-radius:22px;box-shadow:0 14px 35px rgba(39,88,111,.12)}
+.passage-panel{position:sticky;top:18px;max-height:calc(100vh - 36px);display:flex;flex-direction:column}
+.panel-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.panel-head h2{margin:0;font-size:1.2rem}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+.tool-btn{border:1px solid var(--line);background:white;color:var(--navy);border-radius:10px;padding:8px 10px;font-weight:700;cursor:pointer}
+.passage-body{overflow:auto;padding:18px 20px 24px;line-height:1.78}
+.paragraph{padding:12px 13px;border-radius:13px;transition:.3s;margin-bottom:10px}
+.paragraph::before{content:attr(data-label);font-weight:900;color:var(--orange-dark);margin-right:8px}
+.paragraph.highlight{background:#fff0ae;box-shadow:inset 0 0 0 2px #efbf3e}
+mark.answer-mark{background:#ffd35f;padding:2px 3px;border-radius:4px}
+.question-panel{padding:20px}
+.mini-map{display:grid;grid-template-columns:repeat(8,1fr);gap:7px;margin-bottom:16px}
+.dot{border:0;border-radius:10px;padding:8px 0;background:#edf3f6;color:#6d8090;font-weight:900}
+.dot.current{background:var(--orange);color:white} .dot.done{background:#dff6e9;color:#17683f}
+.q-label{display:inline-block;background:#fff0df;color:var(--orange-dark);border-radius:999px;padding:8px 12px;font-weight:900;margin-bottom:13px}
+.question{font-size:1.08rem;line-height:1.65;font-weight:750;margin-bottom:16px}
+.option{width:100%;display:block;text-align:left;border:2px solid #e1e8eb;border-radius:14px;background:#fbfdff;padding:14px 15px;margin:10px 0;cursor:pointer;font-size:1rem;line-height:1.45;transition:.2s}
+.option:hover:not(:disabled){transform:translateY(-2px);border-color:#f1a65d}
+.option.correct{background:#e9faef;border-color:var(--green);color:#115b38}
+.option.wrong{background:#fff0f3;border-color:var(--red);color:#98293d}
+.feedback{display:none;margin-top:16px;padding:15px 16px;border-radius:13px;line-height:1.55}
+.feedback.show{display:block} .feedback.good{background:#e9faef;border-left:5px solid var(--green)} .feedback.bad{background:#fff0f3;border-left:5px solid var(--red)}
+.actions{display:flex;justify-content:space-between;gap:10px;margin-top:15px}
+.primary,.secondary,.restart{border:0;border-radius:12px;padding:12px 17px;font-weight:900;cursor:pointer}
+.primary{background:linear-gradient(135deg,var(--orange),var(--teal));color:white;display:none}
+.primary.show{display:inline-block}
+.secondary{background:#eef5fa;color:var(--navy);display:none} .secondary.show{display:inline-block}
+.result,.gameover{display:none;text-align:center;padding:34px 24px} .result.show,.gameover.show{display:block}
+.big{font-size:3rem;font-weight:950;color:var(--orange-dark);margin:8px 0}
+.skill-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}
+.skill{background:#fff8ee;border:1px solid #f1dfca;border-radius:14px;padding:14px}
+.restart{background:linear-gradient(135deg,var(--orange),var(--teal));color:#fff}
+.confetti{position:fixed;top:-20px;width:9px;height:15px;z-index:9999;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@media(max-width:900px){
+  body{padding:8px} .layout{grid-template-columns:1fr}
+  .passage-panel{position:relative;top:auto;max-height:none}
+  .passage-body{max-height:42vh}
+}
+@media(max-width:620px){
+  .stats{grid-template-columns:repeat(2,1fr)} .mini-map{grid-template-columns:repeat(4,1fr)}
+  .skill-grid{grid-template-columns:repeat(2,1fr)} .hero,.question-panel{padding:16px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <section class="hero">
+    <div class="hero-row">
+      <div><h1>🍳 Cooking Smart at University</h1><div class="subtitle">Grade 11 • Unit 1 • Exercise 11 • Option B</div></div>
+      <button class="sound" id="soundBtn">🔊</button>
+    </div>
+    <div class="stats">
+      <div class="stat">XP<br><span id="xp">0</span></div>
+      <div class="stat">Coins<br><span id="coins">0</span> 🪙</div>
+      <div class="stat">Combo<br><span id="combo">0</span>×</div>
+      <div class="stat">Hearts<br><span id="hearts">❤️❤️❤️</span></div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-meta"><span id="progressText">Question 1 of 8</span><span id="percentText">0%</span></div>
+      <div class="progress"><div id="progressBar"></div></div>
+    </div>
+  </section>
+
+  <section class="layout">
+    <aside class="panel passage-panel">
+      <div class="panel-head">
+        <h2>📘 Reading Passage</h2>
+        <div class="tools">
+          <button class="tool-btn" id="clearBtn">Clear Highlight</button>
+          <button class="tool-btn" id="topBtn">Top</button>
+        </div>
+      </div>
+      <div class="passage-body" id="passageBody"></div>
+    </aside>
+
+    <section class="panel">
+      <div class="question-panel" id="questionPanel">
+        <div class="mini-map" id="miniMap"></div>
+        <div class="q-label" id="qLabel"></div>
+        <div class="question" id="question"></div>
+        <div id="options"></div>
+        <div class="feedback" id="feedback"></div>
+        <div class="actions">
+          <button class="secondary" id="locateBtn">📍 Locate Answer</button>
+          <button class="primary" id="nextBtn">Next ➜</button>
+        </div>
+      </div>
+
+      <div class="result" id="result">
+        <h2>🎉 Reading Mission Complete!</h2>
+        <div class="big" id="finalScore"></div>
+        <p id="resultMessage"></p>
+        <div class="skill-grid">
+          <div class="skill"><b>Vocabulary</b><br><span id="skillVocab"></span></div>
+          <div class="skill"><b>Reference</b><br><span id="skillRef"></span></div>
+          <div class="skill"><b>Detail</b><br><span id="skillDetail"></span></div>
+          <div class="skill"><b>Main Idea</b><br><span id="skillMain"></span></div>
+        </div>
+        <p><b id="finalXp"></b> XP • <b id="finalCoins"></b> Coins • Best combo: <b id="bestCombo"></b>×</p>
+        <button class="restart" id="restartBtn">Play Again</button>
+      </div>
+
+      <div class="gameover" id="gameover">
+        <h2>💔 Game Over</h2>
+        <p>You have run out of hearts. Review the passage and try again.</p>
+        <button class="restart" id="restartOverBtn">Restart</button>
+      </div>
+    </section>
+  </section>
+</div>
+
+<script>
+const passage = {"title": "Cooking Smart at University", "paragraphs": ["Moving away from home is an exciting experience, but many students soon discover that cooking for themselves is not always easy. Before starting university, it is helpful to learn a few basic recipes and become familiar with simple kitchen equipment. Since student kitchens are usually small, only the most useful cooking tools should be taken.", "If you are not confident in the kitchen, ask a family member or friend to cook with you before trying recipes on your own. Do not worry if you make mistakes because every mistake teaches you something new. Even experienced cooks continue learning by improving their skills over time.", "Shopping wisely can also save you a lot of money. Local food markets sometimes sell fresher products at lower prices than large supermarkets. Planning your shopping list before leaving home can help you avoid buying unnecessary items. It is also a good idea to shop when you are not hungry because you are less likely to spend money on things you do not really need.", "Another useful tip is to cook enough food for more than one meal. Meals such as soup, pasta, or rice dishes can easily be kept for another day. Sharing the cost of herbs, spices, and other kitchen supplies with your housemates is another excellent way to save money. Cooking and eating together can make university life more enjoyable while reducing everyone's expenses."]};
+const questions = [{"q": "Which of the following is NOT mentioned as advice for university students?", "options": ["Learn a few simple recipes before leaving home.", "Buy as much kitchen equipment as possible.", "Plan your shopping before going to the store.", "Cook enough food for another meal."], "answer": 1, "explanation": "Bài chỉ khuyên mang những dụng cụ cần thiết, không phải mua thật nhiều đồ dùng.", "target": {"type": "multi", "paragraphs": [0, 2, 3]}}, {"q": "The word \"confident\" in paragraph 2 is closest in meaning to ______.", "options": ["nervous about doing something", "sure about your ability", "interested in learning", "willing to ask for help"], "answer": 1, "explanation": "Confident = tự tin vào khả năng của mình.", "target": {"type": "word", "paragraph": 1, "text": "confident"}}, {"q": "The word \"they\" in paragraph 2 refers to ______.", "options": ["family members", "recipes", "mistakes", "experienced cooks"], "answer": 2, "explanation": "They chỉ mistakes vì mỗi sai lầm đều giúp bạn học được điều mới.", "target": {"type": "phrase", "paragraph": 1, "text": "every mistake teaches you something new"}}, {"q": "The phrase \"save you a lot of money\" is closest in meaning to ______.", "options": ["help you spend money more quickly", "reduce the amount of money you spend", "earn extra money from shopping", "buy more expensive food"], "answer": 1, "explanation": "Save money = tiết kiệm tiền, giảm chi tiêu.", "target": {"type": "phrase", "paragraph": 2, "text": "save you a lot of money"}}, {"q": "Which of the following best paraphrases the sentence: \"Planning your shopping list before leaving home can help you avoid buying unnecessary items.\"", "options": ["A shopping list helps you avoid spending money on unnecessary things.", "You should buy everything you see at the supermarket.", "Shopping without a list saves more time and money.", "Expensive products are usually the best choice."], "answer": 0, "explanation": "Lập danh sách trước khi đi mua sắm giúp tránh mua những thứ không cần thiết.", "target": {"type": "sentence", "paragraph": 2, "text": "Planning your shopping list before leaving home can help you avoid buying unnecessary items."}}, {"q": "According to the passage, students should ______.", "options": ["always cook only for themselves", "avoid asking others for cooking advice", "share kitchen supplies and meals with housemates", "buy all cooking ingredients separately"], "answer": 2, "explanation": "Bài khuyên chia sẻ gia vị, đồ dùng và nấu ăn cùng bạn cùng nhà để tiết kiệm.", "target": {"type": "paragraph", "paragraph": 3}}, {"q": "Which paragraph discusses shopping wisely to reduce expenses?", "options": ["Paragraph 1", "Paragraph 2", "Paragraph 3", "Paragraph 4"], "answer": 2, "explanation": "Đoạn 3 nói về lập danh sách mua sắm, đi chợ khi không đói và chọn nơi mua phù hợp.", "target": {"type": "paragraph", "paragraph": 2}}, {"q": "What is the main idea of the passage?", "options": ["Basic cooking and smart shopping make student life easier.", "Cooking alone is the best way to improve your skills.", "Supermarkets always offer the cheapest food.", "Students should eat out instead of cooking."], "answer": 0, "explanation": "Toàn bài đưa ra những lời khuyên về nấu ăn và mua sắm thông minh dành cho sinh viên mới sống tự lập.", "target": {"type": "all"}}];
+let current=0, score=0, xp=0, coins=0, combo=0, bestCombo=0, hearts=5, locked=false, soundOn=true;
+const answered = Array(questions.length).fill(false);
+const correctLog = Array(questions.length).fill(false);
+const $ = id => document.getElementById(id);
+
+function renderPassage(){
+  $("passageBody").innerHTML = passage.paragraphs.map((p,i)=>
+    `<p class="paragraph" id="p${i}" data-label="P${i+1}">${p}</p>`
+  ).join("");
+}
+function renderMiniMap(){
+  $("miniMap").innerHTML = "";
+  questions.forEach((_,i)=>{
+    const b=document.createElement("button");
+    b.className="dot"+(i===current?" current":"")+(answered[i]?" done":"");
+    b.textContent=i+1;b.disabled=true;$("miniMap").appendChild(b);
+  });
+}
+function updateStats(){
+  $("xp").textContent=xp;$("coins").textContent=coins;$("combo").textContent=combo;
+  $("hearts").textContent="❤️".repeat(hearts)+"🖤".repeat(5-hearts);
+  const pct=Math.round((current/questions.length)*100);
+  $("progressBar").style.width=pct+"%";
+  $("progressText").textContent=`Question ${Math.min(current+1,questions.length)} of ${questions.length}`;
+  $("percentText").textContent=pct+"%";
+}
+function renderQuestion(){
+  locked=false;renderMiniMap();
+  const q=questions[current];
+  $("qLabel").textContent=`Question ${current+1}`;
+  $("question").textContent=q.q;$("options").innerHTML="";
+  $("feedback").className="feedback";$("feedback").innerHTML="";
+  $("nextBtn").className="primary";$("locateBtn").className="secondary";
+  q.options.forEach((text,index)=>{
+    const b=document.createElement("button");b.className="option";
+    b.innerHTML=`<b>${String.fromCharCode(65+index)}.</b> ${text}`;
+    b.onclick=()=>selectAnswer(index,b);$("options").appendChild(b);
+  });
+  updateStats();
+}
+function selectAnswer(index,btn){
+  if(locked)return;locked=true;answered[current]=true;
+  const q=questions[current],buttons=[...document.querySelectorAll(".option")];
+  buttons.forEach(b=>b.disabled=true);buttons[q.answer].classList.add("correct");
+  if(index===q.answer){
+    correctLog[current]=true;score++;combo++;bestCombo=Math.max(bestCombo,combo);
+    const bonus=combo>=3?10:0;xp+=20+bonus;coins+=5+combo;
+    $("feedback").className="feedback good show";
+    $("feedback").innerHTML=`✅ Correct!<br>${q.explanation}`;tone("good");
+  }else{
+    btn.classList.add("wrong");hearts--;combo=0;
+    $("feedback").className="feedback bad show";
+    $("feedback").innerHTML=`❌ Correct answer: <b>${String.fromCharCode(65+q.answer)}</b><br>${q.explanation}`;tone("bad");
+  }
+  updateStats();renderMiniMap();$("locateBtn").className="secondary show";
+  if(hearts<=0 && current<questions.length-1){setTimeout(showGameOver,650)}
+  else{$("nextBtn").className="primary show";$("nextBtn").textContent=current===questions.length-1?"See Results 🎉":"Next ➜";}
+}
+function clearHighlights(){renderPassage();}
+function markPhrase(paragraphIndex,text){
+  const p=$("p"+paragraphIndex);if(!p)return;
+  p.classList.add("highlight");p.innerHTML=p.innerHTML.replace(text,`<mark class="answer-mark">${text}</mark>`);
+  p.scrollIntoView({behavior:"smooth",block:"center"});
+}
+function locateAnswer(){
+  clearHighlights();const t=questions[current].target;
+  if(t.type==="word"||t.type==="phrase"||t.type==="sentence")markPhrase(t.paragraph,t.text);
+  else if(t.type==="paragraph"){const p=$("p"+t.paragraph);p.classList.add("highlight");p.scrollIntoView({behavior:"smooth",block:"center"});}
+  else if(t.type==="multi"){t.paragraphs.forEach(i=>$("p"+i).classList.add("highlight"));$("p"+t.paragraphs[0]).scrollIntoView({behavior:"smooth",block:"center"});}
+  else{document.querySelectorAll(".paragraph").forEach(p=>p.classList.add("highlight"));$("passageBody").scrollTo({top:0,behavior:"smooth"});}
+}
+$("locateBtn").onclick=locateAnswer;$("clearBtn").onclick=clearHighlights;
+$("topBtn").onclick=()=>$("passageBody").scrollTo({top:0,behavior:"smooth"});
+$("nextBtn").onclick=()=>{clearHighlights();current++;current>=questions.length?finish():renderQuestion();};
+function showGameOver(){$("questionPanel").style.display="none";$("gameover").className="gameover show";}
+function stars(correct,total){const filled=Math.max(0,Math.round((correct/total)*5));return "⭐".repeat(filled)+"☆".repeat(5-filled);}
+function finish(){
+  $("questionPanel").style.display="none";$("result").className="result show";
+  $("progressBar").style.width="100%";$("percentText").textContent="100%";$("progressText").textContent="Completed";
+  $("finalScore").textContent=`${score}/${questions.length}`;
+  $("finalXp").textContent=xp;$("finalCoins").textContent=coins;$("bestCombo").textContent=bestCombo;
+  $("resultMessage").textContent=score===8?"Perfect reading score!":score>=6?"Excellent work!":score>=4?"Good effort. Review the highlighted evidence.":"Read the explanations and try again.";
+  $("skillVocab").textContent=stars([1,3].filter(i=>correctLog[i]).length,2);
+  $("skillRef").textContent=stars(correctLog[2]?1:0,1);
+  $("skillDetail").textContent=stars([0,5,6].filter(i=>correctLog[i]).length,3);
+  $("skillMain").textContent=stars(correctLog[7]?1:0,1);
+  tone("finish");confetti();
+}
+function reset(){
+  current=score=xp=coins=combo=bestCombo=0;hearts=5;locked=false;answered.fill(false);correctLog.fill(false);
+  $("questionPanel").style.display="block";$("result").className="result";$("gameover").className="gameover";
+  renderPassage();renderQuestion();
+}
+$("restartBtn").onclick=reset;$("restartOverBtn").onclick=reset;
+$("soundBtn").onclick=()=>{soundOn=!soundOn;$("soundBtn").textContent=soundOn?"🔊":"🔇"};
+function tone(type){
+  if(!soundOn)return;const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+  const ctx=new AC(),o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);
+  o.frequency.value=type==="good"?620:type==="bad"?190:760;
+  g.gain.setValueAtTime(.11,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.35);
+  o.start();o.stop(ctx.currentTime+.36);
+}
+function confetti(){
+  for(let i=0;i<80;i++){const c=document.createElement("div");c.className="confetti";
+    c.style.left=Math.random()*100+"vw";c.style.background=`hsl(${Math.random()*360},80%,60%)`;
+    c.style.animationDuration=(2.4+Math.random()*2.2)+"s";document.body.appendChild(c);setTimeout(()=>c.remove(),5000);}
+}
+renderPassage();renderQuestion();
+</script>
+</body>
+</html>
