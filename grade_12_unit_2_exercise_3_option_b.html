@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade 12 - Unit 2 - Exercise 3 - Option B</title>
+  <style>
+    :root{
+      --bg1:#062b2f;
+      --bg2:#0f766e;
+      --accent:#f97316;
+      --accent2:#14b8a6;
+      --good:#22c55e;
+      --bad:#ef4444;
+      --text:#0f172a;
+      --muted:#64748b;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Arial,Helvetica,sans-serif;
+      background:
+        radial-gradient(circle at 12% 12%,rgba(249,115,22,.22),transparent 24%),
+        radial-gradient(circle at 88% 18%,rgba(20,184,166,.24),transparent 24%),
+        linear-gradient(145deg,var(--bg1),var(--bg2));
+      color:white;
+      padding:18px;
+    }
+    button{font:inherit}
+    .app{width:min(980px,100%);margin:auto}
+    .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:14px;
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:56px;height:56px;border-radius:18px;
+      display:grid;place-items:center;font-size:30px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+    }
+    h1{margin:0;font-size:clamp(20px,3vw,30px)}
+    .sub{margin:4px 0 0;color:rgba(255,255,255,.74);font-size:14px}
+    .sound{
+      border:1px solid rgba(255,255,255,.2);
+      background:rgba(255,255,255,.1);
+      color:white;
+      border-radius:14px;
+      padding:10px 14px;
+      font-weight:800;
+      cursor:pointer;
+    }
+    .hud{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      margin-bottom:12px;
+    }
+    .hud-card{
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:16px;
+      padding:11px 13px;
+      backdrop-filter:blur(10px);
+    }
+    .hud-card small{display:block;color:rgba(255,255,255,.66);margin-bottom:4px}
+    .hud-card strong{font-size:20px}
+    .track{display:flex;gap:7px;margin-bottom:13px}
+    .dot{
+      height:9px;
+      flex:1;
+      border-radius:999px;
+      background:rgba(255,255,255,.15);
+    }
+    .dot.done,.dot.active{
+      background:linear-gradient(90deg,#f97316,#facc15);
+    }
+    .card{
+      min-height:600px;
+      background:#fffaf2;
+      color:var(--text);
+      border-radius:28px;
+      padding:clamp(22px,4vw,38px);
+      box-shadow:0 26px 70px rgba(0,0,0,.28);
+      position:relative;
+      overflow:hidden;
+    }
+    .stamp{
+      position:absolute;
+      right:24px;
+      top:18px;
+      font-size:58px;
+      opacity:.12;
+      transform:rotate(8deg);
+    }
+    .mission{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+    .pill{
+      display:inline-flex;
+      padding:7px 11px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:900;
+    }
+    .place{background:#ccfbf1;color:#115e59}
+    .mode{background:#ffedd5;color:#9a3412}
+    .story{
+      margin:0 0 18px;
+      padding-left:14px;
+      border-left:4px solid var(--accent);
+      color:#526173;
+      line-height:1.65;
+    }
+    .instruction{
+      margin:0 0 12px;
+      color:#334155;
+      font-size:15px;
+      font-weight:800;
+    }
+    .question{
+      font-size:clamp(21px,3vw,31px);
+      line-height:1.4;
+      margin:0 0 22px;
+    }
+    .underlined{
+      text-decoration:underline;
+      text-decoration-thickness:3px;
+      text-underline-offset:4px;
+    }
+    .choices{display:grid;gap:12px}
+    .choice{
+      border:2px solid #e7e2d9;
+      background:white;
+      border-radius:17px;
+      padding:14px 16px;
+      cursor:pointer;
+      text-align:left;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:var(--text);
+      font-size:17px;
+      transition:.18s;
+    }
+    .choice:hover:not(:disabled){
+      transform:translateY(-2px);
+      border-color:#5eead4;
+      box-shadow:0 8px 18px rgba(13,148,136,.12);
+    }
+    .letter{
+      width:36px;height:36px;border-radius:11px;
+      background:#f1f5f9;
+      display:grid;place-items:center;
+      font-weight:900;
+      flex:0 0 36px;
+    }
+    .correct{border-color:var(--good)!important;background:#ecfdf5!important;color:#166534!important}
+    .wrong{border-color:var(--bad)!important;background:#fef2f2!important;color:#991b1b!important}
+    .feedback{
+      display:none;
+      margin-top:17px;
+      padding:15px 17px;
+      border-radius:16px;
+      line-height:1.55;
+    }
+    .feedback.show{display:block}
+    .feedback.good{background:#ecfdf5;border:1px solid #86efac;color:#166534}
+    .feedback.bad{background:#fff7ed;border:1px solid #fdba74;color:#9a3412}
+    .controls{display:flex;justify-content:flex-end;margin-top:18px}
+    .btn{
+      border:0;
+      border-radius:15px;
+      padding:12px 18px;
+      font-weight:900;
+      cursor:pointer;
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,#0f766e,#f97316);
+      color:white;
+    }
+    .hidden{display:none!important}
+    .achievement{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:20;
+      background:#111827;
+      color:white;
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:18px;
+      padding:14px 16px;
+      box-shadow:0 18px 40px rgba(0,0,0,.28);
+      transform:translateY(130%);
+      transition:.35s;
+    }
+    .achievement.show{transform:translateY(0)}
+    .result{text-align:center;padding:24px 0}
+    .trophy{font-size:88px}
+    .result h2{font-size:35px;margin:8px 0}
+    .badge-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin:22px auto;
+      max-width:630px;
+    }
+    .badge-item{
+      border:2px dashed #f97316;
+      border-radius:15px;
+      padding:14px 8px;
+      background:#fff7ed;
+      font-weight:900;
+    }
+    .confetti{
+      position:fixed;
+      top:-20px;
+      width:9px;
+      height:15px;
+      z-index:30;
+      animation:fall linear forwards;
+    }
+    @keyframes fall{
+      to{transform:translateY(110vh) rotate(720deg)}
+    }
+    @media(max-width:650px){
+      body{padding:10px}
+      .hud{grid-template-columns:1fr 1fr}
+      .card{min-height:650px;border-radius:22px}
+      .badge-grid{grid-template-columns:1fr 1fr}
+      .sub{display:none}
+    }
+  </style>
+</head>
+<body>
+<main class="app">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">🧭</div>
+      <div>
+        <h1>Grade 12 – Unit 2 – Exercise 3 – Option B</h1>
+        <p class="sub">Opposite Meaning Challenge</p>
+      </div>
+    </div>
+    <button id="soundBtn" class="sound" type="button">🔊 Sound</button>
+  </header>
+
+  <section class="hud">
+    <div class="hud-card"><small>MISSION</small><strong id="missionNo">1/6</strong></div>
+    <div class="hud-card"><small>XP</small><strong id="xp">0</strong></div>
+    <div class="hud-card"><small>COMBO</small><strong id="combo">0 🔥</strong></div>
+    <div class="hud-card"><small>HEARTS</small><strong id="hearts">3 ❤️</strong></div>
+  </section>
+
+  <div id="track" class="track"></div>
+
+  <section class="card">
+    <div id="stamp" class="stamp">🌍</div>
+    <div id="game"></div>
+    <div id="result" class="result hidden"></div>
+  </section>
+</main>
+
+<div id="achievement" class="achievement"></div>
+
+<script>
+const questions = [
+  {
+    place:"World Education Forum 🌍", mode:"Culture Contrast", icon:"🏫",
+    story:"A global education team is comparing societies with many cultures and societies with only one dominant culture.",
+    sentence:'Many countries are encouraging <span class="underlined">multicultural</span> education to help students understand different traditions.',
+    options:["international","diverse","monocultural","global"], answer:2,
+    explain:"Multicultural = đa văn hóa → trái nghĩa là monocultural = đơn văn hóa."
+  },
+  {
+    place:"Fusion Kitchen 🍳", mode:"Ingredient Split", icon:"🥘",
+    story:"A chef combines local and international flavours. Find the word with the opposite meaning.",
+    sentence:'The chef decided to <span class="underlined">combine</span> local ingredients with international flavors to create a unique dish.',
+    options:["separate","mix","blend","connect"], answer:0,
+    explain:"Combine = kết hợp → trái nghĩa là separate = tách rời."
+  },
+  {
+    place:"Tourism Festival 🎪", mode:"Fame Detector", icon:"📣",
+    story:"The festival attracts visitors worldwide. Choose the word that expresses the opposite idea.",
+    sentence:'The festival has become <span class="underlined">well-known</span> among tourists from around the world.',
+    options:["attractive","unfamiliar","famous","popular"], answer:1,
+    explain:"Well-known = nổi tiếng → trái nghĩa gần nhất là unfamiliar = ít được biết đến."
+  },
+  {
+    place:"Water Puppet Theatre 🎭", mode:"Emotion Switch", icon:"🎎",
+    story:"Visitors react strongly to a traditional performance. Identify the opposite emotional response.",
+    sentence:'Visitors were <span class="underlined">fascinated</span> by the traditional water puppet performance.',
+    options:["interested","amazed","disappointed","impressed"], answer:2,
+    explain:"Fascinated = bị cuốn hút → trái nghĩa gần nhất là disappointed = thất vọng."
+  },
+  {
+    place:"International Campus 🎓", mode:"Trend Reversal", icon:"📉",
+    story:"The number of international students changes each year. Choose the word showing the opposite trend.",
+    sentence:'The number of international students is <span class="underlined">increasing</span> every year.',
+    options:["growing","rising","expanding","decreasing"], answer:3,
+    explain:"Increasing = tăng lên → trái nghĩa là decreasing = giảm xuống."
+  },
+  {
+    place:"Global Network Gate 👑", mode:"Final Opposite Code", icon:"🔗",
+    story:"The final mission tests connections between people and cultures. Unlock the gate with the opposite meaning.",
+    sentence:'Modern technology has made people more <span class="underlined">linked</span> to cultures around the world.',
+    options:["united","unrelated","connected","associated"], answer:1,
+    explain:"Linked = được kết nối → trái nghĩa là unrelated = không liên quan."
+  }
+];
+
+let current=0, xp=0, combo=0, hearts=3, soundOn=true, audioCtx;
+const game=document.getElementById("game");
+const result=document.getElementById("result");
+
+function buildTrack(){
+  document.getElementById("track").innerHTML=questions.map(()=>'<span class="dot"></span>').join("");
+}
+
+function updateHud(){
+  document.getElementById("missionNo").textContent=(current+1)+"/"+questions.length;
+  document.getElementById("xp").textContent=xp;
+  document.getElementById("combo").textContent=combo+" 🔥";
+  document.getElementById("hearts").textContent=hearts+" ❤️";
+  [...document.querySelectorAll(".dot")].forEach((d,i)=>{
+    d.className="dot "+(i<current?"done":i===current?"active":"");
+  });
+}
+
+function tone(kind){
+  if(!soundOn)return;
+  try{
+    audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();
+    const now=audioCtx.currentTime;
+
+    function play(freq,start,duration,type,volume){
+      const osc=audioCtx.createOscillator();
+      const gain=audioCtx.createGain();
+      osc.type=type;
+      osc.frequency.setValueAtTime(freq,now+start);
+      gain.gain.setValueAtTime(.001,now+start);
+      gain.gain.exponentialRampToValueAtTime(volume,now+start+.015);
+      gain.gain.exponentialRampToValueAtTime(.001,now+start+duration);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now+start);
+      osc.stop(now+start+duration+.03);
+    }
+
+    if(kind==="good"){
+      play(440,.00,.12,"square",.07);
+      play(660,.07,.16,"triangle",.10);
+      play(880,.16,.24,"sine",.09);
+    }else if(kind==="finish"){
+      play(330,.00,.20,"triangle",.09);
+      play(440,.10,.20,"triangle",.10);
+      play(550,.20,.22,"triangle",.10);
+      play(660,.31,.26,"sine",.10);
+      play(880,.45,.38,"sine",.08);
+    }else{
+      play(210,.00,.13,"sawtooth",.07);
+      play(125,.10,.24,"square",.06);
+    }
+  }catch(e){}
+}
+
+function showAchievement(text){
+  const a=document.getElementById("achievement");
+  a.innerHTML="🏅 <strong>"+text+"</strong>";
+  a.classList.add("show");
+  setTimeout(()=>a.classList.remove("show"),1800);
+}
+
+function render(){
+  updateHud();
+  const q=questions[current];
+  document.getElementById("stamp").textContent=q.icon;
+  const boss=current===questions.length-1
+    ?'<div style="background:linear-gradient(135deg,#134e4a,#9a3412);color:white;border-radius:18px;padding:13px 16px;margin-bottom:15px;font-weight:900;text-align:center">👑 FINAL OPPOSITE MISSION • 250 XP</div>'
+    :'';
+
+  game.innerHTML=`
+    ${boss}
+    <div class="mission">
+      <span class="pill place">${q.place}</span>
+      <span class="pill mode">${q.mode}</span>
+    </div>
+    <p class="story">${q.story}</p>
+    <p class="instruction">Mark the letter A, B, C, or D to indicate the word OPPOSITE in meaning to the underlined word.</p>
+    <h2 class="question">${q.sentence}</h2>
+    <div class="choices">
+      ${q.options.map((o,i)=>`
+        <button class="choice" data-i="${i}" type="button">
+          <span class="letter">${String.fromCharCode(65+i)}</span>${o}
+        </button>`).join("")}
+    </div>
+    <div id="feedback" class="feedback" aria-live="polite"></div>
+    <div class="controls">
+      <button id="nextBtn" class="btn btn-primary hidden" type="button">
+        ${current===questions.length-1?"Complete mission →":"Next mission →"}
+      </button>
+    </div>
+  `;
+
+  document.querySelectorAll(".choice").forEach(btn=>{
+    btn.addEventListener("click",()=>checkAnswer(Number(btn.dataset.i)));
+  });
+  document.getElementById("nextBtn").addEventListener("click",next);
+}
+
+function checkAnswer(i){
+  const q=questions[current];
+  const buttons=[...document.querySelectorAll(".choice")];
+  buttons.forEach(b=>b.disabled=true);
+  buttons[q.answer].classList.add("correct");
+
+  const feedback=document.getElementById("feedback");
+  const correct=i===q.answer;
+
+  if(correct){
+    combo++;
+    const reward=(current===questions.length-1?250:100)+(combo>=3?50:0);
+    xp+=reward;
+    feedback.className="feedback good show";
+    feedback.innerHTML=`<strong>✅ Correct! +${reward} XP</strong><br>${q.explain}`;
+    tone("good");
+    if(combo===3)showAchievement("Opposite Streak ×3");
+    if(current===questions.length-1)showAchievement("Final Opposite Code Unlocked");
+  }else{
+    combo=0;
+    hearts=Math.max(0,hearts-1);
+    buttons[i].classList.add("wrong");
+    feedback.className="feedback bad show";
+    feedback.innerHTML=`<strong>❌ Incorrect.</strong> Correct answer: <strong>${q.options[q.answer]}</strong>.<br>${q.explain}`;
+    tone("bad");
+  }
+
+  document.getElementById("nextBtn").classList.remove("hidden");
+  updateHud();
+}
+
+function next(){
+  if(current<questions.length-1){
+    current++;
+    render();
+  }else{
+    showResult();
+  }
+}
+
+function showResult(){
+  game.classList.add("hidden");
+  result.classList.remove("hidden");
+
+  const rank=xp>=750?"Opposite Meaning Master":xp>=500?"Vocabulary Explorer":"Culture Learner";
+
+  result.innerHTML=`
+    <div class="trophy">🏆</div>
+    <h2>${rank}</h2>
+    <p>You completed all six opposite-meaning missions.</p>
+    <h3>${xp} XP • ${hearts} hearts left</h3>
+    <div class="badge-grid">
+      <div class="badge-item">🏫 Culture Contrast</div>
+      <div class="badge-item">🥘 Ingredient Split</div>
+      <div class="badge-item">📣 Fame Detector</div>
+      <div class="badge-item">🎎 Emotion Switch</div>
+      <div class="badge-item">📉 Trend Reversal</div>
+      <div class="badge-item">🔗 Final Code</div>
+    </div>
+    <button id="restart" class="btn btn-primary" type="button">↻ Play again</button>
+  `;
+
+  document.getElementById("restart").addEventListener("click",()=>location.reload());
+  tone("finish");
+  confetti();
+}
+
+function confetti(){
+  const colors=["#f97316","#14b8a6","#facc15","#22c55e","#0ea5e9"];
+  for(let i=0;i<85;i++){
+    const p=document.createElement("i");
+    p.className="confetti";
+    p.style.left=Math.random()*100+"vw";
+    p.style.background=colors[i%colors.length];
+    p.style.animationDuration=2.6+Math.random()*2+"s";
+    p.style.animationDelay=Math.random()*.7+"s";
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),5200);
+  }
+}
+
+document.getElementById("soundBtn").addEventListener("click",e=>{
+  soundOn=!soundOn;
+  e.target.textContent=soundOn?"🔊 Sound":"🔇 Muted";
+  if(soundOn)tone("good");
+});
+
+buildTrack();
+render();
+</script>
+</body>
+</html>
