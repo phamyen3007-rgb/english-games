@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>English Games • Updated Grade 11</title>
+  <title>English Games</title>
   <style>
     :root{
       --bg1:#eef6ff;
@@ -323,7 +323,7 @@
       <div class="section-title">
         <h2>📗 Grade 11</h2>
         <div class="section-actions">
-          <span class="count">4 games</span>
+          <span class="count">6 games</span>
           <button class="grade-lock" type="button" data-unlock-grade="11">🔒 Log in</button>
         </div>
       </div>
@@ -353,6 +353,20 @@
           <div class="icon purple">🩺</div>
           <h3>Unit 1 – Exercise 10 – Option C</h3>
           <p>Advanced reading practice with a fixed passage, answer-location highlights, XP, coins and skill review.</p>
+          <span class="play">Play now →</span>
+        </a>
+
+        <a class="game-card locked" data-grade="11" data-title="grade 11 unit 1 exercise 11 option b cooking smart at university reading comprehension" href="grade_11_unit_1_exercise_11_option_b.html">
+          <div class="icon orange">🍳</div>
+          <h3>Unit 1 – Exercise 11 – Option B</h3>
+          <p>University cooking and smart-shopping reading practice with fixed passage, evidence highlights and 5 hearts.</p>
+          <span class="play">Play now →</span>
+        </a>
+
+        <a class="game-card locked" data-grade="11" data-title="grade 11 unit 1 exercise 11 option c becoming an independent student cook reading comprehension" href="grade_11_unit_1_exercise_11_option_c.html">
+          <div class="icon purple">👩‍🍳</div>
+          <h3>Unit 1 – Exercise 11 – Option C</h3>
+          <p>Advanced reading practice about independent cooking, smart shopping and shared expenses with 5 hearts.</p>
           <span class="play">Play now →</span>
         </a>
       </div>
@@ -430,7 +444,7 @@
     </section>
 
     <footer>
-      Created for English learners • Phạm Thị Ngọc Yến • Updated 22/07/2026
+      Created for English learners • Phạm Thị Ngọc Yến
     </footer>
   </main>
 
@@ -579,15 +593,6 @@
       });
     });
 
-    function refreshGameCounts(){
-      document.querySelectorAll(".grade-section").forEach(section => {
-        const count = section.querySelectorAll(".game-card").length;
-        const badge = section.querySelector(".count");
-        if(badge) badge.textContent = count + (count === 1 ? " game" : " games");
-      });
-    }
-
-    refreshGameCounts();
     refreshLocks();
   </script>
 </body>
