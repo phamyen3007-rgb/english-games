@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 11 - Unit 2 - Exercise 1 (21-40) - Option B</title>
+<style>
+:root{--bg:#0d1321;--panel:#151d31;--panel2:#202b44;--cyan:#55d6e8;--yellow:#ffd166;--green:#5ee28a;--red:#ff6b6b;--text:#f7f9ff;--muted:#aebbd2}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:radial-gradient(circle at 12% 12%,rgba(85,214,232,.14),transparent 28%),radial-gradient(circle at 88% 18%,rgba(255,209,102,.10),transparent 25%),linear-gradient(135deg,#090e19,#111a2d 55%,#0b1425);padding:18px}
+.app{max-width:980px;margin:auto}.header,.stage{background:rgba(21,29,49,.94);border:1px solid #30405f;border-radius:24px;box-shadow:0 18px 45px rgba(0,0,0,.28)}
+.header{padding:20px}.header h1{margin:0;font-size:clamp(1.4rem,4vw,2.3rem)}.header p{margin:8px 0 0;color:var(--muted)}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.stat{background:var(--panel2);border:1px solid #354565;border-radius:12px;padding:9px 13px;font-weight:800}
+.progress{height:10px;background:#26324b;border-radius:999px;overflow:hidden;margin-top:16px}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--yellow));transition:.35s}
+.stage{margin-top:18px;overflow:hidden}.map{display:grid;grid-template-columns:repeat(10,1fr);gap:7px;padding:16px;background:#10182a;border-bottom:1px solid #2d3a57}.node{height:9px;border-radius:999px;background:#34415d}.node.current{background:var(--yellow);box-shadow:0 0 14px rgba(255,209,102,.55)}.node.done{background:var(--green)}
+.card{padding:24px}.label{color:var(--cyan);font-weight:900;letter-spacing:.8px;text-transform:uppercase;font-size:.85rem}.question{font-size:clamp(1.12rem,2.4vw,1.42rem);line-height:1.55;margin:13px 0 19px}.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}.option{border:1px solid #394966;background:#202b44;color:white;border-radius:15px;padding:15px;text-align:left;font-size:1rem;cursor:pointer;transition:.2s}.option:hover:not(:disabled){transform:translateY(-2px);border-color:var(--cyan)}.option.correct{background:#19432d;border-color:var(--green)}.option.wrong{background:#4d242d;border-color:var(--red)}
+.feedback{display:none;margin-top:17px;padding:15px;border-radius:14px;line-height:1.55}.feedback.show{display:block}.feedback.good{background:#173a29;border-left:5px solid var(--green)}.feedback.bad{background:#47242b;border-left:5px solid var(--red)}.footer{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:17px}.focus{color:var(--yellow);font-weight:800}.next{display:none;border:0;border-radius:12px;background:linear-gradient(135deg,var(--yellow),#ffb84d);color:#172033;padding:12px 18px;font-weight:900;cursor:pointer}.next.show{display:inline-block}
+.result{display:none;text-align:center;padding:34px 22px}.result.show{display:block}.result .big{font-size:3rem;margin-bottom:10px}.restart{border:0;border-radius:12px;background:var(--cyan);color:#102033;padding:12px 18px;font-weight:900;cursor:pointer}.flash{position:fixed;inset:0;pointer-events:none;opacity:0;z-index:20}.flash.boom{background:radial-gradient(circle,#ffe18a 0,#ff7b3d 18%,rgba(140,0,0,.68) 42%,transparent 68%);animation:boom .55s}@keyframes boom{0%{opacity:0;transform:scale(.35)}35%{opacity:1;transform:scale(1.1)}100%{opacity:0;transform:scale(1)}}
+@media(max-width:680px){.options{grid-template-columns:1fr}.map{grid-template-columns:repeat(5,1fr)}}
+</style>
+</head>
+<body>
+<div class="flash" id="flash"></div>
+<div class="app">
+<section class="header">
+<h1>Grade 11 - Unit 2 - Exercise 1 (21–40) - Option B</h1>
+<p>10 câu trọng tâm • Vocabulary & Grammar Challenge</p>
+<div class="stats"><div class="stat">❤️ <span id="hearts">7</span>/7</div><div class="stat">⭐ <span id="xp">0</span> XP</div><div class="stat">🔥 Combo <span id="combo">0</span></div><div class="stat">✅ <span id="score">0</span>/10</div></div>
+<div class="progress"><span id="bar"></span></div>
+</section>
+<section class="stage">
+<div class="map" id="map"></div>
+<div class="card" id="quiz"><div class="label" id="label"></div><div class="question" id="question"></div><div class="options" id="options"></div><div class="feedback" id="feedback"></div><div class="footer"><div class="focus" id="focus"></div><button class="next" id="nextBtn">Next question →</button></div></div>
+<div class="result" id="result"><div class="big">🏆</div><h2>Challenge Completed!</h2><p id="summary"></p><button class="restart" onclick="location.reload()">Play again</button></div>
+</section>
+</div>
+<script>
+const questions=[
+{q:"Small misunderstandings can easily turn into serious ____________ if family members refuse to listen to one another.",options:["attitudes","arguments","characteristics","opinions"],answer:1,explanation:"Argument = cuộc cãi vã, tranh cãi. 'Serious arguments' là cụm phù hợp nhất trong ngữ cảnh này.",focus:"argument = cuộc cãi vã"},
+{q:"____________ studying for exams, students should spend time helping with family responsibilities.",options:["In spite of","Because of","In addition to","Instead of"],answer:2,explanation:"In addition to + V-ing/N = ngoài việc... Vì vậy: In addition to studying for exams...",focus:"in addition to + V-ing/N"},
+{q:"Many children find it difficult to ____________ to new family rules after moving to another city.",options:["adjust","belong","refer","depend"],answer:0,explanation:"Adjust to = thích nghi với. Các cụm khác là belong to, refer to và depend on.",focus:"adjust to"},
+{q:"Being ____________ on technology for every task may reduce your problem-solving skills.",options:["depended","dependent","depending","dependence"],answer:1,explanation:"Sau 'being' cần tính từ. Be dependent on = phụ thuộc vào.",focus:"be dependent on"},
+{q:"Teenagers should learn ____________ their own decisions responsibly.",options:["making","make","to make","made"],answer:2,explanation:"Learn to do something = học cách làm gì. Do đó: learn to make decisions.",focus:"learn to + V"},
+{q:"My cousin is completely ____________ to online shopping and spends too much money.",options:["influenced","dependent","addicted","absorbed"],answer:2,explanation:"Be addicted to = nghiện. Các cụm đúng khác là influenced by, dependent on và absorbed in.",focus:"be addicted to"},
+{q:"Family members should respect each other's ____________ even when they disagree.",options:["points of view","hold views","share opinions","suit opinions"],answer:0,explanation:"Points of view = quan điểm. 'Respect each other's points of view' là cách diễn đạt tự nhiên.",focus:"points of view"},
+{q:"Parents shouldn't force their children ____________ careers they dislike.",options:["choose","choosing","to choose","to choosing"],answer:2,explanation:"Force somebody to do something = ép ai làm gì. Vì vậy: force their children to choose.",focus:"force + O + to V"},
+{q:"Older and younger family members often ____________ in their opinions about technology.",options:["depend","differ","divide","change"],answer:1,explanation:"Differ in = khác nhau về. 'Differ in their opinions' là cấu trúc đúng.",focus:"differ in"},
+{q:"Teachers often praise students for their good ____________ in class.",options:["experience","gender","value","behavior"],answer:3,explanation:"Behavior = hành vi, cách cư xử. Good behavior là collocation phổ biến.",focus:"good behavior"}
+];
+let current=0,hearts=7,xp=0,combo=0,score=0,locked=false;const solved=Array(questions.length).fill(false);const $=id=>document.getElementById(id);
+function updateStats(){$("hearts").textContent=hearts;$("xp").textContent=xp;$("combo").textContent=combo;$("score").textContent=score;$("bar").style.width=(current/questions.length*100)+"%"}
+function drawMap(){$("map").innerHTML=questions.map((_,i)=>`<span class="node ${solved[i]?'done':''} ${i===current?'current':''}"></span>`).join("")}
+function render(){locked=false;drawMap();updateStats();const q=questions[current];$("label").textContent=`Question ${current+1} of ${questions.length}`;$("question").textContent=q.q;$("focus").textContent="";$("feedback").className="feedback";$("nextBtn").className="next";$("options").innerHTML="";q.options.forEach((text,i)=>{const b=document.createElement("button");b.className="option";b.innerHTML=`<strong>${String.fromCharCode(65+i)}.</strong> ${text}`;b.onclick=()=>choose(i,b);$("options").appendChild(b)})}
+function choose(i,btn){if(locked)return;locked=true;const q=questions[current];const buttons=[...document.querySelectorAll(".option")];buttons.forEach(x=>x.disabled=true);buttons[q.answer].classList.add("correct");solved[current]=true;if(i===q.answer){score++;combo++;xp+=20+(combo-1)*5;$("feedback").className="feedback good show";$("feedback").innerHTML=`✅ Correct!<br>${q.explanation}`;cheer()}else{hearts--;combo=0;btn.classList.add("wrong");$("feedback").className="feedback bad show";$("feedback").innerHTML=`💥 Incorrect. Correct answer: <strong>${String.fromCharCode(65+q.answer)}</strong><br>${q.explanation}`;bomb()}$("focus").textContent="Knowledge focus: "+q.focus;$("nextBtn").className="next show";$("nextBtn").textContent=current===questions.length-1?"View result":"Next question →";updateStats();drawMap()}
+function next(){current++;if(current>=questions.length)finish();else render()}
+function finish(){$("quiz").style.display="none";$("result").className="result show";$("bar").style.width="100%";const pct=Math.round(score/questions.length*100);let rank=pct===100?"Perfect Master":pct>=80?"Vocabulary Expert":pct>=60?"Strong Learner":"Keep Practising";$("summary").innerHTML=`Score: <strong>${score}/${questions.length}</strong><br>Rank: <strong>${rank}</strong><br>Remaining hearts: <strong>${hearts}</strong><br>Total XP: <strong>${xp}</strong>`;cheer()}
+function bomb(){$("flash").className="flash boom";setTimeout(()=>$("flash").className="flash",600);const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;const ctx=new AC(),o=ctx.createOscillator(),g=ctx.createGain();o.type="sawtooth";o.frequency.setValueAtTime(190,ctx.currentTime);o.frequency.exponentialRampToValueAtTime(38,ctx.currentTime+.5);g.gain.setValueAtTime(.25,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.5);o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+.52)}
+function cheer(){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;const ctx=new AC();[523,659,784,1046].forEach((f,i)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.type="triangle";o.frequency.value=f;g.gain.setValueAtTime(.001,ctx.currentTime+i*.06);g.gain.exponentialRampToValueAtTime(.16,ctx.currentTime+i*.06+.02);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+i*.06+.28);o.connect(g);g.connect(ctx.destination);o.start(ctx.currentTime+i*.06);o.stop(ctx.currentTime+i*.06+.3)})}
+$("nextBtn").onclick=next;render();
+</script>
+</body>
+</html>
