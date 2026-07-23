@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 11 - Unit 1 - Exercise 12 - Option C</title>
+<style>
+:root{
+  --ink:#171a22;--paper:#f6f0df;--red:#b63535;--gold:#d6a23b;--blue:#284b63;
+  --green:#2d7d46;--muted:#7b7468;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--ink);
+  background:
+   linear-gradient(rgba(255,255,255,.04),rgba(255,255,255,.04)),
+   repeating-linear-gradient(0deg,#1d232d 0,#1d232d 3px,#202732 3px,#202732 6px);
+  min-height:100vh;padding:18px;
+}
+.app{max-width:1280px;margin:auto}
+.topbar{
+  background:#11161e;color:white;border:1px solid #35404d;border-radius:18px;
+  padding:16px 18px;display:flex;justify-content:space-between;gap:18px;align-items:center;
+  box-shadow:0 14px 30px rgba(0,0,0,.28)
+}
+.brand h1{margin:0;font-size:clamp(1.4rem,3vw,2.25rem);letter-spacing:.5px}
+.brand p{margin:5px 0 0;color:#c6ced8}
+.badges{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}
+.badge{background:#242c37;border:1px solid #3b4653;border-radius:12px;padding:9px 12px;font-family:Arial,sans-serif;font-weight:800}
+.case-progress{margin-top:12px;height:8px;border-radius:999px;background:#313946;overflow:hidden}
+.case-progress div{height:100%;width:0;background:linear-gradient(90deg,var(--gold),#f1cf79);transition:.35s}
+.workspace{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(380px,.9fr);gap:18px;margin-top:18px}
+.file,.desk{border-radius:18px;overflow:hidden;box-shadow:0 18px 38px rgba(0,0,0,.26)}
+.file{background:var(--paper);border:1px solid #d4c9ad;position:sticky;top:18px;max-height:calc(100vh - 36px)}
+.file-header{padding:18px 20px;background:#e8deca;border-bottom:1px solid #cfc1a4;display:flex;justify-content:space-between;align-items:center}
+.file-header h2{margin:0;font-size:1.25rem}
+.file-body{padding:18px 20px 26px;overflow:auto;max-height:calc(100vh - 105px);line-height:1.72}
+.para{padding:12px 13px;border-left:4px solid transparent;border-radius:8px;margin:0 0 14px;transition:.3s}
+.para h3{margin:0 0 8px;color:var(--blue);font-size:1rem}
+.para.active{background:#fff2ad;border-left-color:var(--red);box-shadow:0 0 0 1px #ddb948 inset}
+mark{background:#ffcf5c;padding:2px 3px;border-radius:4px}
+.desk{background:#171d26;border:1px solid #323b48;color:white;padding:20px;position:relative}
+.stamp{display:inline-block;border:2px solid var(--red);color:#ff8e8e;padding:7px 12px;transform:rotate(-2deg);font-family:Arial,sans-serif;font-weight:900;letter-spacing:1px}
+.case-map{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:16px 0}
+.node{background:#28313d;border:1px solid #3d4856;border-radius:10px;padding:8px 0;text-align:center;font-family:Arial,sans-serif;font-weight:900;color:#9ba8b7}
+.node.current{background:var(--gold);color:#171a22;border-color:#efc665}
+.node.solved{background:#244c35;color:#c9f1d8;border-color:#3c7955}
+.type{color:#f0c766;font-family:Arial,sans-serif;font-size:.85rem;font-weight:900;letter-spacing:.8px;text-transform:uppercase;margin-top:16px}
+.question{font-size:1.18rem;line-height:1.55;margin:10px 0 16px}
+.option{width:100%;text-align:left;padding:14px 15px;margin:9px 0;border-radius:12px;border:1px solid #3b4654;background:#212936;color:white;font-size:1rem;cursor:pointer;transition:.2s}
+.option:hover:not(:disabled){transform:translateX(4px);border-color:#d6a23b}
+.option.correct{background:#234c35;border-color:#55a672}
+.option.wrong{background:#54292e;border-color:#d1626e}
+.feedback{display:none;margin-top:14px;padding:14px;border-radius:12px;line-height:1.5}
+.feedback.show{display:block}
+.feedback.good{background:#1f422f;border-left:5px solid #55a672}
+.feedback.bad{background:#4c2428;border-left:5px solid #d1626e}
+.actions{display:flex;justify-content:space-between;gap:10px;margin-top:15px}
+.btn{border:0;border-radius:11px;padding:12px 16px;font-family:Arial,sans-serif;font-weight:900;cursor:pointer}
+.evidence{background:#eef0f3;color:#18202a;display:none}
+.next{background:linear-gradient(135deg,#d6a23b,#f0cf78);color:#171a22;display:none}
+.btn.show{display:inline-block}
+.result{display:none;text-align:center;padding:30px 10px}
+.result.show{display:block}
+.rank{font-size:3rem;margin:8px 0;color:#f0c766}
+.restart{background:#f0c766;color:#171a22}
+.flash{position:fixed;inset:0;pointer-events:none;opacity:0;z-index:50}
+.flash.boom{background:radial-gradient(circle,#ffcf57 0,#e65f2d 18%,rgba(99,0,0,.75) 45%,transparent 70%);animation:boom .55s}
+@keyframes boom{0%{opacity:0;transform:scale(.3)}35%{opacity:1;transform:scale(1.15)}100%{opacity:0;transform:scale(1)}}
+@media(max-width:900px){
+  .workspace{grid-template-columns:1fr}
+  .file{position:relative;top:auto;max-height:none}
+  .file-body{max-height:42vh}
+}
+</style>
+</head>
+<body>
+<div class="flash" id="flash"></div>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <h1>🕵️ Grade 11 - Unit 1 - Exercise 12 - Option C</h1>
+      <p>Reading Detective • Solve the clues • Find the evidence • Close the case</p>
+    </div>
+    <div class="badges">
+      <div class="badge">❤️ <span id="hearts">7</span>/7</div>
+      <div class="badge">🔍 <span id="clues">0</span>/10</div>
+      <div class="badge">⭐ <span id="xp">0</span> XP</div>
+    </div>
+  </header>
+  <div class="case-progress"><div id="bar"></div></div>
+
+  <main class="workspace">
+    <section class="file">
+      <div class="file-header">
+        <h2>📁 Case File: Factors That Affect Life Expectancy</h2>
+        <button class="btn evidence" id="clearBtn" style="display:inline-block">Clear marks</button>
+      </div>
+      <div class="file-body" id="passage"></div>
+    </section>
+
+    <section class="desk">
+      <div id="quiz">
+        <span class="stamp">CONFIDENTIAL</span>
+        <div class="case-map" id="map"></div>
+        <div class="type" id="type"></div>
+        <div class="question" id="question"></div>
+        <div id="options"></div>
+        <div class="feedback" id="feedback"></div>
+        <div class="actions">
+          <button class="btn evidence" id="evidenceBtn">🔍 Reveal Evidence</button>
+          <button class="btn next" id="nextBtn">Next clue →</button>
+        </div>
+      </div>
+      <div class="result" id="result">
+        <div class="stamp">CASE CLOSED</div>
+        <div class="rank" id="rank"></div>
+        <h2 id="scoreText"></h2>
+        <p id="report"></p>
+        <button class="btn restart" id="restart">Open case again</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+const paragraphs=[["1. Gender differences", "In many countries, women generally live longer than men. Experts believe this is partly because women are less likely to smoke or drink alcohol excessively. They are also more likely to visit doctors regularly and maintain healthier lifestyles."], ["2. Living conditions", "People's living conditions also influence how long they live. Those who have access to nutritious food, clean water, safe housing, and quality healthcare usually enjoy better health than those living in disadvantaged communities."], ["3. Education and employment", "Research has shown that individuals with higher education often have more stable careers and higher incomes. As a result, they can enjoy better healthcare, healthier diets, and less financial stress, all of which may increase life expectancy. [I]"], ["4. Improvements in medicine", "[II] New medicines, vaccines, and advanced medical equipment have greatly improved the prevention and treatment of diseases. Consequently, many people today are able to live healthier and longer lives."], ["5. Healthy lifestyle choices", "[III] Following healthy habits such as eating balanced meals, exercising regularly, avoiding tobacco, and getting enough sleep can reduce the risk of many diseases. [IV]"]];
+const questions=[{"type": "Sentence Placement", "prompt": "Where does this sentence best fit? “Personal lifestyle is another key factor that influences life expectancy.”", "options": ["[I]", "[II]", "[III]", "[IV]"], "answer": 2, "explanation": "Đây là câu chủ đề của mục Healthy lifestyle choices, nên đặt ở [III].", "evidence": {"p": 4, "text": "[III]"}}, {"type": "Reference", "prompt": "The word “They” in paragraph 1 refers to ______.", "options": ["experts", "countries", "women", "men"], "answer": 2, "explanation": "“They” thay thế cho “women”.", "evidence": {"p": 0, "text": "They are also more likely to visit doctors regularly and maintain healthier lifestyles."}}, {"type": "Vocabulary", "prompt": "The phrase “maintain healthier lifestyles” could best be replaced by ______.", "options": ["improve medical services", "follow healthier habits", "avoid seeing doctors", "reduce life expectancy"], "answer": 1, "explanation": "Maintain healthier lifestyles = duy trì các thói quen sống lành mạnh.", "evidence": {"p": 0, "text": "maintain healthier lifestyles"}}, {"type": "Opposite Meaning", "prompt": "The word “advanced” is OPPOSITE in meaning to ______.", "options": ["modern", "developed", "outdated", "effective"], "answer": 2, "explanation": "Advanced = tiên tiến; trái nghĩa là outdated = lạc hậu.", "evidence": {"p": 3, "text": "advanced"}}, {"type": "Detail Check", "prompt": "Which factor is NOT mentioned in the passage?", "options": ["Education level", "Medical developments", "Living conditions", "Family size"], "answer": 3, "explanation": "Bài không nhắc đến quy mô gia đình.", "evidence": {"p": "all"}}, {"type": "True Statement", "prompt": "Which statement is TRUE according to the passage?", "options": ["People in poor communities always receive high-quality healthcare.", "Higher education may help people enjoy healthier lives.", "Women live longer only because of genetic factors.", "Sleeping enough has no influence on health."], "answer": 1, "explanation": "Học vấn cao hơn có thể dẫn đến việc làm, thu nhập và điều kiện sống tốt hơn.", "evidence": {"p": 2}}, {"type": "Inference", "prompt": "What does the author imply about healthy lifestyle choices?", "options": ["They can help lower the risk of disease.", "They are less important than medical technology.", "They only improve physical appearance.", "They mainly depend on educational background."], "answer": 0, "explanation": "Lối sống lành mạnh giúp giảm nguy cơ mắc bệnh.", "evidence": {"p": 4}}, {"type": "Paraphrase", "prompt": "Which option best paraphrases: “Individuals with higher education often have more stable careers and higher incomes.”", "options": ["People with more education usually have better jobs and earn more money.", "Only university graduates can find stable employment.", "Education guarantees financial success.", "Good careers are unrelated to education."], "answer": 0, "explanation": "Đáp án A giữ đúng ý và không tuyệt đối hóa.", "evidence": {"p": 2}}, {"type": "Inference", "prompt": "What can be inferred from the passage?", "options": ["Living longer depends on one single factor.", "Better living conditions may indirectly improve life expectancy.", "Medical technology alone can eliminate all diseases.", "Everyone has equal access to healthy food and healthcare."], "answer": 1, "explanation": "Điều kiện sống tốt có thể giúp cải thiện sức khỏe và tuổi thọ một cách gián tiếp.", "evidence": {"p": 1}}, {"type": "Case Conclusion", "prompt": "Which option best summarizes the passage?", "options": ["Healthy eating is the most effective way to increase life expectancy.", "Medical advances are the only reason people are living longer.", "A combination of education, living conditions, medicine, and healthy habits influences how long people live.", "Women naturally live longer regardless of lifestyle."], "answer": 2, "explanation": "Toàn bài trình bày nhiều yếu tố cùng tác động đến tuổi thọ.", "evidence": {"p": "all"}}];
+let current=0, hearts=7, score=0, xp=0, locked=false;
+const solved=Array(questions.length).fill(false);
+const $=id=>document.getElementById(id);
+
+function drawPassage(){
+  $("passage").innerHTML=paragraphs.map((p,i)=>`<section class="para" id="p${i}"><h3>${p[0]}</h3><div>${p[1]}</div></section>`).join("");
+}
+function drawMap(){
+  $("map").innerHTML=questions.map((_,i)=>`<div class="node ${i===current?'current':''} ${solved[i]?'solved':''}">${i+1}</div>`).join("");
+}
+function stats(){
+  $("hearts").textContent=hearts;$("clues").textContent=score;$("xp").textContent=xp;
+  $("bar").style.width=(current/questions.length*100)+"%";
+}
+function render(){
+  locked=false;drawMap();stats();
+  const q=questions[current];
+  $("type").textContent=`Clue ${current+1} • ${q.type}`;
+  $("question").textContent=q.prompt;
+  $("options").innerHTML="";
+  $("feedback").className="feedback";
+  $("evidenceBtn").className="btn evidence";
+  $("nextBtn").className="btn next";
+  q.options.forEach((o,i)=>{
+    const b=document.createElement("button");
+    b.className="option";b.innerHTML=`<b>${String.fromCharCode(65+i)}.</b> ${o}`;
+    b.onclick=()=>answer(i,b);$("options").appendChild(b);
+  });
+}
+function answer(i,btn){
+  if(locked)return;locked=true;
+  const q=questions[current],buttons=[...document.querySelectorAll(".option")];
+  buttons.forEach(x=>x.disabled=true);buttons[q.answer].classList.add("correct");
+  if(i===q.answer){
+    score++;xp+=25;solved[current]=true;
+    $("feedback").className="feedback good show";
+    $("feedback").innerHTML=`✅ Evidence confirmed.<br>${q.explanation}`;
+    applause();
+  }else{
+    hearts--;btn.classList.add("wrong");
+    $("feedback").className="feedback bad show";
+    $("feedback").innerHTML=`💥 False lead. Correct answer: <b>${String.fromCharCode(65+q.answer)}</b><br>${q.explanation}`;
+    bomb();
+  }
+  stats();drawMap();
+  $("evidenceBtn").className="btn evidence show";
+  $("nextBtn").className="btn next show";
+  $("nextBtn").textContent=current===questions.length-1?"Close the case":"Next clue →";
+}
+function clearMarks(){drawPassage()}
+function reveal(){
+  clearMarks();const ev=questions[current].evidence;
+  if(ev.p==="all"){document.querySelectorAll(".para").forEach(x=>x.classList.add("active"));return;}
+  const p=$("p"+ev.p);if(!p)return;p.classList.add("active");
+  if(ev.text){
+    const div=p.querySelector("div");
+    div.innerHTML=div.innerHTML.replace(ev.text,`<mark>${ev.text}</mark>`);
+  }
+  p.scrollIntoView({behavior:"smooth",block:"center"});
+}
+function next(){
+  current++;
+  if(current>=questions.length)finish();else{clearMarks();render();}
+}
+function finish(){
+  $("quiz").style.display="none";$("result").className="result show";
+  $("bar").style.width="100%";
+  const pct=Math.round(score/questions.length*100);
+  $("rank").textContent=pct===100?"MASTER DETECTIVE":pct>=80?"SENIOR DETECTIVE":pct>=60?"FIELD DETECTIVE":"CADET";
+  $("scoreText").textContent=`Solved ${score} of ${questions.length} clues`;
+  $("report").textContent=`You finished with ${hearts} heart(s) and ${xp} XP.`;
+  applause();
+}
+function bomb(){
+  $("flash").className="flash boom";setTimeout(()=>$("flash").className="flash",600);
+  const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+  const ctx=new AC(),o=ctx.createOscillator(),g=ctx.createGain();
+  o.type="sawtooth";o.frequency.setValueAtTime(170,ctx.currentTime);o.frequency.exponentialRampToValueAtTime(35,ctx.currentTime+.55);
+  g.gain.setValueAtTime(.25,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.55);
+  o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+.56);
+}
+function applause(){
+  const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+  const ctx=new AC();
+  [523,659,784,1046].forEach((f,i)=>{
+    const o=ctx.createOscillator(),g=ctx.createGain();o.type="triangle";o.frequency.value=f;
+    g.gain.setValueAtTime(.001,ctx.currentTime+i*.07);
+    g.gain.exponentialRampToValueAtTime(.15,ctx.currentTime+i*.07+.02);
+    g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+i*.07+.3);
+    o.connect(g);g.connect(ctx.destination);o.start(ctx.currentTime+i*.07);o.stop(ctx.currentTime+i*.07+.31);
+  });
+}
+$("evidenceBtn").onclick=reveal;$("nextBtn").onclick=next;$("clearBtn").onclick=clearMarks;
+$("restart").onclick=()=>location.reload();
+drawPassage();render();
+</script>
+</body>
+</html>

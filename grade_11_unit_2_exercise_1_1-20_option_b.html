@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 11 - Unit 2 - Exercise 1 (1-20) - Option B</title>
+<style>
+:root{
+  --bg:#0d1321;--panel:#151d31;--panel2:#1d2942;--cyan:#55d6e8;
+  --yellow:#ffd166;--green:#5ee28a;--red:#ff6b6b;--text:#f7f9ff;--muted:#aebbd2;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;font-family:Inter,Arial,sans-serif;color:var(--text);
+  background:
+    radial-gradient(circle at 10% 10%,rgba(85,214,232,.14),transparent 28%),
+    radial-gradient(circle at 90% 20%,rgba(255,209,102,.10),transparent 25%),
+    linear-gradient(135deg,#090e19,#111a2d 55%,#0b1425);
+  padding:18px;
+}
+.app{max-width:980px;margin:auto}
+.header{
+  background:rgba(21,29,49,.92);border:1px solid #30405f;border-radius:22px;
+  padding:20px;box-shadow:0 18px 45px rgba(0,0,0,.28)
+}
+.header h1{margin:0;font-size:clamp(1.45rem,4vw,2.4rem)}
+.header p{margin:8px 0 0;color:var(--muted)}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.stat{background:#202b44;border:1px solid #354565;border-radius:12px;padding:9px 13px;font-weight:800}
+.progress{height:10px;background:#26324b;border-radius:999px;overflow:hidden;margin-top:16px}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--yellow));transition:.35s}
+.stage{
+  margin-top:18px;background:rgba(21,29,49,.94);border:1px solid #30405f;border-radius:24px;
+  overflow:hidden;box-shadow:0 18px 45px rgba(0,0,0,.28)
+}
+.map{display:grid;grid-template-columns:repeat(10,1fr);gap:7px;padding:16px;background:#10182a;border-bottom:1px solid #2d3a57}
+.node{height:9px;border-radius:999px;background:#34415d}
+.node.current{background:var(--yellow);box-shadow:0 0 14px rgba(255,209,102,.55)}
+.node.done{background:var(--green)}
+.card{padding:24px}
+.label{color:var(--cyan);font-weight:900;letter-spacing:.8px;text-transform:uppercase;font-size:.85rem}
+.question{font-size:clamp(1.12rem,2.4vw,1.42rem);line-height:1.55;margin:13px 0 19px}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.option{
+  border:1px solid #394966;background:#202b44;color:white;border-radius:15px;padding:15px;
+  text-align:left;font-size:1rem;cursor:pointer;transition:.2s
+}
+.option:hover:not(:disabled){transform:translateY(-2px);border-color:var(--cyan)}
+.option.correct{background:#19432d;border-color:var(--green)}
+.option.wrong{background:#4d242d;border-color:var(--red)}
+.feedback{display:none;margin-top:17px;padding:15px;border-radius:14px;line-height:1.55}
+.feedback.show{display:block}
+.feedback.good{background:#173a29;border-left:5px solid var(--green)}
+.feedback.bad{background:#47242b;border-left:5px solid var(--red)}
+.footer{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:17px}
+.focus{color:var(--yellow);font-weight:800}
+.next{display:none;border:0;border-radius:12px;background:linear-gradient(135deg,var(--yellow),#ffb84d);color:#172033;padding:12px 18px;font-weight:900;cursor:pointer}
+.next.show{display:inline-block}
+.result{display:none;text-align:center;padding:34px 22px}
+.result.show{display:block}
+.result .big{font-size:3rem;margin-bottom:10px}
+.restart{border:0;border-radius:12px;background:var(--cyan);color:#102033;padding:12px 18px;font-weight:900;cursor:pointer}
+.flash{position:fixed;inset:0;pointer-events:none;opacity:0;z-index:20}
+.flash.boom{background:radial-gradient(circle,#ffe18a 0,#ff7b3d 18%,rgba(140,0,0,.68) 42%,transparent 68%);animation:boom .55s}
+@keyframes boom{0%{opacity:0;transform:scale(.35)}35%{opacity:1;transform:scale(1.1)}100%{opacity:0;transform:scale(1)}}
+@media(max-width:680px){
+  .options{grid-template-columns:1fr}
+  .map{grid-template-columns:repeat(5,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="flash" id="flash"></div>
+<div class="app">
+  <section class="header">
+    <h1>Grade 11 - Unit 2 - Exercise 1 (1-20) - Option B</h1>
+    <p>Vocabulary & Grammar Challenge • 10 questions</p>
+    <div class="stats">
+      <div class="stat">❤️ <span id="hearts">7</span>/7</div>
+      <div class="stat">⭐ <span id="xp">0</span> XP</div>
+      <div class="stat">🔥 Combo <span id="combo">0</span></div>
+      <div class="stat">✅ <span id="score">0</span>/10</div>
+    </div>
+    <div class="progress"><span id="bar"></span></div>
+  </section>
+
+  <section class="stage">
+    <div class="map" id="map"></div>
+    <div class="card" id="quiz">
+      <div class="label" id="label"></div>
+      <div class="question" id="question"></div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+      <div class="footer">
+        <div class="focus" id="focus"></div>
+        <button class="next" id="nextBtn">Next question →</button>
+      </div>
+    </div>
+
+    <div class="result" id="result">
+      <div class="big">🏆</div>
+      <h2>Challenge Completed!</h2>
+      <p id="summary"></p>
+      <button class="restart" onclick="location.reload()">Play again</button>
+    </div>
+  </section>
+</div>
+
+<script>
+const questions=[{"q": "Why do siblings always ____________ about who should do the household chores first?", "options": ["depend", "argue", "consist", "hire"], "answer": 1, "explanation": "Argue about = tranh cãi về một vấn đề. Depend = phụ thuộc; consist thường đi với of; hire = thuê.", "focus": "argue about"}, {"q": "Many teenagers ____________ that parents should trust them to make more decisions on their own.", "options": ["believe", "advise", "absorb", "wonder"], "answer": 0, "explanation": "Believe that + mệnh đề = tin rằng. Advise thường dùng advise someone to V; wonder = tự hỏi.", "focus": "believe that + clause"}, {"q": "His opinions are completely ____________ of his family's expectations.", "options": ["dependent", "similar", "independent", "involved"], "answer": 2, "explanation": "Independent of = độc lập với. Dependent đi với on; similar đi với to.", "focus": "independent of"}, {"q": "____________ equality has become an important topic in many schools around the world.", "options": ["Economic", "Gender", "Cultural", "Social"], "answer": 1, "explanation": "Gender equality = bình đẳng giới, một cụm từ cố định và phổ biến.", "focus": "gender equality"}, {"q": "Every ____________ has its own way of thinking and solving problems.", "options": ["generational", "generation", "generations", "generator"], "answer": 1, "explanation": "Every + danh từ đếm được số ít. Vì vậy dùng generation.", "focus": "every + singular noun"}, {"q": "The club ____________ of students from different schools across the city.", "options": ["refers", "contains", "belongs", "consists"], "answer": 3, "explanation": "Consist of = bao gồm. Chủ ngữ The club số ít nên dùng consists.", "focus": "consist of"}, {"q": "Parents often try ____________ their children's screen time during the school year.", "options": ["controlling", "learning", "to control", "to reduce"], "answer": 2, "explanation": "Try to + V = cố gắng làm gì. Try to control = cố gắng kiểm soát.", "focus": "try to + V"}, {"q": "She enjoys studying ____________ because she can concentrate better.", "options": ["individual", "individualism", "individually", "individualistic"], "answer": 2, "explanation": "Cần trạng từ bổ nghĩa cho studying, nên dùng individually.", "focus": "study individually"}, {"q": "She ____________ by an international company because of her excellent communication skills.", "options": ["hired", "is hiring", "was hired", "hiring"], "answer": 2, "explanation": "Có by an international company nên dùng bị động: was hired = đã được tuyển dụng.", "focus": "be hired by"}, {"q": "Most students ____________ the Internet to search for learning materials.", "options": ["consist of", "deal with", "rely on", "refer to"], "answer": 2, "explanation": "Rely on = dựa vào, phụ thuộc vào.", "focus": "rely on"}];
+let current=0, hearts=7, xp=0, combo=0, score=0, locked=false;
+const solved=Array(questions.length).fill(false);
+const $=id=>document.getElementById(id);
+
+function updateStats(){
+  $("hearts").textContent=hearts;
+  $("xp").textContent=xp;
+  $("combo").textContent=combo;
+  $("score").textContent=score;
+  $("bar").style.width=(current/questions.length*100)+"%";
+}
+function drawMap(){
+  $("map").innerHTML=questions.map((_,i)=>`<span class="node ${solved[i]?'done':''} ${i===current?'current':''}"></span>`).join("");
+}
+function render(){
+  locked=false;drawMap();updateStats();
+  const q=questions[current];
+  $("label").textContent=`Question ${current+1} of ${questions.length}`;
+  $("question").textContent=q.q;
+  $("focus").textContent="";
+  $("feedback").className="feedback";
+  $("nextBtn").className="next";
+  $("options").innerHTML="";
+  q.options.forEach((text,i)=>{
+    const b=document.createElement("button");
+    b.className="option";
+    b.innerHTML=`<strong>${String.fromCharCode(65+i)}.</strong> ${text}`;
+    b.onclick=()=>choose(i,b);
+    $("options").appendChild(b);
+  });
+}
+function choose(i,btn){
+  if(locked)return;
+  locked=true;
+  const q=questions[current];
+  const buttons=[...document.querySelectorAll(".option")];
+  buttons.forEach(x=>x.disabled=true);
+  buttons[q.answer].classList.add("correct");
+  solved[current]=true;
+  if(i===q.answer){
+    score++;combo++;xp+=20+(combo-1)*5;
+    $("feedback").className="feedback good show";
+    $("feedback").innerHTML=`✅ Correct!<br>${q.explanation}`;
+    cheer();
+  } else {
+    hearts--;combo=0;btn.classList.add("wrong");
+    $("feedback").className="feedback bad show";
+    $("feedback").innerHTML=`💥 Incorrect. Correct answer: <strong>${String.fromCharCode(65+q.answer)}</strong><br>${q.explanation}`;
+    bomb();
+  }
+  $("focus").textContent="Knowledge focus: "+q.focus;
+  $("nextBtn").className="next show";
+  $("nextBtn").textContent=current===questions.length-1?"View result":"Next question →";
+  updateStats();drawMap();
+}
+function next(){
+  current++;
+  if(current>=questions.length)finish(); else render();
+}
+function finish(){
+  $("quiz").style.display="none";
+  $("result").className="result show";
+  $("bar").style.width="100%";
+  const pct=Math.round(score/questions.length*100);
+  let rank=pct===100?"Perfect Master":pct>=80?"Vocabulary Expert":pct>=60?"Strong Learner":"Keep Practising";
+  $("summary").innerHTML=`Score: <strong>${score}/${questions.length}</strong><br>Rank: <strong>${rank}</strong><br>Remaining hearts: <strong>${hearts}</strong><br>Total XP: <strong>${xp}</strong>`;
+  cheer();
+}
+function bomb(){
+  $("flash").className="flash boom";
+  setTimeout(()=>$("flash").className="flash",600);
+  const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+  const ctx=new AC(),o=ctx.createOscillator(),g=ctx.createGain();
+  o.type="sawtooth";o.frequency.setValueAtTime(190,ctx.currentTime);o.frequency.exponentialRampToValueAtTime(38,ctx.currentTime+.5);
+  g.gain.setValueAtTime(.25,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.5);
+  o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+.52);
+}
+function cheer(){
+  const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+  const ctx=new AC();
+  [523,659,784,1046].forEach((f,i)=>{
+    const o=ctx.createOscillator(),g=ctx.createGain();o.type="triangle";o.frequency.value=f;
+    g.gain.setValueAtTime(.001,ctx.currentTime+i*.06);
+    g.gain.exponentialRampToValueAtTime(.16,ctx.currentTime+i*.06+.02);
+    g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+i*.06+.28);
+    o.connect(g);g.connect(ctx.destination);o.start(ctx.currentTime+i*.06);o.stop(ctx.currentTime+i*.06+.3);
+  });
+}
+$("nextBtn").onclick=next;
+render();
+</script>
+</body>
+</html>
