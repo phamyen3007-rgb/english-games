@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>
+    Grade 12 - Unit 2 - Exercise 9 - Option C
+  </title>
+
+  <style>
+    :root {
+      --background-blue: #eef6ff;
+      --background-purple: #f5f3ff;
+      --background-green: #ecfeff;
+
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+
+      --blue: #2563eb;
+      --purple: #7c3aed;
+      --green: #059669;
+      --red: #dc2626;
+      --yellow: #f59e0b;
+
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 18px;
+
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text-dark);
+
+      background:
+        radial-gradient(
+          circle at 10% 15%,
+          rgba(37, 99, 235, 0.18),
+          transparent 26%
+        ),
+        radial-gradient(
+          circle at 90% 20%,
+          rgba(124, 58, 237, 0.16),
+          transparent 25%
+        ),
+        radial-gradient(
+          circle at 80% 90%,
+          rgba(5, 150, 105, 0.15),
+          transparent 28%
+        ),
+        linear-gradient(
+          135deg,
+          var(--background-blue),
+          var(--background-purple) 55%,
+          var(--background-green)
+        );
+
+      overflow-x: hidden;
+    }
+
+    body.shake {
+      animation: screenShake 0.42s ease;
+    }
+
+    @keyframes screenShake {
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      20% {
+        transform: translateX(-10px);
+      }
+
+      40% {
+        transform: translateX(9px);
+      }
+
+      60% {
+        transform: translateX(-7px);
+      }
+
+      80% {
+        transform: translateX(5px);
+      }
+    }
+
+    .container {
+      width: min(1050px, 100%);
+      margin: auto;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .title-card {
+      padding: 24px;
+      border-radius: 26px;
+
+      color: var(--white);
+
+      background:
+        linear-gradient(
+          135deg,
+          #1d4ed8,
+          #0f766e 55%,
+          #7c3aed
+        );
+
+      box-shadow:
+        0 18px 50px rgba(30, 64, 175, 0.22);
+    }
+
+    .title-card h1 {
+      margin: 0 0 8px;
+
+      font-size:
+        clamp(26px, 5vw, 44px);
+    }
+
+    .title-card p {
+      margin: 0;
+      line-height: 1.5;
+      opacity: 0.92;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns:
+        repeat(3, minmax(88px, 1fr));
+
+      gap: 10px;
+    }
+
+    .stat {
+      padding: 14px 12px;
+      border-radius: 18px;
+
+      text-align: center;
+      font-weight: 800;
+
+      background:
+        rgba(255, 255, 255, 0.92);
+
+      box-shadow:
+        0 12px 28px rgba(15, 23, 42, 0.08);
+    }
+
+    .stat small {
+      display: block;
+      margin-top: 3px;
+
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .progress-wrapper {
+      margin: 14px 0;
+      padding: 12px;
+      border-radius: 18px;
+
+      background:
+        rgba(255, 255, 255, 0.9);
+
+      box-shadow:
+        0 10px 25px rgba(15, 23, 42, 0.07);
+    }
+
+    .progress-track {
+      height: 14px;
+      overflow: hidden;
+
+      border-radius: 999px;
+      background: #e2e8f0;
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+
+      background:
+        linear-gradient(
+          90deg,
+          #2563eb,
+          #7c3aed,
+          #059669
+        );
+
+      transition:
+        width 0.35s ease;
+    }
+
+    .game-card {
+      position: relative;
+      overflow: hidden;
+
+      padding: 24px;
+      border-radius: 28px;
+
+      background:
+        rgba(255, 255, 255, 0.95);
+
+      box-shadow:
+        0 22px 55px rgba(15, 23, 42, 0.12);
+    }
+
+    .question-number {
+      margin-bottom: 10px;
+
+      color: var(--purple);
+      font-weight: 900;
+      letter-spacing: 0.5px;
+    }
+
+    .question-text {
+      margin: 0 0 22px;
+
+      font-size:
+        clamp(22px, 3.6vw, 32px);
+
+      line-height: 1.4;
+    }
+
+    .answers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .answer-button {
+      padding: 16px;
+      border: 2px solid #dbeafe;
+      border-radius: 18px;
+
+      color: var(--text-dark);
+      background: var(--white);
+
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.45;
+      text-align: left;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .answer-button:hover:not(:disabled) {
+      transform: translateY(-2px);
+
+      border-color: #60a5fa;
+
+      box-shadow:
+        0 10px 24px rgba(37, 99, 235, 0.12);
+    }
+
+    .answer-button.correct {
+      border-color: #10b981;
+      color: #065f46;
+      background: #d1fae5;
+    }
+
+    .answer-button.wrong {
+      border-color: #ef4444;
+      color: #991b1b;
+      background: #fee2e2;
+    }
+
+    .answer-button:disabled {
+      cursor: not-allowed;
+      opacity: 0.96;
+    }
+
+    .feedback {
+      display: none;
+
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: 18px;
+
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .feedback.show {
+      display: block;
+    }
+
+    .feedback.correct-feedback {
+      border: 1px solid #a7f3d0;
+      background: #ecfdf5;
+    }
+
+    .feedback.wrong-feedback {
+      border: 1px solid #fecdd3;
+      background: #fff1f2;
+    }
+
+    .gift-box {
+      display: none;
+
+      margin-top: 16px;
+      padding: 18px;
+      border: 1px solid #fbbf24;
+      border-radius: 20px;
+
+      text-align: center;
+      font-weight: 900;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fef3c7,
+          #fde68a
+        );
+
+      animation:
+        giftPop 0.35s ease;
+    }
+
+    .gift-box.show {
+      display: block;
+    }
+
+    @keyframes giftPop {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .next-button {
+      display: none;
+
+      width: 100%;
+      margin-top: 18px;
+      padding: 15px;
+
+      border: none;
+      border-radius: 17px;
+
+      color: var(--white);
+
+      background:
+        linear-gradient(
+          135deg,
+          #2563eb,
+          #7c3aed
+        );
+
+      font-size: 18px;
+      font-weight: 900;
+
+      cursor: pointer;
+    }
+
+    .next-button.show {
+      display: block;
+    }
+
+    .final-screen {
+      display: none;
+
+      padding: 32px;
+      border-radius: 28px;
+
+      text-align: center;
+
+      background:
+        rgba(255, 255, 255, 0.96);
+
+      box-shadow:
+        0 22px 55px rgba(15, 23, 42, 0.12);
+    }
+
+    .final-screen.show {
+      display: block;
+    }
+
+    .final-screen h2 {
+      margin: 0 0 12px;
+
+      font-size:
+        clamp(30px, 5vw, 48px);
+    }
+
+    .final-score {
+      margin: 10px 0;
+
+      color: var(--purple);
+      font-size: 72px;
+      font-weight: 900;
+    }
+
+    .restart-button {
+      padding: 15px 24px;
+
+      border: none;
+      border-radius: 17px;
+
+      color: var(--white);
+
+      background:
+        linear-gradient(
+          135deg,
+          #059669,
+          #2563eb
+        );
+
+      font-size: 18px;
+      font-weight: 900;
+
+      cursor: pointer;
+    }
+
+    .effect-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .spark {
+      position: absolute;
+
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+
+      animation:
+        fireworkBurst 900ms ease-out forwards;
+    }
+
+    @keyframes fireworkBurst {
+      from {
+        transform:
+          translate(0, 0)
+          scale(1);
+
+        opacity: 1;
+      }
+
+      to {
+        transform:
+          translate(
+            var(--move-x),
+            var(--move-y)
+          )
+          scale(0.2);
+
+        opacity: 0;
+      }
+    }
+
+    .bomb-flash {
+      display: none;
+
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+
+      background:
+        rgba(239, 68, 68, 0.28);
+
+      pointer-events: none;
+    }
+
+    .bomb-flash.show {
+      display: block;
+
+      animation:
+        redFlash 0.45s ease;
+    }
+
+    @keyframes redFlash {
+      0%,
+      100% {
+        opacity: 0;
+      }
+
+      40% {
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding: 12px;
+      }
+
+      .topbar {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns:
+          repeat(3, 1fr);
+      }
+
+      .answers {
+        grid-template-columns: 1fr;
+      }
+
+      .game-card {
+        padding: 18px;
+      }
+
+      .answer-button {
+        font-size: 16px;
+      }
+
+      .final-score {
+        font-size: 58px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .stats {
+        gap: 6px;
+      }
+
+      .stat {
+        padding: 11px 6px;
+        font-size: 14px;
+      }
+
+      .title-card {
+        padding: 19px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div
+    class="effect-layer"
+    id="effectLayer"
+  ></div>
+
+  <div
+    class="bomb-flash"
+    id="bombFlash"
+  ></div>
+
+  <main class="container">
+
+    <div class="topbar">
+
+      <section class="title-card">
+        <h1>
+          Grade 12 - Unit 2 - Exercise 9 - Option C
+        </h1>
+
+        <p>
+          The Edinburgh Fringe Festival
+          • Sentence Insertion Challenge
+        </p>
+      </section>
+
+      <section class="stats">
+
+        <div class="stat">
+          <span id="hearts">
+            ❤️❤️❤️
+          </span>
+
+          <small>
+            Hearts
+          </small>
+        </div>
+
+        <div class="stat">
+          <span id="xp">
+            0
+          </span>
+
+          <small>
+            XP
+          </small>
+        </div>
+
+        <div class="stat">
+          <span id="gifts">
+            0
+          </span>
+
+          <small>
+            Gifts 🎁
+          </small>
+        </div>
+
+      </section>
+    </div>
+
+    <div class="progress-wrapper">
+      <div class="progress-track">
+
+        <div
+          class="progress-bar"
+          id="progressBar"
+        ></div>
+
+      </div>
+    </div>
+
+    <section
+      class="game-card"
+      id="gameCard"
+    >
+
+      <div
+        class="question-number"
+        id="questionNumber"
+      ></div>
+
+      <h2
+        class="question-text"
+        id="questionText"
+      ></h2>
+
+      <div
+        class="answers"
+        id="answers"
+      ></div>
+
+      <div
+        class="feedback"
+        id="feedback"
+      ></div>
+
+      <div
+        class="gift-box"
+        id="giftBox"
+      >
+        🎁 Surprise Gift! +20 XP
+      </div>
+
+      <button
+        class="next-button"
+        id="nextButton"
+      >
+        Next question →
+      </button>
+
+    </section>
+
+    <section
+      class="final-screen"
+      id="finalScreen"
+    >
+
+      <h2>
+        🎉 Mission Complete!
+      </h2>
+
+      <div
+        class="final-score"
+        id="finalScore"
+      >
+        0/5
+      </div>
+
+      <p id="finalMessage"></p>
+
+      <p>
+        <strong>XP:</strong>
+        <span id="finalXP">0</span>
+
+        •
+        
+        <strong>Gifts:</strong>
+        <span id="finalGifts">0</span>
+      </p>
+
+      <button
+        class="restart-button"
+        id="restartButton"
+      >
+        Play again
+      </button>
+
+    </section>
+
+  </main>
+
+  <script>
+const quizData = [
+
+{
+q:`The Edinburgh Fringe Festival is one of the largest arts festivals in the world. Every summer, thousands of performers and visitors gather in Edinburgh to enjoy a wide variety of cultural events. (1) ________________.`,
+
+options:[
+`As a result, the city becomes a lively centre of art and entertainment during the festival.`,
+`Although the festival is held every year, very few people are interested in attending it.`,
+`The performances are cancelled whenever the weather becomes too hot.`,
+`Therefore, visitors are advised not to explore the city during the festival.`
+],
+
+answer:0,
+
+explain:`
+Sau khi giới thiệu về lễ hội, câu tiếp theo cần nêu kết quả là thành phố trở nên sôi động với các hoạt động nghệ thuật.<br><br>
+
+<b>A.</b> Hợp logic. ✅<br>
+<b>B.</b> Trái với thực tế vì lễ hội thu hút rất đông người tham dự.<br>
+<b>C.</b> Không đúng nội dung.<br>
+<b>D.</b> Trái với mục đích của lễ hội.
+`
+},
+
+{
+q:`The festival welcomes both professional and amateur artists, giving everyone an opportunity to share their talents. (2) ________________. As a result, audiences can enjoy performances ranging from theatre and comedy to music and dance.`,
+
+options:[
+`It began in 1947 when several theatre groups performed outside the official Edinburgh International Festival.`,
+`It will begin with only local artists performing in small theatres every year.`,
+`It has begun because international visitors wanted to replace the original festival.`,
+`It is beginning as a sporting event attracting athletes from different countries.`
+],
+
+answer:0,
+
+explain:`
+Câu cần bổ sung thông tin về nguồn gốc của lễ hội trước khi nói đến sự đa dạng của các buổi biểu diễn.<br><br>
+
+<b>A.</b> Đúng lịch sử và phù hợp mạch văn. ✅<br>
+<b>B.</b> Sai thì và sai nội dung.<br>
+<b>C.</b> Sai nghĩa.<br>
+<b>D.</b> Lễ hội nghệ thuật, không phải sự kiện thể thao.
+`
+},
+
+{
+q:`Throughout the festival, streets, parks, and theatres are filled with excitement and creativity. (3) ________________. Visitors often discover talented performers they have never heard of before while exploring different parts of the city.`,
+
+options:[
+`Consequently, most performances are limited to one famous theatre in the city.`,
+`Therefore, audiences usually have to travel to different countries to enjoy the shows.`,
+`Many performances are free, making the festival accessible to people of different ages and backgrounds.`,
+`In contrast, visitors are not allowed to watch street performances.`
+],
+
+answer:2,
+
+explain:`
+Câu cần bổ sung thêm một đặc điểm nổi bật của lễ hội.<br><br>
+
+<b>A.</b> Sai vì lễ hội diễn ra ở rất nhiều địa điểm.<br>
+<b>B.</b> Không hợp logic.<br>
+<b>C.</b> Phù hợp với nội dung quảng bá lễ hội. ✅<br>
+<b>D.</b> Trái với thực tế vì biểu diễn đường phố là nét đặc trưng của Edinburgh Fringe.
+`
+},
+
+{
+q:`(4) ________________. The festival encourages people from different countries to appreciate one another's cultures and artistic traditions.`,
+
+options:[
+`The festival is mainly organised to encourage business activities instead of cultural exchange.`,
+`Attending the festival gives people a valuable opportunity to experience creativity, diversity, and international friendship.`,
+`Although the performances are creative, visitors often leave feeling disappointed.`,
+`The event only focuses on traditional Scottish music and excludes other cultures.`
+],
+
+answer:1,
+
+explain:`
+Câu sau nói về giao lưu văn hóa, nên câu trước phải giới thiệu lợi ích của việc tham dự lễ hội.<br><br>
+
+<b>A.</b> Sai mục đích.<br>
+<b>B.</b> Hợp nghĩa và liên kết tốt. ✅<br>
+<b>C.</b> Trái với nội dung.<br>
+<b>D.</b> Sai vì lễ hội có tính quốc tế.
+`
+},
+
+{
+q:`(5) ________________.`,
+
+options:[
+`However, many people believe the festival should no longer be held in Edinburgh.`,
+`As a result, the festival has gradually become less popular with international visitors.`,
+`Nevertheless, only professional actors can fully enjoy the activities there.`,
+`Therefore, attending the Edinburgh Fringe Festival is a memorable experience for anyone who loves the arts.`
+],
+
+answer:3,
+
+explain:`
+Đây là câu kết của đoạn văn nên cần tổng kết ý nghĩa của lễ hội.<br><br>
+
+<b>A.</b> Trái với nội dung.<br>
+<b>B.</b> Sai thực tế.<br>
+<b>C.</b> Không đúng vì mọi người đều có thể thưởng thức lễ hội.<br>
+<b>D.</b> Kết luận hợp lý và tự nhiên. ✅
+`
+}
+
+];
+
+let currentQuestion = 0;
+let score = 0;
+let hearts = 3;
+let xp = 0;
+let gifts = 0;
+let answered = false;
+const questionNumber = document.getElementById("questionNumber");
+const questionText = document.getElementById("questionText");
+const answers = document.getElementById("answers");
+const feedback = document.getElementById("feedback");
+const nextButton = document.getElementById("nextButton");
+const progressBar = document.getElementById("progressBar");
+
+const heartsElement = document.getElementById("hearts");
+const xpElement = document.getElementById("xp");
+const giftsElement = document.getElementById("gifts");
+const giftBox = document.getElementById("giftBox");
+
+const gameCard = document.getElementById("gameCard");
+const finalScreen = document.getElementById("finalScreen");
+const finalScore = document.getElementById("finalScore");
+const finalMessage = document.getElementById("finalMessage");
+const finalXP = document.getElementById("finalXP");
+const finalGifts = document.getElementById("finalGifts");
+const restartButton = document.getElementById("restartButton");
+
+function renderQuestion() {
+  answered = false;
+
+  const currentData = quizData[currentQuestion];
+
+  questionNumber.textContent =
+    `Question ${currentQuestion + 1} of ${quizData.length}`;
+
+  questionText.textContent = currentData.q;
+
+  answers.innerHTML = "";
+
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+
+  nextButton.className = "next-button";
+
+  giftBox.className = "gift-box";
+
+  progressBar.style.width =
+    `${(currentQuestion / quizData.length) * 100}%`;
+
+  currentData.options.forEach((option, index) => {
+    const button = document.createElement("button");
+
+    button.className = "answer-button";
+
+    button.innerHTML = `
+      <strong>
+        ${String.fromCharCode(65 + index)}.
+      </strong>
+      ${option}
+    `;
+
+    button.addEventListener("click", function () {
+      selectAnswer(index, button);
+    });
+
+    answers.appendChild(button);
+  });
+}
+
+function selectAnswer(selectedIndex, selectedButton) {
+  if (answered) {
+    return;
+  }
+
+  answered = true;
+
+  const currentData = quizData[currentQuestion];
+
+  const answerButtons =
+    document.querySelectorAll(".answer-button");
+
+  answerButtons.forEach((button) => {
+    button.disabled = true;
+  });
+
+  answerButtons[currentData.answer]
+    .classList.add("correct");
+
+  if (selectedIndex === currentData.answer) {
+    score += 1;
+    xp += 10;
+
+    selectedButton.classList.add("correct");
+
+    feedback.className =
+      "feedback show correct-feedback";
+
+    feedback.innerHTML = `
+      <strong>
+        ✅ Chính xác!
+      </strong>
+
+      <br><br>
+
+      ${currentData.explain}
+    `;
+
+    createFireworks();
+    playFireworkSound();
+
+    if (
+      currentQuestion === 2 ||
+      currentQuestion === 4
+    ) {
+      gifts += 1;
+      xp += 20;
+
+      giftBox.className =
+        "gift-box show";
+    }
+  } else {
+    hearts = Math.max(0, hearts - 1);
+
+    selectedButton.classList.add("wrong");
+
+    feedback.className =
+      "feedback show wrong-feedback";
+
+    feedback.innerHTML = `
+      <strong>
+        ❌ Chưa đúng.
+      </strong>
+
+      <br><br>
+
+      ${currentData.explain}
+    `;
+
+    createBombEffect();
+    playBombSound();
+  }
+
+  updateStatistics();
+
+  nextButton.className =
+    "next-button show";
+
+  if (
+    currentQuestion ===
+    quizData.length - 1
+  ) {
+    nextButton.textContent =
+      "See results →";
+  } else {
+    nextButton.textContent =
+      "Next question →";
+  }
+}
+
+function updateStatistics() {
+  heartsElement.textContent =
+    "❤️".repeat(hearts) +
+    "🖤".repeat(3 - hearts);
+
+  xpElement.textContent = xp;
+
+  giftsElement.textContent = gifts;
+}
+
+nextButton.addEventListener(
+  "click",
+  function () {
+    currentQuestion += 1;
+
+    if (
+      currentQuestion <
+      quizData.length
+    ) {
+      renderQuestion();
+    } else {
+      showFinalScreen();
+    }
+  }
+);
+
+function showFinalScreen() {
+  progressBar.style.width = "100%";
+
+  gameCard.style.display = "none";
+
+  finalScreen.classList.add("show");
+
+  finalScore.textContent =
+    `${score}/${quizData.length}`;
+
+  finalXP.textContent = xp;
+
+  finalGifts.textContent = gifts;
+
+  let message = "";
+
+  if (score === 5) {
+    message =
+      "Xuất sắc! Bạn đã trả lời đúng toàn bộ câu hỏi.";
+  } else if (score === 4) {
+    message =
+      "Rất tốt! Bạn đã nắm khá chắc nội dung bài học.";
+  } else if (score === 3) {
+    message =
+      "Khá tốt! Hãy xem lại những câu còn sai.";
+  } else {
+    message =
+      "Hãy chơi lại để hiểu bài và ghi nhớ tốt hơn nhé!";
+  }
+
+  finalMessage.textContent = message;
+
+  createFireworks();
+  playFireworkSound();
+}
+
+restartButton.addEventListener(
+  "click",
+  restartGame
+);
+
+function restartGame() {
+  currentQuestion = 0;
+  score = 0;
+  hearts = 3;
+  xp = 0;
+  gifts = 0;
+  answered = false;
+
+  finalScreen.classList.remove("show");
+
+  gameCard.style.display = "block";
+
+  updateStatistics();
+
+  renderQuestion();
+}
+
+function createFireworks() {
+  const effectLayer =
+    document.getElementById("effectLayer");
+
+  const colors = [
+    "#f59e0b",
+    "#ef4444",
+    "#22c55e",
+    "#3b82f6",
+    "#a855f7",
+    "#ec4899"
+  ];
+
+  const centreX =
+    window.innerWidth / 2;
+
+  const centreY =
+    window.innerHeight / 3;
+
+  for (let i = 0; i < 55; i++) {
+    const spark =
+      document.createElement("span");
+
+    spark.className = "spark";
+
+    spark.style.left =
+      centreX + "px";
+
+    spark.style.top =
+      centreY + "px";
+
+    spark.style.background =
+      colors[
+        Math.floor(
+          Math.random() *
+          colors.length
+        )
+      ];
+
+    const angle =
+      Math.random() *
+      Math.PI *
+      2;
+
+    const distance =
+      80 +
+      Math.random() *
+      230;
+
+    const moveX =
+      Math.cos(angle) *
+      distance;
+
+    const moveY =
+      Math.sin(angle) *
+      distance;
+
+    spark.style.setProperty(
+      "--move-x",
+      moveX + "px"
+    );
+
+    spark.style.setProperty(
+      "--move-y",
+      moveY + "px"
+    );
+
+    effectLayer.appendChild(spark);
+
+    setTimeout(function () {
+      spark.remove();
+    }, 950);
+  }
+}
+
+function createBombEffect() {
+  const bombFlash =
+    document.getElementById("bombFlash");
+
+  bombFlash.classList.remove("show");
+
+  void bombFlash.offsetWidth;
+
+  bombFlash.classList.add("show");
+
+  document.body.classList.remove("shake");
+
+  void document.body.offsetWidth;
+
+  document.body.classList.add("shake");
+
+  setTimeout(function () {
+    document.body.classList.remove("shake");
+  }, 500);
+
+  setTimeout(function () {
+    bombFlash.classList.remove("show");
+  }, 500);
+}
+
+function playFireworkSound() {
+  const AudioContextClass =
+    window.AudioContext ||
+    window.webkitAudioContext;
+
+  if (!AudioContextClass) {
+    return;
+  }
+
+  const audioContext =
+    new AudioContextClass();
+
+  const startTime =
+    audioContext.currentTime;
+
+  const notes = [
+    659,
+    784,
+    988,
+    1319
+  ];
+
+  notes.forEach(
+    function (frequency, index) {
+      const oscillator =
+        audioContext.createOscillator();
+
+      const gainNode =
+        audioContext.createGain();
+
+      oscillator.type = "sine";
+
+      oscillator.frequency.value =
+        frequency;
+
+      const noteStart =
+        startTime +
+        index * 0.08;
+
+      gainNode.gain.setValueAtTime(
+        0.0001,
+        noteStart
+      );
+
+      gainNode.gain
+        .exponentialRampToValueAtTime(
+          0.18,
+          noteStart + 0.02
+        );
+
+      gainNode.gain
+        .exponentialRampToValueAtTime(
+          0.0001,
+          noteStart + 0.22
+        );
+
+      oscillator.connect(gainNode);
+
+      gainNode.connect(
+        audioContext.destination
+      );
+
+      oscillator.start(noteStart);
+
+      oscillator.stop(
+        noteStart + 0.24
+      );
+    }
+  );
+}
+
+function playBombSound() {
+  const AudioContextClass =
+    window.AudioContext ||
+    window.webkitAudioContext;
+
+  if (!AudioContextClass) {
+    return;
+  }
+
+  const audioContext =
+    new AudioContextClass();
+
+  const oscillator =
+    audioContext.createOscillator();
+
+  const gainNode =
+    audioContext.createGain();
+
+  oscillator.type = "sawtooth";
+
+  oscillator.frequency
+    .setValueAtTime(
+      150,
+      audioContext.currentTime
+    );
+
+  oscillator.frequency
+    .exponentialRampToValueAtTime(
+      42,
+      audioContext.currentTime + 0.48
+    );
+
+  gainNode.gain.setValueAtTime(
+    0.28,
+    audioContext.currentTime
+  );
+
+  gainNode.gain
+    .exponentialRampToValueAtTime(
+      0.0001,
+      audioContext.currentTime + 0.5
+    );
+
+  oscillator.connect(gainNode);
+
+  gainNode.connect(
+    audioContext.destination
+  );
+
+  oscillator.start();
+
+  oscillator.stop(
+    audioContext.currentTime + 0.5
+  );
+}
+
+updateStatistics();
+
+renderQuestion();
+  </script>
+</body>
+</html>
