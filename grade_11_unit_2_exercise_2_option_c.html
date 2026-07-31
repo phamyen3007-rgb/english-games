@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grade 11 - Unit 2 - Exercise 2 - Option C</title>
+  <style>
+    :root {
+      --pink:#db2777;
+      --purple:#7c3aed;
+      --violet:#8b5cf6;
+      --blue:#2563eb;
+      --green:#16a34a;
+      --red:#dc2626;
+      --gold:#f59e0b;
+      --text:#172033;
+      --muted:#64748b;
+    }
+
+    * { box-sizing:border-box; }
+
+    body {
+      margin:0;
+      min-height:100vh;
+      padding:16px;
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 15%, rgba(219,39,119,.17), transparent 26%),
+        radial-gradient(circle at 88% 12%, rgba(124,58,237,.18), transparent 27%),
+        radial-gradient(circle at 80% 90%, rgba(37,99,235,.12), transparent 28%),
+        linear-gradient(135deg,#fff1f7,#f5f3ff 55%,#eff6ff);
+    }
+
+    .app {
+      width:min(900px,100%);
+      margin:auto;
+    }
+
+    .topbar {
+      position:sticky;
+      top:8px;
+      z-index:10;
+      display:grid;
+      grid-template-columns:1fr auto auto;
+      gap:12px;
+      align-items:center;
+      padding:14px 16px;
+      border-radius:20px;
+      background:rgba(255,255,255,.9);
+      backdrop-filter:blur(10px);
+      box-shadow:0 12px 30px rgba(15,23,42,.1);
+    }
+
+    .progress {
+      height:13px;
+      overflow:hidden;
+      border-radius:999px;
+      background:#e2e8f0;
+    }
+
+    .progress-fill {
+      width:0;
+      height:100%;
+      background:linear-gradient(90deg,var(--pink),var(--purple),var(--blue));
+      transition:.35s ease;
+    }
+
+    .stat {
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .hero {
+      margin:18px 0;
+      padding:27px;
+      border-radius:27px;
+      color:white;
+      background:linear-gradient(135deg,var(--pink),var(--purple) 58%,var(--blue));
+      box-shadow:0 20px 48px rgba(124,58,237,.25);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::after {
+      content:"";
+      position:absolute;
+      width:230px;
+      height:230px;
+      right:-70px;
+      top:-100px;
+      border-radius:50%;
+      background:rgba(255,255,255,.11);
+    }
+
+    .hero h1 {
+      margin:0 0 9px;
+      font-size:clamp(27px,5vw,41px);
+    }
+
+    .hero p {
+      margin:0;
+      line-height:1.6;
+      color:rgba(255,255,255,.94);
+    }
+
+    .card {
+      padding:25px;
+      border-radius:26px;
+      background:white;
+      box-shadow:0 18px 45px rgba(15,23,42,.11);
+    }
+
+    .qmeta {
+      margin-bottom:10px;
+      color:var(--pink);
+      font-weight:900;
+    }
+
+    .question {
+      margin-bottom:20px;
+      font-size:23px;
+      line-height:1.5;
+      font-weight:800;
+    }
+
+    .options {
+      display:grid;
+      gap:12px;
+    }
+
+    .option {
+      width:100%;
+      padding:15px 16px;
+      border:2px solid #eadcf8;
+      border-radius:17px;
+      background:white;
+      text-align:left;
+      font-size:17px;
+      line-height:1.4;
+      cursor:pointer;
+      transition:.18s ease;
+    }
+
+    .option:hover:not(:disabled) {
+      transform:translateY(-2px);
+      border-color:#c084fc;
+      box-shadow:0 8px 18px rgba(124,58,237,.09);
+    }
+
+    .option:disabled {
+      cursor:default;
+    }
+
+    .option.correct {
+      border-color:#22c55e;
+      background:#ecfdf5;
+      color:#166534;
+      font-weight:800;
+    }
+
+    .option.wrong {
+      border-color:#ef4444;
+      background:#fef2f2;
+      color:#991b1b;
+      font-weight:800;
+    }
+
+    .feedback {
+      display:none;
+      margin-top:18px;
+      padding:17px;
+      border-radius:17px;
+      line-height:1.6;
+    }
+
+    .feedback.good {
+      display:block;
+      background:#ecfdf5;
+      border-left:6px solid #22c55e;
+    }
+
+    .feedback.bad {
+      display:block;
+      background:#fef2f2;
+      border-left:6px solid #ef4444;
+    }
+
+    .next {
+      display:none;
+      margin:18px 0 0 auto;
+      padding:13px 23px;
+      border:0;
+      border-radius:15px;
+      color:white;
+      background:linear-gradient(135deg,var(--pink),var(--purple));
+      font-size:16px;
+      font-weight:900;
+      cursor:pointer;
+    }
+
+    .next.show {
+      display:block;
+    }
+
+    .gift, .final {
+      display:none;
+      text-align:center;
+    }
+
+    .gift.show, .final.show {
+      display:block;
+    }
+
+    .gift-icon {
+      font-size:72px;
+      animation:bounce .8s infinite alternate;
+    }
+
+    @keyframes bounce {
+      to { transform:translateY(-8px) scale(1.04); }
+    }
+
+    .main-btn {
+      display:inline-block;
+      margin-top:12px;
+      padding:13px 22px;
+      border:0;
+      border-radius:15px;
+      color:white;
+      background:linear-gradient(135deg,#f59e0b,#ea580c);
+      font-size:16px;
+      font-weight:900;
+      cursor:pointer;
+    }
+
+    .big-score {
+      font-size:58px;
+      color:var(--purple);
+      font-weight:900;
+    }
+
+    .summary {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin:22px 0;
+    }
+
+    .summary div {
+      padding:15px;
+      border-radius:16px;
+      background:#faf5ff;
+      font-weight:800;
+    }
+
+    .shake {
+      animation:shake .35s;
+    }
+
+    @keyframes shake {
+      0%,100% { transform:translateX(0); }
+      25% { transform:translateX(-9px); }
+      50% { transform:translateX(9px); }
+      75% { transform:translateX(-5px); }
+    }
+
+    .spark {
+      position:fixed;
+      z-index:999;
+      pointer-events:none;
+      font-size:26px;
+      animation:fly 1s ease-out forwards;
+    }
+
+    @keyframes fly {
+      to {
+        transform:translate(var(--x),var(--y)) rotate(500deg);
+        opacity:0;
+      }
+    }
+
+    @media(max-width:600px) {
+      body { padding:10px; }
+      .topbar { grid-template-columns:1fr auto; }
+      .hero, .card { padding:20px; }
+      .question { font-size:20px; }
+      .summary { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="topbar">
+      <div class="progress">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="stat" id="hearts">❤️ 7</div>
+      <div class="stat" id="xp">⭐ 0 XP</div>
+    </div>
+
+    <section class="hero">
+      <h1>Grade 11 – Unit 2</h1>
+      <p><b>Exercise 2 – Option C</b><br>Modal Verbs Challenge: 15 câu luyện tập về nghĩa vụ, lời khuyên, sự cấm đoán, khả năng và suy luận.</p>
+    </section>
+
+    <section class="card" id="quizCard">
+      <div class="qmeta" id="qMeta"></div>
+      <div class="question" id="question"></div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+      <button class="next" id="nextBtn">Next →</button>
+    </section>
+
+    <section class="card gift" id="giftBox">
+      <div class="gift-icon">🎁</div>
+      <h2 id="giftTitle"></h2>
+      <p id="giftText"></p>
+      <button class="main-btn" id="giftBtn">Tiếp tục</button>
+    </section>
+
+    <section class="card final" id="finalScreen">
+      <div style="font-size:66px">👑</div>
+      <h2>Modal Verbs Master!</h2>
+      <div class="big-score" id="finalScore"></div>
+      <p id="finalMessage"></p>
+
+      <div class="summary">
+        <div id="correctSummary"></div>
+        <div id="xpSummary"></div>
+        <div id="heartSummary"></div>
+      </div>
+
+      <button class="main-btn" onclick="location.reload()">Play Again</button>
+    </section>
+  </div>
+
+  <script>
+    const quizData = [{"q": "Students ____________ wear their school uniforms on Mondays and during school ceremonies.", "options": ["must", "shouldn't", "don't have to", "mustn't"], "answer": 0, "explain": "<b>Must</b> = phải. Diễn tả quy định bắt buộc của nhà trường."}, {"q": "You ____________ leave your bike in front of the emergency exit. It's against the rules.", "options": ["don't have to", "mustn't", "should", "have to"], "answer": 1, "explain": "<b>Mustn't</b> = không được phép. Có dấu hiệu <i>It's against the rules</i>."}, {"q": "My sister ____________ stay up late tonight because she has an important exam tomorrow.", "options": ["don't have to", "shouldn't", "has to", "mustn't"], "answer": 2, "explain": "<b>Has to</b> = phải. Diễn tả sự bắt buộc do hoàn cảnh."}, {"q": "Parents ____________ compare their children with others because everyone is different.", "options": ["ought to", "have to", "don't have to", "shouldn't"], "answer": 3, "explain": "<b>Shouldn't</b> = không nên. Dùng để đưa ra lời khuyên."}, {"q": "When my grandfather was young, he ____________ work from morning until evening.", "options": ["had to", "must", "doesn't have to", "should"], "answer": 0, "explain": "<b>Had to</b> = đã phải. Diễn tả nghĩa vụ trong quá khứ."}, {"q": "You ____________ bring any food to the picnic. We'll prepare everything.", "options": ["shouldn't", "don't have to", "have to", "must"], "answer": 1, "explain": "<b>Don't have to</b> = không cần phải."}, {"q": "The classroom is very clean. The students ____________ have spent a lot of time cleaning it.", "options": ["should", "need", "must", "could"], "answer": 2, "explain": "<b>Must have + V₃</b> = chắc hẳn đã... Dùng để suy luận từ bằng chứng hiện tại."}, {"q": "Visitors ____________ feed the animals in this national park.", "options": ["should", "don't have to", "have to", "mustn't"], "answer": 3, "explain": "<b>Mustn't</b> = không được phép."}, {"q": "Teenagers ____________ learn to take responsibility for their own decisions.", "options": ["ought to", "mustn't", "don't have to", "had to"], "answer": 0, "explain": "<b>Ought to</b> = nên, có bổn phận nên làm."}, {"q": "We ____________ hurry. The movie starts in five minutes.", "options": ["shouldn't", "have to", "don't have to", "mustn't"], "answer": 1, "explain": "<b>Have to</b> = phải. Do hoàn cảnh yêu cầu."}, {"q": "You ____________ worry so much about making mistakes. Everyone learns from them.", "options": ["have to", "should", "don't have to", "must"], "answer": 2, "explain": "<b>Don't have to</b> = không cần phải."}, {"q": "Emma got full marks in the English test. She ____________ have studied very hard.", "options": ["should", "could", "need", "must"], "answer": 3, "explain": "<b>Must have + V₃</b> = chắc hẳn đã..."}, {"q": "You ____________ have shouted at your little brother. He was only trying to help.", "options": ["shouldn't", "needn't", "could", "mustn't"], "answer": 0, "explain": "<b>Shouldn't have + V₃</b> = lẽ ra không nên... nhưng đã làm."}, {"q": "Students ____________ keep their phones silent during the lesson.", "options": ["don't have to", "should", "mustn't", "had to"], "answer": 1, "explain": "<b>Should</b> = nên. Đưa ra lời khuyên hoặc quy tắc ứng xử."}, {"q": "Look at those dark clouds! It ____________ rain later this afternoon.", "options": ["have to", "don't have to", "might", "mustn't"], "answer": 2, "explain": "<b>Might + V</b> = có thể sẽ... Dự đoán một khả năng trong tương lai."}];
+
+    let index = 0;
+    let hearts = 7;
+    let xp = 0;
+    let correct = 0;
+    let answered = false;
+
+    const quizCard = document.getElementById("quizCard");
+    const qMeta = document.getElementById("qMeta");
+    const question = document.getElementById("question");
+    const options = document.getElementById("options");
+    const feedback = document.getElementById("feedback");
+    const nextBtn = document.getElementById("nextBtn");
+    const progressFill = document.getElementById("progressFill");
+    const heartsEl = document.getElementById("hearts");
+    const xpEl = document.getElementById("xp");
+    const giftBox = document.getElementById("giftBox");
+    const finalScreen = document.getElementById("finalScreen");
+
+    function renderQuestion() {
+      answered = false;
+      const item = quizData[index];
+
+      qMeta.textContent = `Question ${index + 1} of ${quizData.length}`;
+      question.textContent = item.q;
+      options.innerHTML = "";
+      feedback.className = "feedback";
+      feedback.innerHTML = "";
+      nextBtn.classList.remove("show");
+      progressFill.style.width = `${(index / quizData.length) * 100}%`;
+
+      item.options.forEach((text, optionIndex) => {
+        const button = document.createElement("button");
+        button.className = "option";
+        button.textContent = String.fromCharCode(65 + optionIndex) + ". " + text;
+        button.addEventListener("click", () => selectAnswer(optionIndex, button));
+        options.appendChild(button);
+      });
+    }
+
+    function selectAnswer(selectedIndex, selectedButton) {
+      if (answered) return;
+      answered = true;
+
+      const item = quizData[index];
+      const buttons = [...document.querySelectorAll(".option")];
+
+      buttons.forEach(button => button.disabled = true);
+      buttons[item.answer].classList.add("correct");
+
+      if (selectedIndex === item.answer) {
+        correct++;
+        xp += 10;
+        feedback.className = "feedback good";
+        feedback.innerHTML = "✅ <b>Chính xác!</b><br>" + item.explain;
+        showFireworks();
+        playSound(true);
+      } else {
+        hearts = Math.max(0, hearts - 1);
+        selectedButton.classList.add("wrong");
+        feedback.className = "feedback bad";
+        feedback.innerHTML = "💣 <b>Chưa đúng.</b><br>" + item.explain;
+        quizCard.classList.add("shake");
+        setTimeout(() => quizCard.classList.remove("shake"), 380);
+        playSound(false);
+      }
+
+      heartsEl.textContent = "❤️ " + hearts;
+      xpEl.textContent = "⭐ " + xp + " XP";
+      nextBtn.textContent = index === quizData.length - 1 ? "Xem kết quả →" : "Next →";
+      nextBtn.classList.add("show");
+    }
+
+    nextBtn.addEventListener("click", () => {
+      if (index === 4) {
+        showGift(1);
+      } else if (index === 9) {
+        showGift(2);
+      } else if (index === 14) {
+        showGift(3);
+      } else {
+        index++;
+        renderQuestion();
+      }
+    });
+
+    function showGift(number) {
+      quizCard.style.display = "none";
+      giftBox.classList.add("show");
+
+      const bonus = number === 1 ? 20 : number === 2 ? 25 : 30;
+      xp += bonus;
+
+      giftTitle.textContent =
+        number === 3 ? "Quà hoàn thành!" : "Quà chặng " + number + "!";
+
+      giftText.innerHTML =
+        "Bạn nhận thêm <b>" + bonus + " XP</b>.";
+
+      giftBtn.textContent =
+        number === 3 ? "Xem kết quả" : "Tiếp tục";
+
+      giftBtn.onclick =
+        number === 3
+          ? finishGame
+          : () => {
+              giftBox.classList.remove("show");
+              quizCard.style.display = "block";
+              index++;
+              renderQuestion();
+            };
+
+      xpEl.textContent = "⭐ " + xp + " XP";
+    }
+
+    function finishGame() {
+      giftBox.classList.remove("show");
+      finalScreen.classList.add("show");
+      progressFill.style.width = "100%";
+
+      const percentage = Math.round((correct / quizData.length) * 100);
+
+      finalScore.textContent = correct + "/15";
+      correctSummary.innerHTML = "✅ Correct<br>" + correct + "/15";
+      xpSummary.innerHTML = "⭐ Total XP<br>" + xp;
+      heartSummary.innerHTML = "❤️ Hearts left<br>" + hearts;
+
+      finalMessage.textContent =
+        percentage >= 90
+          ? "Xuất sắc! Bạn đã làm chủ các modal verbs."
+          : percentage >= 70
+          ? "Tốt lắm! Hãy xem lại những câu chưa đúng."
+          : "Hãy chơi lại để phân biệt rõ hơn các modal verbs.";
+    }
+
+    function showFireworks() {
+      const symbols = ["✨", "🎉", "⭐", "💥"];
+
+      for (let i = 0; i < 14; i++) {
+        const spark = document.createElement("span");
+        spark.className = "spark";
+        spark.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        spark.style.left = window.innerWidth / 2 + "px";
+        spark.style.top = window.innerHeight / 2 + "px";
+        spark.style.setProperty("--x", Math.random() * 500 - 250 + "px");
+        spark.style.setProperty("--y", Math.random() * 420 - 240 + "px");
+        document.body.appendChild(spark);
+        setTimeout(() => spark.remove(), 1050);
+      }
+    }
+
+    function playSound(isCorrect) {
+      try {
+        const audioContext =
+          new (window.AudioContext || window.webkitAudioContext)();
+
+        const oscillator = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+
+        oscillator.connect(gain);
+        gain.connect(audioContext.destination);
+
+        oscillator.frequency.value = isCorrect ? 760 : 120;
+        oscillator.type = isCorrect ? "sine" : "sawtooth";
+
+        gain.gain.setValueAtTime(0.12, audioContext.currentTime);
+        gain.gain.exponentialRampToValueAtTime(
+          0.001,
+          audioContext.currentTime + 0.28
+        );
+
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + 0.28);
+      } catch (error) {}
+    }
+
+    renderQuestion();
+  </script>
+</body>
+</html>
