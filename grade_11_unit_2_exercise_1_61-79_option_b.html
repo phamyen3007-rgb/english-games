@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 11 - Unit 2 - Exercise 1 (61–79) - Option B</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#eef6ff,#f5f3ff);color:#172033;padding:16px;min-height:100vh}
+.app{max-width:850px;margin:auto}.top{position:sticky;top:8px;z-index:5;background:#ffffffee;padding:14px;border-radius:18px;display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;box-shadow:0 10px 25px #0001}
+.bar{height:12px;background:#e2e8f0;border-radius:99px;overflow:hidden}#fill{height:100%;width:0;background:linear-gradient(90deg,#2563eb,#7c3aed);transition:.3s}
+.hero{margin:16px 0;background:linear-gradient(135deg,#1d4ed8,#7c3aed);color:white;padding:24px;border-radius:24px}h1{margin:0 0 8px;font-size:clamp(25px,5vw,38px)}.hero p{margin:0;line-height:1.5}
+.card{background:white;border-radius:24px;padding:24px;box-shadow:0 16px 40px #0f172a1a}#meta{font-weight:800;color:#2563eb;margin-bottom:10px}#question{font-size:22px;font-weight:800;line-height:1.5;margin-bottom:18px}
+.opts{display:grid;gap:11px}.opt{border:2px solid #e2e8f0;background:white;border-radius:15px;padding:14px;text-align:left;font-size:17px;cursor:pointer}.opt:hover:not(:disabled){border-color:#93c5fd;transform:translateY(-2px)}.correct{background:#ecfdf5!important;border-color:#22c55e!important}.wrong{background:#fef2f2!important;border-color:#ef4444!important}
+#feedback{display:none;margin-top:17px;padding:16px;border-radius:15px;line-height:1.5}#feedback.good{display:block;background:#ecfdf5;border-left:5px solid #22c55e}#feedback.bad{display:block;background:#fef2f2;border-left:5px solid #ef4444}
+#next,.mainbtn{display:none;margin:17px 0 0 auto;border:0;border-radius:14px;padding:12px 21px;background:linear-gradient(135deg,#2563eb,#7c3aed);color:white;font-weight:900;font-size:16px;cursor:pointer}#next.show{display:block}
+.gift,.final{display:none;text-align:center}.gift.show,.final.show{display:block}.gift .emoji{font-size:70px}.gift .mainbtn,.final .mainbtn{display:inline-block;background:linear-gradient(135deg,#f59e0b,#ea580c)}
+.big{font-size:56px;font-weight:900;color:#7c3aed}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}.summary div{background:#f8fafc;padding:14px;border-radius:15px;font-weight:800}
+.shake{animation:shake .35s}@keyframes shake{25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-4px)}}
+.spark{position:fixed;z-index:99;pointer-events:none;font-size:25px;animation:fly 1s forwards}@keyframes fly{to{transform:translate(var(--x),var(--y)) rotate(400deg);opacity:0}}
+@media(max-width:550px){.top{grid-template-columns:1fr auto}.card{padding:19px}.summary{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="top"><div class="bar"><div id="fill"></div></div><b id="hearts">❤️ 7</b><b id="xp">⭐ 0 XP</b></div>
+<section class="hero"><h1>Grade 11 – Unit 2</h1><p><b>Exercise 1 (61–79) – Option B</b><br>Homework: 10 câu trọng tâm về Generation Gap, family values và family rules.</p></section>
+<section class="card" id="quiz"><div id="meta"></div><div id="question"></div><div class="opts" id="opts"></div><div id="feedback"></div><button id="next">Next →</button></section>
+<section class="card gift" id="gift"><div class="emoji">🎁</div><h2 id="giftTitle"></h2><p id="giftText"></p><button class="mainbtn" id="giftBtn">Tiếp tục</button></section>
+<section class="card final" id="final"><div style="font-size:65px">🏆</div><h2>Homework Completed!</h2><div class="big" id="score"></div><p id="message"></p><div class="summary"><div id="s1"></div><div id="s2"></div><div id="s3"></div></div><button class="mainbtn" onclick="location.reload()">Play Again</button></section>
+</div>
+<script>
+const data=[{"q": "My grandparents __________ honesty and respect more than anything else.", "o": ["believe", "complain", "value", "force"], "a": 2, "e": "value = coi trọng. Cụm đúng: value honesty and respect."}, {"q": "Parents should teach __________ without forcing them on their children.", "o": ["school schedules", "eating habits", "cultural values", "electronic devices"], "a": 2, "e": "cultural values = các giá trị văn hóa."}, {"q": "Teenagers often complain about __________ and limited screen time.", "o": ["strict house rules", "rules strict house", "house strict rules", "strict rules house"], "a": 0, "e": "Trật tự đúng: strict + house + rules."}, {"q": "My mom got __________ when I rudely talked back during a family dinner.", "o": ["believe", "confused", "upset", "limited"], "a": 2, "e": "get upset = trở nên buồn hoặc bực."}, {"q": "Parents should limit __________, but they also need to give explanations.", "o": ["hairstyle", "screen time", "tradition", "immigration"], "a": 1, "e": "limit screen time = giới hạn thời gian dùng màn hình."}, {"q": "My screen time __________ to two hours a day, including schoolwork.", "o": ["is limited", "was hired", "did consist", "permit"], "a": 0, "e": "is limited to = được giới hạn ở mức."}, {"q": "Some traditional values are still __________ by both old and young people.", "o": ["respected", "complained", "confused", "forced"], "a": 0, "e": "be respected by = được tôn trọng bởi."}, {"q": "Children should be allowed to express their own __________ respectfully.", "o": ["opinions", "devices", "immigrations", "limits"], "a": 0, "e": "express opinions = bày tỏ ý kiến."}, {"q": "Open communication can help __________ conflicts between parents and teenagers.", "o": ["increase", "prevent", "force", "hire"], "a": 1, "e": "prevent conflicts = ngăn ngừa xung đột."}, {"q": "Although my parents are strict, they always __________ why each family rule is necessary.", "o": ["explain", "value", "limit", "complain"], "a": 0, "e": "explain why... = giải thích tại sao..."}];
+let i=0,hearts=7,xp=0,correct=0,answered=false;
+const $=id=>document.getElementById(id);
+function render(){
+ answered=false;let x=data[i];$("meta").textContent=`Question ${i+1} of ${data.length}`;$("question").textContent=x.q;$("opts").innerHTML="";
+ $("feedback").className="";$("feedback").style.display="none";$("next").className="";$("fill").style.width=(i/data.length*100)+"%";
+ x.o.forEach((t,n)=>{let b=document.createElement("button");b.className="opt";b.textContent=String.fromCharCode(65+n)+". "+t;b.onclick=()=>choose(n,b);$("opts").appendChild(b)})
+}
+function choose(n,b){
+ if(answered)return;answered=true;let x=data[i],bs=[...document.querySelectorAll(".opt")];bs.forEach(z=>z.disabled=true);bs[x.a].classList.add("correct");
+ if(n===x.a){correct++;xp+=10;$("feedback").className="good";$("feedback").innerHTML="✅ <b>Chính xác!</b><br>"+x.e;fire();sound(700)}
+ else{hearts=Math.max(0,hearts-1);b.classList.add("wrong");$("feedback").className="bad";$("feedback").innerHTML="💣 <b>Chưa đúng.</b><br>"+x.e;$("quiz").classList.add("shake");setTimeout(()=>$("quiz").classList.remove("shake"),380);sound(120)}
+ $("feedback").style.display="block";$("hearts").textContent="❤️ "+hearts;$("xp").textContent="⭐ "+xp+" XP";$("next").textContent=i===9?"Xem kết quả →":"Next →";$("next").className="show"
+}
+$("next").onclick=()=>{if(i===4)gift(1);else if(i===9)gift(2);else{i++;render()}};
+function gift(n){$("quiz").style.display="none";$("gift").classList.add("show");
+ if(n===1){xp+=20;$("giftTitle").textContent="Quà giữa chặng!";$("giftText").innerHTML="Bạn nhận thêm <b>20 XP</b> sau 5 câu.";$("giftBtn").onclick=()=>{$("gift").classList.remove("show");$("quiz").style.display="block";i++;render()}}
+ else{xp+=30;$("giftTitle").textContent="Quà hoàn thành!";$("giftText").innerHTML="Bạn nhận thêm <b>30 XP</b>.";$("giftBtn").textContent="Xem kết quả";$("giftBtn").onclick=finish}
+ $("xp").textContent="⭐ "+xp+" XP"
+}
+function finish(){$("gift").classList.remove("show");$("final").classList.add("show");$("fill").style.width="100%";$("score").textContent=correct+"/10";$("s1").innerHTML="✅ Correct<br>"+correct+"/10";$("s2").innerHTML="⭐ Total XP<br>"+xp;$("s3").innerHTML="❤️ Hearts left<br>"+hearts;$("message").textContent=correct>=9?"Xuất sắc!":correct>=7?"Tốt lắm! Hãy xem lại câu sai.":"Hãy chơi lại để ghi nhớ tốt hơn."}
+function fire(){for(let k=0;k<12;k++){let s=document.createElement("span");s.className="spark";s.textContent=["✨","🎉","⭐"][k%3];s.style.left=innerWidth/2+"px";s.style.top=innerHeight/2+"px";s.style.setProperty("--x",(Math.random()*450-225)+"px");s.style.setProperty("--y",(Math.random()*350-190)+"px");document.body.appendChild(s);setTimeout(()=>s.remove(),1000)}}
+function sound(f){try{let c=new (AudioContext||webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=f;g.gain.setValueAtTime(.1,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.25);o.start();o.stop(c.currentTime+.25)}catch(e){}}
+render();
+</script></body></html>
