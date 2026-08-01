@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 Unit 1 Exercise 8 Option B</title>
+<style>
+:root {
+  --orange:#7db7e8; --orange-dark:#2f6fa3; --teal:#7fd1d8; --navy:#17324d;
+  --line:#dbeaf4; --red:#e15b77; --green:#2f9b73;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; min-height:100vh; font-family:Inter,Segoe UI,Arial,sans-serif;
+  color:var(--navy);
+  background:
+    radial-gradient(circle at 10% 10%,rgba(242,139,48,.18),transparent 28%),
+    radial-gradient(circle at 90% 0%,rgba(30,156,143,.17),transparent 28%),
+    linear-gradient(135deg,#edf8ff,#f7fbff 55%,#eef7fb);
+  padding:18px;
+}
+.app{max-width:1220px;margin:auto}
+.hero{
+  background:linear-gradient(135deg,#4f8ec5,#7fd1d8 55%,#a9c7ef);color:white;
+  border-radius:24px;padding:22px 26px;box-shadow:0 18px 45px rgba(31,73,101,.18);
+}
+.hero-row{display:flex;justify-content:space-between;align-items:center;gap:16px}
+h1{margin:0;font-size:clamp(1.45rem,3vw,2.25rem)} .subtitle{margin-top:7px;opacity:.92}
+.sound{border:0;border-radius:13px;padding:10px 14px;background:#ffffff25;color:white;font-size:1.05rem;cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.stat{background:#ffffff20;border:1px solid #ffffff35;border-radius:14px;padding:10px;text-align:center;font-weight:800}
+.progress-wrap{margin-top:14px} .progress-meta{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:7px}
+.progress{height:11px;background:#ffffff35;border-radius:999px;overflow:hidden}
+.progress>div{height:100%;width:0;background:#fff;transition:.35s}
+.layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(380px,.95fr);gap:18px;margin-top:18px;align-items:start}
+.panel{background:#ffffffeb;border:1px solid rgba(255,255,255,.9);border-radius:22px;box-shadow:0 14px 35px rgba(39,88,111,.12)}
+.passage-panel{position:sticky;top:18px;max-height:calc(100vh - 36px);display:flex;flex-direction:column}
+.panel-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.panel-head h2{margin:0;font-size:1.2rem}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+.tool-btn{border:1px solid var(--line);background:white;color:var(--navy);border-radius:10px;padding:8px 10px;font-weight:700;cursor:pointer}
+.passage-body{overflow:auto;padding:18px 20px 24px;line-height:1.78}
+.paragraph{padding:12px 13px;border-radius:13px;transition:.3s;margin-bottom:10px}
+.paragraph::before{content:attr(data-label);font-weight:900;color:var(--orange-dark);margin-right:8px}
+.paragraph.highlight{background:#fff0ae;box-shadow:inset 0 0 0 2px #efbf3e}
+mark.answer-mark{background:#ffd35f;padding:2px 3px;border-radius:4px}
+.question-panel{padding:20px}
+.mini-map{display:grid;grid-template-columns:repeat(10,1fr);gap:7px;margin-bottom:16px}
+.dot{border:0;border-radius:10px;padding:8px 0;background:#edf3f6;color:#6d8090;font-weight:900}
+.dot.current{background:var(--orange);color:white} .dot.done{background:#dff6e9;color:#17683f}
+.q-label{display:inline-block;background:#e8f4ff;color:var(--orange-dark);border-radius:999px;padding:8px 12px;font-weight:900;margin-bottom:13px}
+.question{font-size:1.08rem;line-height:1.65;font-weight:750;margin-bottom:16px}
+.option{width:100%;display:block;text-align:left;border:2px solid #e1e8eb;border-radius:14px;background:#fbfdff;padding:14px 15px;margin:10px 0;cursor:pointer;font-size:1rem;line-height:1.45;transition:.2s}
+.option:hover:not(:disabled){transform:translateY(-2px);border-color:#7db7e8}
+.option.correct{background:#e9faef;border-color:var(--green);color:#115b38}
+.option.wrong{background:#fff0f3;border-color:var(--red);color:#98293d}
+.feedback{display:none;margin-top:16px;padding:15px 16px;border-radius:13px;line-height:1.55}
+.feedback.show{display:block} .feedback.good{background:#e9faef;border-left:5px solid var(--green)} .feedback.bad{background:#fff0f3;border-left:5px solid var(--red)}
+.actions{display:flex;justify-content:space-between;gap:10px;margin-top:15px}
+.primary,.secondary,.restart{border:0;border-radius:12px;padding:12px 17px;font-weight:900;cursor:pointer}
+.primary{background:linear-gradient(135deg,#4f8ec5,#7fd1d8 55%,#a9c7ef);color:white;display:none}
+.primary.show{display:inline-block}
+.secondary{background:#eef5fa;color:var(--navy);display:none} .secondary.show{display:inline-block}
+.result,.gameover{display:none;text-align:center;padding:34px 24px} .result.show,.gameover.show{display:block}
+.big{font-size:3rem;font-weight:950;color:var(--orange-dark);margin:8px 0}
+.skill-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}
+.skill{background:#f1f8ff;border:1px solid #dbeaf4;border-radius:14px;padding:14px}
+.restart{background:linear-gradient(135deg,#4f8ec5,#7fd1d8 55%,#a9c7ef);color:#fff}
+.confetti{position:fixed;top:-20px;width:9px;height:15px;z-index:9999;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+.paragraph strong{font-size:1.03rem;color:var(--teal)}
+.insert-marker{font-weight:950;color:var(--orange-dark);background:#fff1df;padding:2px 5px;border-radius:6px}
+@media(max-width:900px){
+  body{padding:8px} .layout{grid-template-columns:1fr}
+  .passage-panel{position:relative;top:auto;max-height:none}
+  .passage-body{max-height:42vh}
+}
+@media(max-width:620px){
+  .stats{grid-template-columns:repeat(2,1fr)} .mini-map{grid-template-columns:repeat(4,1fr)}
+  .skill-grid{grid-template-columns:repeat(2,1fr)} .hero,.question-panel{padding:16px}
+}
+
+.snowflake{position:fixed;top:-20px;color:#fff;z-index:9998;pointer-events:none;animation:snowfall linear forwards;text-shadow:0 0 6px rgba(79,142,197,.45)}
+@keyframes snowfall{to{transform:translateY(110vh) rotate(360deg)}}
+.hero{position:relative;overflow:hidden}
+.hero::after{content:"❄️  ☃️  ❄️";position:absolute;right:24px;top:18px;font-size:30px;opacity:.28;letter-spacing:10px}
+</style>
+</head>
+<body>
+<div class="app">
+  <section class="hero">
+    <div class="hero-row">
+      <div><h1>❄️ Sharing Household Chores in the Family</h1><div class="subtitle">Grade 10 • Unit 1 • Exercise 8 • Option B</div></div>
+      <button class="sound" id="soundBtn">🔊</button>
+    </div>
+    <div class="stats">
+      <div class="stat">XP<br><span id="xp">0</span></div>
+      <div class="stat">Coins<br><span id="coins">0</span> 🪙</div>
+      <div class="stat">Combo<br><span id="combo">0</span>×</div>
+      <div class="stat">Hearts<br><span id="hearts">❤️❤️❤️</span></div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-meta"><span id="progressText">Question 1 of 10</span><span id="percentText">0%</span></div>
+      <div class="progress"><div id="progressBar"></div></div>
+    </div>
+  </section>
+
+  <section class="layout">
+    <aside class="panel passage-panel">
+      <div class="panel-head">
+        <h2>☃️ Winter Reading Passage</h2>
+        <div class="tools">
+          <button class="tool-btn" id="clearBtn">Clear Highlight</button>
+          <button class="tool-btn" id="topBtn">Top</button>
+        </div>
+      </div>
+      <div class="passage-body" id="passageBody"></div>
+    </aside>
+
+    <section class="panel">
+      <div class="question-panel" id="questionPanel">
+        <div class="mini-map" id="miniMap"></div>
+        <div class="q-label" id="qLabel"></div>
+        <div class="question" id="question"></div>
+        <div id="options"></div>
+        <div class="feedback" id="feedback"></div>
+        <div class="actions">
+          <button class="secondary" id="locateBtn">📍 Locate Answer</button>
+          <button class="primary" id="nextBtn">Next ➜</button>
+        </div>
+      </div>
+
+      <div class="result" id="result">
+        <h2>🎄 Winter Reading Mission Complete!</h2>
+        <div class="big" id="finalScore"></div>
+        <p id="resultMessage"></p>
+        <div class="skill-grid">
+          <div class="skill"><b>Sentence Insertion</b><br><span id="skillInsert"></span></div>
+          <div class="skill"><b>Vocabulary</b><br><span id="skillVocab"></span></div>
+          <div class="skill"><b>Reference</b><br><span id="skillRef"></span></div>
+          <div class="skill"><b>Details</b><br><span id="skillDetail"></span></div>
+          <div class="skill"><b>Inference</b><br><span id="skillInference"></span></div>
+          <div class="skill"><b>Summary</b><br><span id="skillSummary"></span></div>
+        </div>
+        <p><b id="finalXp"></b> XP • <b id="finalCoins"></b> Coins • Best combo: <b id="bestCombo"></b>×</p>
+        <button class="restart" id="restartBtn">Play Again</button>
+      </div>
+
+      <div class="gameover" id="gameover">
+        <h2>🥶 Snowed Out!</h2>
+        <p>You have run out of hearts. Warm up, review the passage, and try again.</p>
+        <button class="restart" id="restartOverBtn">Restart</button>
+      </div>
+    </section>
+  </section>
+</div>
+
+<script>
+const passage = {"title": "Sharing Household Chores in the Family", "paragraphs": ["<span class='insert-marker'>[I]</span> In the past, parents often did most of the housework. <span class='insert-marker'>[II]</span> Today, however, many families encourage every member to take part in household chores. <span class='insert-marker'>[III]</span> Children may wash the dishes, tidy their rooms, or help prepare meals. <span class='insert-marker'>[IV]</span> By doing these tasks, they learn how to care for themselves and become more responsible.", "Sharing chores can also reduce stress for parents. When one person has to complete all the housework, they may feel tired and unhappy. Therefore, family members should discuss who will do each task. A clear and fair plan can prevent arguments and make sure that no one has too much work.", "Taking part in household chores also helps children feel important. When they help their parents, they understand that their work is useful to the whole family. They may also learn to respect the time and effort of other members. As a result, family relationships can become closer and more positive.", "However, parents should give children tasks that are suitable for their ages. Young children can put away toys or set the table, while older children can cook simple meals or do the laundry. Parents should also praise their children’s efforts instead of expecting every task to be perfect."]};
+const questions = [{"q": "Where in paragraph 1 does the following sentence best fit? “Housework is no longer seen as the duty of only one person.”", "options": ["[I]", "[II]", "[III]", "[IV]"], "answer": 1, "explanation": "Câu này nối ý quá khứ với hiện tại, nên phù hợp nhất ở [II].", "target": {"type": "phrase", "paragraph": 0, "text": "[II]"}}, {"q": "The word “responsible” in paragraph 1 is closest in meaning to ______.", "options": ["careless", "dependable", "impatient", "nervous"], "answer": 1, "explanation": "Responsible = có trách nhiệm, đáng tin cậy; gần nghĩa nhất với dependable.", "target": {"type": "word", "paragraph": 0, "text": "responsible"}}, {"q": "What does the word “they” in paragraph 3 refer to?", "options": ["parents", "children", "household chores", "family relationships"], "answer": 1, "explanation": "“They” thay thế cho children.", "target": {"type": "sentence", "paragraph": 2, "text": "When they help their parents, they understand that their work is useful to the whole family."}}, {"q": "According to paragraph 2, which of the following can help prevent arguments?", "options": ["Asking parents to do difficult chores", "Giving all tasks to older children", "Making a clear and fair plan", "Avoiding discussions about housework"], "answer": 2, "explanation": "Một kế hoạch rõ ràng và công bằng có thể giúp ngăn ngừa tranh cãi.", "target": {"type": "sentence", "paragraph": 1, "text": "A clear and fair plan can prevent arguments and make sure that no one has too much work."}}, {"q": "Which of the following best summarises paragraph 1?", "options": ["Children should only do simple chores at home.", "Modern families increasingly share housework, helping children develop responsibility.", "Parents have less time to do housework than in the past.", "Children prefer preparing meals to cleaning their rooms."], "answer": 1, "explanation": "Đoạn 1 nói về việc chia sẻ việc nhà và lợi ích đối với trách nhiệm của trẻ.", "target": {"type": "paragraph", "paragraph": 0}}, {"q": "The word “praise” in paragraph 4 is OPPOSITE in meaning to ______.", "options": ["encourage", "support", "criticise", "thank"], "answer": 2, "explanation": "Praise = khen ngợi; trái nghĩa là criticise = chỉ trích.", "target": {"type": "word", "paragraph": 3, "text": "praise"}}, {"q": "Which of the following is TRUE according to the passage?", "options": ["All children should do the same household tasks.", "Parents should expect children to do every chore perfectly.", "Sharing chores can make parents feel less stressed.", "Young children should cook meals and do the laundry."], "answer": 2, "explanation": "Chia sẻ việc nhà có thể giúp cha mẹ bớt căng thẳng.", "target": {"type": "sentence", "paragraph": 1, "text": "Sharing chores can also reduce stress for parents."}}, {"q": "Which of the following best paraphrases the sentence: “When they help their parents, they understand that their work is useful to the whole family.”", "options": ["Children realise that their help makes a valuable contribution to family life.", "Children should only help when their parents are busy.", "Parents need children to complete all household duties.", "Children feel tired when they do too much housework."], "answer": 0, "explanation": "Đáp án A diễn đạt đúng ý câu gốc.", "target": {"type": "sentence", "paragraph": 2, "text": "When they help their parents, they understand that their work is useful to the whole family."}}, {"q": "What can be inferred from the passage?", "options": ["Sharing suitable chores can help children become more independent.", "Children should choose only the chores they enjoy.", "Parents should give children more work than they can complete.", "Household chores often weaken family relationships."], "answer": 0, "explanation": "Việc giao công việc phù hợp giúp trẻ tự lập hơn.", "target": {"type": "multi", "paragraphs": [0, 3]}}, {"q": "Which of the following best summarises the passage?", "options": ["Parents should teach children to complete every household task perfectly.", "Sharing suitable household chores fairly can reduce stress, develop children’s skills, and strengthen family relationships.", "Children should do most of the housework because their parents are usually busy.", "Family members often argue because children do not enjoy household chores."], "answer": 1, "explanation": "Đáp án B tóm tắt đầy đủ nhất toàn bài.", "target": {"type": "all"}}];
+let current=0, score=0, xp=0, coins=0, combo=0, bestCombo=0, hearts=7, locked=false, soundOn=true;
+const answered = Array(questions.length).fill(false);
+const correctLog = Array(questions.length).fill(false);
+const $ = id => document.getElementById(id);
+
+function renderPassage(){
+  $("passageBody").innerHTML = passage.paragraphs.map((p,i)=>
+    `<p class="paragraph" id="p${i}" data-label="P${i+1}">${p}</p>`
+  ).join("");
+}
+function renderMiniMap(){
+  $("miniMap").innerHTML = "";
+  questions.forEach((_,i)=>{
+    const b=document.createElement("button");
+    b.className="dot"+(i===current?" current":"")+(answered[i]?" done":"");
+    b.textContent=i+1;b.disabled=true;$("miniMap").appendChild(b);
+  });
+}
+function updateStats(){
+  $("xp").textContent=xp;$("coins").textContent=coins;$("combo").textContent=combo;
+  $("hearts").textContent="❤️".repeat(hearts)+"🖤".repeat(7-hearts);
+  const pct=Math.round((current/questions.length)*100);
+  $("progressBar").style.width=pct+"%";
+  $("progressText").textContent=`Question ${Math.min(current+1,questions.length)} of ${questions.length}`;
+  $("percentText").textContent=pct+"%";
+}
+function renderQuestion(){
+  locked=false;renderMiniMap();
+  const q=questions[current];
+  $("qLabel").textContent=`Question ${current+1}`;
+  $("question").textContent=q.q;$("options").innerHTML="";
+  $("feedback").className="feedback";$("feedback").innerHTML="";
+  $("nextBtn").className="primary";$("locateBtn").className="secondary";
+  q.options.forEach((text,index)=>{
+    const b=document.createElement("button");b.className="option";
+    b.innerHTML=`<b>${String.fromCharCode(65+index)}.</b> ${text}`;
+    b.onclick=()=>selectAnswer(index,b);$("options").appendChild(b);
+  });
+  updateStats();
+}
+function selectAnswer(index,btn){
+  if(locked)return;locked=true;answered[current]=true;
+  const q=questions[current],buttons=[...document.querySelectorAll(".option")];
+  buttons.forEach(b=>b.disabled=true);buttons[q.answer].classList.add("correct");
+  if(index===q.answer){
+    correctLog[current]=true;score++;combo++;bestCombo=Math.max(bestCombo,combo);
+    const bonus=combo>=3?10:0;xp+=20+bonus;coins+=5+combo;
+    $("feedback").className="feedback good show";
+    $("feedback").innerHTML=`✅ Correct!<br>${q.explanation}`;tone("good");snowfall(18);
+  }else{
+    btn.classList.add("wrong");hearts--;combo=0;
+    $("feedback").className="feedback bad show";
+    $("feedback").innerHTML=`❌ Correct answer: <b>${String.fromCharCode(65+q.answer)}</b><br>${q.explanation}`;tone("bad");
+  }
+  updateStats();renderMiniMap();$("locateBtn").className="secondary show";
+  if(hearts<=0 && current<questions.length-1){setTimeout(showGameOver,650)}
+  else{$("nextBtn").className="primary show";$("nextBtn").textContent=current===questions.length-1?"See Results 🎉":"Next ➜";}
+}
+function clearHighlights(){renderPassage();}
+function markPhrase(paragraphIndex,text){
+  const p=$("p"+paragraphIndex);if(!p)return;
+  p.classList.add("highlight");p.innerHTML=p.innerHTML.replace(text,`<mark class="answer-mark">${text}</mark>`);
+  p.scrollIntoView({behavior:"smooth",block:"center"});
+}
+function locateAnswer(){
+  clearHighlights();const t=questions[current].target;
+  if(t.type==="word"||t.type==="phrase"||t.type==="sentence")markPhrase(t.paragraph,t.text);
+  else if(t.type==="paragraph"){const p=$("p"+t.paragraph);p.classList.add("highlight");p.scrollIntoView({behavior:"smooth",block:"center"});}
+  else if(t.type==="multi"){t.paragraphs.forEach(i=>$("p"+i).classList.add("highlight"));$("p"+t.paragraphs[0]).scrollIntoView({behavior:"smooth",block:"center"});}
+  else{document.querySelectorAll(".paragraph").forEach(p=>p.classList.add("highlight"));$("passageBody").scrollTo({top:0,behavior:"smooth"});}
+}
+$("locateBtn").onclick=locateAnswer;$("clearBtn").onclick=clearHighlights;
+$("topBtn").onclick=()=>$("passageBody").scrollTo({top:0,behavior:"smooth"});
+$("nextBtn").onclick=()=>{clearHighlights();current++;current>=questions.length?finish():renderQuestion();};
+function showGameOver(){$("questionPanel").style.display="none";$("gameover").className="gameover show";}
+function stars(correct,total){const filled=Math.max(0,Math.round((correct/total)*5));return "⭐".repeat(filled)+"☆".repeat(5-filled);}
+function finish(){
+  $("questionPanel").style.display="none";$("result").className="result show";
+  $("progressBar").style.width="100%";$("percentText").textContent="100%";$("progressText").textContent="Completed";
+  $("finalScore").textContent=`${score}/${questions.length}`;
+  $("finalXp").textContent=xp;$("finalCoins").textContent=coins;$("bestCombo").textContent=bestCombo;
+  $("resultMessage").textContent=score===questions.length?"Perfect reading score!":score>=6?"Excellent work!":score>=4?"Good effort. Review the highlighted evidence.":"Read the explanations and try again.";
+  $("skillInsert").textContent=stars(correctLog[0]?1:0,1);
+  $("skillVocab").textContent=stars([2,3].filter(i=>correctLog[i]).length,2);
+  $("skillRef").textContent=stars(correctLog[1]?1:0,1);
+  $("skillDetail").textContent=stars([4,5].filter(i=>correctLog[i]).length,2);
+  $("skillInference").textContent=stars([6,8].filter(i=>correctLog[i]).length,2);
+  $("skillSummary").textContent=stars([7,9].filter(i=>correctLog[i]).length,2);
+  tone("finish");snowfall(80);confetti();
+}
+function reset(){
+  current=score=xp=coins=combo=bestCombo=0;hearts=7;locked=false;answered.fill(false);correctLog.fill(false);
+  $("questionPanel").style.display="block";$("result").className="result";$("gameover").className="gameover";
+  renderPassage();renderQuestion();
+}
+$("restartBtn").onclick=reset;$("restartOverBtn").onclick=reset;
+$("soundBtn").onclick=()=>{soundOn=!soundOn;$("soundBtn").textContent=soundOn?"🔊":"🔇"};
+
+function tone(type){
+  if(!soundOn)return;
+  const AC=window.AudioContext||window.webkitAudioContext;
+  if(!AC)return;
+  const ctx=new AC();
+  if(type==="good"){
+    [587,740,988].forEach((f,i)=>{
+      const o=ctx.createOscillator(),g=ctx.createGain();
+      o.type="triangle";o.frequency.value=f;
+      o.connect(g);g.connect(ctx.destination);
+      g.gain.setValueAtTime(0.0001,ctx.currentTime+i*0.08);
+      g.gain.exponentialRampToValueAtTime(0.18,ctx.currentTime+i*0.08+0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+i*0.08+0.35);
+      o.start(ctx.currentTime+i*0.08);
+      o.stop(ctx.currentTime+i*0.08+0.36);
+    });
+  }else if(type==="bad"){
+    const o=ctx.createOscillator(),g=ctx.createGain();
+    o.type="sawtooth";
+    o.frequency.setValueAtTime(180,ctx.currentTime);
+    o.frequency.exponentialRampToValueAtTime(45,ctx.currentTime+0.45);
+    o.connect(g);g.connect(ctx.destination);
+    g.gain.setValueAtTime(0.22,ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+0.45);
+    o.start();
+    o.stop(ctx.currentTime+0.46);
+  }else{
+    const o=ctx.createOscillator(),g=ctx.createGain();
+    o.frequency.value=1046;
+    o.connect(g);g.connect(ctx.destination);
+    g.gain.setValueAtTime(.15,ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+.5);
+    o.start();o.stop(ctx.currentTime+.5);
+  }
+}
+
+function snowfall(count){
+  for(let i=0;i<count;i++){
+    const s=document.createElement("div");
+    s.className="snowflake";
+    s.textContent=["❄","✦","❅"][Math.floor(Math.random()*3)];
+    s.style.left=Math.random()*100+"vw";
+    s.style.fontSize=(14+Math.random()*18)+"px";
+    s.style.animationDuration=(2.8+Math.random()*3.5)+"s";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),7000);
+  }
+}
+function confetti(){
+  for(let i=0;i<80;i++){const c=document.createElement("div");c.className="confetti";
+    c.style.left=Math.random()*100+"vw";c.style.background=`hsl(${Math.random()*360},80%,60%)`;
+    c.style.animationDuration=(2.4+Math.random()*2.2)+"s";document.body.appendChild(c);setTimeout(()=>c.remove(),5000);}
+}
+renderPassage();renderQuestion();
+</script>
+</body>
+</html>
