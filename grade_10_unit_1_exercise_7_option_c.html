@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 1 - Exercise 7 - Option C</title>
+<style>
+:root{
+  --ink:#f8f0ff;--paper:#1d1028;--red:#ff5d8f;--gold:#ff9f1c;--blue:#8a4fff;
+  --green:#55d187;--muted:#c0a8cf;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--ink);
+  background:
+   linear-gradient(rgba(255,255,255,.04),rgba(255,255,255,.04)),
+   radial-gradient(circle at 20% 15%,rgba(255,159,28,.18),transparent 22%),radial-gradient(circle at 80% 10%,rgba(138,79,255,.18),transparent 24%),linear-gradient(135deg,#0d0712,#1c0e2c 55%,#07140d);
+  min-height:100vh;padding:18px;
+}
+.app{max-width:1280px;margin:auto}
+.topbar{
+  background:linear-gradient(135deg,#2a0d3b,#7a1f5c 55%,#ff7a00);color:white;border:1px solid #35404d;border-radius:18px;
+  padding:16px 18px;display:flex;justify-content:space-between;gap:18px;align-items:center;
+  box-shadow:0 14px 30px rgba(0,0,0,.28)
+}
+.brand h1{margin:0;font-size:clamp(1.4rem,3vw,2.25rem);letter-spacing:.5px}
+.brand p{margin:5px 0 0;color:#c6ced8}
+.badges{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}
+.badge{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:12px;padding:9px 12px;font-family:Arial,sans-serif;font-weight:800}
+.case-progress{margin-top:12px;height:8px;border-radius:999px;background:rgba(255,255,255,.22);overflow:hidden}
+.case-progress div{height:100%;width:0;background:linear-gradient(90deg,#ff9f1c,#ff5d8f,#8a4fff);transition:.35s}
+.workspace{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(380px,.9fr);gap:18px;margin-top:18px}
+.file,.desk{border-radius:18px;overflow:hidden;box-shadow:0 18px 38px rgba(0,0,0,.26)}
+.file{background:var(--paper);border:1px solid #5f3a72;position:sticky;top:18px;max-height:calc(100vh - 36px)}
+.file-header{padding:18px 20px;background:#2d1939;border-bottom:1px solid #5f3a72;display:flex;justify-content:space-between;align-items:center}
+.file-header h2{margin:0;font-size:1.25rem}
+.file-body{padding:18px 20px 26px;overflow:auto;max-height:calc(100vh - 105px);line-height:1.72}
+.para{padding:12px 13px;border-left:4px solid transparent;border-radius:8px;margin:0 0 14px;transition:.3s}
+.para h3{margin:0 0 8px;color:var(--blue);font-size:1rem}
+.para.active{background:#fff2ad;border-left-color:var(--red);box-shadow:0 0 0 1px #ddb948 inset}
+mark{background:#ffcf5c;padding:2px 3px;border-radius:4px}
+.desk{background:linear-gradient(180deg,#170a22,#2b103b 60%,#3b1608);border:1px solid #323b48;color:white;padding:20px;position:relative}
+.stamp{display:inline-block;border:2px solid var(--red);color:#ff8e8e;padding:7px 12px;transform:rotate(-2deg);font-family:Arial,sans-serif;font-weight:900;letter-spacing:1px}
+.case-map{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0}
+.node{background:#2d1838;border:1px solid #60416f;border-radius:10px;padding:8px 0;text-align:center;font-family:Arial,sans-serif;font-weight:900;color:#d6c2df}
+.node.current{background:var(--gold);color:#171a22;border-color:#efc665}
+.node.solved{background:#244c35;color:#c9f1d8;border-color:#3c7955}
+.type{color:#ffb347;font-family:Arial,sans-serif;font-size:.85rem;font-weight:900;letter-spacing:.8px;text-transform:uppercase;margin-top:16px}
+.question{font-size:1.18rem;line-height:1.55;margin:10px 0 16px}
+.option{width:100%;text-align:left;padding:14px 15px;margin:9px 0;border-radius:12px;border:1px solid #68467a;background:#2a1635;color:white;font-size:1rem;cursor:pointer;transition:.2s}
+.option:hover:not(:disabled){transform:translateX(4px);border-color:#d6a23b}
+.option.correct{background:#234c35;border-color:#55a672}
+.option.wrong{background:#54292e;border-color:#d1626e}
+.feedback{display:none;margin-top:14px;padding:14px;border-radius:12px;line-height:1.5}
+.feedback.show{display:block}
+.feedback.good{background:#1f422f;border-left:5px solid #55a672}
+.feedback.bad{background:#4c2428;border-left:5px solid #d1626e}
+.actions{display:flex;justify-content:space-between;gap:10px;margin-top:15px}
+.btn{border:0;border-radius:11px;padding:12px 16px;font-family:Arial,sans-serif;font-weight:900;cursor:pointer}
+.evidence{background:#f3e8ff;color:#2c1238;display:none}
+.next{background:linear-gradient(135deg,#ff9f1c,#ff5d8f);color:#171a22;display:none}
+.btn.show{display:inline-block}
+.result{display:none;text-align:center;padding:30px 10px}
+.result.show{display:block}
+.rank{font-size:3rem;margin:8px 0;color:#ffb347}
+.restart{background:#ff9f1c;color:#171a22}
+.flash{position:fixed;inset:0;pointer-events:none;opacity:0;z-index:50}
+.flash.boom{background:radial-gradient(circle,#ffcf57 0,#e65f2d 18%,rgba(99,0,0,.75) 45%,transparent 70%);animation:boom .55s}
+@keyframes boom{0%{opacity:0;transform:scale(.3)}35%{opacity:1;transform:scale(1.15)}100%{opacity:0;transform:scale(1)}}
+@media(max-width:900px){
+  .workspace{grid-template-columns:1fr}
+  .file{position:relative;top:auto;max-height:none}
+  .file-body{max-height:42vh}
+}
+
+body::before{
+  content:"🦇  🕸️  🎃  👻";
+  position:fixed;
+  left:0;right:0;top:6px;
+  text-align:center;
+  font-size:24px;
+  letter-spacing:18px;
+  opacity:.35;
+  pointer-events:none;
+  z-index:0;
+}
+.file-header h2,.brand h1,.brand p,.badge,.stamp,.type,.question,.option,.feedback,.btn{position:relative;z-index:1}
+.file{box-shadow:0 18px 45px rgba(255,94,143,.12),0 0 40px rgba(138,79,255,.08)}
+.desk{box-shadow:0 18px 45px rgba(255,122,0,.14),0 0 40px rgba(138,79,255,.12)}
+.option:hover:not(:disabled){border-color:#ff9f1c;box-shadow:0 0 0 2px rgba(255,159,28,.15),0 0 22px rgba(255,94,143,.12)}
+.para.active{background:#4a2b12;border-left-color:#ff9f1c;box-shadow:0 0 0 1px #9c5f1a inset}
+mark{background:#ff9f1c;color:#1c0e2c}
+</style>
+</head>
+<body>
+<div class="flash" id="flash"></div>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <h1>🎃 Grade 10 - Unit 1 - Exercise 7 - Option C</h1>
+      <p>Halloween Family Conflict Quest • Read the clues • Escape the haunted house</p>
+    </div>
+    <div class="badges">
+      <div class="badge">❤️ <span id="hearts">5</span>/5</div>
+      <div class="badge">📚 <span id="clues">0</span>/8</div>
+      <div class="badge">⭐ <span id="xp">0</span> XP</div>
+    </div>
+  </header>
+  <div class="case-progress"><div id="bar"></div></div>
+
+  <main class="workspace">
+    <section class="file">
+      <div class="file-header">
+        <h2>🕯️ Haunted Reading Scroll: Family Conflicts</h2>
+        <button class="btn evidence" id="clearBtn" style="display:inline-block">Clear spell</button>
+      </div>
+      <div class="file-body" id="passage"></div>
+    </section>
+
+    <section class="desk">
+      <div id="quiz">
+        <span class="stamp">HAUNTED QUEST</span>
+        <div class="case-map" id="map"></div>
+        <div class="type" id="type"></div>
+        <div class="question" id="question"></div>
+        <div id="options"></div>
+        <div class="feedback" id="feedback"></div>
+        <div class="actions">
+          <button class="btn evidence" id="evidenceBtn">🔍 Find the Clue</button>
+          <button class="btn next" id="nextBtn">Next question →</button>
+        </div>
+      </div>
+      <div class="result" id="result">
+        <div class="stamp">ESCAPE COMPLETE</div>
+        <div class="rank" id="rank"></div>
+        <h2 id="scoreText"></h2>
+        <p id="report"></p>
+        <button class="btn restart" id="restart">Enter again</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+const paragraphs=[["Paragraph 1", "Every family has disagreements from time to time. Parents and children may have different opinions about homework, free time, or using smartphones. These differences are normal and do not always lead to serious problems. In fact, if family members stay calm and listen to one another, disagreements can become opportunities to understand each other better. However, shouting or refusing to talk often makes the situation worse."], ["Paragraph 2", "Respect is one of the most important parts of solving family conflicts. Family members should speak politely, even when they are angry. They should also avoid blaming each other. Instead, everyone should explain how they feel and try to understand other people's opinions. For example, a teenager who wants to spend more time with friends can explain the reason instead of arguing with his or her parents."], ["Paragraph 3", "Another useful way to reduce conflicts is to make family rules together. When parents and children discuss and agree on rules, everyone knows what is expected. As a result, there are fewer arguments about chores, study time, or bedtime. If a rule no longer works, the family can talk about it and make changes together."], ["Paragraph 4", "Today, many families are busy with work, school, and other activities. Because of this, they may not have enough time to talk about their problems. Setting aside a few minutes each day to share feelings and experiences can improve communication. Although conflicts cannot be avoided completely, regular conversations help families solve problems more peacefully and build stronger relationships."]];
+const questions=[{"type": "NOT Mentioned", "prompt": "Which of the following is NOT mentioned as a way to solve family conflicts?", "options": ["Listening to one another", "Speaking politely", "Ignoring family rules", "Sharing feelings regularly"], "answer": 2, "explanation": "Bài đọc nhắc đến lắng nghe, nói chuyện lịch sự và chia sẻ cảm xúc thường xuyên; không hề khuyên bỏ qua các quy tắc gia đình.", "evidence": {"p": "all"}}, {"type": "Vocabulary", "prompt": "The word “expected” in paragraph 3 is closest in meaning to ________.", "options": ["required", "forgotten", "hidden", "changed"], "answer": 0, "explanation": "Expected trong ngữ cảnh này nghĩa là được mong đợi hoặc được yêu cầu phải làm, gần nghĩa nhất với required.", "evidence": {"p": 2, "text": "expected"}}, {"type": "Reference", "prompt": "The word “They” in paragraph 2 refers to ________.", "options": ["family members", "family rules", "other people's opinions", "teenagers"], "answer": 0, "explanation": "“They” thay thế cho “Family members” ở câu trước.", "evidence": {"p": 1, "text": "Family members should speak politely, even when they are angry. They"}}, {"type": "Paraphrase", "prompt": "Which of the following best paraphrases the sentence “Everyone should explain how they feel and try to understand other people's opinions”?", "options": ["Family members should only listen to their own ideas.", "People should share their feelings and respect different opinions.", "Children should always follow their parents without asking questions.", "Parents should make every decision for the family."], "answer": 1, "explanation": "Câu gốc khuyên mọi người chia sẻ cảm xúc và tôn trọng quan điểm khác nhau.", "evidence": {"p": 1, "text": "everyone should explain how they feel and try to understand other people's opinions"}}, {"type": "True Statement", "prompt": "Which of the following is TRUE according to the passage?", "options": ["Family conflicts always damage relationships.", "Parents should make family rules without children.", "Families should change their rules every week.", "Discussing family rules together can reduce arguments."], "answer": 3, "explanation": "Đoạn 3 cho biết khi cha mẹ và con cái cùng thảo luận và thống nhất các quy tắc, sẽ có ít tranh cãi hơn.", "evidence": {"p": 2, "text": "there are fewer arguments"}}, {"type": "Phrase Meaning", "prompt": "The phrase “setting aside” in paragraph 4 is closest in meaning to ________.", "options": ["saving or reserving", "throwing away", "forgetting", "wasting"], "answer": 0, "explanation": "Setting aside = dành ra, bố trí hoặc để dành một khoảng thời gian.", "evidence": {"p": 3, "text": "Setting aside a few minutes each day"}}, {"type": "Paragraph Location", "prompt": "In which paragraph does the writer discuss making family rules together?", "options": ["Paragraph 1", "Paragraph 2", "Paragraph 3", "Paragraph 4"], "answer": 2, "explanation": "Nội dung về việc cùng nhau lập quy tắc gia đình nằm ở Paragraph 3.", "evidence": {"p": 2, "text": "make family rules together"}}, {"type": "Paragraph Location", "prompt": "In which paragraph does the writer explain why regular conversations are important?", "options": ["Paragraph 1", "Paragraph 2", "Paragraph 3", "Paragraph 4"], "answer": 3, "explanation": "Paragraph 4 giải thích rằng các cuộc trò chuyện thường xuyên giúp giải quyết vấn đề hòa bình hơn và xây dựng mối quan hệ bền chặt.", "evidence": {"p": 3, "text": "regular conversations help families solve problems more peacefully and build stronger relationships"}}];
+let current=0, hearts=5, score=0, xp=0, locked=false;
+const solved=Array(questions.length).fill(false);
+const $=id=>document.getElementById(id);
+
+function drawPassage(){
+  $("passage").innerHTML=paragraphs.map((p,i)=>`<section class="para" id="p${i}"><h3>${p[0]}</h3><div>${p[1]}</div></section>`).join("");
+}
+function drawMap(){
+  $("map").innerHTML=questions.map((_,i)=>`<div class="node ${i===current?'current':''} ${solved[i]?'solved':''}">${i+1}</div>`).join("");
+}
+function stats(){
+  $("hearts").textContent=hearts;$("clues").textContent=score;$("xp").textContent=xp;
+  $("bar").style.width=(current/questions.length*100)+"%";
+}
+function render(){
+  locked=false;drawMap();stats();
+  const q=questions[current];
+  $("type").textContent=`Question ${current+1} • ${q.type}`;
+  $("question").textContent=q.prompt;
+  $("options").innerHTML="";
+  $("feedback").className="feedback";
+  $("evidenceBtn").className="btn evidence";
+  $("nextBtn").className="btn next";
+  q.options.forEach((o,i)=>{
+    const b=document.createElement("button");
+    b.className="option";b.innerHTML=`<b>${String.fromCharCode(65+i)}.</b> ${o}`;
+    b.onclick=()=>answer(i,b);$("options").appendChild(b);
+  });
+}
+function answer(i,btn){
+  if(locked)return;locked=true;
+  const q=questions[current],buttons=[...document.querySelectorAll(".option")];
+  buttons.forEach(x=>x.disabled=true);buttons[q.answer].classList.add("correct");
+  if(i===q.answer){
+    score++;xp+=25;solved[current]=true;
+    $("feedback").className="feedback good show";
+    $("feedback").innerHTML=`✅ Spooky success!<br>${q.explanation}`;
+    applause();
+  }else{
+    hearts--;btn.classList.add("wrong");
+    $("feedback").className="feedback bad show";
+    $("feedback").innerHTML=`💥 A ghost tricked you! Correct answer: <b>${String.fromCharCode(65+q.answer)}</b><br>${q.explanation}`;
+    bomb();
+  }
+  stats();drawMap();
+  $("evidenceBtn").className="btn evidence show";
+  $("nextBtn").className="btn next show";
+  $("nextBtn").textContent=current===questions.length-1?"Escape the house":"Next question →";
+}
+function clearMarks(){drawPassage()}
+function reveal(){
+  clearMarks();const ev=questions[current].evidence;
+  if(ev.p==="all"){document.querySelectorAll(".para").forEach(x=>x.classList.add("active"));return;}
+  const p=$("p"+ev.p);if(!p)return;p.classList.add("active");
+  if(ev.text){
+    const div=p.querySelector("div");
+    div.innerHTML=div.innerHTML.replace(ev.text,`<mark>${ev.text}</mark>`);
+  }
+  p.scrollIntoView({behavior:"smooth",block:"center"});
+}
+function next(){
+  current++;
+  if(current>=questions.length)finish();else{clearMarks();render();}
+}
+function finish(){
+  $("quiz").style.display="none";$("result").className="result show";
+  $("bar").style.width="100%";
+  const pct=Math.round(score/questions.length*100);
+  $("rank").textContent=pct===100?"HALLOWEEN READING MASTER":pct>=80?"BRAVE GHOST HUNTER":pct>=60?"CLEVER PUMPKIN":"TRY ANOTHER SPELL";
+  $("scoreText").textContent=`Answered ${score} of ${questions.length} questions correctly`;
+  $("report").textContent=`You finished with ${hearts} heart(s) and ${xp} XP.`;
+  applause();
+}
+function bomb(){
+  $("flash").className="flash boom";setTimeout(()=>$("flash").className="flash",600);
+  const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+  const ctx=new AC(),o=ctx.createOscillator(),g=ctx.createGain();
+  o.type="square";o.frequency.setValueAtTime(150,ctx.currentTime);o.frequency.exponentialRampToValueAtTime(35,ctx.currentTime+.55);
+  g.gain.setValueAtTime(.25,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.55);
+  o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+.56);
+}
+function applause(){
+  const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+  const ctx=new AC();
+  [392,523,659,784].forEach((f,i)=>{
+    const o=ctx.createOscillator(),g=ctx.createGain();o.type="sine";o.frequency.value=f;
+    g.gain.setValueAtTime(.001,ctx.currentTime+i*.07);
+    g.gain.exponentialRampToValueAtTime(.15,ctx.currentTime+i*.07+.02);
+    g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+i*.07+.3);
+    o.connect(g);g.connect(ctx.destination);o.start(ctx.currentTime+i*.07);o.stop(ctx.currentTime+i*.07+.31);
+  });
+}
+$("evidenceBtn").onclick=reveal;$("nextBtn").onclick=next;$("clearBtn").onclick=clearMarks;
+$("restart").onclick=()=>location.reload();
+drawPassage();render();
+</script>
+</body>
+</html>
