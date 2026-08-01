@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 1 - Exercise 7 - Option B</title>
+<style>
+:root{
+  --ink:#17324d;--paper:#f4fbff;--red:#e45f87;--gold:#5bc0be;--blue:#2878a9;
+  --green:#2f9e78;--muted:#6b7f92;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--ink);
+  background:
+   linear-gradient(rgba(255,255,255,.04),rgba(255,255,255,.04)),
+   linear-gradient(135deg,#dff6ff,#f6ecff 55%,#eafaf3);
+  min-height:100vh;padding:18px;
+}
+.app{max-width:1280px;margin:auto}
+.topbar{
+  background:linear-gradient(135deg,#1f6f8b,#6f42c1);color:white;border:1px solid #35404d;border-radius:18px;
+  padding:16px 18px;display:flex;justify-content:space-between;gap:18px;align-items:center;
+  box-shadow:0 14px 30px rgba(0,0,0,.28)
+}
+.brand h1{margin:0;font-size:clamp(1.4rem,3vw,2.25rem);letter-spacing:.5px}
+.brand p{margin:5px 0 0;color:#c6ced8}
+.badges{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}
+.badge{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:12px;padding:9px 12px;font-family:Arial,sans-serif;font-weight:800}
+.case-progress{margin-top:12px;height:8px;border-radius:999px;background:rgba(255,255,255,.22);overflow:hidden}
+.case-progress div{height:100%;width:0;background:linear-gradient(90deg,#5bc0be,#f78fb3);transition:.35s}
+.workspace{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(380px,.9fr);gap:18px;margin-top:18px}
+.file,.desk{border-radius:18px;overflow:hidden;box-shadow:0 18px 38px rgba(0,0,0,.26)}
+.file{background:var(--paper);border:1px solid #b7dce8;position:sticky;top:18px;max-height:calc(100vh - 36px)}
+.file-header{padding:18px 20px;background:#dff3fb;border-bottom:1px solid #b7dce8;display:flex;justify-content:space-between;align-items:center}
+.file-header h2{margin:0;font-size:1.25rem}
+.file-body{padding:18px 20px 26px;overflow:auto;max-height:calc(100vh - 105px);line-height:1.72}
+.para{padding:12px 13px;border-left:4px solid transparent;border-radius:8px;margin:0 0 14px;transition:.3s}
+.para h3{margin:0 0 8px;color:var(--blue);font-size:1rem}
+.para.active{background:#fff2ad;border-left-color:var(--red);box-shadow:0 0 0 1px #ddb948 inset}
+mark{background:#ffcf5c;padding:2px 3px;border-radius:4px}
+.desk{background:linear-gradient(180deg,#17324d,#254d70);border:1px solid #323b48;color:white;padding:20px;position:relative}
+.stamp{display:inline-block;border:2px solid var(--red);color:#ff8e8e;padding:7px 12px;transform:rotate(-2deg);font-family:Arial,sans-serif;font-weight:900;letter-spacing:1px}
+.case-map{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0}
+.node{background:#28313d;border:1px solid #3d4856;border-radius:10px;padding:8px 0;text-align:center;font-family:Arial,sans-serif;font-weight:900;color:#9ba8b7}
+.node.current{background:var(--gold);color:#171a22;border-color:#efc665}
+.node.solved{background:#244c35;color:#c9f1d8;border-color:#3c7955}
+.type{color:#f0c766;font-family:Arial,sans-serif;font-size:.85rem;font-weight:900;letter-spacing:.8px;text-transform:uppercase;margin-top:16px}
+.question{font-size:1.18rem;line-height:1.55;margin:10px 0 16px}
+.option{width:100%;text-align:left;padding:14px 15px;margin:9px 0;border-radius:12px;border:1px solid #3b4654;background:#212936;color:white;font-size:1rem;cursor:pointer;transition:.2s}
+.option:hover:not(:disabled){transform:translateX(4px);border-color:#d6a23b}
+.option.correct{background:#234c35;border-color:#55a672}
+.option.wrong{background:#54292e;border-color:#d1626e}
+.feedback{display:none;margin-top:14px;padding:14px;border-radius:12px;line-height:1.5}
+.feedback.show{display:block}
+.feedback.good{background:#1f422f;border-left:5px solid #55a672}
+.feedback.bad{background:#4c2428;border-left:5px solid #d1626e}
+.actions{display:flex;justify-content:space-between;gap:10px;margin-top:15px}
+.btn{border:0;border-radius:11px;padding:12px 16px;font-family:Arial,sans-serif;font-weight:900;cursor:pointer}
+.evidence{background:#eef0f3;color:#18202a;display:none}
+.next{background:linear-gradient(135deg,#d6a23b,#f0cf78);color:#171a22;display:none}
+.btn.show{display:inline-block}
+.result{display:none;text-align:center;padding:30px 10px}
+.result.show{display:block}
+.rank{font-size:3rem;margin:8px 0;color:#f0c766}
+.restart{background:#f0c766;color:#171a22}
+.flash{position:fixed;inset:0;pointer-events:none;opacity:0;z-index:50}
+.flash.boom{background:radial-gradient(circle,#ffcf57 0,#e65f2d 18%,rgba(99,0,0,.75) 45%,transparent 70%);animation:boom .55s}
+@keyframes boom{0%{opacity:0;transform:scale(.3)}35%{opacity:1;transform:scale(1.15)}100%{opacity:0;transform:scale(1)}}
+@media(max-width:900px){
+  .workspace{grid-template-columns:1fr}
+  .file{position:relative;top:auto;max-height:none}
+  .file-body{max-height:42vh}
+}
+</style>
+</head>
+<body>
+<div class="flash" id="flash"></div>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <h1>🕵️ Grade 10 - Unit 1 - Exercise 7 - Option B</h1>
+      <p>Family Communication Quest • Read carefully • Find the evidence • Build stronger bonds</p>
+    </div>
+    <div class="badges">
+      <div class="badge">❤️ <span id="hearts">5</span>/5</div>
+      <div class="badge">📚 <span id="clues">0</span>/8</div>
+      <div class="badge">⭐ <span id="xp">0</span> XP</div>
+    </div>
+  </header>
+  <div class="case-progress"><div id="bar"></div></div>
+
+  <main class="workspace">
+    <section class="file">
+      <div class="file-header">
+        <h2>📘 Reading File: Family Communication</h2>
+        <button class="btn evidence" id="clearBtn" style="display:inline-block">Clear highlight</button>
+      </div>
+      <div class="file-body" id="passage"></div>
+    </section>
+
+    <section class="desk">
+      <div id="quiz">
+        <span class="stamp">FAMILY QUEST</span>
+        <div class="case-map" id="map"></div>
+        <div class="type" id="type"></div>
+        <div class="question" id="question"></div>
+        <div id="options"></div>
+        <div class="feedback" id="feedback"></div>
+        <div class="actions">
+          <button class="btn evidence" id="evidenceBtn">🔍 Find Evidence</button>
+          <button class="btn next" id="nextBtn">Next question →</button>
+        </div>
+      </div>
+      <div class="result" id="result">
+        <div class="stamp">QUEST COMPLETE</div>
+        <div class="rank" id="rank"></div>
+        <h2 id="scoreText"></h2>
+        <p id="report"></p>
+        <button class="btn restart" id="restart">Play again</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+const paragraphs=[["Paragraph 1", "Family members become happier when they spend time together every day. Simple activities such as having dinner, watching a movie, or taking a walk give parents and children chances to talk. They can share stories about school, work, or their daily lives. These conversations help family members understand one another better and create a warm and friendly home."], ["Paragraph 2", "Listening carefully is another important part of good family communication. Instead of talking all the time, parents and children should give each other enough time to speak. They should also pay attention to the speaker's feelings. For example, if a child looks worried after school, parents can ask simple questions and listen patiently. This makes children feel safe and willing to share their problems."], ["Paragraph 3", "Many families also make time for a family meeting once a week. During the meeting, everyone can give ideas, talk about problems, and plan activities for the next week. Even young children can share their opinions. By working together, family members learn to respect different ideas and solve small problems before they become serious."], ["Paragraph 4", "However, modern life can make family communication more difficult. Many people spend too much time using smartphones or computers after work or school. As a result, family members may sit in the same room but not talk to each other. Turning off electronic devices during meals is a simple way to enjoy more meaningful conversations and build stronger family relationships."]];
+const questions=[{"type": "NOT Mentioned", "prompt": "Which of the following is NOT mentioned as a benefit of spending time together?", "options": ["Understanding each other better", "Getting higher marks at school", "Creating a friendly home", "Sharing daily experiences"], "answer": 1, "explanation": "Bài không đề cập việc dành thời gian cho gia đình giúp học sinh đạt điểm cao hơn ở trường.", "evidence": {"p": 0}}, {"type": "Vocabulary", "prompt": "The word “patiently” in paragraph 2 is closest in meaning to ________.", "options": ["quickly", "calmly", "loudly", "carelessly"], "answer": 1, "explanation": "Patiently = kiên nhẫn, bình tĩnh; gần nghĩa nhất với calmly.", "evidence": {"p": 1, "text": "listen patiently"}}, {"type": "Reference", "prompt": "The word “This” in paragraph 2 refers to ________.", "options": ["asking questions and listening carefully", "finishing homework early", "walking home after school", "talking to teachers"], "answer": 0, "explanation": "“This” chỉ việc cha mẹ đặt câu hỏi đơn giản và lắng nghe kiên nhẫn.", "evidence": {"p": 1, "text": "parents can ask simple questions and listen patiently. This"}}, {"type": "Paraphrase", "prompt": "Which of the following best paraphrases the sentence “Even young children can share their opinions”?", "options": ["Only parents should make family decisions.", "Children are encouraged to express what they think.", "Young children should not join family meetings.", "Children only talk when they have problems."], "answer": 1, "explanation": "Câu gốc có nghĩa là trẻ em cũng được khuyến khích bày tỏ suy nghĩ của mình.", "evidence": {"p": 2, "text": "Even young children can share their opinions."}}, {"type": "True Statement", "prompt": "Which of the following is TRUE according to the passage?", "options": ["Families should only talk during dinner.", "Smartphones always improve family communication.", "Weekly family meetings help solve small problems early.", "Children should listen more than they speak."], "answer": 2, "explanation": "Đoạn 3 cho biết các cuộc họp gia đình giúp giải quyết vấn đề nhỏ trước khi chúng trở nên nghiêm trọng.", "evidence": {"p": 2, "text": "solve small problems before they become serious"}}, {"type": "Phrase Meaning", "prompt": "The phrase “electronic devices” in paragraph 4 refers to ________.", "options": ["books and newspapers", "tables and chairs", "phones and computers", "school bags and notebooks"], "answer": 2, "explanation": "Trong đoạn 4, electronic devices chỉ smartphones và computers.", "evidence": {"p": 3, "text": "smartphones or computers"}}, {"type": "Paragraph Location", "prompt": "In which paragraph does the writer talk about weekly family meetings?", "options": ["Paragraph 1", "Paragraph 2", "Paragraph 3", "Paragraph 4"], "answer": 2, "explanation": "Nội dung về family meeting once a week nằm ở Paragraph 3.", "evidence": {"p": 2, "text": "a family meeting once a week"}}, {"type": "Paragraph Location", "prompt": "In which paragraph are smartphones and computers mentioned?", "options": ["Paragraph 2", "Paragraph 4", "Paragraph 1", "Paragraph 3"], "answer": 1, "explanation": "Smartphones và computers được nhắc đến trong Paragraph 4.", "evidence": {"p": 3, "text": "smartphones or computers"}}];
+let current=0, hearts=5, score=0, xp=0, locked=false;
+const solved=Array(questions.length).fill(false);
+const $=id=>document.getElementById(id);
+
+function drawPassage(){
+  $("passage").innerHTML=paragraphs.map((p,i)=>`<section class="para" id="p${i}"><h3>${p[0]}</h3><div>${p[1]}</div></section>`).join("");
+}
+function drawMap(){
+  $("map").innerHTML=questions.map((_,i)=>`<div class="node ${i===current?'current':''} ${solved[i]?'solved':''}">${i+1}</div>`).join("");
+}
+function stats(){
+  $("hearts").textContent=hearts;$("clues").textContent=score;$("xp").textContent=xp;
+  $("bar").style.width=(current/questions.length*100)+"%";
+}
+function render(){
+  locked=false;drawMap();stats();
+  const q=questions[current];
+  $("type").textContent=`Question ${current+1} • ${q.type}`;
+  $("question").textContent=q.prompt;
+  $("options").innerHTML="";
+  $("feedback").className="feedback";
+  $("evidenceBtn").className="btn evidence";
+  $("nextBtn").className="btn next";
+  q.options.forEach((o,i)=>{
+    const b=document.createElement("button");
+    b.className="option";b.innerHTML=`<b>${String.fromCharCode(65+i)}.</b> ${o}`;
+    b.onclick=()=>answer(i,b);$("options").appendChild(b);
+  });
+}
+function answer(i,btn){
+  if(locked)return;locked=true;
+  const q=questions[current],buttons=[...document.querySelectorAll(".option")];
+  buttons.forEach(x=>x.disabled=true);buttons[q.answer].classList.add("correct");
+  if(i===q.answer){
+    score++;xp+=25;solved[current]=true;
+    $("feedback").className="feedback good show";
+    $("feedback").innerHTML=`✅ Great reading!<br>${q.explanation}`;
+    applause();
+  }else{
+    hearts--;btn.classList.add("wrong");
+    $("feedback").className="feedback bad show";
+    $("feedback").innerHTML=`💥 Not quite. Correct answer: <b>${String.fromCharCode(65+q.answer)}</b><br>${q.explanation}`;
+    bomb();
+  }
+  stats();drawMap();
+  $("evidenceBtn").className="btn evidence show";
+  $("nextBtn").className="btn next show";
+  $("nextBtn").textContent=current===questions.length-1?"Finish the quest":"Next question →";
+}
+function clearMarks(){drawPassage()}
+function reveal(){
+  clearMarks();const ev=questions[current].evidence;
+  if(ev.p==="all"){document.querySelectorAll(".para").forEach(x=>x.classList.add("active"));return;}
+  const p=$("p"+ev.p);if(!p)return;p.classList.add("active");
+  if(ev.text){
+    const div=p.querySelector("div");
+    div.innerHTML=div.innerHTML.replace(ev.text,`<mark>${ev.text}</mark>`);
+  }
+  p.scrollIntoView({behavior:"smooth",block:"center"});
+}
+function next(){
+  current++;
+  if(current>=questions.length)finish();else{clearMarks();render();}
+}
+function finish(){
+  $("quiz").style.display="none";$("result").className="result show";
+  $("bar").style.width="100%";
+  const pct=Math.round(score/questions.length*100);
+  $("rank").textContent=pct===100?"FAMILY COMMUNICATION MASTER":pct>=80?"STRONG READER":pct>=60?"GOOD READER":"KEEP PRACTISING";
+  $("scoreText").textContent=`Answered ${score} of ${questions.length} questions correctly`;
+  $("report").textContent=`You finished with ${hearts} heart(s) and ${xp} XP.`;
+  applause();
+}
+function bomb(){
+  $("flash").className="flash boom";setTimeout(()=>$("flash").className="flash",600);
+  const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+  const ctx=new AC(),o=ctx.createOscillator(),g=ctx.createGain();
+  o.type="sawtooth";o.frequency.setValueAtTime(170,ctx.currentTime);o.frequency.exponentialRampToValueAtTime(35,ctx.currentTime+.55);
+  g.gain.setValueAtTime(.25,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.55);
+  o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+.56);
+}
+function applause(){
+  const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+  const ctx=new AC();
+  [587,740,880,1175].forEach((f,i)=>{
+    const o=ctx.createOscillator(),g=ctx.createGain();o.type="triangle";o.frequency.value=f;
+    g.gain.setValueAtTime(.001,ctx.currentTime+i*.07);
+    g.gain.exponentialRampToValueAtTime(.15,ctx.currentTime+i*.07+.02);
+    g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+i*.07+.3);
+    o.connect(g);g.connect(ctx.destination);o.start(ctx.currentTime+i*.07);o.stop(ctx.currentTime+i*.07+.31);
+  });
+}
+$("evidenceBtn").onclick=reveal;$("nextBtn").onclick=next;$("clearBtn").onclick=clearMarks;
+$("restart").onclick=()=>location.reload();
+drawPassage();render();
+</script>
+</body>
+</html>
