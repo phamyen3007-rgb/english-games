@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 11 - Unit 2 - Exercise 6 - Option C</title>
+<style>
+:root{--jungle:#12351f;--leaf:#1f7a3a;--lime:#84cc16;--gold:#facc15;--earth:#6b3f1d;--green:#16a34a;--red:#dc2626}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:18px;font-family:Arial,Helvetica,sans-serif;color:#f3fff4;background:
+radial-gradient(circle at 12% 14%,rgba(132,204,22,.18),transparent 28%),
+radial-gradient(circle at 88% 12%,rgba(34,197,94,.16),transparent 26%),
+linear-gradient(135deg,#081b10,#12351f 55%,#1f4d2a);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:
+radial-gradient(rgba(255,255,255,.18) 1px,transparent 1px),
+linear-gradient(120deg,transparent 45%,rgba(132,204,22,.05) 46%,transparent 48%);
+background-size:70px 70px,180px 180px;opacity:.32}
+.app{max-width:1100px;margin:auto;position:relative;z-index:1}
+.hero{padding:28px;border-radius:28px;color:#fff;background:linear-gradient(135deg,#12351f,#1f7a3a 58%,#84cc16);box-shadow:0 22px 55px rgba(0,0,0,.35);position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+.hero:after{content:"🌿  🐒  🦜";position:absolute;right:24px;top:18px;font-size:31px;letter-spacing:12px;opacity:.25}
+.hero h1{margin:0 0 8px;font-size:clamp(28px,5vw,44px)}.hero p{margin:0;line-height:1.55;color:#ecfccb}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.stat{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.18);border-radius:15px;padding:11px;text-align:center;font-weight:900}
+.progress{height:12px;background:rgba(255,255,255,.16);border-radius:999px;overflow:hidden;margin-top:14px}
+#bar{height:100%;width:0;background:linear-gradient(90deg,#facc15,#84cc16,#22c55e);transition:.35s}
+.layout{display:grid;grid-template-columns:minmax(320px,.9fr) minmax(0,1.1fr);gap:18px;margin-top:18px;align-items:start}
+.panel{background:rgba(9,35,18,.95);border:1px solid rgba(255,255,255,.1);border-radius:25px;box-shadow:0 18px 45px rgba(0,0,0,.3);color:#f0fdf4}
+.passage{padding:22px;position:sticky;top:18px;line-height:1.8}
+.passage h2{margin-top:0}.passage h3{margin-top:0;color:#bef264}.gap{display:inline-block;min-width:34px;text-align:center;padding:1px 5px;border-radius:7px;background:#365314;color:#fef08a;font-weight:900}
+.quiz{padding:22px}
+.qmeta{font-weight:900;color:#bef264;margin-bottom:10px}
+.question{font-size:21px;font-weight:800;line-height:1.5;margin-bottom:18px}
+.options{display:grid;gap:11px}
+.option{border:2px solid #3f6212;background:#163d24;color:#f0fdf4;border-radius:15px;padding:14px;text-align:left;font-size:16px;cursor:pointer;transition:.2s}
+.option:hover:not(:disabled){transform:translateY(-2px);border-color:#a3e635;box-shadow:0 0 22px rgba(163,230,53,.12)}
+.option.correct{background:#052e16;border-color:#22c55e;color:#bbf7d0;font-weight:800}
+.option.wrong{background:#3f0a19;border-color:#ef4444;color:#fecdd3;font-weight:800}
+.feedback{display:none;margin-top:16px;padding:16px;border-radius:15px;line-height:1.55}
+.feedback.show{display:block}.feedback.good{background:#052e16;border-left:6px solid #22c55e}.feedback.bad{background:#3f0a19;border-left:6px solid #ef4444}
+.next{display:none;margin:17px 0 0 auto;border:0;border-radius:14px;padding:12px 21px;background:linear-gradient(135deg,#65a30d,#22c55e);color:#fff;font-weight:900;cursor:pointer}
+.next.show{display:block}
+.final{display:none;text-align:center;padding:32px}.final.show{display:block}
+.big{font-size:62px;font-weight:950;color:#bef264}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}.summary div{background:#163d24;padding:14px;border-radius:15px;font-weight:900}
+.restart{border:0;border-radius:14px;padding:13px 22px;background:linear-gradient(135deg,#facc15,#84cc16);color:#173000;font-weight:900;cursor:pointer}
+.shake{animation:shake .35s}@keyframes shake{25%{transform:translateX(-9px)}50%{transform:translateX(9px)}75%{transform:translateX(-5px)}}
+.leaf{position:fixed;z-index:999;pointer-events:none;font-size:25px;animation:jungleFall 1.2s forwards}
+@keyframes jungleFall{to{transform:translate(var(--x),var(--y)) rotate(540deg) scale(.6);opacity:0}}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.passage{position:relative;top:auto}}
+@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.summary{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<section class="hero">
+<h1>🌴 Jungle Family Quest</h1>
+<p>Grade 11 • Unit 2 • Exercise 6 • Option C<br>Read the advertisement and choose the best answers to cross the jungle.</p>
+<div class="stats">
+<div class="stat">❤️ Hearts<br><span id="hearts">4</span></div>
+<div class="stat">⭐ XP<br><span id="xp">0</span></div>
+<div class="stat">🔥 Combo<br><span id="combo">0</span>×</div>
+<div class="stat">✅ Correct<br><span id="correct">0</span>/6</div>
+</div>
+<div class="progress"><div id="bar"></div></div>
+</section>
+
+<section class="layout" id="gameArea">
+<aside class="panel passage">
+<h2>📜 Jungle Advertisement</h2>
+<h3>Bridging the Generation Gap</h3>
+<p>Strong family relationships are built through mutual understanding and respect. Rather than focusing <span class="gap">(1)</span> differences in opinions or lifestyles, family members should learn to appreciate one another's perspectives. This is especially valuable in families with several generations <span class="gap">(2)</span> together, where cooperation and patience are essential for maintaining harmony.</p>
+<p>Older family members can provide practical life <span class="gap">(3)</span>, while younger generations often introduce new ideas and technology that make everyday life more convenient. By sharing knowledge, every family member has the opportunity to contribute.</p>
+<p>Our family support programme provides <span class="gap">(4)</span> strengthen communication and encourage teamwork among parents, grandparents, and teenagers.</p>
+<p>Join us today to discover practical ways of building family relationships <span class="gap">(5)</span> on trust, understanding, and shared responsibility.</p>
+<p>Don't miss this excellent opportunity <span class="gap">(6)</span> lasting family connections!</p>
+</aside>
+
+<section class="panel quiz" id="quiz">
+<div class="qmeta" id="qmeta"></div>
+<div class="question" id="question"></div>
+<div class="options" id="options"></div>
+<div class="feedback" id="feedback"></div>
+<button class="next" id="next">Next →</button>
+</section>
+</section>
+
+<section class="panel final" id="final">
+<div style="font-size:72px">🏕️</div>
+<h2>Jungle Quest Complete!</h2>
+<div class="big" id="score"></div>
+<p id="message"></p>
+<div class="summary"><div id="s1"></div><div id="s2"></div><div id="s3"></div><div id="s4"></div></div>
+<button class="restart" onclick="location.reload()">Explore Again</button>
+</section>
+</div>
+
+<script>
+const data=[{"q": "Rather than focusing (1) ____________ differences in opinions or lifestyles, family members should learn to appreciate one another's perspectives.", "options": ["in", "at", "on", "about"], "answer": 2, "explain": "<b>Focus on something</b> = tập trung vào điều gì."}, {"q": "This is especially valuable in families with several generations (2) ____________ together, where cooperation and patience are essential for maintaining harmony.", "options": ["lived", "to live", "living", "live"], "answer": 2, "explain": "<b>Several generations living together</b> là cụm danh từ có V-ing rút gọn, nghĩa là nhiều thế hệ đang sống cùng nhau."}, {"q": "Older family members can provide practical life (3) ____________, while younger generations often introduce new ideas and technology.", "options": ["adviser", "advice", "advise", "advising"], "answer": 1, "explain": "<b>Advice</b> là danh từ không đếm được, phù hợp sau tính từ <b>practical life</b>."}, {"q": "Our family support programme provides (4) ____________ strengthen communication and encourage teamwork among parents, grandparents, and teenagers.", "options": ["specially designed activities to", "activities specially designed", "specially designing activities to", "special designed activities for"], "answer": 0, "explain": "Cấu trúc đúng là <b>specially designed activities to + V</b>: các hoạt động được thiết kế đặc biệt để làm gì."}, {"q": "Join us today to discover practical ways of building family relationships (5) ____________ on trust, understanding, and shared responsibility.", "options": ["building", "build", "built", "to build"], "answer": 2, "explain": "<b>Built on</b> là cụm phân từ quá khứ rút gọn, nghĩa là được xây dựng dựa trên."}, {"q": "Don't miss this excellent opportunity (6) ____________ lasting family connections!", "options": ["creating", "create", "to creating", "to create"], "answer": 3, "explain": "Cấu trúc đúng: <b>an opportunity to do something</b> = một cơ hội để làm gì."}];
+let i=0,hearts=4,xp=0,combo=0,bestCombo=0,correct=0,locked=false;
+const $=id=>document.getElementById(id);
+
+function render(){
+  locked=false;
+  const item=data[i];
+
+  $("qmeta").textContent=`Question ${i+1} of ${data.length}`;
+  $("question").textContent=item.q;
+  $("options").innerHTML="";
+  $("feedback").className="feedback";
+  $("feedback").innerHTML="";
+  $("next").className="next";
+
+  item.options.forEach((text,index)=>{
+    const btn=document.createElement("button");
+    btn.className="option";
+    btn.textContent=String.fromCharCode(65+index)+". "+text;
+    btn.onclick=()=>choose(index,btn);
+    $("options").appendChild(btn);
+  });
+
+  update();
+}
+
+function choose(index,btn){
+  if(locked)return;
+  locked=true;
+
+  const item=data[i];
+  const buttons=[...document.querySelectorAll(".option")];
+  buttons.forEach(b=>b.disabled=true);
+  buttons[item.answer].classList.add("correct");
+
+  if(index===item.answer){
+    correct++;
+    combo++;
+    bestCombo=Math.max(bestCombo,combo);
+    xp+=20+(combo>=3?10:0);
+
+    $("feedback").className="feedback good show";
+    $("feedback").innerHTML="✅ <b>Correct!</b><br>"+item.explain;
+
+    jungleBurst("good");
+    playTone("good");
+  }else{
+    hearts=Math.max(0,hearts-1);
+    combo=0;
+    btn.classList.add("wrong");
+
+    $("feedback").className="feedback bad show";
+    $("feedback").innerHTML="❌ <b>Not correct.</b><br>"+item.explain;
+
+    $("quiz").classList.add("shake");
+    setTimeout(()=>$("quiz").classList.remove("shake"),380);
+
+    jungleBurst("bad");
+    playTone("bad");
+  }
+
+  $("next").textContent=i===data.length-1?"See Results →":"Next →";
+  $("next").className="next show";
+  update();
+}
+
+$("next").onclick=()=>{i++;i>=data.length?finish():render()};
+
+function update(){
+  $("hearts").textContent=hearts;
+  $("xp").textContent=xp;
+  $("combo").textContent=combo;
+  $("correct").textContent=correct;
+  $("bar").style.width=(i/data.length*100)+"%";
+}
+
+function finish(){
+  $("gameArea").style.display="none";
+  $("final").className="panel final show";
+  $("bar").style.width="100%";
+
+  const percent=Math.round(correct/data.length*100);
+
+  $("score").textContent=percent+"%";
+  $("s1").innerHTML="Correct<br>"+correct+"/6";
+  $("s2").innerHTML="XP<br>"+xp;
+  $("s3").innerHTML="Best Combo<br>"+bestCombo+"×";
+  $("s4").innerHTML="Hearts<br>"+hearts;
+
+  $("message").textContent=
+    percent===100
+      ?"Xuất sắc! Bạn đã hoàn thành toàn bộ hành trình rừng xanh."
+      : percent>=67
+      ?"Rất tốt! Hãy xem lại những câu còn sai."
+      : "Hãy bắt đầu lại hành trình để ghi nhớ các cấu trúc quan trọng.";
+
+  jungleBurst("finish");
+  playTone("finish");
+}
+
+function jungleBurst(type){
+  const icons=type==="bad"
+    ?["🐍","🪵","🍂","💥"]
+    :["🌿","🍃","🦜","🐒","✨"];
+
+  const count=type==="finish"?34:20;
+
+  for(let k=0;k<count;k++){
+    const leaf=document.createElement("span");
+    leaf.className="leaf";
+    leaf.textContent=icons[k%icons.length];
+    leaf.style.left=innerWidth/2+"px";
+    leaf.style.top=innerHeight/2+"px";
+    leaf.style.setProperty("--x",(Math.random()*620-310)+"px");
+    leaf.style.setProperty("--y",(Math.random()*500-250)+"px");
+    document.body.appendChild(leaf);
+    setTimeout(()=>leaf.remove(),1250);
+  }
+}
+
+function playTone(type){
+  try{
+    const ctx=new (window.AudioContext||window.webkitAudioContext)();
+
+    if(type==="good"){
+      [494,659,784].forEach((f,n)=>{
+        const o=ctx.createOscillator(),g=ctx.createGain();
+        o.type="triangle";
+        o.frequency.value=f;
+        o.connect(g);
+        g.connect(ctx.destination);
+
+        g.gain.setValueAtTime(.001,ctx.currentTime+n*.08);
+        g.gain.exponentialRampToValueAtTime(.13,ctx.currentTime+n*.08+.02);
+        g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+n*.08+.32);
+
+        o.start(ctx.currentTime+n*.08);
+        o.stop(ctx.currentTime+n*.08+.33);
+      });
+    }else if(type==="bad"){
+      const o=ctx.createOscillator(),g=ctx.createGain();
+      o.type="square";
+      o.frequency.setValueAtTime(150,ctx.currentTime);
+      o.frequency.exponentialRampToValueAtTime(45,ctx.currentTime+.45);
+      o.connect(g);
+      g.connect(ctx.destination);
+
+      g.gain.setValueAtTime(.18,ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.45);
+
+      o.start();
+      o.stop(ctx.currentTime+.46);
+    }else{
+      [392,494,659,784,988].forEach((f,n)=>{
+        const o=ctx.createOscillator(),g=ctx.createGain();
+        o.frequency.value=f;
+        o.connect(g);
+        g.connect(ctx.destination);
+
+        g.gain.setValueAtTime(.001,ctx.currentTime+n*.07);
+        g.gain.exponentialRampToValueAtTime(.13,ctx.currentTime+n*.07+.02);
+        g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+n*.07+.3);
+
+        o.start(ctx.currentTime+n*.07);
+        o.stop(ctx.currentTime+n*.07+.31);
+      });
+    }
+  }catch(e){}
+}
+
+render();
+</script>
+</body>
+</html>

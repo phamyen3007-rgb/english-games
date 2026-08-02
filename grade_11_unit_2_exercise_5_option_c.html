@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 11 - Unit 2 - Exercise 5 - Option C</title>
+<style>
+:root{--lava:#ff5a1f;--ember:#ff9f1c;--dark:#2b0b00;--ash:#3f1d12;--green:#16a34a;--red:#dc2626;--muted:#7c6f68}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:18px;font-family:Arial,Helvetica,sans-serif;color:#2a130c;background:radial-gradient(circle at 20% 15%,rgba(255,90,31,.22),transparent 28%),radial-gradient(circle at 85% 10%,rgba(255,159,28,.18),transparent 25%),linear-gradient(135deg,#fff4ed,#fff7ed 55%,#fef2f2)}
+.app{max-width:1100px;margin:auto}
+.hero{padding:28px;border-radius:28px;color:#fff;background:linear-gradient(135deg,#2b0b00,#7c2d12 55%,#ff5a1f);box-shadow:0 22px 55px rgba(88,28,0,.28);position:relative;overflow:hidden}
+.hero:after{content:"🌋  🔥  🌋";position:absolute;right:26px;top:18px;font-size:30px;letter-spacing:10px;opacity:.22}
+.hero h1{margin:0 0 8px;font-size:clamp(28px,5vw,44px)}.hero p{margin:0;line-height:1.55}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.stat{background:#ffffff20;border:1px solid #ffffff35;border-radius:15px;padding:11px;text-align:center;font-weight:900}
+.progress{height:12px;background:#ffffff30;border-radius:999px;overflow:hidden;margin-top:14px}
+#bar{height:100%;width:0;background:linear-gradient(90deg,#ffd166,#ff9f1c,#ff5a1f);transition:.35s}
+.layout{display:grid;grid-template-columns:minmax(320px,.9fr) minmax(0,1.1fr);gap:18px;margin-top:18px;align-items:start}
+.panel{background:#fff;border-radius:25px;box-shadow:0 18px 45px rgba(75,21,0,.13)}
+.passage{padding:22px;position:sticky;top:18px;line-height:1.8}
+.passage h2{margin-top:0}.passage h3{margin-top:0;color:#b93815}.gap{display:inline-block;min-width:34px;text-align:center;padding:1px 5px;border-radius:7px;background:#ffedd5;color:#c2410c;font-weight:900}
+.quiz{padding:22px}
+.qmeta{font-weight:900;color:#c2410c;margin-bottom:10px}
+.question{font-size:21px;font-weight:800;line-height:1.5;margin-bottom:18px}
+.options{display:grid;gap:11px}
+.option{border:2px solid #fed7aa;background:#fff;border-radius:15px;padding:14px;text-align:left;font-size:16px;cursor:pointer;transition:.2s}
+.option:hover:not(:disabled){transform:translateY(-2px);border-color:#fb923c}
+.option.correct{background:#ecfdf5;border-color:#22c55e;color:#166534;font-weight:800}
+.option.wrong{background:#fef2f2;border-color:#ef4444;color:#991b1b;font-weight:800}
+.feedback{display:none;margin-top:16px;padding:16px;border-radius:15px;line-height:1.55}
+.feedback.show{display:block}.feedback.good{background:#ecfdf5;border-left:6px solid #22c55e}.feedback.bad{background:#fff1f2;border-left:6px solid #ef4444}
+.next{display:none;margin:17px 0 0 auto;border:0;border-radius:14px;padding:12px 21px;background:linear-gradient(135deg,#c2410c,#ff5a1f);color:#fff;font-weight:900;cursor:pointer}
+.next.show{display:block}
+.final{display:none;text-align:center;padding:32px}.final.show{display:block}
+.big{font-size:62px;font-weight:950;color:#c2410c}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}.summary div{background:#fff7ed;padding:14px;border-radius:15px;font-weight:900}
+.restart{border:0;border-radius:14px;padding:13px 22px;background:linear-gradient(135deg,#ff9f1c,#ff5a1f);color:#3b1700;font-weight:900;cursor:pointer}
+.shake{animation:shake .35s}@keyframes shake{25%{transform:translateX(-9px)}50%{transform:translateX(9px)}75%{transform:translateX(-5px)}}
+.ash{position:fixed;z-index:999;pointer-events:none;font-size:24px;animation:eruption 1.2s ease-out forwards}
+@keyframes eruption{from{transform:translate(0,0) scale(.7);opacity:1}to{transform:translate(var(--x),var(--y)) rotate(540deg) scale(1.2);opacity:0}}
+.flash{position:fixed;inset:0;background:rgba(255,90,31,.25);pointer-events:none;z-index:998;animation:flash .45s ease-out forwards}
+@keyframes flash{0%{opacity:0}35%{opacity:1}100%{opacity:0}}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.passage{position:relative;top:auto}}
+@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.summary{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<section class="hero">
+<h1>🌋 Volcano Challenge</h1>
+<p>Grade 11 • Unit 2 • Exercise 5 • Option C<br>Read the text and choose the best answers. Every correct or incorrect answer triggers a volcano eruption!</p>
+<div class="stats">
+<div class="stat">❤️ Hearts<br><span id="hearts">5</span></div>
+<div class="stat">⭐ XP<br><span id="xp">0</span></div>
+<div class="stat">🔥 Combo<br><span id="combo">0</span>×</div>
+<div class="stat">✅ Correct<br><span id="correct">0</span>/8</div>
+</div>
+<div class="progress"><div id="bar"></div></div>
+</section>
+
+<section class="layout" id="gameArea">
+<aside class="panel passage">
+<h2>📕 Reading Text</h2>
+<h3>Why Do Parents and Teenagers Disagree?</h3>
+<p>The generation gap often appears because parents and teenagers do not always <span class="gap">(1)</span> the same ideas about life. Parents usually make decisions based on their past <span class="gap">(2)</span>, while teenagers are more influenced by modern trends and new technology.</p>
+<p>Parents often try to <span class="gap">(3)</span> their children from making bad choices because they want to protect them. However, teenagers want to show that they are mature enough to take <span class="gap">(4)</span> for their own decisions. They may also try to <span class="gap">(5)</span> that they can solve problems without too much help from adults.</p>
+<p>Both parents and teenagers have reasonable opinions in their own <span class="gap">(6)</span>. Parents believe their advice can help their children avoid difficulties, while teenagers are <span class="gap">(7)</span> that their choices are suitable for their current lives. Therefore, family members should communicate openly and learn to <span class="gap">(8)</span> each other’s points of view.</p>
+</aside>
+
+<section class="panel quiz" id="quiz">
+<div class="qmeta" id="qmeta"></div>
+<div class="question" id="question"></div>
+<div class="options" id="options"></div>
+<div class="feedback" id="feedback"></div>
+<button class="next" id="next">Next →</button>
+</section>
+</section>
+
+<section class="panel final" id="final">
+<div style="font-size:72px">🌋</div>
+<h2>Volcano Mission Complete!</h2>
+<div class="big" id="score"></div>
+<p id="message"></p>
+<div class="summary"><div id="s1"></div><div id="s2"></div><div id="s3"></div><div id="s4"></div></div>
+<button class="restart" onclick="location.reload()">Play Again</button>
+</section>
+</div>
+
+<script>
+const data=[{"q": "The generation gap often appears because parents and teenagers do not always (1) ____________ the same ideas about life.", "options": ["share", "prevent", "replace", "control"], "answer": 0, "explain": "<b>Share the same ideas</b> = có chung quan điểm hoặc ý tưởng."}, {"q": "Parents usually make decisions based on their past (2) ____________, while teenagers are more influenced by modern trends and new technology.", "options": ["arguments", "experiences", "behaviours", "decisions"], "answer": 1, "explain": "<b>Past experiences</b> = những kinh nghiệm trong quá khứ."}, {"q": "Parents often try to (3) ____________ their children from making bad choices because they want to protect them.", "options": ["encourage", "allow", "prevent", "invite"], "answer": 2, "explain": "<b>Prevent somebody from doing something</b> = ngăn ai làm gì."}, {"q": "However, teenagers want to show that they are mature enough to take (4) ____________ for their own decisions.", "options": ["control", "responsibility", "action", "influence"], "answer": 1, "explain": "<b>Take responsibility for something</b> = chịu trách nhiệm về việc gì."}, {"q": "They may also try to (5) ____________ that they can solve problems without too much help from adults.", "options": ["prove", "improve", "accept", "understand"], "answer": 0, "explain": "<b>Prove that...</b> = chứng minh rằng..."}, {"q": "Both parents and teenagers have reasonable opinions in their own (6) ____________.", "options": ["road", "place", "way", "street"], "answer": 2, "explain": "<b>In their own way</b> = theo cách hoặc quan điểm riêng của mình."}, {"q": "Parents believe their advice can help their children avoid difficulties, while teenagers are (7) ____________ that their choices are suitable for their current lives.", "options": ["difficult", "sure", "different", "worried"], "answer": 1, "explain": "<b>Be sure that...</b> = chắc chắn rằng..."}, {"q": "Therefore, family members should communicate openly and learn to (8) ____________ each other’s points of view.", "options": ["respect", "replace", "increase", "control"], "answer": 0, "explain": "<b>Respect each other’s points of view</b> = tôn trọng quan điểm của nhau."}];
+let i=0,hearts=5,xp=0,combo=0,bestCombo=0,correct=0,locked=false;
+const $=id=>document.getElementById(id);
+
+function render(){
+  locked=false;
+  const item=data[i];
+  $("qmeta").textContent=`Question ${i+1} of ${data.length}`;
+  $("question").textContent=item.q;
+  $("options").innerHTML="";
+  $("feedback").className="feedback";
+  $("feedback").innerHTML="";
+  $("next").className="next";
+
+  item.options.forEach((text,index)=>{
+    const btn=document.createElement("button");
+    btn.className="option";
+    btn.textContent=String.fromCharCode(65+index)+". "+text;
+    btn.onclick=()=>choose(index,btn);
+    $("options").appendChild(btn);
+  });
+
+  update();
+}
+
+function choose(index,btn){
+  if(locked)return;
+  locked=true;
+
+  const item=data[i];
+  const buttons=[...document.querySelectorAll(".option")];
+  buttons.forEach(b=>b.disabled=true);
+  buttons[item.answer].classList.add("correct");
+
+  if(index===item.answer){
+    correct++;
+    combo++;
+    bestCombo=Math.max(bestCombo,combo);
+    xp+=20+(combo>=3?10:0);
+
+    $("feedback").className="feedback good show";
+    $("feedback").innerHTML="✅ <b>Chính xác!</b><br>"+item.explain;
+
+    erupt("good");
+    playTone("good");
+  }else{
+    hearts=Math.max(0,hearts-1);
+    combo=0;
+    btn.classList.add("wrong");
+
+    $("feedback").className="feedback bad show";
+    $("feedback").innerHTML="💥 <b>Chưa đúng.</b><br>"+item.explain;
+
+    $("quiz").classList.add("shake");
+    setTimeout(()=>$("quiz").classList.remove("shake"),380);
+
+    erupt("bad");
+    playTone("bad");
+  }
+
+  $("next").textContent=i===data.length-1?"See Results →":"Next →";
+  $("next").className="next show";
+  update();
+}
+
+$("next").onclick=()=>{i++;i>=data.length?finish():render()};
+
+function update(){
+  $("hearts").textContent=hearts;
+  $("xp").textContent=xp;
+  $("combo").textContent=combo;
+  $("correct").textContent=correct;
+  $("bar").style.width=(i/data.length*100)+"%";
+}
+
+function finish(){
+  $("gameArea").style.display="none";
+  $("final").className="panel final show";
+  $("bar").style.width="100%";
+
+  const percent=Math.round(correct/data.length*100);
+
+  $("score").textContent=percent+"%";
+  $("s1").innerHTML="Correct<br>"+correct+"/8";
+  $("s2").innerHTML="XP<br>"+xp;
+  $("s3").innerHTML="Best Combo<br>"+bestCombo+"×";
+  $("s4").innerHTML="Hearts<br>"+hearts;
+
+  $("message").textContent=
+    percent===100
+      ?"Xuất sắc! Bạn đã chinh phục núi lửa với toàn bộ đáp án đúng."
+      : percent>=75
+      ?"Rất tốt! Hãy xem lại những câu còn sai."
+      : "Hãy chơi lại để ghi nhớ các cụm từ quan trọng.";
+
+  erupt("finish");
+  playTone("finish");
+}
+
+function erupt(type){
+  const flash=document.createElement("div");
+  flash.className="flash";
+  document.body.appendChild(flash);
+  setTimeout(()=>flash.remove(),500);
+
+  const icons=type==="bad"
+    ?["🌋","💥","🔥","🪨","☄️"]
+    :["🌋","🔥","✨","⭐","💫"];
+
+  const count=type==="finish"?36:22;
+
+  for(let k=0;k<count;k++){
+    const p=document.createElement("span");
+    p.className="ash";
+    p.textContent=icons[k%icons.length];
+    p.style.left=(innerWidth/2)+"px";
+    p.style.top=(innerHeight*.72)+"px";
+    p.style.setProperty("--x",(Math.random()*620-310)+"px");
+    p.style.setProperty("--y",(-120-Math.random()*420)+"px");
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),1300);
+  }
+}
+
+function playTone(type){
+  try{
+    const ctx=new (window.AudioContext||window.webkitAudioContext)();
+
+    if(type==="good"){
+      [392,523,659].forEach((f,n)=>{
+        const o=ctx.createOscillator(),g=ctx.createGain();
+        o.type="triangle";o.frequency.value=f;o.connect(g);g.connect(ctx.destination);
+        g.gain.setValueAtTime(.001,ctx.currentTime+n*.07);
+        g.gain.exponentialRampToValueAtTime(.14,ctx.currentTime+n*.07+.02);
+        g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+n*.07+.28);
+        o.start(ctx.currentTime+n*.07);o.stop(ctx.currentTime+n*.07+.29);
+      });
+    }else if(type==="bad"){
+      const o=ctx.createOscillator(),g=ctx.createGain();
+      o.type="sawtooth";
+      o.frequency.setValueAtTime(180,ctx.currentTime);
+      o.frequency.exponentialRampToValueAtTime(35,ctx.currentTime+.5);
+      o.connect(g);g.connect(ctx.destination);
+      g.gain.setValueAtTime(.22,ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.5);
+      o.start();o.stop(ctx.currentTime+.51);
+    }else{
+      [523,659,784,1046].forEach((f,n)=>{
+        const o=ctx.createOscillator(),g=ctx.createGain();
+        o.frequency.value=f;o.connect(g);g.connect(ctx.destination);
+        g.gain.setValueAtTime(.001,ctx.currentTime+n*.08);
+        g.gain.exponentialRampToValueAtTime(.15,ctx.currentTime+n*.08+.02);
+        g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+n*.08+.32);
+        o.start(ctx.currentTime+n*.08);o.stop(ctx.currentTime+n*.08+.33);
+      });
+    }
+  }catch(e){}
+}
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 11 - Unit 2 - Exercise 4 - Option B</title>
+<style>
+:root{
+  --navy:#102542;
+  --blue:#2563eb;
+  --cyan:#06b6d4;
+  --purple:#7c3aed;
+  --gold:#f59e0b;
+  --green:#16a34a;
+  --red:#dc2626;
+  --paper:#ffffff;
+  --muted:#64748b;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:18px;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--navy);
+  background:
+    radial-gradient(circle at 12% 14%,rgba(37,99,235,.18),transparent 28%),
+    radial-gradient(circle at 88% 12%,rgba(124,58,237,.16),transparent 25%),
+    linear-gradient(135deg,#eef7ff,#f7f3ff 55%,#ecfeff);
+}
+.app{width:min(1150px,100%);margin:auto}
+.hero{
+  color:white;
+  padding:28px;
+  border-radius:28px;
+  background:linear-gradient(135deg,#102542,#2563eb 58%,#06b6d4);
+  box-shadow:0 22px 55px rgba(16,37,66,.25);
+  position:relative;
+  overflow:hidden;
+}
+.hero::after{
+  content:"🧲  🧩  ✨";
+  position:absolute;
+  right:26px;
+  top:18px;
+  font-size:30px;
+  letter-spacing:12px;
+  opacity:.22;
+}
+.hero h1{margin:0 0 8px;font-size:clamp(28px,5vw,44px)}
+.hero p{margin:0;line-height:1.55;opacity:.94}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:18px;
+}
+.stat{
+  background:#ffffff20;
+  border:1px solid #ffffff35;
+  border-radius:15px;
+  padding:11px;
+  text-align:center;
+  font-weight:900;
+}
+.progress{
+  height:12px;
+  margin-top:14px;
+  border-radius:999px;
+  background:#ffffff30;
+  overflow:hidden;
+}
+#progressBar{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#facc15,#fff3a3);
+  transition:.35s;
+}
+.layout{
+  display:grid;
+  grid-template-columns:minmax(300px,.8fr) minmax(0,1.2fr);
+  gap:18px;
+  margin-top:18px;
+  align-items:start;
+}
+.panel{
+  background:rgba(255,255,255,.96);
+  border-radius:25px;
+  box-shadow:0 18px 45px rgba(15,23,42,.12);
+}
+.word-panel{
+  position:sticky;
+  top:18px;
+  padding:20px;
+}
+.word-panel h2{margin:0 0 8px}
+.help{
+  margin:0 0 16px;
+  color:var(--muted);
+  line-height:1.5;
+  font-size:14px;
+}
+.word-box{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.word{
+  border:2px solid #dbeafe;
+  background:linear-gradient(135deg,#eff6ff,#f5f3ff);
+  border-radius:14px;
+  padding:12px 10px;
+  text-align:center;
+  font-weight:900;
+  cursor:grab;
+  user-select:none;
+  transition:.2s;
+}
+.word:hover{
+  transform:translateY(-2px);
+  border-color:#60a5fa;
+  box-shadow:0 9px 20px rgba(37,99,235,.12);
+}
+.word.dragging{opacity:.45;transform:scale(.96)}
+.word.used{
+  opacity:.35;
+  cursor:not-allowed;
+  text-decoration:line-through;
+}
+.controls{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:16px;
+}
+.control-btn{
+  border:0;
+  border-radius:13px;
+  padding:11px 12px;
+  font-weight:900;
+  cursor:pointer;
+}
+.reset-btn{background:#e2e8f0;color:#334155}
+.check-btn{background:linear-gradient(135deg,var(--purple),var(--blue));color:white}
+.text-panel{padding:22px}
+.text-panel h2{margin:0 0 16px}
+.passage{
+  font-size:18px;
+  line-height:2.15;
+  background:#fbfdff;
+  border:1px solid #e2e8f0;
+  border-radius:20px;
+  padding:20px;
+}
+.blank{
+  display:inline-flex;
+  min-width:145px;
+  min-height:42px;
+  align-items:center;
+  justify-content:center;
+  vertical-align:middle;
+  margin:0 4px;
+  padding:7px 10px;
+  border:2px dashed #94a3b8;
+  border-radius:12px;
+  background:white;
+  color:#475569;
+  font-weight:900;
+  transition:.2s;
+}
+.blank.drag-over{
+  border-color:var(--blue);
+  background:#eff6ff;
+  transform:scale(1.03);
+}
+.blank.filled{
+  border-style:solid;
+  border-color:#60a5fa;
+  color:#1d4ed8;
+  background:#eff6ff;
+  cursor:pointer;
+}
+.blank.correct{
+  border-color:#22c55e;
+  background:#ecfdf5;
+  color:#166534;
+}
+.blank.wrong{
+  border-color:#ef4444;
+  background:#fef2f2;
+  color:#991b1b;
+}
+.mobile-note{
+  display:none;
+  margin:14px 0 0;
+  padding:12px;
+  border-radius:12px;
+  background:#fff7ed;
+  color:#9a3412;
+  font-size:14px;
+  line-height:1.45;
+}
+.feedback{
+  display:none;
+  margin-top:18px;
+  padding:18px;
+  border-radius:16px;
+  line-height:1.6;
+}
+.feedback.show{display:block}
+.feedback.good{background:#ecfdf5;border-left:6px solid #22c55e}
+.feedback.bad{background:#fef2f2;border-left:6px solid #ef4444}
+.answer-list{
+  display:grid;
+  gap:10px;
+  margin-top:15px;
+}
+.answer-item{
+  padding:12px 14px;
+  border-radius:13px;
+  background:#f8fafc;
+  border-left:5px solid var(--cyan);
+}
+.final{
+  display:none;
+  text-align:center;
+  padding:34px 24px;
+}
+.final.show{display:block}
+.big-score{
+  font-size:64px;
+  font-weight:950;
+  color:var(--blue);
+}
+.summary{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin:20px 0;
+}
+.summary div{
+  background:#f8fafc;
+  border-radius:15px;
+  padding:14px;
+  font-weight:900;
+}
+.restart{
+  border:0;
+  border-radius:14px;
+  padding:13px 23px;
+  background:linear-gradient(135deg,#f59e0b,#facc15);
+  color:#3b2f00;
+  font-size:16px;
+  font-weight:900;
+  cursor:pointer;
+}
+.result-btn{
+  display:none;
+  width:100%;
+  margin-top:16px;
+  border:0;
+  border-radius:14px;
+  padding:13px 18px;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:#fff;
+  font-size:16px;
+  font-weight:900;
+  cursor:pointer;
+}
+.result-btn.show{display:block}
+.answer-item.correct-review{border-left-color:#22c55e;background:#ecfdf5}
+.answer-item.wrong-review{border-left-color:#ef4444;background:#fef2f2}
+.shake{animation:shake .35s}
+@keyframes shake{
+  25%{transform:translateX(-9px)}
+  50%{transform:translateX(9px)}
+  75%{transform:translateX(-5px)}
+}
+.spark{
+  position:fixed;
+  z-index:999;
+  pointer-events:none;
+  font-size:26px;
+  animation:fly 1s forwards;
+}
+@keyframes fly{
+  to{transform:translate(var(--x),var(--y)) rotate(500deg);opacity:0}
+}
+@media(max-width:850px){
+  .layout{grid-template-columns:1fr}
+  .word-panel{position:relative;top:auto}
+}
+@media(max-width:620px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .word-box{grid-template-columns:1fr 1fr}
+  .summary{grid-template-columns:1fr 1fr}
+  .passage{font-size:16px;line-height:2.3}
+  .blank{min-width:125px}
+  .mobile-note{display:block}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <section class="hero">
+    <h1>🧲 Drag & Drop Word Box</h1>
+    <p>Grade 11 • Unit 2 • Exercise 4 • Option B<br>Drag the words into the correct blanks to complete the text.</p>
+    <div class="stats">
+      <div class="stat">❤️ Hearts<br><span id="hearts">5</span></div>
+      <div class="stat">⭐ XP<br><span id="xp">0</span></div>
+      <div class="stat">✅ Correct<br><span id="correctCount">0</span>/8</div>
+      <div class="stat">🎁 Gift<br><span id="gift">0</span></div>
+    </div>
+    <div class="progress"><div id="progressBar"></div></div>
+  </section>
+
+  <section class="layout" id="gameArea">
+    <aside class="panel word-panel">
+      <h2>📦 Word Box</h2>
+      <p class="help">Kéo từ vào ô trống. Trên điện thoại, chạm vào từ rồi chạm vào ô trống.</p>
+      <div class="word-box" id="wordBox"></div>
+      <div class="controls">
+        <button class="control-btn reset-btn" id="resetBtn">↺ Reset</button>
+        <button class="control-btn check-btn" id="checkBtn">Check Answers</button>
+      </div>
+      <div class="mobile-note">📱 Cách dùng trên điện thoại: chạm chọn một từ, sau đó chạm vào ô trống cần điền.</div>
+    </aside>
+
+    <section class="panel text-panel" id="textPanel">
+      <h2>📘 Complete the text</h2>
+      <div class="passage">
+        In many families today, parents and teenagers sometimes find it difficult to
+        <span class="blank" data-index="0">(1)</span>
+        with each other. Teenagers often spend a lot of time using
+        <span class="blank" data-index="1">(2)</span>,
+        while their parents prefer
+        <span class="blank" data-index="2">(3)</span>
+        conversations. These different habits can create a
+        <span class="blank" data-index="3">(4)</span>
+        if family members do not listen to one another. Parents also expect their children to help with
+        <span class="blank" data-index="4">(5)</span>,
+        but teenagers may wish to have more free time. At the same time, many young people want to become more
+        <span class="blank" data-index="5">(6)</span>
+        and make their own decisions. By learning to
+        <span class="blank" data-index="6">(7)</span>
+        each other's opinions and showing
+        <span class="blank" data-index="7">(8)</span>,
+        families can build stronger relationships.
+      </div>
+
+      <div class="feedback" id="feedback"></div>
+      <button class="result-btn" id="resultBtn">Xem tổng kết</button>
+    </section>
+  </section>
+
+  <section class="panel final" id="finalScreen">
+    <div style="font-size:72px">🏆</div>
+    <h2>Word Box Mission Complete!</h2>
+    <div class="big-score" id="finalScore"></div>
+    <p id="finalMessage"></p>
+    <div class="summary">
+      <div id="sumCorrect"></div>
+      <div id="sumXp"></div>
+      <div id="sumHearts"></div>
+      <div id="sumGift"></div>
+    </div>
+    <button class="restart" onclick="location.reload()">Play Again</button>
+  </section>
+</div>
+
+<script>
+const gameData={"words": ["mutual respect", "generation gap", "independent", "household chores", "digital devices", "face-to-face", "understand", "communicate"], "answers": ["communicate", "digital devices", "face-to-face", "generation gap", "household chores", "independent", "understand", "mutual respect"], "explanations": ["Communicate with each other là cụm cố định, nghĩa là giao tiếp với nhau.", "Digital devices phù hợp với ý thanh thiếu niên dành nhiều thời gian sử dụng điện thoại, máy tính và các thiết bị số.", "Face-to-face conversations nghĩa là các cuộc trò chuyện trực tiếp, đối lập với giao tiếp qua thiết bị điện tử.", "Generation gap là khoảng cách thế hệ, có thể xuất hiện khi cha mẹ và con cái không hiểu nhau.", "Help with household chores là cụm quen thuộc, nghĩa là phụ giúp việc nhà.", "Sau become cần một tính từ. Independent nghĩa là độc lập, tự lập.", "Sau learn to dùng động từ nguyên mẫu. Understand each other's opinions nghĩa là hiểu quan điểm của nhau.", "Show mutual respect là cụm cố định, nghĩa là thể hiện sự tôn trọng lẫn nhau."]};
+let selectedWord=null;
+let hearts=5;
+let xp=0;
+let gift=0;
+let checked=false;
+const placements=Array(8).fill(null);
+const $=id=>document.getElementById(id);
+
+function renderWords(){
+  const box=$("wordBox");
+  box.innerHTML="";
+  gameData.words.forEach((word,index)=>{
+    const item=document.createElement("div");
+    item.className="word";
+    item.textContent=word;
+    item.draggable=true;
+    item.dataset.word=word;
+    item.dataset.wordIndex=index;
+
+    if(placements.includes(word)) item.classList.add("used");
+
+    item.addEventListener("dragstart",event=>{
+      if(item.classList.contains("used")){event.preventDefault();return;}
+      selectedWord=word;
+      item.classList.add("dragging");
+      event.dataTransfer.setData("text/plain",word);
+    });
+
+    item.addEventListener("dragend",()=>{
+      item.classList.remove("dragging");
+    });
+
+    item.addEventListener("click",()=>{
+      if(item.classList.contains("used")) return;
+      document.querySelectorAll(".word").forEach(w=>w.style.outline="");
+      selectedWord=word;
+      item.style.outline="3px solid #facc15";
+    });
+
+    box.appendChild(item);
+  });
+}
+
+function setupBlanks(){
+  document.querySelectorAll(".blank").forEach(blank=>{
+    blank.addEventListener("dragover",event=>{
+      event.preventDefault();
+      blank.classList.add("drag-over");
+    });
+
+    blank.addEventListener("dragleave",()=>{
+      blank.classList.remove("drag-over");
+    });
+
+    blank.addEventListener("drop",event=>{
+      event.preventDefault();
+      blank.classList.remove("drag-over");
+      const word=event.dataTransfer.getData("text/plain")||selectedWord;
+      if(word) placeWord(Number(blank.dataset.index),word);
+    });
+
+    blank.addEventListener("click",()=>{
+      const index=Number(blank.dataset.index);
+
+      if(selectedWord){
+        placeWord(index,selectedWord);
+        return;
+      }
+
+      if(placements[index] && !checked){
+        placements[index]=null;
+        blank.textContent=`(${index+1})`;
+        blank.className="blank";
+        renderWords();
+        updateProgress();
+      }
+    });
+  });
+}
+
+function placeWord(index,word){
+  if(checked) return;
+
+  const oldIndex=placements.indexOf(word);
+  if(oldIndex!==-1){
+    placements[oldIndex]=null;
+    const oldBlank=document.querySelector(`.blank[data-index="${oldIndex}"]`);
+    oldBlank.textContent=`(${oldIndex+1})`;
+    oldBlank.className="blank";
+  }
+
+  if(placements[index]){
+    placements[index]=null;
+  }
+
+  placements[index]=word;
+  const blank=document.querySelector(`.blank[data-index="${index}"]`);
+  blank.textContent=word;
+  blank.className="blank filled";
+
+  selectedWord=null;
+  renderWords();
+  updateProgress();
+}
+
+function updateProgress(){
+  const filled=placements.filter(Boolean).length;
+  $("progressBar").style.width=(filled/8*100)+"%";
+}
+
+$("resetBtn").onclick=()=>{
+  if(checked) return;
+  placements.fill(null);
+  document.querySelectorAll(".blank").forEach((blank,index)=>{
+    blank.textContent=`(${index+1})`;
+    blank.className="blank";
+  });
+  selectedWord=null;
+  renderWords();
+  updateProgress();
+  $("feedback").className="feedback";
+  $("feedback").innerHTML="";
+};
+
+$("checkBtn").onclick=()=>{
+  if(checked) return;
+
+  const filled=placements.filter(Boolean).length;
+  if(filled<8){
+    $("feedback").className="feedback bad show";
+    $("feedback").innerHTML="⚠️ Hãy điền đủ cả 8 ô trước khi kiểm tra.";
+    $("textPanel").classList.add("shake");
+    setTimeout(()=>$("textPanel").classList.remove("shake"),380);
+    playTone("bad");
+    return;
+  }
+
+  checked=true;
+  let correct=0;
+
+  document.querySelectorAll(".blank").forEach((blank,index)=>{
+    if(placements[index]===gameData.answers[index]){
+      blank.classList.add("correct");
+      correct++;
+    }else{
+      blank.classList.add("wrong");
+    }
+  });
+
+  $("correctCount").textContent=correct;
+  xp=correct*20;
+
+  if(correct===8){
+    gift=1;
+    xp+=30;
+    $("feedback").className="feedback good show";
+    $("feedback").innerHTML=createFeedback(correct,true);
+    fireworks();
+    playTone("finish");
+  }else{
+    hearts=Math.max(0,hearts-(8-correct));
+    $("feedback").className="feedback bad show";
+    $("feedback").innerHTML=createFeedback(correct,false);
+    $("textPanel").classList.add("shake");
+    setTimeout(()=>$("textPanel").classList.remove("shake"),380);
+    playTone("bad");
+  }
+
+  $("xp").textContent=xp;
+  $("hearts").textContent=hearts;
+  $("gift").textContent=gift;
+  $("progressBar").style.width="100%";
+
+  $("resultBtn").classList.add("show");
+};
+
+$("resultBtn").onclick=showFinal;
+
+function createFeedback(correct,perfect){
+  const items=gameData.answers.map((answer,index)=>{
+    const studentAnswer=placements[index];
+    const isCorrect=studentAnswer===answer;
+    const status=isCorrect
+      ? "✅ Đúng"
+      : `❌ Sai — bạn chọn: <b>${studentAnswer}</b>`;
+
+    return `
+      <div class="answer-item ${isCorrect?"correct-review":"wrong-review"}">
+        <b>${index+1}. Đáp án đúng: ${answer}</b><br>
+        ${status}<br>
+        <span>💡 ${gameData.explanations[index]}</span>
+      </div>
+    `;
+  }).join("");
+
+  return `
+    <strong>${perfect?"🎉 Perfect! Bạn đúng toàn bộ 8 câu.":"📘 Kết quả: "+correct+"/8 câu đúng"}</strong>
+    <p style="margin:8px 0 0">Đáp án đúng, đáp án bạn chọn và giải thích ngắn được hiển thị bên dưới.</p>
+    <div class="answer-list">${items}</div>
+  `;
+}
+
+function showFinal(){
+  $("finalScreen").className="panel final show";
+  $("resultBtn").classList.remove("show");
+
+  const correct=placements.filter((word,index)=>word===gameData.answers[index]).length;
+  const percent=Math.round(correct/8*100);
+
+  $("finalScore").textContent=percent+"%";
+  $("sumCorrect").innerHTML="Correct<br>"+correct+"/8";
+  $("sumXp").innerHTML="XP<br>"+xp;
+  $("sumHearts").innerHTML="Hearts<br>"+hearts;
+  $("sumGift").innerHTML="Gift<br>"+gift;
+
+  $("finalMessage").textContent=
+    correct===8
+      ?"Xuất sắc! Bạn đã hoàn thành đúng toàn bộ bài Word Box."
+      : correct>=6
+      ?"Rất tốt! Hãy xem lại các cụm từ còn nhầm ở phần đáp án phía trên."
+      : "Hãy xem lại phần đáp án và giải thích phía trên trước khi chơi lại.";
+
+  $("finalScreen").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function fireworks(){
+  const icons=["✨","⭐","🎉","🧲","🧩"];
+  for(let i=0;i<24;i++){
+    const spark=document.createElement("span");
+    spark.className="spark";
+    spark.textContent=icons[i%icons.length];
+    spark.style.left=innerWidth/2+"px";
+    spark.style.top=innerHeight/2+"px";
+    spark.style.setProperty("--x",(Math.random()*560-280)+"px");
+    spark.style.setProperty("--y",(Math.random()*460-250)+"px");
+    document.body.appendChild(spark);
+    setTimeout(()=>spark.remove(),1000);
+  }
+}
+
+function playTone(type){
+  try{
+    const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+    const context=new AudioContextClass();
+
+    if(type==="finish"){
+      [523,659,784,1046].forEach((frequency,index)=>{
+        const oscillator=context.createOscillator();
+        const gain=context.createGain();
+
+        oscillator.type="triangle";
+        oscillator.frequency.value=frequency;
+        oscillator.connect(gain);
+        gain.connect(context.destination);
+
+        gain.gain.setValueAtTime(.001,context.currentTime+index*.08);
+        gain.gain.exponentialRampToValueAtTime(.16,context.currentTime+index*.08+.02);
+        gain.gain.exponentialRampToValueAtTime(.001,context.currentTime+index*.08+.35);
+
+        oscillator.start(context.currentTime+index*.08);
+        oscillator.stop(context.currentTime+index*.08+.36);
+      });
+    }else{
+      const oscillator=context.createOscillator();
+      const gain=context.createGain();
+
+      oscillator.type="sawtooth";
+      oscillator.frequency.setValueAtTime(150,context.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(42,context.currentTime+.45);
+      oscillator.connect(gain);
+      gain.connect(context.destination);
+
+      gain.gain.setValueAtTime(.2,context.currentTime);
+      gain.gain.exponentialRampToValueAtTime(.001,context.currentTime+.45);
+
+      oscillator.start();
+      oscillator.stop(context.currentTime+.46);
+    }
+  }catch(error){}
+}
+
+renderWords();
+setupBlanks();
+updateProgress();
+</script>
+</body>
+</html>
