@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 11 - Unit 2 - Exercise 14 - Option C</title>
+<style>
+:root{
+  --navy:#3f3a12;
+  --blue:#eab308;
+  --cyan:#84cc16;
+  --purple:#65a30d;
+  --gold:#facc15;
+  --green:#16a34a;
+  --red:#dc2626;
+  --muted:#64748b;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:18px;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--navy);
+  background:
+    radial-gradient(circle at 12% 14%,rgba(250,204,21,.24),transparent 28%),
+    radial-gradient(circle at 88% 12%,rgba(132,204,22,.18),transparent 25%),
+    linear-gradient(135deg,#fffbea,#f7fee7 55%,#fef9c3);
+}
+.app{width:min(1150px,100%);margin:auto}
+.hero{
+  padding:28px;
+  border-radius:28px;
+  color:#fff;
+  background:linear-gradient(135deg,#3f3a12,#ca8a04 58%,#65a30d);
+  box-shadow:0 22px 55px rgba(113,63,18,.25);
+  position:relative;
+  overflow:hidden;
+}
+.hero::after{
+  content:"🍌  🐵  🌴";
+  position:absolute;
+  right:24px;
+  top:18px;
+  font-size:30px;
+  letter-spacing:12px;
+  opacity:.22;
+}
+.hero h1{margin:0 0 8px;font-size:clamp(28px,5vw,44px)}
+.hero p{margin:0;line-height:1.55}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:18px;
+}
+.stat{
+  background:#ffffff20;
+  border:1px solid #ffffff35;
+  border-radius:15px;
+  padding:11px;
+  text-align:center;
+  font-weight:900;
+}
+.progress{
+  height:12px;
+  background:#ffffff30;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:14px;
+}
+#bar{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#facc15,#67e8f9,#a78bfa);
+  transition:.35s;
+}
+.layout{
+  display:grid;
+  grid-template-columns:minmax(300px,.8fr) minmax(0,1.2fr);
+  gap:18px;
+  margin-top:18px;
+  align-items:start;
+}
+.panel{
+  background:rgba(255,255,255,.96);
+  border-radius:25px;
+  box-shadow:0 18px 45px rgba(15,23,42,.12);
+}
+.word-panel{
+  position:sticky;
+  top:18px;
+  padding:20px;
+}
+.word-panel h2{margin:0 0 8px}
+.help{
+  margin:0 0 16px;
+  color:var(--muted);
+  line-height:1.5;
+  font-size:14px;
+}
+.word-box{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.word{
+  border:2px solid #fef08a;
+  background:linear-gradient(135deg,#fefce8,#f7fee7);
+  border-radius:14px;
+  padding:12px 10px;
+  text-align:center;
+  font-weight:900;
+  cursor:grab;
+  user-select:none;
+  transition:.2s;
+}
+.word:hover{
+  transform:translateY(-2px);
+  border-color:#eab308;
+  box-shadow:0 9px 20px rgba(234,179,8,.14);
+}
+.word.dragging{opacity:.45;transform:scale(.96)}
+.word.used{
+  opacity:.35;
+  cursor:not-allowed;
+  text-decoration:line-through;
+}
+.controls{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:16px;
+}
+.control-btn{
+  border:0;
+  border-radius:13px;
+  padding:11px 12px;
+  font-weight:900;
+  cursor:pointer;
+}
+.reset-btn{background:#e2e8f0;color:#334155}
+.check-btn{background:linear-gradient(135deg,#65a30d,#eab308);color:#fff}
+.exercise-panel{padding:22px}
+.exercise-panel h2{margin:0 0 15px}
+.sentence-list{display:grid;gap:13px}
+.sentence{
+  padding:15px;
+  border:1px solid #e2e8f0;
+  border-radius:16px;
+  background:#fbfdff;
+  line-height:1.65;
+  font-size:17px;
+}
+.blank{
+  display:inline-flex;
+  min-width:145px;
+  min-height:42px;
+  align-items:center;
+  justify-content:center;
+  vertical-align:middle;
+  margin:0 4px;
+  padding:7px 10px;
+  border:2px dashed #94a3b8;
+  border-radius:12px;
+  background:#fff;
+  color:#475569;
+  font-weight:900;
+  transition:.2s;
+}
+.blank.drag-over{
+  border-color:var(--blue);
+  background:#fefce8;
+  transform:scale(1.03);
+}
+.blank.filled{
+  border-style:solid;
+  border-color:#eab308;
+  color:#854d0e;
+  background:#fefce8;
+  cursor:pointer;
+}
+.blank.correct{
+  border-color:#22c55e;
+  background:#ecfdf5;
+  color:#166534;
+}
+.blank.wrong{
+  border-color:#ef4444;
+  background:#fef2f2;
+  color:#991b1b;
+}
+.feedback{
+  display:none;
+  margin-top:18px;
+  padding:18px;
+  border-radius:16px;
+  line-height:1.6;
+}
+.feedback.show{display:block}
+.feedback.good{background:#ecfdf5;border-left:6px solid #22c55e}
+.feedback.bad{background:#fef2f2;border-left:6px solid #ef4444}
+.answer-list{
+  display:grid;
+  gap:10px;
+  margin-top:14px;
+}
+.answer-item{
+  padding:12px 14px;
+  border-radius:13px;
+  background:#f8fafc;
+  border-left:5px solid var(--cyan);
+}
+.answer-item.correct-review{
+  border-left-color:#22c55e;
+  background:#ecfdf5;
+}
+.answer-item.wrong-review{
+  border-left-color:#ef4444;
+  background:#fef2f2;
+}
+.result-btn{
+  display:none;
+  width:100%;
+  margin-top:16px;
+  border:0;
+  border-radius:14px;
+  padding:13px 18px;
+  background:linear-gradient(135deg,#65a30d,#eab308);
+  color:#fff;
+  font-size:16px;
+  font-weight:900;
+  cursor:pointer;
+}
+.result-btn.show{display:block}
+.final{
+  display:none;
+  text-align:center;
+  padding:34px 24px;
+  margin-top:18px;
+}
+.final.show{display:block}
+.big-score{
+  font-size:64px;
+  font-weight:950;
+  color:var(--blue);
+}
+.summary{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin:20px 0;
+}
+.summary div{
+  background:#f8fafc;
+  border-radius:15px;
+  padding:14px;
+  font-weight:900;
+}
+.restart{
+  border:0;
+  border-radius:14px;
+  padding:13px 23px;
+  background:linear-gradient(135deg,#facc15,#84cc16);
+  color:#3b2f00;
+  font-size:16px;
+  font-weight:900;
+  cursor:pointer;
+}
+.shake{animation:shake .35s}
+@keyframes shake{
+  25%{transform:translateX(-9px)}
+  50%{transform:translateX(9px)}
+  75%{transform:translateX(-5px)}
+}
+.spark{
+  position:fixed;
+  z-index:999;
+  pointer-events:none;
+  font-size:26px;
+  animation:fly 1s forwards;
+}
+@keyframes fly{
+  to{transform:translate(var(--x),var(--y)) rotate(500deg);opacity:0}
+}
+.mobile-note{
+  display:none;
+  margin-top:14px;
+  padding:12px;
+  border-radius:12px;
+  background:#fff7ed;
+  color:#9a3412;
+  font-size:14px;
+  line-height:1.45;
+}
+@media(max-width:850px){
+  .layout{grid-template-columns:1fr}
+  .word-panel{position:relative;top:auto}
+}
+@media(max-width:620px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .word-box{grid-template-columns:1fr 1fr}
+  .summary{grid-template-columns:1fr 1fr}
+  .sentence{font-size:16px}
+  .blank{min-width:125px}
+  .mobile-note{display:block}
+}
+
+.banana-float{
+  position:fixed;
+  z-index:999;
+  pointer-events:none;
+  font-size:28px;
+  animation:bananaFall 1.15s ease-out forwards;
+}
+@keyframes bananaFall{
+  to{
+    transform:translate(var(--x),var(--y)) rotate(580deg) scale(.65);
+    opacity:0;
+  }
+}
+.hero::before{
+  content:"🍌";
+  position:absolute;
+  left:22px;
+  bottom:10px;
+  font-size:72px;
+  opacity:.12;
+  transform:rotate(-18deg);
+}
+.word.selected{
+  outline:3px solid #facc15 !important;
+  box-shadow:0 0 0 5px rgba(250,204,21,.18);
+}
+</style>
+</head>
+<body>
+<div class="app">
+<section class="hero">
+  <h1>🍌 Banana Modal Verbs</h1>
+  <p>Grade 11 • Unit 2 • Exercise 14 • Option C<br>Complete the sentences using each word or phrase only once.</p>
+  <div class="stats">
+    <div class="stat">❤️ Hearts<br><span id="hearts">5</span></div>
+    <div class="stat">⭐ XP<br><span id="xp">0</span></div>
+    <div class="stat">✅ Correct<br><span id="correctCount">0</span>/8</div>
+    <div class="stat">🎁 Gift<br><span id="gift">0</span></div>
+  </div>
+  <div class="progress"><div id="bar"></div></div>
+</section>
+
+<section class="layout" id="gameArea">
+  <aside class="panel word-panel">
+    <h2>🍌 Banana Word Box</h2>
+    <p class="help">Kéo từ vào ô trống. Mỗi từ chỉ được dùng một lần.</p>
+    <div class="word-box" id="wordBox"></div>
+    <div class="controls">
+      <button class="control-btn reset-btn" id="resetBtn">↺ Reset</button>
+      <button class="control-btn check-btn" id="checkBtn">Check Answers</button>
+    </div>
+    <div class="mobile-note">📱 Trên điện thoại: chạm chọn một từ, sau đó chạm vào ô trống cần điền.</div>
+  </aside>
+
+  <section class="panel exercise-panel" id="exercisePanel">
+    <h2>📘 Complete the sentences</h2>
+    <div class="sentence-list" id="sentenceList"><p id="loadingText">Loading game...</p></div>
+    <div class="feedback" id="feedback"></div>
+    <button class="result-btn" id="resultBtn">Xem tổng kết</button>
+  </section>
+</section>
+
+<section class="panel final" id="finalScreen">
+  <div style="font-size:72px">🐵</div>
+  <h2>Banana Mission Complete!</h2>
+  <div class="big-score" id="finalScore"></div>
+  <p id="finalMessage"></p>
+  <div class="summary">
+    <div id="sumCorrect"></div>
+    <div id="sumXp"></div>
+    <div id="sumHearts"></div>
+    <div id="sumGift"></div>
+  </div>
+  <button class="restart" onclick="location.reload()">Collect Bananas Again</button>
+</section>
+</div>
+
+<script>
+const gameData={"words": ["must", "mustn't", "have to", "don't have to", "should", "shouldn't", "ought to", "ought not to"], "sentences": ["Family members __________ be honest with one another if they want to build trust.", "My brother __________ help my grandparents with the gardening every weekend because that's his responsibility.", "You __________ interrupt your parents while they are giving you advice.", "Students __________ wear school uniforms during the summer holiday.", "Drivers __________ stop when the traffic light turns red. It's the law.", "Teenagers __________ spend too much time on their phones during family meals.", "You __________ thank your parents for supporting you through difficult times.", "We __________ judge older people without trying to understand their experiences."], "answers": ["should", "have to", "mustn't", "don't have to", "must", "shouldn't", "ought to", "ought not to"], "explanations": ["Should dùng để đưa ra lời khuyên: các thành viên nên thành thật để xây dựng lòng tin.", "Have to diễn tả trách nhiệm hoặc nghĩa vụ đã được phân công.", "Mustn't diễn tả sự cấm đoán: không được ngắt lời cha mẹ.", "Don't have to diễn tả điều không cần thiết phải làm trong kỳ nghỉ hè.", "Must diễn tả nghĩa vụ bắt buộc theo luật giao thông.", "Shouldn't diễn tả lời khuyên không nên sử dụng điện thoại quá nhiều trong bữa ăn.", "Ought to diễn tả điều nên làm vì đúng về mặt đạo đức.", "Ought not to diễn tả điều không nên làm: không nên phán xét người lớn tuổi."]};
+let selectedWord=null;
+let hearts=5;
+let xp=0;
+let gift=0;
+let checked=false;
+const placements=Array(gameData.answers.length).fill(null);
+const $=id=>document.getElementById(id);
+
+function renderSentences(){
+  const list=$("sentenceList");
+  list.innerHTML="";
+
+  gameData.sentences.forEach((sentence,index)=>{
+    const parts=sentence.split(/_{5,}/);
+    const before=parts[0] || "";
+    const after=parts[1] || "";
+    const row=document.createElement("div");
+    row.className="sentence";
+    row.innerHTML=`
+      <b>${index+1}.</b>
+      ${before}
+      <span class="blank" data-index="${index}">(${index+1})</span>
+      ${after}
+    `;
+    list.appendChild(row);
+  });
+}
+
+function renderWords(){
+  const box=$("wordBox");
+  box.innerHTML="";
+
+  gameData.words.forEach((word,index)=>{
+    const item=document.createElement("div");
+    item.className="word";
+    item.textContent=word;
+    item.draggable=true;
+    item.dataset.word=word;
+    item.dataset.wordIndex=index;
+
+    if(placements.includes(word)) item.classList.add("used");
+
+    item.addEventListener("dragstart",event=>{
+      if(item.classList.contains("used")){
+        event.preventDefault();
+        return;
+      }
+      selectedWord=word;
+      item.classList.add("dragging");
+      event.dataTransfer.setData("text/plain",word);
+    });
+
+    item.addEventListener("dragend",()=>{
+      item.classList.remove("dragging");
+    });
+
+    item.addEventListener("click",()=>{
+      if(item.classList.contains("used")) return;
+      document.querySelectorAll(".word").forEach(w=>w.classList.remove("selected"));
+      selectedWord=word;
+      item.classList.add("selected");
+    });
+
+    box.appendChild(item);
+  });
+}
+
+function setupBlanks(){
+  document.querySelectorAll(".blank").forEach(blank=>{
+    blank.addEventListener("dragover",event=>{
+      event.preventDefault();
+      blank.classList.add("drag-over");
+    });
+
+    blank.addEventListener("dragleave",()=>{
+      blank.classList.remove("drag-over");
+    });
+
+    blank.addEventListener("drop",event=>{
+      event.preventDefault();
+      blank.classList.remove("drag-over");
+      const word=event.dataTransfer.getData("text/plain")||selectedWord;
+      if(word) placeWord(Number(blank.dataset.index),word);
+    });
+
+    blank.addEventListener("click",()=>{
+      const index=Number(blank.dataset.index);
+
+      if(selectedWord){
+        placeWord(index,selectedWord);
+        return;
+      }
+
+      if(placements[index] && !checked){
+        placements[index]=null;
+        blank.textContent=`(${index+1})`;
+        blank.className="blank";
+        renderWords();
+        updateProgress();
+      }
+    });
+  });
+}
+
+function placeWord(index,word){
+  if(checked) return;
+
+  const oldIndex=placements.indexOf(word);
+  if(oldIndex!==-1){
+    placements[oldIndex]=null;
+    const oldBlank=document.querySelector(`.blank[data-index="${oldIndex}"]`);
+    oldBlank.textContent=`(${oldIndex+1})`;
+    oldBlank.className="blank";
+  }
+
+  if(placements[index]){
+    placements[index]=null;
+  }
+
+  placements[index]=word;
+  const blank=document.querySelector(`.blank[data-index="${index}"]`);
+  blank.textContent=word;
+  blank.className="blank filled";
+
+  selectedWord=null;
+  renderWords();
+  updateProgress();
+}
+
+function updateProgress(){
+  const filled=placements.filter(Boolean).length;
+  $("bar").style.width=(filled/gameData.answers.length*100)+"%";
+}
+
+$("resetBtn").onclick=()=>{
+  if(checked) return;
+
+  placements.fill(null);
+  document.querySelectorAll(".blank").forEach((blank,index)=>{
+    blank.textContent=`(${index+1})`;
+    blank.className="blank";
+  });
+
+  selectedWord=null;
+  renderWords();
+  updateProgress();
+  $("feedback").className="feedback";
+  $("feedback").innerHTML="";
+};
+
+$("checkBtn").onclick=()=>{
+  if(checked) return;
+
+  const filled=placements.filter(Boolean).length;
+  if(filled<gameData.answers.length){
+    $("feedback").className="feedback bad show";
+    $("feedback").innerHTML="⚠️ Hãy điền đủ cả 8 ô trước khi kiểm tra.";
+    $("exercisePanel").classList.add("shake");
+    setTimeout(()=>$("exercisePanel").classList.remove("shake"),380);
+    playTone("bad");
+    return;
+  }
+
+  checked=true;
+  let correct=0;
+
+  document.querySelectorAll(".blank").forEach((blank,index)=>{
+    if(placements[index]===gameData.answers[index]){
+      blank.classList.add("correct");
+      correct++;
+    }else{
+      blank.classList.add("wrong");
+    }
+  });
+
+  $("correctCount").textContent=correct;
+  xp=correct*20;
+
+  if(correct===gameData.answers.length){
+    gift=1;
+    xp+=30;
+    $("feedback").className="feedback good show";
+    fireworks();
+    bananaBurst(28);
+    playTone("finish");
+  }else{
+    hearts=Math.max(0,hearts-(gameData.answers.length-correct));
+    $("feedback").className="feedback bad show";
+    $("exercisePanel").classList.add("shake");
+    setTimeout(()=>$("exercisePanel").classList.remove("shake"),380);
+    bananaBurst(14);
+    playTone("bad");
+  }
+
+  $("feedback").innerHTML=createFeedback(correct);
+  $("xp").textContent=xp;
+  $("hearts").textContent=hearts;
+  $("gift").textContent=gift;
+  $("bar").style.width="100%";
+  $("resultBtn").classList.add("show");
+};
+
+function createFeedback(correct){
+  const items=gameData.answers.map((answer,index)=>{
+    const studentAnswer=placements[index];
+    const isCorrect=studentAnswer===answer;
+
+    return `
+      <div class="answer-item ${isCorrect?"correct-review":"wrong-review"}">
+        <b>${index+1}. Đáp án đúng: ${answer}</b><br>
+        ${isCorrect?"✅ Đúng":`❌ Sai — bạn chọn: <b>${studentAnswer}</b>`}<br>
+        <span>💡 ${gameData.explanations[index]}</span>
+      </div>
+    `;
+  }).join("");
+
+  return `
+    <strong>${correct===gameData.answers.length
+      ?"🎉 Perfect! Bạn đúng toàn bộ 8 câu."
+      :"📘 Kết quả: "+correct+"/8 câu đúng"}</strong>
+    <p style="margin:8px 0 0">Đáp án đúng, đáp án bạn chọn và giải thích ngắn được hiển thị bên dưới.</p>
+    <div class="answer-list">${items}</div>
+  `;
+}
+
+$("resultBtn").onclick=showFinal;
+
+function showFinal(){
+  $("finalScreen").className="panel final show";
+  $("resultBtn").classList.remove("show");
+
+  const correct=placements.filter((word,index)=>word===gameData.answers[index]).length;
+  const percent=Math.round(correct/gameData.answers.length*100);
+
+  $("finalScore").textContent=percent+"%";
+  $("sumCorrect").innerHTML="Correct<br>"+correct+"/8";
+  $("sumXp").innerHTML="XP<br>"+xp;
+  $("sumHearts").innerHTML="Hearts<br>"+hearts;
+  $("sumGift").innerHTML="Gift<br>"+gift;
+
+  $("finalMessage").textContent=
+    correct===8
+      ?"Xuất sắc! Bạn đã thu thập đủ chuối và hoàn thành đúng toàn bộ bài Modal Verbs."
+      : correct>=6
+      ?"Rất tốt! Hãy xem lại các câu còn nhầm ở phần đáp án phía trên."
+      : "Hãy xem lại đáp án và giải thích phía trên trước khi chơi lại.";
+
+  $("finalScreen").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function bananaBurst(count){
+  const symbols=["🍌","🍌","🐵","✨","🌿"];
+  for(let i=0;i<count;i++){
+    const item=document.createElement("span");
+    item.className="banana-float";
+    item.textContent=symbols[i%symbols.length];
+    item.style.left=innerWidth/2+"px";
+    item.style.top=innerHeight/2+"px";
+    item.style.setProperty("--x",(Math.random()*600-300)+"px");
+    item.style.setProperty("--y",(Math.random()*480-260)+"px");
+    document.body.appendChild(item);
+    setTimeout(()=>item.remove(),1200);
+  }
+}
+
+function fireworks(){
+  const icons=["🍌","🐵","✨","🌴","⭐"];
+  for(let i=0;i<24;i++){
+    const spark=document.createElement("span");
+    spark.className="spark";
+    spark.textContent=icons[i%icons.length];
+    spark.style.left=innerWidth/2+"px";
+    spark.style.top=innerHeight/2+"px";
+    spark.style.setProperty("--x",(Math.random()*560-280)+"px");
+    spark.style.setProperty("--y",(Math.random()*460-250)+"px");
+    document.body.appendChild(spark);
+    setTimeout(()=>spark.remove(),1000);
+  }
+}
+
+function playTone(type){
+  try{
+    const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+    const context=new AudioContextClass();
+
+    if(type==="finish"){
+      [523,659,784,1046].forEach((frequency,index)=>{
+        const oscillator=context.createOscillator();
+        const gain=context.createGain();
+
+        oscillator.type="triangle";
+        oscillator.frequency.value=frequency;
+        oscillator.connect(gain);
+        gain.connect(context.destination);
+
+        gain.gain.setValueAtTime(.001,context.currentTime+index*.08);
+        gain.gain.exponentialRampToValueAtTime(.16,context.currentTime+index*.08+.02);
+        gain.gain.exponentialRampToValueAtTime(.001,context.currentTime+index*.08+.35);
+
+        oscillator.start(context.currentTime+index*.08);
+        oscillator.stop(context.currentTime+index*.08+.36);
+      });
+    }else{
+      const oscillator=context.createOscillator();
+      const gain=context.createGain();
+
+      oscillator.type="sawtooth";
+      oscillator.frequency.setValueAtTime(150,context.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(42,context.currentTime+.45);
+      oscillator.connect(gain);
+      gain.connect(context.destination);
+
+      gain.gain.setValueAtTime(.2,context.currentTime);
+      gain.gain.exponentialRampToValueAtTime(.001,context.currentTime+.45);
+
+      oscillator.start();
+      oscillator.stop(context.currentTime+.46);
+    }
+  }catch(error){}
+}
+
+renderSentences();
+renderWords();
+setupBlanks();
+updateProgress();
+</script>
+</body>
+</html>
