@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 2 - Exercise 9 - Option C</title>
+<style>
+:root{
+  --pink:#ff7eb6;
+  --rose:#fb7185;
+  --purple:#a78bfa;
+  --blue:#60a5fa;
+  --mint:#86efac;
+  --yellow:#fde68a;
+  --text:#3b2146;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:18px;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 12% 12%,rgba(255,126,182,.22),transparent 28%),
+    radial-gradient(circle at 88% 10%,rgba(167,139,250,.20),transparent 26%),
+    linear-gradient(135deg,#fff1f7,#fdf4ff 55%,#eff6ff);
+}
+.app{max-width:1150px;margin:auto}
+.hero{
+  padding:28px;
+  border-radius:30px;
+  color:white;
+  background:linear-gradient(135deg,#ec4899,#a855f7 55%,#60a5fa);
+  box-shadow:0 22px 55px rgba(168,85,247,.24);
+  position:relative;
+  overflow:hidden;
+}
+.hero:after{
+  content:"🍭  🍬  🧁";
+  position:absolute;
+  right:24px;
+  top:18px;
+  font-size:30px;
+  letter-spacing:12px;
+  opacity:.28;
+}
+.hero h1{margin:0 0 8px;font-size:clamp(28px,5vw,44px)}
+.hero p{margin:0;line-height:1.55}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:18px;
+}
+.stat{
+  background:#ffffff20;
+  border:1px solid #ffffff35;
+  border-radius:15px;
+  padding:11px;
+  text-align:center;
+  font-weight:900;
+}
+.progress{
+  height:12px;
+  background:#ffffff30;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:14px;
+}
+#bar{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#fde68a,#f9a8d4,#c4b5fd,#93c5fd);
+  transition:.35s;
+}
+.layout{
+  display:grid;
+  grid-template-columns:minmax(350px,1fr) minmax(0,1fr);
+  gap:18px;
+  margin-top:18px;
+  align-items:start;
+}
+.panel{
+  background:rgba(255,255,255,.96);
+  border-radius:26px;
+  box-shadow:0 18px 45px rgba(88,28,135,.12);
+}
+.passage{
+  padding:22px;
+  position:sticky;
+  top:18px;
+  line-height:1.75;
+}
+.passage h2{margin-top:0}
+.passage h3{color:#db2777;margin-top:0}
+.quiz{padding:22px}
+.qmeta{font-weight:900;color:#a855f7;margin-bottom:10px}
+.question{font-size:21px;font-weight:800;line-height:1.5;margin-bottom:18px}
+.options{display:grid;gap:11px}
+.option{
+  border:2px solid #f0d5ff;
+  background:#fff;
+  color:#3b2146;
+  border-radius:16px;
+  padding:14px;
+  text-align:left;
+  font-size:16px;
+  cursor:pointer;
+  transition:.2s;
+}
+.option:hover:not(:disabled){
+  transform:translateY(-2px);
+  border-color:#ec4899;
+  box-shadow:0 8px 22px rgba(236,72,153,.13);
+}
+.option.correct{
+  background:#dcfce7;
+  border-color:#22c55e;
+  color:#14532d;
+  font-weight:800;
+}
+.option.wrong{
+  background:#fee2e2;
+  border-color:#ef4444;
+  color:#7f1d1d;
+  font-weight:800;
+}
+.feedback{
+  display:none;
+  margin-top:16px;
+  padding:16px;
+  border-radius:15px;
+  line-height:1.55;
+  color:#111827;
+}
+.feedback.show{display:block}
+.feedback.good{
+  background:#dcfce7;
+  border-left:6px solid #22c55e;
+  color:#14532d;
+}
+.feedback.bad{
+  background:#fee2e2;
+  border-left:6px solid #ef4444;
+  color:#7f1d1d;
+}
+.next{
+  display:none;
+  margin:17px 0 0 auto;
+  border:0;
+  border-radius:14px;
+  padding:12px 21px;
+  background:linear-gradient(135deg,#ec4899,#a855f7);
+  color:#fff;
+  font-weight:900;
+  cursor:pointer;
+}
+.next.show{display:block}
+.final{display:none;text-align:center;padding:34px}
+.final.show{display:block}
+.big{font-size:64px;font-weight:950;color:#db2777}
+.summary{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin:20px 0;
+}
+.summary div{
+  background:#fdf2f8;
+  padding:14px;
+  border-radius:15px;
+  font-weight:900;
+}
+.restart{
+  border:0;
+  border-radius:14px;
+  padding:13px 22px;
+  background:linear-gradient(135deg,#fde68a,#f9a8d4);
+  color:#4a264f;
+  font-weight:900;
+  cursor:pointer;
+}
+.shake{animation:shake .35s}
+@keyframes shake{
+  25%{transform:translateX(-9px)}
+  50%{transform:translateX(9px)}
+  75%{transform:translateX(-5px)}
+}
+.spark{
+  position:fixed;
+  z-index:999;
+  pointer-events:none;
+  font-size:26px;
+  animation:candyBurst 1s forwards;
+}
+@keyframes candyBurst{
+  to{
+    transform:translate(var(--x),var(--y)) rotate(520deg) scale(.55);
+    opacity:0;
+  }
+}
+@media(max-width:840px){
+  .layout{grid-template-columns:1fr}
+  .passage{position:relative;top:auto}
+}
+@media(max-width:600px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .summary{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<section class="hero">
+  <h1>🍭 Candy Heritage Challenge</h1>
+  <p>Grade 12 • Unit 2 • Exercise 9 • Option C<br>Read the passage and collect candy by answering 8 questions.</p>
+  <div class="stats">
+    <div class="stat">❤️ Hearts<br><span id="hearts">5</span></div>
+    <div class="stat">⭐ XP<br><span id="xp">0</span></div>
+    <div class="stat">🔥 Combo<br><span id="combo">0</span>×</div>
+    <div class="stat">✅ Correct<br><span id="correct">0</span>/8</div>
+  </div>
+  <div class="progress"><div id="bar"></div></div>
+</section>
+
+<section class="layout" id="gameArea">
+  <aside class="panel passage">
+    <h2>📖 Reading Passage</h2>
+    
+<h3>Vietnamese Cultural Heritage</h3>
+<p><b>Paragraph 1.</b> Vietnamese cultural heritage reflects the nation's long history, creativity, and ability to adapt to change. It includes not only historical sites and traditional festivals but also customs, languages, music, and crafts that have been passed down through generations. Although influenced by neighboring civilizations, Vietnamese culture has preserved its own distinctive identity while continuing to develop in response to social and economic changes.</p>
+
+<p><b>Paragraph 2.</b> One important feature of Vietnamese cultural heritage is its strong connection to community life. Traditional festivals, communal houses, and village ceremonies encourage people to strengthen relationships and maintain shared values. These activities also provide younger generations with opportunities to learn about the customs and beliefs that have shaped Vietnamese society for centuries.</p>
+
+<p><b>Paragraph 3.</b> In addition to preserving traditions, Vietnam has made considerable efforts to promote its cultural heritage internationally. Several cultural sites and practices have been recognized by UNESCO, attracting millions of domestic and international visitors each year. Such recognition not only contributes to tourism but also increases public awareness of the importance of protecting cultural heritage for future generations.</p>
+
+<p><b>Paragraph 4.</b> Today, despite rapid globalization and technological development, Vietnamese cultural heritage continues to flourish. While some traditional practices have changed to suit modern lifestyles, their essential cultural values remain intact. By balancing preservation with innovation, Vietnam demonstrates that cultural heritage can continue to thrive in an increasingly interconnected world.</p>
+
+  </aside>
+
+  <section class="panel quiz" id="quiz">
+    <div class="qmeta" id="qmeta"></div>
+    <div class="question" id="question"></div>
+    <div class="options" id="options"></div>
+    <div class="feedback" id="feedback"></div>
+    <button class="next" id="next">Next →</button>
+  </section>
+</section>
+
+<section class="panel final" id="final">
+  <div style="font-size:72px">🍬</div>
+  <h2>Candy Mission Complete!</h2>
+  <div class="big" id="score"></div>
+  <p id="message"></p>
+  <div class="summary">
+    <div id="s1"></div>
+    <div id="s2"></div>
+    <div id="s3"></div>
+    <div id="s4"></div>
+  </div>
+  <button class="restart" onclick="location.reload()">Collect Candy Again</button>
+</section>
+
+</div>
+
+<script>
+const data=[{"q": "The word \"distinctive\" in paragraph 1 is closest in meaning to ______.", "options": ["unique", "ordinary", "temporary", "familiar"], "answer": 0, "explain": "<b>Distinctive</b> = đặc trưng, độc đáo; gần nghĩa nhất với <b>unique</b>."}, {"q": "Which of the following is NOT mentioned as part of Vietnamese cultural heritage?", "options": ["Traditional crafts", "Historical sites", "Folk music", "Modern technology"], "answer": 3, "explain": "Đoạn 1 nhắc đến historical sites, music và crafts, nhưng không nhắc đến <b>modern technology</b>."}, {"q": "The word \"flourish\" in paragraph 4 is closest in meaning to ______.", "options": ["disappear", "develop successfully", "weaken gradually", "become limited"], "answer": 1, "explain": "<b>Flourish</b> = phát triển mạnh, phát triển thịnh vượng; gần nghĩa nhất với <b>develop successfully</b>."}, {"q": "Which of the following best paraphrases the underlined sentence in paragraph 3?", "options": ["UNESCO recognition mainly benefits the tourism industry rather than cultural preservation.", "International recognition helps tourism while encouraging people to appreciate the need to safeguard cultural heritage.", "Public awareness is more important than tourism in preserving cultural heritage.", "Cultural heritage can only be protected after being recognized by UNESCO."], "answer": 1, "explain": "Đáp án B giữ đủ hai ý: hỗ trợ du lịch và nâng cao nhận thức về việc bảo vệ di sản văn hóa."}, {"q": "The word \"their\" in paragraph 4 refers to ______.", "options": ["traditional practices", "modern lifestyles", "cultural values", "future generations"], "answer": 0, "explain": "<b>Their</b> thay cho <b>traditional practices</b> trong câu trước."}, {"q": "Which of the following is TRUE according to the passage?", "options": ["Vietnamese cultural heritage has remained completely unchanged throughout history.", "UNESCO recognition has helped raise awareness about cultural preservation.", "Traditional festivals are becoming less important than technology.", "Globalization has completely replaced Vietnamese traditions."], "answer": 1, "explain": "Đoạn 3 nêu rõ UNESCO recognition giúp tăng nhận thức của công chúng về việc bảo vệ di sản."}, {"q": "In which paragraph does the writer mention a present concession relationship?", "options": ["Paragraph 1", "Paragraph 2", "Paragraph 3", "Paragraph 4"], "answer": 3, "explain": "Đoạn 4 có cấu trúc <b>While...</b>, thể hiện quan hệ nhượng bộ."}, {"q": "Which paragraph mentions that Vietnamese culture both preserves tradition and adapts to changing circumstances?", "options": ["Paragraph 1", "Paragraph 2", "Paragraph 3", "Paragraph 4"], "answer": 0, "explain": "Đoạn 1 nói văn hóa Việt Nam vừa giữ bản sắc riêng vừa tiếp tục phát triển trước các thay đổi xã hội và kinh tế."}];
+let i=0,hearts=5,xp=0,combo=0,bestCombo=0,correct=0,locked=false;
+const $=id=>document.getElementById(id);
+
+function render(){
+  locked=false;
+  const item=data[i];
+
+  $("qmeta").textContent=`Question ${i+1} of ${data.length}`;
+  $("question").textContent=item.q;
+  $("options").innerHTML="";
+  $("feedback").className="feedback";
+  $("feedback").innerHTML="";
+  $("next").className="next";
+
+  item.options.forEach((text,index)=>{
+    const btn=document.createElement("button");
+    btn.className="option";
+    btn.textContent=String.fromCharCode(65+index)+". "+text;
+    btn.onclick=()=>choose(index,btn);
+    $("options").appendChild(btn);
+  });
+
+  update();
+}
+
+function choose(index,btn){
+  if(locked)return;
+  locked=true;
+
+  const item=data[i];
+  const buttons=[...document.querySelectorAll(".option")];
+
+  buttons.forEach(button=>button.disabled=true);
+  buttons[item.answer].classList.add("correct");
+
+  if(index===item.answer){
+    correct++;
+    combo++;
+    bestCombo=Math.max(bestCombo,combo);
+    xp+=20+(combo>=3?10:0);
+
+    $("feedback").className="feedback good show";
+    $("feedback").innerHTML="✅ <b>Chính xác!</b><br>"+item.explain;
+
+    candyBurst(true);
+    playTone(true);
+  }else{
+    hearts=Math.max(0,hearts-1);
+    combo=0;
+    btn.classList.add("wrong");
+
+    $("feedback").className="feedback bad show";
+    $("feedback").innerHTML="❌ <b>Chưa đúng.</b><br>"+item.explain;
+
+    $("quiz").classList.add("shake");
+    setTimeout(()=>$("quiz").classList.remove("shake"),380);
+
+    candyBurst(false);
+    playTone(false);
+  }
+
+  $("next").textContent=i===data.length-1?"See Results →":"Next →";
+  $("next").className="next show";
+  update();
+}
+
+$("next").onclick=()=>{
+  i++;
+  i>=data.length?finish():render();
+};
+
+function update(){
+  $("hearts").textContent=hearts;
+  $("xp").textContent=xp;
+  $("combo").textContent=combo;
+  $("correct").textContent=correct;
+  $("bar").style.width=(i/data.length*100)+"%";
+}
+
+function finish(){
+  $("gameArea").style.display="none";
+  $("final").className="panel final show";
+  $("bar").style.width="100%";
+
+  const percent=Math.round(correct/data.length*100);
+
+  $("score").textContent=percent+"%";
+  $("s1").innerHTML="Correct<br>"+correct+"/8";
+  $("s2").innerHTML="XP<br>"+xp;
+  $("s3").innerHTML="Best Combo<br>"+bestCombo+"×";
+  $("s4").innerHTML="Hearts<br>"+hearts;
+
+  $("message").textContent=
+    percent===100
+      ?"Xuất sắc! Bạn đã thu thập đủ toàn bộ kẹo."
+      : percent>=75
+      ?"Rất tốt! Hãy xem lại những câu còn sai."
+      : "Hãy chơi lại để ghi nhớ nội dung bài đọc.";
+
+  candyBurst(true,36);
+  playFinishTone();
+}
+
+function candyBurst(good,count=20){
+  const icons=good
+    ?["🍭","🍬","🧁","✨","⭐"]
+    :["💥","🍬","❌","🌀"];
+
+  for(let k=0;k<count;k++){
+    const item=document.createElement("span");
+    item.className="spark";
+    item.textContent=icons[k%icons.length];
+    item.style.left=innerWidth/2+"px";
+    item.style.top=innerHeight/2+"px";
+    item.style.setProperty("--x",(Math.random()*620-310)+"px");
+    item.style.setProperty("--y",(Math.random()*500-260)+"px");
+    document.body.appendChild(item);
+    setTimeout(()=>item.remove(),1050);
+  }
+}
+
+function playTone(good){
+  try{
+    const context=new (window.AudioContext||window.webkitAudioContext)();
+    const oscillator=context.createOscillator();
+    const gain=context.createGain();
+
+    oscillator.connect(gain);
+    gain.connect(context.destination);
+
+    oscillator.type=good?"triangle":"sawtooth";
+    oscillator.frequency.value=good?840:120;
+
+    gain.gain.setValueAtTime(.12,context.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.001,context.currentTime+.3);
+
+    oscillator.start();
+    oscillator.stop(context.currentTime+.31);
+  }catch(error){}
+}
+
+function playFinishTone(){
+  try{
+    const context=new (window.AudioContext||window.webkitAudioContext)();
+
+    [523,659,784,1046].forEach((frequency,index)=>{
+      const oscillator=context.createOscillator();
+      const gain=context.createGain();
+
+      oscillator.type="triangle";
+      oscillator.frequency.value=frequency;
+      oscillator.connect(gain);
+      gain.connect(context.destination);
+
+      gain.gain.setValueAtTime(.001,context.currentTime+index*.08);
+      gain.gain.exponentialRampToValueAtTime(.14,context.currentTime+index*.08+.02);
+      gain.gain.exponentialRampToValueAtTime(.001,context.currentTime+index*.08+.32);
+
+      oscillator.start(context.currentTime+index*.08);
+      oscillator.stop(context.currentTime+index*.08+.33);
+    });
+  }catch(error){}
+}
+
+render();
+</script>
+</body>
+</html>
