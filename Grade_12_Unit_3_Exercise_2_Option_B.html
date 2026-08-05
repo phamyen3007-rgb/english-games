@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 3 - Exercise 2 - Option B</title>
+<style>
+body{margin:0;font-family:Arial;background:radial-gradient(circle at top,#243b77,#040814 70%);color:#eef;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:60px 60px;opacity:.25;pointer-events:none}
+.wrap{max-width:980px;margin:20px auto;padding:15px}
+h1{text-align:center;background:linear-gradient(90deg,#fff,#6cf,#f6f);-webkit-background-clip:text;color:transparent}
+.card{background:rgba(10,18,40,.92);border:1px solid #3d5cff;border-radius:18px;padding:18px;box-shadow:0 0 30px rgba(90,117,255,.3)}
+.top{display:flex;gap:10px;align-items:center}.orb{width:70px;height:70px;border-radius:50%;background:radial-gradient(circle,#fff,#4de8ff,#355cff);box-shadow:0 0 20px #4de8ff;animation:p 2s infinite}@keyframes p{50%{transform:scale(1.08)}}
+.bar{height:10px;background:#111;border-radius:99px;margin:15px 0}.fill{height:100%;width:0;background:linear-gradient(90deg,#4de8ff,#9d5cff,#ff4fd8);border-radius:99px;transition:.3s}
+.opt{display:block;width:100%;margin:10px 0;padding:14px;border-radius:12px;border:1px solid #456;background:#152040;color:#fff;text-align:left;cursor:pointer}
+.opt:hover{border-color:#4de8ff}.correct{background:#0d5a3d!important}.wrong{background:#6b2230!important}
+#fb{display:none;margin-top:12px;padding:12px;border-left:4px solid #ffd166;background:#0b1328;border-radius:8px}
+button{padding:12px 20px;border:none;border-radius:10px;background:#4de8ff;font-weight:bold;cursor:pointer}
+#result{display:none}
+#q strong{
+  color:#ffd166;
+  text-shadow:0 0 8px rgba(255,209,102,.35);
+}
+#q u{
+  text-decoration-thickness:3px;
+  text-underline-offset:5px;
+}
+</style></head><body>
+<div class="wrap">
+<h1>Universe Anime Mission - Exercise 2 (Option B)</h1>
+<div class="card" id="quiz">
+<div class="top"><div class="orb"></div><div><div id="count"></div><div id="score"></div></div><button id="sound">🔊</button></div>
+<div class="bar"><div class="fill" id="fill"></div></div>
+<h2 id="q"></h2><div id="ops"></div><div id="fb"></div><br><button id="next" disabled>Next 🚀</button>
+</div>
+<div class="card" id="result"><h2>🌌 Mission Complete</h2><h1 id="final"></h1><div id="review"></div><br><button onclick="location.reload()">Play Again</button></div>
+</div>
+<script>
+const qs=[
+["Governments should encourage people to use <strong><u>reusable</u></strong> shopping bags instead of plastic ones.",["biodegradable","recyclable","disposable","sustainable"],2,"Reusable ↔ disposable.","Biodegradable/recyclable/sustainable không đối nghĩa trực tiếp."],
+["Solar energy is considered a <strong><u>renewable</u></strong> source of energy.",["clean","sustainable","non-renewable","alternative"],2,"Renewable ↔ non-renewable.",""],
+["The new policy aims to <strong><u>minimize</u></strong> household waste through better recycling programmes.",["reduce","eliminate","increase","recycle"],2,"Minimize ↔ increase.",""],
+["The factory was criticized for <strong><u>contaminating</u></strong> the nearby river.",["polluting","protecting","damaging","destroying"],1,"Contaminate ↔ protect.",""],
+["Scientists are trying to <strong><u>conserve</u></strong> endangered wildlife habitats.",["protect","preserve","destroy","restore"],2,"Conserve ↔ destroy.",""],
+["Everyone should <strong><u>preserve</u></strong> natural resources for future generations.",["waste","protect","replace","consume"],1,"Preserve ≈ protect.",""],
+["The government plans to <strong><u>implement</u></strong> stricter environmental regulations next year.",["introduce","reject","postpone","discuss"],0,"Implement ≈ introduce.",""],
+["Many countries are trying to <strong><u>combat</u></strong> climate change by investing in renewable energy.",["ignore","reduce","fight","observe"],2,"Combat ≈ fight.",""],
+["Students are encouraged to <strong><u>participate in</u></strong> environmental campaigns organized by their schools.",["take part in","give up","look after","carry out"],0,"Participate in ≈ take part in.",""],
+["The excessive use of fossil fuels leads to the <strong><u>depletion</u></strong> of natural resources.",["protection","reduction","conservation","discovery"],1,"Depletion ≈ reduction.",""]
+];
+const L=["A","B","C","D"];let i=0,s=0,a=false,ctx=null,on=true;
+const g=id=>document.getElementById(id);
+function ac(){if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==="suspended")ctx.resume();return ctx}
+function beep(f,d,t){if(!on)return;let c=ac(),o=c.createOscillator(),ga=c.createGain();o.type=t;o.frequency.value=f;o.connect(ga);ga.connect(c.destination);ga.gain.value=.05;o.start();o.stop(c.currentTime+d)}
+function ok(){beep(700,.12,"triangle");setTimeout(()=>beep(1000,.15,"sine"),120)}
+function bad(){beep(220,.2,"sawtooth")}
+function nextsnd(){beep(500,.08,"square")}
+g("sound").onclick=()=>{on=!on;g("sound").textContent=on?"🔊":"🔇";}
+function show(){
+a=false;g("next").disabled=true;g("fb").style.display="none";
+g("count").textContent=`Question ${i+1}/${qs.length}`;g("score").textContent=`Score: ${s}`;g("fill").style.width=(i/qs.length*100)+"%";
+g("q").innerHTML=qs[i][0];g("ops").innerHTML="";
+qs[i][1].forEach((o,n)=>{let b=document.createElement("button");b.className="opt";b.innerHTML=`<b>${L[n]}.</b> ${o}`;b.onclick=()=>pick(n,b);g("ops").appendChild(b);});
+}
+function pick(n,b){
+if(a)return;a=true;
+let q=qs[i],btns=[...document.querySelectorAll(".opt")];
+btns.forEach(x=>x.disabled=true);btns[q[2]].classList.add("correct");
+if(n==q[2]){s++;b.classList.add("correct");ok();}
+else{b.classList.add("wrong");bad();}
+g("score").textContent=`Score: ${s}`;
+g("fill").style.width=((i+1)/qs.length*100)+"%";
+g("fb").style.display="block";
+g("fb").innerHTML=`<b>Đáp án: ${L[q[2]]}. ${q[1][q[2]]}</b><br>${q[3]}<br><small>${q[4]}</small>`;
+g("next").disabled=false;
+}
+g("next").onclick=()=>{
+nextsnd();
+if(i<qs.length-1){i++;show();}
+else{
+beep(523,.15,"triangle");setTimeout(()=>beep(784,.2,"triangle"),150);
+g("quiz").style.display="none";g("result").style.display="block";
+g("final").textContent=`${s}/${qs.length}`;
+let r="<h3>Galaxy Review</h3>";
+qs.forEach((q,n)=>r+=`<p><b>Q${n+1}:</b> ${L[q[2]]}. ${q[1][q[2]]}<br><i>${q[3]}</i></p>`);
+g("review").innerHTML=r;
+}
+}
+show();
+</script></body></html>

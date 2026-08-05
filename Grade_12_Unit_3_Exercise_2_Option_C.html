@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade 12 - Unit 3 - Exercise 2 - Option C</title>
+  <style>
+    :root{
+      --bg:#07080d;
+      --panel:#11141f;
+      --panel2:#1a2030;
+      --red:#ff3b4f;
+      --orange:#ff8a2a;
+      --yellow:#ffd84d;
+      --blue:#38bdf8;
+      --green:#42e58c;
+      --text:#f8fafc;
+      --muted:#aeb8ca;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Arial,Helvetica,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 20%,rgba(255,59,79,.18),transparent 28%),
+        radial-gradient(circle at 82% 18%,rgba(255,138,42,.14),transparent 25%),
+        linear-gradient(160deg,#05060a,#0b0f18 60%,#05060a);
+      padding:18px;
+      overflow-x:hidden;
+    }
+    .slash,.slash2{
+      position:fixed;
+      width:420px;
+      height:6px;
+      background:linear-gradient(90deg,transparent,var(--red),var(--yellow),transparent);
+      filter:drop-shadow(0 0 16px var(--red));
+      transform:rotate(-28deg);
+      pointer-events:none;
+      opacity:.35;
+    }
+    .slash{top:12%;left:-100px}
+    .slash2{bottom:10%;right:-120px;transform:rotate(24deg)}
+    .wrap{width:min(1040px,100%);margin:auto;position:relative;z-index:2}
+    .hero{
+      display:grid;
+      grid-template-columns:120px 1fr auto;
+      gap:18px;
+      align-items:center;
+      margin-bottom:16px;
+    }
+    .fighter{
+      width:108px;
+      height:108px;
+      position:relative;
+      filter:drop-shadow(0 0 18px rgba(255,59,79,.35));
+    }
+    .aura{
+      position:absolute;inset:5px;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(255,216,77,.3),rgba(255,59,79,.08) 55%,transparent 70%);
+      animation:aura 1.6s ease-in-out infinite;
+    }
+    @keyframes aura{50%{transform:scale(1.12);opacity:.6}}
+    .hair{
+      position:absolute;left:18px;top:4px;width:72px;height:58px;
+      background:linear-gradient(145deg,#f6e27a,#ff9f1c);
+      clip-path:polygon(0 62%,15% 15%,28% 40%,44% 0,56% 36%,74% 8%,83% 43%,100% 25%,88% 100%,18% 100%);
+      z-index:2;
+    }
+    .face{
+      position:absolute;left:29px;top:33px;width:53px;height:54px;
+      background:linear-gradient(#f0c6ae,#d99a80);
+      border-radius:46%;
+      z-index:3;
+    }
+    .eye{
+      position:absolute;top:56px;width:13px;height:5px;background:#111;z-index:4;
+      box-shadow:0 0 8px var(--red);
+    }
+    .eye.l{left:39px}.eye.r{right:34px}
+    .band{
+      position:absolute;left:24px;top:39px;width:64px;height:8px;
+      background:var(--red);z-index:5;transform:rotate(-5deg);
+      box-shadow:0 0 10px var(--red);
+    }
+    h1{
+      margin:0;
+      font-size:clamp(28px,4vw,46px);
+      background:linear-gradient(90deg,#fff,var(--yellow),var(--orange),var(--red));
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .subtitle{margin:7px 0 0;color:var(--muted);font-weight:700}
+    .sound{
+      border:1px solid rgba(255,138,42,.45);
+      background:#171b26;color:#fff;border-radius:12px;
+      padding:11px 14px;font-weight:900;cursor:pointer;
+    }
+    .card{
+      background:linear-gradient(180deg,var(--panel2),var(--panel));
+      border:1px solid rgba(255,138,42,.28);
+      border-radius:24px;
+      box-shadow:0 24px 60px rgba(0,0,0,.5);
+      overflow:hidden;
+    }
+    .status{
+      display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;
+      padding:18px 22px 13px;background:#0c1018;border-bottom:1px solid rgba(255,255,255,.08)
+    }
+    .barbox{height:13px;background:#07090f;border-radius:999px;overflow:hidden}
+    .bar{height:100%;width:0;background:linear-gradient(90deg,var(--yellow),var(--orange),var(--red));transition:.3s}
+    .chip{background:#171d29;border-radius:999px;padding:8px 13px;font-weight:900;white-space:nowrap}
+    .content{padding:24px 22px 26px}
+    .tag{
+      display:inline-block;padding:7px 13px;border-radius:9px;
+      background:rgba(255,59,79,.1);border:1px solid rgba(255,59,79,.5);
+      color:#ff9ba7;font-weight:900;margin-bottom:13px
+    }
+    .question{margin:0 0 22px;font-size:clamp(22px,2.8vw,31px);line-height:1.45}
+    .options{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .option{
+      min-height:72px;border-radius:15px;border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(135deg,#1b2230,#10141d);
+      color:white;display:flex;align-items:center;gap:13px;
+      padding:16px 17px;font-size:18px;text-align:left;cursor:pointer;transition:.16s
+    }
+    .option:hover:not(:disabled){transform:translateY(-2px);border-color:var(--orange);box-shadow:0 0 18px rgba(255,138,42,.15)}
+    .letter{
+      width:40px;height:40px;flex:0 0 40px;border-radius:10px;
+      display:grid;place-items:center;font-weight:1000;color:#160b00;
+      background:linear-gradient(135deg,var(--yellow),var(--orange))
+    }
+    .option.correct{background:linear-gradient(135deg,#145238,#0a2d22)!important;border-color:var(--green)!important}
+    .option.wrong{background:linear-gradient(135deg,#651e2b,#310d15)!important;border-color:var(--red)!important}
+    .feedback{
+      display:none;margin-top:20px;padding:17px 18px;border-radius:15px;
+      background:#0b0f16;border-left:5px solid;line-height:1.6
+    }
+    .feedback.show{display:block}.feedback.correct{border-color:var(--green)}.feedback.wrong{border-color:var(--yellow)}
+    .feedback strong{display:block;margin-bottom:7px}
+    .details{margin-top:9px;color:#cbd5e1;font-size:15px}
+    .controls{display:flex;justify-content:flex-end;margin-top:20px}
+    .action{
+      border:0;border-radius:12px;padding:13px 23px;font-size:17px;font-weight:1000;
+      color:#1a0900;cursor:pointer;background:linear-gradient(90deg,var(--yellow),var(--orange))
+    }
+    .action:disabled{opacity:.35;cursor:not-allowed}
+    .result{display:none;text-align:center;padding:38px 24px}.result.show{display:block}
+    .result-icon{font-size:74px}.score-big{font-size:62px;font-weight:1000;color:var(--orange)}
+    .review{text-align:left;margin-top:25px;border-top:1px solid rgba(255,255,255,.1);padding-top:18px}
+    .review-item{padding:13px 14px;margin-bottom:10px;border-radius:12px;background:#0d121b;border-left:5px solid #64748b}
+    .review-item.ok{border-left-color:var(--green)}.review-item.no{border-left-color:var(--red)}
+    @media(max-width:760px){
+      .hero{grid-template-columns:85px 1fr}.sound{grid-column:1/-1;justify-self:end}
+      .status{grid-template-columns:1fr 1fr}.barbox{grid-column:1/-1;order:3}
+      .options{grid-template-columns:1fr}.content{padding:18px 15px 22px}
+      .fighter{transform:scale(.78);transform-origin:left center;width:85px}
+    }
+  </style>
+</head>
+<body>
+<div class="slash"></div><div class="slash2"></div>
+<main class="wrap">
+  <header class="hero">
+    <div class="fighter">
+      <div class="aura"></div><div class="hair"></div><div class="face"></div>
+      <div class="band"></div><div class="eye l"></div><div class="eye r"></div>
+    </div>
+    <div>
+      <h1>Fighting Anime Vocabulary Battle</h1>
+      <p class="subtitle">Grade 12 · Unit 3 · Exercise 2 · Option C</p>
+    </div>
+    <button class="sound" id="soundBtn">🔊 Âm thanh: Bật</button>
+  </header>
+
+  <section class="card">
+    <div id="quizArea">
+      <div class="status">
+        <div class="barbox"><div class="bar" id="bar"></div></div>
+        <div class="chip" id="counter"></div>
+        <div class="chip" id="scoreChip"></div>
+      </div>
+      <div class="content">
+        <div class="tag" id="tag"></div>
+        <h2 class="question" id="question"></h2>
+        <div class="options" id="options"></div>
+        <div class="feedback" id="feedback"></div>
+        <div class="controls"><button class="action" id="nextBtn" disabled>Next Attack ⚔</button></div>
+      </div>
+    </div>
+
+    <div class="result" id="resultArea">
+      <div class="result-icon" id="resultIcon">🔥</div>
+      <h2>Battle Complete</h2>
+      <div class="score-big" id="finalScore"></div>
+      <p id="message"></p>
+      <button class="action" id="restartBtn">Fight Again ↻</button>
+      <div class="review" id="review"></div>
+    </div>
+  </section>
+</main>
+
+<script>
+const questions=[
+["The government has introduced <strong><u>mandatory</u></strong> recycling regulations for all manufacturing companies.",["compulsory","voluntary","official","nationwide"],1,"mandatory = bắt buộc ↔ voluntary = tự nguyện.","compulsory đồng nghĩa; official và nationwide không đối nghĩa trực tiếp.","OPPOSITE"],
+["Scientists warned that the destruction of forests could have <strong><u>irreversible</u></strong> consequences.",["permanent","lasting","temporary","serious"],2,"irreversible = không thể đảo ngược; từ trái nghĩa gần nhất là temporary.","permanent và lasting gần nghĩa; serious chỉ mức độ nghiêm trọng.","OPPOSITE"],
+["The new environmental policy has been widely <strong><u>praised</u></strong> by scientists.",["supported","criticized","welcomed","appreciated"],1,"praised = được ca ngợi ↔ criticized = bị chỉ trích.","","OPPOSITE"],
+["Many developing countries still <strong><u>depend on</u></strong> fossil fuels for electricity generation.",["rely on","abandon","consume","import"],1,"depend on = phụ thuộc vào ↔ abandon = từ bỏ.","rely on là đồng nghĩa.","OPPOSITE"],
+["The company has made <strong><u>substantial</u></strong> investments in renewable energy projects.",["significant","enormous","minor","considerable"],2,"substantial = đáng kể ↔ minor = nhỏ, không đáng kể.","","OPPOSITE"],
+["Governments should <strong><u>enforce</u></strong> stricter environmental regulations.",["obey","introduce","implement","ignore"],2,"enforce ≈ implement trong ngữ cảnh thực thi chính sách.","obey = tuân theo; ignore = phớt lờ.","CLOSEST"],
+["Many countries are trying to <strong><u>mitigate</u></strong> the effects of climate change.",["eliminate","reduce","worsen","postpone"],1,"mitigate = làm giảm mức độ nghiêm trọng ≈ reduce.","Không chọn eliminate vì không có nghĩa loại bỏ hoàn toàn.","CLOSEST"],
+["The government plans to <strong><u>allocate</u></strong> more funding for environmental education.",["distribute","collect","borrow","reduce"],0,"allocate = phân bổ ≈ distribute.","","CLOSEST"],
+["Many species are becoming <strong><u>vulnerable</u></strong> because of habitat destruction.",["endangered","protected","extinct","harmful"],0,"vulnerable = dễ bị tổn thương; trong ngữ cảnh môi trường gần nhất với endangered.","","CLOSEST"],
+["Scientists continue to <strong><u>monitor</u></strong> air quality in major cities.",["improve","observe","replace","estimate"],1,"monitor = theo dõi thường xuyên ≈ observe carefully.","Không phải estimate.","CLOSEST"]
+];
+
+const L=["A","B","C","D"];
+let current=0,score=0,answered=false,answers=[],soundOn=true,audioCtx=null;
+const $=id=>document.getElementById(id);
+
+function getCtx(){
+  if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==="suspended") audioCtx.resume();
+  return audioCtx;
+}
+function hit(freq,duration,type="square",volume=.05,delay=0){
+  if(!soundOn)return;
+  const c=getCtx(),o=c.createOscillator(),g=c.createGain(),s=c.currentTime+delay;
+  o.type=type;o.frequency.setValueAtTime(freq,s);
+  g.gain.setValueAtTime(.0001,s);
+  g.gain.exponentialRampToValueAtTime(volume,s+.01);
+  g.gain.exponentialRampToValueAtTime(.0001,s+duration);
+  o.connect(g);g.connect(c.destination);o.start(s);o.stop(s+duration+.03);
+}
+function soundCorrect(){
+  hit(180,.08,"square",.035,0);
+  hit(520,.09,"sawtooth",.04,.07);
+  hit(980,.16,"triangle",.05,.15);
+}
+function soundWrong(){
+  hit(140,.16,"sawtooth",.05,0);
+  hit(95,.24,"square",.035,.1);
+  hit(70,.18,"sine",.03,.24);
+}
+function soundNext(){
+  hit(330,.06,"triangle",.025,0);
+  hit(440,.06,"triangle",.022,.05);
+  hit(660,.08,"triangle",.02,.1);
+}
+function soundFinish(){
+  [220,330,440,660,880].forEach((f,i)=>hit(f,.18,"sawtooth",.03,i*.09));
+}
+
+$("soundBtn").onclick=()=>{
+  soundOn=!soundOn;
+  $("soundBtn").textContent=soundOn?"🔊 Âm thanh: Bật":"🔇 Âm thanh: Tắt";
+  if(soundOn)soundNext();
+};
+
+function render(){
+  answered=false;
+  $("nextBtn").disabled=true;
+  $("feedback").className="feedback";
+  $("feedback").innerHTML="";
+  const q=questions[current];
+  $("tag").textContent=`${q[5]} · Question ${current+1}`;
+  $("question").innerHTML=q[0];
+  $("counter").textContent=`Câu ${current+1}/${questions.length}`;
+  $("scoreChip").textContent=`🔥 ${score} điểm`;
+  $("bar").style.width=`${current/questions.length*100}%`;
+  $("options").innerHTML="";
+  q[1].forEach((op,i)=>{
+    const b=document.createElement("button");
+    b.className="option";
+    b.innerHTML=`<span class="letter">${L[i]}</span><span>${op}</span>`;
+    b.onclick=()=>choose(i);
+    $("options").appendChild(b);
+  });
+  $("nextBtn").textContent=current===questions.length-1?"Finish Battle 🔥":"Next Attack ⚔";
+}
+
+function choose(i){
+  if(answered)return;
+  answered=true;
+  const q=questions[current];
+  const btns=[...document.querySelectorAll(".option")];
+  const right=i===q[2];
+  btns.forEach(b=>b.disabled=true);
+  btns[q[2]].classList.add("correct");
+
+  if(right){
+    score++;
+    btns[i].classList.add("correct");
+    $("feedback").className="feedback correct show";
+    $("feedback").innerHTML=`<strong>🔥 Critical Hit! Chính xác.</strong>${q[3]}${q[4]?`<div class="details">${q[4]}</div>`:""}`;
+    soundCorrect();
+  }else{
+    btns[i].classList.add("wrong");
+    $("feedback").className="feedback wrong show";
+    $("feedback").innerHTML=`<strong>⚠ Attack Missed. Đáp án đúng: ${L[q[2]]}. ${q[1][q[2]]}</strong>${q[3]}${q[4]?`<div class="details">${q[4]}</div>`:""}`;
+    soundWrong();
+  }
+  answers.push({selected:i,right,correct:q[2]});
+  $("scoreChip").textContent=`🔥 ${score} điểm`;
+  $("bar").style.width=`${(current+1)/questions.length*100}%`;
+  $("nextBtn").disabled=false;
+}
+
+function showResult(){
+  $("quizArea").style.display="none";
+  $("resultArea").classList.add("show");
+  $("finalScore").textContent=`${score}/${questions.length}`;
+  soundFinish();
+  const p=score/questions.length*100;
+  if(p===100){
+    $("resultIcon").textContent="🏆🔥";
+    $("message").textContent="Ultimate Champion! Bạn đã thắng toàn bộ trận đấu từ vựng.";
+  }else if(p>=80){
+    $("resultIcon").textContent="⚔️✨";
+    $("message").textContent="Elite Fighter! Kỹ năng từ vựng của bạn rất mạnh.";
+  }else if(p>=60){
+    $("resultIcon").textContent="🥊💥";
+    $("message").textContent="Good Battle! Xem lại các câu sai để tăng sức mạnh.";
+  }else{
+    $("resultIcon").textContent="📘🔥";
+    $("message").textContent="Training Mode! Ôn lại từ vựng rồi chiến đấu lần nữa.";
+  }
+  let h="<h3>Battle Review</h3>";
+  questions.forEach((q,n)=>{
+    const a=answers[n];
+    h+=`<div class="review-item ${a&&a.right?"ok":"no"}"><strong>Câu ${n+1}: ${a&&a.right?"Đúng":"Sai"}</strong><br>Bạn chọn: ${a?`${L[a.selected]}. ${q[1][a.selected]}`:"Chưa trả lời"}<br>Đáp án đúng: ${L[q[2]]}. ${q[1][q[2]]}<br><em>${q[3]}</em>${q[4]?`<div class="details">${q[4]}</div>`:""}</div>`;
+  });
+  $("review").innerHTML=h;
+}
+
+$("nextBtn").onclick=()=>{
+  if(!answered)return;
+  soundNext();
+  if(current<questions.length-1){current++;render();}
+  else showResult();
+};
+$("restartBtn").onclick=()=>{
+  current=0;score=0;answered=false;answers=[];
+  $("resultArea").classList.remove("show");
+  $("quizArea").style.display="block";
+  render();soundNext();
+};
+
+render();
+</script>
+</body>
+</html>

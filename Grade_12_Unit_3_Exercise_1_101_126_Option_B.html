@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade 12 - Unit 3 - Exercise 1 (101-126) - Option B</title>
+  <style>
+    :root {
+      --bg: #070b16;
+      --panel: rgba(13, 19, 39, 0.94);
+      --panel2: rgba(20, 28, 54, 0.95);
+      --cyan: #3ee7ff;
+      --blue: #4b7cff;
+      --purple: #9d5cff;
+      --pink: #ff4fa3;
+      --green: #3bf7a1;
+      --red: #ff5d73;
+      --yellow: #ffd166;
+      --text: #eef6ff;
+      --muted: #9fb1c7;
+      --line: rgba(126, 170, 255, 0.22);
+      --shadow: 0 24px 70px rgba(0,0,0,.52);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        linear-gradient(rgba(62,231,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(62,231,255,.035) 1px, transparent 1px),
+        radial-gradient(circle at 18% 15%, rgba(75,124,255,.28), transparent 28%),
+        radial-gradient(circle at 82% 18%, rgba(157,92,255,.24), transparent 25%),
+        radial-gradient(circle at 50% 100%, rgba(255,79,163,.12), transparent 35%),
+        var(--bg);
+      background-size: 36px 36px, 36px 36px, auto, auto, auto, auto;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      width: 360px;
+      height: 360px;
+      border: 1px solid rgba(62,231,255,.15);
+      transform: rotate(45deg);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before { left: -190px; top: 14%; }
+    body::after { right: -210px; bottom: 8%; border-color: rgba(255,79,163,.14); }
+
+    .shell {
+      width: min(1080px, 100%);
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 130px 1fr auto;
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .avatar {
+      width: 118px;
+      height: 118px;
+      position: relative;
+      filter: drop-shadow(0 0 18px rgba(62,231,255,.25));
+    }
+
+    .hair {
+      position: absolute;
+      inset: 2px 10px 8px;
+      background: linear-gradient(145deg, #10182f 0%, #293b73 55%, #6d3db3 100%);
+      clip-path: polygon(14% 20%, 35% 3%, 48% 16%, 64% 0, 88% 19%, 100% 52%, 87% 91%, 61% 100%, 26% 92%, 2% 60%);
+      border: 2px solid rgba(62,231,255,.4);
+    }
+
+    .face {
+      position: absolute;
+      left: 28px;
+      top: 27px;
+      width: 63px;
+      height: 67px;
+      background: linear-gradient(#f3d7c7, #ddb7a8);
+      border-radius: 46% 46% 43% 43%;
+      z-index: 2;
+      border: 2px solid rgba(255,255,255,.18);
+    }
+
+    .fringe {
+      position: absolute;
+      left: 22px;
+      top: 14px;
+      width: 77px;
+      height: 42px;
+      background: linear-gradient(145deg, #151d39, #364d91);
+      clip-path: polygon(0 0, 100% 0, 88% 38%, 66% 18%, 54% 74%, 35% 26%, 21% 70%, 8% 42%);
+      z-index: 3;
+    }
+
+    .eye {
+      position: absolute;
+      top: 55px;
+      width: 13px;
+      height: 6px;
+      background: var(--cyan);
+      box-shadow: 0 0 10px var(--cyan);
+      z-index: 4;
+      transform: skewX(-12deg);
+    }
+
+    .eye.left { left: 42px; }
+    .eye.right { right: 35px; }
+
+    .mask {
+      position: absolute;
+      left: 35px;
+      top: 74px;
+      width: 49px;
+      height: 22px;
+      border: 2px solid rgba(62,231,255,.6);
+      border-top: 0;
+      border-radius: 0 0 14px 14px;
+      z-index: 4;
+      background: rgba(7,11,22,.45);
+    }
+
+    .slash {
+      position: absolute;
+      width: 54px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--pink), transparent);
+      transform: rotate(-28deg);
+      right: -3px;
+      top: 33px;
+      box-shadow: 0 0 12px var(--pink);
+      z-index: 5;
+    }
+
+    .title h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 46px);
+      letter-spacing: .5px;
+      background: linear-gradient(90deg, #fff, var(--cyan), #cdb6ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 24px rgba(62,231,255,.14);
+    }
+
+    .title p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: .3px;
+    }
+
+    .sound-btn {
+      border: 1px solid rgba(62,231,255,.35);
+      background: rgba(14,23,46,.9);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 11px 14px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 0 18px rgba(62,231,255,.08);
+    }
+
+    .card {
+      border-radius: 26px;
+      overflow: hidden;
+      background: linear-gradient(180deg, var(--panel2), var(--panel));
+      border: 1px solid rgba(126,170,255,.26);
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, transparent 0 7%, rgba(62,231,255,.03) 7% 7.3%, transparent 7.3% 100%),
+        linear-gradient(180deg, transparent 0 12%, rgba(157,92,255,.03) 12% 12.3%, transparent 12.3% 100%);
+    }
+
+    .status {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 12px;
+      align-items: center;
+      padding: 18px 22px 13px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(7,11,22,.42);
+    }
+
+    .progress-shell {
+      height: 13px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #0d152a;
+      border: 1px solid rgba(62,231,255,.18);
+    }
+
+    .progress {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--cyan), var(--blue), var(--purple), var(--pink));
+      box-shadow: 0 0 15px rgba(62,231,255,.45);
+      transition: width .35s ease;
+    }
+
+    .chip {
+      border: 1px solid rgba(126,170,255,.25);
+      background: rgba(21,30,58,.9);
+      color: #dcecff;
+      border-radius: 999px;
+      padding: 8px 13px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .content { padding: 24px 22px 26px; }
+
+    .qtag {
+      display: inline-block;
+      color: var(--cyan);
+      border: 1px solid rgba(62,231,255,.45);
+      background: rgba(62,231,255,.07);
+      padding: 7px 13px;
+      border-radius: 10px;
+      font-weight: 900;
+      letter-spacing: .7px;
+      margin-bottom: 13px;
+      text-transform: uppercase;
+      box-shadow: inset 0 0 16px rgba(62,231,255,.05);
+    }
+
+    .question {
+      margin: 0 0 22px;
+      font-size: clamp(22px, 2.8vw, 31px);
+      line-height: 1.45;
+      color: #f7fbff;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .option {
+      min-height: 72px;
+      border-radius: 17px;
+      border: 1px solid rgba(126,170,255,.26);
+      background:
+        linear-gradient(135deg, rgba(27,38,73,.96), rgba(13,20,42,.97));
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 16px 17px;
+      font-size: 18px;
+      text-align: left;
+      cursor: pointer;
+      transition: .17s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .option::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(62,231,255,.08), transparent);
+      transform: translateX(-100%);
+      transition: transform .4s ease;
+    }
+
+    .option:hover:not(:disabled) {
+      transform: translateY(-2px);
+      border-color: var(--cyan);
+      box-shadow: 0 0 20px rgba(62,231,255,.12);
+    }
+
+    .option:hover:not(:disabled)::after {
+      transform: translateX(100%);
+    }
+
+    .option:disabled { cursor: default; }
+
+    .letter {
+      width: 40px;
+      height: 40px;
+      flex: 0 0 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      font-weight: 1000;
+      color: #07101e;
+      background: linear-gradient(135deg, var(--cyan), #a1f3ff);
+      box-shadow: 0 0 13px rgba(62,231,255,.25);
+    }
+
+    .option.correct {
+      border-color: var(--green);
+      background: linear-gradient(135deg, rgba(24,82,63,.95), rgba(10,42,36,.97));
+      color: #e9fff7;
+      box-shadow: 0 0 22px rgba(59,247,161,.16);
+    }
+
+    .option.correct .letter {
+      background: var(--green);
+      box-shadow: 0 0 15px rgba(59,247,161,.5);
+    }
+
+    .option.wrong {
+      border-color: var(--red);
+      background: linear-gradient(135deg, rgba(91,33,50,.96), rgba(48,17,29,.98));
+      color: #fff1f4;
+      box-shadow: 0 0 22px rgba(255,93,115,.14);
+    }
+
+    .option.wrong .letter {
+      background: var(--red);
+      color: white;
+      box-shadow: 0 0 15px rgba(255,93,115,.45);
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 20px;
+      padding: 17px 18px;
+      border-radius: 16px;
+      line-height: 1.58;
+      border-left: 5px solid;
+      background: rgba(9,15,31,.84);
+    }
+
+    .feedback.show { display: block; }
+
+    .feedback.correct {
+      border-color: var(--green);
+      box-shadow: inset 0 0 22px rgba(59,247,161,.04);
+    }
+
+    .feedback.wrong {
+      border-color: var(--yellow);
+      box-shadow: inset 0 0 22px rgba(255,209,102,.04);
+    }
+
+    .feedback strong {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 17px;
+    }
+
+    .details {
+      margin-top: 10px;
+      color: #c4d1e4;
+      font-size: 15px;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+    }
+
+    .action {
+      border: 0;
+      border-radius: 14px;
+      padding: 13px 23px;
+      font-size: 17px;
+      font-weight: 1000;
+      color: #07101e;
+      cursor: pointer;
+      background: linear-gradient(90deg, var(--cyan), #8cf2ff);
+      box-shadow: 0 0 22px rgba(62,231,255,.2);
+      transition: .17s ease;
+    }
+
+    .action:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 0 28px rgba(62,231,255,.3);
+    }
+
+    .action:disabled {
+      opacity: .38;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .result {
+      display: none;
+      text-align: center;
+      padding: 38px 24px 42px;
+    }
+
+    .result.show { display: block; }
+
+    .result-icon {
+      font-size: 76px;
+      filter: drop-shadow(0 0 20px rgba(62,231,255,.24));
+    }
+
+    .result h2 {
+      margin: 6px 0 0;
+      font-size: 36px;
+      color: #eefbff;
+    }
+
+    .score-big {
+      font-size: 64px;
+      font-weight: 1000;
+      margin: 12px 0;
+      background: linear-gradient(90deg, var(--cyan), var(--purple), var(--pink));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .result p {
+      max-width: 650px;
+      margin: 0 auto 24px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    .review {
+      text-align: left;
+      margin-top: 26px;
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+    }
+
+    .review h3 {
+      color: var(--cyan);
+      margin: 0 0 13px;
+    }
+
+    .review-item {
+      padding: 14px 15px;
+      margin-bottom: 11px;
+      border-radius: 14px;
+      background: rgba(12,19,39,.8);
+      border-left: 5px solid #6078a5;
+      line-height: 1.5;
+    }
+
+    .review-item.ok { border-left-color: var(--green); }
+    .review-item.no { border-left-color: var(--red); }
+
+    @media (max-width: 780px) {
+      .hero {
+        grid-template-columns: 88px 1fr;
+      }
+
+      .sound-btn {
+        grid-column: 1 / -1;
+        justify-self: end;
+      }
+
+      .avatar {
+        transform: scale(.74);
+        transform-origin: left center;
+        width: 88px;
+        margin-right: -18px;
+      }
+
+      .status {
+        grid-template-columns: 1fr 1fr;
+        padding: 15px 15px 10px;
+      }
+
+      .progress-shell {
+        grid-column: 1 / -1;
+        order: 3;
+      }
+
+      .options { grid-template-columns: 1fr; }
+      .content { padding: 18px 15px 22px; }
+      .option { font-size: 16.5px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div class="avatar" aria-hidden="true">
+        <div class="hair"></div>
+        <div class="face"></div>
+        <div class="fringe"></div>
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+        <div class="mask"></div>
+        <div class="slash"></div>
+      </div>
+
+      <div class="title">
+        <h1>Collocation Practice – Environment</h1>
+        <p>Grade 12 · Advanced Level · Exercise 1 (101–126) · Option B</p>
+      </div>
+
+      <button class="sound-btn" id="soundBtn">🔊 Âm thanh: Bật</button>
+    </header>
+
+    <section class="card">
+      <div id="quizArea">
+        <div class="status">
+          <div class="progress-shell">
+            <div class="progress" id="progress"></div>
+          </div>
+          <div class="chip" id="counter">Câu 1/15</div>
+          <div class="chip" id="scoreChip">⚡ 0 điểm</div>
+        </div>
+
+        <div class="content">
+          <div class="qtag" id="questionLabel">Question 1</div>
+          <h2 class="question" id="questionText"></h2>
+          <div class="options" id="options"></div>
+          <div class="feedback" id="feedback"></div>
+
+          <div class="controls">
+            <button class="action" id="nextBtn" disabled>Tiếp tục ▶</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="result" id="resultArea">
+        <div class="result-icon" id="resultIcon">⚔️</div>
+        <h2>Mission Complete</h2>
+        <div class="score-big" id="finalScore">0/15</div>
+        <p id="resultMessage"></p>
+        <button class="action" id="restartBtn">Chơi lại ↻</button>
+        <div class="review" id="review"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const questions = [
+      {
+        q: "Governments must take immediate action to ____________ the growing problem of plastic pollution.",
+        options: ["address", "answer", "reply", "discuss"],
+        answer: 0,
+        explanation: "address a problem/issue = giải quyết, xử lý một vấn đề.",
+        details: "answer/reply không dùng với problem theo nghĩa giải quyết; discuss chỉ có nghĩa thảo luận."
+      },
+      {
+        q: "The campaign was launched to ____________ public awareness of the dangers of air pollution.",
+        options: ["grow", "raise", "rise", "lift"],
+        answer: 1,
+        explanation: "raise awareness = nâng cao nhận thức.",
+        details: "rise là nội động từ; grow awareness và lift awareness không phải collocation chuẩn."
+      },
+      {
+        q: "Many environmental organizations are calling ____________ tougher laws on industrial waste.",
+        options: ["out", "on", "for", "up"],
+        answer: 2,
+        explanation: "call for + noun = kêu gọi, yêu cầu điều gì.",
+        details: "call out = gọi lớn/chỉ trích; call on = kêu gọi ai làm gì; call up = gọi điện/triệu tập."
+      },
+      {
+        q: "Households can ____________ their energy consumption by using appliances more efficiently.",
+        options: ["narrow", "cut down on", "fall back on", "run out of"],
+        answer: 1,
+        explanation: "cut down on energy consumption = cắt giảm mức tiêu thụ năng lượng.",
+        details: "fall back on = dựa vào phương án dự phòng; run out of = hết sạch."
+      },
+      {
+        q: "The new policy is expected to ____________ a significant reduction in carbon emissions.",
+        options: ["bring about", "take over", "turn down", "carry on"],
+        answer: 0,
+        explanation: "bring about a change/reduction/result = gây ra, mang lại.",
+        details: "take over = tiếp quản; turn down = từ chối/giảm; carry on = tiếp tục."
+      },
+      {
+        q: "Several companies have pledged to ____________ their dependence on fossil fuels.",
+        options: ["lessen", "decline", "reduce", "lower down"],
+        answer: 2,
+        explanation: "reduce dependence on = giảm sự phụ thuộc vào.",
+        details: "lessen có thể dùng nhưng kém tự nhiên hơn; decline không dùng trực tiếp như ngoại động từ ở đây; lower down sai kết hợp."
+      },
+      {
+        q: "Scientists are conducting research to ____________ the long-term effects of microplastics on human health.",
+        options: ["assess", "judge", "test about", "estimate about"],
+        answer: 0,
+        explanation: "assess the effects/impact/damage = đánh giá tác động hoặc thiệt hại.",
+        details: "test about và estimate about sai cấu trúc; judge thường mang nghĩa phán xét."
+      },
+      {
+        q: "The city council has introduced measures to ____________ illegal dumping in residential areas.",
+        options: ["prevent", "avoid from", "protect", "refuse"],
+        answer: 0,
+        explanation: "prevent illegal dumping = ngăn chặn việc đổ rác trái phép.",
+        details: "avoid không đi với from; protect cần cấu trúc protect something from something."
+      },
+      {
+        q: "Individuals can make a meaningful contribution ____________ environmental protection by changing their daily habits.",
+        options: ["for", "into", "to", "with"],
+        answer: 2,
+        explanation: "make a contribution to + noun/V-ing = đóng góp vào.",
+        details: "contribution for/into/with không phù hợp trong cấu trúc này."
+      },
+      {
+        q: "The authorities are under pressure to ____________ stricter controls on factory emissions.",
+        options: ["impose", "make", "build", "set up on"],
+        answer: 0,
+        explanation: "impose controls/restrictions/limits = áp đặt các biện pháp kiểm soát hoặc hạn chế.",
+        details: "make controls, build controls và set up on không phải kết hợp đúng."
+      },
+      {
+        q: "Many species are at risk because their natural habitats are being ____________ at an alarming rate.",
+        options: ["destroyed", "damaged up", "disappeared", "reduced away"],
+        answer: 0,
+        explanation: "destroy natural habitats = phá hủy môi trường sống tự nhiên.",
+        details: "disappear là nội động từ; damage up và reduce away không tồn tại trong cách dùng này."
+      },
+      {
+        q: "The government has committed itself ____________ achieving net-zero emissions by 2050.",
+        options: ["for", "to", "with", "on"],
+        answer: 1,
+        explanation: "commit oneself to + noun/V-ing = cam kết thực hiện điều gì.",
+        details: "to là giới từ nên theo sau là achieving."
+      },
+      {
+        q: "Environmental education can play a vital role ____________ shaping responsible consumer behaviour.",
+        options: ["in", "on", "at", "for"],
+        answer: 0,
+        explanation: "play a role in + noun/V-ing = đóng vai trò trong việc gì.",
+        details: ""
+      },
+      {
+        q: "The factory was fined for failing to ____________ environmental regulations.",
+        options: ["obey with", "comply with", "follow to", "respond with"],
+        answer: 1,
+        explanation: "comply with regulations/rules/laws = tuân thủ quy định.",
+        details: "obey không đi với with; follow không đi với to; respond with không hợp nghĩa."
+      },
+      {
+        q: "Without urgent action, climate change could ____________ serious consequences for future generations.",
+        options: ["lead to", "result from", "give up", "depend on"],
+        answer: 0,
+        explanation: "lead to serious consequences = dẫn đến những hậu quả nghiêm trọng.",
+        details: "result from = bắt nguồn từ; give up = từ bỏ; depend on = phụ thuộc vào."
+      }
+    ];
+
+    const letters = ["A", "B", "C", "D"];
+    let current = 0;
+    let score = 0;
+    let answered = false;
+    let answers = [];
+    let soundOn = true;
+    let audioCtx = null;
+
+    const questionLabel = document.getElementById("questionLabel");
+    const questionText = document.getElementById("questionText");
+    const optionsBox = document.getElementById("options");
+    const feedback = document.getElementById("feedback");
+    const nextBtn = document.getElementById("nextBtn");
+    const counter = document.getElementById("counter");
+    const scoreChip = document.getElementById("scoreChip");
+    const progress = document.getElementById("progress");
+    const quizArea = document.getElementById("quizArea");
+    const resultArea = document.getElementById("resultArea");
+    const finalScore = document.getElementById("finalScore");
+    const resultMessage = document.getElementById("resultMessage");
+    const resultIcon = document.getElementById("resultIcon");
+    const restartBtn = document.getElementById("restartBtn");
+    const review = document.getElementById("review");
+    const soundBtn = document.getElementById("soundBtn");
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === "suspended") audioCtx.resume();
+      return audioCtx;
+    }
+
+    function tone(freq, duration = 0.12, type = "sine", volume = 0.06, delay = 0) {
+      if (!soundOn) return;
+      const ctx = getAudioContext();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const start = ctx.currentTime + delay;
+
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, start);
+      gain.gain.setValueAtTime(0.0001, start);
+      gain.gain.exponentialRampToValueAtTime(volume, start + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(start);
+      osc.stop(start + duration + 0.03);
+    }
+
+    function playCorrect() {
+      tone(520, .12, "triangle", .065, 0);
+      tone(660, .13, "triangle", .06, .10);
+      tone(880, .17, "sine", .055, .20);
+    }
+
+    function playWrong() {
+      tone(220, .17, "sawtooth", .04, 0);
+      tone(170, .23, "square", .025, .12);
+    }
+
+    function playNext() {
+      tone(420, .07, "square", .025, 0);
+      tone(620, .08, "square", .02, .06);
+    }
+
+    function playFinish() {
+      [440, 554, 659, 880].forEach((f, i) => tone(f, .22, "triangle", .05, i * .12));
+    }
+
+    soundBtn.addEventListener("click", () => {
+      soundOn = !soundOn;
+      soundBtn.textContent = soundOn ? "🔊 Âm thanh: Bật" : "🔇 Âm thanh: Tắt";
+      if (soundOn) playNext();
+    });
+
+    function renderQuestion() {
+      answered = false;
+      nextBtn.disabled = true;
+      feedback.className = "feedback";
+      feedback.innerHTML = "";
+
+      const item = questions[current];
+      questionLabel.textContent = `Question ${current + 1}`;
+      questionText.textContent = item.q;
+      counter.textContent = `Câu ${current + 1}/${questions.length}`;
+      scoreChip.textContent = `⚡ ${score} điểm`;
+      progress.style.width = `${(current / questions.length) * 100}%`;
+      optionsBox.innerHTML = "";
+
+      item.options.forEach((option, index) => {
+        const btn = document.createElement("button");
+        btn.className = "option";
+        btn.innerHTML = `<span class="letter">${letters[index]}</span><span>${option}</span>`;
+        btn.addEventListener("click", () => chooseAnswer(index));
+        optionsBox.appendChild(btn);
+      });
+
+      nextBtn.textContent =
+        current === questions.length - 1 ? "Xem kết quả ⚔" : "Tiếp tục ▶";
+    }
+
+    function chooseAnswer(index) {
+      if (answered) return;
+      answered = true;
+
+      const item = questions[current];
+      const buttons = [...document.querySelectorAll(".option")];
+      const isCorrect = index === item.answer;
+
+      buttons.forEach(btn => btn.disabled = true);
+      buttons[item.answer].classList.add("correct");
+
+      if (isCorrect) {
+        score++;
+        buttons[index].classList.add("correct");
+        feedback.className = "feedback correct show";
+        feedback.innerHTML = `
+          <strong>⚡ Chính xác! Combo thành công.</strong>
+          ${item.explanation}
+          ${item.details ? `<div class="details">${item.details}</div>` : ""}
+        `;
+        playCorrect();
+      } else {
+        buttons[index].classList.add("wrong");
+        feedback.className = "feedback wrong show";
+        feedback.innerHTML = `
+          <strong>⚠ Chưa đúng. Đáp án đúng: ${letters[item.answer]}. ${item.options[item.answer]}</strong>
+          ${item.explanation}
+          ${item.details ? `<div class="details">${item.details}</div>` : ""}
+        `;
+        playWrong();
+      }
+
+      answers.push({
+        selected: index,
+        correct: item.answer,
+        isCorrect
+      });
+
+      scoreChip.textContent = `⚡ ${score} điểm`;
+      progress.style.width = `${((current + 1) / questions.length) * 100}%`;
+      nextBtn.disabled = false;
+    }
+
+    function showResult() {
+      quizArea.style.display = "none";
+      resultArea.classList.add("show");
+      finalScore.textContent = `${score}/${questions.length}`;
+      playFinish();
+
+      const percent = Math.round((score / questions.length) * 100);
+
+      if (percent === 100) {
+        resultIcon.textContent = "🏆⚡";
+        resultMessage.textContent = "Perfect rank! Bạn đã chinh phục toàn bộ collocations ở cấp độ nâng cao.";
+      } else if (percent >= 80) {
+        resultIcon.textContent = "⚔️🔥";
+        resultMessage.textContent = "Excellent rank! Kiến thức collocation của bạn rất vững.";
+      } else if (percent >= 60) {
+        resultIcon.textContent = "🛡️✨";
+        resultMessage.textContent = "Good run! Hãy xem lại những câu sai để nâng cấp kỹ năng.";
+      } else {
+        resultIcon.textContent = "🎯📘";
+        resultMessage.textContent = "Training mode! Ôn lại các collocations trọng tâm rồi thử lại.";
+      }
+
+      let html = "<h3>Combat Review</h3>";
+
+      questions.forEach((item, i) => {
+        const a = answers[i];
+        const selected = a ? `${letters[a.selected]}. ${item.options[a.selected]}` : "Chưa trả lời";
+        const correct = `${letters[item.answer]}. ${item.options[item.answer]}`;
+
+        html += `
+          <div class="review-item ${a && a.isCorrect ? "ok" : "no"}">
+            <strong>Câu ${i + 1}: ${a && a.isCorrect ? "Đúng" : "Sai"}</strong><br>
+            Bạn chọn: ${selected}<br>
+            Đáp án đúng: ${correct}<br>
+            <em>${item.explanation}</em>
+            ${item.details ? `<div class="details">${item.details}</div>` : ""}
+          </div>
+        `;
+      });
+
+      review.innerHTML = html;
+    }
+
+    nextBtn.addEventListener("click", () => {
+      if (!answered) return;
+      playNext();
+
+      if (current < questions.length - 1) {
+        current++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    restartBtn.addEventListener("click", () => {
+      current = 0;
+      score = 0;
+      answered = false;
+      answers = [];
+      resultArea.classList.remove("show");
+      quizArea.style.display = "block";
+      renderQuestion();
+      playNext();
+    });
+
+    renderQuestion();
+  </script>
+</body>
+</html>

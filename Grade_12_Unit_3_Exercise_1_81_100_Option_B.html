@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade 12 - Unit 3 - Exercise 1 (81-100) - Option B</title>
+  <style>
+    :root {
+      --bg1: #0f172a;
+      --bg2: #1e3a8a;
+      --card: rgba(255, 255, 255, 0.97);
+      --text: #0f172a;
+      --muted: #64748b;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --correct: #16a34a;
+      --wrong: #dc2626;
+      --warning: #f59e0b;
+      --line: #dbeafe;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(59,130,246,.35), transparent 35%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .game-shell {
+      width: min(940px, 100%);
+    }
+
+    .topbar {
+      color: white;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .topbar h1 {
+      margin: 0 0 6px;
+      font-size: clamp(22px, 3vw, 34px);
+    }
+
+    .topbar p {
+      margin: 0;
+      opacity: .9;
+      font-size: 15px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.28);
+      overflow: hidden;
+    }
+
+    .status {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 12px;
+      align-items: center;
+      padding: 18px 22px 12px;
+    }
+
+    .progress-wrap {
+      height: 12px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #38bdf8, #2563eb);
+      transition: width .35s ease;
+    }
+
+    .pill {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1d4ed8;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+
+    .content {
+      padding: 14px 22px 24px;
+    }
+
+    .question-number {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 15px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+
+    .question {
+      font-size: clamp(21px, 2.8vw, 30px);
+      line-height: 1.42;
+      font-weight: 750;
+      margin: 0 0 22px;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .option {
+      width: 100%;
+      border: 2px solid #cbd5e1;
+      background: #fff;
+      border-radius: 16px;
+      padding: 16px 18px;
+      font-size: 18px;
+      text-align: left;
+      cursor: pointer;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      min-height: 66px;
+    }
+
+    .option:hover:not(:disabled) {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+      background: #eff6ff;
+    }
+
+    .option:disabled {
+      cursor: default;
+    }
+
+    .letter {
+      width: 36px;
+      height: 36px;
+      flex: 0 0 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: #e2e8f0;
+      font-weight: 800;
+    }
+
+    .option.correct {
+      border-color: var(--correct);
+      background: #dcfce7;
+      color: #14532d;
+    }
+
+    .option.correct .letter {
+      background: var(--correct);
+      color: white;
+    }
+
+    .option.wrong {
+      border-color: var(--wrong);
+      background: #fee2e2;
+      color: #7f1d1d;
+    }
+
+    .option.wrong .letter {
+      background: var(--wrong);
+      color: white;
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 20px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      line-height: 1.55;
+      font-size: 16px;
+      border-left: 6px solid;
+    }
+
+    .feedback.show { display: block; }
+
+    .feedback.correct {
+      background: #f0fdf4;
+      color: #14532d;
+      border-color: var(--correct);
+    }
+
+    .feedback.wrong {
+      background: #fff7ed;
+      color: #7c2d12;
+      border-color: var(--warning);
+    }
+
+    .feedback strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 17px;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+    }
+
+    button.action {
+      border: 0;
+      border-radius: 14px;
+      padding: 13px 22px;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 8px 20px rgba(37,99,235,.25);
+    }
+
+    button.action:hover {
+      background: var(--primary-dark);
+    }
+
+    button.action:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .result {
+      display: none;
+      text-align: center;
+      padding: 34px 24px 38px;
+    }
+
+    .result.show { display: block; }
+
+    .result-emoji {
+      font-size: 68px;
+      margin-bottom: 8px;
+    }
+
+    .result h2 {
+      font-size: 32px;
+      margin: 0 0 10px;
+    }
+
+    .score-big {
+      font-size: 54px;
+      color: var(--primary);
+      font-weight: 900;
+      margin: 12px 0;
+    }
+
+    .result p {
+      color: var(--muted);
+      font-size: 18px;
+      margin: 8px auto 24px;
+      max-width: 620px;
+      line-height: 1.5;
+    }
+
+    .review {
+      margin-top: 24px;
+      text-align: left;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 18px;
+    }
+
+    .review h3 {
+      margin: 0 0 12px;
+    }
+
+    .review-item {
+      padding: 12px 14px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      background: #f8fafc;
+      border-left: 5px solid #94a3b8;
+      line-height: 1.45;
+    }
+
+    .review-item.ok { border-left-color: var(--correct); }
+    .review-item.no { border-left-color: var(--wrong); }
+
+    @media (max-width: 700px) {
+      .status {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .progress-wrap {
+        grid-column: 1 / -1;
+        order: 3;
+      }
+
+      .options {
+        grid-template-columns: 1fr;
+      }
+
+      .content {
+        padding: 12px 16px 20px;
+      }
+
+      .status {
+        padding: 16px 16px 10px;
+      }
+
+      .option {
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="game-shell">
+    <header class="topbar">
+      <h1>Grade 12 - Unit 3</h1>
+      <p>Exercise 1 (81-100) - Option B</p>
+    </header>
+
+    <section class="card">
+      <div id="quizArea">
+        <div class="status">
+          <div class="progress-wrap">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+          <div class="pill" id="counter">Câu 1/15</div>
+          <div class="pill" id="score">Điểm: 0</div>
+        </div>
+
+        <div class="content">
+          <div class="question-number" id="questionNumber">Question 1</div>
+          <h2 class="question" id="questionText"></h2>
+          <div class="options" id="options"></div>
+
+          <div class="feedback" id="feedback"></div>
+
+          <div class="controls">
+            <button class="action" id="nextBtn" disabled>Câu tiếp theo</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="result" id="resultArea">
+        <div class="result-emoji" id="resultEmoji">🎉</div>
+        <h2>Hoàn thành!</h2>
+        <div class="score-big" id="finalScore">0/15</div>
+        <p id="resultMessage"></p>
+        <button class="action" id="restartBtn">Chơi lại</button>
+        <div class="review" id="review"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const questions = [
+      {
+        q: "Many tourists forgot to pick up their rubbish after the picnic, leaving the park covered __________ plastic bottles and food containers.",
+        options: ["by", "with", "for", "into"],
+        answer: 1,
+        explanation: "be covered with = bị phủ đầy bởi."
+      },
+      {
+        q: "Switching to renewable energy can help __________ greenhouse gas emissions significantly.",
+        options: ["increase", "improve", "reduce", "produce"],
+        answer: 2,
+        explanation: "reduce emissions = giảm lượng khí thải."
+      },
+      {
+        q: "People are encouraged to turn __________ electrical appliances when they are not in use.",
+        options: ["on", "down", "up", "off"],
+        answer: 3,
+        explanation: "turn off = tắt."
+      },
+      {
+        q: "The conference will take __________ next Friday at the city convention center.",
+        options: ["place", "part", "over", "in"],
+        answer: 0,
+        explanation: "take place = diễn ra."
+      },
+      {
+        q: "Experts agree __________ the need to protect forests for future generations.",
+        options: ["to", "on", "of", "with"],
+        answer: 1,
+        explanation: "agree on + vấn đề."
+      },
+      {
+        q: "This washing machine has an energy label, __________ helps consumers choose more efficient products.",
+        options: ["who", "whom", "which", "where"],
+        answer: 2,
+        explanation: "which thay cho vật và làm chủ ngữ trong mệnh đề quan hệ."
+      },
+      {
+        q: "Families should prepare __________ possible water shortages caused by climate change.",
+        options: ["about", "with", "to", "for"],
+        answer: 3,
+        explanation: "prepare for = chuẩn bị cho."
+      },
+      {
+        q: "The government is investing heavily in __________ projects to protect natural habitats.",
+        options: ["ecotourism", "luxury", "fashion", "industrial"],
+        answer: 0,
+        explanation: "ecotourism projects = các dự án du lịch sinh thái."
+      },
+      {
+        q: "Many companies are designing __________ packaging to reduce environmental pollution.",
+        options: ["sustainability", "sustainable", "sustainably", "sustain"],
+        answer: 1,
+        explanation: "Cần tính từ sustainable bổ nghĩa cho danh từ packaging."
+      },
+      {
+        q: "If everyone recycled more often, the amount of rubbish sent to __________ would decrease dramatically.",
+        options: ["factories", "rivers", "landfills", "schools"],
+        answer: 2,
+        explanation: "landfills = các bãi chôn lấp rác."
+      },
+      {
+        q: "Volunteers spent the whole morning __________ the beach after the holiday weekend.",
+        options: ["bringing up", "carrying on", "turning up", "cleaning up"],
+        answer: 3,
+        explanation: "clean up = dọn sạch."
+      },
+      {
+        q: "Scientists are looking __________ new ways to recycle electronic waste more effectively.",
+        options: ["for", "after", "into", "forward to"],
+        answer: 0,
+        explanation: "look for = tìm kiếm."
+      },
+      {
+        q: "Using bicycles instead of cars may not seem like much, but the savings will add __________ over time.",
+        options: ["on", "up", "off", "out"],
+        answer: 1,
+        explanation: "add up = cộng dồn, tích lũy thành một lượng đáng kể."
+      },
+      {
+        q: "Our research team used __________ to complete the environmental project before the deadline.",
+        options: [
+          "every available equipment",
+          "available every resource",
+          "all available resources",
+          "resources available every"
+        ],
+        answer: 2,
+        explanation: "all available resources = mọi nguồn lực sẵn có."
+      },
+      {
+        q: "To solve pollution effectively, governments must tackle the __________ through stricter recycling laws.",
+        options: [
+          "plastic pollution waste",
+          "pollution plastic problem",
+          "problem plastic waste",
+          "plastic waste problem"
+        ],
+        answer: 3,
+        explanation: "plastic waste problem = vấn đề rác thải nhựa."
+      }
+    ];
+
+    const letters = ["A", "B", "C", "D"];
+    let current = 0;
+    let score = 0;
+    let answered = false;
+    let userAnswers = [];
+
+    const questionNumber = document.getElementById("questionNumber");
+    const questionText = document.getElementById("questionText");
+    const optionsBox = document.getElementById("options");
+    const feedback = document.getElementById("feedback");
+    const nextBtn = document.getElementById("nextBtn");
+    const counter = document.getElementById("counter");
+    const scoreBox = document.getElementById("score");
+    const progressBar = document.getElementById("progressBar");
+    const quizArea = document.getElementById("quizArea");
+    const resultArea = document.getElementById("resultArea");
+    const finalScore = document.getElementById("finalScore");
+    const resultMessage = document.getElementById("resultMessage");
+    const resultEmoji = document.getElementById("resultEmoji");
+    const restartBtn = document.getElementById("restartBtn");
+    const review = document.getElementById("review");
+
+    function renderQuestion() {
+      answered = false;
+      nextBtn.disabled = true;
+      feedback.className = "feedback";
+      feedback.innerHTML = "";
+
+      const item = questions[current];
+      questionNumber.textContent = `Question ${current + 1}`;
+      questionText.textContent = item.q;
+      counter.textContent = `Câu ${current + 1}/${questions.length}`;
+      scoreBox.textContent = `Điểm: ${score}`;
+      progressBar.style.width = `${(current / questions.length) * 100}%`;
+
+      optionsBox.innerHTML = "";
+
+      item.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.className = "option";
+        button.innerHTML = `<span class="letter">${letters[index]}</span><span>${option}</span>`;
+        button.addEventListener("click", () => selectAnswer(index));
+        optionsBox.appendChild(button);
+      });
+
+      nextBtn.textContent = current === questions.length - 1 ? "Xem kết quả" : "Câu tiếp theo";
+    }
+
+    function selectAnswer(index) {
+      if (answered) return;
+      answered = true;
+
+      const item = questions[current];
+      const buttons = [...document.querySelectorAll(".option")];
+      const isCorrect = index === item.answer;
+
+      buttons.forEach(btn => btn.disabled = true);
+      buttons[item.answer].classList.add("correct");
+
+      if (isCorrect) {
+        score++;
+        buttons[index].classList.add("correct");
+        feedback.className = "feedback correct show";
+        feedback.innerHTML = `<strong>✅ Chính xác!</strong>${item.explanation}`;
+      } else {
+        buttons[index].classList.add("wrong");
+        feedback.className = "feedback wrong show";
+        feedback.innerHTML =
+          `<strong>❌ Chưa đúng. Đáp án đúng: ${letters[item.answer]}. ${item.options[item.answer]}</strong>${item.explanation}`;
+      }
+
+      userAnswers.push({
+        selected: index,
+        correct: item.answer,
+        isCorrect
+      });
+
+      scoreBox.textContent = `Điểm: ${score}`;
+      progressBar.style.width = `${((current + 1) / questions.length) * 100}%`;
+      nextBtn.disabled = false;
+    }
+
+    function showResult() {
+      quizArea.style.display = "none";
+      resultArea.classList.add("show");
+      finalScore.textContent = `${score}/${questions.length}`;
+
+      const percent = Math.round(score / questions.length * 100);
+
+      if (percent === 100) {
+        resultEmoji.textContent = "🏆";
+        resultMessage.textContent = "Xuất sắc! Em đã trả lời đúng toàn bộ câu hỏi.";
+      } else if (percent >= 80) {
+        resultEmoji.textContent = "🎉";
+        resultMessage.textContent = "Rất tốt! Em đã nắm khá chắc kiến thức trọng tâm.";
+      } else if (percent >= 60) {
+        resultEmoji.textContent = "👍";
+        resultMessage.textContent = "Khá tốt! Hãy xem lại những câu chưa đúng để ghi nhớ lâu hơn.";
+      } else {
+        resultEmoji.textContent = "📚";
+        resultMessage.textContent = "Em cần ôn lại các cụm từ và cấu trúc trong bài rồi thử lại nhé.";
+      }
+
+      let reviewHTML = "<h3>Ôn lại đáp án</h3>";
+      questions.forEach((item, i) => {
+        const ua = userAnswers[i];
+        const selectedText = ua ? `${letters[ua.selected]}. ${item.options[ua.selected]}` : "Chưa trả lời";
+        const correctText = `${letters[item.answer]}. ${item.options[item.answer]}`;
+
+        reviewHTML += `
+          <div class="review-item ${ua && ua.isCorrect ? "ok" : "no"}">
+            <strong>Câu ${i + 1}: ${ua && ua.isCorrect ? "Đúng" : "Sai"}</strong><br>
+            Em chọn: ${selectedText}<br>
+            Đáp án đúng: ${correctText}<br>
+            <em>${item.explanation}</em>
+          </div>
+        `;
+      });
+      review.innerHTML = reviewHTML;
+    }
+
+    nextBtn.addEventListener("click", () => {
+      if (!answered) return;
+
+      if (current < questions.length - 1) {
+        current++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    restartBtn.addEventListener("click", () => {
+      current = 0;
+      score = 0;
+      answered = false;
+      userAnswers = [];
+      resultArea.classList.remove("show");
+      quizArea.style.display = "block";
+      renderQuestion();
+    });
+
+    renderQuestion();
+  </script>
+</body>
+</html>

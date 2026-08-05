@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade 12 - Unit 3 - Exercise 1 (81-100) - Option C</title>
+  <style>
+    :root {
+      --pink: #ff8fbd;
+      --pink-dark: #f45a9b;
+      --purple: #9b87f5;
+      --blue: #79c7ff;
+      --mint: #8ee3c8;
+      --yellow: #ffe38a;
+      --cream: #fffaf0;
+      --text: #493b58;
+      --correct: #42bf87;
+      --wrong: #ff6b7a;
+      --card: rgba(255, 255, 255, 0.96);
+      --shadow: 0 18px 45px rgba(111, 76, 137, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 12%, rgba(255,255,255,.9) 0 4px, transparent 5px),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,.75) 0 3px, transparent 4px),
+        radial-gradient(circle at 25% 80%, rgba(255,255,255,.75) 0 4px, transparent 5px),
+        linear-gradient(145deg, #ffd9eb 0%, #e4d9ff 45%, #d9f1ff 100%);
+      background-size: 90px 90px, 130px 130px, 150px 150px, auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      overflow-x: hidden;
+    }
+
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      animation: float 5s ease-in-out infinite;
+      opacity: .75;
+      font-size: 26px;
+    }
+
+    .s1 { top: 7%; left: 5%; }
+    .s2 { top: 15%; right: 7%; animation-delay: .8s; }
+    .s3 { bottom: 10%; left: 8%; animation-delay: 1.5s; }
+    .s4 { bottom: 12%; right: 6%; animation-delay: 2.2s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-14px) rotate(8deg); }
+    }
+
+    .game-wrap {
+      width: min(980px, 100%);
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      margin: 0;
+      color: #6d4a85;
+      font-size: clamp(25px, 3.6vw, 40px);
+      text-shadow: 0 3px 0 rgba(255,255,255,.8);
+    }
+
+    .hero p {
+      margin: 5px 0 0;
+      color: #705b80;
+      font-weight: 700;
+    }
+
+    .chibi {
+      width: 92px;
+      height: 92px;
+      position: relative;
+      flex: 0 0 auto;
+      filter: drop-shadow(0 8px 12px rgba(111,76,137,.18));
+    }
+
+    .hair {
+      position: absolute;
+      inset: 5px 8px 16px;
+      background: #7155a8;
+      border-radius: 48% 48% 40% 40%;
+    }
+
+    .face {
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      width: 56px;
+      height: 55px;
+      background: #ffe5d3;
+      border-radius: 48% 48% 45% 45%;
+      z-index: 2;
+    }
+
+    .bang {
+      position: absolute;
+      top: 9px;
+      left: 14px;
+      width: 64px;
+      height: 29px;
+      background: #7155a8;
+      border-radius: 50% 50% 35% 35%;
+      z-index: 3;
+      transform: rotate(-3deg);
+    }
+
+    .eye {
+      position: absolute;
+      width: 8px;
+      height: 11px;
+      background: #493b58;
+      border-radius: 50%;
+      top: 27px;
+      z-index: 4;
+    }
+
+    .eye.left { left: 31px; }
+    .eye.right { right: 31px; }
+
+    .blush {
+      position: absolute;
+      width: 12px;
+      height: 6px;
+      background: #ff9ebb;
+      border-radius: 50%;
+      top: 42px;
+      z-index: 4;
+      opacity: .7;
+    }
+
+    .blush.left { left: 22px; }
+    .blush.right { right: 22px; }
+
+    .mouth {
+      position: absolute;
+      left: 42px;
+      top: 47px;
+      width: 10px;
+      height: 6px;
+      border-bottom: 2px solid #9c5574;
+      border-radius: 50%;
+      z-index: 4;
+    }
+
+    .bow {
+      position: absolute;
+      top: 0;
+      right: 2px;
+      font-size: 27px;
+      z-index: 5;
+      transform: rotate(12deg);
+    }
+
+    .card {
+      background: var(--card);
+      border: 4px solid rgba(255,255,255,.85);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .top-status {
+      padding: 18px 22px 12px;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 12px;
+      align-items: center;
+      background: linear-gradient(90deg, rgba(255,224,239,.85), rgba(230,222,255,.85));
+    }
+
+    .progress-shell {
+      height: 15px;
+      background: rgba(255,255,255,.85);
+      border: 2px solid #f2d3e6;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue));
+      transition: width .35s ease;
+      position: relative;
+    }
+
+    .progress::after {
+      content: "★";
+      position: absolute;
+      right: 4px;
+      top: -4px;
+      color: white;
+      font-size: 14px;
+    }
+
+    .badge {
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: #fff;
+      color: #6b4c82;
+      font-weight: 900;
+      box-shadow: 0 4px 10px rgba(111,76,137,.12);
+      white-space: nowrap;
+    }
+
+    .content {
+      padding: 22px;
+    }
+
+    .label {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--pink), #f6a5d0);
+      color: white;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-weight: 900;
+      margin-bottom: 12px;
+      box-shadow: 0 5px 12px rgba(244,90,155,.22);
+    }
+
+    .question {
+      margin: 0 0 22px;
+      font-size: clamp(21px, 2.8vw, 30px);
+      line-height: 1.45;
+      color: #4d3e5c;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .option {
+      border: 3px solid #eadcf2;
+      background: linear-gradient(135deg, #ffffff, #fff8fc);
+      border-radius: 20px;
+      padding: 16px 17px;
+      min-height: 69px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 18px;
+      color: var(--text);
+      text-align: left;
+      cursor: pointer;
+      transition: .18s ease;
+      box-shadow: 0 5px 13px rgba(111,76,137,.08);
+    }
+
+    .option:hover:not(:disabled) {
+      transform: translateY(-3px) scale(1.01);
+      border-color: var(--pink);
+      box-shadow: 0 10px 18px rgba(244,90,155,.15);
+    }
+
+    .option:disabled {
+      cursor: default;
+    }
+
+    .letter {
+      width: 39px;
+      height: 39px;
+      flex: 0 0 39px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: linear-gradient(135deg, #ffd5e9, #dccfff);
+      font-weight: 900;
+      color: #654878;
+    }
+
+    .option.correct {
+      border-color: var(--correct);
+      background: #eafff5;
+      color: #22674c;
+    }
+
+    .option.correct .letter {
+      color: white;
+      background: var(--correct);
+    }
+
+    .option.wrong {
+      border-color: var(--wrong);
+      background: #fff0f2;
+      color: #8a3340;
+    }
+
+    .option.wrong .letter {
+      color: white;
+      background: var(--wrong);
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 20px;
+      padding: 16px 18px;
+      border-radius: 20px;
+      line-height: 1.55;
+      border: 3px dashed;
+      font-size: 16px;
+    }
+
+    .feedback.show { display: block; }
+    .feedback.correct {
+      background: #edfff7;
+      border-color: var(--correct);
+      color: #225b45;
+    }
+    .feedback.wrong {
+      background: #fff8e9;
+      border-color: #f2ae49;
+      color: #79521d;
+    }
+
+    .feedback strong {
+      display: block;
+      font-size: 17px;
+      margin-bottom: 5px;
+    }
+
+    .vocab {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(73,59,88,.2);
+      font-size: 15px;
+    }
+
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .action {
+      border: 0;
+      border-radius: 16px;
+      padding: 13px 24px;
+      font-size: 17px;
+      font-weight: 900;
+      cursor: pointer;
+      color: white;
+      background: linear-gradient(90deg, var(--pink-dark), var(--purple));
+      box-shadow: 0 8px 18px rgba(128,91,181,.25);
+      transition: .16s ease;
+    }
+
+    .action:hover:not(:disabled) {
+      transform: translateY(-2px);
+    }
+
+    .action:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .result {
+      display: none;
+      padding: 36px 24px 40px;
+      text-align: center;
+    }
+
+    .result.show { display: block; }
+
+    .result-icon {
+      font-size: 72px;
+      margin-bottom: 6px;
+    }
+
+    .result h2 {
+      margin: 0;
+      font-size: 34px;
+      color: #6d4a85;
+    }
+
+    .score-big {
+      font-size: 58px;
+      font-weight: 1000;
+      color: var(--pink-dark);
+      margin: 10px 0;
+    }
+
+    .result p {
+      font-size: 18px;
+      color: #705d7c;
+      line-height: 1.5;
+      max-width: 620px;
+      margin: 8px auto 24px;
+    }
+
+    .review {
+      text-align: left;
+      margin-top: 26px;
+      border-top: 2px dashed #e4d2ed;
+      padding-top: 18px;
+    }
+
+    .review h3 {
+      color: #6d4a85;
+      margin: 0 0 13px;
+    }
+
+    .review-item {
+      margin-bottom: 11px;
+      padding: 13px 14px;
+      border-radius: 16px;
+      background: #fffafd;
+      border-left: 6px solid #b8a1c9;
+      line-height: 1.5;
+    }
+
+    .review-item.ok { border-left-color: var(--correct); }
+    .review-item.no { border-left-color: var(--wrong); }
+
+    @media (max-width: 720px) {
+      .hero {
+        gap: 7px;
+      }
+
+      .chibi {
+        width: 74px;
+        height: 74px;
+        transform: scale(.8);
+        margin: -8px;
+      }
+
+      .top-status {
+        grid-template-columns: 1fr 1fr;
+        padding: 15px 15px 10px;
+      }
+
+      .progress-shell {
+        grid-column: 1 / -1;
+        order: 3;
+      }
+
+      .content {
+        padding: 17px 15px 20px;
+      }
+
+      .options {
+        grid-template-columns: 1fr;
+      }
+
+      .option {
+        font-size: 16.5px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sparkle s1">✨</div>
+  <div class="sparkle s2">🌸</div>
+  <div class="sparkle s3">💖</div>
+  <div class="sparkle s4">⭐</div>
+
+  <main class="game-wrap">
+    <header class="hero">
+      <div class="chibi" aria-hidden="true">
+        <div class="hair"></div>
+        <div class="face"></div>
+        <div class="bang"></div>
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+        <div class="blush left"></div>
+        <div class="blush right"></div>
+        <div class="mouth"></div>
+        <div class="bow">🎀</div>
+      </div>
+
+      <div>
+        <h1>Grade 12 - Unit 3</h1>
+        <p>Exercise 1 (81-100) · Option C · Kawaii Anime Quiz</p>
+      </div>
+    </header>
+
+    <section class="card">
+      <div id="quizArea">
+        <div class="top-status">
+          <div class="progress-shell">
+            <div class="progress" id="progress"></div>
+          </div>
+          <div class="badge" id="counter">Câu 1/15</div>
+          <div class="badge" id="scoreBadge">⭐ 0 điểm</div>
+        </div>
+
+        <div class="content">
+          <div class="label" id="questionLabel">Question 1</div>
+          <h2 class="question" id="questionText"></h2>
+
+          <div class="options" id="options"></div>
+
+          <div class="feedback" id="feedback"></div>
+
+          <div class="controls">
+            <button class="action" id="nextBtn" disabled>Câu tiếp theo ✨</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="result" id="resultArea">
+        <div class="result-icon" id="resultIcon">🌸</div>
+        <h2>Hoàn thành rồi!</h2>
+        <div class="score-big" id="finalScore">0/15</div>
+        <p id="resultMessage"></p>
+        <button class="action" id="restartBtn">Chơi lại 💖</button>
+        <div class="review" id="review"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const questions = [
+      {
+        q: "Every household is encouraged to __________ unnecessary energy consumption by unplugging electronic devices when they are not in use.",
+        options: ["produce", "replace", "improve", "reduce"],
+        answer: 3,
+        explanation: "reduce energy consumption = giảm mức tiêu thụ năng lượng.",
+        vocab: "produce = tạo ra · replace = thay thế · improve = cải thiện · reduce = giảm"
+      },
+      {
+        q: "Environmental organizations are calling __________ stricter regulations on plastic production.",
+        options: ["at", "for", "to", "of"],
+        answer: 1,
+        explanation: "call for = kêu gọi.",
+        vocab: ""
+      },
+      {
+        q: "Many scientists believe that renewable energy will eventually replace fossil fuels, __________ are one of the main causes of global warming.",
+        options: ["who", "whom", "which", "where"],
+        answer: 2,
+        explanation: "which thay thế cho fossil fuels.",
+        vocab: ""
+      },
+      {
+        q: "The amount of electronic waste has gone __________ dramatically over the last decade.",
+        options: ["away", "through", "up", "over"],
+        answer: 2,
+        explanation: "go up = tăng lên.",
+        vocab: ""
+      },
+      {
+        q: "Households can significantly reduce electricity bills by turning __________ appliances instead of leaving them on standby.",
+        options: ["over", "down", "out", "off"],
+        answer: 3,
+        explanation: "turn off = tắt.",
+        vocab: ""
+      },
+      {
+        q: "Several countries are investing heavily in __________ energy technologies to reduce their dependence on coal.",
+        options: ["renew", "renewable", "renewably", "renewal"],
+        answer: 1,
+        explanation: "Cần tính từ renewable để bổ nghĩa cho cụm danh từ energy technologies.",
+        vocab: ""
+      },
+      {
+        q: "The report recommends planting more trees, __________ absorb carbon dioxide from the atmosphere.",
+        options: ["where", "whom", "which", "whose"],
+        answer: 2,
+        explanation: "which thay cho trees và làm chủ ngữ trong mệnh đề quan hệ.",
+        vocab: ""
+      },
+      {
+        q: "Citizens should prepare __________ more extreme weather events caused by climate change.",
+        options: ["with", "to", "for", "about"],
+        answer: 2,
+        explanation: "prepare for = chuẩn bị cho.",
+        vocab: ""
+      },
+      {
+        q: "The volunteers spent the afternoon __________ rubbish that had been left behind after the music festival.",
+        options: ["carrying on", "bringing up", "picking up", "turning up"],
+        answer: 2,
+        explanation: "pick up rubbish = nhặt rác.",
+        vocab: ""
+      },
+      {
+        q: "Many modern office buildings are designed to be __________ by reducing both water and energy consumption.",
+        options: ["sustainably", "sustain", "sustainability", "sustainable"],
+        answer: 3,
+        explanation: "Sau động từ be cần tính từ sustainable.",
+        vocab: ""
+      },
+      {
+        q: "Small actions such as recycling and saving electricity can eventually add __________ to significant environmental benefits.",
+        options: ["up", "over", "through", "across"],
+        answer: 0,
+        explanation: "add up to = cộng dồn thành.",
+        vocab: ""
+      },
+      {
+        q: "To solve the energy crisis, the government decided to tap into __________ available before importing additional fuel.",
+        options: [
+          "every resources available",
+          "all available resources",
+          "available all resources",
+          "every available resources"
+        ],
+        answer: 1,
+        explanation: "all available resources là cụm từ đúng: all + adjective + plural noun.",
+        vocab: ""
+      },
+      {
+        q: "Experts agree __________ the urgent need to invest in clean energy before fossil fuel reserves run out.",
+        options: ["to", "of", "on", "with"],
+        answer: 2,
+        explanation: "agree on + vấn đề.",
+        vocab: ""
+      },
+      {
+        q: "Local communities are developing __________ programmes to encourage responsible travel while protecting natural ecosystems.",
+        options: ["adventure", "mass tourism", "ecotourism", "luxury"],
+        answer: 2,
+        explanation: "ecotourism programmes = các chương trình du lịch sinh thái.",
+        vocab: ""
+      },
+      {
+        q: "Governments worldwide must address the __________ by encouraging recycling, composting, and waste separation.",
+        options: [
+          "municipal waste management problem",
+          "waste municipal management problem",
+          "management municipal waste problem",
+          "municipal management waste problem"
+        ],
+        answer: 0,
+        explanation: "municipal waste management problem = vấn đề quản lý rác thải đô thị.",
+        vocab: "Trật tự: municipal (đô thị) + waste (rác thải) + management (quản lý) + problem (vấn đề)."
+      }
+    ];
+
+    const letters = ["A", "B", "C", "D"];
+    let current = 0;
+    let score = 0;
+    let answered = false;
+    let answers = [];
+
+    const questionLabel = document.getElementById("questionLabel");
+    const questionText = document.getElementById("questionText");
+    const optionsBox = document.getElementById("options");
+    const feedback = document.getElementById("feedback");
+    const nextBtn = document.getElementById("nextBtn");
+    const counter = document.getElementById("counter");
+    const scoreBadge = document.getElementById("scoreBadge");
+    const progress = document.getElementById("progress");
+    const quizArea = document.getElementById("quizArea");
+    const resultArea = document.getElementById("resultArea");
+    const finalScore = document.getElementById("finalScore");
+    const resultMessage = document.getElementById("resultMessage");
+    const resultIcon = document.getElementById("resultIcon");
+    const restartBtn = document.getElementById("restartBtn");
+    const review = document.getElementById("review");
+
+    function renderQuestion() {
+      answered = false;
+      nextBtn.disabled = true;
+      feedback.className = "feedback";
+      feedback.innerHTML = "";
+
+      const item = questions[current];
+      questionLabel.textContent = `Question ${current + 1}`;
+      questionText.textContent = item.q;
+      counter.textContent = `Câu ${current + 1}/${questions.length}`;
+      scoreBadge.textContent = `⭐ ${score} điểm`;
+      progress.style.width = `${(current / questions.length) * 100}%`;
+      optionsBox.innerHTML = "";
+
+      item.options.forEach((option, index) => {
+        const btn = document.createElement("button");
+        btn.className = "option";
+        btn.innerHTML = `<span class="letter">${letters[index]}</span><span>${option}</span>`;
+        btn.addEventListener("click", () => chooseAnswer(index));
+        optionsBox.appendChild(btn);
+      });
+
+      nextBtn.textContent =
+        current === questions.length - 1 ? "Xem kết quả 🌸" : "Câu tiếp theo ✨";
+    }
+
+    function chooseAnswer(index) {
+      if (answered) return;
+      answered = true;
+
+      const item = questions[current];
+      const buttons = [...document.querySelectorAll(".option")];
+      const isCorrect = index === item.answer;
+
+      buttons.forEach(btn => btn.disabled = true);
+      buttons[item.answer].classList.add("correct");
+
+      if (isCorrect) {
+        score++;
+        buttons[index].classList.add("correct");
+        feedback.className = "feedback correct show";
+        feedback.innerHTML = `
+          <strong>🌟 Chính xác! Tuyệt vời lắm!</strong>
+          ${item.explanation}
+          ${item.vocab ? `<div class="vocab">${item.vocab}</div>` : ""}
+        `;
+      } else {
+        buttons[index].classList.add("wrong");
+        feedback.className = "feedback wrong show";
+        feedback.innerHTML = `
+          <strong>🌼 Chưa đúng rồi. Đáp án đúng: ${letters[item.answer]}. ${item.options[item.answer]}</strong>
+          ${item.explanation}
+          ${item.vocab ? `<div class="vocab">${item.vocab}</div>` : ""}
+        `;
+      }
+
+      answers.push({
+        selected: index,
+        correct: item.answer,
+        isCorrect
+      });
+
+      scoreBadge.textContent = `⭐ ${score} điểm`;
+      progress.style.width = `${((current + 1) / questions.length) * 100}%`;
+      nextBtn.disabled = false;
+    }
+
+    function showResult() {
+      quizArea.style.display = "none";
+      resultArea.classList.add("show");
+      finalScore.textContent = `${score}/${questions.length}`;
+
+      const percent = Math.round((score / questions.length) * 100);
+
+      if (percent === 100) {
+        resultIcon.textContent = "🏆✨";
+        resultMessage.textContent = "Hoàn hảo! Em đã chinh phục toàn bộ thử thách anime kawaii.";
+      } else if (percent >= 80) {
+        resultIcon.textContent = "🌸🎉";
+        resultMessage.textContent = "Rất xuất sắc! Em đã nắm chắc phần lớn kiến thức trọng tâm.";
+      } else if (percent >= 60) {
+        resultIcon.textContent = "💖📚";
+        resultMessage.textContent = "Làm khá tốt! Xem lại vài câu sai rồi thử thêm một lần nữa nhé.";
+      } else {
+        resultIcon.textContent = "🌱✨";
+        resultMessage.textContent = "Cố gắng thêm nhé! Hãy đọc kỹ phần giải thích và chơi lại để tiến bộ.";
+      }
+
+      let html = "<h3>🌸 Ôn lại đáp án</h3>";
+
+      questions.forEach((item, i) => {
+        const a = answers[i];
+        const selected = a
+          ? `${letters[a.selected]}. ${item.options[a.selected]}`
+          : "Chưa trả lời";
+        const correct = `${letters[item.answer]}. ${item.options[item.answer]}`;
+
+        html += `
+          <div class="review-item ${a && a.isCorrect ? "ok" : "no"}">
+            <strong>Câu ${i + 1}: ${a && a.isCorrect ? "Đúng 🌟" : "Sai 🌼"}</strong><br>
+            Em chọn: ${selected}<br>
+            Đáp án đúng: ${correct}<br>
+            <em>${item.explanation}</em>
+            ${item.vocab ? `<div class="vocab">${item.vocab}</div>` : ""}
+          </div>
+        `;
+      });
+
+      review.innerHTML = html;
+    }
+
+    nextBtn.addEventListener("click", () => {
+      if (!answered) return;
+
+      if (current < questions.length - 1) {
+        current++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    restartBtn.addEventListener("click", () => {
+      current = 0;
+      score = 0;
+      answered = false;
+      answers = [];
+      resultArea.classList.remove("show");
+      quizArea.style.display = "block";
+      renderQuestion();
+    });
+
+    renderQuestion();
+  </script>
+</body>
+</html>
