@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Grade 10 - Unit 2 - Exercise 1 (41-60) - Option C</title>
+<style>
+:root{
+ --deep:#031525;--panel:#08263b;--panel2:#0b3651;--cyan:#41e4ff;--blue:#3b82f6;
+ --teal:#27d3c2;--green:#45e39a;--red:#ff687c;--yellow:#ffe082;--text:#f2fbff;--muted:#b6d7e6
+}
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--text);
+ background:
+ radial-gradient(circle at 15% 15%,rgba(65,228,255,.16),transparent 25%),
+ radial-gradient(circle at 85% 18%,rgba(59,130,246,.15),transparent 26%),
+ linear-gradient(180deg,#02101c,#052235 58%,#020e18);
+ padding:18px;overflow-x:hidden
+}
+.ocean{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bubble{
+ position:absolute;border-radius:50%;border:2px solid rgba(185,245,255,.35);
+ background:rgba(116,224,255,.05);animation:rise linear infinite
+}
+.b1{width:26px;height:26px;left:8%;bottom:-40px;animation-duration:9s}
+.b2{width:14px;height:14px;left:22%;bottom:-30px;animation-duration:7s;animation-delay:2s}
+.b3{width:34px;height:34px;right:12%;bottom:-50px;animation-duration:11s;animation-delay:1s}
+.b4{width:18px;height:18px;right:30%;bottom:-40px;animation-duration:8s;animation-delay:3s}
+.b5{width:42px;height:42px;left:52%;bottom:-55px;animation-duration:13s}
+@keyframes rise{to{transform:translateY(-115vh);opacity:.05}}
+.wave,.wave2{
+ position:fixed;left:-5%;width:110%;height:140px;border-radius:45% 55% 0 0;
+ background:rgba(65,228,255,.05);pointer-events:none
+}
+.wave{bottom:-85px;animation:w 6s ease-in-out infinite}
+.wave2{bottom:-100px;background:rgba(59,130,246,.06);animation:w 8s ease-in-out infinite reverse}
+@keyframes w{50%{transform:translateX(2%) translateY(-10px)}}
+.wrap{width:min(1040px,100%);margin:auto;position:relative;z-index:2}
+.hero{display:grid;grid-template-columns:120px 1fr auto;gap:18px;align-items:center;margin-bottom:16px}
+.pearl{width:108px;height:108px;position:relative;display:grid;place-items:center}
+.glow{position:absolute;inset:3px;border-radius:50%;background:radial-gradient(circle,rgba(65,228,255,.34),rgba(59,130,246,.08) 58%,transparent 72%);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.12);opacity:.7}}
+.shell{
+ width:78px;height:54px;border-radius:50% 50% 44% 44%;
+ background:linear-gradient(180deg,#9eeeff,#2a8fb9 70%,#0e4e6a);
+ position:relative;box-shadow:0 0 24px rgba(65,228,255,.4)
+}
+.shell:before{content:"";position:absolute;left:12px;right:12px;top:12px;height:2px;background:rgba(255,255,255,.3);box-shadow:0 10px 0 rgba(255,255,255,.22),0 20px 0 rgba(255,255,255,.16)}
+.shell:after{content:"";position:absolute;width:24px;height:24px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#b8f6ff 55%,#57bad5);left:27px;top:15px;box-shadow:0 0 18px rgba(255,255,255,.7)}
+h1{margin:0;font-size:clamp(28px,4vw,46px);background:linear-gradient(90deg,#fff,var(--cyan),#8ee6ff,var(--blue),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{margin:7px 0 0;color:var(--muted);font-weight:700}
+.sound{border:1px solid rgba(65,228,255,.4);background:#0a2b42;color:#fff;border-radius:12px;padding:11px 14px;font-weight:900;cursor:pointer}
+.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid rgba(65,228,255,.26);border-radius:24px;box-shadow:0 24px 65px rgba(0,0,0,.5);overflow:hidden}
+.status{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;padding:18px 22px 13px;background:#051c2c;border-bottom:1px solid rgba(255,255,255,.08)}
+.barbox{height:13px;background:#02111c;border-radius:999px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--blue),var(--teal));transition:.3s;box-shadow:0 0 15px rgba(65,228,255,.4)}
+.chip{background:#0a3048;border-radius:999px;padding:8px 13px;font-weight:900;white-space:nowrap}
+.content{padding:24px 22px 26px}
+.tag{display:inline-block;padding:7px 13px;border-radius:9px;background:rgba(65,228,255,.08);border:1px solid rgba(65,228,255,.45);color:#8df1ff;font-weight:900;margin-bottom:13px}
+.question{margin:0 0 22px;font-size:clamp(22px,2.8vw,31px);line-height:1.45}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.option{min-height:72px;border-radius:15px;border:1px solid rgba(150,220,255,.16);background:linear-gradient(135deg,#0c3854,#071f31);color:#fff;display:flex;align-items:center;gap:13px;padding:16px 17px;font-size:18px;text-align:left;cursor:pointer;transition:.16s}
+.option:hover:not(:disabled){transform:translateY(-2px);border-color:var(--cyan);box-shadow:0 0 20px rgba(65,228,255,.13)}
+.letter{width:40px;height:40px;flex:0 0 40px;border-radius:10px;display:grid;place-items:center;font-weight:1000;color:#03131f;background:linear-gradient(135deg,var(--cyan),#a7efff)}
+.option.correct{background:linear-gradient(135deg,#14563c,#092d24)!important;border-color:var(--green)!important}
+.option.wrong{background:linear-gradient(135deg,#681f35,#310c1a)!important;border-color:var(--red)!important}
+.feedback{display:none;margin-top:20px;padding:17px 18px;border-radius:15px;background:#041927;border-left:5px solid;line-height:1.6}
+.feedback.show{display:block}.feedback.correct{border-color:var(--green)}.feedback.wrong{border-color:var(--yellow)}
+.feedback strong{display:block;margin-bottom:7px}.details{margin-top:9px;color:#c9e6f1;font-size:15px}
+.controls{display:flex;justify-content:flex-end;margin-top:20px}
+.action{border:0;border-radius:12px;padding:13px 23px;font-size:17px;font-weight:1000;color:#03141f;cursor:pointer;background:linear-gradient(90deg,var(--cyan),#a7efff)}
+.action:disabled{opacity:.35;cursor:not-allowed}
+.result{display:none;text-align:center;padding:38px 24px}.result.show{display:block}
+.result-icon{font-size:74px}.score-big{font-size:62px;font-weight:1000;color:var(--cyan)}
+.review{text-align:left;margin-top:25px;border-top:1px solid rgba(255,255,255,.1);padding-top:18px}
+.review-item{padding:13px 14px;margin-bottom:10px;border-radius:12px;background:#051b2a;border-left:5px solid #648399;line-height:1.5}
+.review-item.ok{border-left-color:var(--green)}.review-item.no{border-left-color:var(--red)}
+@media(max-width:760px){
+ .hero{grid-template-columns:85px 1fr}.sound{grid-column:1/-1;justify-self:end}
+ .status{grid-template-columns:1fr 1fr}.barbox{grid-column:1/-1;order:4}
+ .options{grid-template-columns:1fr}.content{padding:18px 15px 22px}
+ .pearl{transform:scale(.8);transform-origin:left center;width:85px}
+}
+</style>
+</head>
+<body>
+<div class="ocean">
+ <div class="bubble b1"></div><div class="bubble b2"></div><div class="bubble b3"></div>
+ <div class="bubble b4"></div><div class="bubble b5"></div>
+</div>
+<div class="wave"></div><div class="wave2"></div>
+
+<main class="wrap">
+<header class="hero">
+ <div class="pearl"><div class="glow"></div><div class="shell"></div></div>
+ <div>
+  <h1>Ocean Learning Quest</h1>
+  <p class="subtitle">Grade 10 · Unit 2 · Exercise 1 (41–60) · Option C</p>
+ </div>
+ <button class="sound" id="soundBtn">🔊 Âm thanh: Bật</button>
+</header>
+
+<section class="card">
+<div id="quizArea">
+ <div class="status">
+  <div class="barbox"><div class="bar" id="bar"></div></div>
+  <div class="chip" id="counter"></div>
+  <div class="chip" id="scoreChip"></div>
+  <div class="chip" id="heartChip"></div>
+ </div>
+ <div class="content">
+  <div class="tag" id="tag"></div>
+  <h2 class="question" id="question"></h2>
+  <div class="options" id="options"></div>
+  <div class="feedback" id="feedback"></div>
+  <div class="controls"><button class="action" id="nextBtn" disabled>Next Wave 🌊</button></div>
+ </div>
+</div>
+
+<div class="result" id="resultArea">
+ <div class="result-icon" id="resultIcon">🌊</div>
+ <h2>Ocean Quest Complete</h2>
+ <div class="score-big" id="finalScore"></div>
+ <p id="message"></p>
+ <button class="action" id="restartBtn">Dive Again ↻</button>
+ <div class="review" id="review"></div>
+</div>
+</section>
+</main>
+
+<script>
+const questions=[
+["So far, thousands of plastic bottles ____________ from local beaches by volunteers.",["have collected","have been collected","are collecting","collected"],1,"So far là dấu hiệu của hiện tại hoàn thành.","Chủ ngữ plastic bottles là đối tượng được thu gom nên dùng hiện tại hoàn thành bị động: have been + V3."],
+["The sudden ____________ at the power station forced hundreds of families to leave their homes.",["operation","celebration","explosion","construction"],2,"Explosion là vụ nổ, phù hợp với ngữ cảnh khiến người dân phải sơ tán.",""],
+["The campaign aims to ____________ public awareness of recycling.",["estimate","remind","collect","raise"],3,"raise public awareness = nâng cao nhận thức của cộng đồng.",""],
+["Every student received a small ____________ to grow vegetables for the science project.",["plot","report","machine","prevention"],0,"Plot là mảnh đất nhỏ dùng để trồng cây.",""],
+["More charging stations ____________ across the city next year.",["build","will build","will be built","are building"],2,"Next year là dấu hiệu chỉ tương lai.","Chủ ngữ charging stations là đối tượng được xây dựng nên dùng tương lai bị động: will be + V3."],
+["The new recycling app quickly ____________ the attention of young people.",["protected","attracted","estimated","reminded"],1,"attract attention = thu hút sự chú ý.",""],
+["Many supermarkets now sell ____________ packaging to reduce plastic waste.",["compulsory","harmful","electrical","eco-friendly"],3,"Eco-friendly packaging = bao bì thân thiện với môi trường.",""],
+["Cotton is a natural ____________ used to produce many kinds of clothing.",["pollution","raw material","ceremony","damage"],1,"Raw material = nguyên liệu thô.",""],
+["Modern farming methods focus on pest ____________ instead of using too many chemicals.",["attraction","operation","prevention","estimation"],2,"Prevention = phòng ngừa. Cụm pest prevention nói về việc phòng ngừa sâu bệnh.",""],
+["Wearing sunscreen can ____________ skin damage caused by strong sunlight.",["announce","waste","estimate","prevent"],3,"prevent skin damage = ngăn ngừa tổn thương da.",""],
+["Learning basic first aid should be ____________ for all high school students.",["electrical","destructive","compulsory","creative"],2,"Compulsory = bắt buộc.",""],
+["The volunteers picked up ____________ after the music festival.",["bottles empty plastic","empty plastic bottles","plastic bottles empty","bottles plastic empty"],1,"Trật tự đúng: empty + plastic + bottles.","Empty chỉ tình trạng, plastic chỉ chất liệu, rồi đến danh từ bottles."],
+["I don't think the weather ____________ sunny this afternoon.",["is","has been","will be","was"],2,"Sau I don't think, khi dự đoán tương lai, dùng will.",""],
+["The teacher will ____________ the names of the winners after the quiz.",["collect","estimate","announce","remind"],2,"announce the names of the winners = công bố tên người thắng cuộc.",""],
+["My bicycle ____________ outside the library yesterday afternoon.",["left","leaves","was leaving","was left"],3,"Yesterday afternoon là dấu hiệu của quá khứ đơn.","Xe đạp được để lại nên dùng quá khứ đơn bị động: was left."]
+];
+
+const letters=["A","B","C","D"];
+let current=0,score=0,hearts=5,combo=0,answered=false,answers=[],soundOn=true,audioCtx=null;
+const $=id=>document.getElementById(id);
+
+function getCtx(){
+ if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+ if(audioCtx.state==="suspended") audioCtx.resume();
+ return audioCtx;
+}
+function tone(freq,duration,type="sine",volume=.05,delay=0){
+ if(!soundOn)return;
+ const c=getCtx(),o=c.createOscillator(),g=c.createGain(),start=c.currentTime+delay;
+ o.type=type;o.frequency.setValueAtTime(freq,start);
+ g.gain.setValueAtTime(.0001,start);
+ g.gain.exponentialRampToValueAtTime(volume,start+.012);
+ g.gain.exponentialRampToValueAtTime(.0001,start+duration);
+ o.connect(g);g.connect(c.destination);o.start(start);o.stop(start+duration+.03);
+}
+function correctSound(){
+ tone(440,.1,"sine",.04,0);
+ tone(660,.11,"sine",.038,.09);
+ tone(990,.17,"triangle",.04,.18);
+}
+function wrongSound(){
+ tone(170,.17,"sawtooth",.04,0);
+ tone(95,.24,"square",.022,.13);
+}
+function nextSound(){
+ tone(350,.06,"sine",.018,0);
+ tone(520,.07,"triangle",.018,.06);
+}
+function finishSound(){
+ [330,440,550,660,880].forEach((f,i)=>tone(f,.2,"sine",.032,i*.1));
+}
+
+$("soundBtn").onclick=()=>{
+ soundOn=!soundOn;
+ $("soundBtn").textContent=soundOn?"🔊 Âm thanh: Bật":"🔇 Âm thanh: Tắt";
+ if(soundOn)nextSound();
+};
+
+function render(){
+ answered=false;
+ $("nextBtn").disabled=true;
+ $("feedback").className="feedback";
+ $("feedback").innerHTML="";
+ const q=questions[current];
+
+ $("tag").textContent=`Question ${current+1}`;
+ $("question").textContent=q[0];
+ $("counter").textContent=`Câu ${current+1}/${questions.length}`;
+ $("scoreChip").textContent=`🌊 ${score} XP · Combo ${combo}`;
+ $("heartChip").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${current/questions.length*100}%`;
+ $("options").innerHTML="";
+
+ q[1].forEach((option,index)=>{
+  const button=document.createElement("button");
+  button.className="option";
+  button.innerHTML=`<span class="letter">${letters[index]}</span><span>${option}</span>`;
+  button.onclick=()=>choose(index);
+  $("options").appendChild(button);
+ });
+
+ $("nextBtn").textContent=current===questions.length-1?"Finish Dive 🌊":"Next Wave 🌊";
+}
+
+function choose(index){
+ if(answered)return;
+ answered=true;
+
+ const q=questions[current];
+ const buttons=[...document.querySelectorAll(".option")];
+ const isCorrect=index===q[2];
+
+ buttons.forEach(button=>button.disabled=true);
+ buttons[q[2]].classList.add("correct");
+
+ if(isCorrect){
+  score+=10+(combo*2);
+  combo++;
+  buttons[index].classList.add("correct");
+  $("feedback").className="feedback correct show";
+  $("feedback").innerHTML=`<strong>🌊 Perfect Dive! Chính xác.</strong>${q[3]}${q[4]?`<div class="details">${q[4]}</div>`:""}`;
+  correctSound();
+ }else{
+  hearts=Math.max(0,hearts-1);
+  combo=0;
+  buttons[index].classList.add("wrong");
+  $("feedback").className="feedback wrong show";
+  $("feedback").innerHTML=`<strong>⚠ Lost Current. Đáp án đúng: ${letters[q[2]]}. ${q[1][q[2]]}</strong>${q[3]}${q[4]?`<div class="details">${q[4]}</div>`:""}`;
+  wrongSound();
+ }
+
+ answers.push({selected:index,isCorrect,correct:q[2]});
+ $("scoreChip").textContent=`🌊 ${score} XP · Combo ${combo}`;
+ $("heartChip").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${(current+1)/questions.length*100}%`;
+ $("nextBtn").disabled=false;
+}
+
+function showResult(){
+ $("quizArea").style.display="none";
+ $("resultArea").classList.add("show");
+
+ const correctCount=answers.filter(answer=>answer.isCorrect).length;
+ $("finalScore").textContent=`${score} XP · ${correctCount}/${questions.length}`;
+ finishSound();
+
+ const percent=correctCount/questions.length*100;
+ if(percent===100){
+  $("resultIcon").textContent="🏆🌊";
+  $("message").textContent="Perfect Ocean Master! Em đã hoàn thành toàn bộ thử thách.";
+ }else if(percent>=80){
+  $("resultIcon").textContent="🐬✨";
+  $("message").textContent="Excellent Diver! Em đã nắm rất chắc kiến thức.";
+ }else if(percent>=60){
+  $("resultIcon").textContent="🐠🌊";
+  $("message").textContent="Good Dive! Hãy xem lại các câu sai để tiến bộ hơn.";
+ }else{
+  $("resultIcon").textContent="📘🐚";
+  $("message").textContent="Training Dive! Ôn lại kiến thức rồi thử lại.";
+ }
+
+ let reviewHTML="<h3>Ocean Review</h3>";
+ questions.forEach((q,index)=>{
+  const answer=answers[index];
+  reviewHTML+=`
+   <div class="review-item ${answer&&answer.isCorrect?"ok":"no"}">
+    <strong>Câu ${index+1}: ${answer&&answer.isCorrect?"Đúng":"Sai"}</strong><br>
+    Em chọn: ${answer?`${letters[answer.selected]}. ${q[1][answer.selected]}`:"Chưa trả lời"}<br>
+    Đáp án đúng: ${letters[q[2]]}. ${q[1][q[2]]}<br>
+    <em>${q[3]}</em>
+    ${q[4]?`<div class="details">${q[4]}</div>`:""}
+   </div>`;
+ });
+ $("review").innerHTML=reviewHTML;
+}
+
+$("nextBtn").onclick=()=>{
+ if(!answered)return;
+ nextSound();
+ if(current<questions.length-1){
+  current++;
+  render();
+ }else{
+  showResult();
+ }
+};
+
+$("restartBtn").onclick=()=>{
+ current=0;score=0;hearts=5;combo=0;answered=false;answers=[];
+ $("resultArea").classList.remove("show");
+ $("quizArea").style.display="block";
+ render();
+ nextSound();
+};
+
+render();
+</script>
+</body>
+</html>

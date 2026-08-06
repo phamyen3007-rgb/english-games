@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Grade 10 - Unit 2 - Exercise 1 (21-40) - Option C</title>
+<style>
+:root{
+ --bg:#060817;--panel:#10162c;--panel2:#18224a;--cyan:#45e6ff;--blue:#5578ff;
+ --purple:#a25cff;--pink:#ff4fbb;--green:#3fe09a;--red:#ff5f78;--yellow:#ffe066;
+ --text:#f5f8ff;--muted:#aebbd7
+}
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--text);
+ background:
+ radial-gradient(circle at 12% 18%,rgba(69,230,255,.17),transparent 27%),
+ radial-gradient(circle at 85% 15%,rgba(162,92,255,.19),transparent 26%),
+ radial-gradient(circle at 55% 95%,rgba(255,79,187,.11),transparent 32%),
+ linear-gradient(155deg,#030512,#081026 60%,#030512);
+ padding:18px;overflow-x:hidden
+}
+.energy,.energy2{
+ position:fixed;width:440px;height:5px;pointer-events:none;opacity:.38;
+ background:linear-gradient(90deg,transparent,var(--cyan),var(--purple),transparent);
+ filter:drop-shadow(0 0 15px var(--cyan))
+}
+.energy{top:13%;left:-120px;transform:rotate(-24deg)}
+.energy2{right:-130px;bottom:12%;transform:rotate(25deg)}
+.wrap{width:min(1040px,100%);margin:auto;position:relative;z-index:2}
+.hero{display:grid;grid-template-columns:120px 1fr auto;gap:18px;align-items:center;margin-bottom:16px}
+.fighter{width:108px;height:108px;position:relative;filter:drop-shadow(0 0 20px rgba(69,230,255,.34))}
+.aura{
+ position:absolute;inset:3px;border-radius:50%;
+ background:radial-gradient(circle,rgba(69,230,255,.3),rgba(162,92,255,.11) 55%,transparent 72%);
+ animation:aura 1.55s ease-in-out infinite
+}
+@keyframes aura{50%{transform:scale(1.14);opacity:.62}}
+.hair{
+ position:absolute;left:17px;top:3px;width:75px;height:61px;z-index:2;
+ background:linear-gradient(145deg,#91f4ff,#5475ff 55%,#a25cff);
+ clip-path:polygon(0 60%,13% 17%,29% 41%,43% 0,57% 35%,73% 7%,84% 42%,100% 22%,88% 100%,15% 100%)
+}
+.face{position:absolute;left:29px;top:34px;width:53px;height:54px;background:linear-gradient(#f1c8b5,#d79a82);border-radius:46%;z-index:3}
+.eye{position:absolute;top:57px;width:13px;height:5px;background:#07111f;z-index:4;box-shadow:0 0 9px var(--cyan)}
+.eye.l{left:39px}.eye.r{right:34px}
+.band{position:absolute;left:24px;top:40px;width:65px;height:8px;background:var(--purple);z-index:5;transform:rotate(-5deg);box-shadow:0 0 11px var(--purple)}
+h1{
+ margin:0;font-size:clamp(28px,4vw,46px);
+ background:linear-gradient(90deg,#fff,var(--cyan),#a9b8ff,var(--purple),var(--pink));
+ -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.subtitle{margin:7px 0 0;color:var(--muted);font-weight:700}
+.sound{
+ border:1px solid rgba(69,230,255,.4);background:#111a36;color:#fff;border-radius:12px;
+ padding:11px 14px;font-weight:900;cursor:pointer
+}
+.card{
+ background:linear-gradient(180deg,var(--panel2),var(--panel));
+ border:1px solid rgba(85,120,255,.3);border-radius:24px;
+ box-shadow:0 24px 65px rgba(0,0,0,.52);overflow:hidden
+}
+.status{
+ display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;
+ padding:18px 22px 13px;background:#080d20;border-bottom:1px solid rgba(255,255,255,.08)
+}
+.barbox{height:13px;background:#050817;border-radius:999px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--blue),var(--purple),var(--pink));transition:.3s;box-shadow:0 0 15px rgba(69,230,255,.4)}
+.chip{background:#151e3c;border-radius:999px;padding:8px 13px;font-weight:900;white-space:nowrap}
+.content{padding:24px 22px 26px}
+.tag{
+ display:inline-block;padding:7px 13px;border-radius:9px;background:rgba(69,230,255,.08);
+ border:1px solid rgba(69,230,255,.48);color:#8df1ff;font-weight:900;margin-bottom:13px
+}
+.question{margin:0 0 22px;font-size:clamp(22px,2.8vw,31px);line-height:1.45}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.option{
+ min-height:72px;border-radius:15px;border:1px solid rgba(137,162,255,.18);
+ background:linear-gradient(135deg,#1b2853,#0d142b);color:#fff;
+ display:flex;align-items:center;gap:13px;padding:16px 17px;font-size:18px;
+ text-align:left;cursor:pointer;transition:.16s
+}
+.option:hover:not(:disabled){transform:translateY(-2px);border-color:var(--cyan);box-shadow:0 0 20px rgba(69,230,255,.13)}
+.letter{
+ width:40px;height:40px;flex:0 0 40px;border-radius:10px;display:grid;place-items:center;
+ font-weight:1000;color:#050b1d;background:linear-gradient(135deg,var(--cyan),#aabaff)
+}
+.option.correct{background:linear-gradient(135deg,#14563c,#092d24)!important;border-color:var(--green)!important}
+.option.wrong{background:linear-gradient(135deg,#681f35,#310c1a)!important;border-color:var(--red)!important}
+.feedback{
+ display:none;margin-top:20px;padding:17px 18px;border-radius:15px;background:#090f22;
+ border-left:5px solid;line-height:1.6
+}
+.feedback.show{display:block}.feedback.correct{border-color:var(--green)}.feedback.wrong{border-color:var(--yellow)}
+.feedback strong{display:block;margin-bottom:7px}.details{margin-top:9px;color:#cbd5e1;font-size:15px}
+.controls{display:flex;justify-content:flex-end;margin-top:20px}
+.action{
+ border:0;border-radius:12px;padding:13px 23px;font-size:17px;font-weight:1000;color:#06101d;
+ cursor:pointer;background:linear-gradient(90deg,var(--cyan),#a6b8ff)
+}
+.action:disabled{opacity:.35;cursor:not-allowed}
+.result{display:none;text-align:center;padding:38px 24px}.result.show{display:block}
+.result-icon{font-size:74px}.score-big{font-size:62px;font-weight:1000;color:var(--cyan)}
+.review{text-align:left;margin-top:25px;border-top:1px solid rgba(255,255,255,.1);padding-top:18px}
+.review-item{padding:13px 14px;margin-bottom:10px;border-radius:12px;background:#0b1124;border-left:5px solid #64748b;line-height:1.5}
+.review-item.ok{border-left-color:var(--green)}.review-item.no{border-left-color:var(--red)}
+@media(max-width:760px){
+ .hero{grid-template-columns:85px 1fr}.sound{grid-column:1/-1;justify-self:end}
+ .status{grid-template-columns:1fr 1fr}.barbox{grid-column:1/-1;order:4}
+ .options{grid-template-columns:1fr}.content{padding:18px 15px 22px}
+ .fighter{transform:scale(.78);transform-origin:left center;width:85px}
+}
+</style>
+</head>
+<body>
+<div class="energy"></div><div class="energy2"></div>
+<main class="wrap">
+<header class="hero">
+ <div class="fighter">
+  <div class="aura"></div><div class="hair"></div><div class="face"></div>
+  <div class="band"></div><div class="eye l"></div><div class="eye r"></div>
+ </div>
+ <div>
+  <h1>Blue Flame Anime Battle</h1>
+  <p class="subtitle">Grade 10 · Unit 2 · Exercise 1 (21–40) · Option C</p>
+ </div>
+ <button class="sound" id="soundBtn">🔊 Âm thanh: Bật</button>
+</header>
+
+<section class="card">
+<div id="quizArea">
+ <div class="status">
+  <div class="barbox"><div class="bar" id="bar"></div></div>
+  <div class="chip" id="counter"></div>
+  <div class="chip" id="scoreChip"></div>
+  <div class="chip" id="heartChip"></div>
+ </div>
+
+ <div class="content">
+  <div class="tag" id="tag"></div>
+  <h2 class="question" id="question"></h2>
+  <div class="options" id="options"></div>
+  <div class="feedback" id="feedback"></div>
+  <div class="controls"><button class="action" id="nextBtn" disabled>Next Attack ⚡</button></div>
+ </div>
+</div>
+
+<div class="result" id="resultArea">
+ <div class="result-icon" id="resultIcon">⚡</div>
+ <h2>Battle Complete</h2>
+ <div class="score-big" id="finalScore"></div>
+ <p id="message"></p>
+ <button class="action" id="restartBtn">Fight Again ↻</button>
+ <div class="review" id="review"></div>
+</div>
+</section>
+</main>
+
+<script>
+const questions=[
+["Using public transport helps reduce ____________ released into the atmosphere.",["electricity","emissions","reports","achievements"],1,"Emissions là khí thải được thải vào khí quyển.","Các đáp án còn lại không phù hợp về nghĩa."],
+["What time ____________ the movie tomorrow evening?",["is starting","will start","does start","did start"],2,"Dùng hiện tại đơn để nói về lịch trình hoặc thời gian biểu trong tương lai.","Cấu trúc câu hỏi: What time + does + chủ ngữ số ít + động từ nguyên mẫu?"],
+["Thousands of plastic bottles ____________ every week in this factory.",["recycle","recycled","are recycled","recycling"],2,"Chai nhựa được tái chế nên dùng câu bị động: be + V3.","Every week cho biết hành động thường xuyên, vì vậy dùng hiện tại đơn bị động: are recycled."],
+["The teacher's speech attracted the ____________ of all the students.",["attention","pollution","estimate","average"],0,"attract someone's attention = thu hút sự chú ý của ai.",""],
+["Cutting down too many trees causes serious environmental ____________.",["calculation","damage","report","ceremony"],1,"environmental damage = thiệt hại môi trường.",""],
+["The new project aims to ____________ air pollution in large cities.",["destroy","estimate","reduce","remind"],2,"reduce pollution = giảm ô nhiễm.",""],
+["Smoke from factories can ____________ serious health problems.",["collect","produce","cause","recycle"],2,"cause problems/damage = gây ra vấn đề hoặc thiệt hại.",""],
+["We should ____________ the use of plastic bags whenever possible.",["turn on","break down","cut down on","throw away"],2,"cut down on = cắt giảm.",""],
+["Please ____________ before placing them into the recycling container.",["sort recyclable materials","recyclable materials sort","materials recyclable sort","sort materials recyclable"],0,"Trật tự đúng là Verb + Adjective + Noun: sort recyclable materials.",""],
+["Many companies now ____________ old computers to make new products.",["emit","recycle","waste","damage"],1,"recycle old computers = tái chế máy tính cũ.",""],
+["I hope our school ____________ more trees next year.",["planted","plants","is planting","will plant"],3,"Sau hope, khi nói mong muốn trong tương lai thường dùng will + V.","next year là dấu hiệu chỉ tương lai."],
+["The amount of water used by each family was carefully ____________.",["collected","calculated","suggested","prevented"],1,"Calculate = tính toán số liệu. Câu dùng bị động: was calculated.",""],
+["Scientists are trying to ____________ how much energy each household uses.",["raise","destroy","estimate","remind"],2,"Estimate = ước tính.",""],
+["On ____________, teenagers spend about three hours a day online.",["emissions","damage","average","report"],2,"on average = trung bình.",""],
+["Wind farms generate clean ____________ for thousands of homes.",["electricity","pollution","carbon footprint","waste"],0,"generate electricity = tạo ra điện. Đây là cách kết hợp từ chuẩn.",""]
+];
+
+const letters=["A","B","C","D"];
+let current=0,score=0,hearts=5,combo=0,answered=false,answers=[],soundOn=true,audioCtx=null;
+const $=id=>document.getElementById(id);
+
+function getCtx(){
+ if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+ if(audioCtx.state==="suspended") audioCtx.resume();
+ return audioCtx;
+}
+function tone(freq,duration,type="sine",volume=.05,delay=0){
+ if(!soundOn)return;
+ const c=getCtx(),o=c.createOscillator(),g=c.createGain(),start=c.currentTime+delay;
+ o.type=type;o.frequency.setValueAtTime(freq,start);
+ g.gain.setValueAtTime(.0001,start);
+ g.gain.exponentialRampToValueAtTime(volume,start+.012);
+ g.gain.exponentialRampToValueAtTime(.0001,start+duration);
+ o.connect(g);g.connect(c.destination);o.start(start);o.stop(start+duration+.03);
+}
+function correctSound(){
+ tone(360,.07,"triangle",.035,0);
+ tone(620,.09,"sine",.045,.06);
+ tone(1050,.16,"triangle",.05,.14);
+}
+function wrongSound(){
+ tone(175,.16,"sawtooth",.045,0);
+ tone(105,.25,"square",.025,.12);
+}
+function nextSound(){
+ tone(440,.055,"triangle",.022,0);
+ tone(700,.07,"triangle",.02,.055);
+}
+function finishSound(){
+ [330,440,660,880,1175].forEach((f,i)=>tone(f,.2,"triangle",.035,i*.09));
+}
+
+$("soundBtn").onclick=()=>{
+ soundOn=!soundOn;
+ $("soundBtn").textContent=soundOn?"🔊 Âm thanh: Bật":"🔇 Âm thanh: Tắt";
+ if(soundOn)nextSound();
+};
+
+function render(){
+ answered=false;
+ $("nextBtn").disabled=true;
+ $("feedback").className="feedback";
+ $("feedback").innerHTML="";
+ const q=questions[current];
+
+ $("tag").textContent=`Question ${current+1}`;
+ $("question").textContent=q[0];
+ $("counter").textContent=`Câu ${current+1}/${questions.length}`;
+ $("scoreChip").textContent=`⚡ ${score} XP · Combo ${combo}`;
+ $("heartChip").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${current/questions.length*100}%`;
+ $("options").innerHTML="";
+
+ q[1].forEach((option,index)=>{
+  const button=document.createElement("button");
+  button.className="option";
+  button.innerHTML=`<span class="letter">${letters[index]}</span><span>${option}</span>`;
+  button.onclick=()=>choose(index);
+  $("options").appendChild(button);
+ });
+
+ $("nextBtn").textContent=current===questions.length-1?"Finish Battle ⚡":"Next Attack ⚡";
+}
+
+function choose(index){
+ if(answered)return;
+ answered=true;
+
+ const q=questions[current];
+ const buttons=[...document.querySelectorAll(".option")];
+ const isCorrect=index===q[2];
+
+ buttons.forEach(button=>button.disabled=true);
+ buttons[q[2]].classList.add("correct");
+
+ if(isCorrect){
+  score+=10+(combo*2);
+  combo++;
+  buttons[index].classList.add("correct");
+  $("feedback").className="feedback correct show";
+  $("feedback").innerHTML=`<strong>⚡ Blue Flame Hit! Chính xác.</strong>${q[3]}${q[4]?`<div class="details">${q[4]}</div>`:""}`;
+  correctSound();
+ }else{
+  hearts=Math.max(0,hearts-1);
+  combo=0;
+  buttons[index].classList.add("wrong");
+  $("feedback").className="feedback wrong show";
+  $("feedback").innerHTML=`<strong>⚠ Attack Missed. Đáp án đúng: ${letters[q[2]]}. ${q[1][q[2]]}</strong>${q[3]}${q[4]?`<div class="details">${q[4]}</div>`:""}`;
+  wrongSound();
+ }
+
+ answers.push({selected:index,isCorrect,correct:q[2]});
+ $("scoreChip").textContent=`⚡ ${score} XP · Combo ${combo}`;
+ $("heartChip").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${(current+1)/questions.length*100}%`;
+ $("nextBtn").disabled=false;
+}
+
+function showResult(){
+ $("quizArea").style.display="none";
+ $("resultArea").classList.add("show");
+
+ const correctCount=answers.filter(answer=>answer.isCorrect).length;
+ $("finalScore").textContent=`${score} XP · ${correctCount}/${questions.length}`;
+ finishSound();
+
+ const percent=correctCount/questions.length*100;
+ if(percent===100){
+  $("resultIcon").textContent="🏆⚡";
+  $("message").textContent="Ultimate Champion! Em đã trả lời đúng toàn bộ câu hỏi.";
+ }else if(percent>=80){
+  $("resultIcon").textContent="⚔️💫";
+  $("message").textContent="Elite Fighter! Em đã nắm rất chắc kiến thức.";
+ }else if(percent>=60){
+  $("resultIcon").textContent="🥊✨";
+  $("message").textContent="Good Battle! Hãy xem lại các câu sai để tăng sức mạnh.";
+ }else{
+  $("resultIcon").textContent="📘⚡";
+  $("message").textContent="Training Mode! Ôn lại kiến thức rồi chiến đấu lần nữa.";
+ }
+
+ let reviewHTML="<h3>Battle Review</h3>";
+ questions.forEach((q,index)=>{
+  const answer=answers[index];
+  reviewHTML+=`
+   <div class="review-item ${answer&&answer.isCorrect?"ok":"no"}">
+    <strong>Câu ${index+1}: ${answer&&answer.isCorrect?"Đúng":"Sai"}</strong><br>
+    Em chọn: ${answer?`${letters[answer.selected]}. ${q[1][answer.selected]}`:"Chưa trả lời"}<br>
+    Đáp án đúng: ${letters[q[2]]}. ${q[1][q[2]]}<br>
+    <em>${q[3]}</em>
+    ${q[4]?`<div class="details">${q[4]}</div>`:""}
+   </div>`;
+ });
+ $("review").innerHTML=reviewHTML;
+}
+
+$("nextBtn").onclick=()=>{
+ if(!answered)return;
+ nextSound();
+ if(current<questions.length-1){
+  current++;
+  render();
+ }else{
+  showResult();
+ }
+};
+
+$("restartBtn").onclick=()=>{
+ current=0;score=0;hearts=5;combo=0;answered=false;answers=[];
+ $("resultArea").classList.remove("show");
+ $("quizArea").style.display="block";
+ render();
+ nextSound();
+};
+
+render();
+</script>
+</body>
+</html>

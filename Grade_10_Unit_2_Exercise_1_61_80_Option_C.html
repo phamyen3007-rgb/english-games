@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Grade 10 - Unit 2 - Exercise 1 (61-80) - Option C</title>
+<style>
+:root{
+ --sand:#f6d28b;--gold:#e7a93b;--orange:#d96b2b;--sun:#ffd166;--brown:#6b3e24;
+ --deep:#2d1a16;--panel:#fff7e8;--panel2:#fbe8bd;--green:#42c98a;--red:#ef5b67;
+ --text:#4a2c1d;--muted:#8b684d
+}
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--text);
+ background:
+ radial-gradient(circle at 18% 18%,rgba(255,209,102,.25),transparent 24%),
+ radial-gradient(circle at 82% 14%,rgba(217,107,43,.17),transparent 25%),
+ linear-gradient(180deg,#f9d68d 0%,#eaa85b 40%,#a9572f 100%);
+ padding:18px;overflow-x:hidden
+}
+.desert{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.sun{
+ position:absolute;right:8%;top:8%;width:110px;height:110px;border-radius:50%;
+ background:radial-gradient(circle,#fff7bd 0 18%,#ffd166 45%,#f39c3d 100%);
+ box-shadow:0 0 45px rgba(255,209,102,.6)
+}
+.dune,.dune2,.dune3{
+ position:absolute;left:-10%;width:120%;border-radius:50% 50% 0 0/100% 100% 0 0
+}
+.dune{height:230px;bottom:-90px;background:#d88a3a;transform:rotate(-2deg)}
+.dune2{height:180px;bottom:-75px;background:#c96d2f;transform:rotate(2deg);opacity:.9}
+.dune3{height:135px;bottom:-55px;background:#a84f2a;transform:rotate(-1deg);opacity:.95}
+.sand{
+ position:absolute;width:5px;height:5px;border-radius:50%;background:rgba(255,244,200,.7);
+ animation:blow linear infinite
+}
+.s1{top:24%;left:-10px;animation-duration:8s}.s2{top:37%;left:-20px;animation-duration:10s;animation-delay:2s}
+.s3{top:50%;left:-15px;animation-duration:7s;animation-delay:1s}.s4{top:65%;left:-20px;animation-duration:12s}
+@keyframes blow{to{transform:translateX(110vw) translateY(-35px);opacity:.1}}
+.wrap{width:min(1040px,100%);margin:auto;position:relative;z-index:2}
+.hero{display:grid;grid-template-columns:120px 1fr auto;gap:18px;align-items:center;margin-bottom:16px}
+.oasis{width:108px;height:108px;position:relative;display:grid;place-items:center}
+.glow{position:absolute;inset:4px;border-radius:50%;background:radial-gradient(circle,rgba(255,209,102,.35),rgba(217,107,43,.08) 58%,transparent 72%);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.12);opacity:.72}}
+.cactus{position:absolute;bottom:12px;width:24px;height:62px;border-radius:12px;background:linear-gradient(180deg,#5bb66c,#2d7f49)}
+.cactus:before,.cactus:after{content:"";position:absolute;width:16px;height:35px;border-radius:10px;background:#3f9b5b;top:19px}
+.cactus:before{left:-13px;transform:rotate(-20deg)}.cactus:after{right:-13px;transform:rotate(20deg)}
+.cactus-base{position:absolute;bottom:7px;width:72px;height:18px;border-radius:50%;background:#d78a3f}
+h1{margin:0;font-size:clamp(28px,4vw,46px);background:linear-gradient(90deg,#6c321c,#b65424,#e38c32,#6b3e24);-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{margin:7px 0 0;color:#6f4a33;font-weight:700}
+.sound{border:1px solid rgba(107,62,36,.25);background:#fff5dd;color:#5d351f;border-radius:12px;padding:11px 14px;font-weight:900;cursor:pointer;box-shadow:0 8px 20px rgba(90,52,28,.1)}
+.card{background:linear-gradient(180deg,rgba(255,250,238,.97),rgba(255,244,220,.98));border:1px solid rgba(107,62,36,.2);border-radius:24px;box-shadow:0 24px 65px rgba(73,38,19,.2);overflow:hidden}
+.status{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;padding:18px 22px 13px;background:linear-gradient(90deg,#fff2d3,#f9dfaa);border-bottom:1px solid rgba(107,62,36,.1)}
+.barbox{height:13px;background:#ead6ae;border-radius:999px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--sun),var(--gold),var(--orange));transition:.3s}
+.chip{background:#fffaf0;border-radius:999px;padding:8px 13px;font-weight:900;white-space:nowrap;box-shadow:0 5px 14px rgba(90,52,28,.08)}
+.content{padding:24px 22px 26px}
+.tag{display:inline-block;padding:7px 13px;border-radius:9px;background:#fff1d4;border:1px solid rgba(217,107,43,.35);color:#a04a23;font-weight:900;margin-bottom:13px}
+.question{margin:0 0 22px;font-size:clamp(22px,2.8vw,31px);line-height:1.45}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.option{min-height:72px;border-radius:15px;border:2px solid #ecd9b6;background:linear-gradient(135deg,#fffaf0,#fff1d8);color:var(--text);display:flex;align-items:center;gap:13px;padding:16px 17px;font-size:18px;text-align:left;cursor:pointer;transition:.16s}
+.option:hover:not(:disabled){transform:translateY(-2px);border-color:var(--gold);box-shadow:0 10px 20px rgba(217,107,43,.12)}
+.letter{width:40px;height:40px;flex:0 0 40px;border-radius:10px;display:grid;place-items:center;font-weight:1000;color:#4c2a17;background:linear-gradient(135deg,#ffe29b,#efb24d)}
+.option.correct{background:linear-gradient(135deg,#eafff4,#dcf7e8)!important;border-color:var(--green)!important}
+.option.wrong{background:linear-gradient(135deg,#fff0f1,#ffe2e5)!important;border-color:var(--red)!important}
+.feedback{display:none;margin-top:20px;padding:17px 18px;border-radius:15px;background:#fffaf1;border-left:5px solid;line-height:1.6}
+.feedback.show{display:block}.feedback.correct{border-color:var(--green)}.feedback.wrong{border-color:var(--sun)}
+.feedback strong{display:block;margin-bottom:7px}.details{margin-top:9px;color:#795a43;font-size:15px}
+.controls{display:flex;justify-content:flex-end;margin-top:20px}
+.action{border:0;border-radius:12px;padding:13px 23px;font-size:17px;font-weight:1000;color:#4a2a18;cursor:pointer;background:linear-gradient(90deg,#ffe18c,#e9a640)}
+.action:disabled{opacity:.35;cursor:not-allowed}
+.result{display:none;text-align:center;padding:38px 24px}.result.show{display:block}
+.result-icon{font-size:74px}.score-big{font-size:62px;font-weight:1000;color:#d46b2b}
+.review{text-align:left;margin-top:25px;border-top:1px solid rgba(107,62,36,.1);padding-top:18px}
+.review-item{padding:13px 14px;margin-bottom:10px;border-radius:12px;background:#fff8e9;border-left:5px solid #b49372;line-height:1.5}
+.review-item.ok{border-left-color:var(--green)}.review-item.no{border-left-color:var(--red)}
+@media(max-width:760px){
+ .hero{grid-template-columns:85px 1fr}.sound{grid-column:1/-1;justify-self:end}
+ .status{grid-template-columns:1fr 1fr}.barbox{grid-column:1/-1;order:4}
+ .options{grid-template-columns:1fr}.content{padding:18px 15px 22px}
+ .oasis{transform:scale(.8);transform-origin:left center;width:85px}
+}
+</style>
+</head>
+<body>
+<div class="desert">
+ <div class="sun"></div>
+ <div class="sand s1"></div><div class="sand s2"></div><div class="sand s3"></div><div class="sand s4"></div>
+ <div class="dune"></div><div class="dune2"></div><div class="dune3"></div>
+</div>
+
+<main class="wrap">
+<header class="hero">
+ <div class="oasis">
+  <div class="glow"></div><div class="cactus-base"></div><div class="cactus"></div>
+ </div>
+ <div>
+  <h1>Desert Learning Quest</h1>
+  <p class="subtitle">Grade 10 · Unit 2 · Exercise 1 (61–80) · Option C</p>
+ </div>
+ <button class="sound" id="soundBtn">🔊 Âm thanh: Bật</button>
+</header>
+
+<section class="card">
+<div id="quizArea">
+ <div class="status">
+  <div class="barbox"><div class="bar" id="bar"></div></div>
+  <div class="chip" id="counter"></div>
+  <div class="chip" id="scoreChip"></div>
+  <div class="chip" id="heartChip"></div>
+ </div>
+ <div class="content">
+  <div class="tag" id="tag"></div>
+  <h2 class="question" id="question"></h2>
+  <div class="options" id="options"></div>
+  <div class="feedback" id="feedback"></div>
+  <div class="controls"><button class="action" id="nextBtn" disabled>Next Dune 🏜️</button></div>
+ </div>
+</div>
+
+<div class="result" id="resultArea">
+ <div class="result-icon" id="resultIcon">🏜️</div>
+ <h2>Desert Quest Complete</h2>
+ <div class="score-big" id="finalScore"></div>
+ <p id="message"></p>
+ <button class="action" id="restartBtn">Travel Again ↻</button>
+ <div class="review" id="review"></div>
+</div>
+</section>
+</main>
+
+<script>
+const questions=[
+["Switching to reusable shopping bags is an effective way to reduce your ____________.",["renewable resources","carbon footprint","natural habitats","climate balance"],1,"Carbon footprint là lượng khí thải carbon do một người hoặc hoạt động tạo ra.",""],
+["Many crops failed after weeks of extreme ____________ and no rainfall.",["prevention","appliance","heat","recycling"],2,"Extreme heat là nắng nóng gay gắt, làm cây trồng chết nếu không có mưa.",""],
+["Human activities have a serious impact ____________ wildlife around the world.",["with","for","on","into"],2,"Cụm cố định: have an impact on.",""],
+["Air pollution can gradually ____________ the quality of life in large cities.",["encourage","destroy","collect","attract"],1,"Destroy the quality of life = làm suy giảm chất lượng cuộc sống.",""],
+["By the time the firefighters arrived, several trees ____________ by the forest fire.",["were destroyed","had been destroyed","have been destroyed","are destroyed"],1,"Hành động bị động xảy ra trước một mốc trong quá khứ.","Dùng quá khứ hoàn thành bị động: had been + V3."],
+["____________ citizen has a responsibility to protect the environment.",["Every","Most","Some","Several"],0,"Every + danh từ số ít.","Citizen là danh từ số ít."],
+["The competition rewarded the most ____________.",["environmental creative solution","creative environmental solution","solution environmental creative","creative solution environmental"],1,"Trật tự đúng: creative + environmental + solution.","Creative chỉ ý kiến; environmental bổ nghĩa cho danh từ solution."],
+["Look at those strong winds! The old tree ____________ down.",["falls","is falling","is going to fall","will falling"],2,"Có dấu hiệu rõ ràng ở hiện tại nên dùng be going to.",""],
+["The campaign aims ____________ students aware of climate change.",["making","to make","make","made"],1,"Aim to do something = nhằm làm gì.",""],
+["Unless you leave now, you ____________ the school bus.",["miss","are missing","will miss","missed"],2,"Unless = If...not; mệnh đề chính dùng will.",""],
+["My classmates are keen ____________ joining the school's Green Club.",["about","in","on","for"],2,"Be keen on + V-ing/N.",""],
+["This machine is designed ____________ plastic bottles into small pieces.",["recycle","recycled","recycling","to recycle"],3,"Be designed to V = được thiết kế để làm gì.",""],
+["At this time yesterday, volunteers ____________ trees around the lake.",["planted","were planting","have planted","had planted"],1,"Có mốc thời gian xác định trong quá khứ và hành động đang diễn ra.","Dùng quá khứ tiếp diễn: were planting."],
+["Her excellent presentation immediately ____________ the judges' attention.",["raised","caused","attracted","brought"],2,"Cụm cố định: attract someone's attention.",""],
+["Don't forget ____________ the classroom lights before you leave.",["turning off","turn off","to turn off","turned off"],2,"Don't forget to V = đừng quên làm việc gì.",""]
+];
+
+const letters=["A","B","C","D"];
+let current=0,score=0,hearts=5,combo=0,answered=false,answers=[],soundOn=true,audioCtx=null;
+const $=id=>document.getElementById(id);
+
+function getCtx(){
+ if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+ if(audioCtx.state==="suspended") audioCtx.resume();
+ return audioCtx;
+}
+function tone(freq,duration,type="sine",volume=.05,delay=0){
+ if(!soundOn)return;
+ const c=getCtx(),o=c.createOscillator(),g=c.createGain(),start=c.currentTime+delay;
+ o.type=type;o.frequency.setValueAtTime(freq,start);
+ g.gain.setValueAtTime(.0001,start);
+ g.gain.exponentialRampToValueAtTime(volume,start+.012);
+ g.gain.exponentialRampToValueAtTime(.0001,start+duration);
+ o.connect(g);g.connect(c.destination);o.start(start);o.stop(start+duration+.03);
+}
+function correctSound(){
+ tone(440,.08,"triangle",.03,0);
+ tone(660,.1,"sine",.035,.08);
+ tone(880,.16,"triangle",.035,.17);
+}
+function wrongSound(){
+ tone(180,.16,"sawtooth",.035,0);
+ tone(110,.22,"square",.02,.12);
+}
+function nextSound(){
+ tone(330,.06,"triangle",.018,0);
+ tone(495,.07,"triangle",.016,.06);
+}
+function finishSound(){
+ [330,440,550,660,880].forEach((f,i)=>tone(f,.19,"triangle",.03,i*.1));
+}
+
+$("soundBtn").onclick=()=>{
+ soundOn=!soundOn;
+ $("soundBtn").textContent=soundOn?"🔊 Âm thanh: Bật":"🔇 Âm thanh: Tắt";
+ if(soundOn)nextSound();
+};
+
+function render(){
+ answered=false;
+ $("nextBtn").disabled=true;
+ $("feedback").className="feedback";
+ $("feedback").innerHTML="";
+ const q=questions[current];
+
+ $("tag").textContent=`Question ${current+1}`;
+ $("question").textContent=q[0];
+ $("counter").textContent=`Câu ${current+1}/${questions.length}`;
+ $("scoreChip").textContent=`🏜️ ${score} XP · Combo ${combo}`;
+ $("heartChip").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${current/questions.length*100}%`;
+ $("options").innerHTML="";
+
+ q[1].forEach((option,index)=>{
+  const button=document.createElement("button");
+  button.className="option";
+  button.innerHTML=`<span class="letter">${letters[index]}</span><span>${option}</span>`;
+  button.onclick=()=>choose(index);
+  $("options").appendChild(button);
+ });
+
+ $("nextBtn").textContent=current===questions.length-1?"Finish Desert 🏜️":"Next Dune 🏜️";
+}
+
+function choose(index){
+ if(answered)return;
+ answered=true;
+
+ const q=questions[current];
+ const buttons=[...document.querySelectorAll(".option")];
+ const isCorrect=index===q[2];
+
+ buttons.forEach(button=>button.disabled=true);
+ buttons[q[2]].classList.add("correct");
+
+ if(isCorrect){
+  score+=10+(combo*2);
+  combo++;
+  buttons[index].classList.add("correct");
+  $("feedback").className="feedback correct show";
+  $("feedback").innerHTML=`<strong>🏜️ Oasis Found! Chính xác.</strong>${q[3]}${q[4]?`<div class="details">${q[4]}</div>`:""}`;
+  correctSound();
+ }else{
+  hearts=Math.max(0,hearts-1);
+  combo=0;
+  buttons[index].classList.add("wrong");
+  $("feedback").className="feedback wrong show";
+  $("feedback").innerHTML=`<strong>⚠ Lost in the Sand. Đáp án đúng: ${letters[q[2]]}. ${q[1][q[2]]}</strong>${q[3]}${q[4]?`<div class="details">${q[4]}</div>`:""}`;
+  wrongSound();
+ }
+
+ answers.push({selected:index,isCorrect,correct:q[2]});
+ $("scoreChip").textContent=`🏜️ ${score} XP · Combo ${combo}`;
+ $("heartChip").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${(current+1)/questions.length*100}%`;
+ $("nextBtn").disabled=false;
+}
+
+function showResult(){
+ $("quizArea").style.display="none";
+ $("resultArea").classList.add("show");
+
+ const correctCount=answers.filter(answer=>answer.isCorrect).length;
+ $("finalScore").textContent=`${score} XP · ${correctCount}/${questions.length}`;
+ finishSound();
+
+ const percent=correctCount/questions.length*100;
+ if(percent===100){
+  $("resultIcon").textContent="🏆🏜️";
+  $("message").textContent="Perfect Desert Master! Em đã hoàn thành toàn bộ thử thách.";
+ }else if(percent>=80){
+  $("resultIcon").textContent="🐪✨";
+  $("message").textContent="Excellent Explorer! Em đã nắm rất chắc kiến thức.";
+ }else if(percent>=60){
+  $("resultIcon").textContent="🌵🌟";
+  $("message").textContent="Good Journey! Hãy xem lại các câu sai để tiến bộ hơn.";
+ }else{
+  $("resultIcon").textContent="📘🏜️";
+  $("message").textContent="Training Camp! Ôn lại kiến thức rồi thử lại.";
+ }
+
+ let reviewHTML="<h3>Desert Review</h3>";
+ questions.forEach((q,index)=>{
+  const answer=answers[index];
+  reviewHTML+=`
+   <div class="review-item ${answer&&answer.isCorrect?"ok":"no"}">
+    <strong>Câu ${index+1}: ${answer&&answer.isCorrect?"Đúng":"Sai"}</strong><br>
+    Em chọn: ${answer?`${letters[answer.selected]}. ${q[1][answer.selected]}`:"Chưa trả lời"}<br>
+    Đáp án đúng: ${letters[q[2]]}. ${q[1][q[2]]}<br>
+    <em>${q[3]}</em>
+    ${q[4]?`<div class="details">${q[4]}</div>`:""}
+   </div>`;
+ });
+ $("review").innerHTML=reviewHTML;
+}
+
+$("nextBtn").onclick=()=>{
+ if(!answered)return;
+ nextSound();
+ if(current<questions.length-1){
+  current++;
+  render();
+ }else{
+  showResult();
+ }
+};
+
+$("restartBtn").onclick=()=>{
+ current=0;score=0;hearts=5;combo=0;answered=false;answers=[];
+ $("resultArea").classList.remove("show");
+ $("quizArea").style.display="block";
+ render();
+ nextSound();
+};
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Grade 10 - Unit 2 - Exercise 1 (81-100) - Option C</title>
+<style>
+:root{
+ --deep:#071b16;--swamp:#0d3a2f;--panel:#123f34;--panel2:#195145;
+ --lime:#9be564;--green:#47cf7c;--teal:#45d6c1;--yellow:#f4d35e;
+ --red:#ff6677;--text:#f3fff7;--muted:#b9d7c7
+}
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--text);
+ background:
+ radial-gradient(circle at 15% 18%,rgba(155,229,100,.16),transparent 25%),
+ radial-gradient(circle at 85% 15%,rgba(69,214,193,.13),transparent 26%),
+ linear-gradient(180deg,#04120f,#08271f 58%,#03100d);
+ padding:18px;overflow-x:hidden
+}
+.swamp-bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bubble{position:absolute;border-radius:50%;border:2px solid rgba(155,229,100,.35);background:rgba(69,214,193,.05);animation:rise linear infinite}
+.b1{width:22px;height:22px;left:8%;bottom:-30px;animation-duration:8s}
+.b2{width:36px;height:36px;left:24%;bottom:-40px;animation-duration:11s;animation-delay:2s}
+.b3{width:18px;height:18px;right:12%;bottom:-30px;animation-duration:7s;animation-delay:1s}
+.b4{width:30px;height:30px;right:30%;bottom:-40px;animation-duration:10s;animation-delay:3s}
+@keyframes rise{to{transform:translateY(-115vh);opacity:.05}}
+.reeds{position:absolute;left:0;right:0;bottom:0;height:130px;background:linear-gradient(180deg,transparent,rgba(7,45,35,.75))}
+.wrap{width:min(1040px,100%);margin:auto;position:relative;z-index:2}
+.hero{display:grid;grid-template-columns:120px 1fr auto;gap:18px;align-items:center;margin-bottom:16px}
+.gator{width:108px;height:108px;position:relative;display:grid;place-items:center;filter:drop-shadow(0 0 18px rgba(155,229,100,.25))}
+.glow{position:absolute;inset:2px;border-radius:50%;background:radial-gradient(circle,rgba(155,229,100,.28),rgba(69,214,193,.08) 58%,transparent 72%);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.12);opacity:.7}}
+.head{width:82px;height:58px;border-radius:34px 34px 24px 24px;background:linear-gradient(180deg,#7fd45e,#3a9c55);position:relative}
+.snout{position:absolute;left:12px;right:12px;bottom:-10px;height:28px;border-radius:18px;background:#6ec95a}
+.eye{position:absolute;top:12px;width:12px;height:12px;border-radius:50%;background:#fff}
+.eye:after{content:"";position:absolute;inset:3px;border-radius:50%;background:#111}
+.eye.l{left:18px}.eye.r{right:18px}
+.tooth{position:absolute;bottom:-5px;width:8px;height:10px;background:#fff;clip-path:polygon(0 0,100% 0,50% 100%)}
+.t1{left:28px}.t2{right:28px}
+h1{margin:0;font-size:clamp(28px,4vw,46px);background:linear-gradient(90deg,#eaffd8,var(--lime),var(--teal),#8ee3b4);-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{margin:7px 0 0;color:var(--muted);font-weight:700}
+.sound{border:1px solid rgba(155,229,100,.4);background:#12352d;color:#fff;border-radius:12px;padding:11px 14px;font-weight:900;cursor:pointer}
+.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid rgba(155,229,100,.24);border-radius:24px;box-shadow:0 24px 65px rgba(0,0,0,.52);overflow:hidden}
+.status{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;padding:18px 22px 13px;background:#0a2a22;border-bottom:1px solid rgba(255,255,255,.08)}
+.barbox{height:13px;background:#051611;border-radius:999px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--lime),var(--green),var(--teal));transition:.3s;box-shadow:0 0 15px rgba(155,229,100,.35)}
+.chip{background:#163f35;border-radius:999px;padding:8px 13px;font-weight:900;white-space:nowrap}
+.content{padding:24px 22px 26px}
+.tag{display:inline-block;padding:7px 13px;border-radius:9px;background:rgba(155,229,100,.08);border:1px solid rgba(155,229,100,.38);color:#caff9e;font-weight:900;margin-bottom:13px}
+.question{margin:0 0 22px;font-size:clamp(22px,2.8vw,31px);line-height:1.45}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.option{min-height:72px;border-radius:15px;border:1px solid rgba(180,255,200,.15);background:linear-gradient(135deg,#18473b,#0d2d25);color:#fff;display:flex;align-items:center;gap:13px;padding:16px 17px;font-size:18px;text-align:left;cursor:pointer;transition:.16s}
+.option:hover:not(:disabled){transform:translateY(-2px);border-color:var(--lime);box-shadow:0 0 20px rgba(155,229,100,.12)}
+.letter{width:40px;height:40px;flex:0 0 40px;border-radius:10px;display:grid;place-items:center;font-weight:1000;color:#0b2119;background:linear-gradient(135deg,var(--lime),#bdf0a5)}
+.option.correct{background:linear-gradient(135deg,#14563c,#092d24)!important;border-color:var(--green)!important}
+.option.wrong{background:linear-gradient(135deg,#681f35,#310c1a)!important;border-color:var(--red)!important}
+.feedback{display:none;margin-top:20px;padding:17px 18px;border-radius:15px;background:#0b251e;border-left:5px solid;line-height:1.6}
+.feedback.show{display:block}.feedback.correct{border-color:var(--green)}.feedback.wrong{border-color:var(--yellow)}
+.feedback strong{display:block;margin-bottom:7px}.details{margin-top:9px;color:#c9e3d5;font-size:15px}
+.controls{display:flex;justify-content:flex-end;margin-top:20px}
+.action{border:0;border-radius:12px;padding:13px 23px;font-size:17px;font-weight:1000;color:#0c2119;cursor:pointer;background:linear-gradient(90deg,var(--lime),#a7ebca)}
+.action:disabled{opacity:.35;cursor:not-allowed}
+.result{display:none;text-align:center;padding:38px 24px}.result.show{display:block}
+.result-icon{font-size:74px}.score-big{font-size:62px;font-weight:1000;color:var(--lime)}
+.review{text-align:left;margin-top:25px;border-top:1px solid rgba(255,255,255,.1);padding-top:18px}
+.review-item{padding:13px 14px;margin-bottom:10px;border-radius:12px;background:#0b251e;border-left:5px solid #66877a;line-height:1.5}
+.review-item.ok{border-left-color:var(--green)}.review-item.no{border-left-color:var(--red)}
+@media(max-width:760px){
+ .hero{grid-template-columns:85px 1fr}.sound{grid-column:1/-1;justify-self:end}
+ .status{grid-template-columns:1fr 1fr}.barbox{grid-column:1/-1;order:4}
+ .options{grid-template-columns:1fr}.content{padding:18px 15px 22px}
+ .gator{transform:scale(.8);transform-origin:left center;width:85px}
+}
+</style>
+</head>
+<body>
+<div class="swamp-bg">
+ <div class="bubble b1"></div><div class="bubble b2"></div><div class="bubble b3"></div><div class="bubble b4"></div>
+ <div class="reeds"></div>
+</div>
+
+<main class="wrap">
+<header class="hero">
+ <div class="gator">
+  <div class="glow"></div><div class="head"><div class="eye l"></div><div class="eye r"></div><div class="snout"></div><div class="tooth t1"></div><div class="tooth t2"></div></div>
+ </div>
+ <div>
+  <h1>Alligator Learning Quest</h1>
+  <p class="subtitle">Grade 10 · Unit 2 · Exercise 1 (81–100) · Option C</p>
+ </div>
+ <button class="sound" id="soundBtn">🔊 Âm thanh: Bật</button>
+</header>
+
+<section class="card">
+<div id="quizArea">
+ <div class="status">
+  <div class="barbox"><div class="bar" id="bar"></div></div>
+  <div class="chip" id="counter"></div>
+  <div class="chip" id="scoreChip"></div>
+  <div class="chip" id="heartChip"></div>
+ </div>
+ <div class="content">
+  <div class="tag" id="tag"></div>
+  <h2 class="question" id="question"></h2>
+  <div class="options" id="options"></div>
+  <div class="feedback" id="feedback"></div>
+  <div class="controls"><button class="action" id="nextBtn" disabled>Next Splash 🐊</button></div>
+ </div>
+</div>
+
+<div class="result" id="resultArea">
+ <div class="result-icon" id="resultIcon">🐊</div>
+ <h2>Swamp Quest Complete</h2>
+ <div class="score-big" id="finalScore"></div>
+ <p id="message"></p>
+ <button class="action" id="restartBtn">Swim Again ↻</button>
+ <div class="review" id="review"></div>
+</div>
+</section>
+</main>
+
+<script>
+const questions=[
+["Scientists are looking for cleaner sources of ____________ to replace fossil fuels.",["pollution","energy","damage","appliance"],1,"Sources of energy = nguồn năng lượng.",""],
+["Using too much plastic can have a harmful impact ____________ marine life.",["in","with","on","by"],2,"Cụm cố định: have an impact on.",""],
+["Many sea animals die because they accidentally ____________ plastic waste.",["destroy","attract","swallow","recycle"],2,"Swallow plastic = nuốt phải nhựa.",""],
+["Look at those black clouds! It ____________ heavily soon.",["rains","will rain","is going to rain","has rained"],2,"Có dấu hiệu rõ ràng ở hiện tại nên dùng be going to.",""],
+["If we continue cutting down forests, many animals ____________ their homes.",["lose","lost","will lose","are losing"],2,"Đây là câu điều kiện loại 1.","Mệnh đề if dùng hiện tại đơn; mệnh đề chính dùng will + V."],
+["Our school has decided to ____________ a Green Day next month.",["organize","grow","collect","damage"],0,"Organize an event = tổ chức sự kiện.",""],
+["The broken computers ____________ before they are recycled.",["repair","repaired","will repair","will be repaired"],3,"Máy tính là đối tượng được sửa nên dùng tương lai bị động.","Will be repaired = sẽ được sửa."],
+["She forgot ____________ the classroom lights after the lesson.",["switch off","switching off","to switch off","switched off"],2,"Forget to V = quên làm việc gì.",""],
+["At this time yesterday, volunteers ____________ rubbish along the river.",["collected","were collecting","have collected","had collected"],1,"At this time yesterday là dấu hiệu của quá khứ tiếp diễn.",""],
+["By the time we arrived, all the rubbish ____________ from the beach.",["removed","was removed","had been removed","has removed"],2,"Hành động bị động xảy ra trước một mốc trong quá khứ.","Dùng quá khứ hoàn thành bị động: had been removed."],
+["The new recycling campaign has already ____________ thousands of students' attention.",["raised","caused","attracted","caught"],2,"Collocation đúng: attract attention.",""],
+["You should ____________ electrical appliances when they are not being used.",["turn off","look after","take off","put on"],0,"Turn off appliances = tắt thiết bị điện.",""],
+["The government hopes to ____________ public awareness of environmental protection.",["raise","rise","grow","build"],0,"Raise awareness = nâng cao nhận thức.","Raise là ngoại động từ, có tân ngữ awareness."],
+["The volunteers are ____________ collecting rubbish every weekend.",["interested","keen on","responsible","proud"],1,"Be keen on + V-ing = rất thích làm gì.",""],
+["There's someone at the door. Don't worry. I ____________ it.",["am going to answer","answer","will answer","answered"],2,"Will dùng cho quyết định được đưa ra ngay tại thời điểm nói.",""]
+];
+
+const letters=["A","B","C","D"];
+let current=0,score=0,hearts=5,combo=0,answered=false,answers=[],soundOn=true,audioCtx=null;
+const $=id=>document.getElementById(id);
+
+function getCtx(){
+ if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+ if(audioCtx.state==="suspended") audioCtx.resume();
+ return audioCtx;
+}
+function tone(freq,duration,type="sine",volume=.05,delay=0){
+ if(!soundOn)return;
+ const c=getCtx(),o=c.createOscillator(),g=c.createGain(),start=c.currentTime+delay;
+ o.type=type;o.frequency.setValueAtTime(freq,start);
+ g.gain.setValueAtTime(.0001,start);
+ g.gain.exponentialRampToValueAtTime(volume,start+.012);
+ g.gain.exponentialRampToValueAtTime(.0001,start+duration);
+ o.connect(g);g.connect(c.destination);o.start(start);o.stop(start+duration+.03);
+}
+function correctSound(){
+ tone(420,.08,"triangle",.03,0);
+ tone(630,.1,"sine",.035,.08);
+ tone(945,.16,"triangle",.035,.17);
+}
+function wrongSound(){
+ tone(165,.16,"sawtooth",.035,0);
+ tone(95,.23,"square",.02,.12);
+}
+function nextSound(){
+ tone(310,.06,"triangle",.018,0);
+ tone(470,.07,"triangle",.016,.06);
+}
+function finishSound(){
+ [330,440,550,660,880].forEach((f,i)=>tone(f,.19,"triangle",.03,i*.1));
+}
+
+$("soundBtn").onclick=()=>{
+ soundOn=!soundOn;
+ $("soundBtn").textContent=soundOn?"🔊 Âm thanh: Bật":"🔇 Âm thanh: Tắt";
+ if(soundOn)nextSound();
+};
+
+function render(){
+ answered=false;
+ $("nextBtn").disabled=true;
+ $("feedback").className="feedback";
+ $("feedback").innerHTML="";
+ const q=questions[current];
+
+ $("tag").textContent=`Question ${current+1}`;
+ $("question").textContent=q[0];
+ $("counter").textContent=`Câu ${current+1}/${questions.length}`;
+ $("scoreChip").textContent=`🐊 ${score} XP · Combo ${combo}`;
+ $("heartChip").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${current/questions.length*100}%`;
+ $("options").innerHTML="";
+
+ q[1].forEach((option,index)=>{
+  const button=document.createElement("button");
+  button.className="option";
+  button.innerHTML=`<span class="letter">${letters[index]}</span><span>${option}</span>`;
+  button.onclick=()=>choose(index);
+  $("options").appendChild(button);
+ });
+
+ $("nextBtn").textContent=current===questions.length-1?"Finish Swamp 🐊":"Next Splash 🐊";
+}
+
+function choose(index){
+ if(answered)return;
+ answered=true;
+
+ const q=questions[current];
+ const buttons=[...document.querySelectorAll(".option")];
+ const isCorrect=index===q[2];
+
+ buttons.forEach(button=>button.disabled=true);
+ buttons[q[2]].classList.add("correct");
+
+ if(isCorrect){
+  score+=10+(combo*2);
+  combo++;
+  buttons[index].classList.add("correct");
+  $("feedback").className="feedback correct show";
+  $("feedback").innerHTML=`<strong>🐊 Chomp! Chính xác.</strong>${q[3]}${q[4]?`<div class="details">${q[4]}</div>`:""}`;
+  correctSound();
+ }else{
+  hearts=Math.max(0,hearts-1);
+  combo=0;
+  buttons[index].classList.add("wrong");
+  $("feedback").className="feedback wrong show";
+  $("feedback").innerHTML=`<strong>⚠ Missed Bite. Đáp án đúng: ${letters[q[2]]}. ${q[1][q[2]]}</strong>${q[3]}${q[4]?`<div class="details">${q[4]}</div>`:""}`;
+  wrongSound();
+ }
+
+ answers.push({selected:index,isCorrect,correct:q[2]});
+ $("scoreChip").textContent=`🐊 ${score} XP · Combo ${combo}`;
+ $("heartChip").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${(current+1)/questions.length*100}%`;
+ $("nextBtn").disabled=false;
+}
+
+function showResult(){
+ $("quizArea").style.display="none";
+ $("resultArea").classList.add("show");
+
+ const correctCount=answers.filter(answer=>answer.isCorrect).length;
+ $("finalScore").textContent=`${score} XP · ${correctCount}/${questions.length}`;
+ finishSound();
+
+ const percent=correctCount/questions.length*100;
+ if(percent===100){
+  $("resultIcon").textContent="🏆🐊";
+  $("message").textContent="Perfect Swamp Master! Em đã hoàn thành toàn bộ thử thách.";
+ }else if(percent>=80){
+  $("resultIcon").textContent="🐊✨";
+  $("message").textContent="Excellent Hunter! Em đã nắm rất chắc kiến thức.";
+ }else if(percent>=60){
+  $("resultIcon").textContent="🌿🐊";
+  $("message").textContent="Good Quest! Hãy xem lại các câu sai để tiến bộ hơn.";
+ }else{
+  $("resultIcon").textContent="📘🐊";
+  $("message").textContent="Training Swamp! Ôn lại kiến thức rồi thử lại.";
+ }
+
+ let reviewHTML="<h3>Alligator Review</h3>";
+ questions.forEach((q,index)=>{
+  const answer=answers[index];
+  reviewHTML+=`
+   <div class="review-item ${answer&&answer.isCorrect?"ok":"no"}">
+    <strong>Câu ${index+1}: ${answer&&answer.isCorrect?"Đúng":"Sai"}</strong><br>
+    Em chọn: ${answer?`${letters[answer.selected]}. ${q[1][answer.selected]}`:"Chưa trả lời"}<br>
+    Đáp án đúng: ${letters[q[2]]}. ${q[1][q[2]]}<br>
+    <em>${q[3]}</em>
+    ${q[4]?`<div class="details">${q[4]}</div>`:""}
+   </div>`;
+ });
+ $("review").innerHTML=reviewHTML;
+}
+
+$("nextBtn").onclick=()=>{
+ if(!answered)return;
+ nextSound();
+ if(current<questions.length-1){
+  current++;
+  render();
+ }else{
+  showResult();
+ }
+};
+
+$("restartBtn").onclick=()=>{
+ current=0;score=0;hearts=5;combo=0;answered=false;answers=[];
+ $("resultArea").classList.remove("show");
+ $("quizArea").style.display="block";
+ render();
+ nextSound();
+};
+
+render();
+</script>
+</body>
+</html>

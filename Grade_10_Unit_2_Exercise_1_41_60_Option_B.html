@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Grade 10 - Unit 2 - Exercise 1 (41-60) - Option B</title>
+<style>
+:root{
+ --bg:#160b08;--panel:#2a140f;--panel2:#3a1b12;--red:#d9432f;--orange:#ff8a2a;
+ --gold:#ffd166;--cream:#fff3d6;--green:#47d79a;--wrong:#ff6677;--text:#fff9ef;--muted:#e8c9a7
+}
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--text);
+ background:
+ radial-gradient(circle at 18% 15%,rgba(255,209,102,.16),transparent 24%),
+ radial-gradient(circle at 82% 17%,rgba(217,67,47,.18),transparent 26%),
+ linear-gradient(180deg,#100604,#1b0c08 58%,#0c0504);
+ padding:18px;overflow-x:hidden
+}
+.lanterns{position:fixed;inset:0;pointer-events:none;z-index:0}
+.lantern{
+ position:absolute;width:58px;height:76px;border-radius:18px 18px 24px 24px;
+ background:linear-gradient(180deg,#ffcf5a,#ff7a2c 58%,#d9432f);
+ box-shadow:0 0 28px rgba(255,138,42,.5);
+ animation:sway 4s ease-in-out infinite
+}
+.lantern:before{content:"";position:absolute;left:50%;top:-70px;width:2px;height:70px;background:#f4c76b}
+.lantern:after{content:"";position:absolute;left:50%;bottom:-22px;width:2px;height:22px;background:#ffd166}
+.l1{left:7%;top:12%}.l2{right:8%;top:18%;animation-delay:1s}.l3{left:16%;bottom:10%;transform:scale(.7);animation-delay:.5s}.l4{right:18%;bottom:8%;transform:scale(.75);animation-delay:1.5s}
+@keyframes sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+.wrap{width:min(1040px,100%);margin:auto;position:relative;z-index:2}
+.hero{display:grid;grid-template-columns:120px 1fr auto;gap:18px;align-items:center;margin-bottom:16px}
+.hero-lantern{width:106px;height:106px;position:relative;display:grid;place-items:center}
+.glow{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(255,209,102,.35),rgba(255,138,42,.08) 58%,transparent 72%);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.12);opacity:.7}}
+.main-lantern{width:62px;height:78px;border-radius:18px 18px 24px 24px;background:linear-gradient(180deg,#ffe58a,#ff9b36 58%,#d9432f);box-shadow:0 0 26px rgba(255,138,42,.55);position:relative}
+.main-lantern:before{content:"";position:absolute;left:10px;right:10px;top:13px;height:2px;background:rgba(130,40,15,.45);box-shadow:0 14px 0 rgba(130,40,15,.35),0 28px 0 rgba(130,40,15,.3)}
+h1{margin:0;font-size:clamp(28px,4vw,46px);background:linear-gradient(90deg,#fff8dd,var(--gold),var(--orange),#ff6450);-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{margin:7px 0 0;color:var(--muted);font-weight:700}
+.sound{border:1px solid rgba(255,209,102,.4);background:#2a160f;color:#fff;border-radius:12px;padding:11px 14px;font-weight:900;cursor:pointer}
+.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid rgba(255,138,42,.3);border-radius:24px;box-shadow:0 24px 65px rgba(0,0,0,.5);overflow:hidden}
+.status{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;padding:18px 22px 13px;background:#1a0d09;border-bottom:1px solid rgba(255,255,255,.08)}
+.barbox{height:13px;background:#0f0604;border-radius:999px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--orange),var(--red));transition:.3s;box-shadow:0 0 15px rgba(255,138,42,.4)}
+.chip{background:#32170f;border-radius:999px;padding:8px 13px;font-weight:900;white-space:nowrap}
+.content{padding:24px 22px 26px}
+.tag{display:inline-block;padding:7px 13px;border-radius:9px;background:rgba(255,209,102,.08);border:1px solid rgba(255,209,102,.42);color:#ffe59a;font-weight:900;margin-bottom:13px}
+.question{margin:0 0 22px;font-size:clamp(22px,2.8vw,31px);line-height:1.45}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.option{min-height:72px;border-radius:15px;border:1px solid rgba(255,210,150,.16);background:linear-gradient(135deg,#3a1c13,#21100b);color:#fff;display:flex;align-items:center;gap:13px;padding:16px 17px;font-size:18px;text-align:left;cursor:pointer;transition:.16s}
+.option:hover:not(:disabled){transform:translateY(-2px);border-color:var(--gold);box-shadow:0 0 20px rgba(255,209,102,.13)}
+.letter{width:40px;height:40px;flex:0 0 40px;border-radius:10px;display:grid;place-items:center;font-weight:1000;color:#281000;background:linear-gradient(135deg,var(--gold),var(--orange))}
+.option.correct{background:linear-gradient(135deg,#14563c,#092d24)!important;border-color:var(--green)!important}
+.option.wrong{background:linear-gradient(135deg,#681f35,#310c1a)!important;border-color:var(--wrong)!important}
+.feedback{display:none;margin-top:20px;padding:17px 18px;border-radius:15px;background:#1a0c08;border-left:5px solid;line-height:1.6}
+.feedback.show{display:block}.feedback.correct{border-color:var(--green)}.feedback.wrong{border-color:var(--gold)}
+.feedback strong{display:block;margin-bottom:7px}.details{margin-top:9px;color:#f0d6bc;font-size:15px}
+.controls{display:flex;justify-content:flex-end;margin-top:20px}
+.action{border:0;border-radius:12px;padding:13px 23px;font-size:17px;font-weight:1000;color:#2b1000;cursor:pointer;background:linear-gradient(90deg,var(--gold),var(--orange))}
+.action:disabled{opacity:.35;cursor:not-allowed}
+.result{display:none;text-align:center;padding:38px 24px}.result.show{display:block}
+.result-icon{font-size:74px}.score-big{font-size:62px;font-weight:1000;color:var(--gold)}
+.review{text-align:left;margin-top:25px;border-top:1px solid rgba(255,255,255,.1);padding-top:18px}
+.review-item{padding:13px 14px;margin-bottom:10px;border-radius:12px;background:#1a0d09;border-left:5px solid #8a6a53;line-height:1.5}
+.review-item.ok{border-left-color:var(--green)}.review-item.no{border-left-color:var(--wrong)}
+@media(max-width:760px){
+ .hero{grid-template-columns:85px 1fr}.sound{grid-column:1/-1;justify-self:end}
+ .status{grid-template-columns:1fr 1fr}.barbox{grid-column:1/-1;order:4}
+ .options{grid-template-columns:1fr}.content{padding:18px 15px 22px}
+ .hero-lantern{transform:scale(.8);transform-origin:left center;width:85px}
+}
+</style>
+</head>
+<body>
+<div class="lanterns"><div class="lantern l1"></div><div class="lantern l2"></div><div class="lantern l3"></div><div class="lantern l4"></div></div>
+<main class="wrap">
+<header class="hero">
+ <div class="hero-lantern"><div class="glow"></div><div class="main-lantern"></div></div>
+ <div>
+  <h1>Lantern Learning Quest</h1>
+  <p class="subtitle">Grade 10 · Unit 2 · Exercise 1 (41–60) · Option B</p>
+ </div>
+ <button class="sound" id="soundBtn">🔊 Âm thanh: Bật</button>
+</header>
+
+<section class="card">
+<div id="quizArea">
+ <div class="status">
+  <div class="barbox"><div class="bar" id="bar"></div></div>
+  <div class="chip" id="counter"></div>
+  <div class="chip" id="scoreChip"></div>
+  <div class="chip" id="heartChip"></div>
+ </div>
+ <div class="content">
+  <div class="tag" id="tag"></div>
+  <h2 class="question" id="question"></h2>
+  <div class="options" id="options"></div>
+  <div class="feedback" id="feedback"></div>
+  <div class="controls"><button class="action" id="nextBtn" disabled>Next Lantern 🏮</button></div>
+ </div>
+</div>
+
+<div class="result" id="resultArea">
+ <div class="result-icon" id="resultIcon">🏮</div>
+ <h2>Lantern Quest Complete</h2>
+ <div class="score-big" id="finalScore"></div>
+ <p id="message"></p>
+ <button class="action" id="restartBtn">Light Again ↻</button>
+ <div class="review" id="review"></div>
+</div>
+</section>
+</main>
+
+<script>
+const questions=[
+["Up to now, many plastic straws ____________ from restaurants in our city.",["have been removed","are removing","were removed","remove"],0,"Up to now là dấu hiệu của hiện tại hoàn thành.","Chủ ngữ plastic straws là đối tượng bị loại bỏ nên dùng hiện tại hoàn thành bị động: have been + V3."],
+["The sudden ____________ at the recycling plant frightened everyone nearby.",["renovation","operation","construction","explosion"],3,"Explosion là vụ nổ, phù hợp với ngữ cảnh khiến mọi người hoảng sợ.","Các đáp án còn lại không phù hợp về nghĩa."],
+["The school hopes to ____________ students' awareness of environmental protection.",["remind","raise","estimate","collect"],1,"raise awareness = nâng cao nhận thức.",""],
+["Each class was given a small ____________ to grow vegetables for the Green School project.",["plot","prevention","energy bill","report"],0,"Plot nghĩa là mảnh đất nhỏ, phù hợp để trồng rau.",""],
+["More trees ____________ around the lake next spring.",["are planting","plant","will be planted","will plant"],2,"Next spring là dấu hiệu tương lai.","Chủ ngữ trees được trồng nên dùng tương lai bị động: will be + V3."],
+["Electric cars are beginning to ____________ attention because they produce less pollution.",["attract","remind","estimate","prevent"],0,"attract attention = thu hút sự chú ý.",""],
+["Many people choose ____________ products to reduce environmental pollution.",["compulsory","harmful","eco-friendly","electrical"],2,"Eco-friendly products là các sản phẩm thân thiện với môi trường.",""],
+["Wood is an important ____________ used to make furniture.",["attraction","raw material","celebration","estimate"],1,"Raw material = nguyên liệu thô. Gỗ là nguyên liệu để làm đồ nội thất.",""],
+["Planting more trees is one of the best pollution ____________ measures.",["estimation","prevention","operation","destruction"],1,"pollution prevention measures = các biện pháp phòng chống ô nhiễm.",""],
+["Regular exercise helps ____________ many health problems.",["waste","announce","prevent","remind"],2,"Prevent = ngăn ngừa. Cụm đúng là prevent health problems.",""],
+["Wearing helmets should be ____________ for all motorbike riders.",["creative","harmful","compulsory","electrical"],2,"Compulsory = bắt buộc.","Đội mũ bảo hiểm nên là quy định bắt buộc đối với người đi xe máy."],
+["The road was covered with ____________ after the storm.",["leaves dry","dry leaves","leaves brown dry","brown leaves dry"],1,"Tính từ đứng trước danh từ: dry leaves = lá khô.","Các đáp án còn lại sai trật tự từ."],
+["I think our team ____________ the championship this year.",["wins","is winning","has won","will win"],3,"Sau I think, khi đưa ra dự đoán, thường dùng will + V.",""],
+["The principal will ____________ the winners after the competition.",["destroy","estimate","announce","collect"],2,"announce the winners = công bố những người chiến thắng.",""],
+["My notebook ____________ on the school bus yesterday.",["left","was leaving","was left","leaves"],2,"Yesterday là dấu hiệu của quá khứ đơn.","Quyển vở bị để quên nên dùng quá khứ đơn bị động: was + V3."]
+];
+
+const letters=["A","B","C","D"];
+let current=0,score=0,hearts=5,combo=0,answered=false,answers=[],soundOn=true,audioCtx=null;
+const $=id=>document.getElementById(id);
+
+function getCtx(){
+ if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+ if(audioCtx.state==="suspended") audioCtx.resume();
+ return audioCtx;
+}
+function tone(freq,duration,type="sine",volume=.05,delay=0){
+ if(!soundOn)return;
+ const c=getCtx(),o=c.createOscillator(),g=c.createGain(),start=c.currentTime+delay;
+ o.type=type;o.frequency.setValueAtTime(freq,start);
+ g.gain.setValueAtTime(.0001,start);
+ g.gain.exponentialRampToValueAtTime(volume,start+.012);
+ g.gain.exponentialRampToValueAtTime(.0001,start+duration);
+ o.connect(g);g.connect(c.destination);o.start(start);o.stop(start+duration+.03);
+}
+function correctSound(){
+ tone(523,.11,"sine",.045,0);
+ tone(659,.12,"triangle",.04,.1);
+ tone(880,.17,"sine",.04,.2);
+}
+function wrongSound(){
+ tone(190,.16,"sawtooth",.04,0);
+ tone(120,.23,"square",.025,.12);
+}
+function nextSound(){
+ tone(392,.06,"triangle",.02,0);
+ tone(523,.07,"triangle",.018,.06);
+}
+function finishSound(){
+ [392,523,659,784,1047].forEach((f,i)=>tone(f,.2,"triangle",.035,i*.1));
+}
+
+$("soundBtn").onclick=()=>{
+ soundOn=!soundOn;
+ $("soundBtn").textContent=soundOn?"🔊 Âm thanh: Bật":"🔇 Âm thanh: Tắt";
+ if(soundOn)nextSound();
+};
+
+function render(){
+ answered=false;
+ $("nextBtn").disabled=true;
+ $("feedback").className="feedback";
+ $("feedback").innerHTML="";
+ const q=questions[current];
+
+ $("tag").textContent=`Question ${current+1}`;
+ $("question").textContent=q[0];
+ $("counter").textContent=`Câu ${current+1}/${questions.length}`;
+ $("scoreChip").textContent=`🏮 ${score} XP · Combo ${combo}`;
+ $("heartChip").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${current/questions.length*100}%`;
+ $("options").innerHTML="";
+
+ q[1].forEach((option,index)=>{
+  const button=document.createElement("button");
+  button.className="option";
+  button.innerHTML=`<span class="letter">${letters[index]}</span><span>${option}</span>`;
+  button.onclick=()=>choose(index);
+  $("options").appendChild(button);
+ });
+
+ $("nextBtn").textContent=current===questions.length-1?"Finish Quest 🏮":"Next Lantern 🏮";
+}
+
+function choose(index){
+ if(answered)return;
+ answered=true;
+
+ const q=questions[current];
+ const buttons=[...document.querySelectorAll(".option")];
+ const isCorrect=index===q[2];
+
+ buttons.forEach(button=>button.disabled=true);
+ buttons[q[2]].classList.add("correct");
+
+ if(isCorrect){
+  score+=10+(combo*2);
+  combo++;
+  buttons[index].classList.add("correct");
+  $("feedback").className="feedback correct show";
+  $("feedback").innerHTML=`<strong>🏮 Lantern Lit! Chính xác.</strong>${q[3]}${q[4]?`<div class="details">${q[4]}</div>`:""}`;
+  correctSound();
+ }else{
+  hearts=Math.max(0,hearts-1);
+  combo=0;
+  buttons[index].classList.add("wrong");
+  $("feedback").className="feedback wrong show";
+  $("feedback").innerHTML=`<strong>⚠ Lantern Dimmed. Đáp án đúng: ${letters[q[2]]}. ${q[1][q[2]]}</strong>${q[3]}${q[4]?`<div class="details">${q[4]}</div>`:""}`;
+  wrongSound();
+ }
+
+ answers.push({selected:index,isCorrect,correct:q[2]});
+ $("scoreChip").textContent=`🏮 ${score} XP · Combo ${combo}`;
+ $("heartChip").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${(current+1)/questions.length*100}%`;
+ $("nextBtn").disabled=false;
+}
+
+function showResult(){
+ $("quizArea").style.display="none";
+ $("resultArea").classList.add("show");
+
+ const correctCount=answers.filter(answer=>answer.isCorrect).length;
+ $("finalScore").textContent=`${score} XP · ${correctCount}/${questions.length}`;
+ finishSound();
+
+ const percent=correctCount/questions.length*100;
+ if(percent===100){
+  $("resultIcon").textContent="🏆🏮";
+  $("message").textContent="Perfect Light! Em đã thắp sáng toàn bộ thử thách.";
+ }else if(percent>=80){
+  $("resultIcon").textContent="✨🏮";
+  $("message").textContent="Bright Lantern! Em đã nắm rất chắc kiến thức.";
+ }else if(percent>=60){
+  $("resultIcon").textContent="🌟🏮";
+  $("message").textContent="Good Quest! Hãy xem lại các câu sai để ánh sáng mạnh hơn.";
+ }else{
+  $("resultIcon").textContent="📘🏮";
+  $("message").textContent="Training Light! Ôn lại kiến thức rồi thử lại.";
+ }
+
+ let reviewHTML="<h3>Lantern Review</h3>";
+ questions.forEach((q,index)=>{
+  const answer=answers[index];
+  reviewHTML+=`
+   <div class="review-item ${answer&&answer.isCorrect?"ok":"no"}">
+    <strong>Câu ${index+1}: ${answer&&answer.isCorrect?"Đúng":"Sai"}</strong><br>
+    Em chọn: ${answer?`${letters[answer.selected]}. ${q[1][answer.selected]}`:"Chưa trả lời"}<br>
+    Đáp án đúng: ${letters[q[2]]}. ${q[1][q[2]]}<br>
+    <em>${q[3]}</em>
+    ${q[4]?`<div class="details">${q[4]}</div>`:""}
+   </div>`;
+ });
+ $("review").innerHTML=reviewHTML;
+}
+
+$("nextBtn").onclick=()=>{
+ if(!answered)return;
+ nextSound();
+ if(current<questions.length-1){
+  current++;
+  render();
+ }else{
+  showResult();
+ }
+};
+
+$("restartBtn").onclick=()=>{
+ current=0;score=0;hearts=5;combo=0;answered=false;answers=[];
+ $("resultArea").classList.remove("show");
+ $("quizArea").style.display="block";
+ render();
+ nextSound();
+};
+
+render();
+</script>
+</body>
+</html>
