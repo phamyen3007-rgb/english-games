@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Grade 11 - Unit 2 - Exercise 9 - Option C</title>
+<style>
+:root{
+  --blue:#2196f3;--deep:#0d47a1;--cyan:#8fe7ff;--white:#ffffff;--red:#ef5350;
+  --yellow:#ffd54f;--green:#43d18b;--text:#19324d;--muted:#6b7f93;--panel:#f8fcff
+}
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--text);
+  background:linear-gradient(#bfe9ff 0 65%,#e8f7ff 65% 100%);padding:18px;overflow-x:hidden
+}
+.bg{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.cloud{position:absolute;background:#fff;border-radius:999px;opacity:.88}
+.cloud:before,.cloud:after{content:"";position:absolute;background:#fff;border-radius:50%}
+.c1{width:120px;height:36px;left:6%;top:10%}.c1:before{width:52px;height:52px;left:18px;top:-24px}.c1:after{width:60px;height:60px;right:12px;top:-28px}
+.c2{width:95px;height:30px;right:9%;top:18%}.c2:before{width:42px;height:42px;left:14px;top:-18px}.c2:after{width:48px;height:48px;right:8px;top:-22px}
+.wrap{width:min(1120px,100%);margin:auto;position:relative;z-index:2}
+.hero{display:grid;grid-template-columns:120px 1fr auto;gap:18px;align-items:center;margin-bottom:16px}
+.doraemon{width:110px;height:110px;position:relative;filter:drop-shadow(0 10px 16px rgba(13,71,161,.2))}
+.head{position:absolute;left:15px;top:8px;width:82px;height:82px;border-radius:50%;background:#39a9ff;border:3px solid #167ac2}
+.face{position:absolute;left:24px;top:24px;width:64px;height:58px;border-radius:48%;background:white;border:2px solid #ddd}
+.eye{position:absolute;top:13px;width:21px;height:27px;background:white;border:2px solid #333;border-radius:50%;z-index:3}
+.eye.l{left:34px}.eye.r{right:34px}
+.eye:after{content:"";position:absolute;width:6px;height:9px;background:#111;border-radius:50%;bottom:4px;left:8px}
+.nose{position:absolute;left:50%;top:41px;transform:translateX(-50%);width:14px;height:14px;border-radius:50%;background:var(--red);z-index:4}
+.mouth{position:absolute;left:50%;top:57px;transform:translateX(-50%);width:34px;height:18px;border-bottom:3px solid #333;border-radius:0 0 50% 50%;z-index:4}
+.bell{position:absolute;left:50%;bottom:3px;transform:translateX(-50%);width:24px;height:24px;border-radius:50%;background:var(--yellow);border:3px solid #d9a500;z-index:5}
+.collar{position:absolute;left:25px;right:25px;bottom:18px;height:10px;background:var(--red);border-radius:10px}
+h1{margin:0;font-size:clamp(28px,4vw,44px);background:linear-gradient(90deg,#0d47a1,#2196f3,#00a8cc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{margin:7px 0 0;color:#587086;font-weight:700}
+.sound{border:1px solid rgba(33,150,243,.35);background:white;color:#17588e;border-radius:12px;padding:11px 14px;font-weight:900;cursor:pointer}
+.card{background:rgba(255,255,255,.98);border:1px solid rgba(33,150,243,.28);border-radius:24px;box-shadow:0 24px 65px rgba(30,100,150,.16);overflow:hidden}
+.status{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;padding:16px 20px;background:linear-gradient(90deg,#eef8ff,#f8fcff)}
+.barbox{height:13px;background:#dcecf7;border-radius:999px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,#8fe7ff,#2196f3,#0d47a1);transition:.3s}
+.chip{background:white;padding:8px 12px;border-radius:999px;font-weight:900;white-space:nowrap;box-shadow:0 4px 12px rgba(30,90,130,.08)}
+.main{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;padding:20px}
+.passage{background:#f4fbff;border:2px solid #d5edf9;border-radius:18px;padding:18px;max-height:560px;overflow:auto;line-height:1.7}
+.passage h3{margin:0 0 10px;color:#246da0}
+.quizbox{background:#fafdff;border:2px solid #dbeaf5;border-radius:18px;padding:18px}
+.tag{display:inline-block;background:#e4f4ff;color:#17689e;padding:7px 12px;border-radius:10px;font-weight:900}
+.question{font-size:23px;line-height:1.5;margin:16px 0}
+.answer-input{width:100%;padding:14px 16px;border:2px solid #d7e6f1;border-radius:14px;font-size:18px;outline:none}
+.answer-input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(33,150,243,.12)}
+.note{font-size:14px;color:var(--muted);margin-top:8px}
+.buttons{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.btn{border:0;border-radius:12px;padding:12px 18px;font-weight:900;cursor:pointer}
+.check{background:linear-gradient(90deg,#bfe9ff,#8ed6ff);color:#124d76}
+.next{background:linear-gradient(90deg,#ffe88a,#ffd54f);color:#5d4b00}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.feedback{display:none;margin-top:16px;padding:15px;border-left:5px solid;border-radius:12px;background:white;line-height:1.55}
+.feedback.show{display:block}.feedback.correct{border-color:var(--green)}.feedback.wrong{border-color:var(--red)}
+.result{display:none;text-align:center;padding:34px 22px}.result.show{display:block}
+.scorebig{font-size:58px;font-weight:1000;color:var(--blue)}
+.review{text-align:left;margin-top:24px;border-top:1px solid #dde9f2;padding-top:16px}
+.item{padding:12px 14px;background:#f9fcff;border-radius:12px;margin:9px 0;border-left:5px solid #9fb7c9;line-height:1.5}
+.item.ok{border-left-color:var(--green)}.item.no{border-left-color:var(--red)}
+@media(max-width:850px){.main{grid-template-columns:1fr}.passage{max-height:380px}}
+@media(max-width:650px){.hero{grid-template-columns:85px 1fr}.sound{grid-column:1/-1;justify-self:end}.status{grid-template-columns:1fr 1fr}.barbox{grid-column:1/-1;order:4}.doraemon{transform:scale(.78);transform-origin:left center;width:85px}}
+</style>
+</head>
+<body>
+<div class="bg"><div class="cloud c1"></div><div class="cloud c2"></div></div>
+<main class="wrap">
+<header class="hero">
+  <div class="doraemon">
+    <div class="head"></div><div class="face"></div><div class="eye l"></div><div class="eye r"></div>
+    <div class="nose"></div><div class="mouth"></div><div class="collar"></div><div class="bell"></div>
+  </div>
+  <div>
+    <h1>Doraemon Family Reading Quest</h1>
+    <p class="subtitle">Grade 11 · Unit 2 · Exercise 9 · Option C</p>
+  </div>
+  <button class="sound" id="soundBtn">🔊 Âm thanh: Bật</button>
+</header>
+
+<section class="card">
+<div id="quizArea">
+  <div class="status">
+    <div class="barbox"><div class="bar" id="bar"></div></div>
+    <div class="chip" id="counter"></div>
+    <div class="chip" id="scoreChip"></div>
+    <div class="chip" id="heartChip"></div>
+  </div>
+
+  <div class="main">
+    <div class="passage">
+      <h3>📖 Respect Across Generations</h3>
+      <div id="passageText"></div>
+    </div>
+
+    <div class="quizbox">
+      <div class="tag" id="tag"></div>
+      <div class="question" id="question"></div>
+      <input id="answerInput" class="answer-input" type="text" autocomplete="off" placeholder="Type your answer...">
+      <div class="note">NO MORE THAN TWO WORDS from the text.</div>
+      <div class="buttons">
+        <button id="checkBtn" class="btn check">Check Answer 🔔</button>
+        <button id="nextBtn" class="btn next" disabled>Next Question →</button>
+      </div>
+      <div id="feedback" class="feedback"></div>
+    </div>
+  </div>
+</div>
+
+<div id="resultArea" class="result">
+  <div style="font-size:74px">🔔💙</div>
+  <h2>Doraemon Quest Complete!</h2>
+  <div id="finalScore" class="scorebig"></div>
+  <p id="message"></p>
+  <button id="restartBtn" class="btn check">Play Again ↻</button>
+  <div id="review" class="review"></div>
+</div>
+</section>
+</main>
+
+<script>
+const passage = "Every generation has its own ideas, habits, and ways of thinking. Because society changes over time, young people and older people sometimes see the world differently. These differences may lead to misunderstandings, but they can also help family members learn from each other if they are willing to communicate openly.\n\nOne of the best ways to improve family relationships is to spend meaningful time together. Eating dinner as a family, sharing household chores, or simply talking about daily experiences can strengthen family bonds. Such activities allow parents and children to understand each other's feelings and build stronger connections.\n\nRespect is another important factor in family life. Parents should give their children opportunities to express their opinions, while children should appreciate their parents' advice and experience. Instead of criticizing each other, family members should discuss problems calmly and work together to find suitable solutions.\n\nFinally, patience is essential for maintaining a happy family. Building trust and understanding takes time, but with love, respect, and good communication, families can overcome difficulties and enjoy lasting relationships.";
+const questions = [{"q": "Different generations may have different ideas because ____________ changes over time.", "answer": "society", "explanation": "The passage says: “Because society changes over time...” → Society = xã hội."}, {"q": "Sharing household chores can help strengthen family ____________.", "answer": "bonds", "explanation": "The passage says sharing household chores can strengthen family bonds. Family bonds = mối gắn kết gia đình."}, {"q": "Parents should allow their children to express their ____________.", "answer": "opinions", "explanation": "The passage says parents should give children opportunities to express their opinions."}, {"q": "Family members should discuss problems calmly instead of ____________ each other.", "answer": "criticizing", "explanation": "The passage says: “Instead of criticizing each other...” After instead of, the verb takes -ing."}, {"q": "Building trust and understanding requires ____________.", "answer": "time", "explanation": "The passage says: “Building trust and understanding takes time.”"}];
+
+let current=0,score=0,hearts=5,combo=0,answered=false,answers=[],soundOn=true,audioCtx=null;
+const $=id=>document.getElementById(id);
+
+function getCtx(){
+  if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==="suspended") audioCtx.resume();
+  return audioCtx;
+}
+function tone(freq,duration=.1,type="sine",volume=.04,delay=0){
+  if(!soundOn)return;
+  const c=getCtx(),o=c.createOscillator(),g=c.createGain(),s=c.currentTime+delay;
+  o.type=type;o.frequency.setValueAtTime(freq,s);
+  g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(volume,s+.01);
+  g.gain.exponentialRampToValueAtTime(.0001,s+duration);
+  o.connect(g);g.connect(c.destination);o.start(s);o.stop(s+duration+.03);
+}
+function correctSound(){tone(740,.08,"sine",.035);tone(1040,.13,"triangle",.035,.08)}
+function wrongSound(){tone(170,.16,"sawtooth",.035);tone(110,.22,"square",.02,.11)}
+function nextSound(){tone(520,.06,"triangle",.018);tone(760,.07,"triangle",.016,.06)}
+function finishSound(){[523,659,784,988].forEach((f,i)=>tone(f,.18,"triangle",.03,i*.1))}
+
+$("soundBtn").onclick=()=>{
+  soundOn=!soundOn;
+  $("soundBtn").textContent=soundOn?"🔊 Âm thanh: Bật":"🔇 Âm thanh: Tắt";
+  if(soundOn)nextSound();
+};
+
+function normalize(s){
+  return s.toLowerCase().trim().replace(/[.,!?;:'"]/g,"").replace(/\s+/g," ");
+}
+function wordCount(s){
+  return normalize(s).split(" ").filter(Boolean).length;
+}
+
+function render(){
+  answered=false;
+  $("answerInput").disabled=false;
+  $("answerInput").value="";
+  $("checkBtn").disabled=false;
+  $("nextBtn").disabled=true;
+  $("feedback").className="feedback";
+  $("feedback").innerHTML="";
+  const q=questions[current];
+
+  $("tag").textContent=`Question ${current+1}`;
+  $("question").textContent=q.q;
+  $("counter").textContent=`Câu ${current+1}/${questions.length}`;
+  $("scoreChip").textContent=`🔔 ${score} XP · Combo ${combo}`;
+  $("heartChip").textContent=`❤️ ${hearts}`;
+  $("bar").style.width=`${current/questions.length*100}%`;
+  $("nextBtn").textContent=current===questions.length-1?"Finish Quest 💙":"Next Question →";
+  $("answerInput").focus();
+}
+
+function checkAnswer(){
+  if(answered)return;
+  const raw=$("answerInput").value.trim();
+  if(!raw)return;
+
+  answered=true;
+  const q=questions[current];
+  const tooLong=wordCount(raw)>2;
+  const correct=!tooLong && normalize(raw)===normalize(q.answer);
+
+  $("answerInput").disabled=true;
+  $("checkBtn").disabled=true;
+  $("nextBtn").disabled=false;
+
+  if(correct){
+    score+=10+combo*2;
+    combo++;
+    $("feedback").className="feedback correct show";
+    $("feedback").innerHTML=`<strong>🔔 Chính xác!</strong>Đáp án: ${q.answer}<br>${q.explanation}`;
+    correctSound();
+  }else{
+    hearts=Math.max(0,hearts-1);
+    combo=0;
+    $("feedback").className="feedback wrong show";
+    $("feedback").innerHTML=`<strong>Chưa đúng. Đáp án: ${q.answer}</strong>${tooLong?"Câu trả lời vượt quá TWO WORDS.<br>":""}${q.explanation}`;
+    wrongSound();
+  }
+
+  answers.push({given:raw,correct});
+  $("scoreChip").textContent=`🔔 ${score} XP · Combo ${combo}`;
+  $("heartChip").textContent=`❤️ ${hearts}`;
+  $("bar").style.width=`${(current+1)/questions.length*100}%`;
+}
+
+$("checkBtn").onclick=checkAnswer;
+$("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter")checkAnswer()});
+
+$("nextBtn").onclick=()=>{
+  if(!answered)return;
+  nextSound();
+  if(current<questions.length-1){current++;render();}
+  else showResult();
+};
+
+function showResult(){
+  $("quizArea").style.display="none";
+  $("resultArea").classList.add("show");
+
+  const correctCount=answers.filter(a=>a.correct).length;
+  $("finalScore").textContent=`${score} XP · ${correctCount}/${questions.length}`;
+  finishSound();
+
+  if(correctCount===5) $("message").textContent="Perfect Doraemon Reader! Em đã hoàn thành toàn bộ thử thách.";
+  else if(correctCount>=4) $("message").textContent="Excellent reading! Em đã xác định thông tin rất tốt.";
+  else if(correctCount>=3) $("message").textContent="Good job! Hãy xem lại những câu chưa đúng.";
+  else $("message").textContent="Hãy đọc lại đoạn văn và thử thêm một lần nữa nhé.";
+
+  let html="<h3>🔔 Doraemon Review</h3>";
+  questions.forEach((q,i)=>{
+    const a=answers[i];
+    html+=`<div class="item ${a&&a.correct?"ok":"no"}"><strong>Câu ${i+1}: ${a&&a.correct?"Đúng":"Sai"}</strong><br>Em trả lời: ${a?a.given:"Chưa trả lời"}<br>Đáp án đúng: ${q.answer}<br><em>${q.explanation}</em></div>`;
+  });
+  $("review").innerHTML=html;
+}
+
+$("restartBtn").onclick=()=>{
+  current=0;score=0;hearts=5;combo=0;answered=false;answers=[];
+  $("resultArea").classList.remove("show");
+  $("quizArea").style.display="block";
+  render();nextSound();
+};
+
+$("passageText").innerHTML=passage.split("\n\n").map(p=>`<p>${p}</p>`).join("");
+render();
+</script>
+</body>
+</html>

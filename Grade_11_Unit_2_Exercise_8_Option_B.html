@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Grade 11 - Unit 2 - Exercise 8 - Option B</title>
+<style>
+:root{
+  --brown:#5b4636;--dark:#1f252b;--paper:#f4ead8;--gold:#c99a4a;--green:#3f7b6a;
+  --red:#a94848;--blue:#4f6d8a;--text:#2f2a26;--muted:#6f655d;--cream:#fffaf1
+}
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;font-family:Georgia,"Times New Roman",serif;color:var(--text);
+  background:
+    radial-gradient(circle at 15% 15%,rgba(201,154,74,.14),transparent 25%),
+    radial-gradient(circle at 85% 18%,rgba(79,109,138,.12),transparent 24%),
+    linear-gradient(145deg,#22282d,#15191d 62%,#0f1316);
+  padding:18px;overflow-x:hidden
+}
+.fog{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.fog:before,.fog:after{
+  content:"";position:absolute;width:60vw;height:22vh;border-radius:50%;
+  background:rgba(255,255,255,.035);filter:blur(40px);animation:fog 14s ease-in-out infinite
+}
+.fog:before{left:-15%;top:12%}.fog:after{right:-18%;bottom:10%;animation-delay:4s}
+@keyframes fog{50%{transform:translateX(12%) translateY(8px)}}
+.wrap{width:min(1120px,100%);margin:auto;position:relative;z-index:2}
+.hero{display:grid;grid-template-columns:120px 1fr auto;gap:18px;align-items:center;margin-bottom:16px}
+.detective{width:110px;height:110px;position:relative;filter:drop-shadow(0 10px 16px rgba(0,0,0,.35))}
+.hat{position:absolute;left:22px;top:10px;width:70px;height:28px;border-radius:50% 50% 20% 20%;background:#75604a;border:3px solid #3a2f26;z-index:3}
+.hat:after{content:"";position:absolute;left:-12px;right:-12px;bottom:-7px;height:10px;border-radius:999px;background:#5e4b3c}
+.face{position:absolute;left:31px;top:30px;width:52px;height:55px;border-radius:45%;background:#d7b28d;border:3px solid #5d4638}
+.eye{position:absolute;top:50px;width:7px;height:7px;border-radius:50%;background:#1c1c1c;z-index:4}.eye.l{left:45px}.eye.r{right:38px}
+.pipe{position:absolute;left:66px;top:69px;width:28px;height:5px;background:#5a3a24;transform:rotate(18deg);z-index:5}.pipe:after{content:"";position:absolute;right:-7px;top:-5px;width:12px;height:12px;border-radius:50%;background:#7f5537}
+.coat{position:absolute;left:24px;bottom:2px;width:64px;height:40px;border-radius:28px 28px 8px 8px;background:#7b6955}
+.lens{position:absolute;right:0;bottom:5px;width:34px;height:34px;border:5px solid var(--gold);border-radius:50%;box-shadow:0 0 10px rgba(201,154,74,.3)}.lens:after{content:"";position:absolute;width:28px;height:6px;background:var(--gold);right:-22px;bottom:-12px;transform:rotate(45deg);border-radius:4px}
+h1{margin:0;font-size:clamp(28px,4vw,44px);background:linear-gradient(90deg,#f1dfbb,#c99a4a,#9fb5c8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{margin:7px 0 0;color:#cbbcae;font-weight:700}
+.sound{border:1px solid rgba(201,154,74,.42);background:#2a3036;color:#f5e7c9;border-radius:12px;padding:11px 14px;font-weight:900;cursor:pointer}
+.card{background:rgba(248,241,227,.98);border:1px solid rgba(201,154,74,.32);border-radius:24px;box-shadow:0 24px 65px rgba(0,0,0,.42);overflow:hidden}
+.status{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;padding:16px 20px;background:linear-gradient(90deg,#efe3cd,#f8f1e3)}
+.barbox{height:13px;background:#d8c8aa;border-radius:999px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,#c99a4a,#6e879d,#3f7b6a);transition:.3s}
+.chip{background:#fffaf1;padding:8px 12px;border-radius:999px;font-weight:900;white-space:nowrap;box-shadow:0 4px 12px rgba(70,55,40,.08)}
+.main{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;padding:20px}
+.passage{background:#fffaf1;border:2px solid #dbc9a6;border-radius:18px;padding:18px;max-height:560px;overflow:auto;line-height:1.75;box-shadow:inset 0 0 30px rgba(120,90,50,.04)}
+.passage h3{margin:0 0 10px;color:#5a4635}
+.quizbox{background:#f7efe1;border:2px solid #ddccb0;border-radius:18px;padding:18px}
+.tag{display:inline-block;background:#e8dcc7;color:#5f4b39;padding:7px 12px;border-radius:10px;font-weight:900}
+.question{font-size:23px;line-height:1.5;margin:16px 0}
+.answer-input{width:100%;padding:14px 16px;border:2px solid #d1bea1;border-radius:14px;font-size:18px;outline:none;background:#fffdf8;color:#2f2a26}
+.answer-input:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(201,154,74,.12)}
+.note{font-size:14px;color:var(--muted);margin-top:8px}
+.buttons{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.btn{border:0;border-radius:12px;padding:12px 18px;font-weight:900;cursor:pointer}
+.check{background:linear-gradient(90deg,#d9c09a,#c99a4a);color:#382b20}
+.next{background:linear-gradient(90deg,#b8cad8,#7f9eb7);color:#203646}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.feedback{display:none;margin-top:16px;padding:15px;border-left:5px solid;border-radius:12px;background:#fffaf1;line-height:1.55}
+.feedback.show{display:block}.feedback.correct{border-color:#4a8b72}.feedback.wrong{border-color:#a94848}
+.result{display:none;text-align:center;padding:34px 22px}.result.show{display:block}
+.scorebig{font-size:58px;font-weight:1000;color:#5b4636}
+.review{text-align:left;margin-top:24px;border-top:1px solid #d8c8aa;padding-top:16px}
+.item{padding:12px 14px;background:#fffaf1;border-radius:12px;margin:9px 0;border-left:5px solid #9f8c77;line-height:1.5}
+.item.ok{border-left-color:#4a8b72}.item.no{border-left-color:#a94848}
+@media(max-width:850px){.main{grid-template-columns:1fr}.passage{max-height:380px}}
+@media(max-width:650px){.hero{grid-template-columns:85px 1fr}.sound{grid-column:1/-1;justify-self:end}.status{grid-template-columns:1fr 1fr}.barbox{grid-column:1/-1;order:4}.detective{transform:scale(.78);transform-origin:left center;width:85px}}
+</style>
+</head>
+<body>
+<div class="fog"></div>
+<main class="wrap">
+<header class="hero">
+  <div class="detective">
+    <div class="hat"></div><div class="face"></div><div class="eye l"></div><div class="eye r"></div>
+    <div class="pipe"></div><div class="coat"></div><div class="lens"></div>
+  </div>
+  <div>
+    <h1>Sherlock Holmes Reading Mystery</h1>
+    <p class="subtitle">Grade 11 · Unit 2 · Exercise 8 · Option B</p>
+  </div>
+  <button class="sound" id="soundBtn">🔊 Âm thanh: Bật</button>
+</header>
+
+<section class="card">
+<div id="quizArea">
+  <div class="status">
+    <div class="barbox"><div class="bar" id="bar"></div></div>
+    <div class="chip" id="counter"></div>
+    <div class="chip" id="scoreChip"></div>
+    <div class="chip" id="heartChip"></div>
+  </div>
+
+  <div class="main">
+    <div class="passage">
+      <h3>🔎 Building Trust Between Parents and Teenagers</h3>
+      <div id="passageText"></div>
+    </div>
+
+    <div class="quizbox">
+      <div class="tag" id="tag"></div>
+      <div class="question" id="question"></div>
+      <input id="answerInput" class="answer-input" type="text" autocomplete="off" placeholder="Enter your clue...">
+      <div class="note">NO MORE THAN TWO WORDS from the text.</div>
+      <div class="buttons">
+        <button id="checkBtn" class="btn check">Check Clue 🔎</button>
+        <button id="nextBtn" class="btn next" disabled>Next Clue →</button>
+      </div>
+      <div id="feedback" class="feedback"></div>
+    </div>
+  </div>
+</div>
+
+<div id="resultArea" class="result">
+  <div style="font-size:74px">🕵️‍♂️🔎</div>
+  <h2>Mystery Solved!</h2>
+  <div id="finalScore" class="scorebig"></div>
+  <p id="message"></p>
+  <button id="restartBtn" class="btn check">Investigate Again ↻</button>
+  <div id="review" class="review"></div>
+</div>
+</section>
+</main>
+
+<script>
+const passage = "Every family experiences disagreements from time to time, especially when children become teenagers. As young people grow older, they begin to develop their own opinions, interests, and goals. This change is a natural part of growing up, but it may sometimes create misunderstandings between parents and their children.\n\nInstead of criticizing their teenagers, parents should listen carefully to what they have to say. A calm conversation is usually much more effective than an argument. Teenagers are more willing to share their feelings when they know that their parents respect their opinions. At the same time, teenagers should understand that their parents give advice because they care about their safety and future.\n\nParents should also encourage their children to make their own decisions whenever possible. Giving teenagers more responsibility helps them become independent and confident. However, freedom should always come with responsibility. Teenagers need to accept the consequences of their choices and learn from their mistakes.\n\nFinally, spending quality time together is one of the best ways to strengthen family relationships. Whether it is having dinner together, playing sports, or simply talking at the end of the day, these moments help build trust and understanding between parents and children.";
+const questions = [{"q": "As teenagers grow older, they develop their own opinions, interests, and ____________.", "answer": "goals", "explanation": "The passage says: “they begin to develop their own opinions, interests, and goals.”"}, {"q": "Parents should ____________ to their teenagers instead of criticizing them.", "answer": "listen", "explanation": "The passage says parents should listen carefully to what their teenagers have to say."}, {"q": "Teenagers share their feelings more easily when their parents respect their ____________.", "answer": "opinions", "explanation": "The passage says teenagers are more willing to share their feelings when their parents respect their opinions."}, {"q": "Giving teenagers more responsibility helps them become ____________ and confident.", "answer": "independent", "explanation": "The passage says giving teenagers more responsibility helps them become independent and confident."}, {"q": "Spending ____________ together strengthens family relationships.", "answer": "quality time", "explanation": "The final paragraph says spending quality time together is one of the best ways to strengthen family relationships."}];
+
+let current=0,score=0,hearts=5,combo=0,answered=false,answers=[],soundOn=true,audioCtx=null;
+const $=id=>document.getElementById(id);
+
+function getCtx(){
+  if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==="suspended") audioCtx.resume();
+  return audioCtx;
+}
+function tone(freq,duration=.1,type="sine",volume=.04,delay=0){
+  if(!soundOn)return;
+  const c=getCtx(),o=c.createOscillator(),g=c.createGain(),s=c.currentTime+delay;
+  o.type=type;o.frequency.setValueAtTime(freq,s);
+  g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(volume,s+.01);
+  g.gain.exponentialRampToValueAtTime(.0001,s+duration);
+  o.connect(g);g.connect(c.destination);o.start(s);o.stop(s+duration+.03);
+}
+function correctSound(){tone(520,.08,"triangle",.035);tone(780,.12,"sine",.035,.08)}
+function wrongSound(){tone(160,.16,"sawtooth",.035);tone(100,.22,"square",.02,.11)}
+function nextSound(){tone(380,.06,"triangle",.018);tone(560,.07,"triangle",.016,.06)}
+function finishSound(){[392,523,659,784].forEach((f,i)=>tone(f,.18,"triangle",.03,i*.1))}
+
+$("soundBtn").onclick=()=>{
+  soundOn=!soundOn;
+  $("soundBtn").textContent=soundOn?"🔊 Âm thanh: Bật":"🔇 Âm thanh: Tắt";
+  if(soundOn)nextSound();
+};
+
+function normalize(s){
+  return s.toLowerCase().trim().replace(/[.,!?;:'"]/g,"").replace(/\s+/g," ");
+}
+function wordCount(s){
+  return normalize(s).split(" ").filter(Boolean).length;
+}
+
+function render(){
+  answered=false;
+  $("answerInput").disabled=false;
+  $("answerInput").value="";
+  $("checkBtn").disabled=false;
+  $("nextBtn").disabled=true;
+  $("feedback").className="feedback";
+  $("feedback").innerHTML="";
+  const q=questions[current];
+
+  $("tag").textContent=`Clue ${current+1}`;
+  $("question").textContent=q.q;
+  $("counter").textContent=`Câu ${current+1}/${questions.length}`;
+  $("scoreChip").textContent=`🔎 ${score} XP · Combo ${combo}`;
+  $("heartChip").textContent=`❤️ ${hearts}`;
+  $("bar").style.width=`${current/questions.length*100}%`;
+  $("nextBtn").textContent=current===questions.length-1?"Solve Mystery 🕵️":"Next Clue →";
+  $("answerInput").focus();
+}
+
+function checkAnswer(){
+  if(answered)return;
+  const raw=$("answerInput").value.trim();
+  if(!raw)return;
+
+  answered=true;
+  const q=questions[current];
+  const tooLong=wordCount(raw)>2;
+  const correct=!tooLong && normalize(raw)===normalize(q.answer);
+
+  $("answerInput").disabled=true;
+  $("checkBtn").disabled=true;
+  $("nextBtn").disabled=false;
+
+  if(correct){
+    score+=10+combo*2;
+    combo++;
+    $("feedback").className="feedback correct show";
+    $("feedback").innerHTML=`<strong>🔎 Clue confirmed! Chính xác.</strong>Đáp án: ${q.answer}<br>${q.explanation}`;
+    correctSound();
+  }else{
+    hearts=Math.max(0,hearts-1);
+    combo=0;
+    $("feedback").className="feedback wrong show";
+    $("feedback").innerHTML=`<strong>❌ Clue rejected. Đáp án: ${q.answer}</strong>${tooLong?"Câu trả lời vượt quá TWO WORDS.<br>":""}${q.explanation}`;
+    wrongSound();
+  }
+
+  answers.push({given:raw,correct});
+  $("scoreChip").textContent=`🔎 ${score} XP · Combo ${combo}`;
+  $("heartChip").textContent=`❤️ ${hearts}`;
+  $("bar").style.width=`${(current+1)/questions.length*100}%`;
+}
+
+$("checkBtn").onclick=checkAnswer;
+$("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter")checkAnswer()});
+
+$("nextBtn").onclick=()=>{
+  if(!answered)return;
+  nextSound();
+  if(current<questions.length-1){current++;render();}
+  else showResult();
+};
+
+function showResult(){
+  $("quizArea").style.display="none";
+  $("resultArea").classList.add("show");
+
+  const correctCount=answers.filter(a=>a.correct).length;
+  $("finalScore").textContent=`${score} XP · ${correctCount}/${questions.length}`;
+  finishSound();
+
+  if(correctCount===5) $("message").textContent="Master Detective! Em đã giải đúng toàn bộ manh mối.";
+  else if(correctCount>=4) $("message").textContent="Excellent detective work! Em đọc và định vị thông tin rất tốt.";
+  else if(correctCount>=3) $("message").textContent="Good investigation! Hãy xem lại các manh mối chưa chính xác.";
+  else $("message").textContent="Hãy đọc lại hồ sơ vụ án và điều tra thêm một lần nữa nhé.";
+
+  let html="<h3>🕵️ Detective Review</h3>";
+  questions.forEach((q,i)=>{
+    const a=answers[i];
+    html+=`<div class="item ${a&&a.correct?"ok":"no"}"><strong>Clue ${i+1}: ${a&&a.correct?"Đúng":"Sai"}</strong><br>Em trả lời: ${a?a.given:"Chưa trả lời"}<br>Đáp án đúng: ${q.answer}<br><em>${q.explanation}</em></div>`;
+  });
+  $("review").innerHTML=html;
+}
+
+$("restartBtn").onclick=()=>{
+  current=0;score=0;hearts=5;combo=0;answered=false;answers=[];
+  $("resultArea").classList.remove("show");
+  $("quizArea").style.display="block";
+  render();nextSound();
+};
+
+$("passageText").innerHTML=passage.split("\n\n").map(p=>`<p>${p}</p>`).join("");
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Grade 11 - Unit 2 - Exercise 10 - Option C</title>
+<style>
+:root{
+ --mist:#d7e0e5;--fog:#b9c6ce;--slate:#52606d;--deep:#26323a;--blue:#6f8ea3;
+ --green:#55b89a;--red:#d65d68;--gold:#d7b66c;--text:#24313a;--muted:#66727a;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--text);
+ background:
+   radial-gradient(circle at 20% 18%,rgba(255,255,255,.45),transparent 28%),
+   radial-gradient(circle at 80% 20%,rgba(170,190,200,.28),transparent 26%),
+   linear-gradient(180deg,#cfd8dc,#aebbc3 55%,#8f9ca4);
+ padding:18px;overflow-x:hidden
+}
+.fog-layer{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.fog1,.fog2,.fog3{
+ position:absolute;width:70vw;height:22vh;border-radius:50%;
+ background:rgba(255,255,255,.24);filter:blur(38px);
+ animation:fogmove 16s ease-in-out infinite
+}
+.fog1{left:-20%;top:8%}
+.fog2{right:-22%;top:38%;animation-delay:4s}
+.fog3{left:10%;bottom:4%;animation-delay:8s}
+@keyframes fogmove{50%{transform:translateX(12%) translateY(12px);opacity:.55}}
+.wrap{width:min(1120px,100%);margin:auto;position:relative;z-index:2}
+.hero{display:grid;grid-template-columns:120px 1fr auto;gap:18px;align-items:center;margin-bottom:16px}
+.mist-icon{width:110px;height:110px;position:relative;display:grid;place-items:center}
+.orb{width:70px;height:70px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#eef7fb,#9eb4c1 55%,#5e7481);box-shadow:0 0 30px rgba(255,255,255,.45)}
+.ring{position:absolute;border:2px solid rgba(255,255,255,.55);border-radius:50%}
+.r1{width:92px;height:42px;animation:spin 8s linear infinite}
+.r2{width:45px;height:95px;animation:spin2 10s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}@keyframes spin2{to{transform:rotate(-360deg)}}
+h1{margin:0;font-size:clamp(28px,4vw,44px);background:linear-gradient(90deg,#2f3d46,#678395,#c7d4dc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{margin:7px 0 0;color:#475760;font-weight:700}
+.sound{border:1px solid rgba(82,96,109,.28);background:#eef3f5;color:#3f5059;border-radius:12px;padding:11px 14px;font-weight:900;cursor:pointer}
+.card{background:rgba(243,247,249,.96);border:1px solid rgba(82,96,109,.18);border-radius:24px;box-shadow:0 24px 65px rgba(40,55,65,.2);overflow:hidden}
+.status{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;padding:16px 20px;background:linear-gradient(90deg,#e9eff2,#f5f8fa)}
+.barbox{height:13px;background:#d5dee3;border-radius:999px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,#a9bac4,#6f8ea3,#52606d);transition:.3s}
+.chip{background:#fff;padding:8px 12px;border-radius:999px;font-weight:900;white-space:nowrap;box-shadow:0 4px 12px rgba(50,70,80,.07)}
+.main{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;padding:20px}
+.passage{background:#f9fbfc;border:2px solid #d7e0e5;border-radius:18px;padding:18px;max-height:560px;overflow:auto;line-height:1.75}
+.passage h3{margin:0 0 10px;color:#4f6674}
+.quizbox{background:#f4f7f8;border:2px solid #d5dde2;border-radius:18px;padding:18px}
+.tag{display:inline-block;background:#e2e9ed;color:#4b5f6b;padding:7px 12px;border-radius:10px;font-weight:900}
+.question{font-size:23px;line-height:1.5;margin:16px 0}
+.options{display:grid;gap:12px}
+.option{width:100%;padding:14px 15px;border:2px solid #d2dce1;border-radius:14px;background:#fff;color:var(--text);text-align:left;font-size:17px;line-height:1.45;cursor:pointer;transition:.16s}
+.option:hover:not(:disabled){transform:translateY(-2px);border-color:#8aa1ae;box-shadow:0 8px 18px rgba(60,80,90,.08)}
+.option.correct{background:#e8f8f1!important;border-color:var(--green)!important}
+.option.wrong{background:#fff0f1!important;border-color:var(--red)!important}
+.feedback{display:none;margin-top:16px;padding:15px;border-left:5px solid;border-radius:12px;background:#fff;line-height:1.55}
+.feedback.show{display:block}.feedback.correct{border-color:var(--green)}.feedback.wrong{border-color:var(--red)}
+.controls{display:flex;justify-content:flex-end;margin-top:14px}
+.btn{border:0;border-radius:12px;padding:12px 18px;font-weight:900;cursor:pointer;background:linear-gradient(90deg,#dfe8ed,#b8c8d1);color:#354750}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.result{display:none;text-align:center;padding:34px 22px}.result.show{display:block}
+.scorebig{font-size:58px;font-weight:1000;color:#52606d}
+.review{text-align:left;margin-top:24px;border-top:1px solid #d4dde2;padding-top:16px}
+.item{padding:12px 14px;background:#f9fbfc;border-radius:12px;margin:9px 0;border-left:5px solid #9aaab4;line-height:1.5}
+.item.ok{border-left-color:var(--green)}.item.no{border-left-color:var(--red)}
+@media(max-width:850px){.main{grid-template-columns:1fr}.passage{max-height:380px}}
+@media(max-width:650px){.hero{grid-template-columns:85px 1fr}.sound{grid-column:1/-1;justify-self:end}.status{grid-template-columns:1fr 1fr}.barbox{grid-column:1/-1;order:4}.mist-icon{transform:scale(.78);transform-origin:left center;width:85px}}
+</style>
+</head>
+<body>
+<div class="fog-layer"><div class="fog1"></div><div class="fog2"></div><div class="fog3"></div></div>
+
+<main class="wrap">
+<header class="hero">
+  <div class="mist-icon"><div class="ring r1"></div><div class="ring r2"></div><div class="orb"></div></div>
+  <div>
+    <h1>Mist Reading Challenge</h1>
+    <p class="subtitle">Grade 11 · Unit 2 · Exercise 10 · Option C</p>
+  </div>
+  <button class="sound" id="soundBtn">🔊 Âm thanh: Bật</button>
+</header>
+
+<section class="card">
+<div id="quizArea">
+  <div class="status">
+    <div class="barbox"><div class="bar" id="bar"></div></div>
+    <div class="chip" id="counter"></div>
+    <div class="chip" id="scoreChip"></div>
+    <div class="chip" id="heartChip"></div>
+  </div>
+
+  <div class="main">
+    <div class="passage">
+      <h3>🌫️ Gen Z and Changing Family Expectations</h3>
+      <div id="passageText"></div>
+    </div>
+
+    <div class="quizbox">
+      <div class="tag" id="tag"></div>
+      <div class="question" id="question"></div>
+      <div class="options" id="options"></div>
+      <div id="feedback" class="feedback"></div>
+      <div class="controls"><button id="nextBtn" class="btn" disabled>Next Mist →</button></div>
+    </div>
+  </div>
+</div>
+
+<div id="resultArea" class="result">
+  <div style="font-size:74px">🌫️✨</div>
+  <h2>Mist Challenge Complete!</h2>
+  <div id="finalScore" class="scorebig"></div>
+  <p id="message"></p>
+  <button id="restartBtn" class="btn">Play Again ↻</button>
+  <div id="review" class="review"></div>
+</div>
+</section>
+</main>
+
+<script>
+const passage = "In many families today, Gen Z is changing the way young people communicate, make decisions, and express their personal values. Compared with previous generations, they are often more willing to question traditional expectations. Researchers suggest that this attitude has developed partly because of (1) ____________.\n\nGrowing up with constant access to information, Gen Z is exposed to a wide range of lifestyles, opinions, and social issues. As a result, they may not automatically accept the beliefs of older family members. Supported by online communities and digital platforms, (2) ____________.\n\nThis generation, (3) ____________, often expects greater freedom in choosing careers, relationships, and personal goals. While parents may view some of these choices as unrealistic or disrespectful, young people often see them as an important part of becoming independent.\n\nSuch differences can sometimes lead to tension at home. (4) ____________. Instead of simply accepting traditional rules, many Gen Z members want to understand the reasons behind them and discuss whether they are still appropriate.\n\n(5) ____________. When both generations are willing to listen and explain their viewpoints, differences do not always have to become serious conflicts.";
+const questions = [{"q": "Question 1", "options": ["being constantly exposed to different viewpoints and social experiences", "expose themselves constantly to traditional family expectations", "the exposure of old beliefs being completely rejected by young people", "having constantly expose to different social attitudes"], "answer": 0, "explanation": "Sau because of cần noun / V-ing. “being constantly exposed to...” đúng cả ngữ pháp và nghĩa."}, {"q": "Question 2", "options": ["older generations have begun to control what young people discuss online", "they can share their opinions and connect with people who have similar experiences", "parents are becoming less interested in their children's online activities", "many traditional beliefs have disappeared completely from modern families"], "answer": 1, "explanation": "“Supported by online communities and digital platforms” phải bổ nghĩa cho Gen Z / they. Đáp án B phù hợp nhất."}, {"q": "Question 3", "options": ["who has grown up in a world where personal choice is increasingly valued", "having grown up in a world where personal choice is increasingly valued", "grown up in a world where personal choices has been increasingly valued", "which growing up in a world where people value personal choice"], "answer": 1, "explanation": "Cấu trúc chen vào tự nhiên nhất là “having grown up...”, bổ sung thông tin cho This generation."}, {"q": "Question 4", "options": ["Although these disagreements exist, communication can help reduce them", "Because parents always understand their children, conflicts rarely happen", "While younger people dislike all traditions, older people refuse every new idea", "Because family rules are unnecessary, young people should simply ignore them"], "answer": 0, "explanation": "Câu trước nói về tension, câu sau nói về thảo luận. Đáp án A nối ý logic nhất: giao tiếp giúp giảm bất đồng."}, {"q": "Question 5", "options": ["The generation gap becomes worse whenever young people express their opinions", "Mutual understanding can be more effective than forcing one generation to accept the other's views", "Parents should avoid discussing differences because they may create unnecessary problems", "Gen Z can only become independent by rejecting the values of previous generations"], "answer": 1, "explanation": "Câu cuối nhấn mạnh lắng nghe, giải thích quan điểm và thấu hiểu lẫn nhau. Đáp án B diễn đạt đúng nhất."}];
+const letters=["A","B","C","D"];
+
+let current=0,score=0,hearts=5,combo=0,answered=false,answers=[],soundOn=true,audioCtx=null;
+const $=id=>document.getElementById(id);
+
+function getCtx(){
+  if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==="suspended") audioCtx.resume();
+  return audioCtx;
+}
+function tone(freq,duration=.1,type="sine",volume=.04,delay=0){
+  if(!soundOn)return;
+  const c=getCtx(),o=c.createOscillator(),g=c.createGain(),s=c.currentTime+delay;
+  o.type=type;o.frequency.setValueAtTime(freq,s);
+  g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(volume,s+.01);
+  g.gain.exponentialRampToValueAtTime(.0001,s+duration);
+  o.connect(g);g.connect(c.destination);o.start(s);o.stop(s+duration+.03);
+}
+function correctSound(){tone(500,.08,"triangle",.03);tone(720,.12,"sine",.03,.08)}
+function wrongSound(){tone(150,.16,"sawtooth",.035);tone(95,.22,"square",.02,.11)}
+function nextSound(){tone(360,.06,"triangle",.018);tone(520,.07,"triangle",.016,.06)}
+function finishSound(){[392,523,659,784].forEach((f,i)=>tone(f,.18,"triangle",.03,i*.1))}
+
+$("soundBtn").onclick=()=>{
+  soundOn=!soundOn;
+  $("soundBtn").textContent=soundOn?"🔊 Âm thanh: Bật":"🔇 Âm thanh: Tắt";
+  if(soundOn)nextSound();
+};
+
+function render(){
+  answered=false;
+  $("nextBtn").disabled=true;
+  $("feedback").className="feedback";
+  $("feedback").innerHTML="";
+  const q=questions[current];
+
+  $("tag").textContent=`Question ${current+1}`;
+  $("question").textContent=q.q;
+  $("counter").textContent=`Câu ${current+1}/${questions.length}`;
+  $("scoreChip").textContent=`🌫️ ${score} XP · Combo ${combo}`;
+  $("heartChip").textContent=`❤️ ${hearts}`;
+  $("bar").style.width=`${current/questions.length*100}%`;
+  $("options").innerHTML="";
+
+  q.options.forEach((op,index)=>{
+    const b=document.createElement("button");
+    b.className="option";
+    b.innerHTML=`<strong>${letters[index]}.</strong> ${op}`;
+    b.onclick=()=>choose(index);
+    $("options").appendChild(b);
+  });
+
+  $("nextBtn").textContent=current===questions.length-1?"Finish Mist 🌫️":"Next Mist →";
+}
+
+function choose(index){
+  if(answered)return;
+  answered=true;
+
+  const q=questions[current];
+  const buttons=[...document.querySelectorAll(".option")];
+  const correct=index===q.answer;
+
+  buttons.forEach(b=>b.disabled=true);
+  buttons[q.answer].classList.add("correct");
+
+  if(correct){
+    score+=10+combo*2;
+    combo++;
+    $("feedback").className="feedback correct show";
+    $("feedback").innerHTML=`<strong>🌫️ Chính xác! ${letters[q.answer]}. ${q.options[q.answer]}</strong>${q.explanation}`;
+    correctSound();
+  }else{
+    hearts=Math.max(0,hearts-1);
+    combo=0;
+    buttons[index].classList.add("wrong");
+    $("feedback").className="feedback wrong show";
+    $("feedback").innerHTML=`<strong>Chưa đúng. Đáp án: ${letters[q.answer]}. ${q.options[q.answer]}</strong>${q.explanation}`;
+    wrongSound();
+  }
+
+  answers.push({selected:index,correct});
+  $("scoreChip").textContent=`🌫️ ${score} XP · Combo ${combo}`;
+  $("heartChip").textContent=`❤️ ${hearts}`;
+  $("bar").style.width=`${(current+1)/questions.length*100}%`;
+  $("nextBtn").disabled=false;
+}
+
+$("nextBtn").onclick=()=>{
+  if(!answered)return;
+  nextSound();
+  if(current<questions.length-1){current++;render();}
+  else showResult();
+};
+
+function showResult(){
+  $("quizArea").style.display="none";
+  $("resultArea").classList.add("show");
+  const correctCount=answers.filter(a=>a.correct).length;
+  $("finalScore").textContent=`${score} XP · ${correctCount}/${questions.length}`;
+  finishSound();
+
+  if(correctCount===5) $("message").textContent="Perfect Mist Reader! Em đã hoàn thành toàn bộ thử thách.";
+  else if(correctCount>=4) $("message").textContent="Excellent reading! Em xử lý rất tốt các cấu trúc và liên kết ý.";
+  else if(correctCount>=3) $("message").textContent="Good job! Hãy xem lại các câu chưa đúng.";
+  else $("message").textContent="Hãy đọc lại passage và thử thêm một lần nữa.";
+
+  let html="<h3>🌫️ Mist Review</h3>";
+  questions.forEach((q,i)=>{
+    const a=answers[i];
+    html+=`<div class="item ${a&&a.correct?"ok":"no"}"><strong>Câu ${i+1}: ${a&&a.correct?"Đúng":"Sai"}</strong><br>Em chọn: ${a?letters[a.selected]:"-"}. ${a?q.options[a.selected]:""}<br>Đáp án đúng: ${letters[q.answer]}. ${q.options[q.answer]}<br><em>${q.explanation}</em></div>`;
+  });
+  $("review").innerHTML=html;
+}
+
+$("restartBtn").onclick=()=>{
+  current=0;score=0;hearts=5;combo=0;answered=false;answers=[];
+  $("resultArea").classList.remove("show");
+  $("quizArea").style.display="block";
+  render();nextSound();
+};
+
+$("passageText").innerHTML=passage.split("\n\n").map(p=>`<p>${p}</p>`).join("");
+render();
+</script>
+</body>
+</html>
