@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Grade 10 - Unit 2 - Exercise 4 - Option B</title>
+<style>
+:root{
+ --ink:#111318;--paper:#efe7d6;--paper2:#f8f1e4;--brown:#6a513d;--gold:#c49a57;
+ --blue:#5e7f9b;--green:#4fc28d;--red:#d65d68;--text:#2f2b28;--muted:#746a60
+}
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;font-family:Georgia,"Times New Roman",serif;color:var(--text);
+ background:
+  radial-gradient(circle at 14% 16%,rgba(196,154,87,.12),transparent 24%),
+  radial-gradient(circle at 86% 18%,rgba(94,127,155,.10),transparent 24%),
+  linear-gradient(145deg,#20242a,#111418 62%,#090b0d);
+ padding:18px;overflow-x:hidden
+}
+.bg{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.fog{position:absolute;width:70vw;height:20vh;border-radius:50%;background:rgba(255,255,255,.035);filter:blur(40px);animation:fogmove 15s ease-in-out infinite}
+.f1{left:-20%;top:12%}.f2{right:-20%;bottom:12%;animation-delay:5s}
+@keyframes fogmove{50%{transform:translateX(10%) translateY(8px);opacity:.6}}
+.foot{position:absolute;font-size:28px;opacity:.18;animation:walk 12s linear infinite}
+.p1{left:-50px;top:30%}.p2{left:-70px;top:62%;animation-delay:4s}
+@keyframes walk{to{transform:translateX(115vw) rotate(20deg)}}
+.wrap{width:min(1120px,100%);margin:auto;position:relative;z-index:2}
+.hero{display:grid;grid-template-columns:120px 1fr auto;gap:18px;align-items:center;margin-bottom:16px}
+.detective{width:110px;height:110px;position:relative;filter:drop-shadow(0 10px 16px rgba(0,0,0,.3))}
+.hat{position:absolute;left:22px;top:8px;width:70px;height:28px;border-radius:50% 50% 20% 20%;background:#75604a;border:3px solid #3a2f26;z-index:3}
+.hat:after{content:"";position:absolute;left:-12px;right:-12px;bottom:-7px;height:10px;border-radius:999px;background:#5e4b3c}
+.face{position:absolute;left:31px;top:30px;width:52px;height:55px;border-radius:45%;background:#d7b28d;border:3px solid #5d4638}
+.eye{position:absolute;top:50px;width:7px;height:7px;border-radius:50%;background:#1c1c1c;z-index:4}.eye.l{left:45px}.eye.r{right:38px}
+.coat{position:absolute;left:24px;bottom:2px;width:64px;height:40px;border-radius:28px 28px 8px 8px;background:#7b6955}
+.lens{position:absolute;right:0;bottom:4px;width:36px;height:36px;border:5px solid var(--gold);border-radius:50%;box-shadow:0 0 12px rgba(196,154,87,.28)}
+.lens:after{content:"";position:absolute;width:30px;height:6px;background:var(--gold);right:-22px;bottom:-13px;transform:rotate(45deg);border-radius:4px}
+h1{margin:0;font-size:clamp(28px,4vw,44px);background:linear-gradient(90deg,#f4e6c9,#c49a57,#8ca4b8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{margin:7px 0 0;color:#c7b9aa;font-weight:700}
+.sound{border:1px solid rgba(196,154,87,.38);background:#2a3036;color:#f4e6c9;border-radius:12px;padding:11px 14px;font-weight:900;cursor:pointer}
+.card{background:rgba(245,238,224,.98);border:1px solid rgba(196,154,87,.28);border-radius:24px;box-shadow:0 24px 65px rgba(0,0,0,.42);overflow:hidden}
+.status{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;padding:16px 20px;background:linear-gradient(90deg,#e9dcc4,#f6efe2)}
+.barbox{height:13px;background:#d5c4a8;border-radius:999px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,#c49a57,#7c91a3,#5e7f9b);transition:.3s}
+.chip{background:#fffaf1;padding:8px 12px;border-radius:999px;font-weight:900;white-space:nowrap;box-shadow:0 4px 12px rgba(70,55,40,.08)}
+.main{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;padding:20px}
+.passage{background:#fffaf1;border:2px solid #d9c6a4;border-radius:18px;padding:18px;max-height:600px;overflow:auto;line-height:1.75}
+.passage h3{margin:0 0 10px;color:#5d4938}
+.quiz{background:#f4eadb;border:2px solid #d8c4a8;border-radius:18px;padding:18px}
+.tag{display:inline-block;background:#e6d8c3;color:#5a4635;padding:7px 12px;border-radius:10px;font-weight:900}
+.question{font-size:23px;margin:16px 0}
+.options{display:grid;gap:12px}
+.option{padding:14px 15px;border:2px solid #d2bea0;border-radius:14px;background:#fffdf8;color:#2f2b28;text-align:left;font-size:17px;cursor:pointer;transition:.16s}
+.option:hover:not(:disabled){transform:translateY(-2px);border-color:#c49a57;box-shadow:0 8px 18px rgba(100,75,50,.08)}
+.option.correct{background:#e9fff4!important;border-color:var(--green)!important}
+.option.wrong{background:#fff0f2!important;border-color:var(--red)!important}
+.feedback{display:none;margin-top:16px;padding:15px;border-left:5px solid;border-radius:12px;background:#fffaf1;line-height:1.55}
+.feedback.show{display:block}.feedback.correct{border-color:var(--green)}.feedback.wrong{border-color:var(--red)}
+.controls{display:flex;justify-content:flex-end;margin-top:14px}
+.btn{border:0;border-radius:12px;padding:12px 18px;font-weight:900;cursor:pointer;background:linear-gradient(90deg,#d7c099,#b6c8d6);color:#3b322b}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.result{display:none;text-align:center;padding:34px 22px}.result.show{display:block}
+.scorebig{font-size:58px;font-weight:1000;color:#76563d}
+.review{text-align:left;margin-top:24px;border-top:1px solid #d7c7af;padding-top:16px}
+.item{padding:12px 14px;background:#fffaf1;border-radius:12px;margin:9px 0;border-left:5px solid #9f8c77;line-height:1.5}
+.item.ok{border-left-color:var(--green)}.item.no{border-left-color:var(--red)}
+@media(max-width:850px){.main{grid-template-columns:1fr}.passage{max-height:380px}}
+@media(max-width:650px){.hero{grid-template-columns:85px 1fr}.sound{grid-column:1/-1;justify-self:end}.status{grid-template-columns:1fr 1fr}.barbox{grid-column:1/-1;order:4}.detective{transform:scale(.78);transform-origin:left center;width:85px}}
+</style>
+</head>
+<body>
+<div class="bg">
+ <div class="fog f1"></div><div class="fog f2"></div>
+ <div class="foot p1">👣</div><div class="foot p2">👣</div>
+</div>
+
+<main class="wrap">
+<header class="hero">
+ <div class="detective">
+  <div class="hat"></div><div class="face"></div><div class="eye l"></div><div class="eye r"></div><div class="coat"></div><div class="lens"></div>
+ </div>
+ <div>
+  <h1>Sherlock Holmes Detector Challenge</h1>
+  <p class="subtitle">Grade 10 · Unit 2 · Exercise 4 · Option B</p>
+ </div>
+ <button class="sound" id="soundBtn">🔊 Âm thanh: Bật</button>
+</header>
+
+<section class="card">
+<div id="quizArea">
+ <div class="status">
+  <div class="barbox"><div class="bar" id="bar"></div></div>
+  <div class="chip" id="counter"></div>
+  <div class="chip" id="scoreChip"></div>
+  <div class="chip" id="heartChip"></div>
+ </div>
+
+ <div class="main">
+  <div class="passage">
+   <h3>🔎 THE RISE OF ONLINE LEARNING</h3>
+   <div id="passageText"></div>
+  </div>
+
+  <div class="quiz">
+   <div class="tag" id="tag"></div>
+   <div class="question" id="question"></div>
+   <div class="options" id="options"></div>
+   <div id="feedback" class="feedback"></div>
+   <div class="controls"><button id="nextBtn" class="btn" disabled>Next Clue →</button></div>
+  </div>
+ </div>
+</div>
+
+<div id="resultArea" class="result">
+ <div style="font-size:74px">🕵️‍♂️🔎</div>
+ <h2>Case Solved!</h2>
+ <div id="finalScore" class="scorebig"></div>
+ <p id="message"></p>
+ <button id="restartBtn" class="btn">Investigate Again ↻</button>
+ <div id="review" class="review"></div>
+</div>
+</section>
+</main>
+
+<script>
+const passage="In the past, students usually had to be in a classroom to attend lessons. However, the rapid development of technology has brought major changes to the (1) ____________ students learn. Today, online learning has become increasingly popular because it allows learners to study from almost anywhere.\n\nOne important (2) ____________ of online learning is its flexibility. Students can often choose when and where to study, which makes it easier for them to (3) ____________ their time effectively. They can also have access (4) ____________ a wide range of learning materials, including videos, online exercises, and digital books. As a (5) ____________, learners can review difficult lessons whenever necessary.\n\nHowever, studying online also requires students to become more (6) ____________ for their own learning. Without a teacher physically present, some students may find it difficult to stay focused. They need to develop good study habits and avoid (7) ____________ too much time on social media while studying.\n\nOnline learning can also help students communicate with people from different places. (8) ____________, learners can take part in online discussions and share ideas with classmates who live far away. This can provide them (9) ____________ valuable opportunities to improve both their communication and technology skills.\n\nAs digital technology continues to develop, online education is likely to play an increasingly important (10) ____________ in the way people learn.";
+const questions=[["Question 1", ["method", "way", "style", "manner"], 1, "the way + S + V = cách mà... → the way students learn = cách học sinh học."], ["Question 2", ["advantage", "reason", "result", "effect"], 0, "an advantage of sth = một lợi ích/ưu điểm của cái gì. Tính linh hoạt là một ưu điểm của học trực tuyến."], ["Question 3", ["control", "spend", "manage", "arrange"], 2, "manage one's time = quản lý thời gian. → manage their time effectively = quản lý thời gian hiệu quả."], ["Question 4", ["for", "with", "on", "to"], 3, "have access to sth = có quyền/cơ hội tiếp cận cái gì."], ["Question 5", ["cause", "result", "reason", "consequence"], 1, "as a result = kết quả là/do đó. Dùng để giới thiệu kết quả của ý phía trước."], ["Question 6", ["responsible", "suitable", "available", "successful"], 0, "be responsible for sth = chịu trách nhiệm về việc gì. Học trực tuyến đòi hỏi học sinh có trách nhiệm hơn với việc học của mình."], ["Question 7", ["taking", "wasting", "giving", "making"], 1, "waste time on sth = lãng phí thời gian vào việc gì. Sau avoid dùng V-ing → avoid wasting too much time."], ["Question 8", ["Therefore", "However", "Otherwise", "For example"], 3, "Câu sau đưa ra ví dụ về cách học sinh giao tiếp với người khác khi học online → dùng For example."], ["Question 9", ["for", "to", "with", "about"], 2, "provide somebody with something = cung cấp/mang đến cho ai cái gì. → provide them with valuable opportunities."], ["Question 10", ["role", "position", "place", "action"], 0, "play an important role in sth = đóng vai trò quan trọng trong việc gì."]];
+const letters=["A","B","C","D"];
+
+let current=0,score=0,hearts=5,combo=0,answered=false,answers=[],soundOn=true,audioCtx=null;
+const $=id=>document.getElementById(id);
+
+function getCtx(){
+ if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+ if(audioCtx.state==="suspended") audioCtx.resume();
+ return audioCtx;
+}
+function tone(freq,duration=.1,type="sine",volume=.04,delay=0){
+ if(!soundOn)return;
+ const c=getCtx(),o=c.createOscillator(),g=c.createGain(),s=c.currentTime+delay;
+ o.type=type;o.frequency.setValueAtTime(freq,s);
+ g.gain.setValueAtTime(.0001,s);
+ g.gain.exponentialRampToValueAtTime(volume,s+.01);
+ g.gain.exponentialRampToValueAtTime(.0001,s+duration);
+ o.connect(g);g.connect(c.destination);o.start(s);o.stop(s+duration+.03);
+}
+function correctSound(){tone(500,.08,"triangle",.03);tone(760,.11,"sine",.03,.08)}
+function wrongSound(){tone(155,.16,"sawtooth",.035);tone(95,.22,"square",.018,.11)}
+function nextSound(){tone(340,.06,"triangle",.017);tone(520,.07,"triangle",.015,.06)}
+function finishSound(){[392,523,659,784].forEach((f,i)=>tone(f,.17,"triangle",.027,i*.09))}
+
+$("soundBtn").onclick=()=>{
+ soundOn=!soundOn;
+ $("soundBtn").textContent=soundOn?"🔊 Âm thanh: Bật":"🔇 Âm thanh: Tắt";
+ if(soundOn)nextSound();
+};
+
+function render(){
+ answered=false;
+ $("nextBtn").disabled=true;
+ $("feedback").className="feedback";
+ $("feedback").innerHTML="";
+ const q=questions[current];
+
+ $("tag").textContent=`Clue ${current+1}`;
+ $("question").textContent=q[0];
+ $("counter").textContent=`Câu ${current+1}/${questions.length}`;
+ $("scoreChip").textContent=`🔎 ${score} XP · Combo ${combo}`;
+ $("heartChip").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${current/questions.length*100}%`;
+ $("options").innerHTML="";
+
+ q[1].forEach((op,index)=>{
+  const b=document.createElement("button");
+  b.className="option";
+  b.innerHTML=`<strong>${letters[index]}.</strong> ${op}`;
+  b.onclick=()=>choose(index);
+  $("options").appendChild(b);
+ });
+
+ $("nextBtn").textContent=current===questions.length-1?"Solve Case 🕵️":"Next Clue →";
+}
+
+function choose(index){
+ if(answered)return;
+ answered=true;
+
+ const q=questions[current];
+ const buttons=[...document.querySelectorAll(".option")];
+ const correct=index===q[2];
+
+ buttons.forEach(b=>b.disabled=true);
+ buttons[q[2]].classList.add("correct");
+
+ if(correct){
+  score+=10+combo*2;
+  combo++;
+  $("feedback").className="feedback correct show";
+  $("feedback").innerHTML=`<strong>🔎 Clue confirmed! ${letters[q[2]]}. ${q[1][q[2]]}</strong>${q[3]}`;
+  correctSound();
+ }else{
+  hearts=Math.max(0,hearts-1);
+  combo=0;
+  buttons[index].classList.add("wrong");
+  $("feedback").className="feedback wrong show";
+  $("feedback").innerHTML=`<strong>❌ Wrong clue. Đáp án: ${letters[q[2]]}. ${q[1][q[2]]}</strong>${q[3]}`;
+  wrongSound();
+ }
+
+ answers.push({selected:index,correct});
+ $("scoreChip").textContent=`🔎 ${score} XP · Combo ${combo}`;
+ $("heartChip").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${(current+1)/questions.length*100}%`;
+ $("nextBtn").disabled=false;
+}
+
+$("nextBtn").onclick=()=>{
+ if(!answered)return;
+ nextSound();
+ if(current<questions.length-1){
+  current++;
+  render();
+ }else{
+  showResult();
+ }
+};
+
+function showResult(){
+ $("quizArea").style.display="none";
+ $("resultArea").classList.add("show");
+
+ const correctCount=answers.filter(a=>a.correct).length;
+ $("finalScore").textContent=`${score} XP · ${correctCount}/${questions.length}`;
+ finishSound();
+
+ if(correctCount===10) $("message").textContent="Master Detective! Em đã giải đúng toàn bộ manh mối.";
+ else if(correctCount>=8) $("message").textContent="Excellent detective work! Em nắm rất chắc vocabulary và collocations.";
+ else if(correctCount>=6) $("message").textContent="Good investigation! Hãy xem lại các clue chưa chính xác.";
+ else $("message").textContent="Hãy đọc lại hồ sơ và điều tra thêm một lần nữa.";
+
+ let html="<h3>🕵️ Detective Review</h3>";
+ questions.forEach((q,i)=>{
+  const a=answers[i];
+  html+=`<div class="item ${a&&a.correct?"ok":"no"}">
+   <strong>Clue ${i+1}: ${a&&a.correct?"Đúng":"Sai"}</strong><br>
+   Em chọn: ${a?letters[a.selected]:"-"}. ${a?q[1][a.selected]:""}<br>
+   Đáp án đúng: ${letters[q[2]]}. ${q[1][q[2]]}<br>
+   <em>${q[3]}</em>
+  </div>`;
+ });
+ $("review").innerHTML=html;
+}
+
+$("restartBtn").onclick=()=>{
+ current=0;score=0;hearts=5;combo=0;answered=false;answers=[];
+ $("resultArea").classList.remove("show");
+ $("quizArea").style.display="block";
+ render();nextSound();
+};
+
+$("passageText").innerHTML=passage.split("\\n\\n").map(p=>`<p>${p}</p>`).join("");
+render();
+</script>
+</body>
+</html>

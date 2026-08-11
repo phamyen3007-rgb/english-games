@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Grade 10 - Unit 2 - Exercise 4 - Option C</title>
+<style>
+:root{
+ --coffee:#5b3a29;--dark:#2f211a;--cream:#fff7e8;--milk:#f8efe0;--caramel:#c98a4a;
+ --latte:#d8b28a;--foam:#fffaf2;--green:#53c98b;--red:#ef6675;--text:#4a3529;--muted:#806d61
+}
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--text);
+ background:
+  radial-gradient(circle at 15% 15%,rgba(255,247,232,.28),transparent 22%),
+  radial-gradient(circle at 85% 18%,rgba(201,138,74,.15),transparent 24%),
+  linear-gradient(180deg,#f4dfc7,#e5c39f 55%,#bc8156);
+ padding:18px;overflow-x:hidden
+}
+.bg{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.bean{position:absolute;font-size:30px;opacity:.28;animation:beanMove linear infinite}
+.b1{left:-45px;top:24%;animation-duration:16s}.b2{left:-65px;top:58%;animation-duration:21s;animation-delay:4s}
+@keyframes beanMove{to{transform:translateX(115vw) rotate(320deg)}}
+.foam-bubble{position:absolute;border-radius:50%;background:rgba(255,250,242,.45);border:2px solid rgba(255,255,255,.55);animation:rise linear infinite}
+.f1{width:20px;height:20px;left:10%;bottom:-30px;animation-duration:8s}.f2{width:32px;height:32px;left:26%;bottom:-40px;animation-duration:11s;animation-delay:2s}.f3{width:24px;height:24px;right:12%;bottom:-35px;animation-duration:9s;animation-delay:1s}
+@keyframes rise{to{transform:translateY(-115vh);opacity:.05}}
+.wrap{width:min(1120px,100%);margin:auto;position:relative;z-index:2}
+.hero{display:grid;grid-template-columns:115px 1fr auto;gap:18px;align-items:center;margin-bottom:16px}
+.cup{width:105px;height:105px;position:relative;display:grid;place-items:center;filter:drop-shadow(0 10px 16px rgba(90,50,30,.2))}
+.mug{width:68px;height:58px;border-radius:8px 8px 18px 18px;background:linear-gradient(180deg,#fffaf2,#ead8c0);border:3px solid #9a6a47;position:relative}
+.mug:before{content:"";position:absolute;left:7px;right:7px;top:6px;height:17px;border-radius:50%;background:linear-gradient(180deg,#6b412d,#4f2f22)}
+.mug:after{content:"";position:absolute;right:-20px;top:16px;width:23px;height:25px;border:5px solid #9a6a47;border-left:0;border-radius:0 18px 18px 0}
+.foam{position:absolute;left:12px;right:12px;top:4px;height:10px;border-radius:50%;background:#fff8eb;z-index:3}
+.steam{position:absolute;width:3px;height:35px;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.7),transparent);top:-32px;animation:steam 2.5s ease-in-out infinite}
+.s1{left:38px}.s2{left:53px;animation-delay:.8s}
+@keyframes steam{50%{transform:translateY(-6px) translateX(4px);opacity:.3}}
+h1{margin:0;font-size:clamp(28px,4vw,44px);background:linear-gradient(90deg,#5b3a29,#9a6643,#c98a4a,#fff4df);-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{margin:7px 0 0;color:#6d5c50;font-weight:700}
+.sound{border:1px solid rgba(91,58,41,.25);background:#fff8ed;color:#5b3a29;border-radius:12px;padding:11px 14px;font-weight:900;cursor:pointer}
+.card{background:rgba(255,250,243,.98);border:1px solid rgba(91,58,41,.18);border-radius:24px;box-shadow:0 24px 65px rgba(90,55,35,.16);overflow:hidden}
+.status{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;padding:16px 20px;background:linear-gradient(90deg,#fff4e4,#f8ead9)}
+.barbox{height:13px;background:#ead9c8;border-radius:999px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,#fff4df,#d8b28a,#c98a4a,#6f4933);transition:.3s}
+.chip{background:#fffaf2;padding:8px 12px;border-radius:999px;font-weight:900;white-space:nowrap;box-shadow:0 4px 12px rgba(80,55,35,.07)}
+.main{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;padding:20px}
+.passage{background:#fffaf2;border:2px solid #e2cdb4;border-radius:18px;padding:18px;max-height:600px;overflow:auto;line-height:1.75}
+.passage h3{margin:0 0 10px;color:#6b4631}
+.quiz{background:#f8efe2;border:2px solid #dfc7ad;border-radius:18px;padding:18px}
+.tag{display:inline-block;background:#ead7c2;color:#66432f;padding:7px 12px;border-radius:10px;font-weight:900}
+.question{font-size:23px;margin:16px 0}
+.options{display:grid;gap:12px}
+.option{padding:14px 15px;border:2px solid #dbc5ae;border-radius:14px;background:#fff;color:#4a3529;text-align:left;font-size:17px;cursor:pointer;transition:.16s}
+.option:hover:not(:disabled){transform:translateY(-2px);border-color:#c98a4a;box-shadow:0 8px 18px rgba(110,70,40,.08)}
+.option.correct{background:#e8fff3!important;border-color:var(--green)!important}
+.option.wrong{background:#fff0f2!important;border-color:var(--red)!important}
+.feedback{display:none;margin-top:16px;padding:15px;border-left:5px solid;border-radius:12px;background:#fffaf2;line-height:1.55}
+.feedback.show{display:block}.feedback.correct{border-color:var(--green)}.feedback.wrong{border-color:var(--red)}
+.controls{display:flex;justify-content:flex-end;margin-top:14px}
+.btn{border:0;border-radius:12px;padding:12px 18px;font-weight:900;cursor:pointer;background:linear-gradient(90deg,#f3dec8,#d6a875);color:#4b3426}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.result{display:none;text-align:center;padding:34px 22px}.result.show{display:block}
+.scorebig{font-size:58px;font-weight:1000;color:#9a613f}
+.review{text-align:left;margin-top:24px;border-top:1px solid #e0cfbc;padding-top:16px}
+.item{padding:12px 14px;background:#fffaf2;border-radius:12px;margin:9px 0;border-left:5px solid #ad9683;line-height:1.5}
+.item.ok{border-left-color:var(--green)}.item.no{border-left-color:var(--red)}
+@media(max-width:850px){.main{grid-template-columns:1fr}.passage{max-height:380px}}
+@media(max-width:650px){.hero{grid-template-columns:80px 1fr}.sound{grid-column:1/-1;justify-self:end}.status{grid-template-columns:1fr 1fr}.barbox{grid-column:1/-1;order:4}.cup{transform:scale(.8);transform-origin:left center;width:80px}}
+</style>
+</head>
+<body>
+<div class="bg">
+ <div class="bean b1">🫘</div><div class="bean b2">🫘</div>
+ <div class="foam-bubble f1"></div><div class="foam-bubble f2"></div><div class="foam-bubble f3"></div>
+</div>
+
+<main class="wrap">
+<header class="hero">
+ <div class="cup">
+  <div class="steam s1"></div><div class="steam s2"></div>
+  <div class="mug"><div class="foam"></div></div>
+ </div>
+ <div>
+  <h1>Salt Milk Coffee Reading Challenge</h1>
+  <p class="subtitle">Grade 10 · Unit 2 · Exercise 4 · Option C</p>
+ </div>
+ <button class="sound" id="soundBtn">🔊 Âm thanh: Bật</button>
+</header>
+
+<section class="card">
+<div id="quizArea">
+ <div class="status">
+  <div class="barbox"><div class="bar" id="bar"></div></div>
+  <div class="chip" id="counter"></div>
+  <div class="chip" id="scoreChip"></div>
+  <div class="chip" id="heartChip"></div>
+ </div>
+
+ <div class="main">
+  <div class="passage">
+   <h3>☕ THE CHANGING WAY WE TRAVEL</h3>
+   <div id="passageText"></div>
+  </div>
+
+  <div class="quiz">
+   <div class="tag" id="tag"></div>
+   <div class="question" id="question"></div>
+   <div class="options" id="options"></div>
+   <div id="feedback" class="feedback"></div>
+   <div class="controls"><button id="nextBtn" class="btn" disabled>Next Sip →</button></div>
+  </div>
+ </div>
+</div>
+
+<div id="resultArea" class="result">
+ <div style="font-size:74px">☕✨</div>
+ <h2>Coffee Challenge Complete!</h2>
+ <div id="finalScore" class="scorebig"></div>
+ <p id="message"></p>
+ <button id="restartBtn" class="btn">Play Again ↻</button>
+ <div id="review" class="review"></div>
+</div>
+</section>
+</main>
+
+<script>
+const passage="In recent years, the way people travel around cities has changed considerably. As urban populations continue to grow, many cities are trying to (1) ____________ with problems such as traffic congestion and air pollution. Improving public transport has become one of the most effective ways to encourage people to leave their private vehicles at home.\n\nOne major (2) ____________ of public transport is that it can carry large numbers of passengers while using less energy per person. If more commuters travel by bus or train, this can result (3) ____________ fewer vehicles being on the road. Public transport can therefore make an important (4) ____________ to reducing air pollution in crowded cities.\n\nHowever, people will only give (5) ____________ their cars if public transport is convenient and reliable. Buses and trains need to run frequently, and passengers should be able to depend (6) ____________ them to arrive on time. The cost of travelling is another factor that should be taken into (7) ____________. If tickets are too expensive, many people may continue to drive instead.\n\nSome cities have also introduced bicycle-sharing systems. These allow residents to (8) ____________ advantage of bicycles for short journeys without having to own one. (9) ____________, safer cycling paths have been built to encourage more people to travel by bike.\n\nAlthough changing people's travel habits can take time, these measures may have a positive (10) ____________ on both the environment and the quality of life in cities.";
+const questions=[["Question 1", ["solve", "deal", "handle", "overcome"], 1, "deal with a problem = giải quyết/đối phó với một vấn đề. Trong câu đã có with nên deal là đáp án chính xác."], ["Question 2", ["benefit", "purpose", "advantage", "effect"], 2, "an advantage of sth = một ưu điểm của cái gì. Khả năng vận chuyển nhiều hành khách với mức năng lượng thấp hơn là một ưu điểm của giao thông công cộng."], ["Question 3", ["from", "with", "to", "in"], 3, "result in + noun/V-ing = dẫn đến một kết quả. → result in fewer vehicles being on the road. Phân biệt: result from = bắt nguồn từ."], ["Question 4", ["contribution", "difference", "progress", "influence"], 0, "make a contribution to + noun/V-ing = đóng góp vào việc gì. → make an important contribution to reducing air pollution."], ["Question 5", ["away", "out", "up", "off"], 2, "give up sth = từ bỏ/ngừng sử dụng thứ gì. → give up their cars = từ bỏ/hạn chế sử dụng ô tô cá nhân."], ["Question 6", ["on", "at", "for", "with"], 0, "depend on sb/sth = phụ thuộc/tin cậy vào ai hoặc cái gì."], ["Question 7", ["attention", "consideration", "notice", "thought"], 1, "take sth into consideration = cân nhắc/xem xét điều gì. → Giá vé là một yếu tố cần được cân nhắc."], ["Question 8", ["make", "get", "do", "take"], 3, "take advantage of sth = tận dụng cái gì. → take advantage of bicycles = tận dụng xe đạp trong hệ thống chia sẻ."], ["Question 9", ["Nevertheless", "Otherwise", "In addition", "As a result"], 2, "In addition = ngoài ra, hơn nữa. Câu sau bổ sung thêm một biện pháp: xây đường dành cho xe đạp."], ["Question 10", ["impact", "cause", "result", "change"], 0, "have a positive/negative impact on sth = có tác động tích cực/tiêu cực đến cái gì."]];
+const letters=["A","B","C","D"];
+
+let current=0,score=0,hearts=5,combo=0,answered=false,answers=[],soundOn=true,audioCtx=null;
+const $=id=>document.getElementById(id);
+
+function getCtx(){
+ if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+ if(audioCtx.state==="suspended") audioCtx.resume();
+ return audioCtx;
+}
+function tone(freq,duration=.1,type="sine",volume=.04,delay=0){
+ if(!soundOn)return;
+ const c=getCtx(),o=c.createOscillator(),g=c.createGain(),s=c.currentTime+delay;
+ o.type=type;o.frequency.setValueAtTime(freq,s);
+ g.gain.setValueAtTime(.0001,s);
+ g.gain.exponentialRampToValueAtTime(volume,s+.01);
+ g.gain.exponentialRampToValueAtTime(.0001,s+duration);
+ o.connect(g);g.connect(c.destination);o.start(s);o.stop(s+duration+.03);
+}
+function correctSound(){tone(590,.08,"triangle",.03);tone(820,.11,"sine",.03,.08)}
+function wrongSound(){tone(165,.16,"sawtooth",.035);tone(95,.22,"square",.018,.11)}
+function nextSound(){tone(390,.06,"triangle",.017);tone(580,.07,"triangle",.015,.06)}
+function finishSound(){[440,554,659,880].forEach((f,i)=>tone(f,.17,"triangle",.027,i*.09))}
+
+$("soundBtn").onclick=()=>{
+ soundOn=!soundOn;
+ $("soundBtn").textContent=soundOn?"🔊 Âm thanh: Bật":"🔇 Âm thanh: Tắt";
+ if(soundOn)nextSound();
+};
+
+function render(){
+ answered=false;
+ $("nextBtn").disabled=true;
+ $("feedback").className="feedback";
+ $("feedback").innerHTML="";
+ const q=questions[current];
+
+ $("tag").textContent=`Question ${current+1}`;
+ $("question").textContent=q[0];
+ $("counter").textContent=`Câu ${current+1}/${questions.length}`;
+ $("scoreChip").textContent=`☕ ${score} XP · Combo ${combo}`;
+ $("heartChip").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${current/questions.length*100}%`;
+ $("options").innerHTML="";
+
+ q[1].forEach((op,index)=>{
+  const b=document.createElement("button");
+  b.className="option";
+  b.innerHTML=`<strong>${letters[index]}.</strong> ${op}`;
+  b.onclick=()=>choose(index);
+  $("options").appendChild(b);
+ });
+
+ $("nextBtn").textContent=current===questions.length-1?"Finish Coffee ☕":"Next Sip →";
+}
+
+function choose(index){
+ if(answered)return;
+ answered=true;
+
+ const q=questions[current];
+ const buttons=[...document.querySelectorAll(".option")];
+ const correct=index===q[2];
+
+ buttons.forEach(b=>b.disabled=true);
+ buttons[q[2]].classList.add("correct");
+
+ if(correct){
+  score+=10+combo*2;
+  combo++;
+  $("feedback").className="feedback correct show";
+  $("feedback").innerHTML=`<strong>☕ Chính xác! ${letters[q[2]]}. ${q[1][q[2]]}</strong>${q[3]}`;
+  correctSound();
+ }else{
+  hearts=Math.max(0,hearts-1);
+  combo=0;
+  buttons[index].classList.add("wrong");
+  $("feedback").className="feedback wrong show";
+  $("feedback").innerHTML=`<strong>Chưa đúng. Đáp án: ${letters[q[2]]}. ${q[1][q[2]]}</strong>${q[3]}`;
+  wrongSound();
+ }
+
+ answers.push({selected:index,correct});
+ $("scoreChip").textContent=`☕ ${score} XP · Combo ${combo}`;
+ $("heartChip").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${(current+1)/questions.length*100}%`;
+ $("nextBtn").disabled=false;
+}
+
+$("nextBtn").onclick=()=>{
+ if(!answered)return;
+ nextSound();
+ if(current<questions.length-1){
+  current++;
+  render();
+ }else{
+  showResult();
+ }
+};
+
+function showResult(){
+ $("quizArea").style.display="none";
+ $("resultArea").classList.add("show");
+
+ const correctCount=answers.filter(a=>a.correct).length;
+ $("finalScore").textContent=`${score} XP · ${correctCount}/${questions.length}`;
+ finishSound();
+
+ if(correctCount===10) $("message").textContent="Perfect Coffee Master! Em đã hoàn thành toàn bộ thử thách.";
+ else if(correctCount>=8) $("message").textContent="Excellent! Em nắm rất chắc collocations và linking words.";
+ else if(correctCount>=6) $("message").textContent="Good job! Hãy xem lại những câu chưa đúng.";
+ else $("message").textContent="Hãy đọc lại passage và thử thêm một lần nữa.";
+
+ let html="<h3>☕ Salt Milk Coffee Review</h3>";
+ questions.forEach((q,i)=>{
+  const a=answers[i];
+  html+=`<div class="item ${a&&a.correct?"ok":"no"}">
+   <strong>Câu ${i+1}: ${a&&a.correct?"Đúng":"Sai"}</strong><br>
+   Em chọn: ${a?letters[a.selected]:"-"}. ${a?q[1][a.selected]:""}<br>
+   Đáp án đúng: ${letters[q[2]]}. ${q[1][q[2]]}<br>
+   <em>${q[3]}</em>
+  </div>`;
+ });
+ $("review").innerHTML=html;
+}
+
+$("restartBtn").onclick=()=>{
+ current=0;score=0;hearts=5;combo=0;answered=false;answers=[];
+ $("resultArea").classList.remove("show");
+ $("quizArea").style.display="block";
+ render();nextSound();
+};
+
+$("passageText").innerHTML=passage.split("\\n\\n").map(p=>`<p>${p}</p>`).join("");
+render();
+</script>
+</body>
+</html>
