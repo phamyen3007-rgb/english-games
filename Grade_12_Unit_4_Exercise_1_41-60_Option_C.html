@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Grade 12 - Unit 4 - Exercise 1 (41-60) - Option C</title>
+<style>
+:root{
+ --night:#07131d;--panel:#102631;--panel2:#173843;--cyan:#62e4ff;--sky:#81b9ff;
+ --mint:#75e4b8;--gold:#ffd36d;--ok:#4fd39a;--bad:#ff6c79;--white:#f6fcff;--muted:#b7cad4;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--white);
+ background:
+ radial-gradient(circle at 14% 12%,rgba(98,228,255,.10),transparent 24%),
+ radial-gradient(circle at 84% 18%,rgba(129,185,255,.09),transparent 24%),
+ linear-gradient(160deg,#061019,#0a1d27 58%,#04090d);
+ padding:18px;overflow-x:hidden
+}
+.bg{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.blueprint{position:absolute;inset:0;background:
+linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+background-size:34px 34px}
+.skyline{position:absolute;left:0;right:0;bottom:0;height:30%;display:flex;align-items:flex-end;gap:8px;padding:0 2%}
+.tower{background:linear-gradient(180deg,#173344,#09131b);border-top:1px solid rgba(255,255,255,.05);flex:1;min-width:42px}
+.t1{height:35%}.t2{height:54%}.t3{height:42%}.t4{height:68%}.t5{height:48%}.t6{height:58%}.t7{height:36%}.t8{height:63%}.t9{height:46%}
+.route{position:absolute;left:8%;right:8%;bottom:13%;height:5px;background:linear-gradient(90deg,#62e4ff,#81b9ff,#75e4b8,#ffd36d);border-radius:99px;box-shadow:0 0 15px rgba(98,228,255,.28)}
+.dot{position:absolute;bottom:11.7%;width:18px;height:18px;border-radius:50%;background:white;border:4px solid #62e4ff}.d1{left:15%}.d2{left:38%;border-color:#81b9ff}.d3{left:61%;border-color:#75e4b8}.d4{right:14%;border-color:#ffd36d}
+.wrap{max-width:1120px;margin:auto;position:relative;z-index:2}
+.hero{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:16px}
+.hero-left{display:flex;align-items:center;gap:14px}
+.icon{font-size:62px;filter:drop-shadow(0 0 16px rgba(98,228,255,.22))}
+h1{margin:0;font-size:clamp(28px,4vw,44px);background:linear-gradient(90deg,#effcff,#62e4ff,#81b9ff,#75e4b8,#ffd36d);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{margin-top:6px;color:var(--muted);font-weight:700}
+.sound{border:1px solid rgba(98,228,255,.24);background:#13323c;color:white;border-radius:12px;padding:11px 14px;font-weight:900;cursor:pointer}
+.shell{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid rgba(98,228,255,.14);border-radius:24px;overflow:hidden;box-shadow:0 24px 65px rgba(0,0,0,.4)}
+.status{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;padding:16px 20px;background:#0b2029}
+.track{height:13px;background:#04090d;border-radius:999px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--sky),var(--mint),var(--gold));transition:.25s}
+.chip{background:#173a45;padding:8px 12px;border-radius:999px;font-weight:900;white-space:nowrap}
+.game{padding:22px}
+.card{max-width:870px;margin:auto;background:#0e2c36;border:2px solid #275766;border-radius:20px;padding:20px}
+.casehead{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.qtag{display:inline-block;background:#19424d;color:#dcfbff;padding:7px 12px;border-radius:10px;font-weight:900}
+.blueprint-tag{font-size:12px;color:#8de6f5;font-weight:900;letter-spacing:1.5px}
+.question{font-size:22px;line-height:1.55;margin:18px 0}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.option{padding:15px;border:2px solid #2d5d6b;border-radius:14px;background:#123740;color:white;text-align:left;font-size:17px;cursor:pointer;transition:.15s}
+.option:hover:not(:disabled){transform:translateY(-2px);border-color:var(--cyan);box-shadow:0 0 18px rgba(98,228,255,.09)}
+.option.correct{background:#154232!important;border-color:var(--ok)!important}
+.option.wrong{background:#482229!important;border-color:var(--bad)!important}
+.feedback{display:none;margin-top:16px;padding:15px;border-left:5px solid;border-radius:12px;background:#0a222a;line-height:1.55}
+.feedback.show{display:block}.feedback.ok{border-color:var(--ok)}.feedback.no{border-color:var(--bad)}
+.controls{display:flex;justify-content:flex-end;margin-top:14px}
+.next{border:0;border-radius:12px;padding:12px 18px;font-weight:900;background:linear-gradient(90deg,#8cecff,#a8c7ff,#9ef0cf,#ffe08c);color:#16323a;cursor:pointer}
+.next:disabled{opacity:.4}
+.result{display:none;text-align:center;padding:32px}.result.show{display:block}
+.big{font-size:58px;font-weight:1000;color:#82e9ff}
+.review{text-align:left;margin-top:22px}
+.item{padding:12px 14px;background:#0b252d;border-left:5px solid #617d87;border-radius:12px;margin:9px 0;line-height:1.5}
+.item.ok{border-left-color:var(--ok)}.item.no{border-left-color:var(--bad)}
+@media(max-width:700px){.options{grid-template-columns:1fr}.hero{align-items:flex-start;flex-direction:column}.status{grid-template-columns:1fr 1fr}.track{grid-column:1/-1;order:4}}
+</style>
+</head>
+<body>
+<div class="bg">
+ <div class="blueprint"></div>
+ <div class="skyline">
+  <div class="tower t1"></div><div class="tower t2"></div><div class="tower t3"></div>
+  <div class="tower t4"></div><div class="tower t5"></div><div class="tower t6"></div>
+  <div class="tower t7"></div><div class="tower t8"></div><div class="tower t9"></div>
+ </div>
+ <div class="route"></div>
+ <div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div><div class="dot d4"></div>
+</div>
+
+<div class="wrap">
+ <div class="hero">
+  <div class="hero-left">
+   <div class="icon">🏙️📐</div>
+   <div>
+    <h1>Skyline Architect Challenge</h1>
+    <div class="sub">Grade 12 · Unit 4 · Exercise 1 (41–60) · Option C</div>
+   </div>
+  </div>
+  <button class="sound" id="sound">🔊 Sound On</button>
+ </div>
+
+ <div class="shell">
+  <div id="quizArea">
+   <div class="status">
+    <div class="track"><div class="bar" id="bar"></div></div>
+    <div class="chip" id="count"></div>
+    <div class="chip" id="score"></div>
+    <div class="chip" id="heart"></div>
+   </div>
+
+   <div class="game">
+    <div class="card">
+     <div class="casehead">
+      <div class="qtag" id="qtag"></div>
+      <div class="blueprint-tag">CITY BLUEPRINT NODE</div>
+     </div>
+     <div class="question" id="question"></div>
+     <div class="options" id="options"></div>
+     <div class="feedback" id="feedback"></div>
+     <div class="controls"><button class="next" id="next" disabled>Next Blueprint →</button></div>
+    </div>
+   </div>
+  </div>
+
+  <div class="result" id="result">
+   <div style="font-size:74px">🏙️🏆</div>
+   <h2>Skyline Mission Complete!</h2>
+   <div class="big" id="final"></div>
+   <p id="message"></p>
+   <button class="next" id="restart">Design Again ↻</button>
+   <div class="review" id="review"></div>
+  </div>
+ </div>
+</div>
+
+<script>
+const Q=[{"q": "City planners are trying to ____________ a balance between economic development and the protection of green spaces.", "options": ["strike", "seek", "make", "reach"], "answer": 0, "explanation": "Strike a balance between A and B = tạo/duy trì sự cân bằng giữa A và B. Đây là collocation chuẩn."}, {"q": "As industrial zones continue to expand towards the countryside, ____________ land is available for farming.", "options": ["the fewest", "fewer and fewer", "less and less", "the least"], "answer": 2, "explanation": "Land là danh từ không đếm được nên dùng less and less = ngày càng ít."}, {"q": "The local government has invested heavily in ____________ to make remote communities more accessible to nearby cities.", "options": ["development rural infrastructure", "infrastructure rural development", "rural development infrastructure", "rural transportation infrastructure"], "answer": 3, "explanation": "Trật tự từ tự nhiên nhất là rural transportation infrastructure = cơ sở hạ tầng giao thông nông thôn."}, {"q": "This is the third time the city council ____________ a proposal to improve public transportation in the area.", "options": ["considered", "has considered", "had considered", "considers"], "answer": 1, "explanation": "This is the third time + S + has/have + V3. → has considered."}, {"q": "Many graduates are willing to leave their hometowns and move to metropolitan areas to ____________ better career prospects.", "options": ["attract", "afford", "establish", "pursue"], "answer": 3, "explanation": "Pursue career prospects = theo đuổi/tìm kiếm triển vọng nghề nghiệp tốt hơn."}, {"q": "The city has undergone significant economic and social changes ____________ the new industrial park opened five years ago.", "options": ["since", "for", "during", "because of"], "answer": 0, "explanation": "Since + mệnh đề quá khứ = kể từ khi. → since the new industrial park opened five years ago."}, {"q": "The more efficiently public transportation operates, ____________ people are likely to rely on their private cars.", "options": ["the fewest", "the less", "the fewer", "fewer and fewer"], "answer": 2, "explanation": "People là danh từ đếm được số nhiều nên dùng fewer. So sánh kép: The more efficiently..., the fewer people..."}, {"q": "The historic district is particularly famous for its well-preserved ____________ buildings dating back to the period when the country was under foreign rule.", "options": ["futuristic", "colonial", "residential", "agricultural"], "answer": 1, "explanation": "Colonial buildings = các tòa nhà thời thuộc địa. Ngữ cảnh 'under foreign rule' cho thấy đáp án B."}, {"q": "As the population continues to rise, the shortage of affordable accommodation is becoming ____________ serious in major urban centres.", "options": ["more and more", "the more", "much and much", "the most and most"], "answer": 0, "explanation": "More and more + adjective = ngày càng... → more and more serious."}, {"q": "The newly developed ____________ enables thousands of commuters to travel across the city without depending on private vehicles.", "options": ["network city's metro", "city's network metro", "metro city's network", "city's metro network"], "answer": 3, "explanation": "Trật tự đúng: city's metro network = mạng lưới metro của thành phố."}];
+const L=["A","B","C","D"];
+let i=0,xp=0,hearts=5,combo=0,answered=false,history=[],soundOn=true,ctx=null;
+const $=id=>document.getElementById(id);
+
+function ac(){
+ if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();
+ if(ctx.state==="suspended")ctx.resume();
+ return ctx;
+}
+function tone(f,d=.1,t="sine",v=.035,delay=0){
+ if(!soundOn)return;
+ const c=ac(),o=c.createOscillator(),g=c.createGain(),s=c.currentTime+delay;
+ o.type=t;o.frequency.setValueAtTime(f,s);
+ g.gain.setValueAtTime(.0001,s);
+ g.gain.exponentialRampToValueAtTime(v,s+.01);
+ g.gain.exponentialRampToValueAtTime(.0001,s+d);
+ o.connect(g);g.connect(c.destination);o.start(s);o.stop(s+d+.03);
+}
+function good(){tone(650,.08,"triangle");tone(910,.11,"sine",.03,.08)}
+function bad(){tone(165,.16,"sawtooth");tone(95,.2,"square",.018,.1)}
+function nextSound(){tone(430,.06,"triangle",.018);tone(670,.07,"triangle",.015,.06)}
+function win(){[523,659,784,1047].forEach((f,k)=>tone(f,.17,"triangle",.027,k*.09))}
+
+$("sound").onclick=()=>{
+ soundOn=!soundOn;
+ $("sound").textContent=soundOn?"🔊 Sound On":"🔇 Sound Off";
+ if(soundOn)nextSound();
+};
+
+function render(){
+ answered=false;
+ $("next").disabled=true;
+ $("feedback").className="feedback";
+ $("feedback").innerHTML="";
+ const q=Q[i];
+
+ $("qtag").textContent=`Blueprint ${i+1}`;
+ $("question").textContent=q.q;
+ $("count").textContent=`${i+1}/${Q.length}`;
+ $("score").textContent=`⭐ ${xp} XP · Combo ${combo}`;
+ $("heart").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${i/Q.length*100}%`;
+ $("options").innerHTML="";
+
+ q.options.forEach((op,n)=>{
+  const b=document.createElement("button");
+  b.className="option";
+  b.innerHTML=`<strong>${L[n]}.</strong> ${op}`;
+  b.onclick=()=>choose(n,b);
+  $("options").appendChild(b);
+ });
+
+ $("next").textContent=i===Q.length-1?"Complete Skyline 🏙️":"Next Blueprint →";
+}
+
+function choose(n,btn){
+ if(answered)return;
+ answered=true;
+
+ const q=Q[i];
+ const buttons=[...document.querySelectorAll(".option")];
+ const right=n===q.answer;
+
+ buttons.forEach(b=>b.disabled=true);
+ buttons[q.answer].classList.add("correct");
+
+ if(right){
+  xp+=10+combo*2;
+  combo++;
+  $("feedback").className="feedback ok show";
+  $("feedback").innerHTML=`<strong>✅ Correct: ${L[q.answer]}. ${q.options[q.answer]}</strong><br>${q.explanation}`;
+  good();
+ }else{
+  hearts=Math.max(0,hearts-1);
+  combo=0;
+  btn.classList.add("wrong");
+  $("feedback").className="feedback no show";
+  $("feedback").innerHTML=`<strong>❌ Correct answer: ${L[q.answer]}. ${q.options[q.answer]}</strong><br>${q.explanation}`;
+  bad();
+ }
+
+ history.push({selected:n,correct:right});
+ $("score").textContent=`⭐ ${xp} XP · Combo ${combo}`;
+ $("heart").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${(i+1)/Q.length*100}%`;
+ $("next").disabled=false;
+}
+
+$("next").onclick=()=>{
+ if(!answered)return;
+ nextSound();
+ if(i<Q.length-1){i++;render();}
+ else finish();
+};
+
+function finish(){
+ $("quizArea").style.display="none";
+ $("result").classList.add("show");
+ win();
+
+ const correct=history.filter(x=>x.correct).length;
+ $("final").textContent=`${correct}/${Q.length} · ${xp} XP`;
+
+ if(correct===Q.length) $("message").textContent="Perfect Skyline Architect!";
+ else if(correct>=8) $("message").textContent="Excellent! Em nắm rất chắc Urbanisation vocabulary & grammar.";
+ else if(correct>=6) $("message").textContent="Good job! Hãy xem lại những câu chưa đúng.";
+ else $("message").textContent="Hãy ôn lại collocations, word order và cấu trúc so sánh kép rồi thử lại.";
+
+ let html="<h3>📐 Skyline Review</h3>";
+ Q.forEach((q,k)=>{
+  const a=history[k];
+  html+=`<div class="item ${a.correct?"ok":"no"}">
+   <strong>Blueprint ${k+1}: ${a.correct?"Correct":"Incorrect"}</strong><br>
+   Your answer: ${L[a.selected]}. ${q.options[a.selected]}<br>
+   Correct: ${L[q.answer]}. ${q.options[q.answer]}<br>
+   <em>${q.explanation}</em>
+  </div>`;
+ });
+ $("review").innerHTML=html;
+}
+
+$("restart").onclick=()=>location.reload();
+render();
+</script>
+</body>
+</html>

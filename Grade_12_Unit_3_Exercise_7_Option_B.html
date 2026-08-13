@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Grade 12 - Unit 3 - Exercise 7 - Option B</title>
+<style>
+:root{
+ --navy:#101827;--navy2:#17243a;--panel:#f8fbff;--blue:#4e7fd1;--cyan:#70d7ff;
+ --gold:#ffd36d;--green:#4cc98a;--red:#ef6675;--text:#26364a;--muted:#758398;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--text);
+ background:
+ radial-gradient(circle at 10% 12%,rgba(112,215,255,.16),transparent 24%),
+ radial-gradient(circle at 88% 16%,rgba(78,127,209,.13),transparent 24%),
+ linear-gradient(160deg,#0f1827,#15243a 58%,#0b1420);
+ padding:18px
+}
+.wrap{max-width:1180px;margin:auto}
+.hero{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px}
+.hero-left{display:flex;align-items:center;gap:14px}
+.badge-icon{font-size:62px;filter:drop-shadow(0 0 18px rgba(112,215,255,.22))}
+h1{margin:0;color:#eef6ff;font-size:clamp(28px,4vw,44px)}
+.sub{margin-top:6px;color:#b6c7db;font-weight:700}
+.sound{border:1px solid rgba(112,215,255,.28);background:#17243a;color:white;padding:11px 14px;border-radius:12px;font-weight:900;cursor:pointer}
+.shell{background:rgba(248,251,255,.98);border-radius:24px;overflow:hidden;box-shadow:0 24px 65px rgba(0,0,0,.35)}
+.status{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;padding:16px 20px;background:linear-gradient(90deg,#edf5ff,#f9fbff)}
+.barbox{height:13px;background:#dfe8f2;border-radius:999px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--blue),var(--gold));transition:.25s}
+.chip{background:white;padding:8px 12px;border-radius:999px;font-weight:900;white-space:nowrap;box-shadow:0 4px 12px rgba(70,90,110,.07)}
+.grid{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;padding:20px}
+.passage{background:#fbfdff;border:2px solid #dce8f2;border-radius:18px;padding:18px;max-height:650px;overflow:auto;line-height:1.75}
+.passage h2{margin-top:0;color:#355f9a}
+.section-label{font-weight:900;color:#5478a7}
+.quiz{background:#f7faff;border:2px solid #dce6f0;border-radius:18px;padding:18px}
+.qtag{display:inline-block;background:#e5eef9;color:#476a95;padding:7px 12px;border-radius:10px;font-weight:900}
+.question{font-size:22px;line-height:1.5;margin:16px 0}
+.options{display:grid;gap:11px}
+.option{padding:14px 15px;border:2px solid #d8e2ec;border-radius:14px;background:#fff;color:var(--text);text-align:left;font-size:17px;cursor:pointer;transition:.15s}
+.option:hover:not(:disabled){transform:translateY(-2px);border-color:#6a98d7;box-shadow:0 8px 18px rgba(70,100,140,.08)}
+.option.correct{background:#e9fff4!important;border-color:var(--green)!important}
+.option.wrong{background:#fff0f2!important;border-color:var(--red)!important}
+.feedback{display:none;margin-top:15px;padding:15px;border-left:5px solid;border-radius:12px;background:white;line-height:1.55}
+.feedback.show{display:block}.feedback.ok{border-color:var(--green)}.feedback.no{border-color:var(--red)}
+.controls{display:flex;justify-content:flex-end;margin-top:14px}
+.next{border:0;border-radius:12px;padding:12px 18px;font-weight:900;background:linear-gradient(90deg,#aee7ff,#ffd98f);color:#28425a;cursor:pointer}
+.next:disabled{opacity:.4}
+.result{display:none;text-align:center;padding:32px}.result.show{display:block}
+.big{font-size:58px;font-weight:1000;color:#4e7fd1}
+.review{text-align:left;margin-top:22px}
+.item{padding:12px 14px;background:#f7faff;border-left:5px solid #9aabba;border-radius:12px;margin:9px 0;line-height:1.5}
+.item.ok{border-left-color:var(--green)}.item.no{border-left-color:var(--red)}
+@media(max-width:900px){.grid{grid-template-columns:1fr}.passage{max-height:430px}}
+@media(max-width:620px){.hero{align-items:flex-start;flex-direction:column}.status{grid-template-columns:1fr 1fr}.barbox{grid-column:1/-1;order:4}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="badge-icon">🏠🌱</div>
+      <div>
+        <h1>Greener Home Reading Mission</h1>
+        <div class="sub">Grade 12 · Unit 3 · Exercise 7 · Option B</div>
+      </div>
+    </div>
+    <button class="sound" id="sound">🔊 Sound On</button>
+  </div>
+
+  <div class="shell">
+    <div id="game">
+      <div class="status">
+        <div class="barbox"><div class="bar" id="bar"></div></div>
+        <div class="chip" id="count"></div>
+        <div class="chip" id="score"></div>
+        <div class="chip" id="heart"></div>
+      </div>
+
+      <div class="grid">
+        <section class="passage">
+          <h2>SMALL ACTIONS FOR A GREENER HOME</h2>
+          <div id="passage"></div>
+        </section>
+
+        <section class="quiz">
+          <div class="qtag" id="qtag"></div>
+          <div class="question" id="question"></div>
+          <div class="options" id="options"></div>
+          <div class="feedback" id="feedback"></div>
+          <div class="controls"><button class="next" id="next" disabled>Next Question →</button></div>
+        </section>
+      </div>
+    </div>
+
+    <div id="result" class="result">
+      <div style="font-size:72px">🏆🌿</div>
+      <h2>Reading Mission Complete!</h2>
+      <div class="big" id="final"></div>
+      <p id="msg"></p>
+      <button class="next" id="restart">Play Again ↻</button>
+      <div class="review" id="review"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const passage="Many people believe that protecting the environment requires major lifestyle changes. However, small adjustments to everyday routines can significantly reduce household energy consumption. Developing greener habits at home not only benefits the environment but can also lower monthly expenses.\n\nA. One effective way to reduce energy use is to pay closer attention to household appliances. When buying a new refrigerator, washing machine, or air conditioner, consumers should consider its energy efficiency rather than simply choosing the cheapest model. Although energy-efficient appliances may initially cost more, they generally consume less electricity throughout their lifetime. Consequently, households may save considerably more money in the long run.\n\nB. Another simple strategy involves making better use of natural conditions. During daylight hours, opening curtains and arranging furniture so that sunlight can enter the room may reduce the need for artificial lighting. Similarly, when the weather is pleasant, opening windows can provide natural ventilation instead of relying entirely on air conditioners. These measures may seem minor, but when practised consistently, they can make a noticeable difference to household energy consumption.\n\nC. Finally, people should pay attention to devices that continue consuming electricity even when they are not actively being used. Televisions, computers, chargers, and other electronic devices may still draw a small amount of power while they remain plugged in. This is sometimes called “standby power.” Although the amount consumed by an individual device may be insignificant, the combined consumption of several devices over time can account for a considerable portion of a household's electricity use. Unplugging unnecessary devices or using power strips that can be switched off is therefore an effective way to avoid wasting electricity.";
+const Q=[{"q": "Which of the following is NOT mentioned as a way to reduce household energy consumption?", "options": ["Selecting appliances according to their energy efficiency", "Taking advantage of sunlight during the daytime", "Disconnecting electronic devices that are not needed", "Replacing old windows with specially designed energy-saving ones"], "answer": 3, "explanation": "The passage mentions energy-efficient appliances, using daylight, and unplugging unnecessary devices. It does not mention replacing old windows."}, {"q": "The word “Consequently” in paragraph A is closest in meaning to ______.", "options": ["Nevertheless", "As a result", "In contrast", "For instance"], "answer": 1, "explanation": "Consequently = as a result = vì vậy / kết quả là."}, {"q": "The word “they” in paragraph B refers to ______.", "options": ["daylight hours", "natural conditions", "these measures", "air conditioners"], "answer": 2, "explanation": "The pronoun “they” refers back to “These measures” in the previous sentence."}, {"q": "The phrase “account for” in paragraph C is closest in meaning to ______.", "options": ["explain the reason for", "make up", "depend on", "cut down on"], "answer": 1, "explanation": "account for = make up / constitute = chiếm, tạo thành một phần."}, {"q": "Which of the following is TRUE according to the passage?", "options": ["Choosing the cheapest appliance is usually the most effective way to save money in the long term.", "Natural ventilation can sometimes reduce people's dependence on air conditioning.", "Electronic devices stop consuming electricity immediately when people finish using them.", "Standby power from a single device is responsible for most household electricity consumption."], "answer": 1, "explanation": "Paragraph B states that opening windows can provide natural ventilation instead of relying entirely on air conditioners."}, {"q": "What can be inferred from paragraph A?", "options": ["Energy-efficient appliances are always cheaper to purchase than ordinary ones.", "Consumers should replace all their household appliances immediately.", "A higher initial cost may be compensated for by lower energy expenses over time.", "The price of an appliance is unrelated to its energy efficiency."], "answer": 2, "explanation": "Paragraph A says energy-efficient appliances may cost more initially but use less electricity, so the higher purchase price can be offset by later savings."}, {"q": "Which statement best expresses the main idea of paragraph C?", "options": ["Modern electronic devices require increasingly large amounts of electricity.", "Chargers consume more electricity than all other household appliances.", "Reducing standby power consumption can prevent unnecessary electricity waste.", "Power strips should completely replace electrical outlets in modern homes."], "answer": 2, "explanation": "Paragraph C focuses on standby power and explains that unplugging devices or using switchable power strips helps avoid wasting electricity."}];
+const L=["A","B","C","D"];
+let i=0,xp=0,hearts=5,combo=0,answered=false,answers=[],soundOn=true,ctx=null;
+const $=id=>document.getElementById(id);
+
+function ac(){if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==="suspended")ctx.resume();return ctx}
+function tone(f,d=.1,t="sine",v=.035,delay=0){
+ if(!soundOn)return;
+ const c=ac(),o=c.createOscillator(),g=c.createGain(),s=c.currentTime+delay;
+ o.type=t;o.frequency.setValueAtTime(f,s);
+ g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(v,s+.01);g.gain.exponentialRampToValueAtTime(.0001,s+d);
+ o.connect(g);g.connect(c.destination);o.start(s);o.stop(s+d+.03)
+}
+function okSound(){tone(620,.08,"triangle");tone(880,.11,"sine",.03,.08)}
+function badSound(){tone(160,.16,"sawtooth");tone(95,.2,"square",.018,.1)}
+function nextSound(){tone(420,.06,"triangle",.018);tone(650,.07,"triangle",.015,.06)}
+function winSound(){[523,659,784,988].forEach((f,n)=>tone(f,.17,"triangle",.028,n*.09))}
+
+$("sound").onclick=()=>{soundOn=!soundOn;$("sound").textContent=soundOn?"🔊 Sound On":"🔇 Sound Off";if(soundOn)nextSound()}
+
+function render(){
+ answered=false;$("next").disabled=true;$("feedback").className="feedback";$("feedback").innerHTML="";
+ const q=Q[i];
+ $("qtag").textContent=`Question ${i+1}`;
+ $("question").textContent=q.q;
+ $("count").textContent=`${i+1}/${Q.length}`;
+ $("score").textContent=`⭐ ${xp} XP · Combo ${combo}`;
+ $("heart").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${i/Q.length*100}%`;
+ $("options").innerHTML="";
+ q.options.forEach((op,n)=>{
+   const b=document.createElement("button");
+   b.className="option";
+   b.innerHTML=`<strong>${L[n]}.</strong> ${op}`;
+   b.onclick=()=>choose(n,b);
+   $("options").appendChild(b);
+ });
+ $("next").textContent=i===Q.length-1?"Finish Reading 🌿":"Next Question →";
+}
+
+function choose(n,btn){
+ if(answered)return;answered=true;
+ const q=Q[i],buttons=[...document.querySelectorAll(".option")],right=n===q.answer;
+ buttons.forEach(b=>b.disabled=true);buttons[q.answer].classList.add("correct");
+
+ if(right){
+   xp+=10+combo*2;combo++;
+   $("feedback").className="feedback ok show";
+   $("feedback").innerHTML=`<strong>✅ Correct: ${L[q.answer]}. ${q.options[q.answer]}</strong><br>${q.explanation}`;
+   okSound();
+ }else{
+   hearts=Math.max(0,hearts-1);combo=0;btn.classList.add("wrong");
+   $("feedback").className="feedback no show";
+   $("feedback").innerHTML=`<strong>❌ Correct answer: ${L[q.answer]}. ${q.options[q.answer]}</strong><br>${q.explanation}`;
+   badSound();
+ }
+
+ answers.push({selected:n,correct:right});
+ $("score").textContent=`⭐ ${xp} XP · Combo ${combo}`;
+ $("heart").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${(i+1)/Q.length*100}%`;
+ $("next").disabled=false;
+}
+
+$("next").onclick=()=>{
+ if(!answered)return;nextSound();
+ if(i<Q.length-1){i++;render()}else finish()
+}
+
+function finish(){
+ $("game").style.display="none";$("result").classList.add("show");winSound();
+ const correct=answers.filter(a=>a.correct).length;
+ $("final").textContent=`${xp} XP · ${correct}/${Q.length}`;
+ $("msg").textContent=correct===7?"Perfect reading score!":correct>=6?"Excellent reading comprehension!":correct>=5?"Good job — review the missed items.":"Read the passage again and try once more.";
+ let html="<h3>📘 Reading Review</h3>";
+ Q.forEach((q,n)=>{
+   const a=answers[n];
+   html+=`<div class="item ${a&&a.correct?"ok":"no"}"><strong>Question ${n+1}: ${a&&a.correct?"Correct":"Incorrect"}</strong><br>Your answer: ${a?L[a.selected]:"-"} ${a?q.options[a.selected]:""}<br>Correct answer: ${L[q.answer]}. ${q.options[q.answer]}<br><em>${q.explanation}</em></div>`;
+ });
+ $("review").innerHTML=html;
+}
+$("restart").onclick=()=>location.reload();
+
+$("passage").innerHTML=passage
+ .replace(/^A\./m,'<span class="section-label">A.</span>')
+ .replace(/^B\./m,'<span class="section-label">B.</span>')
+ .replace(/^C\./m,'<span class="section-label">C.</span>')
+ .split("\\n\\n").map(p=>`<p>${p}</p>`).join("");
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Grade 12 - Unit 3 - Exercise 8 - Option B</title>
+<style>
+:root{
+ --bg:#081515;--panel:#102b2a;--panel2:#173b39;--mint:#9ff2d0;--cyan:#71e2e8;
+ --gold:#ffd66e;--green:#4fd39a;--red:#ff6a78;--white:#f6fffc;--muted:#b5d2cc;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--white);
+ background:
+ radial-gradient(circle at 12% 12%,rgba(113,226,232,.10),transparent 22%),
+ radial-gradient(circle at 85% 18%,rgba(159,242,208,.10),transparent 24%),
+ linear-gradient(160deg,#061010,#0a1e1d 58%,#050b0b);
+ padding:18px;overflow-x:hidden
+}
+.bg{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(28px);opacity:.16}
+.o1{width:260px;height:260px;background:#71e2e8;left:-90px;top:10%}
+.o2{width:300px;height:300px;background:#9ff2d0;right:-110px;bottom:4%}
+.leaf{position:absolute;font-size:28px;opacity:.22;animation:float linear infinite}
+.l1{left:-40px;top:28%;animation-duration:18s}.l2{left:-70px;top:62%;animation-duration:23s;animation-delay:4s}
+@keyframes float{to{transform:translateX(115vw) rotate(360deg)}}
+.wrap{max-width:1180px;margin:auto;position:relative;z-index:2}
+.hero{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px}
+.hero-left{display:flex;align-items:center;gap:14px}
+.icon{font-size:64px;filter:drop-shadow(0 0 16px rgba(113,226,232,.22))}
+h1{margin:0;font-size:clamp(28px,4vw,44px);background:linear-gradient(90deg,#e8fff9,#71e2e8,#9ff2d0,#ffd66e);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{margin-top:6px;color:var(--muted);font-weight:700}
+.sound{border:1px solid rgba(113,226,232,.25);background:#123332;color:white;padding:11px 14px;border-radius:12px;font-weight:900;cursor:pointer}
+.shell{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid rgba(113,226,232,.14);border-radius:24px;overflow:hidden;box-shadow:0 24px 65px rgba(0,0,0,.38)}
+.status{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;padding:16px 20px;background:#0b2221}
+.barbox{height:13px;background:#050d0d;border-radius:999px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--mint),var(--gold));transition:.25s}
+.chip{background:#163735;padding:8px 12px;border-radius:999px;font-weight:900;white-space:nowrap}
+.grid{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;padding:20px}
+.passage{background:#0b2423;border:2px solid #24524f;border-radius:18px;padding:18px;max-height:670px;overflow:auto;line-height:1.75}
+.passage h2{margin-top:0;color:#dffbf4}
+.quiz{background:#0f2a29;border:2px solid #24524f;border-radius:18px;padding:18px}
+.qtag{display:inline-block;background:#19403e;color:#d8fbf2;padding:7px 12px;border-radius:10px;font-weight:900}
+.question{font-size:22px;line-height:1.5;margin:16px 0}
+.options{display:grid;gap:11px}
+.option{padding:14px 15px;border:2px solid #2d5e5a;border-radius:14px;background:#123331;color:white;text-align:left;font-size:17px;cursor:pointer;transition:.15s}
+.option:hover:not(:disabled){transform:translateY(-2px);border-color:#71e2e8;box-shadow:0 0 18px rgba(113,226,232,.09)}
+.option.correct{background:#154232!important;border-color:var(--green)!important}
+.option.wrong{background:#482229!important;border-color:var(--red)!important}
+.feedback{display:none;margin-top:15px;padding:15px;border-left:5px solid;border-radius:12px;background:#091d1c;line-height:1.55}
+.feedback.show{display:block}.feedback.ok{border-color:var(--green)}.feedback.no{border-color:var(--red)}
+.controls{display:flex;justify-content:flex-end;margin-top:14px}
+.next{border:0;border-radius:12px;padding:12px 18px;font-weight:900;background:linear-gradient(90deg,#8cecf1,#b4f1d2,#ffe18a);color:#173936;cursor:pointer}
+.next:disabled{opacity:.4}
+.result{display:none;text-align:center;padding:32px}.result.show{display:block}
+.big{font-size:58px;font-weight:1000;color:#93ebe7}
+.review{text-align:left;margin-top:22px}
+.item{padding:12px 14px;background:#0b2423;border-left:5px solid #587a77;border-radius:12px;margin:9px 0;line-height:1.5}
+.item.ok{border-left-color:var(--green)}.item.no{border-left-color:var(--red)}
+@media(max-width:900px){.grid{grid-template-columns:1fr}.passage{max-height:430px}}
+@media(max-width:620px){.hero{align-items:flex-start;flex-direction:column}.status{grid-template-columns:1fr 1fr}.barbox{grid-column:1/-1;order:4}}
+</style>
+</head>
+<body>
+<div class="bg">
+ <div class="orb o1"></div><div class="orb o2"></div>
+ <div class="leaf l1">🍃</div><div class="leaf l2">🌿</div>
+</div>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="icon">🌍📘</div>
+      <div>
+        <h1>Sustainable Living Reading Quest</h1>
+        <div class="sub">Grade 12 · Unit 3 · Exercise 8 · Option B</div>
+      </div>
+    </div>
+    <button class="sound" id="sound">🔊 Sound On</button>
+  </div>
+
+  <div class="shell">
+    <div id="game">
+      <div class="status">
+        <div class="barbox"><div class="bar" id="bar"></div></div>
+        <div class="chip" id="count"></div>
+        <div class="chip" id="score"></div>
+        <div class="chip" id="heart"></div>
+      </div>
+
+      <div class="grid">
+        <section class="passage">
+          <h2>MAKING SUSTAINABLE LIVING PART OF EVERYDAY LIFE</h2>
+          <div id="passage"></div>
+        </section>
+
+        <section class="quiz">
+          <div class="qtag" id="qtag"></div>
+          <div class="question" id="question"></div>
+          <div class="options" id="options"></div>
+          <div class="feedback" id="feedback"></div>
+          <div class="controls"><button class="next" id="next" disabled>Next Question →</button></div>
+        </section>
+      </div>
+    </div>
+
+    <div id="result" class="result">
+      <div style="font-size:72px">🌍🏆</div>
+      <h2>Sustainable Living Quest Complete!</h2>
+      <div class="big" id="final"></div>
+      <p id="msg"></p>
+      <button class="next" id="restart">Play Again ↻</button>
+      <div class="review" id="review"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const passage="As environmental problems become increasingly serious, sustainable living is no longer simply a personal preference but an important responsibility. It involves making conscious decisions that reduce the negative impact of everyday activities on the environment. These decisions may include limiting unnecessary consumption, conserving natural resources, choosing environmentally responsible products, and reducing dependence on fossil fuels. Although individual actions may seem insignificant, their combined effects can contribute considerably to environmental protection.\n\nOne important aspect of sustainable living is responsible consumption. Instead of purchasing products that are designed to be used only once, consumers can choose durable or reusable alternatives. Buying locally produced goods can also be beneficial because they generally require less transportation, which may reduce the carbon emissions associated with delivering products over long distances. In addition, consumers can support companies that prioritize environmentally responsible production methods, encouraging businesses to adopt greener practices.\n\nSustainable habits can also produce significant environmental benefits at home. Households can lower their energy consumption by using energy-efficient appliances and turning off unnecessary electrical devices. Reducing energy demand not only lowers electricity bills but also decreases the amount of greenhouse gases released into the atmosphere. Similarly, collecting rainwater for gardening and repairing leaking taps can prevent unnecessary water waste. When these practices are adopted consistently, they help conserve valuable natural resources.\n\nHowever, encouraging widespread sustainable behaviour requires more than individual effort. Schools can incorporate environmental topics into lessons, while local organizations can provide practical workshops on reducing waste and conserving resources. Online campaigns can also make environmental information more accessible to the public. When people become better informed about the consequences of their choices, they are more likely to adopt responsible habits. Education can therefore play a significant role in creating lasting environmental change.";
+const Q=[{"q": "Which of the following is NOT mentioned as a sustainable living practice?", "options": ["Choosing products that can be used repeatedly", "Purchasing goods produced locally", "Growing organic vegetables for personal consumption", "Repairing taps that waste water"], "answer": 2, "explanation": "The passage mentions reusable alternatives, locally produced goods, and repairing leaking taps. Growing organic vegetables is not mentioned."}, {"q": "The word “prioritize” in paragraph 2 is OPPOSITE in meaning to ______.", "options": ["emphasize", "disregard", "consider", "promote"], "answer": 1, "explanation": "prioritize = ưu tiên, coi trọng; disregard = phớt lờ, không coi trọng. Therefore, disregard is the opposite."}, {"q": "The word “their” in paragraph 3 refers to ______.", "options": ["environmental benefits", "households", "appliances", "electrical devices"], "answer": 1, "explanation": "“Households can lower their energy consumption...” → their refers to households."}, {"q": "The word “informed” in paragraph 4 could best be replaced by ______.", "options": ["concerned", "familiar", "knowledgeable", "responsible"], "answer": 2, "explanation": "be informed about something = có đầy đủ thông tin / hiểu biết về điều gì. Knowledgeable is the closest meaning."}, {"q": "Which of the following best paraphrases the underlined sentence in paragraph 3?", "options": ["Using less energy can reduce household electricity costs as well as the quantity of greenhouse gases emitted into the air.", "Lower electricity prices encourage households to consume less energy and completely prevent greenhouse gases from entering the atmosphere.", "Reducing greenhouse gas emissions is possible only when households stop using electrical appliances altogether.", "Although consuming less energy may reduce electricity expenses, it generally results in greater greenhouse gas emissions."], "answer": 0, "explanation": "Option A preserves both original ideas: lower electricity bills and fewer greenhouse gases released into the atmosphere."}, {"q": "Which of the following is TRUE according to the passage?", "options": ["Locally produced goods are environmentally beneficial mainly because they are always made from reusable materials.", "Individual environmental actions are ineffective unless they are organized by schools or community groups.", "Using energy-efficient appliances can provide both financial and environmental benefits.", "Online environmental campaigns are less effective than traditional classroom education."], "answer": 2, "explanation": "Paragraph 3 explains that using less energy can lower electricity bills and reduce greenhouse gas emissions, giving both financial and environmental benefits."}, {"q": "In which paragraph does the writer mention a present causal relationship between transportation and environmental impact?", "options": ["Paragraph 1", "Paragraph 2", "Paragraph 3", "Paragraph 4"], "answer": 1, "explanation": "Paragraph 2: locally produced goods → less transportation → fewer carbon emissions."}, {"q": "In which paragraph does the writer discuss different ways of educating the public about sustainable behaviour?", "options": ["Paragraph 1", "Paragraph 2", "Paragraph 3", "Paragraph 4"], "answer": 3, "explanation": "Paragraph 4 mentions schools, local workshops, and online campaigns as ways to educate people about sustainable behaviour."}];
+const L=["A","B","C","D"];
+let i=0,xp=0,hearts=5,combo=0,answered=false,answers=[],soundOn=true,ctx=null;
+const $=id=>document.getElementById(id);
+
+function ac(){if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==="suspended")ctx.resume();return ctx}
+function tone(f,d=.1,t="sine",v=.035,delay=0){
+ if(!soundOn)return;
+ const c=ac(),o=c.createOscillator(),g=c.createGain(),s=c.currentTime+delay;
+ o.type=t;o.frequency.setValueAtTime(f,s);
+ g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(v,s+.01);g.gain.exponentialRampToValueAtTime(.0001,s+d);
+ o.connect(g);g.connect(c.destination);o.start(s);o.stop(s+d+.03)
+}
+function okSound(){tone(640,.08,"triangle");tone(900,.11,"sine",.03,.08)}
+function badSound(){tone(160,.16,"sawtooth");tone(95,.2,"square",.018,.1)}
+function nextSound(){tone(430,.06,"triangle",.018);tone(670,.07,"triangle",.015,.06)}
+function winSound(){[523,659,784,988].forEach((f,n)=>tone(f,.17,"triangle",.028,n*.09))}
+
+$("sound").onclick=()=>{soundOn=!soundOn;$("sound").textContent=soundOn?"🔊 Sound On":"🔇 Sound Off";if(soundOn)nextSound()}
+
+function render(){
+ answered=false;$("next").disabled=true;$("feedback").className="feedback";$("feedback").innerHTML="";
+ const q=Q[i];
+ $("qtag").textContent=`Question ${i+1}`;
+ $("question").textContent=q.q;
+ $("count").textContent=`${i+1}/${Q.length}`;
+ $("score").textContent=`⭐ ${xp} XP · Combo ${combo}`;
+ $("heart").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${i/Q.length*100}%`;
+ $("options").innerHTML="";
+ q.options.forEach((op,n)=>{
+   const b=document.createElement("button");
+   b.className="option";
+   b.innerHTML=`<strong>${L[n]}.</strong> ${op}`;
+   b.onclick=()=>choose(n,b);
+   $("options").appendChild(b);
+ });
+ $("next").textContent=i===Q.length-1?"Finish Quest 🌿":"Next Question →";
+}
+
+function choose(n,btn){
+ if(answered)return;answered=true;
+ const q=Q[i],buttons=[...document.querySelectorAll(".option")],right=n===q.answer;
+ buttons.forEach(b=>b.disabled=true);
+ buttons[q.answer].classList.add("correct");
+
+ if(right){
+   xp+=10+combo*2;combo++;
+   $("feedback").className="feedback ok show";
+   $("feedback").innerHTML=`<strong>✅ Correct: ${L[q.answer]}. ${q.options[q.answer]}</strong><br>${q.explanation}`;
+   okSound();
+ }else{
+   hearts=Math.max(0,hearts-1);combo=0;btn.classList.add("wrong");
+   $("feedback").className="feedback no show";
+   $("feedback").innerHTML=`<strong>❌ Correct answer: ${L[q.answer]}. ${q.options[q.answer]}</strong><br>${q.explanation}`;
+   badSound();
+ }
+
+ answers.push({selected:n,correct:right});
+ $("score").textContent=`⭐ ${xp} XP · Combo ${combo}`;
+ $("heart").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${(i+1)/Q.length*100}%`;
+ $("next").disabled=false;
+}
+
+$("next").onclick=()=>{
+ if(!answered)return;
+ nextSound();
+ if(i<Q.length-1){i++;render()}else finish()
+}
+
+function finish(){
+ $("game").style.display="none";$("result").classList.add("show");winSound();
+ const correct=answers.filter(a=>a.correct).length;
+ $("final").textContent=`${xp} XP · ${correct}/${Q.length}`;
+ $("msg").textContent=correct===8?"Perfect reading score!":correct>=7?"Excellent reading comprehension!":correct>=6?"Good job — review the missed items.":"Read the passage again and try once more.";
+ let html="<h3>📘 Reading Review</h3>";
+ Q.forEach((q,n)=>{
+   const a=answers[n];
+   html+=`<div class="item ${a&&a.correct?"ok":"no"}"><strong>Question ${n+1}: ${a&&a.correct?"Correct":"Incorrect"}</strong><br>Your answer: ${a?L[a.selected]:"-"} ${a?q.options[a.selected]:""}<br>Correct answer: ${L[q.answer]}. ${q.options[q.answer]}<br><em>${q.explanation}</em></div>`;
+ });
+ $("review").innerHTML=html;
+}
+$("restart").onclick=()=>location.reload();
+$("passage").innerHTML=passage.split("\\n\\n").map(p=>`<p>${p}</p>`).join("");
+render();
+</script>
+</body>
+</html>

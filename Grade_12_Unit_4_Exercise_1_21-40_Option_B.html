@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Grade 12 - Unit 4 - Exercise 1 (21-40) - Option B</title>
+<style>
+:root{
+ --bg:#07111d;--panel:#102238;--panel2:#173653;--blue:#48c6ff;--purple:#8a7cff;
+ --pink:#ff78ba;--gold:#ffd36a;--green:#4fd39a;--red:#ff6878;--white:#f5fbff;--muted:#b3c6d9;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--white);
+ background:
+ radial-gradient(circle at 14% 12%,rgba(72,198,255,.11),transparent 24%),
+ radial-gradient(circle at 85% 18%,rgba(138,124,255,.09),transparent 22%),
+ linear-gradient(160deg,#050b13,#091725 58%,#03070c);
+ padding:18px;overflow-x:hidden
+}
+.bg{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.metro-line{position:absolute;left:6%;right:6%;bottom:14%;height:8px;background:linear-gradient(90deg,#48c6ff,#8a7cff,#ff78ba);border-radius:999px;box-shadow:0 0 20px rgba(72,198,255,.3)}
+.station{position:absolute;bottom:11.5%;width:24px;height:24px;border-radius:50%;background:#fff;border:5px solid #48c6ff;box-shadow:0 0 15px rgba(72,198,255,.4)}
+.s1{left:12%}.s2{left:33%;border-color:#8a7cff}.s3{left:56%;border-color:#ff78ba}.s4{right:12%;border-color:#ffd36a}
+.train{position:absolute;bottom:16%;left:-140px;font-size:58px;animation:ride 14s linear infinite;filter:drop-shadow(0 0 12px rgba(72,198,255,.3))}
+@keyframes ride{to{transform:translateX(120vw)}}
+.wrap{max-width:1120px;margin:auto;position:relative;z-index:2}
+.hero{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px}
+.hero-left{display:flex;align-items:center;gap:14px}
+.icon{font-size:64px;filter:drop-shadow(0 0 16px rgba(72,198,255,.25))}
+h1{margin:0;font-size:clamp(28px,4vw,44px);background:linear-gradient(90deg,#eafaff,#48c6ff,#8a7cff,#ff78ba);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{margin-top:6px;color:var(--muted);font-weight:700}
+.sound{border:1px solid rgba(72,198,255,.25);background:#102943;color:white;padding:11px 14px;border-radius:12px;font-weight:900;cursor:pointer}
+.shell{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid rgba(72,198,255,.14);border-radius:24px;overflow:hidden;box-shadow:0 24px 65px rgba(0,0,0,.4)}
+.status{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;padding:16px 20px;background:#0a1a2b}
+.track{height:13px;background:#040a11;border-radius:999px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--purple),var(--pink),var(--gold));transition:.25s}
+.chip{background:#12324e;padding:8px 12px;border-radius:999px;font-weight:900;white-space:nowrap}
+.game{padding:22px}
+.card{background:#0d2942;border:2px solid #1f5677;border-radius:20px;padding:20px;max-width:850px;margin:auto}
+.qtag{display:inline-block;background:#173f60;color:#d8f6ff;padding:7px 12px;border-radius:10px;font-weight:900}
+.question{font-size:22px;line-height:1.55;margin:18px 0}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.option{padding:15px;border:2px solid #2a5977;border-radius:14px;background:#12314d;color:#fff;text-align:left;font-size:17px;cursor:pointer;transition:.15s}
+.option:hover:not(:disabled){transform:translateY(-2px);border-color:var(--blue);box-shadow:0 0 18px rgba(72,198,255,.09)}
+.option.correct{background:#154232!important;border-color:var(--green)!important}
+.option.wrong{background:#482229!important;border-color:var(--red)!important}
+.feedback{display:none;margin-top:16px;padding:15px;border-left:5px solid;border-radius:12px;background:#091b2b;line-height:1.55}
+.feedback.show{display:block}.feedback.ok{border-color:var(--green)}.feedback.no{border-color:var(--red)}
+.controls{display:flex;justify-content:flex-end;margin-top:14px}
+.next{border:0;border-radius:12px;padding:12px 18px;font-weight:900;background:linear-gradient(90deg,#8de0ff,#b6a6ff,#ffb6da);color:#18314f;cursor:pointer}
+.next:disabled{opacity:.4}
+.result{display:none;text-align:center;padding:32px}.result.show{display:block}
+.big{font-size:58px;font-weight:1000;color:#79ddff}
+.review{text-align:left;margin-top:22px}
+.item{padding:12px 14px;background:#0b2035;border-left:5px solid #58728b;border-radius:12px;margin:9px 0;line-height:1.5}
+.item.ok{border-left-color:var(--green)}.item.no{border-left-color:var(--red)}
+@media(max-width:700px){.options{grid-template-columns:1fr}.hero{align-items:flex-start;flex-direction:column}.status{grid-template-columns:1fr 1fr}.track{grid-column:1/-1;order:4}}
+</style>
+</head>
+<body>
+<div class="bg">
+ <div class="metro-line"></div>
+ <div class="station s1"></div><div class="station s2"></div><div class="station s3"></div><div class="station s4"></div>
+ <div class="train">🚇</div>
+</div>
+
+<div class="wrap">
+ <div class="hero">
+  <div class="hero-left">
+   <div class="icon">🚇🌃</div>
+   <div>
+    <h1>Metro Pulse Challenge</h1>
+    <div class="sub">Grade 12 · Unit 4 · Exercise 1 (21–40) · Option B</div>
+   </div>
+  </div>
+  <button class="sound" id="sound">🔊 Sound On</button>
+ </div>
+
+ <div class="shell">
+  <div id="quizArea">
+   <div class="status">
+    <div class="track"><div class="bar" id="bar"></div></div>
+    <div class="chip" id="count"></div>
+    <div class="chip" id="score"></div>
+    <div class="chip" id="heart"></div>
+   </div>
+
+   <div class="game">
+    <div class="card">
+     <div class="qtag" id="qtag"></div>
+     <div class="question" id="question"></div>
+     <div class="options" id="options"></div>
+     <div class="feedback" id="feedback"></div>
+     <div class="controls"><button class="next" id="next" disabled>Next Station →</button></div>
+    </div>
+   </div>
+  </div>
+
+  <div class="result" id="result">
+   <div style="font-size:74px">🚇🏆</div>
+   <h2>Metro Pulse Mission Complete!</h2>
+   <div class="big" id="final"></div>
+   <p id="message"></p>
+   <button class="next" id="restart">Play Again ↻</button>
+   <div class="review" id="review"></div>
+  </div>
+ </div>
+</div>
+
+<script>
+const Q=[{"q": "Rapid urbanisation has placed enormous pressure on the city's ____________, particularly its transport, water supply, and waste management systems.", "options": ["accommodation", "convenience", "infrastructure", "landscape"], "answer": 2, "explanation": "Infrastructure = cơ sở hạ tầng, bao gồm hệ thống giao thông, cấp nước và xử lý rác thải. Vì vậy đáp án C phù hợp nhất."}, {"q": "As more agricultural land is converted into residential areas, many farmers find it difficult to ____________ their traditional way of life.", "options": ["afford", "urbanise", "accommodate", "maintain"], "answer": 3, "explanation": "Maintain a way of life = duy trì lối sống. Câu nói nông dân khó tiếp tục lối sống truyền thống khi đất nông nghiệp bị chuyển đổi."}, {"q": "Despite several measures introduced by the local authorities, traffic congestion has become ____________ during peak hours.", "options": ["more and more serious", "the most serious", "as seriously as", "less serious than"], "answer": 0, "explanation": "More and more + adjective = ngày càng... → more and more serious = ngày càng nghiêm trọng."}, {"q": "The rapid ____________ of the city has resulted in the construction of numerous high-rise buildings on its outskirts.", "options": ["expense", "expansion", "employment", "residence"], "answer": 1, "explanation": "Expansion = sự mở rộng. Rapid expansion of the city = sự mở rộng nhanh chóng của thành phố."}, {"q": "The government ____________ several major infrastructure projects since the city's population began to increase dramatically.", "options": ["launched", "was launching", "had launched", "has launched"], "answer": 3, "explanation": "Since + mốc quá khứ thường đi với Present Perfect ở mệnh đề chính. → has launched."}, {"q": "Housing in the city centre has become so expensive that many low-income residents can no longer ____________ to live there.", "options": ["reside", "afford", "expand", "provide"], "answer": 1, "explanation": "Afford to do something = có đủ khả năng tài chính để làm gì. → can no longer afford to live there."}, {"q": "____________ public transport becomes, ____________ likely urban residents are to depend on private vehicles.", "options": ["More efficient / less", "The most efficient / the least", "The more efficient / the less", "The more efficiently / the fewer"], "answer": 2, "explanation": "Cấu trúc so sánh kép: The + comparative..., the + comparative... → The more efficient..., the less likely..."}, {"q": "A shortage of affordable housing may lead to serious ____________ as increasing numbers of people compete for limited living space.", "options": ["overcrowding", "convenience", "urban development", "infrastructure"], "answer": 0, "explanation": "Overcrowding = tình trạng quá đông đúc. Thiếu nhà ở giá phải chăng có thể dẫn đến quá tải chỗ ở."}, {"q": "Property prices in the area have ____________ considerably since the new metro line was completed.", "options": ["gone through", "taken place", "gone up", "brought about"], "answer": 2, "explanation": "Go up = tăng lên. → Property prices have gone up considerably = giá bất động sản đã tăng đáng kể."}, {"q": "The more rapidly a city expands without proper planning, ____________ it becomes to provide adequate public services for all residents.", "options": ["the difficult", "more difficult", "the more difficult", "the most difficult"], "answer": 2, "explanation": "Cấu trúc so sánh kép: The more rapidly..., the more difficult... = càng phát triển nhanh thì càng khó cung cấp dịch vụ công đầy đủ."}];
+const L=["A","B","C","D"];
+let i=0,xp=0,hearts=5,combo=0,answered=false,history=[],soundOn=true,ctx=null;
+const $=id=>document.getElementById(id);
+
+function ac(){
+ if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();
+ if(ctx.state==="suspended")ctx.resume();
+ return ctx;
+}
+function tone(f,d=.1,t="sine",v=.035,delay=0){
+ if(!soundOn)return;
+ const c=ac(),o=c.createOscillator(),g=c.createGain(),s=c.currentTime+delay;
+ o.type=t;o.frequency.setValueAtTime(f,s);
+ g.gain.setValueAtTime(.0001,s);
+ g.gain.exponentialRampToValueAtTime(v,s+.01);
+ g.gain.exponentialRampToValueAtTime(.0001,s+d);
+ o.connect(g);g.connect(c.destination);o.start(s);o.stop(s+d+.03);
+}
+function good(){tone(640,.08,"triangle");tone(900,.11,"sine",.03,.08)}
+function bad(){tone(160,.16,"sawtooth");tone(95,.2,"square",.018,.1)}
+function nextSound(){tone(420,.06,"triangle",.018);tone(650,.07,"triangle",.015,.06)}
+function win(){[523,659,784,1047].forEach((f,k)=>tone(f,.17,"triangle",.027,k*.09))}
+
+$("sound").onclick=()=>{
+ soundOn=!soundOn;
+ $("sound").textContent=soundOn?"🔊 Sound On":"🔇 Sound Off";
+ if(soundOn)nextSound();
+};
+
+function render(){
+ answered=false;
+ $("next").disabled=true;
+ $("feedback").className="feedback";
+ $("feedback").innerHTML="";
+ const q=Q[i];
+
+ $("qtag").textContent=`Question ${i+1}`;
+ $("question").textContent=q.q;
+ $("count").textContent=`${i+1}/${Q.length}`;
+ $("score").textContent=`⭐ ${xp} XP · Combo ${combo}`;
+ $("heart").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${i/Q.length*100}%`;
+ $("options").innerHTML="";
+
+ q.options.forEach((op,n)=>{
+  const b=document.createElement("button");
+  b.className="option";
+  b.innerHTML=`<strong>${L[n]}.</strong> ${op}`;
+  b.onclick=()=>choose(n,b);
+  $("options").appendChild(b);
+ });
+
+ $("next").textContent=i===Q.length-1?"Finish Route 🚇":"Next Station →";
+}
+
+function choose(n,btn){
+ if(answered)return;
+ answered=true;
+
+ const q=Q[i];
+ const buttons=[...document.querySelectorAll(".option")];
+ const right=n===q.answer;
+
+ buttons.forEach(b=>b.disabled=true);
+ buttons[q.answer].classList.add("correct");
+
+ if(right){
+  xp+=10+combo*2;
+  combo++;
+  $("feedback").className="feedback ok show";
+  $("feedback").innerHTML=`<strong>✅ Correct: ${L[q.answer]}. ${q.options[q.answer]}</strong><br>${q.explanation}`;
+  good();
+ }else{
+  hearts=Math.max(0,hearts-1);
+  combo=0;
+  btn.classList.add("wrong");
+  $("feedback").className="feedback no show";
+  $("feedback").innerHTML=`<strong>❌ Correct answer: ${L[q.answer]}. ${q.options[q.answer]}</strong><br>${q.explanation}`;
+  bad();
+ }
+
+ history.push({selected:n,correct:right});
+ $("score").textContent=`⭐ ${xp} XP · Combo ${combo}`;
+ $("heart").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${(i+1)/Q.length*100}%`;
+ $("next").disabled=false;
+}
+
+$("next").onclick=()=>{
+ if(!answered)return;
+ nextSound();
+ if(i<Q.length-1){i++;render();}
+ else finish();
+};
+
+function finish(){
+ $("quizArea").style.display="none";
+ $("result").classList.add("show");
+ win();
+
+ const correct=history.filter(x=>x.correct).length;
+ $("final").textContent=`${correct}/${Q.length} · ${xp} XP`;
+
+ if(correct===Q.length) $("message").textContent="Perfect Metro Master!";
+ else if(correct>=8) $("message").textContent="Excellent! Em nắm rất chắc Urbanisation vocabulary & grammar.";
+ else if(correct>=6) $("message").textContent="Good job! Hãy xem lại những câu chưa đúng.";
+ else $("message").textContent="Hãy ôn lại collocations, phrasal verbs và cấu trúc so sánh kép rồi thử lại.";
+
+ let html="<h3>🚇 Metro Pulse Review</h3>";
+ Q.forEach((q,k)=>{
+  const a=history[k];
+  html+=`<div class="item ${a.correct?"ok":"no"}">
+   <strong>Question ${k+1}: ${a.correct?"Correct":"Incorrect"}</strong><br>
+   Your answer: ${L[a.selected]}. ${q.options[a.selected]}<br>
+   Correct: ${L[q.answer]}. ${q.options[q.answer]}<br>
+   <em>${q.explanation}</em>
+  </div>`;
+ });
+ $("review").innerHTML=html;
+}
+
+$("restart").onclick=()=>location.reload();
+render();
+</script>
+</body>
+</html>

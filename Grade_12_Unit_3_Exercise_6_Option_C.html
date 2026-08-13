@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Grade 12 - Unit 3 - Exercise 6 - Option C</title>
+<style>
+:root{
+  --bg:#0d1f1a;--panel:#132a24;--panel2:#18362e;--mint:#bdf3d4;--lime:#74e6a2;
+  --teal:#40c7a0;--gold:#ffd36c;--red:#ff6b78;--white:#f6fff9;--muted:#a9c9b9;
+}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:Inter,Arial,sans-serif;background:
+radial-gradient(circle at 10% 10%,rgba(116,230,162,.09),transparent 24%),
+linear-gradient(160deg,#091713,#102820 55%,#0a1613);color:var(--white);padding:20px}
+.wrap{max-width:1180px;margin:auto}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px}
+.brand h1{margin:0;font-size:clamp(28px,4vw,44px);letter-spacing:.5px}
+.brand p{margin:6px 0 0;color:var(--muted);font-weight:700}
+.sound{border:1px solid rgba(189,243,212,.22);background:#16342b;color:white;padding:11px 15px;border-radius:12px;font-weight:900;cursor:pointer}
+.mission-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}
+.panel{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid rgba(189,243,212,.12);border-radius:22px;box-shadow:0 22px 60px rgba(0,0,0,.28)}
+.reading{padding:20px;max-height:720px;overflow:auto;line-height:1.75}
+.reading h2{margin-top:0;color:var(--mint)}
+.board{padding:18px}
+.stats{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;margin-bottom:16px}
+.progress{height:12px;border-radius:999px;background:#0b1814;overflow:hidden}
+.progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--lime),var(--gold));transition:.25s}
+.badge{background:#0e211b;border:1px solid rgba(255,255,255,.07);padding:8px 12px;border-radius:999px;font-weight:900}
+.mission{background:#0f241d;border:1px solid rgba(189,243,212,.13);border-radius:18px;padding:18px}
+.mission-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.mission-title{font-weight:1000;color:var(--mint)}
+.streak{font-weight:900;color:var(--gold)}
+.options{display:grid;gap:11px;margin-top:16px}
+.option{border:1px solid #285144;background:#153129;color:white;border-radius:14px;padding:14px 15px;text-align:left;font-size:17px;cursor:pointer;transition:.15s}
+.option:hover:not(:disabled){transform:translateY(-2px);border-color:var(--lime)}
+.option.correct{background:#154231!important;border-color:var(--lime)!important}
+.option.wrong{background:#482229!important;border-color:var(--red)!important}
+.feedback{display:none;margin-top:14px;border-left:5px solid;padding:14px;background:#0b1c17;border-radius:12px;line-height:1.55}
+.feedback.show{display:block}.feedback.ok{border-color:var(--lime)}.feedback.no{border-color:var(--red)}
+.next-row{display:flex;justify-content:flex-end;margin-top:14px}
+.next{border:0;border-radius:12px;padding:12px 18px;font-weight:1000;background:linear-gradient(90deg,var(--lime),var(--gold));color:#163126;cursor:pointer}
+.next:disabled{opacity:.4}
+.tip{margin-top:14px;color:var(--muted);font-size:14px}
+.result{display:none;padding:28px;text-align:center}.result.show{display:block}
+.big{font-size:58px;font-weight:1000;color:var(--gold)}
+.review{text-align:left;margin-top:22px}
+.item{background:#0f241d;border-left:5px solid #54756a;border-radius:12px;padding:12px 14px;margin:9px 0;line-height:1.5}
+.item.ok{border-left-color:var(--lime)}.item.no{border-left-color:var(--red)}
+@media(max-width:900px){.mission-grid{grid-template-columns:1fr}.reading{max-height:420px}}
+@media(max-width:620px){.stats{grid-template-columns:1fr 1fr}.progress{grid-column:1/-1;order:3}.topbar{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="brand">
+      <h1>🌿 Sustainable Mission Board</h1>
+      <p>Grade 12 · Unit 3 · Exercise 6 · Option C</p>
+    </div>
+    <button class="sound" id="sound">🔊 Sound On</button>
+  </div>
+
+  <div class="panel">
+    <div id="gameArea" class="mission-grid">
+      <section class="reading">
+        <h2>SMALL CHANGES, LASTING IMPACT</h2>
+        <div id="passage"></div>
+      </section>
+
+      <section class="board">
+        <div class="stats">
+          <div class="progress"><div id="bar"></div></div>
+          <div class="badge" id="score"></div>
+          <div class="badge" id="heart"></div>
+        </div>
+
+        <div class="mission">
+          <div class="mission-head">
+            <div class="mission-title" id="title"></div>
+            <div class="streak" id="streak"></div>
+          </div>
+          <div class="options" id="options"></div>
+          <div class="feedback" id="feedback"></div>
+          <div class="next-row">
+            <button class="next" id="next" disabled>Next Mission →</button>
+          </div>
+          <div class="tip">Choose the option that best fits the blank in the passage.</div>
+        </div>
+      </section>
+    </div>
+
+    <div id="result" class="result">
+      <div style="font-size:72px">🌱🏆</div>
+      <h2>Mission Complete!</h2>
+      <div class="big" id="final"></div>
+      <p id="msg"></p>
+      <button class="next" id="restart">Play Again ↻</button>
+      <div class="review" id="review"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const passage="Living sustainably does not necessarily require dramatic changes. Many environmental organizations recommend adopting simple habits (1) ____________ to reduce the amount of waste households produce. Instead of relying heavily (2) ____________ disposable products, consumers can choose reusable alternatives and gradually (3) ____________ unnecessary consumption.\n\nSuch changes may appear insignificant at first; (4) ____________, when adopted by large numbers of people, they can have a considerable environmental impact. Community campaigns also (5) ____________ awareness of responsible consumption, (6) ____________ individuals to reconsider everyday choices that may harm the environment (7) ____________.\n\nAnother effective approach is to incorporate environmentally friendly practices (8) ____________ daily life. For example, households can reduce electricity consumption by using appliances powered by (9) ____________ energy. Ultimately, sustainable living does not depend on a single solution but rather on people's willingness to (10) ____________ environmentally responsible habits over time.";
+const Q=[{"options": ["designing", "having designed", "designed", "which designed"], "answer": 2, "explanation": "designed to + V = được thiết kế để làm gì. Đây là cụm phân từ quá khứ rút gọn bổ nghĩa cho habits."}, {"options": ["in", "on", "with", "for"], "answer": 1, "explanation": "rely on + noun = phụ thuộc vào cái gì. → rely heavily on disposable products."}, {"options": ["cut down on", "put up with", "make up for", "come down with"], "answer": 0, "explanation": "cut down on = cắt giảm. → cut down on unnecessary consumption."}, {"options": ["otherwise", "therefore", "nevertheless", "moreover"], "answer": 2, "explanation": "nevertheless = tuy nhiên/mặc dù vậy. Câu trước nói thay đổi nhỏ có vẻ không đáng kể, nhưng khi nhiều người cùng làm thì tác động rất lớn."}, {"options": ["rise", "arise", "raise", "lift"], "answer": 2, "explanation": "raise awareness = nâng cao nhận thức. Đây là collocation chuẩn."}, {"options": ["encouraged", "encouraging", "to encouraging", "having encourage"], "answer": 1, "explanation": "encouraging... là cụm V-ing bổ sung kết quả/tác động của community campaigns."}, {"options": ["in the long run", "at first sight", "on behalf of", "at short notice"], "answer": 0, "explanation": "in the long run = về lâu dài. Phù hợp với hậu quả lâu dài của các lựa chọn gây hại môi trường."}, {"options": ["onto", "toward", "into", "among"], "answer": 2, "explanation": "incorporate sth into sth = đưa/kết hợp cái gì vào cái gì. → incorporate environmentally friendly practices into daily life."}, {"options": ["renewable", "renewed", "renewal", "renewably"], "answer": 0, "explanation": "renewable energy = năng lượng tái tạo. Cần tính từ đứng trước danh từ energy."}, {"options": ["carry out", "take up", "maintain", "bring about"], "answer": 2, "explanation": "maintain habits = duy trì thói quen. → maintain environmentally responsible habits over time."}];
+const L=["A","B","C","D"];
+let i=0,score=0,hearts=5,streak=0,answered=false,answers=[],soundOn=true,ctx=null;
+const $=id=>document.getElementById(id);
+
+function ac(){if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==="suspended")ctx.resume();return ctx}
+function tone(f,d=.1,t="sine",v=.035,delay=0){
+ if(!soundOn)return;
+ const c=ac(),o=c.createOscillator(),g=c.createGain(),s=c.currentTime+delay;
+ o.type=t;o.frequency.setValueAtTime(f,s);
+ g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(v,s+.01);g.gain.exponentialRampToValueAtTime(.0001,s+d);
+ o.connect(g);g.connect(c.destination);o.start(s);o.stop(s+d+.03)
+}
+function okSound(){tone(620,.08,"triangle");tone(880,.11,"sine",.03,.08)}
+function badSound(){tone(160,.16,"sawtooth");tone(95,.2,"square",.018,.1)}
+function nextSound(){tone(420,.06,"triangle",.018);tone(650,.07,"triangle",.015,.06)}
+function winSound(){[523,659,784,988].forEach((f,n)=>tone(f,.17,"triangle",.028,n*.09))}
+
+$("sound").onclick=()=>{soundOn=!soundOn;$("sound").textContent=soundOn?"🔊 Sound On":"🔇 Sound Off";if(soundOn)nextSound()}
+
+function render(){
+ answered=false;$("next").disabled=true;$("feedback").className="feedback";$("feedback").innerHTML="";
+ $("title").textContent=`Mission ${i+1} / ${Q.length}`;
+ $("score").textContent=`⭐ ${score} XP`;
+ $("heart").textContent=`❤️ ${hearts}`;
+ $("streak").textContent=`Streak: ${streak}`;
+ $("bar").style.width=`${i/Q.length*100}%`;
+ $("options").innerHTML="";
+ Q[i].options.forEach((op,n)=>{
+   const b=document.createElement("button");
+   b.className="option";
+   b.innerHTML=`<strong>${L[n]}.</strong> ${op}`;
+   b.onclick=()=>choose(n,b);
+   $("options").appendChild(b);
+ });
+ $("next").textContent=i===Q.length-1?"Finish Mission 🌿":"Next Mission →";
+}
+
+function choose(n,btn){
+ if(answered)return;answered=true;
+ const q=Q[i],buttons=[...document.querySelectorAll(".option")],right=n===q.answer;
+ buttons.forEach(b=>b.disabled=true);
+ buttons[q.answer].classList.add("correct");
+ if(right){
+   score+=10+streak*2;streak++;
+   $("feedback").className="feedback ok show";
+   $("feedback").innerHTML=`<strong>✅ Correct: ${L[q.answer]}. ${q.options[q.answer]}</strong><br>${q.explanation}`;
+   okSound();
+ }else{
+   hearts=Math.max(0,hearts-1);streak=0;btn.classList.add("wrong");
+   $("feedback").className="feedback no show";
+   $("feedback").innerHTML=`<strong>❌ Correct answer: ${L[q.answer]}. ${q.options[q.answer]}</strong><br>${q.explanation}`;
+   badSound();
+ }
+ answers.push({selected:n,correct:right});
+ $("score").textContent=`⭐ ${score} XP`;
+ $("heart").textContent=`❤️ ${hearts}`;
+ $("streak").textContent=`Streak: ${streak}`;
+ $("bar").style.width=`${(i+1)/Q.length*100}%`;
+ $("next").disabled=false;
+}
+
+$("next").onclick=()=>{
+ if(!answered)return;nextSound();
+ if(i<Q.length-1){i++;render()}else finish()
+}
+
+function finish(){
+ $("gameArea").style.display="none";$("result").classList.add("show");winSound();
+ const correct=answers.filter(a=>a.correct).length;
+ $("final").textContent=`${score} XP · ${correct}/${Q.length}`;
+ $("msg").textContent=correct===10?"Perfect sustainability mission!":correct>=8?"Excellent work!":correct>=6?"Good job — review the missed items.":"Try the passage again and improve your score.";
+ let html="<h3>🌿 Mission Review</h3>";
+ Q.forEach((q,n)=>{
+   const a=answers[n];
+   html+=`<div class="item ${a&&a.correct?"ok":"no"}"><strong>Question ${n+1}: ${a&&a.correct?"Correct":"Incorrect"}</strong><br>Your answer: ${a?L[a.selected]:"-"} ${a?q.options[a.selected]:""}<br>Correct answer: ${L[q.answer]}. ${q.options[q.answer]}<br><em>${q.explanation}</em></div>`;
+ });
+ $("review").innerHTML=html;
+}
+$("restart").onclick=()=>location.reload();
+$("passage").innerHTML=passage.split("\\n\\n").map(p=>`<p>${p}</p>`).join("");
+render();
+</script>
+</body>
+</html>
