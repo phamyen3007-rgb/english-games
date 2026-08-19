@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade 10 - Unit 2 - Exercise 8 - Option C</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 82% 12%, rgba(255, 224, 92, .50), transparent 19%),
+        radial-gradient(circle at 15% 24%, rgba(255,255,255,.35), transparent 22%),
+        radial-gradient(circle at 50% 110%, rgba(0, 122, 190, .34), transparent 36%),
+        linear-gradient(180deg, #75d5ff 0%, #bdefff 42%, #54b9e6 68%, #1676ae 100%);
+      color: #eef7ff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .shell {
+      width: min(1100px, 94%);
+      margin: 28px auto;
+    }
+
+    .card {
+      background: rgba(244, 252, 255, .95);
+      border: 1px solid rgba(34, 142, 194, .35);
+      border-radius: 22px;
+      box-shadow: 0 0 30px rgba(17, 113, 170, .22);
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 20px 22px;
+      background: linear-gradient(90deg, rgba(255,205,68,.94), rgba(64,176,224,.92));
+      border-bottom: 1px solid rgba(31,126,178,.20);
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 38px);
+      font-weight: 800;
+      letter-spacing: .5px;
+      color: #083d61;
+      text-shadow: 0 1px 0 rgba(255,255,255,.55);
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: #15516f;
+      font-size: 15px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 14px 18px;
+      background: rgba(234, 249, 255, .92);
+      border-bottom: 1px solid rgba(42,139,190,.16);
+    }
+
+    .stat {
+      text-align: center;
+      padding: 10px 8px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.45);
+      border: 1px solid rgba(55,151,196,.18);
+    }
+
+    .stat b {
+      display: block;
+      font-size: 20px;
+      color: #0a4d72;
+    }
+
+    .stat span {
+      font-size: 12px;
+      color: #4f7e91;
+    }
+
+    .content {
+      padding: 22px;
+    }
+
+    .passage {
+      background: rgba(255,255,255,.45);
+      border: 1px solid rgba(56,151,196,.18);
+      border-radius: 18px;
+      padding: 20px;
+      line-height: 1.72;
+      color: #163f53;
+      margin-bottom: 22px;
+      max-height: 370px;
+      overflow-y: auto;
+    }
+
+    .passage h2 {
+      margin-top: 0;
+      color: #0a74a8;
+      text-align: center;
+    }
+
+    .question-box {
+      background: rgba(248, 253, 255, .96);
+      border: 1px solid rgba(47,145,190,.20);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .progress {
+      height: 10px;
+      background: rgba(24, 110, 159, .12);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .progress > div {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ffd34e, #21a7d8);
+      transition: width .3s ease;
+    }
+
+    .qtext {
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .answers {
+      display: grid;
+      gap: 12px;
+    }
+
+    .answer {
+      width: 100%;
+      text-align: left;
+      border: 1px solid rgba(43,143,190,.22);
+      background: rgba(255,255,255,.045);
+      color: #123f55;
+      padding: 15px 16px;
+      border-radius: 14px;
+      font-size: 17px;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+
+    .answer:hover {
+      transform: translateY(-1px);
+      border-color: rgba(19,137,194,.70);
+      background: rgba(80,190,235,.14);
+    }
+
+    .answer.correct {
+      background: rgba(32, 185, 98, .18);
+      border-color: #43db8b;
+      color: #d9ffea;
+      box-shadow: 0 0 16px rgba(55,215,134,.2);
+    }
+
+    .answer.wrong {
+      background: rgba(233, 64, 64, .19);
+      border-color: #ff6969;
+      color: #ffdede;
+      animation: shake .2s linear 2;
+    }
+
+    .answer:disabled { cursor: default; }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+      100% { transform: translateX(0); }
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      line-height: 1.55;
+      background: rgba(82,181,226,.12);
+      border: 1px solid rgba(43,142,190,.22);
+      color: #18485f;
+    }
+
+    .feedback.show { display: block; }
+
+    .next-btn {
+      display: none;
+      margin-top: 16px;
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 17px;
+      font-weight: 800;
+      color: white;
+      cursor: pointer;
+      background: linear-gradient(90deg, #ffc72f, #159bcf);
+      box-shadow: 0 0 18px rgba(23,133,187,.20);
+    }
+
+    .next-btn.show { display: block; }
+
+    .summary {
+      display: none;
+      padding: 28px 22px 32px;
+      text-align: center;
+    }
+
+    .summary.show { display: block; }
+
+    .rank {
+      font-size: 50px;
+      margin: 10px 0;
+    }
+
+    .summary h2 {
+      font-size: 32px;
+      margin: 8px 0;
+      color: #0874a8;
+    }
+
+    .summary p {
+      color: #315c70;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .restart {
+      margin-top: 14px;
+      border: 0;
+      padding: 14px 22px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 16px;
+      color: white;
+      background: linear-gradient(90deg, #ffbf21, #108dc1);
+      cursor: pointer;
+    }
+
+    .credit {
+      text-align: center;
+      padding: 15px;
+      color: #557d90;
+      font-size: 12px;
+      border-top: 1px solid rgba(104,198,255,.12);
+    }
+
+    @media (max-width: 700px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .content { padding: 14px; }
+      .qtext { font-size: 18px; }
+      .answer { font-size: 15px; }
+      .passage { max-height: 310px; }
+    }
+  
+    /* READABILITY FIX — light Ocean + Sun theme */
+    body { color: #123f55 !important; }
+    .title { color: #073b5c !important; }
+    .subtitle { color: #124f70 !important; font-weight: 700; }
+    .stat b { color: #083f60 !important; }
+    .stat span { color: #386b82 !important; font-weight: 700; }
+    .passage { color: #173f52 !important; }
+    .passage h2 { color: #006fa5 !important; }
+    .question-box { color: #123f55 !important; }
+    .qtext {
+      color: #083f60 !important;
+      text-shadow: none !important;
+      font-weight: 800 !important;
+    }
+    .answer {
+      color: #123f55 !important;
+      background: rgba(255,255,255,.76) !important;
+      border-color: rgba(20,125,178,.28) !important;
+    }
+    .answer:hover {
+      color: #083f60 !important;
+      background: rgba(218,245,255,.96) !important;
+    }
+    .answer.correct {
+      color: #075d35 !important;
+      background: rgba(191, 246, 215, .92) !important;
+    }
+    .answer.wrong {
+      color: #8d1e1e !important;
+      background: rgba(255, 218, 218, .94) !important;
+    }
+    .feedback {
+      color: #123f55 !important;
+      background: rgba(225,247,255,.96) !important;
+    }
+    .summary, .summary p { color: #17475d !important; }
+    .summary h2 { color: #006fa5 !important; }
+
+  
+    /* ANIME THEME */
+    body {
+      background:
+        radial-gradient(circle at 18% 15%, rgba(114, 91, 255, .34), transparent 24%),
+        radial-gradient(circle at 84% 18%, rgba(255, 86, 173, .24), transparent 22%),
+        radial-gradient(circle at 50% 105%, rgba(31, 201, 255, .24), transparent 34%),
+        linear-gradient(145deg, #0a1230, #17265b 48%, #391c62 100%) !important;
+      color: #eef7ff !important;
+    }
+    .card { background: rgba(10,20,48,.94) !important; border-color: rgba(106,210,255,.38) !important; }
+    .header { background: linear-gradient(90deg, rgba(54,92,210,.96), rgba(171,52,167,.90)) !important; }
+    .title { color:#fff !important; text-shadow:0 0 14px rgba(117,225,255,.65) !important; }
+    .subtitle { color:#e8f7ff !important; }
+    .stats { background:rgba(8,18,44,.90) !important; }
+    .stat { background:rgba(255,255,255,.07) !important; border-color:rgba(121,211,255,.20) !important; }
+    .stat b { color:#fff !important; }
+    .stat span { color:#bfe9ff !important; }
+    .passage { background:rgba(250,253,255,.96) !important; color:#17364d !important; border-color:rgba(96,194,238,.30) !important; }
+    .passage h2 { color:#315bc5 !important; }
+    .question-box { background:rgba(247,251,255,.97) !important; color:#17364d !important; }
+    .qtext { color:#183d68 !important; text-shadow:none !important; }
+    .answer { color:#17364d !important; background:rgba(255,255,255,.94) !important; border-color:rgba(67,133,205,.30) !important; }
+    .answer:hover { background:#edf6ff !important; border-color:#4e8ee0 !important; }
+    .feedback { color:#17364d !important; background:#eef8ff !important; }
+    .next-btn { background:linear-gradient(90deg,#4968e8,#bd4fc3) !important; }
+    .progress > div { background:linear-gradient(90deg,#40d7ff,#9e59ff,#ff5ba8) !important; }
+
+</style>
+</head>
+<body>
+  <main class="shell">
+    <section class="card">
+      <div class="header">
+        <h1 class="title">GRADE 10 • UNIT 2 • EXERCISE 8</h1>
+        <div class="subtitle">Option C — Giving Food Waste a Second Chance</div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b id="qCounter">1/10</b><span>QUESTION</span></div>
+        <div class="stat"><b id="hearts">❤️❤️❤️</b><span>HEARTS</span></div>
+        <div class="stat"><b id="xp">0</b><span>XP</span></div>
+        <div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+      </div>
+
+      <div class="content" id="gameArea">
+        <div class="passage">
+          <h2>GIVING FOOD WASTE A SECOND CHANCE</h2>
+          <p>Every day, large amounts of food are thrown away by households, restaurants, and supermarkets. Some of this food is no longer safe to eat, but much of it is wasted simply because people buy more than they need or refuse to use food that does not look perfect. Besides wasting money, throwing away edible food also has consequences for the environment.</p>
+          <p>When food is produced, resources such as water, land, and energy are required. [I] Transporting food from farms to shops also consumes fuel. [II] Therefore, when food is thrown away, the resources used to produce and transport it are wasted as well. [III] Food waste that ends up in landfills can also produce methane, a greenhouse gas that contributes to global warming. [IV] As a result, reducing food waste can benefit the environment in more ways than people may realize.</p>
+          <p>Fortunately, households can take several practical steps to deal with the problem. Planning meals before shopping can prevent people from buying unnecessary food. Checking what is already in the refrigerator is also useful. In addition, food that looks less attractive should not automatically be thrown away. A strangely shaped carrot, for example, can still be perfectly good to eat. Leftovers can also be stored safely and used for another meal instead of being immediately discarded.</p>
+          <p>However, reducing food waste does not depend only on individual households. Supermarkets can offer imperfect-looking fruit and vegetables at lower prices, while restaurants can provide customers with suitable containers for unfinished meals. If businesses and consumers change their habits together, a considerable amount of food could be kept out of landfills.</p>
+        </div>
+        <div class="question-box">
+          <div class="progress"><div id="progressBar"></div></div>
+          <div class="qtext" id="questionText"></div>
+          <div class="answers" id="answers"></div>
+          <div class="feedback" id="feedback"></div>
+          <button class="next-btn" id="nextBtn">NEXT →</button>
+        </div>
+      </div>
+
+      <div class="summary" id="summary">
+        <div class="rank" id="rankIcon">🏆</div>
+        <h2>MISSION COMPLETE!</h2>
+        <p id="summaryText"></p>
+        <button class="restart" onclick="restartGame()">PLAY AGAIN</button>
+      </div>
+
+      <div class="credit">Grade 10 English Review Game</div>
+    </section>
+  </main>
+
+  <script>
+    const questions = [
+      {q:'Where in paragraph 2 does the following sentence best fit? “The environmental cost of wasted food, however, does not end there.”',options:['A. [I]','B. [II]','C. [III]','D. [IV]'],correct:2,explain:'Trước [III], bài nói thực phẩm bị vứt bỏ làm lãng phí các tài nguyên dùng để sản xuất và vận chuyển. Cụm “does not end there” báo hiệu còn một hậu quả khác; ngay sau [III] là tác hại methane từ bãi chôn lấp. Vì vậy chọn C.'},
+      {q:'Which of the following statements is NOT TRUE according to the passage?',options:['A. Some edible food is discarded because of its appearance.','B. Producing and transporting food requires various resources.','C. Food waste can create environmental problems even after it is thrown away.','D. Most food is wasted because it becomes dangerous to eat before people can use it.'],correct:3,explain:'Bài chỉ nói một phần thực phẩm không còn an toàn, còn “much of it” bị lãng phí vì mua quá nhiều hoặc vì hình thức không đẹp. Vì vậy D trái với bài.'},
+      {q:'The word “discarded” in paragraph 3 is closest in meaning to:',options:['A. stored','B. thrown away','C. produced','D. selected'],correct:1,explain:'“discarded” = “thrown away” = bị vứt bỏ. Các phương án còn lại lần lượt là được cất giữ, được sản xuất và được lựa chọn.'},
+      {q:'What does the word “it” in the sentence “the resources used to produce and transport it are wasted as well” refer to?',options:['A. fuel','B. food','C. energy','D. waste'],correct:1,explain:'Trong câu “when food is thrown away, the resources used to produce and transport it...”, đại từ “it” thay thế cho danh từ “food”.'},
+      {q:'The word “considerable” in paragraph 4 is opposite in meaning to:',options:['A. insignificant','B. unnecessary','C. expensive','D. harmful'],correct:0,explain:'“considerable” = đáng kể, khá lớn. Từ trái nghĩa là “insignificant” = không đáng kể.'},
+      {q:'What is the main idea of the second paragraph?',options:['A. Transporting food is the main cause of global warming.','B. Food production should use less water, land, and energy.','C. Wasting food also means wasting resources and causing further environmental damage.','D. Landfills should be replaced because they produce large amounts of methane.'],correct:2,explain:'Đoạn 2 nói sản xuất và vận chuyển thực phẩm tiêu tốn tài nguyên; khi thực phẩm bị bỏ đi, các tài nguyên đó cũng bị lãng phí, đồng thời rác thực phẩm còn tạo methane. C bao quát đầy đủ nhất.'},
+      {q:'Which of the following best restates the sentence: “In addition, food that looks less attractive should not automatically be thrown away.”',options:['A. Food should be discarded whenever its appearance suggests that it may not be fresh.','B. People should avoid buying food that looks different from what they expect.','C. An unattractive appearance does not necessarily mean that food should be wasted.','D. Food with an unusual appearance should only be used when no other food is available.'],correct:2,explain:'Ý quan trọng là “not automatically”: thực phẩm trông không đẹp không có nghĩa là nhất thiết phải vứt bỏ. “does not necessarily” ở C diễn đạt đúng ý này.'},
+      {q:'Which of the following is NOT mentioned as a way to reduce food waste?',options:['A. Making a plan for meals before buying food.','B. Keeping unfinished food for a later meal.','C. Selling less attractive produce at reduced prices.','D. Giving unwanted food directly to local charities.'],correct:3,explain:'A, B và C đều được đề cập trực tiếp. Bài không nhắc đến việc đưa thực phẩm không cần dùng cho các tổ chức từ thiện, nên chọn D.'},
+      {q:'Which of the following can be inferred from the passage?',options:['A. Changing consumer habits alone is unlikely to be the most complete solution to food waste.','B. Supermarkets mainly sell imperfect fruit because customers prefer cheaper products.','C. Restaurants produce more food waste than households and supermarkets combined.','D. Food with an unusual shape generally has lower nutritional value than normal-looking food.'],correct:0,explain:'Đoạn cuối nói giảm lãng phí thực phẩm không chỉ phụ thuộc vào hộ gia đình và cần cả doanh nghiệp lẫn người tiêu dùng thay đổi thói quen. Vì vậy có thể suy ra chỉ thay đổi hành vi người tiêu dùng chưa phải giải pháp toàn diện nhất.'},
+      {q:'Which of the following best summarizes the entire passage?',options:['A. Food waste mainly results from supermarkets refusing to sell unattractive products, so businesses should take full responsibility for solving the problem.','B. Food waste wastes valuable resources and harms the environment, but practical actions by both consumers and businesses can reduce the problem.','C. Households should plan their shopping carefully because reducing unnecessary spending is the most important reason to prevent food waste.','D. Although food waste creates methane in landfills, improving food transportation is the most effective way to reduce its environmental impact.'],correct:1,explain:'Toàn bài gồm hai ý lớn: lãng phí thực phẩm làm lãng phí tài nguyên và gây hại môi trường; đồng thời cả người tiêu dùng và doanh nghiệp đều có thể thực hiện các biện pháp thực tế để giảm vấn đề. B bao quát đầy đủ nhất.'}
+    ];
+
+    let current = 0;
+    let hearts = 5;
+    let xp = 0;
+    let combo = 0;
+    let totalWrong = 0;
+    let locked = false;
+    let q4BonusGiven = false;
+
+    const qCounter = document.getElementById('qCounter');
+    const heartsEl = document.getElementById('hearts');
+    const xpEl = document.getElementById('xp');
+    const comboEl = document.getElementById('combo');
+    const questionText = document.getElementById('questionText');
+    const answersEl = document.getElementById('answers');
+    const feedback = document.getElementById('feedback');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressBar = document.getElementById('progressBar');
+    const gameArea = document.getElementById('gameArea');
+    const summary = document.getElementById('summary');
+    const summaryText = document.getElementById('summaryText');
+    const rankIcon = document.getElementById('rankIcon');
+
+    function renderQuestion() {
+      locked = false;
+      const item = questions[current];
+
+      qCounter.textContent = `${current + 1}/${questions.length}`;
+      heartsEl.textContent = '❤️'.repeat(hearts) + '🖤'.repeat(Math.max(0, 5 - hearts));
+      xpEl.textContent = xp;
+      comboEl.textContent = combo;
+      progressBar.style.width = `${(current / questions.length) * 100}%`;
+
+      questionText.textContent = `Question ${current + 1}. ${item.q}`;
+      answersEl.innerHTML = '';
+      feedback.className = 'feedback';
+      feedback.textContent = '';
+      nextBtn.className = 'next-btn';
+
+      item.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'answer';
+        btn.textContent = opt;
+        btn.onclick = () => chooseAnswer(index, btn);
+        answersEl.appendChild(btn);
+      });
+    }
+
+    function chooseAnswer(index, btn) {
+      if (locked) return;
+
+      const item = questions[current];
+
+      if (index === item.correct) {
+        locked = true;
+        btn.classList.add('correct');
+
+        combo++;
+        let gain = 10;
+        if (combo >= 3) gain = 20;
+        else if (combo >= 2) gain = 15;
+        xp += gain;
+
+        // Question 4 bonus: +1 heart, up to the maximum of 5, once per run.
+        let bonusText = '';
+        if (current === 3 && !q4BonusGiven) {
+          q4BonusGiven = true;
+          if (hearts < 5) {
+            hearts++;
+            bonusText = '<br>💖 <strong>Thưởng câu 4: +1 tim!</strong>';
+          } else {
+            bonusText = '<br>💖 <strong>Đã đạt thưởng câu 4! Tim hiện đang đầy.</strong>';
+          }
+          heartsEl.textContent = '❤️'.repeat(hearts) + '🖤'.repeat(Math.max(0, 5 - hearts));
+        }
+
+        [...answersEl.children].forEach(b => b.disabled = true);
+
+        feedback.innerHTML = `✅ <strong>Chính xác!</strong><br>${item.explain}<br><strong>+${gain} XP</strong>${bonusText}`;
+        feedback.classList.add('show');
+
+        xpEl.textContent = xp;
+        comboEl.textContent = combo;
+        nextBtn.classList.add('show');
+
+        if (current === questions.length - 1) {
+          nextBtn.textContent = 'XEM KẾT QUẢ →';
+        } else {
+          nextBtn.textContent = 'CÂU TIẾP THEO →';
+        }
+      } else {
+        btn.classList.add('wrong');
+        btn.disabled = true;
+
+        combo = 0;
+        totalWrong++;
+
+        hearts--;
+        if (hearts <= 0) {
+          hearts = 0;
+          heartsEl.textContent = '🖤🖤🖤🖤🖤';
+          comboEl.textContent = 0;
+          setTimeout(() => {
+            alert('💔 Hết 5 trái tim! Bạn phải làm lại từ câu 1.');
+            restartGame();
+          }, 250);
+          return;
+        }
+
+        heartsEl.textContent = '❤️'.repeat(hearts) + '🖤'.repeat(Math.max(0, 5 - hearts));
+        comboEl.textContent = combo;
+
+        feedback.innerHTML = `❌ <strong>Chưa đúng.</strong> Em hãy chọn lại. Phải chọn đúng mới được chuyển sang câu tiếp theo.`;
+        feedback.classList.add('show');
+
+        setTimeout(() => {
+          btn.classList.remove('wrong');
+          btn.disabled = false;
+        }, 500);
+      }
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (current < questions.length - 1) {
+        current++;
+        renderQuestion();
+      } else {
+        finishGame();
+      }
+    });
+
+    function finishGame() {
+      progressBar.style.width = '100%';
+      gameArea.style.display = 'none';
+      summary.classList.add('show');
+
+      let rank = '🥇';
+      let label = 'S RANK';
+      if (totalWrong >= 5) {
+        rank = '🥈';
+        label = 'A RANK';
+      }
+      if (totalWrong >= 10) {
+        rank = '🥉';
+        label = 'B RANK';
+      }
+
+      rankIcon.textContent = rank;
+      summaryText.innerHTML =
+        `<strong>${label}</strong><br>` +
+        `You completed all ${questions.length} questions.<br>` +
+        `XP: <strong>${xp}</strong> • Wrong choices: <strong>${totalWrong}</strong><br>` +
+        `Remember: reuse, repair, and exchange can help reduce waste and save resources.`;
+    }
+
+    function restartGame() {
+      current = 0;
+      hearts = 5;
+      xp = 0;
+      combo = 0;
+      totalWrong = 0;
+      locked = false;
+      q4BonusGiven = false;
+
+      summary.classList.remove('show');
+      gameArea.style.display = 'block';
+      renderQuestion();
+    }
+
+    renderQuestion();
+  </script>
+</body>
+</html>

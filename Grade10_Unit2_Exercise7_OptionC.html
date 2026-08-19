@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade 10 - Unit 2 - Exercise 7 - Option C</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(95, 190, 255, .28), transparent 30%),
+        radial-gradient(circle at 82% 24%, rgba(93, 244, 255, .20), transparent 26%),
+        linear-gradient(135deg, #123a63, #1a5687 55%, #0f3156);
+      color: #eef7ff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .shell {
+      width: min(1100px, 94%);
+      margin: 28px auto;
+    }
+
+    .card {
+      background: rgba(18, 48, 78, .90);
+      border: 1px solid rgba(104, 198, 255, .35);
+      border-radius: 22px;
+      box-shadow: 0 0 28px rgba(45, 164, 255, .18);
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 20px 22px;
+      background: linear-gradient(90deg, rgba(26,76,130,.78), rgba(8,30,55,.8));
+      border-bottom: 1px solid rgba(104,198,255,.28);
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 38px);
+      font-weight: 800;
+      letter-spacing: .5px;
+      color: #dff5ff;
+      text-shadow: 0 0 12px rgba(82,191,255,.4);
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: #9fd9ff;
+      font-size: 15px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 14px 18px;
+      background: rgba(14, 45, 76, .72);
+      border-bottom: 1px solid rgba(104,198,255,.16);
+    }
+
+    .stat {
+      text-align: center;
+      padding: 10px 8px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.035);
+      border: 1px solid rgba(124,202,255,.13);
+    }
+
+    .stat b {
+      display: block;
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .stat span {
+      font-size: 12px;
+      color: #9ecae7;
+    }
+
+    .content {
+      padding: 22px;
+    }
+
+    .passage {
+      background: rgba(255,255,255,.035);
+      border: 1px solid rgba(135,209,255,.15);
+      border-radius: 18px;
+      padding: 20px;
+      line-height: 1.72;
+      color: #eaf6ff;
+      margin-bottom: 22px;
+      max-height: 370px;
+      overflow-y: auto;
+    }
+
+    .passage h2 {
+      margin-top: 0;
+      color: #87d8ff;
+      text-align: center;
+    }
+
+    .question-box {
+      background: rgba(18, 58, 92, .86);
+      border: 1px solid rgba(100,198,255,.2);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .progress {
+      height: 10px;
+      background: rgba(255,255,255,.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .progress > div {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #33a8ff, #68e1ff);
+      transition: width .3s ease;
+    }
+
+    .qtext {
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .answers {
+      display: grid;
+      gap: 12px;
+    }
+
+    .answer {
+      width: 100%;
+      text-align: left;
+      border: 1px solid rgba(128,203,255,.22);
+      background: rgba(255,255,255,.045);
+      color: #f6fbff;
+      padding: 15px 16px;
+      border-radius: 14px;
+      font-size: 17px;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+
+    .answer:hover {
+      transform: translateY(-1px);
+      border-color: rgba(107,211,255,.65);
+      background: rgba(70,151,212,.10);
+    }
+
+    .answer.correct {
+      background: rgba(32, 185, 98, .18);
+      border-color: #43db8b;
+      color: #d9ffea;
+      box-shadow: 0 0 16px rgba(55,215,134,.2);
+    }
+
+    .answer.wrong {
+      background: rgba(233, 64, 64, .19);
+      border-color: #ff6969;
+      color: #ffdede;
+      animation: shake .2s linear 2;
+    }
+
+    .answer:disabled { cursor: default; }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+      100% { transform: translateX(0); }
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      line-height: 1.55;
+      background: rgba(85, 180, 255, .08);
+      border: 1px solid rgba(118,205,255,.2);
+      color: #dff3ff;
+    }
+
+    .feedback.show { display: block; }
+
+    .next-btn {
+      display: none;
+      margin-top: 16px;
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 17px;
+      font-weight: 800;
+      color: white;
+      cursor: pointer;
+      background: linear-gradient(90deg, #168cff, #26c5ff);
+      box-shadow: 0 0 18px rgba(32,160,255,.22);
+    }
+
+    .next-btn.show { display: block; }
+
+    .summary {
+      display: none;
+      padding: 28px 22px 32px;
+      text-align: center;
+    }
+
+    .summary.show { display: block; }
+
+    .rank {
+      font-size: 50px;
+      margin: 10px 0;
+    }
+
+    .summary h2 {
+      font-size: 32px;
+      margin: 8px 0;
+      color: #9ce5ff;
+    }
+
+    .summary p {
+      color: #cde8f8;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .restart {
+      margin-top: 14px;
+      border: 0;
+      padding: 14px 22px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 16px;
+      color: white;
+      background: linear-gradient(90deg, #155fc4, #15aee8);
+      cursor: pointer;
+    }
+
+    .credit {
+      text-align: center;
+      padding: 15px;
+      color: #6e9ab8;
+      font-size: 12px;
+      border-top: 1px solid rgba(104,198,255,.12);
+    }
+
+    @media (max-width: 700px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .content { padding: 14px; }
+      .qtext { font-size: 18px; }
+      .answer { font-size: 15px; }
+      .passage { max-height: 310px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="card">
+      <div class="header">
+        <h1 class="title">GRADE 10 • UNIT 2 • EXERCISE 7</h1>
+        <div class="subtitle">Option C — Small Changes, Greener Cities</div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b id="qCounter">1/8</b><span>QUESTION</span></div>
+        <div class="stat"><b id="hearts">❤️❤️❤️</b><span>HEARTS</span></div>
+        <div class="stat"><b id="xp">0</b><span>XP</span></div>
+        <div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+      </div>
+
+      <div class="content" id="gameArea">
+        <div class="passage">
+          <h2>Small Changes, Greener Cities</h2>
+
+          <p>As cities continue to grow, they face increasing environmental problems. More people means greater demand for energy, transportation, food, and housing. At the same time, urban areas produce large amounts of waste and air pollution. Building completely new cities is neither practical nor necessary. Instead, many communities are making small but effective changes to make existing cities cleaner and more sustainable.</p>
+
+          <p>One such change is the development of urban green spaces. In crowded neighborhoods, unused land and even the roofs of buildings can be transformed into small gardens. These areas provide more than attractive places for residents to relax. Trees and plants can absorb some air pollutants and provide shade during hot weather. Community gardens can also supply local residents with fresh vegetables. Although a single garden may have only a limited effect, a network of green spaces across a city can make a noticeable difference.</p>
+
+          <p>Transportation is another area where small changes can produce significant results. Some cities are building safer cycling paths and improving public transportation to encourage residents to use their cars less frequently. Others have introduced car-free zones in busy city centers. These measures do not completely remove traffic problems, but they can reduce the number of vehicles on the road. As a result, residents may experience cleaner air, quieter streets, and safer public spaces.</p>
+
+          <p>However, successful environmental change cannot depend entirely on city governments. Residents also play an essential role. Choosing public transportation, reducing household waste, and taking part in local environmental projects may seem like minor actions. Yet when thousands of people adopt similar habits, their combined impact can be considerable. Creating greener cities, therefore, requires cooperation between local authorities and the people who live there.</p>
+        </div>
+
+        <div class="question-box">
+          <div class="progress"><div id="progressBar"></div></div>
+          <div class="qtext" id="questionText"></div>
+          <div class="answers" id="answers"></div>
+          <div class="feedback" id="feedback"></div>
+          <button class="next-btn" id="nextBtn">NEXT →</button>
+        </div>
+      </div>
+
+      <div class="summary" id="summary">
+        <div class="rank" id="rankIcon">🏆</div>
+        <h2>MISSION COMPLETE!</h2>
+        <p id="summaryText"></p>
+        <button class="restart" onclick="restartGame()">PLAY AGAIN</button>
+      </div>
+
+      <div class="credit">Grade 10 English Review Game</div>
+    </section>
+  </main>
+
+  <script>
+    const questions = [
+      {
+        q: 'The word “limited” in paragraph 2 is opposite in meaning to ________.',
+        options: ['A. minor', 'B. restricted', 'C. considerable', 'D. temporary'],
+        correct: 2,
+        explain: '“limited” means “hạn chế/nhỏ”, while “considerable” means “đáng kể/lớn”. They are opposite in meaning.'
+      },
+      {
+        q: 'Which of the following best expresses the main idea of the passage?',
+        options: [
+          'A. Rapid urban growth can only be controlled by building new cities.',
+          'B. Governments should take full responsibility for solving urban environmental problems.',
+          'C. Small environmental actions by cities and residents can together make urban areas more sustainable.',
+          'D. Green spaces are the most effective solution to pollution in modern cities.'
+        ],
+        correct: 2,
+        explain: 'The passage focuses on small changes made by both cities and residents to create cleaner and more sustainable urban areas.'
+      },
+      {
+        q: 'The word “These” in paragraph 3 refers to ________.',
+        options: [
+          'A. busy city centers',
+          'B. traffic problems',
+          'C. measures to reduce car use',
+          'D. public spaces'
+        ],
+        correct: 2,
+        explain: '“These measures” refers to cycling paths, improved public transportation, and car-free zones — all measures that reduce car use.'
+      },
+      {
+        q: 'What can be inferred from the sentence “Although a single garden may have only a limited effect, a network of green spaces across a city can make a noticeable difference”?',
+        options: [
+          'A. Small environmental projects can become more effective when they are carried out on a wider scale.',
+          'B. Individual gardens are unlikely to provide any environmental benefits.',
+          'C. Cities should replace most buildings with gardens to achieve meaningful results.',
+          'D. Large environmental projects are always more successful than community-based activities.'
+        ],
+        correct: 0,
+        explain: 'The sentence implies that one small project has limited impact, but many similar projects together can create a much greater effect.'
+      },
+      {
+        q: 'The word “adopt” in paragraph 4 is closest in meaning to ________.',
+        options: [
+          'A. avoid',
+          'B. develop',
+          'C. accept and begin to follow',
+          'D. examine carefully'
+        ],
+        correct: 2,
+        explain: '“adopt a habit/practice” means to accept it and begin to follow or use it.'
+      },
+      {
+        q: 'Which of the following is NOT true according to the passage?',
+        options: [
+          'A. Plants in urban green spaces can help improve environmental conditions.',
+          'B. Reducing the number of vehicles may make city streets quieter.',
+          'C. Environmental improvement requires actions from both authorities and residents.',
+          'D. Car-free zones can completely solve traffic problems in crowded city centers.'
+        ],
+        correct: 3,
+        explain: 'The passage says these measures “do not completely remove traffic problems”, so option D is NOT true.'
+      },
+      {
+        q: 'In which paragraph does the author explain how changes in transportation may improve people\'s living environment?',
+        options: ['A. Paragraph 1', 'B. Paragraph 2', 'C. Paragraph 3', 'D. Paragraph 4'],
+        correct: 2,
+        explain: 'Paragraph 3 explains that reducing vehicles can lead to cleaner air, quieter streets, and safer public spaces.'
+      },
+      {
+        q: 'In which paragraph does the author emphasize that individual actions can have a much greater effect when many people do the same thing?',
+        options: ['A. Paragraph 1', 'B. Paragraph 2', 'C. Paragraph 3', 'D. Paragraph 4'],
+        correct: 3,
+        explain: 'Paragraph 4 says that when thousands of people adopt similar habits, their combined impact can be considerable.'
+      }
+    ];
+
+    let current = 0;
+    let hearts = 5;
+    let xp = 0;
+    let combo = 0;
+    let totalWrong = 0;
+    let locked = false;
+    let q4BonusGiven = false;
+
+    const qCounter = document.getElementById('qCounter');
+    const heartsEl = document.getElementById('hearts');
+    const xpEl = document.getElementById('xp');
+    const comboEl = document.getElementById('combo');
+    const questionText = document.getElementById('questionText');
+    const answersEl = document.getElementById('answers');
+    const feedback = document.getElementById('feedback');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressBar = document.getElementById('progressBar');
+    const gameArea = document.getElementById('gameArea');
+    const summary = document.getElementById('summary');
+    const summaryText = document.getElementById('summaryText');
+    const rankIcon = document.getElementById('rankIcon');
+
+    function renderQuestion() {
+      locked = false;
+      const item = questions[current];
+
+      qCounter.textContent = `${current + 1}/${questions.length}`;
+      heartsEl.textContent = '❤️'.repeat(hearts) + '🖤'.repeat(Math.max(0, 5 - hearts));
+      xpEl.textContent = xp;
+      comboEl.textContent = combo;
+      progressBar.style.width = `${(current / questions.length) * 100}%`;
+
+      questionText.textContent = `Question ${current + 1}. ${item.q}`;
+      answersEl.innerHTML = '';
+      feedback.className = 'feedback';
+      feedback.textContent = '';
+      nextBtn.className = 'next-btn';
+
+      item.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'answer';
+        btn.textContent = opt;
+        btn.onclick = () => chooseAnswer(index, btn);
+        answersEl.appendChild(btn);
+      });
+    }
+
+    function chooseAnswer(index, btn) {
+      if (locked) return;
+
+      const item = questions[current];
+
+      if (index === item.correct) {
+        locked = true;
+        btn.classList.add('correct');
+
+        combo++;
+        let gain = 10;
+        if (combo >= 3) gain = 20;
+        else if (combo >= 2) gain = 15;
+        xp += gain;
+
+        // Question 4 bonus: +1 heart, up to the maximum of 5, once per run.
+        let bonusText = '';
+        if (current === 3 && !q4BonusGiven) {
+          q4BonusGiven = true;
+          if (hearts < 5) {
+            hearts++;
+            bonusText = '<br>💖 <strong>Question 4 bonus: +1 heart!</strong>';
+          } else {
+            bonusText = '<br>💖 <strong>Question 4 bonus reached! Hearts are already full.</strong>';
+          }
+          heartsEl.textContent = '❤️'.repeat(hearts) + '🖤'.repeat(Math.max(0, 5 - hearts));
+        }
+
+        [...answersEl.children].forEach(b => b.disabled = true);
+
+        feedback.innerHTML = `✅ <strong>Correct!</strong><br>${item.explain}<br><strong>+${gain} XP</strong>${bonusText}`;
+        feedback.classList.add('show');
+
+        xpEl.textContent = xp;
+        comboEl.textContent = combo;
+        nextBtn.classList.add('show');
+
+        if (current === questions.length - 1) {
+          nextBtn.textContent = 'VIEW RESULT →';
+        } else {
+          nextBtn.textContent = 'NEXT QUESTION →';
+        }
+      } else {
+        btn.classList.add('wrong');
+        btn.disabled = true;
+
+        combo = 0;
+        totalWrong++;
+
+        hearts--;
+        if (hearts <= 0) {
+          hearts = 0;
+          heartsEl.textContent = '🖤🖤🖤🖤🖤';
+          comboEl.textContent = 0;
+          setTimeout(() => {
+            alert('💔 Hết 5 trái tim! Bạn phải làm lại từ câu 1.');
+            restartGame();
+          }, 250);
+          return;
+        }
+
+        heartsEl.textContent = '❤️'.repeat(hearts) + '🖤'.repeat(Math.max(0, 5 - hearts));
+        comboEl.textContent = combo;
+
+        feedback.innerHTML = `❌ <strong>Not correct.</strong> Try again. You must choose the correct answer before moving on.`;
+        feedback.classList.add('show');
+
+        setTimeout(() => {
+          btn.classList.remove('wrong');
+          btn.disabled = false;
+        }, 500);
+      }
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (current < questions.length - 1) {
+        current++;
+        renderQuestion();
+      } else {
+        finishGame();
+      }
+    });
+
+    function finishGame() {
+      progressBar.style.width = '100%';
+      gameArea.style.display = 'none';
+      summary.classList.add('show');
+
+      let rank = '🥇';
+      let label = 'S RANK';
+      if (totalWrong >= 5) {
+        rank = '🥈';
+        label = 'A RANK';
+      }
+      if (totalWrong >= 10) {
+        rank = '🥉';
+        label = 'B RANK';
+      }
+
+      rankIcon.textContent = rank;
+      summaryText.innerHTML =
+        `<strong>${label}</strong><br>` +
+        `You completed all ${questions.length} questions.<br>` +
+        `XP: <strong>${xp}</strong> • Wrong choices: <strong>${totalWrong}</strong><br>` +
+        `Remember: reuse, repair, and exchange can help reduce waste and save resources.`;
+    }
+
+    function restartGame() {
+      current = 0;
+      hearts = 5;
+      xp = 0;
+      combo = 0;
+      totalWrong = 0;
+      locked = false;
+      q4BonusGiven = false;
+
+      summary.classList.remove('show');
+      gameArea.style.display = 'block';
+      renderQuestion();
+    }
+
+    renderQuestion();
+  </script>
+</body>
+</html>

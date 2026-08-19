@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade 10 – Unit 3 – Exercise 1 (1-20) – Option B</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 18% 16%, rgba(124, 90, 255, .30), transparent 24%),
+        radial-gradient(circle at 84% 16%, rgba(255, 80, 174, .22), transparent 22%),
+        radial-gradient(circle at 50% 108%, rgba(28, 196, 255, .24), transparent 35%),
+        linear-gradient(145deg, #09122f, #18265a 48%, #3a1e62 100%);
+      color: #eef7ff;
+    }
+
+    .shell {
+      width: min(1000px, 94%);
+      margin: 28px auto;
+    }
+
+    .card {
+      background: rgba(10, 20, 48, .95);
+      border: 1px solid rgba(106, 210, 255, .38);
+      border-radius: 22px;
+      box-shadow: 0 0 30px rgba(80, 170, 255, .20);
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 20px 22px;
+      background: linear-gradient(90deg, rgba(54,92,210,.96), rgba(171,52,167,.92));
+      border-bottom: 1px solid rgba(152,216,255,.24);
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 38px);
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 0 0 14px rgba(117,225,255,.65);
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: #edf8ff;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 14px 18px;
+      background: rgba(8,18,44,.92);
+      border-bottom: 1px solid rgba(125,202,255,.16);
+    }
+
+    .stat {
+      text-align: center;
+      padding: 10px 8px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(121,211,255,.20);
+    }
+
+    .stat b {
+      display: block;
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .stat span {
+      font-size: 12px;
+      color: #bfe9ff;
+      font-weight: 700;
+    }
+
+    .content {
+      padding: 22px;
+    }
+
+    .question-box {
+      background: rgba(247,251,255,.97);
+      color: #17364d;
+      border: 1px solid rgba(71,145,205,.24);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .progress {
+      height: 10px;
+      background: rgba(32, 77, 127, .12);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .progress > div {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg,#40d7ff,#9e59ff,#ff5ba8);
+      transition: width .3s ease;
+    }
+
+    .qtext {
+      font-size: 22px;
+      line-height: 1.5;
+      font-weight: 800;
+      color: #183d68;
+      margin-bottom: 16px;
+    }
+
+    .answers {
+      display: grid;
+      gap: 12px;
+    }
+
+    .answer {
+      width: 100%;
+      text-align: left;
+      border: 1px solid rgba(67,133,205,.30);
+      background: rgba(255,255,255,.96);
+      color: #17364d;
+      padding: 15px 16px;
+      border-radius: 14px;
+      font-size: 17px;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+
+    .answer:hover {
+      transform: translateY(-1px);
+      background: #edf6ff;
+      border-color: #4e8ee0;
+    }
+
+    .answer.correct {
+      background: rgba(194, 247, 218, .96);
+      border-color: #37c977;
+      color: #075d35;
+      box-shadow: 0 0 15px rgba(55,201,119,.18);
+    }
+
+    .answer.wrong {
+      background: rgba(255, 218, 218, .96);
+      border-color: #ef6b6b;
+      color: #8d1e1e;
+      animation: shake .2s linear 2;
+    }
+
+    .answer:disabled { cursor: default; }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+      100% { transform: translateX(0); }
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      line-height: 1.6;
+      background: #eef8ff;
+      border: 1px solid rgba(76,149,208,.24);
+      color: #17364d;
+    }
+
+    .feedback.show { display: block; }
+
+    .next-btn {
+      display: none;
+      margin-top: 16px;
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 17px;
+      font-weight: 900;
+      color: white;
+      cursor: pointer;
+      background: linear-gradient(90deg,#4968e8,#bd4fc3);
+      box-shadow: 0 0 18px rgba(119,85,229,.22);
+    }
+
+    .next-btn.show { display: block; }
+
+    .summary {
+      display: none;
+      text-align: center;
+      padding: 30px 22px 34px;
+      background: rgba(247,251,255,.97);
+      color: #17364d;
+    }
+
+    .summary.show { display: block; }
+
+    .summary h2 {
+      font-size: 32px;
+      color: #315bc5;
+      margin: 8px 0;
+    }
+
+    .summary p {
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .rank {
+      font-size: 54px;
+      margin: 10px 0;
+    }
+
+    .restart {
+      margin-top: 14px;
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 22px;
+      font-size: 16px;
+      font-weight: 900;
+      color: white;
+      background: linear-gradient(90deg,#4968e8,#bd4fc3);
+      cursor: pointer;
+    }
+
+    .credit {
+      text-align: center;
+      padding: 14px;
+      color: #a9cce7;
+      font-size: 12px;
+    }
+
+    @media (max-width: 700px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .content { padding: 14px; }
+      .qtext { font-size: 19px; }
+      .answer { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="card">
+      <div class="header">
+        <h1 class="title">GRADE 10 • UNIT 3 • EXERCISE 1</h1>
+        <div class="subtitle">Option B — Questions 1–15</div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b id="qCounter">1/15</b><span>QUESTION</span></div>
+        <div class="stat"><b id="hearts">❤️❤️❤️❤️❤️</b><span>HEARTS</span></div>
+        <div class="stat"><b id="xp">0</b><span>XP</span></div>
+        <div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+      </div>
+
+      <div class="content" id="gameArea">
+        <div class="question-box">
+          <div class="progress"><div id="progressBar"></div></div>
+          <div class="qtext" id="questionText">Question 1. Social media has helped _________ Vietnamese music to listeners in many other countries.</div>
+          <div class="answers" id="answers"></div>
+          <div class="feedback" id="feedback"></div>
+          <button class="next-btn" id="nextBtn">CÂU TIẾP THEO →</button>
+        </div>
+      </div>
+
+      <div class="summary" id="summary">
+        <div class="rank">🏆</div>
+        <h2>HOÀN THÀNH!</h2>
+        <p id="summaryText"></p>
+        <button class="restart" onclick="restartGame()">CHƠI LẠI</button>
+      </div>
+
+      <div class="credit">Grade 10 English Review Game</div>
+    </section>
+  </main>
+
+  <script>
+    const questions = [
+      {
+        q: 'Social media has helped _________ Vietnamese music to listeners in many other countries.',
+        options: ['A. popularity', 'B. popular', 'C. popularize', 'D. popularly'],
+        correct: 2,
+        explain: 'Sau “help” dùng động từ nguyên mẫu: help + V. Vì vậy “help popularize” là đúng. “Popularize” = làm cho trở nên phổ biến.'
+      },
+      {
+        q: 'The young singer became _________ with teenagers after her first song went viral online.',
+        options: ['A. popularity', 'B. popular', 'C. popularly', 'D. popularize'],
+        correct: 1,
+        explain: 'Sau “became” cần tính từ. “popular” là tính từ, nghĩa là nổi tiếng/được yêu thích.'
+      },
+      {
+        q: 'This reality show has gained great _________ among young viewers in recent years.',
+        options: ['A. popular', 'B. popularly', 'C. popularity', 'D. popularize'],
+        correct: 2,
+        explain: 'Sau tính từ “great” cần danh từ. “popularity” là danh từ. Cụm “gain popularity” = trở nên phổ biến.'
+      },
+      {
+        q: 'The music teacher discovered several _________ students in her new class.',
+        options: ['A. talent', 'B. talented', 'C. talentless', 'D. talenting'],
+        correct: 1,
+        explain: 'Cần tính từ bổ nghĩa cho “students”. “talented students” = những học sinh có tài năng.'
+      },
+      {
+        q: 'Mai has the _________ to remember a song after hearing it only once.',
+        options: ['A. able', 'B. enable', 'C. ability', 'D. talented'],
+        correct: 2,
+        explain: 'Cấu trúc đúng là “have the ability to + V” = có khả năng làm gì.'
+      },
+      {
+        q: 'Music apps _________ users to listen to their favorite songs anywhere.',
+        options: ['A. ability', 'B. able', 'C. enable', 'D. talent'],
+        correct: 2,
+        explain: 'Cấu trúc “enable + somebody + to V” = cho phép/giúp ai có thể làm gì. Vì vậy chọn “enable”.'
+      },
+      {
+        q: 'Although Minh has never taken professional lessons, he has a natural _________ for playing the guitar.',
+        options: ['A. talent', 'B. talented', 'C. enable', 'D. able'],
+        correct: 0,
+        explain: 'Cụm “have a talent for + V-ing” = có năng khiếu làm gì. Vì vậy chọn “talent”.'
+      },
+      {
+        q: 'Traditional songs have been passed down from generation to generation since _________ times.',
+        options: ['A. modern', 'B. ancient', 'C. current', 'D. recent'],
+        correct: 1,
+        explain: '“ancient times” = thời xa xưa. Ngữ cảnh “passed down from generation to generation” cho thấy bài hát đã có từ lâu đời.'
+      },
+      {
+        q: 'The musician played the _________ by blowing air into it while moving his fingers over the holes.',
+        options: ['A. gong', 'B. drum', 'C. flute', 'D. piano'],
+        correct: 2,
+        explain: '“flute” là sáo, một nhạc cụ hơi được chơi bằng cách thổi và di chuyển ngón tay trên các lỗ.'
+      },
+      {
+        q: 'The museum displays many _________ from different regions of Vietnam.',
+        options: ['A. traditional musical instruments', 'B. musical traditional instruments', 'C. instruments traditional musical', 'D. traditional instruments musical'],
+        correct: 0,
+        explain: 'Trật tự từ đúng là “traditional + musical + instruments” = các nhạc cụ truyền thống.'
+      },
+      {
+        q: 'The young singer received an _________ for her excellent performance in the competition.',
+        options: ['A. audience', 'B. award', 'C. record', 'D. view'],
+        correct: 1,
+        explain: 'Cụm “receive an award” = nhận một giải thưởng. Vì vậy chọn “award”.'
+      },
+      {
+        q: 'The singer hopes to set a new _________ for the most online views in one day.',
+        options: ['A. prize', 'B. recording', 'C. record', 'D. award'],
+        correct: 2,
+        explain: 'Cụm “set a new record for” = lập kỷ lục mới về một điều gì đó.'
+      },
+      {
+        q: 'We watched a _________ of last night\'s concert because we could not attend it in person.',
+        options: ['A. recorder', 'B. record', 'C. recording', 'D. recorded'],
+        correct: 2,
+        explain: 'Sau “a” cần danh từ. “a recording of the concert” = một bản ghi âm/ghi hình của buổi hòa nhạc.'
+      },
+      {
+        q: 'The final round of the singing competition attracted millions of _________ across the country.',
+        options: ['A. views', 'B. viewers', 'C. audiences', 'D. spectators'],
+        correct: 1,
+        explain: '“viewers” = người xem chương trình/truyền hình. “views” = lượt xem; “spectators” thường là người xem trực tiếp tại sự kiện.'
+      },
+      {
+        q: 'After editing her new music video, Hoa _________ it to her YouTube channel.',
+        options: ['A. downloaded', 'B. recorded', 'C. uploaded', 'D. viewed'],
+        correct: 2,
+        explain: '“upload something to + platform” = tải nội dung lên một nền tảng. “download” là tải xuống.'
+      }
+    ];
+
+    const bonusQuestions = new Set([2, 5, 8, 11]); // Q3, Q6, Q9, Q12 (0-based)
+
+    let current = 0;
+    let hearts = 5;
+    let xp = 0;
+    let combo = 0;
+    let totalWrong = 0;
+    let locked = false;
+    let bonusGiven = new Set();
+
+    const qCounter = document.getElementById('qCounter');
+    const heartsEl = document.getElementById('hearts');
+    const xpEl = document.getElementById('xp');
+    const comboEl = document.getElementById('combo');
+    const questionText = document.getElementById('questionText');
+    const answersEl = document.getElementById('answers');
+    const feedback = document.getElementById('feedback');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressBar = document.getElementById('progressBar');
+    const gameArea = document.getElementById('gameArea');
+    const summary = document.getElementById('summary');
+    const summaryText = document.getElementById('summaryText');
+
+    function updateHearts() {
+      heartsEl.textContent = '❤️'.repeat(hearts) + '🖤'.repeat(Math.max(0, 5 - hearts));
+    }
+
+    function renderQuestion() {
+      locked = false;
+      const item = questions[current];
+
+      qCounter.textContent = `${current + 1}/${questions.length}`;
+      xpEl.textContent = xp;
+      comboEl.textContent = combo;
+      updateHearts();
+      progressBar.style.width = `${(current / questions.length) * 100}%`;
+
+      questionText.textContent = `Question ${current + 1}. ${item.q}`;
+      answersEl.innerHTML = '';
+      feedback.className = 'feedback';
+      feedback.textContent = '';
+      nextBtn.className = 'next-btn';
+
+      item.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'answer';
+        btn.textContent = opt;
+        btn.onclick = () => chooseAnswer(index, btn);
+        answersEl.appendChild(btn);
+      });
+    }
+
+    function chooseAnswer(index, btn) {
+      if (locked) return;
+      const item = questions[current];
+
+      if (index === item.correct) {
+        locked = true;
+        btn.classList.add('correct');
+
+        combo++;
+        let gain = 10;
+        if (combo >= 3) gain = 20;
+        else if (combo >= 2) gain = 15;
+        xp += gain;
+
+        let bonusText = '';
+        if (bonusQuestions.has(current) && !bonusGiven.has(current)) {
+          bonusGiven.add(current);
+          if (hearts < 5) {
+            hearts++;
+            bonusText = '<br>💖 <strong>Bonus +1 tim!</strong>';
+          } else {
+            bonusText = '<br>💖 <strong>Đạt câu bonus! Tim đang đầy.</strong>';
+          }
+          updateHearts();
+        }
+
+        [...answersEl.children].forEach(b => b.disabled = true);
+
+        feedback.innerHTML =
+          `✅ <strong>Chính xác!</strong><br>${item.explain}<br><strong>+${gain} XP</strong>${bonusText}`;
+        feedback.classList.add('show');
+
+        xpEl.textContent = xp;
+        comboEl.textContent = combo;
+        nextBtn.classList.add('show');
+
+        nextBtn.textContent =
+          current === questions.length - 1 ? 'XEM KẾT QUẢ →' : 'CÂU TIẾP THEO →';
+
+      } else {
+        btn.classList.add('wrong');
+        btn.disabled = true;
+        combo = 0;
+        totalWrong++;
+        hearts--;
+        updateHearts();
+        comboEl.textContent = combo;
+
+        feedback.innerHTML =
+          '❌ <strong>Chưa đúng.</strong> Em hãy chọn lại. Phải chọn đúng mới được chuyển sang câu tiếp theo.';
+        feedback.classList.add('show');
+
+        if (hearts <= 0) {
+          setTimeout(() => {
+            alert('💔 Hết 5 trái tim! Em phải làm lại từ câu 1.');
+            restartGame();
+          }, 250);
+          return;
+        }
+
+        setTimeout(() => {
+          btn.classList.remove('wrong');
+          btn.disabled = false;
+        }, 500);
+      }
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (current < questions.length - 1) {
+        current++;
+        renderQuestion();
+      } else {
+        finishGame();
+      }
+    });
+
+    function finishGame() {
+      progressBar.style.width = '100%';
+      gameArea.style.display = 'none';
+      summary.classList.add('show');
+
+      let rank = 'S RANK';
+      if (totalWrong >= 5) rank = 'A RANK';
+      if (totalWrong >= 10) rank = 'B RANK';
+
+      summaryText.innerHTML =
+        `<strong>${rank}</strong><br>` +
+        `Em đã hoàn thành ${questions.length} câu.<br>` +
+        `XP: <strong>${xp}</strong> • Số lần chọn sai: <strong>${totalWrong}</strong>`;
+    }
+
+    function restartGame() {
+      current = 0;
+      hearts = 5;
+      xp = 0;
+      combo = 0;
+      totalWrong = 0;
+      locked = false;
+      bonusGiven = new Set();
+
+      summary.classList.remove('show');
+      gameArea.style.display = 'block';
+      renderQuestion();
+    }
+
+    renderQuestion();
+  </script>
+</body>
+</html>

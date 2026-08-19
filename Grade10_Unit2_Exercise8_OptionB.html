@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade 10 - Unit 2 - Exercise 8 - Option B</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 82% 12%, rgba(255, 224, 92, .50), transparent 19%),
+        radial-gradient(circle at 15% 24%, rgba(255,255,255,.35), transparent 22%),
+        radial-gradient(circle at 50% 110%, rgba(0, 122, 190, .34), transparent 36%),
+        linear-gradient(180deg, #75d5ff 0%, #bdefff 42%, #54b9e6 68%, #1676ae 100%);
+      color: #eef7ff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .shell {
+      width: min(1100px, 94%);
+      margin: 28px auto;
+    }
+
+    .card {
+      background: rgba(244, 252, 255, .95);
+      border: 1px solid rgba(34, 142, 194, .35);
+      border-radius: 22px;
+      box-shadow: 0 0 30px rgba(17, 113, 170, .22);
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 20px 22px;
+      background: linear-gradient(90deg, rgba(255,205,68,.94), rgba(64,176,224,.92));
+      border-bottom: 1px solid rgba(31,126,178,.20);
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 38px);
+      font-weight: 800;
+      letter-spacing: .5px;
+      color: #083d61;
+      text-shadow: 0 1px 0 rgba(255,255,255,.55);
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: #15516f;
+      font-size: 15px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 14px 18px;
+      background: rgba(234, 249, 255, .92);
+      border-bottom: 1px solid rgba(42,139,190,.16);
+    }
+
+    .stat {
+      text-align: center;
+      padding: 10px 8px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.45);
+      border: 1px solid rgba(55,151,196,.18);
+    }
+
+    .stat b {
+      display: block;
+      font-size: 20px;
+      color: #0a4d72;
+    }
+
+    .stat span {
+      font-size: 12px;
+      color: #4f7e91;
+    }
+
+    .content {
+      padding: 22px;
+    }
+
+    .passage {
+      background: rgba(255,255,255,.45);
+      border: 1px solid rgba(56,151,196,.18);
+      border-radius: 18px;
+      padding: 20px;
+      line-height: 1.72;
+      color: #163f53;
+      margin-bottom: 22px;
+      max-height: 370px;
+      overflow-y: auto;
+    }
+
+    .passage h2 {
+      margin-top: 0;
+      color: #0a74a8;
+      text-align: center;
+    }
+
+    .question-box {
+      background: rgba(248, 253, 255, .96);
+      border: 1px solid rgba(47,145,190,.20);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .progress {
+      height: 10px;
+      background: rgba(24, 110, 159, .12);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .progress > div {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ffd34e, #21a7d8);
+      transition: width .3s ease;
+    }
+
+    .qtext {
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .answers {
+      display: grid;
+      gap: 12px;
+    }
+
+    .answer {
+      width: 100%;
+      text-align: left;
+      border: 1px solid rgba(43,143,190,.22);
+      background: rgba(255,255,255,.045);
+      color: #123f55;
+      padding: 15px 16px;
+      border-radius: 14px;
+      font-size: 17px;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+
+    .answer:hover {
+      transform: translateY(-1px);
+      border-color: rgba(19,137,194,.70);
+      background: rgba(80,190,235,.14);
+    }
+
+    .answer.correct {
+      background: rgba(32, 185, 98, .18);
+      border-color: #43db8b;
+      color: #d9ffea;
+      box-shadow: 0 0 16px rgba(55,215,134,.2);
+    }
+
+    .answer.wrong {
+      background: rgba(233, 64, 64, .19);
+      border-color: #ff6969;
+      color: #ffdede;
+      animation: shake .2s linear 2;
+    }
+
+    .answer:disabled { cursor: default; }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+      100% { transform: translateX(0); }
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      line-height: 1.55;
+      background: rgba(82,181,226,.12);
+      border: 1px solid rgba(43,142,190,.22);
+      color: #18485f;
+    }
+
+    .feedback.show { display: block; }
+
+    .next-btn {
+      display: none;
+      margin-top: 16px;
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 17px;
+      font-weight: 800;
+      color: white;
+      cursor: pointer;
+      background: linear-gradient(90deg, #ffc72f, #159bcf);
+      box-shadow: 0 0 18px rgba(23,133,187,.20);
+    }
+
+    .next-btn.show { display: block; }
+
+    .summary {
+      display: none;
+      padding: 28px 22px 32px;
+      text-align: center;
+    }
+
+    .summary.show { display: block; }
+
+    .rank {
+      font-size: 50px;
+      margin: 10px 0;
+    }
+
+    .summary h2 {
+      font-size: 32px;
+      margin: 8px 0;
+      color: #0874a8;
+    }
+
+    .summary p {
+      color: #315c70;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .restart {
+      margin-top: 14px;
+      border: 0;
+      padding: 14px 22px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 16px;
+      color: white;
+      background: linear-gradient(90deg, #ffbf21, #108dc1);
+      cursor: pointer;
+    }
+
+    .credit {
+      text-align: center;
+      padding: 15px;
+      color: #557d90;
+      font-size: 12px;
+      border-top: 1px solid rgba(104,198,255,.12);
+    }
+
+    @media (max-width: 700px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .content { padding: 14px; }
+      .qtext { font-size: 18px; }
+      .answer { font-size: 15px; }
+      .passage { max-height: 310px; }
+    }
+  
+    /* READABILITY FIX — light Ocean + Sun theme */
+    body { color: #123f55 !important; }
+    .title { color: #073b5c !important; }
+    .subtitle { color: #124f70 !important; font-weight: 700; }
+    .stat b { color: #083f60 !important; }
+    .stat span { color: #386b82 !important; font-weight: 700; }
+    .passage { color: #173f52 !important; }
+    .passage h2 { color: #006fa5 !important; }
+    .question-box { color: #123f55 !important; }
+    .qtext {
+      color: #083f60 !important;
+      text-shadow: none !important;
+      font-weight: 800 !important;
+    }
+    .answer {
+      color: #123f55 !important;
+      background: rgba(255,255,255,.76) !important;
+      border-color: rgba(20,125,178,.28) !important;
+    }
+    .answer:hover {
+      color: #083f60 !important;
+      background: rgba(218,245,255,.96) !important;
+    }
+    .answer.correct {
+      color: #075d35 !important;
+      background: rgba(191, 246, 215, .92) !important;
+    }
+    .answer.wrong {
+      color: #8d1e1e !important;
+      background: rgba(255, 218, 218, .94) !important;
+    }
+    .feedback {
+      color: #123f55 !important;
+      background: rgba(225,247,255,.96) !important;
+    }
+    .summary, .summary p { color: #17475d !important; }
+    .summary h2 { color: #006fa5 !important; }
+
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="card">
+      <div class="header">
+        <h1 class="title">GRADE 10 • UNIT 2 • EXERCISE 8</h1>
+        <div class="subtitle">Option B — Saving Energy at Home</div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b id="qCounter">1/10</b><span>QUESTION</span></div>
+        <div class="stat"><b id="hearts">❤️❤️❤️</b><span>HEARTS</span></div>
+        <div class="stat"><b id="xp">0</b><span>XP</span></div>
+        <div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+      </div>
+
+      <div class="content" id="gameArea">
+        <div class="passage">
+          <h2>SAVING ENERGY AT HOME</h2>
+
+          <p>Every day, families use energy for many different activities, such as cooking, lighting rooms, heating water, and using electrical appliances. Most people cannot stop using electricity completely, but they can change the way they use it. By developing simple energy-saving habits, families can reduce both their electricity bills and their impact on the environment.</p>
+
+          <p>Using too much electricity can cause environmental problems. [I] In many places, electricity is still produced by burning fossil fuels such as coal and gas. [II] This process releases greenhouse gases into the atmosphere and contributes to global warming. Therefore, reducing unnecessary electricity use can be an effective way to protect the environment.</p>
+
+          <p>Fortunately, saving energy at home does not require major changes. [III] People can start with small actions in their daily routines. [IV] For instance, they can turn off lights when leaving a room and unplug electronic devices when they are not being used. Families can also use energy-efficient appliances, which usually require less electricity to perform the same tasks.</p>
+
+          <p>These simple habits may seem unimportant, but their effects can become significant when many people practise them. By using energy more wisely, families can save money while helping to create a cleaner environment.</p>
+        </div>
+
+        <div class="question-box">
+          <div class="progress"><div id="progressBar"></div></div>
+          <div class="qtext" id="questionText"></div>
+          <div class="answers" id="answers"></div>
+          <div class="feedback" id="feedback"></div>
+          <button class="next-btn" id="nextBtn">NEXT →</button>
+        </div>
+      </div>
+
+      <div class="summary" id="summary">
+        <div class="rank" id="rankIcon">🏆</div>
+        <h2>MISSION COMPLETE!</h2>
+        <p id="summaryText"></p>
+        <button class="restart" onclick="restartGame()">PLAY AGAIN</button>
+      </div>
+
+      <div class="credit">Grade 10 English Review Game</div>
+    </section>
+  </main>
+
+  <script>
+    const questions = [
+      {
+        q: 'Where in paragraph [ ] does the following sentence best fit? “For example, changing the way we use electrical devices can make a difference.”',
+        options: ['A. [I]', 'B. [II]', 'C. [III]', 'D. [IV]'],
+        correct: 3,
+        explain: 'Câu này đưa ra một ví dụ về việc thay đổi cách sử dụng thiết bị điện. Vị trí [IV] hợp lý nhất vì ngay sau đó là các ví dụ cụ thể như tắt đèn và rút phích cắm thiết bị.'
+      },
+      {
+        q: 'Which of the following statements is NOT TRUE according to the passage?',
+        options: [
+          'A. Families use energy for several activities at home.',
+          'B. Burning fossil fuels can release greenhouse gases.',
+          'C. People must completely stop using electricity to protect the environment.',
+          'D. Energy-efficient appliances can use less electricity.'
+        ],
+        correct: 2,
+        explain: 'Bài đọc nói con người không thể ngừng sử dụng điện hoàn toàn, nhưng có thể thay đổi cách sử dụng điện. Vì vậy phương án C trái với nội dung bài.'
+      },
+      {
+        q: 'The word “reduce” in paragraph 1 is opposite in meaning to:',
+        options: ['A. increase', 'B. control', 'C. limit', 'D. save'],
+        correct: 0,
+        explain: '“reduce” có nghĩa là “giảm”, nên từ trái nghĩa là “increase” = “tăng”.'
+      },
+      {
+        q: 'What does the phrase “This process” in paragraph 2 refer to?',
+        options: [
+          'A. protecting the environment',
+          'B. producing electricity by burning fossil fuels',
+          'C. reducing unnecessary electricity use',
+          'D. releasing greenhouse gases into the atmosphere'
+        ],
+        correct: 1,
+        explain: '“This process” chỉ nội dung ngay trước đó: quá trình sản xuất điện bằng cách đốt nhiên liệu hóa thạch như than và khí đốt.'
+      },
+      {
+        q: 'The word “significant” in paragraph 4 is closest in meaning to:',
+        options: ['A. expensive', 'B. important', 'C. difficult', 'D. immediate'],
+        correct: 1,
+        explain: '“significant” trong ngữ cảnh này có nghĩa là “đáng kể/quan trọng”, gần nghĩa nhất với “important”.'
+      },
+      {
+        q: 'What is the main idea of the third paragraph?',
+        options: [
+          'A. Electrical devices should not be used at home.',
+          'B. Buying new appliances is the only way to save energy.',
+          'C. Small changes in everyday habits can help save energy.',
+          'D. Turning off lights is more effective than using efficient appliances.'
+        ],
+        correct: 2,
+        explain: 'Đoạn 3 nêu các hành động đơn giản như tắt đèn, rút thiết bị không sử dụng và dùng thiết bị tiết kiệm năng lượng. Vì vậy ý chính là những thay đổi nhỏ trong thói quen hằng ngày có thể giúp tiết kiệm năng lượng.'
+      },
+      {
+        q: 'Which of the following best restates the sentence: “Most people cannot stop using electricity completely, but they can change the way they use it.”',
+        options: [
+          'A. People should avoid using electricity whenever they are at home.',
+          'B. Although electricity is necessary, people can use it in more responsible ways.',
+          'C. People cannot change their electricity consumption because they need it every day.',
+          'D. The best way to save electricity is to stop using electrical appliances.'
+        ],
+        correct: 1,
+        explain: 'Câu gốc cho biết con người vẫn cần sử dụng điện nhưng có thể thay đổi cách sử dụng. Phương án B diễn đạt đúng ý này: điện là cần thiết nhưng chúng ta có thể sử dụng điện có trách nhiệm hơn.'
+      },
+      {
+        q: 'Which of the following is NOT mentioned in the passage?',
+        options: [
+          'A. Turning off unnecessary lights can save energy.',
+          'B. Unplugging unused electronic devices can reduce electricity use.',
+          'C. Installing solar panels can provide clean energy for homes.',
+          'D. Energy-efficient appliances require less electricity.'
+        ],
+        correct: 2,
+        explain: 'Bài có đề cập việc tắt đèn, rút thiết bị điện và sử dụng thiết bị tiết kiệm năng lượng. “Installing solar panels” hoàn toàn không được nhắc đến.'
+      },
+      {
+        q: 'Which of the following can be inferred from the passage?',
+        options: [
+          'A. Individual energy-saving actions can have a greater effect when many people adopt them.',
+          'B. All electricity around the world is produced from fossil fuels.',
+          'C. Energy-efficient appliances are always cheaper than ordinary appliances.',
+          'D. Families that save electricity will completely prevent global warming.'
+        ],
+        correct: 0,
+        explain: 'Đoạn cuối nói những thói quen đơn giản sẽ tạo ra tác động đáng kể khi nhiều người cùng thực hiện. Vì vậy có thể suy ra hành động của mỗi cá nhân sẽ có tác động lớn hơn khi được nhiều người áp dụng.'
+      },
+      {
+        q: 'Which of the following best summarizes the entire passage?',
+        options: [
+          'A. Electricity is harmful to the environment, so people should avoid using it whenever possible.',
+          'B. Fossil fuels are the main source of electricity and should immediately be replaced everywhere.',
+          'C. Simple changes in household energy use can save money and help protect the environment.',
+          'D. Modern electrical appliances are the best solution to environmental problems.'
+        ],
+        correct: 2,
+        explain: 'Toàn bài tập trung vào các thay đổi đơn giản trong cách sử dụng năng lượng tại nhà. Những thay đổi này vừa giúp tiết kiệm tiền vừa góp phần bảo vệ môi trường.'
+      }
+    ];
+
+    let current = 0;
+    let hearts = 5;
+    let xp = 0;
+    let combo = 0;
+    let totalWrong = 0;
+    let locked = false;
+    let q4BonusGiven = false;
+
+    const qCounter = document.getElementById('qCounter');
+    const heartsEl = document.getElementById('hearts');
+    const xpEl = document.getElementById('xp');
+    const comboEl = document.getElementById('combo');
+    const questionText = document.getElementById('questionText');
+    const answersEl = document.getElementById('answers');
+    const feedback = document.getElementById('feedback');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressBar = document.getElementById('progressBar');
+    const gameArea = document.getElementById('gameArea');
+    const summary = document.getElementById('summary');
+    const summaryText = document.getElementById('summaryText');
+    const rankIcon = document.getElementById('rankIcon');
+
+    function renderQuestion() {
+      locked = false;
+      const item = questions[current];
+
+      qCounter.textContent = `${current + 1}/${questions.length}`;
+      heartsEl.textContent = '❤️'.repeat(hearts) + '🖤'.repeat(Math.max(0, 5 - hearts));
+      xpEl.textContent = xp;
+      comboEl.textContent = combo;
+      progressBar.style.width = `${(current / questions.length) * 100}%`;
+
+      questionText.textContent = `Question ${current + 1}. ${item.q}`;
+      answersEl.innerHTML = '';
+      feedback.className = 'feedback';
+      feedback.textContent = '';
+      nextBtn.className = 'next-btn';
+
+      item.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'answer';
+        btn.textContent = opt;
+        btn.onclick = () => chooseAnswer(index, btn);
+        answersEl.appendChild(btn);
+      });
+    }
+
+    function chooseAnswer(index, btn) {
+      if (locked) return;
+
+      const item = questions[current];
+
+      if (index === item.correct) {
+        locked = true;
+        btn.classList.add('correct');
+
+        combo++;
+        let gain = 10;
+        if (combo >= 3) gain = 20;
+        else if (combo >= 2) gain = 15;
+        xp += gain;
+
+        // Question 4 bonus: +1 heart, up to the maximum of 5, once per run.
+        let bonusText = '';
+        if (current === 3 && !q4BonusGiven) {
+          q4BonusGiven = true;
+          if (hearts < 5) {
+            hearts++;
+            bonusText = '<br>💖 <strong>Thưởng câu 4: +1 tim!</strong>';
+          } else {
+            bonusText = '<br>💖 <strong>Đã đạt thưởng câu 4! Tim hiện đang đầy.</strong>';
+          }
+          heartsEl.textContent = '❤️'.repeat(hearts) + '🖤'.repeat(Math.max(0, 5 - hearts));
+        }
+
+        [...answersEl.children].forEach(b => b.disabled = true);
+
+        feedback.innerHTML = `✅ <strong>Chính xác!</strong><br>${item.explain}<br><strong>+${gain} XP</strong>${bonusText}`;
+        feedback.classList.add('show');
+
+        xpEl.textContent = xp;
+        comboEl.textContent = combo;
+        nextBtn.classList.add('show');
+
+        if (current === questions.length - 1) {
+          nextBtn.textContent = 'XEM KẾT QUẢ →';
+        } else {
+          nextBtn.textContent = 'CÂU TIẾP THEO →';
+        }
+      } else {
+        btn.classList.add('wrong');
+        btn.disabled = true;
+
+        combo = 0;
+        totalWrong++;
+
+        hearts--;
+        if (hearts <= 0) {
+          hearts = 0;
+          heartsEl.textContent = '🖤🖤🖤🖤🖤';
+          comboEl.textContent = 0;
+          setTimeout(() => {
+            alert('💔 Hết 5 trái tim! Bạn phải làm lại từ câu 1.');
+            restartGame();
+          }, 250);
+          return;
+        }
+
+        heartsEl.textContent = '❤️'.repeat(hearts) + '🖤'.repeat(Math.max(0, 5 - hearts));
+        comboEl.textContent = combo;
+
+        feedback.innerHTML = `❌ <strong>Chưa đúng.</strong> Em hãy chọn lại. Phải chọn đúng mới được chuyển sang câu tiếp theo.`;
+        feedback.classList.add('show');
+
+        setTimeout(() => {
+          btn.classList.remove('wrong');
+          btn.disabled = false;
+        }, 500);
+      }
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (current < questions.length - 1) {
+        current++;
+        renderQuestion();
+      } else {
+        finishGame();
+      }
+    });
+
+    function finishGame() {
+      progressBar.style.width = '100%';
+      gameArea.style.display = 'none';
+      summary.classList.add('show');
+
+      let rank = '🥇';
+      let label = 'S RANK';
+      if (totalWrong >= 5) {
+        rank = '🥈';
+        label = 'A RANK';
+      }
+      if (totalWrong >= 10) {
+        rank = '🥉';
+        label = 'B RANK';
+      }
+
+      rankIcon.textContent = rank;
+      summaryText.innerHTML =
+        `<strong>${label}</strong><br>` +
+        `You completed all ${questions.length} questions.<br>` +
+        `XP: <strong>${xp}</strong> • Wrong choices: <strong>${totalWrong}</strong><br>` +
+        `Remember: reuse, repair, and exchange can help reduce waste and save resources.`;
+    }
+
+    function restartGame() {
+      current = 0;
+      hearts = 5;
+      xp = 0;
+      combo = 0;
+      totalWrong = 0;
+      locked = false;
+      q4BonusGiven = false;
+
+      summary.classList.remove('show');
+      gameArea.style.display = 'block';
+      renderQuestion();
+    }
+
+    renderQuestion();
+  </script>
+</body>
+</html>

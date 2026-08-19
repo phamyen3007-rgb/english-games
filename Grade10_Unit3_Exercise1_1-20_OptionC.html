@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade 10 - Unit 3 - Exercise 1 (1-20) - Option C</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 82% 12%, rgba(255, 226, 102, .42), transparent 18%),
+        radial-gradient(circle at 18% 20%, rgba(255,255,255,.28), transparent 20%),
+        radial-gradient(circle at 50% 108%, rgba(0, 91, 150, .42), transparent 38%),
+        linear-gradient(180deg, #7dd9ff 0%, #c5f1ff 38%, #4eb8e6 64%, #0d6ea7 100%);
+      color: #123f55;
+    }
+
+    .shell {
+      width: min(1000px, 94%);
+      margin: 28px auto;
+    }
+
+    .card {
+      background: rgba(244, 252, 255, .96);
+      border: 1px solid rgba(29, 128, 181, .34);
+      border-radius: 22px;
+      box-shadow: 0 0 30px rgba(12, 106, 166, .22);
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 20px 22px;
+      background: linear-gradient(90deg, rgba(255,207,75,.96), rgba(46,168,219,.94));
+      border-bottom: 1px solid rgba(27,126,181,.20);
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 38px);
+      font-weight: 900;
+      color: #073b5c;
+      text-shadow: 0 1px 0 rgba(255,255,255,.55);
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: #124f70;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 14px 18px;
+      background: rgba(232,248,255,.94);
+      border-bottom: 1px solid rgba(42,139,190,.16);
+    }
+
+    .stat {
+      text-align: center;
+      padding: 10px 8px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.68);
+      border: 1px solid rgba(55,151,196,.18);
+    }
+
+    .stat b {
+      display: block;
+      font-size: 20px;
+      color: #083f60;
+    }
+
+    .stat span {
+      font-size: 12px;
+      color: #386b82;
+      font-weight: 700;
+    }
+
+    .content {
+      padding: 22px;
+    }
+
+    .question-box {
+      background: rgba(248,253,255,.97);
+      color: #17364d;
+      border: 1px solid rgba(47,145,190,.22);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .progress {
+      height: 10px;
+      background: rgba(24,110,159,.12);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .progress > div {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ffd34e, #21a7d8);
+      transition: width .3s ease;
+    }
+
+    .qtext {
+      font-size: 22px;
+      line-height: 1.5;
+      font-weight: 800;
+      color: #083f60;
+      margin-bottom: 16px;
+    }
+
+    .answers {
+      display: grid;
+      gap: 12px;
+    }
+
+    .answer {
+      width: 100%;
+      text-align: left;
+      border: 1px solid rgba(43,143,190,.24);
+      background: rgba(255,255,255,.94);
+      color: #123f55;
+      padding: 15px 16px;
+      border-radius: 14px;
+      font-size: 17px;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+
+    .answer:hover {
+      transform: translateY(-1px);
+      background: rgba(218,245,255,.98);
+      border-color: rgba(19,137,194,.72);
+    }
+
+    .answer.correct {
+      background: rgba(191,246,215,.94);
+      border-color: #37c977;
+      color: #075d35;
+      box-shadow: 0 0 15px rgba(55,201,119,.18);
+    }
+
+    .answer.wrong {
+      background: rgba(255,218,218,.95);
+      border-color: #ef6b6b;
+      color: #8d1e1e;
+      animation: shake .2s linear 2;
+    }
+
+    .answer:disabled { cursor: default; }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+      100% { transform: translateX(0); }
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      line-height: 1.6;
+      background: rgba(225,247,255,.97);
+      border: 1px solid rgba(43,142,190,.22);
+      color: #123f55;
+    }
+
+    .feedback.show { display: block; }
+
+    .next-btn {
+      display: none;
+      margin-top: 16px;
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 17px;
+      font-weight: 900;
+      color: white;
+      cursor: pointer;
+      background: linear-gradient(90deg, #ffc72f, #159bcf);
+      box-shadow: 0 0 18px rgba(23,133,187,.20);
+    }
+
+    .next-btn.show { display: block; }
+
+    .summary {
+      display: none;
+      text-align: center;
+      padding: 30px 22px 34px;
+      background: rgba(248,253,255,.97);
+      color: #17475d;
+    }
+
+    .summary.show { display: block; }
+
+    .summary h2 {
+      font-size: 32px;
+      color: #0874a8;
+      margin: 8px 0;
+    }
+
+    .summary p {
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .rank {
+      font-size: 54px;
+      margin: 10px 0;
+    }
+
+    .restart {
+      margin-top: 14px;
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 22px;
+      font-size: 16px;
+      font-weight: 900;
+      color: white;
+      background: linear-gradient(90deg, #ffbf21, #108dc1);
+      cursor: pointer;
+    }
+
+    .credit {
+      text-align: center;
+      padding: 14px;
+      color: #557d90;
+      font-size: 12px;
+    }
+
+    @media (max-width: 700px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .content { padding: 14px; }
+      .qtext { font-size: 19px; }
+      .answer { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="card">
+      <div class="header">
+        <h1 class="title">GRADE 10 • UNIT 3 • EXERCISE 1</h1>
+        <div class="subtitle">Option C — Ocean World</div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b id="qCounter">1/15</b><span>QUESTION</span></div>
+        <div class="stat"><b id="hearts">❤️❤️❤️❤️❤️</b><span>HEARTS</span></div>
+        <div class="stat"><b id="xp">0</b><span>XP</span></div>
+        <div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+      </div>
+
+      <div class="content" id="gameArea">
+        <div class="question-box">
+          <div class="progress"><div id="progressBar"></div></div>
+          <div class="qtext" id="questionText"></div>
+          <div class="answers" id="answers"></div>
+          <div class="feedback" id="feedback"></div>
+          <button class="next-btn" id="nextBtn">CÂU TIẾP THEO →</button>
+        </div>
+      </div>
+
+      <div class="summary" id="summary">
+        <div class="rank">🌊🏆</div>
+        <h2>HOÀN THÀNH!</h2>
+        <p id="summaryText"></p>
+        <button class="restart" onclick="restartGame()">CHƠI LẠI</button>
+      </div>
+
+      <div class="credit">Grade 10 English Review Game • Ocean World</div>
+    </section>
+  </main>
+
+  <script>
+    const questions = [
+      {
+        q: "The band's appearance on an international TV programme helped _________ traditional Vietnamese music among younger audiences overseas.",
+        options: ['A. popular', 'B. popularity', 'C. popularize', 'D. popularly'],
+        correct: 2,
+        explain: 'Sau “help” dùng động từ nguyên mẫu: help + V. Vì vậy “help popularize” là đúng. “Popularize” = làm cho điều gì trở nên phổ biến.'
+      },
+      {
+        q: 'Although the singer was almost unknown a year ago, she has become increasingly _________ with young music fans.',
+        options: ['A. popularity', 'B. popular', 'C. popularize', 'D. popularly'],
+        correct: 1,
+        explain: 'Sau “become” cần tính từ; “increasingly” là trạng từ bổ nghĩa cho tính từ. “Increasingly popular with” = ngày càng được yêu thích.'
+      },
+      {
+        q: 'The young musician showed an unusual _________ to recognize a melody after hearing only a few notes.',
+        options: ['A. ability', 'B. talent', 'C. enable', 'D. talented'],
+        correct: 0,
+        explain: 'Cấu trúc “ability to + V” = khả năng làm gì. “Talent” thường đi với “talent for + N/V-ing”.'
+      },
+      {
+        q: 'Despite coming from a family with no musical background, Nam proved to be a remarkably _________ performer.',
+        options: ['A. talent', 'B. talented', 'C. talentless', 'D. talenting'],
+        correct: 1,
+        explain: 'Cấu trúc “a + adverb + adjective + noun”: “a remarkably talented performer”. “Remarkably” bổ nghĩa cho tính từ “talented”.'
+      },
+      {
+        q: 'Regular practice can _________ young musicians to perform more confidently in front of large audiences.',
+        options: ['A. ability', 'B. able', 'C. enable', 'D. talent'],
+        correct: 2,
+        explain: 'Sau modal “can” cần động từ nguyên mẫu. Cấu trúc “enable + somebody + to V” = giúp/cho phép ai có thể làm gì.'
+      },
+      {
+        q: "Linh's natural _________ for music became obvious when she started composing simple songs at the age of seven.",
+        options: ['A. ability', 'B. talent', 'C. talented', 'D. enable'],
+        correct: 1,
+        explain: 'Cụm đúng là “a natural talent for + N” = năng khiếu tự nhiên về điều gì. “At the age of seven” cũng gợi ý đây là năng khiếu bẩm sinh.'
+      },
+      {
+        q: 'The festival gives visitors an opportunity to experience _________ that have been played in local communities for generations.',
+        options: ['A. musical traditional instruments', 'B. traditionally musical instruments', 'C. traditional musical instruments', 'D. traditional instruments music'],
+        correct: 2,
+        explain: 'Cụm đúng là “traditional musical instruments” = các nhạc cụ truyền thống. “Traditional” bổ nghĩa cho cụm “musical instruments”.'
+      },
+      {
+        q: 'During the cultural ceremony, the powerful sound of the _________ could be heard across the Central Highlands village.',
+        options: ['A. violin', 'B. piano', 'C. gong', 'D. flute'],
+        correct: 2,
+        explain: '“Gong” gắn với văn hóa cồng chiêng Tây Nguyên. Các từ khóa “cultural ceremony” và “Central Highlands” giúp xác định đáp án.'
+      },
+      {
+        q: 'The musician chose the _________ because its soft sound was suitable for the peaceful traditional melody.',
+        options: ['A. flute', 'B. gong', 'C. drum', 'D. bamboo clapper'],
+        correct: 0,
+        explain: '“Flute” tạo âm thanh nhẹ, mềm, phù hợp với “peaceful melody”. Các nhạc cụ gõ như gong, drum, bamboo clapper không phù hợp bằng.'
+      },
+      {
+        q: 'After winning several national competitions, the young pianist received an international _________ for her outstanding performance.',
+        options: ['A. record', 'B. award', 'C. recording', 'D. viewer'],
+        correct: 1,
+        explain: 'Cụm “receive an award for + N” = nhận giải thưởng vì một thành tích nào đó.'
+      },
+      {
+        q: "The group's latest song _________ a new record when it became the fastest Vietnamese music video to reach 50 million views.",
+        options: ['A. made', 'B. did', 'C. set', 'D. reached'],
+        correct: 2,
+        explain: 'Collocation đúng là “set a record” = lập kỷ lục. Không dùng “make/do a record” với nghĩa này.'
+      },
+      {
+        q: 'Because the concert was broadcast live, millions of _________ were able to enjoy the performance without going to the stadium.',
+        options: ['A. audiences', 'B. spectators', 'C. viewers', 'D. views'],
+        correct: 2,
+        explain: '“Viewers” = người xem qua TV/video. “Broadcast live” và “without going to the stadium” là dấu hiệu quan trọng.'
+      },
+      {
+        q: "The studio released a high-quality _________ of the singer's live performance several days after the concert.",
+        options: ['A. record', 'B. recorder', 'C. recording', 'D. recorded'],
+        correct: 2,
+        explain: 'Sau “a high-quality” cần danh từ. “A recording of a performance” = bản ghi âm/ghi hình của màn biểu diễn.'
+      },
+      {
+        q: 'The singer _________ a short preview of her new music video to her official channel before the full version was released.',
+        options: ['A. uploaded', 'B. downloaded', 'C. recorded', 'D. viewed'],
+        correct: 0,
+        explain: '“Upload something to a channel/platform” = tải nội dung lên kênh/nền tảng. “Download” là tải về thiết bị.'
+      },
+      {
+        q: 'Within only a few hours of being released, the music video had attracted more than two million _________, showing how eagerly fans had been waiting for it.',
+        options: ['A. viewers', 'B. audiences', 'C. views', 'D. spectators'],
+        correct: 2,
+        explain: 'Khi nói về số lượt xem của một video, dùng “views”. “Viewer” = người xem; “view” = lượt xem.'
+      }
+    ];
+
+    const bonusQuestions = new Set([2, 5, 8, 11]); // Q3, Q6, Q9, Q12
+
+    let current = 0;
+    let hearts = 5;
+    let xp = 0;
+    let combo = 0;
+    let totalWrong = 0;
+    let locked = false;
+    let bonusGiven = new Set();
+
+    const qCounter = document.getElementById('qCounter');
+    const heartsEl = document.getElementById('hearts');
+    const xpEl = document.getElementById('xp');
+    const comboEl = document.getElementById('combo');
+    const questionText = document.getElementById('questionText');
+    const answersEl = document.getElementById('answers');
+    const feedback = document.getElementById('feedback');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressBar = document.getElementById('progressBar');
+    const gameArea = document.getElementById('gameArea');
+    const summary = document.getElementById('summary');
+    const summaryText = document.getElementById('summaryText');
+
+    function updateHearts() {
+      heartsEl.textContent = '❤️'.repeat(hearts) + '🖤'.repeat(Math.max(0, 5 - hearts));
+    }
+
+    function renderQuestion() {
+      locked = false;
+      const item = questions[current];
+
+      qCounter.textContent = `${current + 1}/${questions.length}`;
+      xpEl.textContent = xp;
+      comboEl.textContent = combo;
+      updateHearts();
+      progressBar.style.width = `${(current / questions.length) * 100}%`;
+
+      questionText.textContent = `Question ${current + 1}. ${item.q}`;
+      answersEl.innerHTML = '';
+      feedback.className = 'feedback';
+      feedback.textContent = '';
+      nextBtn.className = 'next-btn';
+
+      item.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'answer';
+        btn.textContent = opt;
+        btn.onclick = () => chooseAnswer(index, btn);
+        answersEl.appendChild(btn);
+      });
+    }
+
+    function chooseAnswer(index, btn) {
+      if (locked) return;
+
+      const item = questions[current];
+
+      if (index === item.correct) {
+        locked = true;
+        btn.classList.add('correct');
+
+        combo++;
+        let gain = 10;
+        if (combo >= 3) gain = 20;
+        else if (combo >= 2) gain = 15;
+        xp += gain;
+
+        let bonusText = '';
+        if (bonusQuestions.has(current) && !bonusGiven.has(current)) {
+          bonusGiven.add(current);
+          if (hearts < 5) {
+            hearts++;
+            bonusText = '<br>💖 <strong>Bonus +1 tim!</strong>';
+          } else {
+            bonusText = '<br>💖 <strong>Đạt câu bonus! Tim đang đầy.</strong>';
+          }
+          updateHearts();
+        }
+
+        [...answersEl.children].forEach(b => b.disabled = true);
+
+        feedback.innerHTML =
+          `✅ <strong>Chính xác!</strong><br>${item.explain}<br><strong>+${gain} XP</strong>${bonusText}`;
+        feedback.classList.add('show');
+
+        xpEl.textContent = xp;
+        comboEl.textContent = combo;
+        nextBtn.classList.add('show');
+        nextBtn.textContent =
+          current === questions.length - 1 ? 'XEM KẾT QUẢ →' : 'CÂU TIẾP THEO →';
+
+      } else {
+        btn.classList.add('wrong');
+        btn.disabled = true;
+
+        combo = 0;
+        totalWrong++;
+        hearts--;
+        updateHearts();
+        comboEl.textContent = combo;
+
+        feedback.innerHTML =
+          '❌ <strong>Chưa đúng.</strong> Em hãy chọn lại. Phải chọn đúng mới được chuyển sang câu tiếp theo.';
+        feedback.classList.add('show');
+
+        if (hearts <= 0) {
+          setTimeout(() => {
+            alert('💔 Hết 5 trái tim! Em phải làm lại từ câu 1.');
+            restartGame();
+          }, 250);
+          return;
+        }
+
+        setTimeout(() => {
+          btn.classList.remove('wrong');
+          btn.disabled = false;
+        }, 500);
+      }
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (current < questions.length - 1) {
+        current++;
+        renderQuestion();
+      } else {
+        finishGame();
+      }
+    });
+
+    function finishGame() {
+      progressBar.style.width = '100%';
+      gameArea.style.display = 'none';
+      summary.classList.add('show');
+
+      let rank = 'S RANK';
+      if (totalWrong >= 5) rank = 'A RANK';
+      if (totalWrong >= 10) rank = 'B RANK';
+
+      summaryText.innerHTML =
+        `<strong>${rank}</strong><br>` +
+        `Em đã hoàn thành ${questions.length} câu.<br>` +
+        `XP: <strong>${xp}</strong> • Số lần chọn sai: <strong>${totalWrong}</strong>`;
+    }
+
+    function restartGame() {
+      current = 0;
+      hearts = 5;
+      xp = 0;
+      combo = 0;
+      totalWrong = 0;
+      locked = false;
+      bonusGiven = new Set();
+
+      summary.classList.remove('show');
+      gameArea.style.display = 'block';
+      renderQuestion();
+    }
+
+    renderQuestion();
+  </script>
+</body>
+</html>

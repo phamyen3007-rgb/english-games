@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade 10 - Unit 2 - Exercise 7 - Option B</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(55, 126, 255, .18), transparent 28%),
+        radial-gradient(circle at 80% 30%, rgba(0, 229, 255, .12), transparent 24%),
+        linear-gradient(135deg, #06111f, #0a1c33 55%, #07101d);
+      color: #eef7ff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .shell {
+      width: min(1100px, 94%);
+      margin: 28px auto;
+    }
+
+    .card {
+      background: rgba(8, 20, 36, .92);
+      border: 1px solid rgba(104, 198, 255, .35);
+      border-radius: 22px;
+      box-shadow: 0 0 28px rgba(45, 164, 255, .18);
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 20px 22px;
+      background: linear-gradient(90deg, rgba(26,76,130,.78), rgba(8,30,55,.8));
+      border-bottom: 1px solid rgba(104,198,255,.28);
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 38px);
+      font-weight: 800;
+      letter-spacing: .5px;
+      color: #dff5ff;
+      text-shadow: 0 0 12px rgba(82,191,255,.4);
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: #9fd9ff;
+      font-size: 15px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 14px 18px;
+      background: rgba(4, 14, 27, .72);
+      border-bottom: 1px solid rgba(104,198,255,.16);
+    }
+
+    .stat {
+      text-align: center;
+      padding: 10px 8px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.035);
+      border: 1px solid rgba(124,202,255,.13);
+    }
+
+    .stat b {
+      display: block;
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .stat span {
+      font-size: 12px;
+      color: #9ecae7;
+    }
+
+    .content {
+      padding: 22px;
+    }
+
+    .passage {
+      background: rgba(255,255,255,.035);
+      border: 1px solid rgba(135,209,255,.15);
+      border-radius: 18px;
+      padding: 20px;
+      line-height: 1.72;
+      color: #eaf6ff;
+      margin-bottom: 22px;
+      max-height: 370px;
+      overflow-y: auto;
+    }
+
+    .passage h2 {
+      margin-top: 0;
+      color: #87d8ff;
+      text-align: center;
+    }
+
+    .question-box {
+      background: rgba(10, 28, 48, .86);
+      border: 1px solid rgba(100,198,255,.2);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .progress {
+      height: 10px;
+      background: rgba(255,255,255,.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .progress > div {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #33a8ff, #68e1ff);
+      transition: width .3s ease;
+    }
+
+    .qtext {
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .answers {
+      display: grid;
+      gap: 12px;
+    }
+
+    .answer {
+      width: 100%;
+      text-align: left;
+      border: 1px solid rgba(128,203,255,.22);
+      background: rgba(255,255,255,.045);
+      color: #f6fbff;
+      padding: 15px 16px;
+      border-radius: 14px;
+      font-size: 17px;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+
+    .answer:hover {
+      transform: translateY(-1px);
+      border-color: rgba(107,211,255,.65);
+      background: rgba(70,151,212,.10);
+    }
+
+    .answer.correct {
+      background: rgba(32, 185, 98, .18);
+      border-color: #43db8b;
+      color: #d9ffea;
+      box-shadow: 0 0 16px rgba(55,215,134,.2);
+    }
+
+    .answer.wrong {
+      background: rgba(233, 64, 64, .19);
+      border-color: #ff6969;
+      color: #ffdede;
+      animation: shake .2s linear 2;
+    }
+
+    .answer:disabled { cursor: default; }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+      100% { transform: translateX(0); }
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      line-height: 1.55;
+      background: rgba(85, 180, 255, .08);
+      border: 1px solid rgba(118,205,255,.2);
+      color: #dff3ff;
+    }
+
+    .feedback.show { display: block; }
+
+    .next-btn {
+      display: none;
+      margin-top: 16px;
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 17px;
+      font-weight: 800;
+      color: white;
+      cursor: pointer;
+      background: linear-gradient(90deg, #168cff, #26c5ff);
+      box-shadow: 0 0 18px rgba(32,160,255,.22);
+    }
+
+    .next-btn.show { display: block; }
+
+    .nav-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .nav-buttons .next-btn { margin-top: 0; }
+    #backBtn { background: linear-gradient(90deg, #324a67, #42698d); }
+    #backBtn:disabled { opacity: .35; cursor: not-allowed; }
+
+    .summary {
+      display: none;
+      padding: 28px 22px 32px;
+      text-align: center;
+    }
+
+    .summary.show { display: block; }
+
+    .rank {
+      font-size: 50px;
+      margin: 10px 0;
+    }
+
+    .summary h2 {
+      font-size: 32px;
+      margin: 8px 0;
+      color: #9ce5ff;
+    }
+
+    .summary p {
+      color: #cde8f8;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .restart {
+      margin-top: 14px;
+      border: 0;
+      padding: 14px 22px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 16px;
+      color: white;
+      background: linear-gradient(90deg, #155fc4, #15aee8);
+      cursor: pointer;
+    }
+
+    .credit {
+      text-align: center;
+      padding: 15px;
+      color: #6e9ab8;
+      font-size: 12px;
+      border-top: 1px solid rgba(104,198,255,.12);
+    }
+
+    @media (max-width: 700px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .content { padding: 14px; }
+      .qtext { font-size: 18px; }
+      .answer { font-size: 15px; }
+      .passage { max-height: 310px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="card">
+      <div class="header">
+        <h1 class="title">GRADE 10 • UNIT 2 • EXERCISE 7</h1>
+        <div class="subtitle">Option B — Giving Old Things a New Life</div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b id="qCounter">1/8</b><span>QUESTION</span></div>
+        <div class="stat"><b id="hearts">❤️❤️❤️</b><span>HEARTS</span></div>
+        <div class="stat"><b id="xp">0</b><span>XP</span></div>
+        <div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+      </div>
+
+      <div class="content" id="gameArea">
+        <div class="passage">
+          <h2>Giving Old Things a New Life</h2>
+
+          <p>Every year, people throw away large amounts of household items, including clothes, furniture, and electronic devices. Many of these things are still useful or can be repaired. Instead of sending them directly to landfills, some communities are finding creative ways to give old products a second life. By reusing and repairing things, people can reduce waste and make better use of natural resources.</p>
+
+          <p>One popular solution is the development of repair cafés. At these places, people can bring broken household items and receive help from volunteers who know how to repair them. For example, a person may bring in a broken lamp, a damaged chair, or an old radio. Instead of immediately buying a replacement, the owner can learn how to fix the item. As a result, useful products remain in use for a longer period of time.</p>
+
+          <p>Another solution is to exchange things that people no longer need. Some schools and local communities organize exchange events where people bring unwanted books, clothes, or toys. Other participants can then take these items home and use them. These events are usually free, so they can also help families save money. More importantly, they prevent useful products from being thrown away simply because their original owners no longer want them.</p>
+
+          <p>However, creating a culture of reuse requires more than repair cafés and exchange events. People also need to change the way they think about old products. Buying something new may seem easier, but repairing or reusing an existing item can often be better for the environment. If more people develop these habits, communities can reduce waste while saving resources for future generations.</p>
+        </div>
+
+        <div class="question-box">
+          <div class="progress"><div id="progressBar"></div></div>
+          <div class="qtext" id="questionText"></div>
+          <div class="answers" id="answers"></div>
+          <div class="feedback" id="feedback"></div>
+          <div class="nav-buttons">
+            <button class="next-btn show" id="backBtn">← BACK</button>
+            <button class="next-btn" id="nextBtn">NEXT →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary" id="summary">
+        <div class="rank" id="rankIcon">🏆</div>
+        <h2>MISSION COMPLETE!</h2>
+        <p id="summaryText"></p>
+        <button class="restart" onclick="restartGame()">PLAY AGAIN</button>
+      </div>
+
+      <div class="credit">Grade 10 English Review Game</div>
+    </section>
+  </main>
+
+  <script>
+    const questions = [
+      {
+        q: 'The word “damaged” in paragraph 2 is opposite in meaning to ________.',
+        options: ['A. broken', 'B. repaired', 'C. old', 'D. used'],
+        correct: 1,
+        explain: '“damaged” means “bị hư hỏng”, while “repaired” means “được sửa chữa”. They are opposite in meaning.'
+      },
+      {
+        q: 'What is the main idea of the passage?',
+        options: [
+          'A. People should stop buying electronic devices.',
+          'B. Repair cafés are the only effective way to reduce household waste.',
+          'C. Reusing and repairing old products can help reduce waste and save resources.',
+          'D. Communities should collect unwanted products and send them to factories.'
+        ],
+        correct: 2,
+        explain: 'The whole passage focuses on reusing, repairing, and exchanging old products to reduce waste and save natural resources.'
+      },
+      {
+        q: 'The word “them” in paragraph 3 refers to ________.',
+        options: ['A. events', 'B. families', 'C. participants', 'D. items'],
+        correct: 3,
+        explain: 'In “take these items home and use them”, “them” clearly refers to “items”.'
+      },
+      {
+        q: 'What does the sentence “useful products remain in use for a longer period of time” suggest?',
+        options: [
+          'A. Repairing products can extend the time people are able to use them.',
+          'B. Old products usually become more expensive after they are repaired.',
+          'C. People should keep broken products even when they cannot be fixed.',
+          'D. Repair cafés encourage people to replace their household items regularly.'
+        ],
+        correct: 0,
+        explain: '“remain in use for a longer period” means repairing helps extend the usable life of products.'
+      },
+      {
+        q: 'The word “prevent” in paragraph 3 is closest in meaning to ________.',
+        options: ['A. allow', 'B. stop', 'C. collect', 'D. encourage'],
+        correct: 1,
+        explain: '“prevent” is closest in meaning to “stop”: to stop something from happening.'
+      },
+      {
+        q: 'Which of the following is NOT true according to the passage?',
+        options: [
+          'A. Volunteers may help people repair broken household items.',
+          'B. Exchange events can help families spend less money.',
+          'C. All unwanted products must be recycled in special factories.',
+          'D. People’s habits are important for developing a culture of reuse.'
+        ],
+        correct: 2,
+        explain: 'The passage never says all unwanted products must be recycled in factories. It discusses repairing, reusing, and exchanging them.'
+      },
+      {
+        q: 'In which paragraph does the author describe a place where people can get help fixing broken products?',
+        options: ['A. Paragraph 1', 'B. Paragraph 2', 'C. Paragraph 3', 'D. Paragraph 4'],
+        correct: 1,
+        explain: 'Paragraph 2 introduces repair cafés, where volunteers help people fix broken household items.'
+      },
+      {
+        q: 'In which paragraph does the author discuss the need to change people’s attitudes towards old products?',
+        options: ['A. Paragraph 1', 'B. Paragraph 2', 'C. Paragraph 3', 'D. Paragraph 4'],
+        correct: 3,
+        explain: 'Paragraph 4 says people need to “change the way they think about old products”.'
+      }
+    ];
+
+    let current = 0;
+    let hearts = 5;
+    let xp = 0;
+    let combo = 0;
+    let totalWrong = 0;
+    let locked = false;
+    let q4BonusGiven = false;
+
+    const qCounter = document.getElementById('qCounter');
+    const heartsEl = document.getElementById('hearts');
+    const xpEl = document.getElementById('xp');
+    const comboEl = document.getElementById('combo');
+    const questionText = document.getElementById('questionText');
+    const answersEl = document.getElementById('answers');
+    const feedback = document.getElementById('feedback');
+    const nextBtn = document.getElementById('nextBtn');
+    const backBtn = document.getElementById('backBtn');
+    const progressBar = document.getElementById('progressBar');
+    const gameArea = document.getElementById('gameArea');
+    const summary = document.getElementById('summary');
+    const summaryText = document.getElementById('summaryText');
+    const rankIcon = document.getElementById('rankIcon');
+
+    function renderQuestion() {
+      locked = false;
+      const item = questions[current];
+
+      qCounter.textContent = `${current + 1}/${questions.length}`;
+      heartsEl.textContent = '❤️'.repeat(hearts) + '🖤'.repeat(Math.max(0, 5 - hearts));
+      xpEl.textContent = xp;
+      comboEl.textContent = combo;
+      progressBar.style.width = `${(current / questions.length) * 100}%`;
+
+      questionText.textContent = `Question ${current + 1}. ${item.q}`;
+      answersEl.innerHTML = '';
+      feedback.className = 'feedback';
+      feedback.textContent = '';
+      nextBtn.className = 'next-btn';
+      backBtn.disabled = current === 0;
+
+      item.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'answer';
+        btn.textContent = opt;
+        btn.onclick = () => chooseAnswer(index, btn);
+        answersEl.appendChild(btn);
+      });
+    }
+
+    function chooseAnswer(index, btn) {
+      if (locked) return;
+
+      const item = questions[current];
+
+      if (index === item.correct) {
+        locked = true;
+        btn.classList.add('correct');
+
+        combo++;
+        let gain = 10;
+        if (combo >= 3) gain = 20;
+        else if (combo >= 2) gain = 15;
+        xp += gain;
+
+        // Question 4 bonus: +1 heart, up to the maximum of 5, once per run.
+        let bonusText = '';
+        if (current === 3 && !q4BonusGiven) {
+          q4BonusGiven = true;
+          if (hearts < 5) {
+            hearts++;
+            bonusText = '<br>💖 <strong>Question 4 bonus: +1 heart!</strong>';
+          } else {
+            bonusText = '<br>💖 <strong>Question 4 bonus reached! Hearts are already full.</strong>';
+          }
+          heartsEl.textContent = '❤️'.repeat(hearts) + '🖤'.repeat(Math.max(0, 5 - hearts));
+        }
+
+        [...answersEl.children].forEach(b => b.disabled = true);
+
+        feedback.innerHTML = `✅ <strong>Correct!</strong><br>${item.explain}<br><strong>+${gain} XP</strong>${bonusText}`;
+        feedback.classList.add('show');
+
+        xpEl.textContent = xp;
+        comboEl.textContent = combo;
+        nextBtn.classList.add('show');
+
+        if (current === questions.length - 1) {
+          nextBtn.textContent = 'VIEW RESULT →';
+        } else {
+          nextBtn.textContent = 'NEXT QUESTION →';
+        }
+      } else {
+        btn.classList.add('wrong');
+        btn.disabled = true;
+
+        combo = 0;
+        totalWrong++;
+
+        hearts--;
+        if (hearts <= 0) {
+          hearts = 0;
+          heartsEl.textContent = '🖤🖤🖤🖤🖤';
+          comboEl.textContent = 0;
+          setTimeout(() => {
+            alert('💔 Hết 5 trái tim! Bạn phải làm lại từ câu 1.');
+            restartGame();
+          }, 250);
+          return;
+        }
+
+        heartsEl.textContent = '❤️'.repeat(hearts) + '🖤'.repeat(Math.max(0, 5 - hearts));
+        comboEl.textContent = combo;
+
+        feedback.innerHTML = `❌ <strong>Not correct.</strong> Try again. You must choose the correct answer before moving on.`;
+        feedback.classList.add('show');
+
+        setTimeout(() => {
+          btn.classList.remove('wrong');
+          btn.disabled = false;
+        }, 500);
+      }
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (current < questions.length - 1) {
+        current++;
+        renderQuestion();
+      } else {
+        finishGame();
+      }
+    });
+
+    backBtn.addEventListener('click', () => {
+      if (current > 0) {
+        current--;
+        renderQuestion();
+      }
+    });
+
+    function finishGame() {
+      progressBar.style.width = '100%';
+      gameArea.style.display = 'none';
+      summary.classList.add('show');
+
+      let rank = '🥇';
+      let label = 'S RANK';
+      if (totalWrong >= 5) {
+        rank = '🥈';
+        label = 'A RANK';
+      }
+      if (totalWrong >= 10) {
+        rank = '🥉';
+        label = 'B RANK';
+      }
+
+      rankIcon.textContent = rank;
+      summaryText.innerHTML =
+        `<strong>${label}</strong><br>` +
+        `You completed all ${questions.length} questions.<br>` +
+        `XP: <strong>${xp}</strong> • Wrong choices: <strong>${totalWrong}</strong><br>` +
+        `Remember: reuse, repair, and exchange can help reduce waste and save resources.`;
+    }
+
+    function restartGame() {
+      current = 0;
+      hearts = 5;
+      xp = 0;
+      combo = 0;
+      totalWrong = 0;
+      locked = false;
+      q4BonusGiven = false;
+
+      summary.classList.remove('show');
+      gameArea.style.display = 'block';
+      renderQuestion();
+    }
+
+    renderQuestion();
+  </script>
+</body>
+</html>

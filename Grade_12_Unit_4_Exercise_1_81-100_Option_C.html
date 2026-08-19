@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Grade 12 - Unit 4 - Exercise 1 (81-100) - Option C</title>
+<style>
+:root{
+ --bg:#071018;--panel:#0e2431;--panel2:#163746;--cyan:#63e6ff;--lime:#8be28e;
+ --amber:#ffd46b;--green:#4fd39a;--red:#ff6c78;--white:#f5fbff;--muted:#b5c9d5;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--white);
+ background:
+ radial-gradient(circle at 12% 12%,rgba(99,230,255,.11),transparent 24%),
+ radial-gradient(circle at 86% 18%,rgba(139,226,142,.09),transparent 24%),
+ linear-gradient(160deg,#050b11,#081922 58%,#03070a);
+ padding:18px;overflow-x:hidden
+}
+.bg{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.grid{position:absolute;inset:0;background:
+linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+background-size:42px 42px}
+.signal{position:absolute;width:12px;height:12px;border-radius:50%;background:#63e6ff;box-shadow:0 0 16px #63e6ff;animation:pulse 2.2s infinite}
+.s1{left:12%;top:24%}.s2{left:34%;top:40%;animation-delay:.7s}.s3{right:28%;top:19%;animation-delay:1.1s}.s4{right:12%;top:48%;animation-delay:1.6s}
+@keyframes pulse{50%{transform:scale(1.8);opacity:.35}}
+.city{position:absolute;left:0;right:0;bottom:0;height:28%;display:flex;gap:7px;align-items:flex-end;padding:0 2%;opacity:.36}
+.b{flex:1;background:#0b1921;border-top:1px solid rgba(255,255,255,.05);min-width:34px}.b1{height:38%}.b2{height:55%}.b3{height:43%}.b4{height:69%}.b5{height:46%}.b6{height:61%}.b7{height:35%}.b8{height:58%}.b9{height:48%}
+.wrap{max-width:1120px;margin:auto;position:relative;z-index:2}
+.hero{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px}
+.hero-left{display:flex;align-items:center;gap:14px}
+.icon{font-size:64px}
+h1{margin:0;font-size:clamp(28px,4vw,44px);background:linear-gradient(90deg,#eaffff,#63e6ff,#8be28e,#ffd46b);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{margin-top:6px;color:var(--muted);font-weight:700}
+.sound{border:1px solid rgba(99,230,255,.24);background:#12303a;color:white;padding:11px 14px;border-radius:12px;font-weight:900;cursor:pointer}
+.shell{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid rgba(99,230,255,.14);border-radius:24px;overflow:hidden;box-shadow:0 24px 65px rgba(0,0,0,.4)}
+.status{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;padding:16px 20px;background:#0a1d25}
+.track{height:13px;background:#04090c;border-radius:999px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--lime),var(--amber));transition:.25s}
+.chip{background:#173946;padding:8px 12px;border-radius:999px;font-weight:900;white-space:nowrap}
+.game{padding:22px}
+.card{max-width:880px;margin:auto;background:#0f2a34;border:2px solid #285b69;border-radius:20px;padding:20px}
+.head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.qtag{display:inline-block;background:#19434d;color:#d9fbff;padding:7px 12px;border-radius:10px;font-weight:900}
+.mode{font-size:12px;letter-spacing:1.5px;color:#8deaf5;font-weight:900}
+.question{font-size:22px;line-height:1.55;margin:18px 0}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.option{padding:15px;border:2px solid #2f5f6d;border-radius:14px;background:#123640;color:#fff;text-align:left;font-size:17px;cursor:pointer;transition:.15s}
+.option:hover:not(:disabled){transform:translateY(-2px);border-color:var(--cyan)}
+.option.correct{background:#154232!important;border-color:var(--green)!important}
+.option.wrong{background:#482229!important;border-color:var(--red)!important}
+.feedback{display:none;margin-top:16px;padding:15px;border-left:5px solid;border-radius:12px;background:#0a2027;line-height:1.55}
+.feedback.show{display:block}.feedback.ok{border-color:var(--green)}.feedback.no{border-color:var(--red)}
+.controls{display:flex;justify-content:flex-end;margin-top:14px}
+.next{border:0;border-radius:12px;padding:12px 18px;font-weight:900;background:linear-gradient(90deg,#8beeff,#b6efb8,#ffe092);color:#17343b;cursor:pointer}
+.next:disabled{opacity:.4}
+.result{display:none;text-align:center;padding:32px}.result.show{display:block}
+.big{font-size:58px;font-weight:1000;color:#81ebff}
+.review{text-align:left;margin-top:22px}
+.item{padding:12px 14px;background:#0b252d;border-left:5px solid #607982;border-radius:12px;margin:9px 0;line-height:1.5}
+.item.ok{border-left-color:var(--green)}.item.no{border-left-color:var(--red)}
+@media(max-width:700px){.options{grid-template-columns:1fr}.hero{align-items:flex-start;flex-direction:column}.status{grid-template-columns:1fr 1fr}.track{grid-column:1/-1;order:4}}
+</style>
+</head>
+<body>
+<div class="bg">
+ <div class="grid"></div>
+ <div class="signal s1"></div><div class="signal s2"></div><div class="signal s3"></div><div class="signal s4"></div>
+ <div class="city"><div class="b b1"></div><div class="b b2"></div><div class="b b3"></div><div class="b b4"></div><div class="b b5"></div><div class="b b6"></div><div class="b b7"></div><div class="b b8"></div><div class="b b9"></div></div>
+</div>
+
+<div class="wrap">
+ <div class="hero">
+  <div class="hero-left">
+   <div class="icon">📡🏙️</div>
+   <div>
+    <h1>Urban Signal Grid</h1>
+    <div class="sub">Grade 12 · Unit 4 · Exercise 1 (81–100) · Option C</div>
+   </div>
+  </div>
+  <button class="sound" id="sound">🔊 Sound On</button>
+ </div>
+
+ <div class="shell">
+  <div id="quizArea">
+   <div class="status">
+    <div class="track"><div class="bar" id="bar"></div></div>
+    <div class="chip" id="count"></div>
+    <div class="chip" id="score"></div>
+    <div class="chip" id="heart"></div>
+   </div>
+
+   <div class="game">
+    <div class="card">
+     <div class="head">
+      <div class="qtag" id="qtag"></div>
+      <div class="mode">SMART CITY SIGNAL</div>
+     </div>
+     <div class="question" id="question"></div>
+     <div class="options" id="options"></div>
+     <div class="feedback" id="feedback"></div>
+     <div class="controls"><button class="next" id="next" disabled>Next Signal →</button></div>
+    </div>
+   </div>
+  </div>
+
+  <div class="result" id="result">
+   <div style="font-size:76px">📡✅</div>
+   <h2>Urban Signal Mission Complete!</h2>
+   <div class="big" id="final"></div>
+   <p id="message"></p>
+   <button class="next" id="restart">Run Again ↻</button>
+   <div class="review" id="review"></div>
+  </div>
+ </div>
+</div>
+
+<script>
+const Q=[{"q": "Despite several attempts to control overcrowding, the local authorities have __________ failed to provide enough affordable housing for low-income residents.", "options": ["yet", "still", "ever", "just"], "answer": 1, "explanation": "Have still failed to do sth = cho đến nay vẫn chưa làm được. Yet thường đứng cuối câu hoặc dùng trong câu phủ định/nghi vấn."}, {"q": "__________ public facilities in rapidly expanding residential areas can help strengthen the sense of community among people who have recently moved there.", "options": ["Having provided adequately", "Adequately providing", "Providing adequate", "Adequate providing"], "answer": 2, "explanation": "V-ing làm chủ ngữ: Providing adequate public facilities... = Việc cung cấp đầy đủ cơ sở công cộng. Adequate là tính từ bổ nghĩa cho public facilities."}, {"q": "As housing prices continue to rise while wages remain relatively unchanged, an increasing number of young workers feel __________ in expensive urban areas.", "options": ["stuck", "abandoned", "isolated", "separated"], "answer": 0, "explanation": "Feel stuck = cảm thấy mắc kẹt trong một hoàn cảnh khó thay đổi. Chi tiết housing prices rise + wages unchanged tạo nghĩa này."}, {"q": "The city council has introduced several measures to reduce traffic congestion, but __________ have proved effective enough to deal with the problem permanently.", "options": ["little", "few", "less", "fewer"], "answer": 1, "explanation": "Measures là danh từ đếm được số nhiều → few have proved effective = rất ít biện pháp tỏ ra hiệu quả. Little/less dùng với danh từ không đếm được."}, {"q": "__________ people move from rural communities to major cities in search of employment, __________ pressure is placed on housing and public services.", "options": ["More and more / greater and greater", "The more / the greatest", "The most / the greater", "The more / the greater"], "answer": 3, "explanation": "Cấu trúc: The + comparative..., the + comparative... → The more people move..., the greater pressure is placed..."}, {"q": "Air pollution in some industrial districts has become __________ that local authorities have advised vulnerable residents to limit outdoor activities.", "options": ["increasingly severe", "increasingly severely", "more increasingly severe", "the increasingly severe"], "answer": 0, "explanation": "Sau become cần tính từ → severe. Increasingly + adjective = ngày càng... → increasingly severe."}, {"q": "Although the government has invested heavily in public transport __________ the beginning of the decade, traffic congestion has not significantly decreased.", "options": ["during", "for", "since", "from"], "answer": 2, "explanation": "Since + mốc thời gian: since the beginning of the decade. For phải đi với khoảng thời gian."}, {"q": "This is the third time the city __________ its urban development plan because population growth has exceeded earlier predictions.", "options": ["revised", "has revised", "had revised", "has been revising"], "answer": 1, "explanation": "This is the first/second/third time + S + have/has + V3 → has revised."}, {"q": "The expansion of residential areas has resulted in the loss of farmland and has __________ placed considerable pressure on local water supplies.", "options": ["ever", "yet", "so far", "also"], "answer": 3, "explanation": "Cấu trúc song song: has resulted in... and has also placed..."}, {"q": "The rapid disappearance of public parks has weakened residents' sense of __________, particularly among newcomers who have few opportunities to interact with their neighbours.", "options": ["direction", "belonging", "relation", "dependence"], "answer": 1, "explanation": "Sense of belonging = cảm giác thuộc về/gắn bó với một cộng đồng. Chi tiết newcomers + interact with neighbours làm belonging chính xác nhất."}, {"q": "Urban housing has become __________ affordable over the past decade, forcing many workers to live farther away from their workplaces.", "options": ["fewer and fewer", "increasingly less", "less and less", "the least"], "answer": 2, "explanation": "Less and less + adjective = ngày càng ít/kém... → less and less affordable."}, {"q": "The new metro line is one of the most ambitious infrastructure projects the city __________ in the past twenty years.", "options": ["undertook", "had undertaken", "has ever undertaken", "ever undertakes"], "answer": 2, "explanation": "Sau so sánh nhất thường dùng Present Perfect: one of the most ... the city has ever undertaken."}, {"q": "__________ investment is made in public transportation, the more heavily residents are likely to depend on private vehicles.", "options": ["The less", "The least", "Less and less", "The fewer"], "answer": 0, "explanation": "Double comparative: The less investment..., the more heavily... Investment là danh từ không đếm được."}, {"q": "Have local authorities introduced any effective measures to deal with the sharp rise in housing demand __________?", "options": ["ever", "before", "yet", "since"], "answer": 2, "explanation": "Trong câu hỏi Present Perfect, yet = cho đến thời điểm hiện tại/chưa. → Have authorities introduced any effective measures yet?"}, {"q": "Despite stricter environmental regulations, the amount of harmful __________ released by factories on the outskirts of the city remains a major public-health concern.", "options": ["smog", "housing", "congestion", "emissions"], "answer": 3, "explanation": "Harmful emissions = khí/chất thải có hại. Emissions released by factories là collocation tự nhiên nhất."}];
+const L=["A","B","C","D"];
+let i=0,xp=0,hearts=5,combo=0,answered=false,history=[],soundOn=true,ctx=null;
+const $=id=>document.getElementById(id);
+
+function ac(){
+ if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();
+ if(ctx.state==="suspended")ctx.resume();
+ return ctx;
+}
+function tone(f,d=.1,t="sine",v=.035,delay=0){
+ if(!soundOn)return;
+ const c=ac(),o=c.createOscillator(),g=c.createGain(),s=c.currentTime+delay;
+ o.type=t;o.frequency.setValueAtTime(f,s);
+ g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(v,s+.01);g.gain.exponentialRampToValueAtTime(.0001,s+d);
+ o.connect(g);g.connect(c.destination);o.start(s);o.stop(s+d+.03);
+}
+function good(){tone(650,.08,"triangle");tone(930,.11,"sine",.03,.08)}
+function bad(){tone(170,.16,"sawtooth");tone(100,.2,"square",.018,.1)}
+function nextSound(){tone(430,.06,"triangle",.018);tone(680,.07,"triangle",.015,.06)}
+function win(){[523,659,784,1047].forEach((f,k)=>tone(f,.17,"triangle",.027,k*.09))}
+
+$("sound").onclick=()=>{
+ soundOn=!soundOn;
+ $("sound").textContent=soundOn?"🔊 Sound On":"🔇 Sound Off";
+ if(soundOn)nextSound();
+};
+
+function render(){
+ answered=false;
+ $("next").disabled=true;
+ $("feedback").className="feedback";
+ $("feedback").innerHTML="";
+ const q=Q[i];
+
+ $("qtag").textContent=`Signal ${i+1}`;
+ $("question").textContent=q.q;
+ $("count").textContent=`${i+1}/${Q.length}`;
+ $("score").textContent=`⭐ ${xp} XP · Combo ${combo}`;
+ $("heart").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${i/Q.length*100}%`;
+ $("options").innerHTML="";
+
+ q.options.forEach((op,n)=>{
+  const b=document.createElement("button");
+  b.className="option";
+  b.innerHTML=`<strong>${L[n]}.</strong> ${op}`;
+  b.onclick=()=>choose(n,b);
+  $("options").appendChild(b);
+ });
+
+ $("next").textContent=i===Q.length-1?"Complete Grid 📡":"Next Signal →";
+}
+
+function choose(n,btn){
+ if(answered)return;
+ answered=true;
+ const q=Q[i];
+ const buttons=[...document.querySelectorAll(".option")];
+ const right=n===q.answer;
+
+ buttons.forEach(b=>b.disabled=true);
+ buttons[q.answer].classList.add("correct");
+
+ if(right){
+  xp+=10+combo*2;
+  combo++;
+  $("feedback").className="feedback ok show";
+  $("feedback").innerHTML=`<strong>✅ Correct: ${L[q.answer]}. ${q.options[q.answer]}</strong><br>${q.explanation}`;
+  good();
+ }else{
+  hearts=Math.max(0,hearts-1);
+  combo=0;
+  btn.classList.add("wrong");
+  $("feedback").className="feedback no show";
+  $("feedback").innerHTML=`<strong>❌ Correct answer: ${L[q.answer]}. ${q.options[q.answer]}</strong><br>${q.explanation}`;
+  bad();
+ }
+
+ history.push({selected:n,correct:right});
+ $("score").textContent=`⭐ ${xp} XP · Combo ${combo}`;
+ $("heart").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${(i+1)/Q.length*100}%`;
+ $("next").disabled=false;
+}
+
+$("next").onclick=()=>{
+ if(!answered)return;
+ nextSound();
+ if(i<Q.length-1){i++;render();}
+ else finish();
+};
+
+function finish(){
+ $("quizArea").style.display="none";
+ $("result").classList.add("show");
+ win();
+
+ const correct=history.filter(x=>x.correct).length;
+ $("final").textContent=`${correct}/${Q.length} · ${xp} XP`;
+
+ if(correct===Q.length) $("message").textContent="Perfect Urban Signal Master!";
+ else if(correct>=13) $("message").textContent="Excellent! Em nắm rất chắc Urbanisation vocabulary & grammar.";
+ else if(correct>=10) $("message").textContent="Good job! Hãy xem lại các signal chưa đúng.";
+ else $("message").textContent="Hãy ôn lại collocations, Present Perfect và comparative structures rồi thử lại.";
+
+ let html="<h3>📡 Urban Signal Review</h3>";
+ Q.forEach((q,k)=>{
+  const a=history[k];
+  html+=`<div class="item ${a.correct?"ok":"no"}">
+   <strong>Signal ${k+1}: ${a.correct?"Correct":"Incorrect"}</strong><br>
+   Your answer: ${L[a.selected]}. ${q.options[a.selected]}<br>
+   Correct: ${L[q.answer]}. ${q.options[q.answer]}<br>
+   <em>${q.explanation}</em>
+  </div>`;
+ });
+ $("review").innerHTML=html;
+}
+
+$("restart").onclick=()=>location.reload();
+render();
+</script>
+</body>
+</html>

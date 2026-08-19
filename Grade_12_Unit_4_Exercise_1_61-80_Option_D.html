@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Grade 12 - Unit 4 - Exercise 1 (61-80) - Option D</title>
+<style>
+:root{
+ --bg:#080b15;--panel:#12192a;--panel2:#1a2440;--cyan:#55e7ff;--violet:#8c7dff;
+ --pink:#ff6fb5;--gold:#ffd369;--green:#4fd39a;--red:#ff6878;--white:#f5f8ff;--muted:#b8bfd4;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--white);
+ background:
+ radial-gradient(circle at 15% 12%,rgba(85,231,255,.12),transparent 24%),
+ radial-gradient(circle at 85% 18%,rgba(255,111,181,.10),transparent 24%),
+ linear-gradient(160deg,#060812,#0b1020 58%,#03050a);
+ padding:18px;overflow-x:hidden
+}
+.bg{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.road{position:absolute;left:50%;bottom:-70px;transform:translateX(-50%);width:60%;height:50%;background:linear-gradient(180deg,#151a28,#05070b);clip-path:polygon(42% 0,58% 0,100% 100%,0 100%)}
+.roadline{position:absolute;left:50%;bottom:2%;transform:translateX(-50%);width:8px;height:80px;background:#ffd369;box-shadow:0 -120px 0 #ffd369,0 -240px 0 #ffd369;opacity:.65}
+.city{position:absolute;left:0;right:0;bottom:0;height:31%;display:flex;gap:6px;align-items:flex-end;padding:0 1.5%;opacity:.35}
+.b{flex:1;background:#111827;border-top:1px solid rgba(255,255,255,.05);min-width:34px}.b1{height:34%}.b2{height:54%}.b3{height:43%}.b4{height:68%}.b5{height:41%}.b6{height:59%}.b7{height:47%}.b8{height:65%}.b9{height:38%}.b10{height:52%}
+.wrap{max-width:1120px;margin:auto;position:relative;z-index:2}
+.hero{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:16px}
+.hero-left{display:flex;align-items:center;gap:14px}
+.icon{font-size:64px;filter:drop-shadow(0 0 16px rgba(85,231,255,.25))}
+h1{margin:0;font-size:clamp(28px,4vw,44px);background:linear-gradient(90deg,#eefcff,#55e7ff,#8c7dff,#ff6fb5,#ffd369);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{margin-top:6px;color:var(--muted);font-weight:700}
+.sound{border:1px solid rgba(85,231,255,.25);background:#171f35;color:white;padding:11px 14px;border-radius:12px;font-weight:900;cursor:pointer}
+.shell{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid rgba(85,231,255,.14);border-radius:24px;overflow:hidden;box-shadow:0 24px 65px rgba(0,0,0,.42)}
+.status{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;padding:16px 20px;background:#0d1425}
+.track{height:13px;background:#04060b;border-radius:999px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--pink),var(--gold));transition:.25s}
+.chip{background:#1a2642;padding:8px 12px;border-radius:999px;font-weight:900;white-space:nowrap}
+.game{padding:22px}
+.card{max-width:880px;margin:auto;background:#131d32;border:2px solid #2c3f67;border-radius:20px;padding:20px}
+.head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.qtag{display:inline-block;background:#1d2c4a;color:#dcfaff;padding:7px 12px;border-radius:10px;font-weight:900}
+.mode{font-size:12px;letter-spacing:1.5px;color:#75e9ff;font-weight:900}
+.question{font-size:22px;line-height:1.55;margin:18px 0}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.option{padding:15px;border:2px solid #334b73;border-radius:14px;background:#182541;color:#fff;text-align:left;font-size:17px;cursor:pointer;transition:.15s}
+.option:hover:not(:disabled){transform:translateY(-2px);border-color:var(--cyan);box-shadow:0 0 18px rgba(85,231,255,.08)}
+.option.correct{background:#154232!important;border-color:var(--green)!important}
+.option.wrong{background:#482229!important;border-color:var(--red)!important}
+.feedback{display:none;margin-top:16px;padding:15px;border-left:5px solid;border-radius:12px;background:#0d1729;line-height:1.55}
+.feedback.show{display:block}.feedback.ok{border-color:var(--green)}.feedback.no{border-color:var(--red)}
+.controls{display:flex;justify-content:flex-end;margin-top:14px}
+.next{border:0;border-radius:12px;padding:12px 18px;font-weight:900;background:linear-gradient(90deg,#8cecff,#b4a7ff,#ffb6d9,#ffe090);color:#17243c;cursor:pointer}
+.next:disabled{opacity:.4}
+.result{display:none;text-align:center;padding:32px}.result.show{display:block}
+.big{font-size:58px;font-weight:1000;color:#7ceaff}
+.review{text-align:left;margin-top:22px}
+.item{padding:12px 14px;background:#101a2d;border-left:5px solid #5e6f8c;border-radius:12px;margin:9px 0;line-height:1.5}
+.item.ok{border-left-color:var(--green)}.item.no{border-left-color:var(--red)}
+@media(max-width:700px){.options{grid-template-columns:1fr}.hero{align-items:flex-start;flex-direction:column}.status{grid-template-columns:1fr 1fr}.track{grid-column:1/-1;order:4}}
+</style>
+</head>
+<body>
+<div class="bg">
+ <div class="road"></div><div class="roadline"></div>
+ <div class="city">
+  <div class="b b1"></div><div class="b b2"></div><div class="b b3"></div><div class="b b4"></div><div class="b b5"></div>
+  <div class="b b6"></div><div class="b b7"></div><div class="b b8"></div><div class="b b9"></div><div class="b b10"></div>
+ </div>
+</div>
+
+<div class="wrap">
+ <div class="hero">
+  <div class="hero-left">
+   <div class="icon">🚦🌆</div>
+   <div>
+    <h1>Skyline Rush</h1>
+    <div class="sub">Grade 12 · Unit 4 · Exercise 1 (61–80) · Option D</div>
+   </div>
+  </div>
+  <button class="sound" id="sound">🔊 Sound On</button>
+ </div>
+
+ <div class="shell">
+  <div id="quizArea">
+   <div class="status">
+    <div class="track"><div class="bar" id="bar"></div></div>
+    <div class="chip" id="count"></div>
+    <div class="chip" id="score"></div>
+    <div class="chip" id="heart"></div>
+   </div>
+
+   <div class="game">
+    <div class="card">
+     <div class="head">
+      <div class="qtag" id="qtag"></div>
+      <div class="mode">URBAN RUSH MODE</div>
+     </div>
+     <div class="question" id="question"></div>
+     <div class="options" id="options"></div>
+     <div class="feedback" id="feedback"></div>
+     <div class="controls"><button class="next" id="next" disabled>Next Checkpoint →</button></div>
+    </div>
+   </div>
+  </div>
+
+  <div class="result" id="result">
+   <div style="font-size:76px">🏁🌆</div>
+   <h2>Skyline Rush Complete!</h2>
+   <div class="big" id="final"></div>
+   <p id="message"></p>
+   <button class="next" id="restart">Race Again ↻</button>
+   <div class="review" id="review"></div>
+  </div>
+ </div>
+</div>
+
+<script>
+const Q=[{"q": "As more people move into major cities, the demand for affordable housing is rising ____________, putting considerable pressure on local authorities.", "options": ["increasingly", "more rapid", "rapidly", "the most rapidly"], "answer": 2, "explanation": "Rise là động từ nên cần trạng từ bổ nghĩa → rise rapidly = tăng nhanh. Rapid là tính từ nên B sai."}, {"q": "Despite improvements to the metro system, many commuters still ____________ about delays during peak hours, particularly on routes serving the outer suburbs.", "options": ["complain", "respond", "object", "argue"], "answer": 0, "explanation": "Complain about + noun = phàn nàn về điều gì. → complain about delays. Object thường đi với to."}, {"q": "The city has expanded so rapidly that public services have struggled to ____________ the needs of its growing population.", "options": ["catch up with", "put up with", "come up with", "get away with"], "answer": 0, "explanation": "Catch up with = theo kịp. Public services không theo kịp nhu cầu của dân số tăng."}, {"q": "Housing in the city centre has become ____________ affordable for young workers as property prices continue to rise.", "options": ["fewer and fewer", "more and more", "less and less", "much and much"], "answer": 2, "explanation": "Less and less + adjective = ngày càng kém... → less and less affordable."}, {"q": "The government has introduced several measures to reduce traffic congestion, but none of them ____________ completely successful so far.", "options": ["became", "has been", "had been", "was"], "answer": 1, "explanation": "So far là dấu hiệu thường gặp của Present Perfect → has been."}, {"q": "The more employment opportunities a city provides, ____________ it is likely to attract people from surrounding rural areas.", "options": ["the more", "the most", "the greater", "more and more"], "answer": 0, "explanation": "Cấu trúc The + comparative..., the + comparative... → The more opportunities..., the more it is likely to attract..."}, {"q": "Many families have moved to suburban areas, where housing tends to be more ____________ than in overcrowded city centres.", "options": ["sustainable", "reliable", "available", "affordable"], "answer": 3, "explanation": "Affordable housing = nhà ở có giá phù hợp/có khả năng chi trả."}, {"q": "Rapid urban growth has resulted in the ____________ of large areas of farmland into residential and commercial zones.", "options": ["converting", "conversion", "convert", "converted"], "answer": 1, "explanation": "Sau the cần danh từ → conversion. Cấu trúc: the conversion of A into B."}, {"q": "Although the city has ____________ expanded its public transport network, the number of private vehicles on the roads continues to increase.", "options": ["closely", "slightly", "heavily", "considerably"], "answer": 3, "explanation": "Considerably = đáng kể. → has considerably expanded = đã mở rộng đáng kể."}, {"q": "The authorities hope that improving public transport will encourage residents to ____________ using private cars for short journeys.", "options": ["cut down on", "keep up with", "look forward to", "run out of"], "answer": 0, "explanation": "Cut down on + N/V-ing = giảm bớt. → cut down on using private cars."}, {"q": "With land becoming increasingly scarce, newly constructed apartment buildings are getting ____________ in many densely populated districts.", "options": ["the tallest", "taller and taller", "more and more tall", "as tall as"], "answer": 1, "explanation": "Tall là tính từ ngắn → taller. Comparative + and + comparative = ngày càng... → taller and taller."}, {"q": "Urban planners need to ensure that infrastructure develops ____________ enough to cope with rapid population growth.", "options": ["efficiently", "significantly", "rapidly", "increasingly"], "answer": 2, "explanation": "Rapidly enough to cope with = phát triển đủ nhanh để theo kịp."}, {"q": "The government has invested heavily in public transportation ____________, yet residents in several outer districts still have limited access to reliable services.", "options": ["ever", "already", "yet", "so far"], "answer": 3, "explanation": "So far = cho đến nay, thường dùng với Present Perfect."}, {"q": "As cities become more densely populated, providing residents with sufficient green space becomes increasingly ____________.", "options": ["challenging", "challenged", "challenge", "challengingly"], "answer": 0, "explanation": "Sau becomes cần tính từ → challenging = đầy thách thức/khó khăn."}, {"q": "The rapid expansion of the city has ____________ concerns about whether its existing infrastructure can support such a large population.", "options": ["risen", "raised", "arisen", "grown"], "answer": 1, "explanation": "Raise concerns = làm dấy lên những lo ngại. Raise là ngoại động từ; rise là nội động từ."}];
+const L=["A","B","C","D"];
+let i=0,xp=0,hearts=5,combo=0,answered=false,history=[],soundOn=true,ctx=null;
+const $=id=>document.getElementById(id);
+
+function ac(){
+ if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();
+ if(ctx.state==="suspended")ctx.resume();
+ return ctx;
+}
+function tone(f,d=.1,t="sine",v=.035,delay=0){
+ if(!soundOn)return;
+ const c=ac(),o=c.createOscillator(),g=c.createGain(),s=c.currentTime+delay;
+ o.type=t;o.frequency.setValueAtTime(f,s);
+ g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(v,s+.01);g.gain.exponentialRampToValueAtTime(.0001,s+d);
+ o.connect(g);g.connect(c.destination);o.start(s);o.stop(s+d+.03);
+}
+function good(){tone(680,.08,"triangle");tone(980,.11,"sine",.03,.08)}
+function bad(){tone(170,.16,"sawtooth");tone(100,.2,"square",.018,.1)}
+function nextSound(){tone(450,.06,"triangle",.018);tone(700,.07,"triangle",.015,.06)}
+function win(){[523,659,784,1047].forEach((f,k)=>tone(f,.17,"triangle",.027,k*.09))}
+
+$("sound").onclick=()=>{
+ soundOn=!soundOn;
+ $("sound").textContent=soundOn?"🔊 Sound On":"🔇 Sound Off";
+ if(soundOn)nextSound();
+};
+
+function render(){
+ answered=false;
+ $("next").disabled=true;
+ $("feedback").className="feedback";
+ $("feedback").innerHTML="";
+ const q=Q[i];
+
+ $("qtag").textContent=`Checkpoint ${i+1}`;
+ $("question").textContent=q.q;
+ $("count").textContent=`${i+1}/${Q.length}`;
+ $("score").textContent=`⭐ ${xp} XP · Combo ${combo}`;
+ $("heart").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${i/Q.length*100}%`;
+ $("options").innerHTML="";
+
+ q.options.forEach((op,n)=>{
+  const b=document.createElement("button");
+  b.className="option";
+  b.innerHTML=`<strong>${L[n]}.</strong> ${op}`;
+  b.onclick=()=>choose(n,b);
+  $("options").appendChild(b);
+ });
+
+ $("next").textContent=i===Q.length-1?"Finish Rush 🏁":"Next Checkpoint →";
+}
+
+function choose(n,btn){
+ if(answered)return;
+ answered=true;
+ const q=Q[i];
+ const buttons=[...document.querySelectorAll(".option")];
+ const right=n===q.answer;
+
+ buttons.forEach(b=>b.disabled=true);
+ buttons[q.answer].classList.add("correct");
+
+ if(right){
+  xp+=10+combo*2;
+  combo++;
+  $("feedback").className="feedback ok show";
+  $("feedback").innerHTML=`<strong>✅ Correct: ${L[q.answer]}. ${q.options[q.answer]}</strong><br>${q.explanation}`;
+  good();
+ }else{
+  hearts=Math.max(0,hearts-1);
+  combo=0;
+  btn.classList.add("wrong");
+  $("feedback").className="feedback no show";
+  $("feedback").innerHTML=`<strong>❌ Correct answer: ${L[q.answer]}. ${q.options[q.answer]}</strong><br>${q.explanation}`;
+  bad();
+ }
+
+ history.push({selected:n,correct:right});
+ $("score").textContent=`⭐ ${xp} XP · Combo ${combo}`;
+ $("heart").textContent=`❤️ ${hearts}`;
+ $("bar").style.width=`${(i+1)/Q.length*100}%`;
+ $("next").disabled=false;
+}
+
+$("next").onclick=()=>{
+ if(!answered)return;
+ nextSound();
+ if(i<Q.length-1){i++;render();}
+ else finish();
+};
+
+function finish(){
+ $("quizArea").style.display="none";
+ $("result").classList.add("show");
+ win();
+
+ const correct=history.filter(x=>x.correct).length;
+ $("final").textContent=`${correct}/${Q.length} · ${xp} XP`;
+
+ if(correct===Q.length) $("message").textContent="Perfect Skyline Racer!";
+ else if(correct>=13) $("message").textContent="Excellent! Em nắm rất chắc Urbanisation vocabulary & grammar.";
+ else if(correct>=10) $("message").textContent="Good job! Hãy xem lại các checkpoint chưa đúng.";
+ else $("message").textContent="Hãy ôn lại collocations, comparative structures và Present Perfect rồi thử lại.";
+
+ let html="<h3>🚦 Skyline Rush Review</h3>";
+ Q.forEach((q,k)=>{
+  const a=history[k];
+  html+=`<div class="item ${a.correct?"ok":"no"}">
+   <strong>Checkpoint ${k+1}: ${a.correct?"Correct":"Incorrect"}</strong><br>
+   Your answer: ${L[a.selected]}. ${q.options[a.selected]}<br>
+   Correct: ${L[q.answer]}. ${q.options[q.answer]}<br>
+   <em>${q.explanation}</em>
+  </div>`;
+ });
+ $("review").innerHTML=html;
+}
+
+$("restart").onclick=()=>location.reload();
+render();
+</script>
+</body>
+</html>

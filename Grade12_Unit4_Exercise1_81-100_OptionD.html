@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 4 - Exercise 1 (81-100) - Option D</title>
+<style>
+*{box-sizing:border-box} body{margin:0;min-height:100vh;font-family:Arial,sans-serif;color:#eef8ff;background:radial-gradient(circle at 50% 0,#163e61 0,#071522 48%,#02070c 100%)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(120deg,transparent 30%,rgba(90,200,255,.05) 50%,transparent 70%)}
+.wrap{max-width:950px;margin:auto;padding:26px 18px}.hero{text-align:center;margin-bottom:18px}.hero .tag{letter-spacing:3px;color:#80d9ff;font-weight:800}.hero h1{margin:8px 0 4px;font-size:clamp(25px,4vw,39px);text-shadow:0 0 20px #168cd0}.hero p{margin:0;color:#a9c9dc}
+.card{background:rgba(5,20,33,.93);border:1px solid #2f8cbe;border-radius:22px;padding:22px;box-shadow:0 0 28px rgba(31,157,218,.18)}
+.stats{display:flex;gap:9px;flex-wrap:wrap}.stat{background:#0d2b43;border:1px solid #286a91;border-radius:999px;padding:8px 13px;font-weight:800}.progress{height:9px;background:#102333;border-radius:10px;overflow:hidden;margin:17px 0 22px}.bar{height:100%;background:linear-gradient(90deg,#52c9ff,#d1f5ff);width:0;transition:.3s}
+.qnum{font-weight:900;color:#65d1ff;margin-bottom:8px}.question{font-size:20px;font-weight:700;line-height:1.5;margin-bottom:17px}.answers{display:grid;gap:11px}
+.answer{width:100%;text-align:left;padding:14px 15px;border-radius:14px;border:1px solid #315f7c;background:#0d2235;color:#f4fbff;font-size:16px;cursor:pointer;transition:.15s}.answer:hover:not(:disabled){transform:translateY(-1px);background:#12324c;border-color:#6ed7ff}.answer:disabled{cursor:default}.answer.correct{background:#123b29;border-color:#55df98}.answer.wrong{background:#461923;border-color:#ff617c}
+.feedback{display:none;margin-top:16px;padding:15px;border-radius:14px;background:#0d2a3c;line-height:1.55}.feedback.good{border-left:4px solid #59e39c}.feedback.bad{border-left:4px solid #ff607d}.next{display:none;margin:16px 0 0 auto;border:0;border-radius:12px;padding:11px 20px;background:#74dcff;color:#03101a;font-weight:900;cursor:pointer}
+.result{display:none;text-align:center}.result h2{font-size:32px;color:#87e4ff}.big{font-size:52px;margin:8px}.result p{font-size:18px;line-height:1.6}.restart{border:0;border-radius:12px;padding:12px 22px;background:#7ee1ff;font-weight:900;cursor:pointer}.foot{text-align:center;color:#7799ac;font-size:12px;margin-top:15px}
+</style></head>
+<body><div class="wrap">
+<div class="hero"><div class="tag">GRADE 12 • UNIT 4</div><h1>Exercise 1 (81–100) – Option D</h1><p>Urbanisation Challenge</p></div>
+<div class="card" id="game">
+<div class="stats"><div class="stat">Question <span id="n">1</span>/15</div><div class="stat">⭐ Score: <span id="score">0</span>/15</div><div class="stat">🔥 Streak: <span id="streak">0</span></div></div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<div class="qnum" id="qnum"></div><div class="question" id="question"></div><div class="answers" id="answers"></div>
+<div class="feedback" id="feedback"></div><button class="next" id="next">NEXT →</button>
+</div>
+<div class="card result" id="result"><h2>MISSION COMPLETE</h2><div class="big" id="medal">🏆</div><p id="summary"></p><button class="restart" onclick="restart()">PLAY AGAIN</button></div>
+<div class="foot">Grade 12 • Unit 4 • Exercise 1 • Option D</div></div>
+<script>
+const qs=[{"q": "Although several apartment blocks have been completed __________, they have done little to ease the shortage of affordable housing in the city.", "o": ["ever", "so far", "yet", "before"], "a": 1, "e": "“so far” = cho đến nay, thường dùng với Present Perfect. → have been completed so far."}, {"q": "As more young professionals move into the city centre, long-term residents may gradually lose their sense of __________ to the neighbourhood they once knew well.", "o": ["belonging", "connection", "relationship", "community"], "a": 0, "e": "Cụm cố định: “sense of belonging to + place/group” = cảm giác thuộc về/gắn bó với một nơi hoặc cộng đồng."}, {"q": "The rapid expansion of the city has placed enormous __________ on public services, particularly healthcare and public transportation.", "o": ["difficulty", "concern", "pressure", "challenge"], "a": 2, "e": "Collocation: “place pressure on something” = gây áp lực lên cái gì."}, {"q": "__________ employment opportunities a city creates, __________ it is likely to become to workers from surrounding rural areas.", "o": ["The most / the most attractive", "More and more / increasingly attractive", "The more / the more attractive", "The greater / the most attractive"], "a": 2, "e": "Cấu trúc: The + comparative..., the + comparative... → The more..., the more attractive..."}, {"q": "This is the first time the local government __________ such a large proportion of its annual budget to improving public transportation.", "o": ["has allocated", "allocated", "had allocated", "has been allocating"], "a": 0, "e": "This is the first time + S + have/has + V3 → has allocated."}, {"q": "With property prices rising much faster than average incomes, home ownership is becoming __________ for many young urban residents.", "o": ["increasingly inaccessible", "increased inaccessible", "increasingly inaccessibly", "more increasingly inaccessible"], "a": 0, "e": "Sau “becoming” cần tính từ. increasingly + adjective = ngày càng... → increasingly inaccessible."}, {"q": "The authorities have introduced stricter environmental regulations, but there has been little improvement in air quality __________.", "o": ["just", "already", "ever", "so far"], "a": 3, "e": "Present Perfect + “so far” = cho đến nay."}, {"q": "The redevelopment project is intended not only to provide additional housing but also to __________ neglected neighbourhoods and attract new businesses.", "o": ["replace", "recover", "revitalise", "restore"], "a": 2, "e": "“revitalise a neighbourhood/area” = đem sức sống mới, phục hồi một khu vực xuống cấp."}, {"q": "The longer commuters have to spend travelling between their homes and workplaces, __________ time they have available for family and leisure activities.", "o": ["the fewer", "the less", "less and less", "the least"], "a": 1, "e": "“time” là danh từ không đếm được → less. Cấu trúc: The longer..., the less..."}, {"q": "Urban planners are increasingly concerned that uncontrolled development may __________ existing inequalities by forcing lower-income residents out of central neighbourhoods.", "o": ["deepen", "expand", "raise", "increase up"], "a": 0, "e": "Collocation: “deepen inequalities” = làm cho sự bất bình đẳng trở nên nghiêm trọng hơn."}, {"q": "The city's population __________ steadily for more than a decade, putting increasing pressure on housing, transport, and essential services.", "o": ["grew", "had grown", "has been growing", "is growing"], "a": 2, "e": "“for more than a decade” + hành động bắt đầu trong quá khứ và vẫn tiếp diễn → has been growing."}, {"q": "Many residents oppose the construction of additional high-rise buildings because they fear that further development will come at the __________ of public green spaces.", "o": ["loss", "expense", "cost", "price"], "a": 1, "e": "Cụm cố định: “at the expense of something” = với cái giá phải trả là/làm tổn hại đến cái gì."}, {"q": "__________ attention is paid to developing efficient public transport, the more serious traffic congestion is likely to become.", "o": ["The least", "The fewer", "Less and less", "The less"], "a": 3, "e": "“attention” không đếm được → less. Cấu trúc: The less attention..., the more serious..."}, {"q": "Of all the measures the city __________ to address overcrowding, expanding the suburban rail network appears to have produced the most noticeable results.", "o": ["ever introduced", "has ever introduced", "had ever introduced", "is ever introducing"], "a": 1, "e": "Of all the measures + S + has ever + V3 → has ever introduced."}, {"q": "Despite the economic opportunities associated with urbanisation, rapid population growth can __________ considerable strain on infrastructure if it is not properly managed.", "o": ["make", "put", "take", "bring"], "a": 1, "e": "Collocation: “put/place strain on something” = gây áp lực lớn lên cái gì."}];
+let i=0,score=0,streak=0,answered=false;
+const letters=["A","B","C","D"];
+function render(){
+ answered=false;
+ document.getElementById("n").textContent=i+1;
+ document.getElementById("qnum").textContent="QUESTION "+(i+1);
+ document.getElementById("question").textContent=qs[i].q;
+ document.getElementById("bar").style.width=(i/qs.length*100)+"%";
+ const box=document.getElementById("answers"); box.innerHTML="";
+ qs[i].o.forEach((x,k)=>{
+   const b=document.createElement("button"); b.className="answer";
+   b.innerHTML="<b>"+letters[k]+".</b> "+x;
+   b.onclick=()=>choose(k,b); box.appendChild(b);
+ });
+ const f=document.getElementById("feedback"); f.style.display="none"; f.className="feedback";
+ document.getElementById("next").style.display="none";
+}
+function choose(k,btn){
+ if(answered)return; answered=true;
+ const q=qs[i], buttons=[...document.querySelectorAll(".answer")];
+ buttons.forEach(b=>b.disabled=true);
+ buttons[q.a].classList.add("correct");
+ const f=document.getElementById("feedback");
+ if(k===q.a){
+   score++; streak++;
+   f.className="feedback good";
+   f.innerHTML="<b>✅ CORRECT!</b><br>"+q.e;
+ }else{
+   streak=0; btn.classList.add("wrong");
+   f.className="feedback bad";
+   f.innerHTML="<b>❌ INCORRECT.</b> Correct answer: <b>"+letters[q.a]+". "+q.o[q.a]+"</b><br>"+q.e;
+ }
+ document.getElementById("score").textContent=score;
+ document.getElementById("streak").textContent=streak;
+ f.style.display="block"; document.getElementById("next").style.display="block";
+}
+document.getElementById("next").onclick=()=>{
+ i++;
+ if(i<qs.length) render(); else finish();
+};
+function finish(){
+ document.getElementById("game").style.display="none";
+ document.getElementById("result").style.display="block";
+ let pct=Math.round(score/qs.length*100);
+ let medal=pct>=90?"🏆":pct>=75?"🥇":pct>=60?"🥈":"🎯";
+ document.getElementById("medal").textContent=medal;
+ document.getElementById("summary").innerHTML="You answered <b>"+score+"/"+qs.length+"</b> correctly ("+pct+"%).<br>Each question accepts only one answer.";
+}
+function restart(){i=0;score=0;streak=0;document.getElementById("score").textContent=0;document.getElementById("streak").textContent=0;document.getElementById("result").style.display="none";document.getElementById("game").style.display="block";render();}
+render();
+</script></body></html>
