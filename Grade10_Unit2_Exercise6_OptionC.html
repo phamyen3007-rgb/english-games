@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade 10 - Unit 2 - Exercise 6 - Option C</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 18% 14%, rgba(255, 225, 110, .30), transparent 20%),
+        radial-gradient(circle at 84% 18%, rgba(125, 220, 255, .28), transparent 22%),
+        radial-gradient(circle at 50% 108%, rgba(26, 109, 164, .32), transparent 38%),
+        linear-gradient(145deg, #0e6686, #2c9fbd 48%, #82d4dd 100%);
+      color: #163f50;
+    }
+
+    .shell {
+      width: min(1050px, 94%);
+      margin: 28px auto;
+    }
+
+    .card {
+      background: rgba(247, 253, 255, .96);
+      border: 1px solid rgba(48, 145, 184, .28);
+      border-radius: 22px;
+      box-shadow: 0 0 28px rgba(15, 103, 150, .22);
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 20px 22px;
+      background: linear-gradient(90deg, rgba(255,213,76,.95), rgba(67,171,211,.93));
+      border-bottom: 1px solid rgba(47,142,181,.20);
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 38px);
+      font-weight: 900;
+      color: #073f5d;
+      text-shadow: 0 1px 0 rgba(255,255,255,.55);
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: #1b5c76;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 14px 18px;
+      background: rgba(235, 249, 253, .95);
+      border-bottom: 1px solid rgba(54,147,185,.16);
+    }
+
+    .stat {
+      text-align: center;
+      padding: 10px 8px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(64,153,190,.18);
+    }
+
+    .stat b {
+      display: block;
+      font-size: 20px;
+      color: #0b4966;
+    }
+
+    .stat span {
+      font-size: 12px;
+      color: #547788;
+      font-weight: 700;
+    }
+
+    .content {
+      padding: 22px;
+    }
+
+    .passage {
+      background: rgba(255,255,255,.90);
+      border: 1px solid rgba(71,158,194,.20);
+      border-radius: 18px;
+      padding: 20px;
+      line-height: 1.75;
+      color: #294957;
+      margin-bottom: 22px;
+      max-height: 420px;
+      overflow-y: auto;
+    }
+
+    .passage h2 {
+      margin-top: 0;
+      text-align: center;
+      color: #0a7298;
+      font-size: 27px;
+    }
+
+    .question-box {
+      background: rgba(249,254,255,.98);
+      color: #173f50;
+      border: 1px solid rgba(55,148,184,.22);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .progress {
+      height: 10px;
+      background: rgba(31,109,151,.12);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .progress > div {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ffd34e, #2aa5d1);
+      transition: width .3s ease;
+    }
+
+    .qtext {
+      font-size: 21px;
+      line-height: 1.55;
+      font-weight: 800;
+      color: #104965;
+      margin-bottom: 16px;
+    }
+
+    .answers {
+      display: grid;
+      gap: 12px;
+    }
+
+    .answer {
+      width: 100%;
+      text-align: left;
+      border: 1px solid rgba(60,147,183,.24);
+      background: rgba(255,255,255,.96);
+      color: #173f50;
+      padding: 15px 16px;
+      border-radius: 14px;
+      font-size: 17px;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+
+    .answer:hover {
+      transform: translateY(-1px);
+      background: rgba(229,248,255,.98);
+      border-color: rgba(36,139,186,.70);
+    }
+
+    .answer.correct {
+      background: rgba(191,246,215,.95);
+      border-color: #37c977;
+      color: #075d35;
+      box-shadow: 0 0 15px rgba(55,201,119,.18);
+    }
+
+    .answer.wrong {
+      background: rgba(255,218,218,.95);
+      border-color: #ef6b6b;
+      color: #8d1e1e;
+      animation: shake .2s linear 2;
+    }
+
+    .answer:disabled { cursor: default; }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+      100% { transform: translateX(0); }
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      line-height: 1.6;
+      background: rgba(233,249,255,.98);
+      border: 1px solid rgba(56,148,184,.22);
+      color: #173f50;
+    }
+
+    .feedback.show { display: block; }
+
+    .next-btn {
+      display: none;
+      margin-top: 16px;
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 17px;
+      font-weight: 900;
+      color: white;
+      cursor: pointer;
+      background: linear-gradient(90deg, #e6a500, #238fbd);
+      box-shadow: 0 0 18px rgba(35,143,189,.20);
+    }
+
+    .next-btn.show { display: block; }
+
+    .summary {
+      display: none;
+      text-align: center;
+      padding: 30px 22px 34px;
+      background: rgba(249,254,255,.98);
+      color: #17475a;
+    }
+
+    .summary.show { display: block; }
+
+    .summary h2 {
+      font-size: 32px;
+      color: #0a759e;
+      margin: 8px 0;
+    }
+
+    .summary p {
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .rank {
+      font-size: 54px;
+      margin: 10px 0;
+    }
+
+    .restart {
+      margin-top: 14px;
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 22px;
+      font-size: 16px;
+      font-weight: 900;
+      color: white;
+      background: linear-gradient(90deg, #e1a100, #1f88b5);
+      cursor: pointer;
+    }
+
+    .credit {
+      text-align: center;
+      padding: 14px;
+      color: #5d7f8c;
+      font-size: 12px;
+    }
+
+    @media (max-width: 700px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .content { padding: 14px; }
+      .qtext { font-size: 18px; }
+      .answer { font-size: 15px; }
+      .passage { max-height: 340px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="card">
+      <div class="header">
+        <h1 class="title">GRADE 10 • UNIT 2 • EXERCISE 6</h1>
+        <div class="subtitle">Option C — Saving Energy at Home</div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b id="qCounter">1/5</b><span>QUESTION</span></div>
+        <div class="stat"><b id="hearts">❤️❤️❤️❤️❤️</b><span>HEARTS</span></div>
+        <div class="stat"><b id="xp">0</b><span>XP</span></div>
+        <div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+      </div>
+
+      <div class="content" id="gameArea">
+        <div class="passage">
+          <h2>SAVING ENERGY AT HOME</h2>
+
+          <p>Saving energy at home is one of the easiest ways to help protect the environment. Many household appliances use electricity every day, and some of them (1) _________. This not only wastes energy but also increases the amount of money families have to pay for electricity.</p>
+
+          <p>Fortunately, we can reduce energy use by changing a few simple habits. Lights and fans should be turned off when we leave a room. (2) _________, we should unplug chargers and other devices when they are not being used. These actions may seem small, but they can save a surprising amount of energy over time.</p>
+
+          <p>Choosing the right appliances can also make a difference. Energy-efficient devices, (3) _________, usually require less electricity to operate. Although they may sometimes cost more to buy, they can help families save money in the long run.</p>
+
+          <p>Another useful solution is to make better use of natural light. (4) _________, we can open the curtains and let sunlight into our homes. This reduces the need for electric lights and makes rooms feel brighter and more comfortable.</p>
+
+          <p>Saving energy does not require major changes to our daily lives. If everyone develops better habits at home, (5) _________.</p>
+        </div>
+
+        <div class="question-box">
+          <div class="progress"><div id="progressBar"></div></div>
+          <div class="qtext" id="questionText"></div>
+          <div class="answers" id="answers"></div>
+          <div class="feedback" id="feedback"></div>
+          <button class="next-btn" id="nextBtn">CÂU TIẾP THEO →</button>
+        </div>
+      </div>
+
+      <div class="summary" id="summary">
+        <div class="rank">💡🏆</div>
+        <h2>HOÀN THÀNH!</h2>
+        <p id="summaryText"></p>
+        <button class="restart" onclick="restartGame()">CHƠI LẠI</button>
+      </div>
+
+      <div class="credit">Grade 10 English Review Game</div>
+    </section>
+  </main>
+
+  <script>
+    const questions = [
+      {
+        q: 'Choose the best answer for blank (1).',
+        options: [
+          'A. have been producing more electricity themselves',
+          'B. are left on even when nobody is using them',
+          'C. will stop families from using electricity',
+          'D. use them whenever people leave home'
+        ],
+        correct: 1,
+        explain: 'Câu sau có “This not only wastes energy...”, nên chỗ trống phải nói về một hành động gây lãng phí điện. “are left on even when nobody is using them” = bị để bật dù không ai sử dụng, nên B đúng.'
+      },
+      {
+        q: 'Choose the best answer for blank (2).',
+        options: [
+          'A. Instead',
+          'B. However',
+          'C. In addition',
+          'D. As a result'
+        ],
+        correct: 2,
+        explain: 'Câu trước nói tắt đèn và quạt; câu sau bổ sung thêm một giải pháp là rút phích cắm thiết bị. Vì vậy “In addition” = ngoài ra là từ nối phù hợp nhất.'
+      },
+      {
+        q: 'Choose the best answer for blank (3).',
+        options: [
+          'A. which are designed to use energy more efficiently',
+          'B. that people should leave on throughout the day',
+          'C. using too much electricity in most homes',
+          'D. which they are usually wasting more energy'
+        ],
+        correct: 0,
+        explain: 'Hai dấu phẩy cho thấy cần mệnh đề quan hệ không xác định. “which are designed to use energy more efficiently” vừa đúng cấu trúc vừa đúng nghĩa với “energy-efficient devices”.'
+      },
+      {
+        q: 'Choose the best answer for blank (4).',
+        options: [
+          'A. Although electric lights are necessary at night',
+          'B. Because every room needs more electrical equipment',
+          'C. If people keep all their curtains closed',
+          'D. During the daytime, instead of turning on the lights'
+        ],
+        correct: 3,
+        explain: 'Phần sau nói “open the curtains and let sunlight into our homes”, nên ý phù hợp nhất là tận dụng ánh sáng tự nhiên thay vì bật đèn vào ban ngày. Vì vậy D đúng.'
+      },
+      {
+        q: 'Choose the best answer for blank (5).',
+        options: [
+          'A. only expensive technology will be able to solve the problem',
+          'B. electricity will become unnecessary in modern homes',
+          'C. household appliances should never be used again',
+          'D. we can reduce both our energy bills and our impact on the environment'
+        ],
+        correct: 3,
+        explain: 'Đây là câu kết luận toàn bài. Tiết kiệm điện vừa giúp giảm hóa đơn tiền điện vừa giảm tác động đến môi trường, nên D tổng kết đúng nhất.'
+      }
+    ];
+
+    let current = 0;
+    let hearts = 5;
+    let xp = 0;
+    let combo = 0;
+    let totalWrong = 0;
+    let locked = false;
+
+    const qCounter = document.getElementById('qCounter');
+    const heartsEl = document.getElementById('hearts');
+    const xpEl = document.getElementById('xp');
+    const comboEl = document.getElementById('combo');
+    const questionText = document.getElementById('questionText');
+    const answersEl = document.getElementById('answers');
+    const feedback = document.getElementById('feedback');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressBar = document.getElementById('progressBar');
+    const gameArea = document.getElementById('gameArea');
+    const summary = document.getElementById('summary');
+    const summaryText = document.getElementById('summaryText');
+
+    function updateHearts() {
+      heartsEl.textContent = '❤️'.repeat(hearts) + '🖤'.repeat(Math.max(0, 5 - hearts));
+    }
+
+    function renderQuestion() {
+      locked = false;
+      const item = questions[current];
+
+      qCounter.textContent = `${current + 1}/${questions.length}`;
+      xpEl.textContent = xp;
+      comboEl.textContent = combo;
+      updateHearts();
+      progressBar.style.width = `${(current / questions.length) * 100}%`;
+
+      questionText.textContent = `Question ${current + 1}. ${item.q}`;
+      answersEl.innerHTML = '';
+      feedback.className = 'feedback';
+      feedback.textContent = '';
+      nextBtn.className = 'next-btn';
+
+      item.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'answer';
+        btn.textContent = opt;
+        btn.onclick = () => chooseAnswer(index, btn);
+        answersEl.appendChild(btn);
+      });
+    }
+
+    function chooseAnswer(index, btn) {
+      if (locked) return;
+      const item = questions[current];
+
+      if (index === item.correct) {
+        locked = true;
+        btn.classList.add('correct');
+
+        combo++;
+        let gain = 10;
+        if (combo >= 3) gain = 20;
+        else if (combo >= 2) gain = 15;
+        xp += gain;
+
+        [...answersEl.children].forEach(b => b.disabled = true);
+
+        feedback.innerHTML =
+          `✅ <strong>Chính xác!</strong><br>${item.explain}<br><strong>+${gain} XP</strong>`;
+        feedback.classList.add('show');
+
+        xpEl.textContent = xp;
+        comboEl.textContent = combo;
+        nextBtn.classList.add('show');
+        nextBtn.textContent =
+          current === questions.length - 1 ? 'XEM KẾT QUẢ →' : 'CÂU TIẾP THEO →';
+
+      } else {
+        btn.classList.add('wrong');
+        btn.disabled = true;
+
+        combo = 0;
+        totalWrong++;
+        hearts--;
+        updateHearts();
+        comboEl.textContent = combo;
+
+        feedback.innerHTML =
+          '❌ <strong>Chưa đúng.</strong> Em hãy chọn lại. Phải chọn đúng mới được chuyển sang câu tiếp theo.';
+        feedback.classList.add('show');
+
+        if (hearts <= 0) {
+          setTimeout(() => {
+            alert('💔 Hết 5 trái tim! Em phải làm lại từ câu 1.');
+            restartGame();
+          }, 250);
+          return;
+        }
+
+        setTimeout(() => {
+          btn.classList.remove('wrong');
+          btn.disabled = false;
+        }, 500);
+      }
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (current < questions.length - 1) {
+        current++;
+        renderQuestion();
+      } else {
+        finishGame();
+      }
+    });
+
+    function finishGame() {
+      progressBar.style.width = '100%';
+      gameArea.style.display = 'none';
+      summary.classList.add('show');
+
+      let rank = 'S RANK';
+      if (totalWrong >= 3) rank = 'A RANK';
+      if (totalWrong >= 6) rank = 'B RANK';
+
+      summaryText.innerHTML =
+        `<strong>${rank}</strong><br>` +
+        `Em đã hoàn thành ${questions.length} câu.<br>` +
+        `XP: <strong>${xp}</strong> • Số lần chọn sai: <strong>${totalWrong}</strong>`;
+    }
+
+    function restartGame() {
+      current = 0;
+      hearts = 5;
+      xp = 0;
+      combo = 0;
+      totalWrong = 0;
+      locked = false;
+
+      summary.classList.remove('show');
+      gameArea.style.display = 'block';
+      renderQuestion();
+    }
+
+    renderQuestion();
+  </script>
+</body>
+</html>

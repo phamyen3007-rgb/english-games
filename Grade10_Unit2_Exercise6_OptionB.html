@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade 10 - Unit 2 - Exercise 6 - Option B</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 18% 16%, rgba(126, 225, 173, .25), transparent 22%),
+        radial-gradient(circle at 84% 14%, rgba(255, 218, 92, .28), transparent 20%),
+        radial-gradient(circle at 50% 110%, rgba(18, 117, 89, .30), transparent 38%),
+        linear-gradient(145deg, #0d5c4d, #1f8f72 48%, #7cc7a2 100%);
+      color: #163f35;
+    }
+
+    .shell {
+      width: min(1050px, 94%);
+      margin: 28px auto;
+    }
+
+    .card {
+      background: rgba(247, 255, 251, .96);
+      border: 1px solid rgba(45, 143, 111, .28);
+      border-radius: 22px;
+      box-shadow: 0 0 28px rgba(15, 102, 82, .22);
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 20px 22px;
+      background: linear-gradient(90deg, rgba(255,210,75,.95), rgba(73,174,128,.93));
+      border-bottom: 1px solid rgba(45,140,110,.20);
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 38px);
+      font-weight: 900;
+      color: #0a4a3b;
+      text-shadow: 0 1px 0 rgba(255,255,255,.55);
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: #205f50;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 14px 18px;
+      background: rgba(235, 250, 243, .95);
+      border-bottom: 1px solid rgba(52,145,113,.16);
+    }
+
+    .stat {
+      text-align: center;
+      padding: 10px 8px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(63,151,119,.18);
+    }
+
+    .stat b {
+      display: block;
+      font-size: 20px;
+      color: #0d4c3d;
+    }
+
+    .stat span {
+      font-size: 12px;
+      color: #4f796c;
+      font-weight: 700;
+    }
+
+    .content {
+      padding: 22px;
+    }
+
+    .passage {
+      background: rgba(255,255,255,.88);
+      border: 1px solid rgba(69,156,124,.20);
+      border-radius: 18px;
+      padding: 20px;
+      line-height: 1.75;
+      color: #25483e;
+      margin-bottom: 22px;
+      max-height: 410px;
+      overflow-y: auto;
+    }
+
+    .passage h2 {
+      margin-top: 0;
+      text-align: center;
+      color: #0d6d54;
+      font-size: 27px;
+    }
+
+    .question-box {
+      background: rgba(249,255,252,.98);
+      color: #173f34;
+      border: 1px solid rgba(53,145,111,.22);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .progress {
+      height: 10px;
+      background: rgba(30,106,81,.12);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .progress > div {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ffd34e, #32a977);
+      transition: width .3s ease;
+    }
+
+    .qtext {
+      font-size: 21px;
+      line-height: 1.55;
+      font-weight: 800;
+      color: #104a3a;
+      margin-bottom: 16px;
+    }
+
+    .answers {
+      display: grid;
+      gap: 12px;
+    }
+
+    .answer {
+      width: 100%;
+      text-align: left;
+      border: 1px solid rgba(58,145,112,.24);
+      background: rgba(255,255,255,.96);
+      color: #173f34;
+      padding: 15px 16px;
+      border-radius: 14px;
+      font-size: 17px;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+
+    .answer:hover {
+      transform: translateY(-1px);
+      background: rgba(230,250,240,.98);
+      border-color: rgba(34,137,99,.70);
+    }
+
+    .answer.correct {
+      background: rgba(191,246,215,.95);
+      border-color: #37c977;
+      color: #075d35;
+      box-shadow: 0 0 15px rgba(55,201,119,.18);
+    }
+
+    .answer.wrong {
+      background: rgba(255,218,218,.95);
+      border-color: #ef6b6b;
+      color: #8d1e1e;
+      animation: shake .2s linear 2;
+    }
+
+    .answer:disabled { cursor: default; }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+      100% { transform: translateX(0); }
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      line-height: 1.6;
+      background: rgba(232,250,241,.98);
+      border: 1px solid rgba(54,145,112,.22);
+      color: #173f34;
+    }
+
+    .feedback.show { display: block; }
+
+    .next-btn {
+      display: none;
+      margin-top: 16px;
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 17px;
+      font-weight: 900;
+      color: white;
+      cursor: pointer;
+      background: linear-gradient(90deg, #e7a600, #27956b);
+      box-shadow: 0 0 18px rgba(39,149,107,.20);
+    }
+
+    .next-btn.show { display: block; }
+
+    .summary {
+      display: none;
+      text-align: center;
+      padding: 30px 22px 34px;
+      background: rgba(249,255,252,.98);
+      color: #17473a;
+    }
+
+    .summary.show { display: block; }
+
+    .summary h2 {
+      font-size: 32px;
+      color: #0d7658;
+      margin: 8px 0;
+    }
+
+    .summary p {
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .rank {
+      font-size: 54px;
+      margin: 10px 0;
+    }
+
+    .restart {
+      margin-top: 14px;
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 22px;
+      font-size: 16px;
+      font-weight: 900;
+      color: white;
+      background: linear-gradient(90deg, #e4a300, #238c65);
+      cursor: pointer;
+    }
+
+    .credit {
+      text-align: center;
+      padding: 14px;
+      color: #5d8176;
+      font-size: 12px;
+    }
+
+    @media (max-width: 700px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .content { padding: 14px; }
+      .qtext { font-size: 18px; }
+      .answer { font-size: 15px; }
+      .passage { max-height: 340px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="card">
+      <div class="header">
+        <h1 class="title">GRADE 10 • UNIT 2 • EXERCISE 6</h1>
+        <div class="subtitle">Option B — Food Waste: A Problem We Can Solve</div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b id="qCounter">1/5</b><span>QUESTION</span></div>
+        <div class="stat"><b id="hearts">❤️❤️❤️❤️❤️</b><span>HEARTS</span></div>
+        <div class="stat"><b id="xp">0</b><span>XP</span></div>
+        <div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+      </div>
+
+      <div class="content" id="gameArea">
+        <div class="passage">
+          <h2>FOOD WASTE – A PROBLEM WE CAN SOLVE</h2>
+
+          <p>Food waste has become a serious environmental problem in many parts of the world. Every day, large amounts of food (1) _________. This happens in homes, restaurants, supermarkets, and even schools. (2) _________, wasting food also means wasting the water, energy, and land used to produce it.</p>
+
+          <p>Another problem occurs when food waste is sent to landfills. As the food breaks down, it produces gases that contribute to climate change. (3) _________, the environmental impact can become even greater. This is why reducing food waste is important for protecting our planet.</p>
+
+          <p>Fortunately, there are many simple ways to solve the problem. Families can plan their meals carefully and avoid buying more food than they need. Leftover food, (4) _________, can be kept in the fridge and eaten the next day. Schools can also teach students how their everyday choices affect the environment.</p>
+
+          <p>Everyone has a role to play in reducing food waste. We do not need to make huge changes to our lives. (5) _________.</p>
+        </div>
+
+        <div class="question-box">
+          <div class="progress"><div id="progressBar"></div></div>
+          <div class="qtext" id="questionText"></div>
+          <div class="answers" id="answers"></div>
+          <div class="feedback" id="feedback"></div>
+          <button class="next-btn" id="nextBtn">CÂU TIẾP THEO →</button>
+        </div>
+      </div>
+
+      <div class="summary" id="summary">
+        <div class="rank">♻️🏆</div>
+        <h2>HOÀN THÀNH!</h2>
+        <p id="summaryText"></p>
+        <button class="restart" onclick="restartGame()">CHƠI LẠI</button>
+      </div>
+
+      <div class="credit">Grade 10 English Review Game</div>
+    </section>
+  </main>
+
+  <script>
+    const questions = [
+      {
+        q: 'Choose the best answer for blank (1).',
+        options: [
+          'A. is preparing for families every day',
+          'B. are thrown away before they are eaten',
+          'C. is thrown away before it can be eaten',
+          'D. have thrown into rubbish bins'
+        ],
+        correct: 2,
+        explain: '“Food” là danh từ không đếm được nên dùng động từ số ít. Câu cần thể bị động vì thức ăn “bị vứt bỏ”: “is thrown away”. Vì vậy C đúng.'
+      },
+      {
+        q: 'Choose the best answer for blank (2).',
+        options: [
+          'A. However, producing food requires no natural resources',
+          'B. In addition to losing valuable food',
+          'C. Although people should buy more food than necessary',
+          'D. Because food is becoming cheaper in many countries'
+        ],
+        correct: 1,
+        explain: 'Cấu trúc “In addition to + V-ing” = ngoài việc... còn... Phần sau có “also means...”, nên B tạo liên kết nghĩa và ngữ pháp tự nhiên nhất.'
+      },
+      {
+        q: 'Choose the best answer for blank (3).',
+        options: [
+          'A. If more and more food is thrown away',
+          'B. Although landfills are always good for the environment',
+          'C. When families finish all the food they buy',
+          'D. Because people stop producing food completely'
+        ],
+        correct: 0,
+        explain: 'Phần sau nói “the environmental impact can become even greater”, nên cần một điều kiện làm tác động môi trường lớn hơn. “If more and more food is thrown away” phù hợp nhất.'
+      },
+      {
+        q: 'Choose the best answer for blank (4).',
+        options: [
+          'A. which can still be safe to eat',
+          'B. that people threw it away immediately',
+          'C. being always dangerous to human health',
+          'D. which they must never eat again'
+        ],
+        correct: 0,
+        explain: 'Hai dấu phẩy cho thấy cần mệnh đề quan hệ không xác định. “which can still be safe to eat” vừa đúng cấu trúc vừa phù hợp với ý “can be kept in the fridge and eaten the next day”.'
+      },
+      {
+        q: 'Choose the best answer for blank (5).',
+        options: [
+          'A. Every small action can help us make a difference',
+          'B. Unless everyone stops eating, the problem will disappear',
+          'C. Only governments are responsible for solving this problem',
+          'D. Food waste will never become an environmental problem'
+        ],
+        correct: 0,
+        explain: 'Đây là câu kết luận toàn bài. Trước đó bài nhấn mạnh các hành động nhỏ và “Everyone has a role to play”, nên A là thông điệp tổng kết phù hợp nhất.'
+      }
+    ];
+
+    let current = 0;
+    let hearts = 5;
+    let xp = 0;
+    let combo = 0;
+    let totalWrong = 0;
+    let locked = false;
+
+    const qCounter = document.getElementById('qCounter');
+    const heartsEl = document.getElementById('hearts');
+    const xpEl = document.getElementById('xp');
+    const comboEl = document.getElementById('combo');
+    const questionText = document.getElementById('questionText');
+    const answersEl = document.getElementById('answers');
+    const feedback = document.getElementById('feedback');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressBar = document.getElementById('progressBar');
+    const gameArea = document.getElementById('gameArea');
+    const summary = document.getElementById('summary');
+    const summaryText = document.getElementById('summaryText');
+
+    function updateHearts() {
+      heartsEl.textContent = '❤️'.repeat(hearts) + '🖤'.repeat(Math.max(0, 5 - hearts));
+    }
+
+    function renderQuestion() {
+      locked = false;
+      const item = questions[current];
+
+      qCounter.textContent = `${current + 1}/${questions.length}`;
+      xpEl.textContent = xp;
+      comboEl.textContent = combo;
+      updateHearts();
+      progressBar.style.width = `${(current / questions.length) * 100}%`;
+
+      questionText.textContent = `Question ${current + 1}. ${item.q}`;
+      answersEl.innerHTML = '';
+      feedback.className = 'feedback';
+      feedback.textContent = '';
+      nextBtn.className = 'next-btn';
+
+      item.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'answer';
+        btn.textContent = opt;
+        btn.onclick = () => chooseAnswer(index, btn);
+        answersEl.appendChild(btn);
+      });
+    }
+
+    function chooseAnswer(index, btn) {
+      if (locked) return;
+      const item = questions[current];
+
+      if (index === item.correct) {
+        locked = true;
+        btn.classList.add('correct');
+
+        combo++;
+        let gain = 10;
+        if (combo >= 3) gain = 20;
+        else if (combo >= 2) gain = 15;
+        xp += gain;
+
+        [...answersEl.children].forEach(b => b.disabled = true);
+
+        feedback.innerHTML =
+          `✅ <strong>Chính xác!</strong><br>${item.explain}<br><strong>+${gain} XP</strong>`;
+        feedback.classList.add('show');
+
+        xpEl.textContent = xp;
+        comboEl.textContent = combo;
+        nextBtn.classList.add('show');
+        nextBtn.textContent =
+          current === questions.length - 1 ? 'XEM KẾT QUẢ →' : 'CÂU TIẾP THEO →';
+
+      } else {
+        btn.classList.add('wrong');
+        btn.disabled = true;
+
+        combo = 0;
+        totalWrong++;
+        hearts--;
+        updateHearts();
+        comboEl.textContent = combo;
+
+        feedback.innerHTML =
+          '❌ <strong>Chưa đúng.</strong> Em hãy chọn lại. Phải chọn đúng mới được chuyển sang câu tiếp theo.';
+        feedback.classList.add('show');
+
+        if (hearts <= 0) {
+          setTimeout(() => {
+            alert('💔 Hết 5 trái tim! Em phải làm lại từ câu 1.');
+            restartGame();
+          }, 250);
+          return;
+        }
+
+        setTimeout(() => {
+          btn.classList.remove('wrong');
+          btn.disabled = false;
+        }, 500);
+      }
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (current < questions.length - 1) {
+        current++;
+        renderQuestion();
+      } else {
+        finishGame();
+      }
+    });
+
+    function finishGame() {
+      progressBar.style.width = '100%';
+      gameArea.style.display = 'none';
+      summary.classList.add('show');
+
+      let rank = 'S RANK';
+      if (totalWrong >= 3) rank = 'A RANK';
+      if (totalWrong >= 6) rank = 'B RANK';
+
+      summaryText.innerHTML =
+        `<strong>${rank}</strong><br>` +
+        `Em đã hoàn thành ${questions.length} câu.<br>` +
+        `XP: <strong>${xp}</strong> • Số lần chọn sai: <strong>${totalWrong}</strong>`;
+    }
+
+    function restartGame() {
+      current = 0;
+      hearts = 5;
+      xp = 0;
+      combo = 0;
+      totalWrong = 0;
+      locked = false;
+
+      summary.classList.remove('show');
+      gameArea.style.display = 'block';
+      renderQuestion();
+    }
+
+    renderQuestion();
+  </script>
+</body>
+</html>

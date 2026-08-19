@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade 10 - Unit 2 - Exercise 5 - Option C</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(117, 222, 255, .28), transparent 24%),
+        radial-gradient(circle at 84% 16%, rgba(255, 228, 91, .30), transparent 22%),
+        radial-gradient(circle at 50% 108%, rgba(0, 126, 168, .30), transparent 36%),
+        linear-gradient(145deg, #0f6a8b, #35a7c8 48%, #77d0d7 100%);
+      color: #123f55;
+    }
+
+    .shell {
+      width: min(1000px, 94%);
+      margin: 28px auto;
+    }
+
+    .card {
+      background: rgba(246, 253, 255, .96);
+      border: 1px solid rgba(31, 137, 180, .28);
+      border-radius: 22px;
+      box-shadow: 0 0 28px rgba(10, 97, 145, .22);
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 20px 22px;
+      background: linear-gradient(90deg, rgba(255,213,76,.95), rgba(54,174,201,.93));
+      border-bottom: 1px solid rgba(33,132,175,.20);
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 38px);
+      font-weight: 900;
+      color: #063d59;
+      text-shadow: 0 1px 0 rgba(255,255,255,.55);
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: #15516f;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 14px 18px;
+      background: rgba(233, 248, 252, .95);
+      border-bottom: 1px solid rgba(50,145,181,.16);
+    }
+
+    .stat {
+      text-align: center;
+      padding: 10px 8px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(56,153,190,.18);
+    }
+
+    .stat b {
+      display: block;
+      font-size: 20px;
+      color: #083f60;
+    }
+
+    .stat span {
+      font-size: 12px;
+      color: #4d7184;
+      font-weight: 700;
+    }
+
+    .content {
+      padding: 22px;
+    }
+
+    .question-box {
+      background: rgba(248,253,255,.98);
+      color: #17364d;
+      border: 1px solid rgba(47,145,190,.22);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .progress {
+      height: 10px;
+      background: rgba(24,110,159,.12);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .progress > div {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ffd34e, #20a4cf);
+      transition: width .3s ease;
+    }
+
+    .qtext {
+      font-size: 21px;
+      line-height: 1.55;
+      font-weight: 800;
+      color: #083f60;
+      margin-bottom: 16px;
+      white-space: pre-line;
+    }
+
+    .answers {
+      display: grid;
+      gap: 12px;
+    }
+
+    .answer {
+      width: 100%;
+      text-align: left;
+      border: 1px solid rgba(43,143,190,.24);
+      background: rgba(255,255,255,.96);
+      color: #123f55;
+      padding: 15px 16px;
+      border-radius: 14px;
+      font-size: 17px;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+
+    .answer:hover {
+      transform: translateY(-1px);
+      background: rgba(224,247,255,.98);
+      border-color: rgba(19,137,194,.72);
+    }
+
+    .answer.correct {
+      background: rgba(191,246,215,.94);
+      border-color: #37c977;
+      color: #075d35;
+      box-shadow: 0 0 15px rgba(55,201,119,.18);
+    }
+
+    .answer.wrong {
+      background: rgba(255,218,218,.95);
+      border-color: #ef6b6b;
+      color: #8d1e1e;
+      animation: shake .2s linear 2;
+    }
+
+    .answer:disabled { cursor: default; }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+      100% { transform: translateX(0); }
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      line-height: 1.6;
+      background: rgba(227,248,255,.98);
+      border: 1px solid rgba(43,142,190,.22);
+      color: #123f55;
+    }
+
+    .feedback.show { display: block; }
+
+    .next-btn {
+      display: none;
+      margin-top: 16px;
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 17px;
+      font-weight: 900;
+      color: white;
+      cursor: pointer;
+      background: linear-gradient(90deg, #ffbe24, #159bcf);
+      box-shadow: 0 0 18px rgba(23,133,187,.20);
+    }
+
+    .next-btn.show { display: block; }
+
+    .summary {
+      display: none;
+      text-align: center;
+      padding: 30px 22px 34px;
+      background: rgba(248,253,255,.98);
+      color: #17475d;
+    }
+
+    .summary.show { display: block; }
+
+    .summary h2 {
+      font-size: 32px;
+      color: #0874a8;
+      margin: 8px 0;
+    }
+
+    .summary p {
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .rank {
+      font-size: 54px;
+      margin: 10px 0;
+    }
+
+    .restart {
+      margin-top: 14px;
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 22px;
+      font-size: 16px;
+      font-weight: 900;
+      color: white;
+      background: linear-gradient(90deg, #ffbf21, #108dc1);
+      cursor: pointer;
+    }
+
+    .credit {
+      text-align: center;
+      padding: 14px;
+      color: #557d90;
+      font-size: 12px;
+    }
+
+    @media (max-width: 700px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .content { padding: 14px; }
+      .qtext { font-size: 18px; }
+      .answer { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="card">
+      <div class="header">
+        <h1 class="title">GRADE 10 • UNIT 2 • EXERCISE 5</h1>
+        <div class="subtitle">Option C — Sentence Arrangement Challenge</div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b id="qCounter">1/5</b><span>QUESTION</span></div>
+        <div class="stat"><b id="hearts">❤️❤️❤️❤️❤️</b><span>HEARTS</span></div>
+        <div class="stat"><b id="xp">0</b><span>XP</span></div>
+        <div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+      </div>
+
+      <div class="content" id="gameArea">
+        <div class="question-box">
+          <div class="progress"><div id="progressBar"></div></div>
+          <div class="qtext" id="questionText"></div>
+          <div class="answers" id="answers"></div>
+          <div class="feedback" id="feedback"></div>
+          <button class="next-btn" id="nextBtn">CÂU TIẾP THEO →</button>
+        </div>
+      </div>
+
+      <div class="summary" id="summary">
+        <div class="rank">🌿🏆</div>
+        <h2>HOÀN THÀNH!</h2>
+        <p id="summaryText"></p>
+        <button class="restart" onclick="restartGame()">CHƠI LẠI</button>
+      </div>
+
+      <div class="credit">Grade 10 English Review Game</div>
+    </section>
+  </main>
+
+  <script>
+    const questions = [
+      {
+        q: `a. That sounds useful. What can students do there?
+b. Our school is starting an environmental club next month.
+c. They can learn about nature and take part in green activities.
+d. Really? I'd like to join it.
+e. Great! We can join the club together.`,
+        options: [
+          'A. b – d – a – c – e',
+          'B. d – b – c – a – e',
+          'C. b – a – d – e – c',
+          'D. a – c – b – d – e'
+        ],
+        correct: 0,
+        explain: 'Trình tự hợp lý là: giới thiệu thông tin → “Really?” phản hồi → hỏi thêm → trả lời → kết thúc. Vì vậy chọn A.'
+      },
+      {
+        q: `a. This can reduce the number of plastic bottles thrown away every day.
+b. Many students buy bottled water at school.
+c. Instead, they can bring reusable water bottles from home.
+d. As a result, the school will produce less plastic waste.
+e. However, using so many plastic bottles is not good for the environment.`,
+        options: [
+          'A. b – c – e – a – d',
+          'B. e – b – c – d – a',
+          'C. b – e – c – a – d',
+          'D. b – e – a – c – d'
+        ],
+        correct: 2,
+        explain: 'Trình tự đúng là: thực trạng → “However” nêu vấn đề → “Instead” đưa giải pháp → “This” chỉ giải pháp vừa nêu → “As a result” nêu kết quả. Chọn C.'
+      },
+      {
+        q: `a. That's terrible. People should never leave rubbish there.
+b. I saw a lot of rubbish on the beach yesterday.
+c. Exactly. It can harm fish and other sea animals.
+d. Why don't we help clean the beach this Sunday?
+e. Sure! I'll invite some friends to come with us.`,
+        options: [
+          'A. b – a – c – d – e',
+          'B. a – b – d – c – e',
+          'C. b – c – a – e – d',
+          'D. d – e – b – a – c'
+        ],
+        correct: 0,
+        explain: 'Trình tự hợp lý: nêu vấn đề → “That’s terrible” phản ứng → “Exactly” + hậu quả → đề xuất → “Sure!” đồng ý. Chọn A.'
+      },
+      {
+        q: `a. After lunch, we watered the trees and cleaned the area around them.
+b. We had an interesting outdoor activity at school yesterday.
+c. In the morning, our teacher showed us how to plant young trees.
+d. At the end of the day, we took a class photo beside the new trees.
+e. It was a busy day, but everyone enjoyed the activity.`,
+        options: [
+          'A. c – b – a – d – e',
+          'B. b – c – a – d – e',
+          'C. b – a – c – e – d',
+          'D. c – a – b – d – e'
+        ],
+        correct: 1,
+        explain: 'Trình tự thời gian rõ ràng: giới thiệu sự kiện → “In the morning” → “After lunch” → “At the end of the day” → cảm nhận cuối cùng. Chọn B.'
+      },
+      {
+        q: `a. Yes. It can help reduce air pollution around our school.
+b. I've heard that our school is going to plant more trees this year.
+c. That's great news. Trees also provide shade on hot days.
+d. I think the school yard will become much greener and more beautiful.
+e. I hope so. It will be a nicer place for everyone.`,
+        options: [
+          'A. b – a – c – d – e',
+          'B. b – c – a – e – d',
+          'C. c – b – d – a – e',
+          'D. b – d – c – a – e'
+        ],
+        correct: 0,
+        explain: 'Trình tự hợp lý: đưa thông tin → “Yes” + lợi ích → “also” bổ sung lợi ích → dự đoán kết quả → “I hope so” kết thúc. Chọn A.'
+      }
+    ];
+
+    let current = 0;
+    let hearts = 5;
+    let xp = 0;
+    let combo = 0;
+    let totalWrong = 0;
+    let locked = false;
+
+    const qCounter = document.getElementById('qCounter');
+    const heartsEl = document.getElementById('hearts');
+    const xpEl = document.getElementById('xp');
+    const comboEl = document.getElementById('combo');
+    const questionText = document.getElementById('questionText');
+    const answersEl = document.getElementById('answers');
+    const feedback = document.getElementById('feedback');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressBar = document.getElementById('progressBar');
+    const gameArea = document.getElementById('gameArea');
+    const summary = document.getElementById('summary');
+    const summaryText = document.getElementById('summaryText');
+
+    function updateHearts() {
+      heartsEl.textContent = '❤️'.repeat(hearts) + '🖤'.repeat(Math.max(0, 5 - hearts));
+    }
+
+    function renderQuestion() {
+      locked = false;
+      const item = questions[current];
+
+      qCounter.textContent = `${current + 1}/${questions.length}`;
+      xpEl.textContent = xp;
+      comboEl.textContent = combo;
+      updateHearts();
+      progressBar.style.width = `${(current / questions.length) * 100}%`;
+
+      questionText.textContent = `Question ${current + 1}\n\n${item.q}`;
+      answersEl.innerHTML = '';
+      feedback.className = 'feedback';
+      feedback.textContent = '';
+      nextBtn.className = 'next-btn';
+
+      item.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'answer';
+        btn.textContent = opt;
+        btn.onclick = () => chooseAnswer(index, btn);
+        answersEl.appendChild(btn);
+      });
+    }
+
+    function chooseAnswer(index, btn) {
+      if (locked) return;
+      const item = questions[current];
+
+      if (index === item.correct) {
+        locked = true;
+        btn.classList.add('correct');
+
+        combo++;
+        let gain = 10;
+        if (combo >= 3) gain = 20;
+        else if (combo >= 2) gain = 15;
+        xp += gain;
+
+        [...answersEl.children].forEach(b => b.disabled = true);
+
+        feedback.innerHTML =
+          `✅ <strong>Chính xác!</strong><br>${item.explain}<br><strong>+${gain} XP</strong>`;
+        feedback.classList.add('show');
+
+        xpEl.textContent = xp;
+        comboEl.textContent = combo;
+        nextBtn.classList.add('show');
+        nextBtn.textContent =
+          current === questions.length - 1 ? 'XEM KẾT QUẢ →' : 'CÂU TIẾP THEO →';
+
+      } else {
+        btn.classList.add('wrong');
+        btn.disabled = true;
+
+        combo = 0;
+        totalWrong++;
+        hearts--;
+        updateHearts();
+        comboEl.textContent = combo;
+
+        feedback.innerHTML =
+          '❌ <strong>Chưa đúng.</strong> Em hãy chọn lại. Phải chọn đúng mới được chuyển sang câu tiếp theo.';
+        feedback.classList.add('show');
+
+        if (hearts <= 0) {
+          setTimeout(() => {
+            alert('💔 Hết 5 trái tim! Em phải làm lại từ câu 1.');
+            restartGame();
+          }, 250);
+          return;
+        }
+
+        setTimeout(() => {
+          btn.classList.remove('wrong');
+          btn.disabled = false;
+        }, 500);
+      }
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (current < questions.length - 1) {
+        current++;
+        renderQuestion();
+      } else {
+        finishGame();
+      }
+    });
+
+    function finishGame() {
+      progressBar.style.width = '100%';
+      gameArea.style.display = 'none';
+      summary.classList.add('show');
+
+      let rank = 'S RANK';
+      if (totalWrong >= 3) rank = 'A RANK';
+      if (totalWrong >= 6) rank = 'B RANK';
+
+      summaryText.innerHTML =
+        `<strong>${rank}</strong><br>` +
+        `Em đã hoàn thành ${questions.length} câu.<br>` +
+        `XP: <strong>${xp}</strong> • Số lần chọn sai: <strong>${totalWrong}</strong>`;
+    }
+
+    function restartGame() {
+      current = 0;
+      hearts = 5;
+      xp = 0;
+      combo = 0;
+      totalWrong = 0;
+      locked = false;
+
+      summary.classList.remove('show');
+      gameArea.style.display = 'block';
+      renderQuestion();
+    }
+
+    renderQuestion();
+  </script>
+</body>
+</html>
