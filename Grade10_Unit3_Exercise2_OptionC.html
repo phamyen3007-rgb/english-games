@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 3 - Exercise 2 - Option C</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;
+  background:linear-gradient(145deg,#08152d,#142a51 55%,#35195d);
+  color:#eef8ff
+}
+.wrap{width:min(1050px,94%);margin:24px auto}
+.card{
+  background:#0d1c39;border:1px solid #3c8fbd;border-radius:22px;
+  overflow:hidden;box-shadow:0 16px 38px rgba(0,0,0,.28)
+}
+.head{
+  padding:22px;text-align:center;
+  background:linear-gradient(90deg,#176fa6,#6f3aa2,#b6387e)
+}
+.head h1{margin:0;font-size:clamp(23px,4vw,36px);color:white}
+.head p{margin:8px 0 0;font-weight:800;color:#f1f8ff}
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
+  padding:14px;background:#09162e
+}
+.stat{
+  padding:10px;text-align:center;background:#142747;
+  border:1px solid #315b80;border-radius:12px
+}
+.stat b{display:block;font-size:19px;color:white}
+.stat span{font-size:11px;font-weight:800;color:#abdff6}
+.content{padding:20px}
+.passage{
+  background:#f8fcff;color:#263b50;border-radius:16px;padding:19px;
+  line-height:1.72;margin-bottom:20px;border:1px solid #c7e0ef
+}
+.passage h2{margin-top:0;text-align:center;color:#315a9a}
+.question-box{
+  background:#fbfdff;color:#273c52;border-radius:16px;
+  padding:19px;border:1px solid #c7ddea
+}
+.progress{height:9px;background:#dce9f1;border-radius:20px;overflow:hidden;margin-bottom:18px}
+#bar{height:100%;width:0;background:linear-gradient(90deg,#00cce8,#7660dd,#e34c9f)}
+#questionText{font-size:20px;font-weight:800;line-height:1.5;margin-bottom:16px}
+.answers{display:grid;gap:11px}
+.answer{
+  padding:14px;text-align:left;border:1px solid #bdd4e2;border-radius:12px;
+  background:white;color:#263d54;font-size:16px;cursor:pointer
+}
+.answer:hover{background:#eef9ff}
+.answer.correct{background:#d9f8e6;border-color:#35b96f;color:#075b35}
+.answer.wrong{background:#ffe0e0;border-color:#e06a6a;color:#891f1f}
+#feedback{
+  display:none;margin-top:15px;padding:13px;border-radius:12px;
+  background:#eef8ff;color:#273d52;border:1px solid #c4dcea;line-height:1.6
+}
+#nextBtn{
+  display:none;width:100%;margin-top:15px;padding:14px;border:0;
+  border-radius:12px;background:linear-gradient(90deg,#1595be,#704fcd,#cc478f);
+  color:white;font-size:16px;font-weight:900;cursor:pointer
+}
+#summary{
+  display:none;text-align:center;padding:35px;color:#eef8ff
+}
+#summary h2{color:#81e1ff;font-size:30px}
+.restart{
+  padding:13px 22px;border:0;border-radius:12px;background:#237da8;
+  color:white;font-weight:900;cursor:pointer
+}
+@media(max-width:650px){
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .content{padding:13px}
+ #questionText{font-size:18px}
+ .answer{font-size:15px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<div class="head">
+<h1>GRADE 10 • UNIT 3 • EXERCISE 2</h1>
+<p>OPTION C • CYBER CITY CONCERT</p>
+</div>
+
+<div class="stats">
+<div class="stat"><b id="counter">1/5</b><span>QUESTION</span></div>
+<div class="stat"><b id="hearts">❤️❤️❤️❤️❤️</b><span>HEARTS</span></div>
+<div class="stat"><b id="xp">0</b><span>XP</span></div>
+<div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+</div>
+
+<div class="content" id="gameArea">
+<div class="passage">
+<h2>ORGANISING A LIVE CONCERT</h2>
+<p>Organising a live concert requires much more than simply inviting musicians to perform. Weeks before the event, organizers have to make sure that the stage, lighting, and sound equipment are properly prepared. They also need to encourage performers (1) _________ regularly so that everyone is ready for the live show. Without careful preparation, even talented musicians may have difficulty (2) _________ their best in front of a large audience.</p>
+
+<p>Communication is equally important. Band members need to listen to one another carefully, (3) _________ a small misunderstanding can affect the entire performance. When an unexpected problem occurs on stage, experienced musicians usually avoid showing their nervousness and keep (4) _________ as naturally as possible.</p>
+
+<p>A successful concert is therefore the result of both individual talent and teamwork. When performers cooperate effectively, they have a better chance of creating a performance that leaves a lasting (5) _________ on the audience.</p>
+</div>
+
+<div class="question-box">
+<div class="progress"><div id="bar"></div></div>
+<div id="questionText">Question 1. Choose the best answer for blank (1).</div>
+<div class="answers" id="answers"></div>
+<div id="feedback"></div>
+<button id="nextBtn">NEXT →</button>
+</div>
+</div>
+
+<div id="summary">
+<div style="font-size:54px">🌃🏆</div>
+<h2>HOÀN THÀNH!</h2>
+<p id="summaryText"></p>
+<button class="restart" onclick="restartGame()">CHƠI LẠI</button>
+</div>
+
+</div>
+</div>
+
+<script>
+var questions = [
+  {
+    q: "Choose the best answer for blank (1).",
+    options: ["A. practising","B. practise","C. to practise","D. practised"],
+    correct: 2,
+    explain: "Cấu trúc “encourage + somebody + to V” = khuyến khích ai làm gì. Vì vậy “encourage performers to practise regularly” là đúng."
+  },
+  {
+    q: "Choose the best answer for blank (2).",
+    options: ["A. perform","B. to perform","C. performing","D. performed"],
+    correct: 2,
+    explain: "Cấu trúc “have difficulty + V-ing” = gặp khó khăn khi làm gì. Vì vậy “have difficulty performing their best” là đúng."
+  },
+  {
+    q: "Choose the best answer for blank (3).",
+    options: ["A. yet","B. so","C. or","D. for"],
+    correct: 3,
+    explain: "Ở đây “for” = because = bởi vì. Mệnh đề sau giải thích lý do các thành viên cần lắng nghe nhau cẩn thận."
+  },
+  {
+    q: "Choose the best answer for blank (4).",
+    options: ["A. to perform","B. performing","C. perform","D. performed"],
+    correct: 1,
+    explain: "Cấu trúc “keep + V-ing” = tiếp tục làm gì. Vì vậy “keep performing as naturally as possible” là đúng."
+  },
+  {
+    q: "Choose the best answer for blank (5).",
+    options: ["A. attention","B. impression","C. popularity","D. attraction"],
+    correct: 1,
+    explain: "Collocation đúng là “leave a lasting impression on somebody” = để lại ấn tượng lâu dài với ai."
+  }
+];
+
+var current = 0;
+var hearts = 5;
+var xp = 0;
+var combo = 0;
+var wrong = 0;
+var locked = false;
+
+function getEl(id){ return document.getElementById(id); }
+
+function heartText(n){
+  var text = "";
+  var i;
+  for(i=0;i<n;i++){ text += "❤️"; }
+  for(i=n;i<5;i++){ text += "🖤"; }
+  return text;
+}
+
+function updateStats(){
+  getEl("counter").innerHTML = (current + 1) + "/5";
+  getEl("hearts").innerHTML = heartText(hearts);
+  getEl("xp").innerHTML = xp;
+  getEl("combo").innerHTML = combo;
+  getEl("bar").style.width = ((current / questions.length) * 100) + "%";
+}
+
+function renderQuestion(){
+  var item = questions[current];
+  var box = getEl("answers");
+  var i, btn;
+
+  locked = false;
+  updateStats();
+  getEl("questionText").innerHTML = "Question " + (current + 1) + ". " + item.q;
+  box.innerHTML = "";
+  getEl("feedback").style.display = "none";
+  getEl("feedback").innerHTML = "";
+  getEl("nextBtn").style.display = "none";
+
+  for(i=0;i<item.options.length;i++){
+    btn = document.createElement("button");
+    btn.className = "answer";
+    btn.innerHTML = item.options[i];
+    btn.setAttribute("data-index", i);
+    btn.onclick = function(){
+      chooseAnswer(parseInt(this.getAttribute("data-index"),10), this);
+    };
+    box.appendChild(btn);
+  }
+}
+
+function chooseAnswer(index, button){
+  var item, buttons, i, gain;
+
+  if(locked){ return; }
+  item = questions[current];
+
+  if(index === item.correct){
+    locked = true;
+    button.className = "answer correct";
+
+    buttons = getEl("answers").getElementsByTagName("button");
+    for(i=0;i<buttons.length;i++){
+      buttons[i].disabled = true;
+    }
+
+    combo++;
+    gain = 10;
+    if(combo >= 3){ gain = 20; }
+    else if(combo >= 2){ gain = 15; }
+    xp += gain;
+
+    getEl("feedback").innerHTML = "✅ <strong>Chính xác!</strong><br>" + item.explain + "<br><strong>+" + gain + " XP</strong>";
+    getEl("feedback").style.display = "block";
+    getEl("nextBtn").style.display = "block";
+    getEl("nextBtn").innerHTML = current === questions.length - 1 ? "XEM KẾT QUẢ →" : "NEXT →";
+    updateStats();
+  } else {
+    button.className = "answer wrong";
+    button.disabled = true;
+    hearts--;
+    wrong++;
+    combo = 0;
+    updateStats();
+
+    getEl("feedback").innerHTML = "❌ <strong>Chưa đúng.</strong> Em hãy chọn lại. Chỉ được qua câu khi chọn đúng.";
+    getEl("feedback").style.display = "block";
+
+    if(hearts <= 0){
+      window.setTimeout(function(){
+        alert("💔 Hết 5 trái tim! Em phải làm lại từ câu 1.");
+        restartGame();
+      },250);
+    } else {
+      window.setTimeout(function(){
+        button.className = "answer";
+        button.disabled = false;
+      },450);
+    }
+  }
+}
+
+getEl("nextBtn").onclick = function(){
+  if(current < questions.length - 1){
+    current++;
+    renderQuestion();
+  } else {
+    finishGame();
+  }
+};
+
+function finishGame(){
+  getEl("bar").style.width = "100%";
+  getEl("gameArea").style.display = "none";
+  getEl("summary").style.display = "block";
+  getEl("summaryText").innerHTML =
+    "Em đã hoàn thành <strong>5 câu</strong>.<br>" +
+    "XP: <strong>" + xp + "</strong> • Số lần chọn sai: <strong>" + wrong + "</strong>";
+}
+
+function restartGame(){
+  current = 0;
+  hearts = 5;
+  xp = 0;
+  combo = 0;
+  wrong = 0;
+  locked = false;
+  getEl("summary").style.display = "none";
+  getEl("gameArea").style.display = "block";
+  renderQuestion();
+}
+
+renderQuestion();
+</script>
+</body>
+</html>

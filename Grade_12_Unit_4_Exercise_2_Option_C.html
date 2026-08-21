@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Grade 12 - Unit 4 - Exercise 2 - Option C</title>
+<style>
+:root{
+ --bg:#061411;--panel:#0d241f;--panel2:#14362f;--mint:#66e3b4;--cyan:#65dcff;
+ --gold:#ffd16e;--green:#52d99a;--red:#ff6878;--text:#f4fff9;--muted:#b8d3c8;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--text);
+ background:
+ radial-gradient(circle at 12% 12%,rgba(102,227,180,.12),transparent 24%),
+ radial-gradient(circle at 85% 16%,rgba(101,220,255,.10),transparent 24%),
+ linear-gradient(160deg,#04100d,#071c17 58%,#020806);
+ padding:18px;overflow-x:hidden
+}
+.bg{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.grid{position:absolute;inset:0;background:
+linear-gradient(rgba(255,255,255,.023) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.023) 1px,transparent 1px);
+background-size:44px 44px}
+.leaf{position:absolute;font-size:46px;opacity:.1;animation:float 16s linear infinite}.l1{left:-60px;top:20%}.l2{left:-90px;top:65%;animation-delay:5s}
+@keyframes float{to{transform:translateX(118vw) rotate(30deg)}}
+.wrap{max-width:1120px;margin:auto;position:relative;z-index:2}
+.hero{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:16px}
+.brand{display:flex;align-items:center;gap:14px}.icon{font-size:64px}
+h1{margin:0;font-size:clamp(28px,4vw,44px);background:linear-gradient(90deg,#ecfff7,#66e3b4,#65dcff,#ffd16e);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{margin-top:6px;color:var(--muted);font-weight:700}
+.sound{border:1px solid rgba(102,227,180,.22);background:#123128;color:white;padding:10px 14px;border-radius:12px;font-weight:900;cursor:pointer}
+.shell{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid rgba(102,227,180,.14);border-radius:24px;overflow:hidden;box-shadow:0 25px 70px rgba(0,0,0,.4)}
+.top{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:16px 20px;background:#0a1c18}
+.progress{height:12px;background:#030806;border-radius:999px;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--mint),var(--cyan),var(--gold));transition:.25s}
+.pill{background:#173a31;padding:8px 12px;border-radius:999px;font-weight:900;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;padding:20px}
+.passage{background:#f7fffb;color:#274039;border:2px solid #bfe7d7;border-radius:18px;padding:18px;max-height:690px;overflow:auto;line-height:1.7}
+.passage h2{margin-top:0;color:#2b7b60}.passage strong{color:#22775b}
+.quiz{background:#102d26;border:2px solid #2d5f50;border-radius:18px;padding:18px}
+.qtag{display:inline-block;background:#19483b;color:#dfffee;padding:7px 12px;border-radius:10px;font-weight:900}
+.question{font-size:21px;line-height:1.5;margin:16px 0}
+.answers{display:grid;gap:11px}
+.answer{padding:14px 15px;border:2px solid #37695a;border-radius:14px;background:#15382f;color:#fff;text-align:left;font-size:16px;cursor:pointer;transition:.15s}
+.answer:hover:not(:disabled){transform:translateY(-2px);border-color:var(--mint)}
+.answer.correct{background:#154232!important;border-color:var(--green)!important}
+.answer.wrong{background:#482229!important;border-color:var(--red)!important}
+.feedback{display:none;margin-top:15px;padding:15px;border-left:5px solid;border-radius:12px;background:#0a211b;line-height:1.55}
+.feedback.good{display:block;border-color:var(--green)}.feedback.bad{display:block;border-color:var(--red)}
+.controls{display:flex;justify-content:flex-end;margin-top:14px}
+.next{display:none;border:0;border-radius:12px;padding:12px 18px;font-weight:900;background:linear-gradient(90deg,#98edc9,#9ee8ff,#ffe093);color:#17352b;cursor:pointer}
+.result{display:none;text-align:center;padding:34px}.result.show{display:block}
+.big{font-size:58px;font-weight:1000;color:#8ce7c3}.review{text-align:left;margin-top:22px}
+.item{padding:12px 14px;background:#0c261f;border-left:5px solid #607c72;border-radius:12px;margin:9px 0;line-height:1.5}.item.ok{border-left-color:var(--green)}.item.no{border-left-color:var(--red)}
+.restart{border:0;border-radius:12px;padding:12px 20px;background:#8ce8c2;font-weight:900;cursor:pointer}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}.passage{max-height:430px}}
+@media(max-width:650px){.hero{align-items:flex-start;flex-direction:column}.top{grid-template-columns:1fr 1fr}.progress{grid-column:1/-1;order:3}}
+</style>
+</head>
+<body>
+<div class="bg"><div class="grid"></div><div class="leaf l1">🌿</div><div class="leaf l2">🍃</div></div>
+<div class="wrap">
+<div class="hero">
+ <div class="brand"><div class="icon">🌿🏙️</div><div><h1>Urban Green Nexus</h1><div class="sub">Grade 12 · Unit 4 · Exercise 2 · Option C</div></div></div>
+ <button class="sound" id="sound">🔊 Sound On</button>
+</div>
+
+<div class="shell" id="game">
+ <div class="top">
+  <div class="progress"><div class="bar" id="bar"></div></div>
+  <div class="pill">⭐ <span id="score">0</span>/8</div>
+  <div class="pill">🔥 <span id="streak">0</span></div>
+ </div>
+
+ <div class="grid2">
+  <section class="passage" id="passage"></section>
+  <section class="quiz">
+   <div class="qtag" id="qtag"></div>
+   <div class="question" id="question"></div>
+   <div class="answers" id="answers"></div>
+   <div class="feedback" id="feedback"></div>
+   <div class="controls"><button class="next" id="next">NEXT →</button></div>
+  </section>
+ </div>
+</div>
+
+<div class="shell result" id="result">
+ <div style="font-size:78px">🌿🏆</div>
+ <h2>Urban Green Nexus Complete!</h2>
+ <div class="big" id="final"></div>
+ <p id="message"></p>
+ <button class="restart" id="restart">Play Again ↻</button>
+ <div class="review" id="review"></div>
+</div>
+</div>
+
+<script>
+const PASSAGE="<h2>The Changing Face of Urban Life</h2>\n<p>Over the past few decades, rapid urbanisation has dramatically changed the way people live and work. Large cities continue to attract people from rural areas who are searching for better employment opportunities and a higher standard of living. As a result, many urban centres have experienced a considerable <strong>(1) ______</strong> in population, placing increasing pressure on housing, transport, and public services.</p>\n\n<p>On the positive side, urbanisation can contribute significantly to economic development. A large and diverse workforce allows businesses to expand and encourages companies to <strong>(2) ______</strong> in new technologies and infrastructure. Cities also tend to provide residents with greater <strong>(3) ______</strong> to education, healthcare, and employment opportunities than rural communities.</p>\n\n<p>However, rapid urban expansion can also <strong>(4) ______</strong> serious challenges if it is not properly managed. As demand for housing rises, agricultural land and natural habitats may be <strong>(5) ______</strong> into residential and industrial areas. Meanwhile, inadequate public transport can result in severe traffic congestion, making daily journeys increasingly <strong>(6) ______</strong> for commuters.</p>\n\n<p>To deal with these problems, governments need to adopt a more <strong>(7) ______</strong> approach to urban planning, taking economic, social, and environmental concerns into account. Unless appropriate measures are taken, the quality of life in rapidly growing cities may gradually <strong>(8) ______</strong> despite the economic benefits that urbanisation brings.</p>",Q=[{"q": "Over the past few decades, rapid urbanisation has dramatically changed the way people live and work. Large cities continue to attract people from rural areas who are searching for better employment opportunities and a higher standard of living. As a result, many urban centres have experienced a considerable (1) ____________ in population, placing increasing pressure on housing, transport, and public services.", "o": ["density", "migration", "expansion", "growth"], "a": 3, "e": "Growth in population = sự gia tăng dân số. Cụm “a considerable growth in population” phù hợp nhất với ngữ cảnh."}, {"q": "On the positive side, urbanisation can contribute significantly to economic development. A large and diverse workforce allows businesses to expand and encourages companies to (2) ____________ in new technologies and infrastructure.", "o": ["participate", "invest", "contribute", "involve"], "a": 1, "e": "Invest in + noun = đầu tư vào. → invest in new technologies and infrastructure."}, {"q": "Cities also tend to provide residents with greater (3) ____________ to education, healthcare, and employment opportunities than rural communities.", "o": ["admission", "approach", "access", "entrance"], "a": 2, "e": "Have/provide access to = có/cung cấp khả năng tiếp cận. → greater access to education, healthcare, and employment opportunities."}, {"q": "However, rapid urban expansion can also (4) ____________ serious challenges if it is not properly managed.", "o": ["arise", "raise", "undergo", "pose"], "a": 3, "e": "Pose a challenge/problem/threat = đặt ra/gây ra một thách thức, vấn đề hoặc mối đe dọa."}, {"q": "As demand for housing rises, agricultural land and natural habitats may be (5) ____________ into residential and industrial areas.", "o": ["converted", "transformed", "exchanged", "transferred"], "a": 0, "e": "Be converted into = được chuyển đổi thành. Đây là collocation chuẩn trong ngữ cảnh sử dụng đất."}, {"q": "Meanwhile, inadequate public transport can result in severe traffic congestion, making daily journeys increasingly (6) ____________ for commuters.", "o": ["insufficient", "unavailable", "inconvenient", "ineffective"], "a": 2, "e": "Inconvenient = bất tiện. Traffic congestion khiến các chuyến đi hằng ngày trở nên ngày càng bất tiện."}, {"q": "To deal with these problems, governments need to adopt a more (7) ____________ approach to urban planning, taking economic, social, and environmental concerns into account.", "o": ["dependent", "sustainable", "competitive", "temporary"], "a": 1, "e": "A sustainable approach = cách tiếp cận bền vững, phù hợp với việc cân bằng kinh tế, xã hội và môi trường."}, {"q": "Unless appropriate measures are taken, the quality of life in rapidly growing cities may gradually (8) ____________ despite the economic benefits that urbanisation brings.", "o": ["lower", "reduce", "decrease", "decline"], "a": 3, "e": "Decline = suy giảm. “The quality of life may gradually decline” là cách diễn đạt tự nhiên nhất."}],L=["A","B","C","D"];
+let i=0,score=0,streak=0,answered=false,history=[],soundOn=true,ctx=null;
+const $=id=>document.getElementById(id);
+
+function audio(){
+ if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();
+ if(ctx.state==="suspended")ctx.resume();
+ return ctx;
+}
+function tone(f,d=.1,t="triangle",delay=0){
+ if(!soundOn)return;
+ const c=audio(),o=c.createOscillator(),g=c.createGain(),s=c.currentTime+delay;
+ o.type=t;o.frequency.value=f;
+ g.gain.setValueAtTime(.001,s);g.gain.exponentialRampToValueAtTime(.03,s+.01);g.gain.exponentialRampToValueAtTime(.001,s+d);
+ o.connect(g);g.connect(c.destination);o.start(s);o.stop(s+d+.03)
+}
+function goodSound(){tone(650,.08);tone(930,.12,"sine",.08)}
+function badSound(){tone(170,.18,"sawtooth")}
+function nextSound(){tone(430,.06);tone(670,.08,"triangle",.06)}
+function winSound(){[523,659,784,1047].forEach((f,k)=>tone(f,.16,"triangle",k*.08))}
+
+$("sound").onclick=()=>{
+ soundOn=!soundOn;
+ $("sound").textContent=soundOn?"🔊 Sound On":"🔇 Sound Off";
+ if(soundOn)nextSound();
+};
+
+function render(){
+ answered=false;
+ const q=Q[i];
+ $("qtag").textContent="Blank "+(i+1)+" / "+Q.length;
+ $("question").textContent=q.q;
+ $("bar").style.width=(i/Q.length*100)+"%";
+ $("answers").innerHTML="";
+ $("feedback").className="feedback";
+ $("feedback").style.display="none";
+ $("next").style.display="none";
+
+ q.o.forEach((op,n)=>{
+  const b=document.createElement("button");
+  b.className="answer";
+  b.innerHTML="<strong>"+L[n]+".</strong> "+op;
+  b.onclick=()=>choose(n,b);
+  $("answers").appendChild(b);
+ });
+ $("next").textContent=i===Q.length-1?"FINISH →":"NEXT →";
+}
+
+function choose(n,btn){
+ if(answered)return;
+ answered=true;
+ const q=Q[i],bs=[...document.querySelectorAll(".answer")];
+ bs.forEach(b=>b.disabled=true);
+ bs[q.a].classList.add("correct");
+ const right=n===q.a;
+
+ if(right){
+  score++;streak++;
+  $("feedback").className="feedback good";
+  $("feedback").innerHTML="<strong>✅ CORRECT — "+L[q.a]+". "+q.o[q.a]+"</strong><br>"+q.e;
+  goodSound();
+ }else{
+  streak=0;
+  btn.classList.add("wrong");
+  $("feedback").className="feedback bad";
+  $("feedback").innerHTML="<strong>❌ INCORRECT. Correct answer: "+L[q.a]+". "+q.o[q.a]+"</strong><br>"+q.e;
+  badSound();
+ }
+
+ $("feedback").style.display="block";
+ $("score").textContent=score;
+ $("streak").textContent=streak;
+ $("bar").style.width=((i+1)/Q.length*100)+"%";
+ history.push({selected:n,correct:right});
+ $("next").style.display="block";
+}
+
+$("next").onclick=()=>{
+ if(!answered)return;
+ nextSound();
+ if(i<Q.length-1){i++;render();}
+ else finish();
+};
+
+function finish(){
+ $("game").style.display="none";
+ $("result").classList.add("show");
+ winSound();
+ const pct=Math.round(score/Q.length*100);
+ $("final").textContent=score+"/"+Q.length+" · "+pct+"%";
+ $("message").textContent=pct>=90?"Excellent control of urbanisation vocabulary!":pct>=75?"Very strong performance.":pct>=60?"Good work — review the missed blanks below.":"Review the explanations and try again.";
+
+ let h="<h3>🌿 Urban Green Review</h3>";
+ Q.forEach((q,k)=>{
+  const a=history[k];
+  h+='<div class="item '+(a.correct?"ok":"no")+'"><strong>Blank '+(k+1)+': '+(a.correct?"Correct":"Incorrect")+'</strong><br>Your answer: '+L[a.selected]+'. '+q.o[a.selected]+'<br>Correct: '+L[q.a]+'. '+q.o[q.a]+'<br><em>'+q.e+'</em></div>';
+ });
+ $("review").innerHTML=h;
+}
+
+$("restart").onclick=()=>location.reload();
+$("passage").innerHTML=PASSAGE;
+render();
+</script>
+</body>
+</html>

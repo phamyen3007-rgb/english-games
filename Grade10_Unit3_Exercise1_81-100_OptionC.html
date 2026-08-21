@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 3 - Exercise 1 (81-100) - Option C</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#f7f8ff;
+  background:
+    linear-gradient(rgba(5,8,28,.55),rgba(5,8,28,.72)),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 4px),
+    radial-gradient(circle at 20% 15%,rgba(0,240,255,.22),transparent 22%),
+    radial-gradient(circle at 82% 18%,rgba(255,46,168,.20),transparent 22%),
+    linear-gradient(145deg,#090b22,#17113e 52%,#32134b);
+}
+.wrap{width:min(950px,94%);margin:26px auto}
+.card{
+  background:rgba(11,14,39,.96);
+  border:1px solid rgba(0,230,255,.32);
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 0 18px rgba(0,225,255,.16),0 0 34px rgba(255,56,173,.10)
+}
+.head{
+  padding:24px;
+  text-align:center;
+  background:linear-gradient(90deg,rgba(9,91,151,.97),rgba(108,36,153,.94),rgba(190,40,130,.92));
+  border-bottom:1px solid rgba(107,235,255,.30)
+}
+.head h1{
+  margin:0;
+  color:#fff;
+  font-size:clamp(23px,4vw,36px);
+  letter-spacing:.6px;
+  text-shadow:0 0 8px #00dbff,0 0 18px rgba(255,47,171,.45)
+}
+.head p{margin:8px 0 0;color:#e9faff;font-weight:800;letter-spacing:.4px}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  padding:14px;
+  background:rgba(7,10,30,.96)
+}
+.stat{
+  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.035));
+  border:1px solid rgba(72,205,255,.20);
+  border-radius:12px;
+  padding:10px;
+  text-align:center
+}
+.stat b{display:block;font-size:19px;color:#fff}
+.stat span{font-size:11px;font-weight:800;color:#8feaff}
+.main{padding:22px}
+.progress{
+  height:10px;
+  background:rgba(255,255,255,.08);
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:22px;
+  border:1px solid rgba(255,255,255,.05)
+}
+#bar{
+  height:100%;
+  background:linear-gradient(90deg,#00e5ff,#7a5cff,#ff43ad);
+  transition:.3s;
+  box-shadow:0 0 10px rgba(0,229,255,.55)
+}
+.q{
+  font-size:21px;
+  font-weight:800;
+  line-height:1.55;
+  margin-bottom:18px;
+  color:#f5fbff
+}
+.answers{display:grid;gap:12px}
+.ans{
+  padding:15px;
+  text-align:left;
+  font-size:17px;
+  border-radius:12px;
+  border:1px solid rgba(99,197,255,.26);
+  background:linear-gradient(180deg,#fcfdff,#f4f8ff);
+  color:#20284a;
+  cursor:pointer;
+  transition:.18s
+}
+.ans:hover{
+  transform:translateY(-1px);
+  border-color:#00cfe8;
+  background:#effcff;
+  box-shadow:0 0 12px rgba(0,214,236,.15)
+}
+.ans.ok{
+  background:#daf8e6;
+  border-color:#39c77a;
+  color:#096039
+}
+.ans.bad{
+  background:#ffe0e6;
+  border-color:#ef7474;
+  color:#8a2424
+}
+.feedback{
+  display:none;
+  margin-top:16px;
+  padding:14px;
+  border-radius:12px;
+  background:#f2f8ff;
+  border:1px solid rgba(75,174,230,.26);
+  line-height:1.6;
+  color:#24304c
+}
+.feedback.show{display:block}
+.next{
+  display:none;
+  width:100%;
+  margin-top:15px;
+  padding:14px;
+  border:0;
+  border-radius:12px;
+  background:linear-gradient(90deg,#00a6c8,#7051d8,#d8409b);
+  color:white;
+  font-weight:900;
+  font-size:17px;
+  cursor:pointer;
+  box-shadow:0 0 18px rgba(66,156,255,.18)
+}
+.next.show{display:block}
+.summary{
+  display:none;
+  text-align:center;
+  padding:35px;
+  color:#eefaff
+}
+.summary.show{display:block}
+.summary h2{
+  font-size:32px;
+  color:#71eaff;
+  text-shadow:0 0 10px rgba(76,223,255,.35)
+}
+.restart{
+  padding:14px 22px;
+  border:0;
+  border-radius:12px;
+  background:linear-gradient(90deg,#00a6c8,#d8409b);
+  color:white;
+  font-weight:900;
+  cursor:pointer
+}
+@media(max-width:650px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .main{padding:15px}
+  .q{font-size:18px}
+  .ans{font-size:15px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="head">
+      <h1>GRADE 10 • UNIT 3 • EXERCISE 1</h1>
+      <p>(81–100) • OPTION C • RETRO ARCADE CHALLENGE</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b id="counter">1/15</b><span>QUESTION</span></div>
+      <div class="stat"><b id="heart">❤️❤️❤️❤️❤️</b><span>HEARTS</span></div>
+      <div class="stat"><b id="xp">0</b><span>XP</span></div>
+      <div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+    </div>
+
+    <div class="main" id="game">
+      <div class="progress"><div id="bar"></div></div>
+      <div class="q" id="q"></div>
+      <div class="answers" id="answers"></div>
+      <div class="feedback" id="feedback"></div>
+      <button class="next" id="next">NEXT →</button>
+    </div>
+
+    <div class="summary" id="summary">
+      <div style="font-size:55px">🕹️🏆</div>
+      <h2>HOÀN THÀNH!</h2>
+      <p id="sum"></p>
+      <button class="restart" onclick="restart()">CHƠI LẠI</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const data=[
+{
+q:"Listening to instrumental music while doing simple tasks can be beneficial _________ students who find it difficult to stay relaxed.",
+options:["A. with","B. at","C. for","D. to"],
+correct:2,
+explain:"“be beneficial for/to somebody” = có lợi cho ai. Trong các lựa chọn, “for” phù hợp."
+},
+{
+q:"Despite being nervous about performing in public, she eventually decided _________ for a place in the school orchestra.",
+options:["A. to audition","B. auditioning","C. audition","D. auditioned"],
+correct:0,
+explain:"“decide to + V” = quyết định làm gì. “audition for + a role/place” = thử tuyển cho một vị trí."
+},
+{
+q:"The unexpected change in the melody made several members of the audience _________ towards the stage in surprise.",
+options:["A. looked","B. looking","C. look","D. to look"],
+correct:2,
+explain:"“make + O + V nguyên mẫu” = khiến ai làm gì. Vì vậy “made ... look” là đúng."
+},
+{
+q:"While watching the rehearsal, the music teacher noticed one of the performers _________ the same difficult part several times.",
+options:["A. repeated","B. repeating","C. to repeat","D. was repeating"],
+correct:1,
+explain:"“notice + O + V-ing” = nhận thấy ai đang thực hiện một hành động. Vì vậy chọn “repeating”."
+},
+{
+q:"The singer is particularly famous _________ turning traditional folk songs into modern versions that appeal to teenagers.",
+options:["A. about","B. with","C. from","D. for"],
+correct:3,
+explain:"“be famous for + N/V-ing” = nổi tiếng vì điều gì. Vì vậy chọn “for”."
+},
+{
+q:"The band's first online concert _________ the previous viewing record by attracting nearly twice as many viewers.",
+options:["A. broke","B. won","C. reached","D. passed"],
+correct:0,
+explain:"“break a record” = phá kỷ lục. “previous viewing record” là dấu hiệu quan trọng."
+},
+{
+q:"Due to unexpected technical problems, the outdoor performance will _________ two hours later than originally planned.",
+options:["A. take part","B. take place","C. take up","D. take after"],
+correct:1,
+explain:"“take place” = diễn ra. “take part in” = tham gia; “take up” = chiếm/bắt đầu sở thích; “take after” = giống ai trong gia đình."
+},
+{
+q:"Winning the regional competition gave the young musicians a valuable _________ to perform in front of a much larger audience.",
+options:["A. possibility","B. occasion","C. chance","D. turn"],
+correct:2,
+explain:"“give somebody a chance to + V” = cho ai cơ hội làm gì. “a chance to perform” là collocation tự nhiên."
+},
+{
+q:"The organizers expected every band _________ its instruments carefully before the live broadcast began.",
+options:["A. checking","B. to check","C. check","D. checked"],
+correct:1,
+explain:"“expect + O + to V” = mong đợi/yêu cầu ai làm gì. Vì vậy chọn “to check”."
+},
+{
+q:"The charity concert was held to provide financial support for _________ affected by the recent floods.",
+options:["A. local affected families","B. families affected local","C. affected families locally","D. local families affected"],
+correct:3,
+explain:"“local families affected by the recent floods” = các gia đình địa phương bị ảnh hưởng bởi lũ lụt. “affected by...” là cụm phân từ đứng sau “families”."
+},
+{
+q:"Several well-known artists agreed to appear at the fundraising concert without asking for any _________ in return.",
+options:["A. payment","B. prize","C. popularity","D. award"],
+correct:0,
+explain:"“ask for payment” = yêu cầu được trả tiền/thù lao. Ngữ cảnh fundraising concert cho thấy họ biểu diễn miễn phí."
+},
+{
+q:"The latest _________ of the talent show focused on contestants preparing for the difficult semi-final round.",
+options:["A. scene","B. episode","C. stage","D. performance"],
+correct:1,
+explain:"“an episode of a TV/talent show” = một tập của chương trình. Vì vậy chọn “episode”."
+},
+{
+q:"Unlike traditional singing competitions, this reality _________ follows the contestants both on and off the stage.",
+options:["A. show","B. scene","C. record","D. audience"],
+correct:0,
+explain:"“reality show” = chương trình truyền hình thực tế. Việc theo dõi thí sinh cả trên và ngoài sân khấu là đặc điểm của reality show."
+},
+{
+q:"The group began to gain international _________ after a video of their unusual performance attracted millions of views overseas.",
+options:["A. recognition","B. preparation","C. decision","D. hesitation"],
+correct:0,
+explain:"“gain international recognition” = được quốc tế công nhận/biết đến."
+},
+{
+q:"More than fifty schools participated _________ the project, each sending one musical group to represent its students.",
+options:["A. at","B. with","C. on","D. in"],
+correct:3,
+explain:"“participate in + event/activity/project” = tham gia vào một sự kiện/hoạt động/dự án."
+}
+];
+
+const bonusQuestions=new Set([3,6,9,12]);
+
+let current=0,hearts=5,xp=0,combo=0,wrong=0,locked=false;
+let bonusGiven=new Set();
+
+const $=id=>document.getElementById(id);
+
+function updateStats(){
+  $("counter").textContent=(current+1)+"/"+data.length;
+  $("heart").textContent="❤️".repeat(hearts)+"🖤".repeat(Math.max(0,5-hearts));
+  $("xp").textContent=xp;
+  $("combo").textContent=combo;
+  $("bar").style.width=(current/data.length*100)+"%";
+}
+
+function render(){
+  locked=false;
+  updateStats();
+
+  const item=data[current];
+  $("q").textContent="Question "+(current+1)+". "+item.q;
+  $("answers").innerHTML="";
+  $("feedback").className="feedback";
+  $("feedback").textContent="";
+  $("next").className="next";
+
+  item.options.forEach((opt,index)=>{
+    const btn=document.createElement("button");
+    btn.className="ans";
+    btn.textContent=opt;
+    btn.onclick=()=>choose(index,btn);
+    $("answers").appendChild(btn);
+  });
+}
+
+function choose(index,btn){
+  if(locked)return;
+
+  const item=data[current];
+
+  if(index===item.correct){
+    locked=true;
+    btn.classList.add("ok");
+    [...$("answers").children].forEach(b=>b.disabled=true);
+
+    combo++;
+    let gain=combo>=3?20:combo>=2?15:10;
+    xp+=gain;
+
+    let bonusText="";
+    const qNo=current+1;
+
+    if(bonusQuestions.has(qNo)&&!bonusGiven.has(qNo)){
+      bonusGiven.add(qNo);
+
+      if(hearts<5){
+        hearts++;
+        bonusText="<br>💖 <strong>Bonus +1 tim!</strong>";
+      }else{
+        bonusText="<br>💖 <strong>Câu bonus! Tim đang đầy 5/5.</strong>";
+      }
+    }
+
+    $("feedback").innerHTML=
+      "✅ <strong>Chính xác!</strong><br>"+
+      item.explain+
+      bonusText+
+      "<br><strong>+"+gain+" XP</strong>";
+
+    $("feedback").classList.add("show");
+    updateStats();
+
+    $("next").classList.add("show");
+    $("next").textContent=
+      current===data.length-1 ? "XEM KẾT QUẢ →" : "NEXT →";
+
+  }else{
+    btn.classList.add("bad");
+    btn.disabled=true;
+
+    hearts--;
+    wrong++;
+    combo=0;
+    updateStats();
+
+    $("feedback").innerHTML=
+      "❌ <strong>Chưa đúng.</strong> Em hãy chọn lại. Chỉ được qua câu khi chọn đúng.";
+    $("feedback").classList.add("show");
+
+    if(hearts<=0){
+      setTimeout(()=>{
+        alert("💔 Hết 5 trái tim! Em phải làm lại từ câu 1.");
+        restart();
+      },300);
+      return;
+    }
+
+    setTimeout(()=>{
+      btn.classList.remove("bad");
+      btn.disabled=false;
+    },500);
+  }
+}
+
+$("next").onclick=()=>{
+  if(current<data.length-1){
+    current++;
+    render();
+  }else{
+    finish();
+  }
+};
+
+function finish(){
+  $("bar").style.width="100%";
+  $("game").style.display="none";
+  $("summary").classList.add("show");
+
+  $("sum").innerHTML=
+    "Em đã hoàn thành <strong>"+data.length+" câu</strong>.<br>"+
+    "XP: <strong>"+xp+"</strong> • Số lần chọn sai: <strong>"+wrong+"</strong><br>"+
+    "🕹️ Arcade mission complete!";
+}
+
+function restart(){
+  current=0;
+  hearts=5;
+  xp=0;
+  combo=0;
+  wrong=0;
+  locked=false;
+  bonusGiven=new Set();
+
+  $("summary").classList.remove("show");
+  $("game").style.display="block";
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

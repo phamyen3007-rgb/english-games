@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 4 - Exercise 4 - Option C</title>
+<style>
+*{box-sizing:border-box}
+:root{--ink:#30233f;--violet:#7450a8;--pink:#d96d9b;--paper:#fffaf2;--gold:#d79c3f}
+body{margin:0;min-height:100vh;padding:24px;font-family:Arial,sans-serif;color:var(--ink);
+background:
+radial-gradient(circle at 12% 12%,#ffd9e7 0 4%,transparent 4.3%),
+radial-gradient(circle at 88% 18%,#e4d5ff 0 5%,transparent 5.3%),
+linear-gradient(135deg,#fff1df,#f9e7f3 48%,#eee7ff)}
+.shell{max-width:1180px;margin:auto}
+.hero{position:relative;overflow:hidden;border-radius:28px 28px 0 0;padding:24px 28px;color:white;
+background:linear-gradient(120deg,#4b2d69,#8154a8 50%,#bd638e);box-shadow:0 18px 50px #4b2d6935}
+.hero:after{content:"☁️  ☁️";position:absolute;right:5%;top:8px;font-size:50px;opacity:.18}
+.heroRow{display:flex;justify-content:space-between;align-items:center;gap:18px}
+.logo{display:flex;gap:17px;align-items:center}.balloon{font-size:70px;filter:drop-shadow(0 7px 8px #0003)}
+h1{margin:0;color:#fff3c9;font-size:clamp(28px,4vw,43px)}.sub{font-weight:800;color:#f5dff2;margin-top:7px}
+.sound{border:1px solid #ffe9bd;background:#fff9e9;color:#59366f;padding:11px 15px;border-radius:13px;font-weight:900;cursor:pointer}
+.game{background:#fffdf8;border-radius:0 0 28px 28px;overflow:hidden;box-shadow:0 20px 55px #4b2d6925}
+.status{padding:14px 20px;background:#f4e9f7;display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center}
+.track{height:13px;background:#dbcbe5;border-radius:99px;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,#d66f98,#8b62b0);transition:.3s}
+.pill{background:#fff;border:1px solid #ddcce7;border-radius:99px;padding:8px 13px;font-weight:900}
+.main{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;padding:20px}
+.reading{background:var(--paper);border:2px solid #e9c67f;border-radius:20px;padding:21px;line-height:1.72;max-height:690px;overflow:auto;box-shadow:inset 0 0 0 6px #fff4d8}
+.reading h2{margin-top:0;color:#6e438c}.reading strong{color:#b44f79}
+.quiz{background:#fff;border:2px solid #e3d3e8;border-radius:20px;padding:21px}
+.tag{display:inline-block;background:#6d478d;color:white;border-radius:10px;padding:7px 12px;font-weight:900}
+.q{font-size:20px;line-height:1.5;margin:17px 0}
+.answers{display:grid;gap:11px}.ans{border:2px solid #e2d6e6;background:#fff;border-radius:14px;padding:14px;text-align:left;font-size:16px;color:var(--ink);cursor:pointer;transition:.15s}
+.ans:hover:not(:disabled){transform:translateX(4px);border-color:#a56caa;background:#fff8fc}.ans.correct{background:#e9fff1;border-color:#3ca96a}.ans.wrong{background:#fff0f3;border-color:#d5576e}
+.feedback{display:none;margin-top:15px;padding:14px;border-radius:13px;line-height:1.55}.feedback.good{display:block;background:#eafff1;border-left:5px solid #35a666}.feedback.bad{display:block;background:#fff0f3;border-left:5px solid #d5576e}
+.controls{text-align:right;margin-top:14px}.next{display:none;border:0;border-radius:12px;padding:12px 21px;background:linear-gradient(90deg,#69458c,#a45c94);color:white;font-weight:900;cursor:pointer}
+.result{display:none;background:#fffdf8;border-radius:28px;padding:35px;text-align:center;box-shadow:0 20px 55px #4b2d6925}.result.show{display:block}
+.scoreBig{font-size:62px;font-weight:1000;color:#724a92}.review{text-align:left;margin-top:24px}.reviewItem{padding:13px 15px;margin:9px 0;border-radius:12px;background:#f7eff9;border-left:5px solid #8660a3}.reviewItem.ok{border-color:#35a666}.reviewItem.no{border-color:#d5576e}
+.restart{border:0;border-radius:12px;padding:12px 21px;background:#704b90;color:#fff;font-weight:900;cursor:pointer}
+.float{position:fixed;pointer-events:none;opacity:.13;font-size:90px}.f1{left:1%;top:17%}.f2{right:1%;bottom:7%}
+@media(max-width:900px){.main{grid-template-columns:1fr}.reading{max-height:430px}}@media(max-width:620px){.heroRow{align-items:flex-start;flex-direction:column}.status{grid-template-columns:1fr 1fr}.track{grid-column:1/-1;order:3}}
+</style>
+</head>
+<body>
+<div class="float f1">🎈</div><div class="float f2">🗺️</div>
+<div class="shell">
+<header class="hero"><div class="heroRow"><div class="logo"><div class="balloon">🎈</div><div><h1>Skyline Balloon Journey</h1><div class="sub">Grade 12 - Unit 4 - Exercise 4 - Option C</div></div></div><button id="sound" class="sound">🔊 Sound On</button></div></header>
+
+<section id="game" class="game">
+<div class="status"><div class="track"><div id="bar" class="bar"></div></div><div class="pill">🎯 Score <span id="score">0</span>/6</div><div class="pill">🔥 Streak <span id="streak">0</span></div></div>
+<div class="main"><article id="reading" class="reading"></article><section class="quiz"><div id="tag" class="tag"></div><div id="question" class="q"></div><div id="answers" class="answers"></div><div id="feedback" class="feedback"></div><div class="controls"><button id="next" class="next">NEXT →</button></div></section></div>
+</section>
+
+<section id="result" class="result"><div style="font-size:82px">🎈🏆✨</div><h2>Journey Complete!</h2><div id="final" class="scoreBig"></div><p id="message"></p><button class="restart" onclick="location.reload()">PLAY AGAIN ↻</button><div id="review" class="review"></div></section>
+</div>
+
+<script>
+const Q=[{"q": "(1) ______, unless urban expansion is carefully managed, these benefits may be accompanied by serious social and environmental consequences.", "o": ["Consequently", "Nevertheless", "Likewise", "Therefore"], "a": 1, "e": "<b>Nevertheless</b> = tuy nhiên/dẫu vậy. Câu trước nói về lợi ích của đô thị hoá, còn câu sau chuyển sang các hậu quả tiêu cực nếu đô thị hoá không được quản lý tốt → quan hệ tương phản."}, {"q": "These difficulties can (2) ______ a particularly serious threat to low-income residents.", "o": ["impose", "raise", "pose", "establish"], "a": 2, "e": "Collocation: <b>pose a threat to sb/sth</b> = gây ra/đặt ra mối đe doạ đối với ai/cái gì. Ta cũng thường gặp <i>pose a risk / pose a challenge</i>."}, {"q": "Urban expansion often involves replacing natural areas with roads, buildings, and industrial facilities, (3) ______ can increase pollution and reduce biodiversity.", "o": ["which", "that", "what", "where"], "a": 0, "e": "Sau dấu phẩy, <b>which</b> có thể mở đầu mệnh đề quan hệ không xác định và bổ sung thông tin về toàn bộ sự việc phía trước. <i>That</i> không dùng trong cấu trúc này."}, {"q": "Although some cities have introduced measures to protect green spaces, (4) ______ have continued to prioritise short-term economic growth over environmental protection.", "o": ["the others", "another", "the other", "others"], "a": 3, "e": "Cấu trúc <b>some ... others ...</b> = một số... những cái/người khác... Ở đây: <i>some cities ... others ...</i>."}, {"q": "Governments need long-term strategies that take environmental and social concerns into (5) ______ when making development decisions.", "o": ["concern", "attention", "account", "regard"], "a": 2, "e": "Collocation cố định: <b>take something into account</b> = xem xét/cân nhắc điều gì. Mình đã đổi phương án A từ <i>consideration</i> thành <i>concern</i> để câu này chỉ còn <b>một đáp án đúng</b>."}, {"q": "...creating cities that are both economically successful and environmentally (6) ______.", "o": ["sustained", "sustainable", "sustainability", "sustainably"], "a": 1, "e": "Sau <b>environmentally</b> cần tính từ → <b>sustainable</b>. Cấu trúc song song: <i>economically successful</i> và <i>environmentally sustainable</i>."}], PASSAGE="\n<h2>Making Urban Growth Sustainable</h2>\n<p>Rapid urbanisation has created considerable economic opportunities in many parts of the world. Cities often provide better access to employment, education, and healthcare, attracting increasing numbers of people from rural communities. <strong>(1) ______</strong>, unless urban expansion is carefully managed, these benefits may be accompanied by serious social and environmental consequences.</p>\n\n<p>One major concern is that infrastructure frequently fails to keep pace with population growth. Public transport becomes overcrowded, housing shortages intensify, and essential services are placed under increasing pressure. These difficulties can <strong>(2) ______</strong> a particularly serious threat to low-income residents, who may already have limited access to adequate housing and healthcare.</p>\n\n<p>Environmental sustainability presents an equally significant challenge. Urban expansion often involves replacing natural areas with roads, buildings, and industrial facilities, <strong>(3) ______</strong> can increase pollution and reduce biodiversity. Although some cities have introduced measures to protect green spaces, <strong>(4) ______</strong> have continued to prioritise short-term economic growth over environmental protection.</p>\n\n<p>Addressing these challenges requires more than simply expanding existing infrastructure. Governments need long-term strategies that take environmental and social concerns into <strong>(5) ______</strong> when making development decisions. If such policies are implemented consistently, urbanisation can contribute to economic prosperity without compromising the well-being of future generations, thereby creating cities that are both economically successful and environmentally <strong>(6) ______</strong>.</p>\n", LETTERS=["A","B","C","D"];
+let i=0,score=0,streak=0,answered=false,history=[],soundOn=true,audioCtx;
+const $=id=>document.getElementById(id);
+function tone(freq,d=.1,delay=0){if(!soundOn)return;if(!audioCtx)audioCtx=new(AudioContext||webkitAudioContext)();if(audioCtx.state==="suspended")audioCtx.resume();const o=audioCtx.createOscillator(),g=audioCtx.createGain(),s=audioCtx.currentTime+delay;o.type="sine";o.frequency.value=freq;g.gain.setValueAtTime(.001,s);g.gain.exponentialRampToValueAtTime(.04,s+.01);g.gain.exponentialRampToValueAtTime(.001,s+d);o.connect(g);g.connect(audioCtx.destination);o.start(s);o.stop(s+d+.03)}
+function rightSound(){tone(650,.08);tone(850,.1,.07);tone(1080,.13,.14)}function wrongSound(){tone(180,.2)}function clickSound(){tone(440,.05)}
+$("sound").onclick=()=>{soundOn=!soundOn;$("sound").textContent=soundOn?"🔊 Sound On":"🔇 Sound Off";if(soundOn)clickSound()}
+function render(){answered=false;const x=Q[i];$("tag").textContent="Question "+(i+1)+" / "+Q.length;$("question").textContent=x.q;$("bar").style.width=(i/Q.length*100)+"%";$("answers").innerHTML="";$("feedback").className="feedback";$("feedback").style.display="none";$("next").style.display="none";x.o.forEach((v,n)=>{const b=document.createElement("button");b.className="ans";b.innerHTML="<b>"+LETTERS[n]+".</b> "+v;b.onclick=()=>choose(n,b);$("answers").appendChild(b)});$("next").textContent=i===Q.length-1?"FINISH →":"NEXT →"}
+function choose(n,b){if(answered)return;answered=true;const x=Q[i],buttons=[...document.querySelectorAll(".ans")];buttons.forEach(z=>z.disabled=true);buttons[x.a].classList.add("correct");const ok=n===x.a;if(ok){score++;streak++;$("feedback").className="feedback good";$("feedback").innerHTML="<b>✅ CORRECT — "+LETTERS[x.a]+". "+x.o[x.a]+"</b><br>"+x.e;rightSound()}else{streak=0;b.classList.add("wrong");$("feedback").className="feedback bad";$("feedback").innerHTML="<b>❌ INCORRECT. Correct answer: "+LETTERS[x.a]+". "+x.o[x.a]+"</b><br>"+x.e;wrongSound()}$("feedback").style.display="block";$("score").textContent=score;$("streak").textContent=streak;$("bar").style.width=((i+1)/Q.length*100)+"%";history.push({n,ok});$("next").style.display="inline-block"}
+$("next").onclick=()=>{if(!answered)return;clickSound();if(i<Q.length-1){i++;render()}else finish()}
+function finish(){$("game").style.display="none";$("result").classList.add("show");[523,659,784,1047].forEach((f,k)=>tone(f,.14,k*.08));const pct=Math.round(score/Q.length*100);$("final").textContent=score+"/"+Q.length+" · "+pct+"%";$("message").textContent=pct===100?"Perfect flight! Every language checkpoint cleared.":pct>=80?"Excellent work! Your balloon reached the sustainable skyline.":pct>=60?"Good work. Review the missed checkpoints below.":"Review the explanations and try the journey again.";let h="<h3>🗺️ Journey Review</h3>";Q.forEach((x,k)=>{const a=history[k];h+='<div class="reviewItem '+(a.ok?"ok":"no")+'"><b>Question '+(k+1)+' — '+(a.ok?"✅ Correct":"❌ Incorrect")+'</b><br>Your answer: '+LETTERS[a.n]+'. '+x.o[a.n]+'<br>Correct: '+LETTERS[x.a]+'. '+x.o[x.a]+'<br>'+x.e+'</div>'});$("review").innerHTML=h}
+$("reading").innerHTML=PASSAGE;render();
+</script>
+</body></html>

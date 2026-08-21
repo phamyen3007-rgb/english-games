@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 3 - Exercise 1 (61-80) - Option C</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#ecf7ff;
+  background:
+    radial-gradient(circle at 18% 12%,rgba(127,90,255,.38),transparent 24%),
+    radial-gradient(circle at 82% 18%,rgba(0,220,255,.26),transparent 20%),
+    radial-gradient(circle at 50% 110%,rgba(255,69,181,.18),transparent 36%),
+    linear-gradient(145deg,#060b25,#10194b 48%,#2a1352 100%);
+}
+.wrap{width:min(940px,94%);margin:26px auto}
+.card{
+  background:rgba(8,16,45,.95);
+  border:1px solid rgba(112,210,255,.34);
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 0 36px rgba(78,139,255,.23)
+}
+.head{
+  padding:24px;
+  text-align:center;
+  background:linear-gradient(100deg,rgba(61,94,224,.96),rgba(181,56,190,.92))
+}
+.head h1{
+  margin:0;
+  color:#fff;
+  font-size:clamp(23px,4vw,36px);
+  text-shadow:0 0 14px rgba(98,224,255,.75)
+}
+.head p{margin:8px 0 0;color:#eaf8ff;font-weight:800}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  padding:14px;
+  background:rgba(5,13,39,.94)
+}
+.stat{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(120,210,255,.18);
+  border-radius:14px;
+  padding:10px;
+  text-align:center
+}
+.stat b{display:block;font-size:19px;color:#fff}
+.stat span{font-size:11px;font-weight:800;color:#b9ddff}
+.main{padding:22px}
+.progress{
+  height:10px;
+  background:rgba(255,255,255,.08);
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:22px
+}
+#bar{
+  height:100%;
+  background:linear-gradient(90deg,#1edcff,#8e5bff,#ff5cb8);
+  transition:.3s
+}
+.q{
+  font-size:21px;
+  font-weight:800;
+  line-height:1.55;
+  margin-bottom:18px;
+  color:#e9f8ff
+}
+.answers{display:grid;gap:12px}
+.ans{
+  padding:15px;
+  text-align:left;
+  font-size:17px;
+  border-radius:14px;
+  border:1px solid rgba(118,197,255,.28);
+  background:rgba(250,253,255,.96);
+  color:#173b56;
+  cursor:pointer;
+  transition:.18s
+}
+.ans:hover{
+  transform:translateY(-1px);
+  background:#edf8ff;
+  border-color:#7c8cff
+}
+.ans.ok{
+  background:#d9f8e6;
+  border-color:#39c77a;
+  color:#096039
+}
+.ans.bad{
+  background:#ffe0e0;
+  border-color:#ef7474;
+  color:#8a2424
+}
+.feedback{
+  display:none;
+  margin-top:16px;
+  padding:14px;
+  border-radius:14px;
+  background:rgba(240,249,255,.97);
+  border:1px solid rgba(118,197,255,.24);
+  line-height:1.6;
+  color:#173f52
+}
+.feedback.show{display:block}
+.next{
+  display:none;
+  width:100%;
+  margin-top:15px;
+  padding:14px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(90deg,#4a66e8,#be4fc4);
+  color:white;
+  font-weight:900;
+  font-size:17px;
+  cursor:pointer;
+  box-shadow:0 0 18px rgba(144,76,222,.22)
+}
+.next.show{display:block}
+.summary{
+  display:none;
+  text-align:center;
+  padding:35px;
+  color:#eef8ff
+}
+.summary.show{display:block}
+.summary h2{font-size:32px;color:#82ddff}
+.restart{
+  padding:14px 22px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(90deg,#4a66e8,#be4fc4);
+  color:white;
+  font-weight:900;
+  cursor:pointer
+}
+@media(max-width:650px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .main{padding:15px}
+  .q{font-size:18px}
+  .ans{font-size:15px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="head">
+      <h1>GRADE 10 • UNIT 3 • EXERCISE 1</h1>
+      <p>(61–80) • OPTION C • GALAXY NEON CHALLENGE</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b id="counter">1/15</b><span>QUESTION</span></div>
+      <div class="stat"><b id="heart">❤️❤️❤️❤️❤️</b><span>HEARTS</span></div>
+      <div class="stat"><b id="xp">0</b><span>XP</span></div>
+      <div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+    </div>
+
+    <div class="main" id="game">
+      <div class="progress"><div id="bar"></div></div>
+      <div class="q" id="q"></div>
+      <div class="answers" id="answers"></div>
+      <div class="feedback" id="feedback"></div>
+      <button class="next" id="next">NEXT →</button>
+    </div>
+
+    <div class="summary" id="summary">
+      <div style="font-size:55px">🌌🏆</div>
+      <h2>HOÀN THÀNH!</h2>
+      <p id="sum"></p>
+      <button class="restart" onclick="restart()">CHƠI LẠI</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const data=[
+{
+q:"After her folk song went viral online, the young performer quickly became widely _________ as a promising new artist.",
+options:["A. recognised","B. prepared","C. persuaded","D. decided"],
+correct:0,
+explain:"“be/become recognised as + N” = được công nhận là. “widely recognised” = được công nhận rộng rãi."
+},
+{
+q:"During the final round, viewers were given five minutes to _________ for the contestant they wanted to see win the competition.",
+options:["A. praise","B. vote","C. decide","D. perform"],
+correct:1,
+explain:"“vote for + somebody” = bình chọn cho ai. Ngữ cảnh “the contestant they wanted to see win” cho thấy hành động cần là vote."
+},
+{
+q:"Although the audition had officially ended, the judges allowed the last contestant _________ her song because she had been delayed by heavy traffic.",
+options:["A. finishing","B. finish","C. to finish","D. finished"],
+correct:2,
+explain:"Cấu trúc “allow + O + to V” = cho phép ai làm gì. Vì vậy “allowed the contestant to finish” là đúng."
+},
+{
+q:"The coach let the nervous contestant _________ the song once more before she went on stage.",
+options:["A. rehearsed","B. rehearsing","C. to rehearse","D. rehearse"],
+correct:3,
+explain:"Cấu trúc “let + O + V nguyên mẫu”. Vì vậy dùng “let the contestant rehearse”, không có “to”."
+},
+{
+q:"The unexpected change in the final result made several members of the audience _________ in surprise.",
+options:["A. shouted","B. to shout","C. shout","D. shouting"],
+correct:2,
+explain:"Cấu trúc “make + O + V nguyên mẫu” = khiến ai làm gì. Vì vậy chọn “shout”."
+},
+{
+q:"Despite having little experience on stage, he eventually decided _________ for a place in the school band.",
+options:["A. trying out","B. to try out","C. tried out","D. try out"],
+correct:1,
+explain:"“decide to + V” = quyết định làm gì. “try out for + team/band/role” = thử tuyển để giành một vị trí."
+},
+{
+q:"The group practised the difficult piece repeatedly in order to _________ making mistakes during the live performance.",
+options:["A. avoid","B. refuse","C. hesitate","D. deny"],
+correct:0,
+explain:"Câu kiểm tra hai cấu trúc: “in order to + V” và “avoid + V-ing”. Vì vậy “in order to avoid making mistakes” là đúng."
+},
+{
+q:"The organizers provided an extra rehearsal room so that every band _________ enough time to check its instruments before going on stage.",
+options:["A. has","B. could have","C. having","D. to have"],
+correct:1,
+explain:"Hành động chính ở quá khứ “provided”, nên dùng “so that + S + could + V” để diễn tả mục đích."
+},
+{
+q:"Even though they had never performed without payment before, the musicians agreed _________ part in the charity concert.",
+options:["A. taking","B. take","C. to take","D. took"],
+correct:2,
+explain:"“agree to + V” = đồng ý làm gì; “take part in” = tham gia. Vì vậy “agreed to take part” là đúng."
+},
+{
+q:"The school moved the concert to a larger hall _________ more parents could come and watch their children perform.",
+options:["A. because of","B. in order to","C. so that","D. despite"],
+correct:2,
+explain:"Sau chỗ trống là mệnh đề “more parents could come”, nên dùng “so that + S + could + V”."
+},
+{
+q:"She may be shy when speaking to strangers, but she is particularly good _________ expressing her emotions through music.",
+options:["A. for","B. with","C. in","D. at"],
+correct:3,
+explain:"“be good at + N/V-ing” = giỏi việc gì. Vì vậy “good at expressing” là đúng."
+},
+{
+q:"Music education can play an important role _________ helping teenagers develop confidence and creativity.",
+options:["A. at","B. for","C. in","D. with"],
+correct:2,
+explain:"“play a role in + N/V-ing” = đóng vai trò trong việc gì. Vì vậy chọn “in”."
+},
+{
+q:"Before designing their presentation, the students did extensive _________ on how traditional instruments have changed over time.",
+options:["A. research","B. assignment","C. project","D. homework"],
+correct:0,
+explain:"“do research on + topic” = nghiên cứu về một chủ đề. “extensive research” = nghiên cứu sâu/rộng; research là danh từ không đếm được ở đây."
+},
+{
+q:"While discussing how to make the performance more memorable, one student came _________ the idea of combining live music with traditional dance.",
+options:["A. along with","B. away with","C. up with","D. down with"],
+correct:2,
+explain:"“come up with + idea/solution/plan” = nghĩ ra. “come along with” = đi cùng; “come down with” = mắc bệnh."
+},
+{
+q:"The band plans _________ several traditional melodies before choosing one for the cultural festival.",
+options:["A. recording","B. to record","C. record","D. recorded"],
+correct:1,
+explain:"“plan to + V” = dự định làm gì. Vì vậy “plans to record” là đúng."
+}
+];
+
+const bonusQuestions=new Set([3,6,9,12]);
+let current=0,hearts=5,xp=0,combo=0,wrong=0,locked=false;
+let bonusGiven=new Set();
+
+const $=id=>document.getElementById(id);
+
+function updateStats(){
+  $("counter").textContent=(current+1)+"/"+data.length;
+  $("heart").textContent="❤️".repeat(hearts)+"🖤".repeat(Math.max(0,5-hearts));
+  $("xp").textContent=xp;
+  $("combo").textContent=combo;
+  $("bar").style.width=(current/data.length*100)+"%";
+}
+
+function render(){
+  locked=false;
+  updateStats();
+  const item=data[current];
+
+  $("q").textContent="Question "+(current+1)+". "+item.q;
+  $("answers").innerHTML="";
+  $("feedback").className="feedback";
+  $("feedback").textContent="";
+  $("next").className="next";
+
+  item.options.forEach((opt,index)=>{
+    const btn=document.createElement("button");
+    btn.className="ans";
+    btn.textContent=opt;
+    btn.onclick=()=>choose(index,btn);
+    $("answers").appendChild(btn);
+  });
+}
+
+function choose(index,btn){
+  if(locked)return;
+  const item=data[current];
+
+  if(index===item.correct){
+    locked=true;
+    btn.classList.add("ok");
+    [...$("answers").children].forEach(b=>b.disabled=true);
+
+    combo++;
+    let gain=combo>=3?20:combo>=2?15:10;
+    xp+=gain;
+
+    let bonusText="";
+    const qNo=current+1;
+
+    if(bonusQuestions.has(qNo)&&!bonusGiven.has(qNo)){
+      bonusGiven.add(qNo);
+
+      if(hearts<5){
+        hearts++;
+        bonusText="<br>💖 <strong>Bonus +1 tim!</strong>";
+      }else{
+        bonusText="<br>💖 <strong>Câu bonus! Tim đang đầy 5/5.</strong>";
+      }
+    }
+
+    $("feedback").innerHTML=
+      "✅ <strong>Chính xác!</strong><br>"+
+      item.explain+
+      bonusText+
+      "<br><strong>+"+gain+" XP</strong>";
+
+    $("feedback").classList.add("show");
+    updateStats();
+
+    $("next").classList.add("show");
+    $("next").textContent=
+      current===data.length-1 ? "XEM KẾT QUẢ →" : "NEXT →";
+
+  }else{
+    btn.classList.add("bad");
+    btn.disabled=true;
+
+    hearts--;
+    wrong++;
+    combo=0;
+    updateStats();
+
+    $("feedback").innerHTML=
+      "❌ <strong>Chưa đúng.</strong> Em hãy chọn lại. Chỉ được qua câu khi chọn đúng.";
+    $("feedback").classList.add("show");
+
+    if(hearts<=0){
+      setTimeout(()=>{
+        alert("💔 Hết 5 trái tim! Em phải làm lại từ câu 1.");
+        restart();
+      },300);
+      return;
+    }
+
+    setTimeout(()=>{
+      btn.classList.remove("bad");
+      btn.disabled=false;
+    },500);
+  }
+}
+
+$("next").onclick=()=>{
+  if(current<data.length-1){
+    current++;
+    render();
+  }else{
+    finish();
+  }
+};
+
+function finish(){
+  $("bar").style.width="100%";
+  $("game").style.display="none";
+  $("summary").classList.add("show");
+
+  $("sum").innerHTML=
+    "Em đã hoàn thành <strong>"+data.length+" câu</strong>.<br>"+
+    "XP: <strong>"+xp+"</strong> • Số lần chọn sai: <strong>"+wrong+"</strong><br>"+
+    "🌌 Galaxy mission complete!";
+}
+
+function restart(){
+  current=0;
+  hearts=5;
+  xp=0;
+  combo=0;
+  wrong=0;
+  locked=false;
+  bonusGiven=new Set();
+
+  $("summary").classList.remove("show");
+  $("game").style.display="block";
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 10 - Unit 3 - Exercise 6 - Option B</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;font-family:Arial,sans-serif;color:#fff;
+  background:
+    linear-gradient(rgba(3,15,30,.78),rgba(8,31,45,.86)),
+    radial-gradient(circle at 15% 15%,#5c3b20 0,transparent 24%),
+    radial-gradient(circle at 85% 25%,#214d52 0,transparent 28%),
+    #061724;
+}
+.wrap{width:min(1100px,95%);margin:24px auto}
+.card{
+  background:rgba(7,25,38,.96);
+  border:1px solid #ba8f54;
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 18px 55px #0008;
+}
+.head{
+  text-align:center;
+  padding:24px;
+  background:linear-gradient(100deg,#5a351f,#8b5c31,#31535b);
+}
+h1{margin:0;font-size:clamp(23px,4vw,35px)}
+.sub{margin-top:8px;font-weight:800;color:#ffe0a6}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  padding:13px;
+  background:#071823;
+}
+.stat{
+  text-align:center;
+  background:#ffffff12;
+  border:1px solid #ffffff18;
+  border-radius:13px;
+  padding:9px;
+}
+.stat b{display:block;font-size:19px}
+.stat span{font-size:11px;color:#d9c6a5;font-weight:800}
+.main{padding:22px}
+.progress{
+  height:10px;
+  background:#ffffff15;
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:18px;
+}
+#bar{
+  height:100%;
+  background:linear-gradient(90deg,#d3a35c,#e7c985);
+  width:0;
+  transition:.3s;
+}
+.passage{
+  background:#f7f0df;
+  color:#33291f;
+  border-radius:16px;
+  padding:18px;
+  line-height:1.68;
+  margin-bottom:18px;
+  border-left:5px solid #c8954f;
+}
+.passage h2{
+  margin-top:0;
+  text-align:center;
+  color:#704b2f;
+}
+.q{
+  font-size:20px;
+  font-weight:900;
+  margin:12px 0;
+}
+.answers{display:grid;gap:10px}
+.ans{
+  text-align:left;
+  padding:14px;
+  border-radius:13px;
+  border:1px solid #a99a84;
+  background:#fffdf7;
+  color:#322d29;
+  font-size:16px;
+  cursor:pointer;
+}
+.ans:hover{background:#f4ead8}
+.ans.bad{
+  background:#ffe0e0;
+  border-color:#e35d5d;
+  color:#821d1d;
+}
+.ans.ok{
+  background:#d9f6df;
+  border-color:#35b764;
+  color:#07592b;
+}
+.feedback{
+  display:none;
+  margin-top:15px;
+  padding:14px;
+  border-radius:13px;
+  background:#fff8e8;
+  color:#403326;
+  line-height:1.6;
+}
+.feedback.show{display:block}
+.next{
+  display:none;
+  width:100%;
+  margin-top:14px;
+  padding:14px;
+  border:0;
+  border-radius:13px;
+  background:linear-gradient(90deg,#a96d35,#4e777a);
+  color:#fff;
+  font-weight:900;
+  font-size:17px;
+  cursor:pointer;
+}
+.next.show{display:block}
+.summary{
+  display:none;
+  text-align:center;
+  padding:38px;
+}
+.summary.show{display:block}
+.restart{
+  padding:13px 22px;
+  border:0;
+  border-radius:12px;
+  background:#b77b3f;
+  color:#fff;
+  font-weight:900;
+  cursor:pointer;
+}
+@media(max-width:650px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .main{padding:13px}
+  .passage{font-size:14px}
+  .ans{font-size:14px}
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+<div class="card">
+
+<div class="head">
+  <h1>GRADE 10 • UNIT 3 • EXERCISE 6</h1>
+  <div class="sub">OPTION B • VINTAGE MUSIC STUDIO 🎙️🎷</div>
+</div>
+
+<div class="stats">
+  <div class="stat"><b id="counter">1/5</b><span>QUESTION</span></div>
+  <div class="stat"><b id="heart">❤️❤️❤️❤️❤️</b><span>HEARTS</span></div>
+  <div class="stat"><b id="xp">0</b><span>XP</span></div>
+  <div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+</div>
+
+<div class="main" id="game">
+  <div class="progress"><div id="bar"></div></div>
+
+  <div class="passage">
+    <h2>Music at School</h2>
+
+    <p>Music is an important part of school life for many students. Some enjoy singing, while others prefer playing musical instruments. <b>(1) ________.</b> They can also make school more enjoyable and interesting.</p>
+
+    <p>Learning to play an instrument takes time and practice. At first, students may find it difficult to play a song correctly. <b>(2) ________.</b> After practising for several weeks, they usually become more confident and make fewer mistakes.</p>
+
+    <p>Music can also help students make new friends. When they join a school band or music club, they have opportunities to meet other students with similar interests. <b>(3) ________.</b> In this way, music can bring students closer together.</p>
+
+    <p>Taking part in a performance is another useful experience. Students may feel nervous before going on stage. <b>(4) ________.</b> When the audience claps for them, they often feel proud of what they have achieved.</p>
+
+    <p>Finally, music can help students relax after a busy day at school. Listening to a favourite song can reduce stress and improve their mood. <b>(5) ________.</b> For these reasons, music can have an important place in students' daily lives.</p>
+  </div>
+
+  <div class="q" id="q"></div>
+  <div class="answers" id="answers"></div>
+  <div class="feedback" id="feedback"></div>
+  <button class="next" id="next">NEXT →</button>
+</div>
+
+<div class="summary" id="summary">
+  <div style="font-size:58px">🎙️🏆🎶</div>
+  <h2>HOÀN THÀNH!</h2>
+  <p id="sum"></p>
+  <button class="restart" onclick="restart()">CHƠI LẠI</button>
+</div>
+
+</div>
+</div>
+
+<script>
+const options = [
+  "A. However, regular practice can help them improve.",
+  "B. These activities give young people a chance to develop their musical skills.",
+  "C. For example, they can practise songs together and help one another.",
+  "D. As a result, many students listen to music when they need a break.",
+  "E. However, they often become more relaxed once the performance begins.",
+  "F. Some students find maths more difficult than music.",
+  "G. Professional musicians usually perform in large concert halls.",
+  "H. They should always buy expensive musical instruments."
+];
+
+const correct = [1,0,2,4,3];
+
+const explanations = [
+  "“These activities” quy chiếu trực tiếp về “singing” và “playing musical instruments” ở câu trước. Vì vậy B nối ý tự nhiên nhất.",
+  "Trước chỗ trống nói học sinh gặp khó khăn; sau đó nói luyện tập giúp tự tin hơn và ít mắc lỗi hơn. “However, regular practice can help them improve.” tạo quan hệ tương phản hợp lý. → A.",
+  "Câu trước nói học sinh gặp những bạn có cùng sở thích. “For example” đưa ra ví dụ cụ thể: cùng luyện bài hát và giúp đỡ nhau. → C.",
+  "“nervous before going on stage” tương phản với “become more relaxed once the performance begins”, nên E phù hợp nhất.",
+  "Nghe nhạc giúp giảm căng thẳng và cải thiện tâm trạng, vì vậy nhiều học sinh nghe nhạc khi cần nghỉ ngơi. “As a result” thể hiện quan hệ nguyên nhân – kết quả. → D."
+];
+
+let current = 0;
+let hearts = 5;
+let xp = 0;
+let combo = 0;
+let wrong = 0;
+let locked = false;
+
+const $ = id => document.getElementById(id);
+
+function updateStats(){
+  $("counter").textContent = (current + 1) + "/5";
+  $("heart").textContent = "❤️".repeat(hearts) + "🖤".repeat(5 - hearts);
+  $("xp").textContent = xp;
+  $("combo").textContent = combo;
+  $("bar").style.width = (current / 5 * 100) + "%";
+}
+
+function render(){
+  locked = false;
+  updateStats();
+
+  $("q").textContent = "Question " + (current + 1) + ": Chọn câu phù hợp nhất cho chỗ trống (" + (current + 1) + ").";
+  $("answers").innerHTML = "";
+  $("feedback").className = "feedback";
+  $("feedback").innerHTML = "";
+  $("next").className = "next";
+
+  options.forEach((opt, i) => {
+    const btn = document.createElement("button");
+    btn.className = "ans";
+    btn.textContent = opt;
+    btn.onclick = () => choose(i, btn);
+    $("answers").appendChild(btn);
+  });
+}
+
+function choose(index, btn){
+  if(locked) return;
+
+  if(index === correct[current]){
+    locked = true;
+    btn.classList.add("ok");
+
+    [...$("answers").children].forEach(b => b.disabled = true);
+
+    combo++;
+    let gain = 10;
+    if(combo >= 3) gain = 20;
+    else if(combo >= 2) gain = 15;
+
+    xp += gain;
+
+    $("feedback").innerHTML =
+      "✅ <b>Chính xác!</b><br>" +
+      explanations[current] +
+      "<br><b>+" + gain + " XP</b>";
+
+    $("feedback").classList.add("show");
+    $("next").classList.add("show");
+    $("next").textContent = current === 4 ? "XEM KẾT QUẢ →" : "NEXT →";
+
+    updateStats();
+
+  } else {
+    btn.classList.add("bad");
+    btn.disabled = true;
+
+    hearts--;
+    wrong++;
+    combo = 0;
+
+    updateStats();
+
+    $("feedback").innerHTML =
+      "❌ <b>Chưa đúng.</b> Em hãy đọc lại câu trước và câu sau chỗ trống để tìm từ/cụm từ liên kết. Chỉ được qua câu khi chọn đúng.";
+
+    $("feedback").classList.add("show");
+
+    if(hearts <= 0){
+      setTimeout(() => {
+        alert("💔 Hết 5 trái tim! Em phải làm lại từ câu 1.");
+        restart();
+      }, 300);
+    } else {
+      setTimeout(() => {
+        btn.classList.remove("bad");
+        btn.disabled = false;
+      }, 500);
+    }
+  }
+}
+
+$("next").onclick = () => {
+  if(current < 4){
+    current++;
+    render();
+  } else {
+    finish();
+  }
+};
+
+function finish(){
+  $("bar").style.width = "100%";
+  $("game").style.display = "none";
+  $("summary").classList.add("show");
+
+  $("sum").innerHTML =
+    "Em đã hoàn thành <b>5 câu</b>.<br>" +
+    "XP: <b>" + xp + "</b> • Số lần chọn sai: <b>" + wrong + "</b><br><br>" +
+    "Đáp án: <b>1B – 2A – 3C – 4E – 5D</b>";
+}
+
+function restart(){
+  current = 0;
+  hearts = 5;
+  xp = 0;
+  combo = 0;
+  wrong = 0;
+  locked = false;
+
+  $("summary").classList.remove("show");
+  $("game").style.display = "block";
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

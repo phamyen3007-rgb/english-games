@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 3 - Exercise 3 - Option C</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#f7f4ff;
+  background:
+    radial-gradient(circle at 78% 12%,rgba(255,238,185,.45),transparent 14%),
+    radial-gradient(circle at 18% 18%,rgba(113,98,195,.24),transparent 22%),
+    linear-gradient(180deg,#0a1633 0%,#18294a 45%,#4d3652 72%,#8c654b 100%);
+}
+body:before{
+  content:"🌙   ✨   🎶   🏜️   🎸   ✨";
+  position:fixed;
+  top:18px;left:0;width:100%;
+  text-align:center;
+  font-size:25px;
+  opacity:.34;
+  pointer-events:none;
+}
+.wrap{width:min(1050px,94%);margin:26px auto}
+.card{
+  background:rgba(16,28,56,.95);
+  border:1px solid rgba(229,198,143,.26);
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 18px 50px rgba(0,0,0,.28)
+}
+.head{
+  padding:24px;
+  text-align:center;
+  background:linear-gradient(95deg,rgba(63,75,142,.96),rgba(116,75,128,.94),rgba(174,116,78,.90));
+}
+.head h1{
+  margin:0;
+  color:#fff;
+  font-size:clamp(23px,4vw,36px);
+  text-shadow:0 2px 12px rgba(0,0,0,.28)
+}
+.head p{margin:8px 0 0;color:#fff6e8;font-weight:800}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  padding:14px;
+  background:rgba(11,23,47,.96)
+}
+.stat{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(232,204,153,.15);
+  border-radius:14px;
+  padding:10px;
+  text-align:center
+}
+.stat b{display:block;font-size:19px;color:#fff}
+.stat span{font-size:11px;font-weight:800;color:#e6d5ba}
+.content{padding:22px}
+.passage{
+  background:rgba(255,252,247,.98);
+  border:1px solid rgba(219,181,128,.22);
+  border-radius:18px;
+  padding:20px;
+  line-height:1.75;
+  color:#463f4d;
+  margin-bottom:22px;
+  max-height:430px;
+  overflow-y:auto
+}
+.passage h2{
+  margin-top:0;
+  text-align:center;
+  color:#70568b;
+  font-size:27px
+}
+.question-box{
+  background:rgba(255,254,250,.98);
+  color:#443c4c;
+  border:1px solid rgba(219,181,128,.22);
+  border-radius:18px;
+  padding:20px
+}
+.progress{
+  height:10px;
+  background:#ece5dc;
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:20px
+}
+#bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#e7bd67,#9479d7,#d38a6d);
+  transition:.3s
+}
+.q{
+  font-size:21px;
+  font-weight:800;
+  line-height:1.55;
+  margin-bottom:18px;
+  color:#58465f
+}
+.answers{display:grid;gap:12px}
+.ans{
+  padding:15px;
+  text-align:left;
+  font-size:17px;
+  border-radius:14px;
+  border:1px solid #dbcdbd;
+  background:#fff;
+  color:#49404e;
+  cursor:pointer;
+  transition:.18s
+}
+.ans:hover{
+  transform:translateY(-1px);
+  background:#fff7ee;
+  border-color:#cda66d
+}
+.ans.ok{
+  background:#d9f8e6;
+  border-color:#39c77a;
+  color:#096039
+}
+.ans.bad{
+  background:#ffe0e5;
+  border-color:#ef7474;
+  color:#8a2424
+}
+.feedback{
+  display:none;
+  margin-top:16px;
+  padding:14px;
+  border-radius:14px;
+  background:#f8f1e8;
+  border:1px solid #ddcfbe;
+  line-height:1.65;
+  color:#4d4650
+}
+.feedback.show{display:block}
+.next{
+  display:none;
+  width:100%;
+  margin-top:15px;
+  padding:14px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(90deg,#9b79c8,#c28a59);
+  color:white;
+  font-weight:900;
+  font-size:17px;
+  cursor:pointer
+}
+.next.show{display:block}
+.summary{
+  display:none;
+  text-align:center;
+  padding:35px;
+  color:#fff4e8
+}
+.summary.show{display:block}
+.summary h2{
+  font-size:32px;
+  color:#f1cd87
+}
+.restart{
+  padding:14px 22px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(90deg,#9b79c8,#c28a59);
+  color:white;
+  font-weight:900;
+  cursor:pointer
+}
+@media(max-width:650px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .content{padding:14px}
+  .q{font-size:18px}
+  .ans{font-size:15px}
+  .passage{max-height:350px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+
+<div class="head">
+<h1>GRADE 10 • UNIT 3 • EXERCISE 3</h1>
+<p>OPTION C • DESERT NIGHT MUSIC JOURNEY</p>
+</div>
+
+<div class="stats">
+<div class="stat"><b id="counter">1/6</b><span>QUESTION</span></div>
+<div class="stat"><b id="heart">❤️❤️❤️❤️❤️</b><span>HEARTS</span></div>
+<div class="stat"><b id="xp">0</b><span>XP</span></div>
+<div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+</div>
+
+<div class="content" id="game">
+
+<div class="passage">
+<h2>From Street Performer to Professional Musician</h2>
+
+<p>Daniel had always been interested in music, but few people expected him to become a professional performer. As a teenager, he was remarkably (1) _________ and could play several instruments without having received much formal training. He began his career as a street (2) _________, performing in public places to earn enough money to continue his music lessons. However, he did not attract the attention of a professional producer (3) _________ one of his performances was shared widely online.</p>
+
+<p>The unexpected publicity gave Daniel opportunities to work with experienced artists, (4) _________ he continued performing in small local venues whenever possible. Instead of working only on his own, he regularly collaborated (5) _________ musicians whose styles were very different from his. This experience helped him develop a distinctive sound that combined modern rhythms with traditional (6) _________.</p>
+</div>
+
+<div class="question-box">
+<div class="progress"><div id="bar"></div></div>
+<div class="q" id="q"></div>
+<div class="answers" id="answers"></div>
+<div class="feedback" id="feedback"></div>
+<button class="next" id="next">NEXT →</button>
+</div>
+
+</div>
+
+<div class="summary" id="summary">
+<div style="font-size:56px">🌙🏆</div>
+<h2>HOÀN THÀNH!</h2>
+<p id="sum"></p>
+<button class="restart" onclick="restart()">CHƠI LẠI</button>
+</div>
+
+</div>
+</div>
+
+<script>
+const data=[
+{
+q:"Choose the best answer for blank (1).",
+options:["A. talent","B. talentfully","C. talented","D. talents"],
+correct:2,
+explain:"Sau “was remarkably” cần tính từ. “talented” = có tài năng. Vì vậy “he was remarkably talented” là đúng."
+},
+{
+q:"Choose the best answer for blank (2).",
+options:["A. performance","B. performer","C. performing","D. perform"],
+correct:1,
+explain:"Sau “a street” cần danh từ chỉ người. “street performer” = nghệ sĩ biểu diễn đường phố."
+},
+{
+q:"Choose the best answer for blank (3).",
+options:["A. while","B. since","C. until","D. during"],
+correct:2,
+explain:"Cấu trúc “not ... until + clause” = mãi đến khi... mới... Vì vậy dùng “until”."
+},
+{
+q:"Choose the best answer for blank (4).",
+options:["A. so","B. for","C. or","D. yet"],
+correct:3,
+explain:"Có sự tương phản: Daniel có cơ hội làm việc với nghệ sĩ giàu kinh nghiệm nhưng vẫn tiếp tục biểu diễn tại các địa điểm nhỏ. Vì vậy dùng “yet”."
+},
+{
+q:"Choose the best answer for blank (5).",
+options:["A. by","B. for","C. with","D. to"],
+correct:2,
+explain:"Collocation “collaborate with + somebody” = hợp tác với ai. Vì vậy chọn “with”."
+},
+{
+q:"Choose the best answer for blank (6).",
+options:["A. melodies","B. noises","C. speeches","D. voices"],
+correct:0,
+explain:"“combine modern rhythms with traditional melodies” = kết hợp nhịp điệu hiện đại với giai điệu truyền thống. “melodies” phù hợp nhất."
+}
+];
+
+let current=0,hearts=5,xp=0,combo=0,wrong=0,locked=false;
+const $=id=>document.getElementById(id);
+
+function updateStats(){
+ $("counter").textContent=(current+1)+"/"+data.length;
+ $("heart").textContent="❤️".repeat(hearts)+"🖤".repeat(Math.max(0,5-hearts));
+ $("xp").textContent=xp;
+ $("combo").textContent=combo;
+ $("bar").style.width=(current/data.length*100)+"%";
+}
+
+function render(){
+ locked=false;
+ updateStats();
+
+ const item=data[current];
+ $("q").textContent="Question "+(current+1)+". "+item.q;
+ $("answers").innerHTML="";
+ $("feedback").className="feedback";
+ $("feedback").textContent="";
+ $("next").className="next";
+
+ item.options.forEach((opt,index)=>{
+  const btn=document.createElement("button");
+  btn.className="ans";
+  btn.textContent=opt;
+  btn.onclick=()=>choose(index,btn);
+  $("answers").appendChild(btn);
+ });
+}
+
+function choose(index,btn){
+ if(locked)return;
+
+ const item=data[current];
+
+ if(index===item.correct){
+  locked=true;
+  btn.classList.add("ok");
+  [...$("answers").children].forEach(b=>b.disabled=true);
+
+  combo++;
+  let gain=combo>=3?20:combo>=2?15:10;
+  xp+=gain;
+
+  $("feedback").innerHTML=
+   "✅ <strong>Chính xác!</strong><br>"+
+   item.explain+
+   "<br><strong>+"+gain+" XP</strong>";
+
+  $("feedback").classList.add("show");
+  updateStats();
+
+  $("next").classList.add("show");
+  $("next").textContent=current===data.length-1?"XEM KẾT QUẢ →":"NEXT →";
+
+ }else{
+  btn.classList.add("bad");
+  btn.disabled=true;
+
+  hearts--;
+  wrong++;
+  combo=0;
+  updateStats();
+
+  $("feedback").innerHTML=
+   "❌ <strong>Chưa đúng.</strong> Em hãy chọn lại. Chỉ được qua câu khi chọn đúng.";
+  $("feedback").classList.add("show");
+
+  if(hearts<=0){
+   setTimeout(()=>{
+    alert("💔 Hết 5 trái tim! Em phải làm lại từ câu 1.");
+    restart();
+   },300);
+   return;
+  }
+
+  setTimeout(()=>{
+   btn.classList.remove("bad");
+   btn.disabled=false;
+  },500);
+ }
+}
+
+$("next").onclick=()=>{
+ if(current<data.length-1){
+  current++;
+  render();
+ }else{
+  finish();
+ }
+};
+
+function finish(){
+ $("bar").style.width="100%";
+ $("game").style.display="none";
+ $("summary").classList.add("show");
+
+ $("sum").innerHTML=
+  "Em đã hoàn thành <strong>"+data.length+" câu</strong>.<br>"+
+  "XP: <strong>"+xp+"</strong> • Số lần chọn sai: <strong>"+wrong+"</strong><br>"+
+  "🌙 Desert Night journey complete!";
+}
+
+function restart(){
+ current=0;
+ hearts=5;
+ xp=0;
+ combo=0;
+ wrong=0;
+ locked=false;
+
+ $("summary").classList.remove("show");
+ $("game").style.display="block";
+ render();
+}
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 3 - Exercise 4 - Option C</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#f6f3ff;
+  background:
+    radial-gradient(circle at 18% 12%,rgba(255,236,174,.22),transparent 18%),
+    radial-gradient(circle at 82% 16%,rgba(173,188,255,.20),transparent 22%),
+    radial-gradient(circle at 50% 110%,rgba(120,93,182,.22),transparent 36%),
+    linear-gradient(145deg,#081225,#172347 48%,#3b2e66 100%);
+}
+body:before{
+  content:"✨   🌙   🏰   🎵   ⭐   ✨";
+  position:fixed;
+  top:18px;left:0;width:100%;
+  text-align:center;
+  font-size:25px;
+  opacity:.34;
+  pointer-events:none;
+}
+.wrap{width:min(1050px,94%);margin:26px auto}
+.card{
+  background:rgba(11,22,49,.96);
+  border:1px solid rgba(200,192,255,.24);
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 18px 50px rgba(0,0,0,.30),0 0 28px rgba(156,135,230,.10)
+}
+.head{
+  padding:24px;
+  text-align:center;
+  background:linear-gradient(95deg,rgba(43,79,142,.96),rgba(87,66,150,.94),rgba(138,92,149,.90));
+}
+.head h1{
+  margin:0;
+  color:#fff;
+  font-size:clamp(23px,4vw,36px);
+  text-shadow:0 0 12px rgba(219,214,255,.50)
+}
+.head p{margin:8px 0 0;color:#f9f5ff;font-weight:800}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  padding:14px;
+  background:rgba(7,17,39,.96)
+}
+.stat{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(202,194,255,.15);
+  border-radius:14px;
+  padding:10px;
+  text-align:center
+}
+.stat b{display:block;font-size:19px;color:#fff}
+.stat span{font-size:11px;font-weight:800;color:#d5cef2}
+.main{padding:22px}
+.progress{
+  height:10px;
+  background:rgba(255,255,255,.08);
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:20px
+}
+#bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#efd981,#a79cf2,#d78bbb);
+  transition:.3s
+}
+.q{
+  font-size:21px;
+  font-weight:800;
+  line-height:1.55;
+  margin-bottom:18px;
+  color:#faf8ff;
+  white-space:pre-line
+}
+.answers{display:grid;gap:12px}
+.ans{
+  padding:15px;
+  text-align:left;
+  font-size:17px;
+  border-radius:14px;
+  border:1px solid rgba(153,145,210,.28);
+  background:#fbfaff;
+  color:#3b3650;
+  cursor:pointer;
+  transition:.18s
+}
+.ans:hover{
+  transform:translateY(-1px);
+  background:#f4f1ff;
+  border-color:#9b8fd6
+}
+.ans.ok{
+  background:#d9f8e6;
+  border-color:#39c77a;
+  color:#096039
+}
+.ans.bad{
+  background:#ffe0e6;
+  border-color:#ef7474;
+  color:#8a2424
+}
+.feedback{
+  display:none;
+  margin-top:16px;
+  padding:14px;
+  border-radius:14px;
+  background:#f6f3ff;
+  border:1px solid #d8d0eb;
+  line-height:1.65;
+  color:#443d55
+}
+.feedback.show{display:block}
+.next{
+  display:none;
+  width:100%;
+  margin-top:15px;
+  padding:14px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(90deg,#5d6fc8,#8b57b6);
+  color:white;
+  font-weight:900;
+  font-size:17px;
+  cursor:pointer
+}
+.next.show{display:block}
+.summary{
+  display:none;
+  text-align:center;
+  padding:35px;
+  color:#f8f5ff
+}
+.summary.show{display:block}
+.summary h2{
+  font-size:32px;
+  color:#f0dc91
+}
+.restart{
+  padding:14px 22px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(90deg,#5d6fc8,#8b57b6);
+  color:white;
+  font-weight:900;
+  cursor:pointer
+}
+@media(max-width:650px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .main{padding:14px}
+  .q{font-size:18px}
+  .ans{font-size:15px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+
+<div class="head">
+<h1>GRADE 10 • UNIT 3 • EXERCISE 4</h1>
+<p>OPTION C • STARLIGHT CASTLE MUSIC BALL</p>
+</div>
+
+<div class="stats">
+<div class="stat"><b id="counter">1/8</b><span>QUESTION</span></div>
+<div class="stat"><b id="heart">❤️❤️❤️❤️❤️</b><span>HEARTS</span></div>
+<div class="stat"><b id="xp">0</b><span>XP</span></div>
+<div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+</div>
+
+<div class="main" id="game">
+<div class="progress"><div id="bar"></div></div>
+<div class="q" id="q"></div>
+<div class="answers" id="answers"></div>
+<div class="feedback" id="feedback"></div>
+<button class="next" id="next">NEXT →</button>
+</div>
+
+<div class="summary" id="summary">
+<div style="font-size:56px">🌙🏰🏆</div>
+<h2>HOÀN THÀNH!</h2>
+<p id="sum"></p>
+<button class="restart" onclick="restart()">CHƠI LẠI</button>
+</div>
+
+</div>
+</div>
+
+<script>
+const data=[
+{
+q:"Question 1\n\na. I haven't decided yet. I'm thinking about learning the drums.\nb. That's interesting. Why do you want to learn them?\nc. Because I really enjoy rhythm, and my cousin can teach me the basics.",
+options:["A. b – a – c","B. a – c – b","C. a – b – c","D. c – b – a"],
+correct:2,
+explain:"(a) giới thiệu “the drums” → (b) “them” quy chiếu về the drums và hỏi “Why...?” → (c) “Because...” trả lời trực tiếp. Chọn C."
+},
+{
+q:"Question 2\n\na. Really? I thought you were going to sing a pop song.\nb. Yes, but our teacher suggested trying something different this time.\nc. I'm going to perform a traditional Vietnamese song at the school festival.\nd. That sounds great. I'm looking forward to hearing it!",
+options:["A. c – a – b – d","B. a – c – d – b","C. c – b – a – d","D. d – c – a – b"],
+correct:0,
+explain:"(c) thông báo sẽ hát nhạc truyền thống → (a) ngạc nhiên vì trước đó nghĩ là pop → (b) giải thích sự thay đổi → (d) kết thúc bằng lời động viên. Chọn A."
+},
+{
+q:"Question 3\n\na. Luckily, another guitarist in the band lent her one for the performance.\nb. Just before going on stage, Hoa discovered that one of her guitar strings had broken.\nc. Although she was worried at first, she managed to complete the performance successfully.\nd. Last Friday, Hoa performed with her school band at a charity event.\ne. The experience taught her to check her instrument carefully before every performance.",
+options:["A. b – a – d – c – e","B. d – c – b – a – e","C. d – b – c – a – e","D. d – b – a – c – e"],
+correct:3,
+explain:"(d) giới thiệu sự kiện → (b) vấn đề xảy ra trước khi lên sân khấu → (a) “Luckily” đưa ra giải pháp → (c) kết quả → (e) “The experience” nêu bài học. Chọn D."
+},
+{
+q:"Question 4\n\na. Yes. I'm collecting old folk songs from people in my village.\nb. That must be interesting. What are you going to do with the recordings?\nc. I'm planning to use some of them in my presentation about local culture.\nd. I heard you're working on a music project for school. Is that right?\ne. That's a creative idea. Your presentation should be really interesting.",
+options:["A. a – d – b – c – e","B. d – a – b – c – e","C. d – b – a – e – c","D. b – c – d – a – e"],
+correct:1,
+explain:"(d) hỏi “Is that right?” → (a) “Yes” trả lời → (b) hỏi về “the recordings” → (c) trả lời mục đích → (e) nhận xét và kết thúc. Chọn B."
+},
+{
+q:"Question 5\n\nHi Lucy,\n\na. At first, I was worried that I might forget the lyrics, but everything went better than expected.\nb. Last Saturday, I performed in front of a large audience for the first time.\nc. When the song ended, hearing everyone clap made me feel incredibly proud.\nd. I had spent nearly a month practising the song with my music teacher.\ne. Now I'm much more confident about performing in public again.\n\nSee you soon,\nMia",
+options:["A. b – d – a – c – e","B. d – b – c – a – e","C. b – a – d – e – c","D. a – b – d – c – e"],
+correct:0,
+explain:"Mạch chính: trải nghiệm → chuẩn bị → lo lắng ban đầu → kết thúc thành công → tự tin hơn. Vì vậy b – d – a – c – e, chọn A."
+},
+{
+q:"Question 6\n\na. This can be especially useful for students who are shy about speaking in front of others.\nb. Music activities can help teenagers become more confident in expressing themselves.\nc. As they practise and perform regularly, they gradually become more comfortable being watched by an audience.\nd. In addition, performing with classmates gives them opportunities to support and encourage one another.\ne. For these reasons, music can contribute to both personal and social development.",
+options:["A. c – a – b – d – e","B. b – d – c – a – e","C. b – c – a – d – e","D. b – a – d – c – e"],
+correct:2,
+explain:"(b) topic sentence → (c) giải thích quá trình tăng tự tin → (a) “This” quy chiếu về việc trở nên thoải mái hơn khi biểu diễn → (d) “In addition” bổ sung lợi ích xã hội → (e) “For these reasons” tổng kết. Chọn C."
+},
+{
+q:"Question 7\n\na. As a result, the members began to understand one another's musical styles better.\nb. At first, the four students found it difficult to agree on which songs to perform.\nc. Eventually, they created a performance that included ideas from every member of the group.\nd. Working in a band can sometimes be challenging when members have different opinions.\ne. Instead of arguing, they decided to listen to each person's suggestions carefully.",
+options:["A. d – b – e – a – c","B. b – d – e – c – a","C. d – e – b – a – c","D. b – e – d – a – c"],
+correct:0,
+explain:"(d) nêu ý khái quát → (b) khó khăn cụ thể → (e) giải pháp “Instead of arguing” → (a) “As a result” nêu kết quả → (c) “Eventually” kết thúc quá trình. Chọn A."
+},
+{
+q:"Question 8\n\na. Some students prefer modern pop songs, while others are interested in traditional music.\nb. Giving students different choices can therefore make music lessons more enjoyable and meaningful.\nc. Music teachers often need to consider students' different interests when planning classroom activities.\nd. For example, allowing groups to choose their own songs can encourage them to participate more actively.\ne. These differences can make it difficult for one activity to appeal equally to everyone.",
+options:["A. a – e – c – d – b","B. c – a – e – d – b","C. c – d – a – e – b","D. a – c – d – b – e"],
+correct:1,
+explain:"(c) topic sentence → (a) nêu các sở thích khác nhau → (e) “These differences” quy chiếu về (a) → (d) “For example” đưa ra giải pháp → (b) “therefore” rút ra kết luận. Chọn B."
+}
+];
+
+let current=0,hearts=5,xp=0,combo=0,wrong=0,locked=false;
+const $=id=>document.getElementById(id);
+
+function updateStats(){
+ $("counter").textContent=(current+1)+"/"+data.length;
+ $("heart").textContent="❤️".repeat(hearts)+"🖤".repeat(Math.max(0,5-hearts));
+ $("xp").textContent=xp;
+ $("combo").textContent=combo;
+ $("bar").style.width=(current/data.length*100)+"%";
+}
+
+function render(){
+ locked=false;
+ updateStats();
+
+ const item=data[current];
+ $("q").textContent=item.q;
+ $("answers").innerHTML="";
+ $("feedback").className="feedback";
+ $("feedback").textContent="";
+ $("next").className="next";
+
+ item.options.forEach((opt,index)=>{
+  const btn=document.createElement("button");
+  btn.className="ans";
+  btn.textContent=opt;
+  btn.onclick=()=>choose(index,btn);
+  $("answers").appendChild(btn);
+ });
+}
+
+function choose(index,btn){
+ if(locked)return;
+ const item=data[current];
+
+ if(index===item.correct){
+  locked=true;
+  btn.classList.add("ok");
+  [...$("answers").children].forEach(b=>b.disabled=true);
+
+  combo++;
+  let gain=combo>=3?20:combo>=2?15:10;
+  xp+=gain;
+
+  $("feedback").innerHTML=
+   "✅ <strong>Chính xác!</strong><br>"+
+   item.explain+
+   "<br><strong>+"+gain+" XP</strong>";
+
+  $("feedback").classList.add("show");
+  updateStats();
+
+  $("next").classList.add("show");
+  $("next").textContent=current===data.length-1?"XEM KẾT QUẢ →":"NEXT →";
+
+ }else{
+  btn.classList.add("bad");
+  btn.disabled=true;
+
+  hearts--;
+  wrong++;
+  combo=0;
+  updateStats();
+
+  $("feedback").innerHTML=
+   "❌ <strong>Chưa đúng.</strong> Em hãy chọn lại. Chỉ được qua câu khi chọn đúng.";
+  $("feedback").classList.add("show");
+
+  if(hearts<=0){
+   setTimeout(()=>{
+    alert("💔 Hết 5 trái tim! Em phải làm lại từ câu 1.");
+    restart();
+   },300);
+   return;
+  }
+
+  setTimeout(()=>{
+   btn.classList.remove("bad");
+   btn.disabled=false;
+  },500);
+ }
+}
+
+$("next").onclick=()=>{
+ if(current<data.length-1){
+  current++;
+  render();
+ }else{
+  finish();
+ }
+};
+
+function finish(){
+ $("bar").style.width="100%";
+ $("game").style.display="none";
+ $("summary").classList.add("show");
+
+ $("sum").innerHTML=
+  "Em đã hoàn thành <strong>"+data.length+" câu</strong>.<br>"+
+  "XP: <strong>"+xp+"</strong> • Số lần chọn sai: <strong>"+wrong+"</strong><br>"+
+  "🌙 Starlight Castle mission complete!";
+}
+
+function restart(){
+ current=0;
+ hearts=5;
+ xp=0;
+ combo=0;
+ wrong=0;
+ locked=false;
+
+ $("summary").classList.remove("show");
+ $("game").style.display="block";
+ render();
+}
+
+render();
+</script>
+</body>
+</html>

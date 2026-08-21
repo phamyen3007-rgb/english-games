@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 3 - Exercise 1 (101-120) - Option C</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:#effbff;
+  background:
+    radial-gradient(circle at 15% 13%,rgba(255,255,255,.28),transparent 18%),
+    radial-gradient(circle at 84% 17%,rgba(154,210,255,.28),transparent 22%),
+    radial-gradient(circle at 50% 108%,rgba(137,112,255,.20),transparent 36%),
+    linear-gradient(145deg,#071c3e,#114f7c 50%,#524b98 100%);
+}
+body:before{
+  content:"❄️   ✦   💎   ❄️   ✧   💎   ❄️";
+  position:fixed;top:18px;left:0;width:100%;text-align:center;
+  font-size:24px;opacity:.34;pointer-events:none;
+}
+.wrap{width:min(950px,94%);margin:26px auto}
+.card{
+  background:rgba(8,31,61,.95);
+  border:1px solid rgba(179,231,255,.34);
+  border-radius:24px;overflow:hidden;
+  box-shadow:0 0 34px rgba(129,211,255,.20),0 18px 45px rgba(0,0,0,.22)
+}
+.head{
+  padding:24px;text-align:center;
+  background:linear-gradient(100deg,rgba(44,145,201,.96),rgba(104,104,210,.92));
+  border-bottom:1px solid rgba(210,244,255,.25)
+}
+.head h1{
+  margin:0;color:#fff;font-size:clamp(23px,4vw,36px);
+  text-shadow:0 0 14px rgba(190,240,255,.75)
+}
+.head p{margin:8px 0 0;color:#effbff;font-weight:800}
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
+  padding:14px;background:rgba(5,25,51,.95)
+}
+.stat{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(185,232,255,.18);
+  border-radius:14px;padding:10px;text-align:center
+}
+.stat b{display:block;font-size:19px;color:#fff}
+.stat span{font-size:11px;font-weight:800;color:#bde9ff}
+.main{padding:22px}
+.progress{
+  height:10px;background:rgba(255,255,255,.09);
+  border-radius:20px;overflow:hidden;margin-bottom:22px
+}
+#bar{
+  height:100%;
+  background:linear-gradient(90deg,#7de7ff,#79a6ff,#b48cff);
+  transition:.3s;
+  box-shadow:0 0 12px rgba(117,222,255,.45)
+}
+.q{
+  font-size:21px;font-weight:800;line-height:1.55;
+  margin-bottom:18px;color:#f4fcff
+}
+.answers{display:grid;gap:12px}
+.ans{
+  padding:15px;text-align:left;font-size:17px;border-radius:14px;
+  border:1px solid rgba(131,199,234,.30);
+  background:linear-gradient(180deg,#fbfeff,#eff8ff);
+  color:#163e5c;cursor:pointer;transition:.18s
+}
+.ans:hover{
+  transform:translateY(-1px);
+  background:#e7f8ff;
+  border-color:#61c9eb;
+  box-shadow:0 0 12px rgba(109,215,255,.16)
+}
+.ans.ok{background:#d9f8e6;border-color:#39c77a;color:#096039}
+.ans.bad{background:#ffe0e5;border-color:#ef7474;color:#8a2424}
+.feedback{
+  display:none;margin-top:16px;padding:14px;border-radius:14px;
+  background:#f1faff;border:1px solid rgba(107,190,230,.28);
+  line-height:1.6;color:#173f5a
+}
+.feedback.show{display:block}
+.next{
+  display:none;width:100%;margin-top:15px;padding:14px;border:0;
+  border-radius:14px;background:linear-gradient(90deg,#229dc6,#706fd0);
+  color:white;font-weight:900;font-size:17px;cursor:pointer;
+  box-shadow:0 0 18px rgba(101,185,240,.18)
+}
+.next.show{display:block}
+.summary{display:none;text-align:center;padding:35px;color:#effaff}
+.summary.show{display:block}
+.summary h2{
+  font-size:32px;color:#a9ecff;
+  text-shadow:0 0 10px rgba(148,225,255,.38)
+}
+.restart{
+  padding:14px 22px;border:0;border-radius:14px;
+  background:linear-gradient(90deg,#229dc6,#706fd0);
+  color:white;font-weight:900;cursor:pointer
+}
+@media(max-width:650px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .main{padding:15px}.q{font-size:18px}.ans{font-size:15px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+
+<div class="head">
+<h1>GRADE 10 • UNIT 3 • EXERCISE 1</h1>
+<p>(101–120) • OPTION C • FROZEN CRYSTAL CHALLENGE</p>
+</div>
+
+<div class="stats">
+<div class="stat"><b id="counter">1/15</b><span>QUESTION</span></div>
+<div class="stat"><b id="heart">❤️❤️❤️❤️❤️</b><span>HEARTS</span></div>
+<div class="stat"><b id="xp">0</b><span>XP</span></div>
+<div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+</div>
+
+<div class="main" id="game">
+<div class="progress"><div id="bar"></div></div>
+<div class="q" id="q"></div>
+<div class="answers" id="answers"></div>
+<div class="feedback" id="feedback"></div>
+<button class="next" id="next">NEXT →</button>
+</div>
+
+<div class="summary" id="summary">
+<div style="font-size:55px">❄️🏆</div>
+<h2>HOÀN THÀNH!</h2>
+<p id="sum"></p>
+<button class="restart" onclick="restart()">CHƠI LẠI</button>
+</div>
+
+</div>
+</div>
+
+<script>
+const data=[
+{
+q:"The young pianist had only a few days to prepare, _________ she gave one of the most impressive performances of the evening.",
+options:["A. for","B. so","C. yet","D. and"],
+correct:2,
+explain:"“yet” = tuy nhiên/thế mà, diễn tả sự tương phản bất ngờ. Cô ấy có ít thời gian chuẩn bị nhưng vẫn biểu diễn rất ấn tượng."
+},
+{
+q:"The organizers added another performance, _________ the audience had asked to hear the traditional song again.",
+options:["A. for","B. yet","C. or","D. so"],
+correct:0,
+explain:"Ở đây “for” = because = bởi vì. Mệnh đề sau giải thích lý do ban tổ chức thêm một tiết mục."
+},
+{
+q:"The band could perform its original song, _________ it could choose one from the list provided by the judges.",
+options:["A. and","B. so","C. yet","D. or"],
+correct:3,
+explain:"“or” dùng để đưa ra hai lựa chọn: biểu diễn bài hát gốc hoặc chọn một bài trong danh sách của giám khảo."
+},
+{
+q:"The contestants completed their sound check, _________ they returned backstage to change into their costumes.",
+options:["A. yet","B. and","C. for","D. but"],
+correct:1,
+explain:"“and” nối hai hành động liên tiếp: hoàn thành kiểm tra âm thanh rồi trở lại hậu trường thay trang phục."
+},
+{
+q:"The singer forgot several words in the middle of the song, _________ she remained calm and continued performing.",
+options:["A. but","B. so","C. and","D. for"],
+correct:0,
+explain:"Quên lời nhưng vẫn bình tĩnh và tiếp tục biểu diễn → quan hệ tương phản, nên dùng “but”."
+},
+{
+q:"The performance received the highest score of the evening, _________ the group advanced directly to the final.",
+options:["A. yet","B. or","C. so","D. for"],
+correct:2,
+explain:"“so” = vì vậy, diễn tả kết quả. Nhóm đạt điểm cao nhất nên được vào thẳng vòng chung kết."
+},
+{
+q:"The singer could record the song immediately, _________ she could spend another week improving it first.",
+options:["A. for","B. or","C. yet","D. so"],
+correct:1,
+explain:"Có hai lựa chọn: thu âm ngay hoặc dành thêm một tuần để cải thiện bài hát. Vì vậy dùng “or”."
+},
+{
+q:"The outdoor stage was quite small, _________ it provided enough space for all six musicians to perform comfortably.",
+options:["A. and","B. so","C. for","D. yet"],
+correct:3,
+explain:"Sân khấu khá nhỏ nhưng vẫn đủ chỗ cho sáu nhạc công biểu diễn thoải mái → “yet” diễn tả tương phản bất ngờ."
+},
+{
+q:"The musician refused to leave the rehearsal early, _________ he wanted to master the most difficult part before going home.",
+options:["A. for","B. but","C. or","D. yet"],
+correct:0,
+explain:"“for” = because. Mệnh đề sau giải thích lý do anh ấy không muốn rời buổi tập sớm."
+},
+{
+q:"The audience immediately recognised the melody, _________ several people began singing along with the performer.",
+options:["A. yet","B. so","C. for","D. or"],
+correct:1,
+explain:"Khán giả nhận ra giai điệu, vì vậy một số người bắt đầu hát theo. “so” nối nguyên nhân với kết quả."
+},
+{
+q:"The group changed the opening of the song _________ added a short instrumental section at the end.",
+options:["A. but","B. yet","C. and","D. or"],
+correct:2,
+explain:"Hai động từ cùng chung chủ ngữ “the group”: changed ... and added ... Vì vậy chọn “and”."
+},
+{
+q:"The contestant had an excellent voice, _________ the judges were not completely satisfied with his stage presence.",
+options:["A. or","B. but","C. so","D. for"],
+correct:1,
+explain:"Giọng hát xuất sắc nhưng khả năng trình diễn sân khấu chưa làm giám khảo hoàn toàn hài lòng → dùng “but”."
+},
+{
+q:"The musicians had already rehearsed the piece several times, _________ the conductor asked them to practise it once more.",
+options:["A. so","B. and","C. for","D. yet"],
+correct:3,
+explain:"Đã tập nhiều lần nhưng vẫn được yêu cầu tập thêm một lần nữa → “yet” diễn tả tương phản."
+},
+{
+q:"The charity event attracted hundreds of visitors, _________ it also raised enough money to buy musical instruments for the school.",
+options:["A. and","B. but","C. or","D. for"],
+correct:0,
+explain:"Hai kết quả tích cực bổ sung cho nhau: sự kiện thu hút đông người và cũng gây quỹ đủ tiền. Vì vậy dùng “and”."
+},
+{
+q:"Not only did the young composer write all the songs for the show, _________ he also performed two of them himself.",
+options:["A. yet","B. or","C. but","D. so"],
+correct:2,
+explain:"Cấu trúc cố định “not only ... but also ...” = không những... mà còn... Khi Not only đứng đầu câu, mệnh đề đầu có đảo ngữ."
+}
+];
+
+const bonusQuestions=new Set([3,6,9,12]);
+let current=0,hearts=5,xp=0,combo=0,wrong=0,locked=false;
+let bonusGiven=new Set();
+
+const $=id=>document.getElementById(id);
+
+function updateStats(){
+ $("counter").textContent=(current+1)+"/"+data.length;
+ $("heart").textContent="❤️".repeat(hearts)+"🖤".repeat(Math.max(0,5-hearts));
+ $("xp").textContent=xp;
+ $("combo").textContent=combo;
+ $("bar").style.width=(current/data.length*100)+"%";
+}
+
+function render(){
+ locked=false;
+ updateStats();
+
+ const item=data[current];
+ $("q").textContent="Question "+(current+1)+". "+item.q;
+ $("answers").innerHTML="";
+ $("feedback").className="feedback";
+ $("feedback").textContent="";
+ $("next").className="next";
+
+ item.options.forEach((opt,index)=>{
+   const btn=document.createElement("button");
+   btn.className="ans";
+   btn.textContent=opt;
+   btn.onclick=()=>choose(index,btn);
+   $("answers").appendChild(btn);
+ });
+}
+
+function choose(index,btn){
+ if(locked)return;
+ const item=data[current];
+
+ if(index===item.correct){
+   locked=true;
+   btn.classList.add("ok");
+   [...$("answers").children].forEach(b=>b.disabled=true);
+
+   combo++;
+   let gain=combo>=3?20:combo>=2?15:10;
+   xp+=gain;
+
+   let bonusText="";
+   const qNo=current+1;
+
+   if(bonusQuestions.has(qNo)&&!bonusGiven.has(qNo)){
+     bonusGiven.add(qNo);
+
+     if(hearts<5){
+       hearts++;
+       bonusText="<br>💖 <strong>Bonus +1 tim!</strong>";
+     }else{
+       bonusText="<br>💖 <strong>Câu bonus! Tim đang đầy 5/5.</strong>";
+     }
+   }
+
+   $("feedback").innerHTML=
+     "✅ <strong>Chính xác!</strong><br>"+
+     item.explain+
+     bonusText+
+     "<br><strong>+"+gain+" XP</strong>";
+
+   $("feedback").classList.add("show");
+   updateStats();
+
+   $("next").classList.add("show");
+   $("next").textContent=current===data.length-1?"XEM KẾT QUẢ →":"NEXT →";
+
+ }else{
+   btn.classList.add("bad");
+   btn.disabled=true;
+
+   hearts--;
+   wrong++;
+   combo=0;
+   updateStats();
+
+   $("feedback").innerHTML=
+     "❌ <strong>Chưa đúng.</strong> Em hãy chọn lại. Chỉ được qua câu khi chọn đúng.";
+   $("feedback").classList.add("show");
+
+   if(hearts<=0){
+     setTimeout(()=>{
+       alert("💔 Hết 5 trái tim! Em phải làm lại từ câu 1.");
+       restart();
+     },300);
+     return;
+   }
+
+   setTimeout(()=>{
+     btn.classList.remove("bad");
+     btn.disabled=false;
+   },500);
+ }
+}
+
+$("next").onclick=()=>{
+ if(current<data.length-1){
+   current++;
+   render();
+ }else{
+   finish();
+ }
+};
+
+function finish(){
+ $("bar").style.width="100%";
+ $("game").style.display="none";
+ $("summary").classList.add("show");
+
+ $("sum").innerHTML=
+   "Em đã hoàn thành <strong>"+data.length+" câu</strong>.<br>"+
+   "XP: <strong>"+xp+"</strong> • Số lần chọn sai: <strong>"+wrong+"</strong><br>"+
+   "❄️ Frozen Crystal mission complete!";
+}
+
+function restart(){
+ current=0;
+ hearts=5;
+ xp=0;
+ combo=0;
+ wrong=0;
+ locked=false;
+ bonusGiven=new Set();
+
+ $("summary").classList.remove("show");
+ $("game").style.display="block";
+ render();
+}
+
+render();
+</script>
+</body>
+</html>

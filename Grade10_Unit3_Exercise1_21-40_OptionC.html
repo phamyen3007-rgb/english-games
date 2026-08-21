@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 3 - Exercise 1 (21-40) - Option C</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:#17364d;
+  background:
+    radial-gradient(circle at 18% 15%,rgba(255,223,92,.30),transparent 20%),
+    radial-gradient(circle at 84% 17%,rgba(95,214,255,.30),transparent 22%),
+    radial-gradient(circle at 50% 110%,rgba(10,95,160,.34),transparent 38%),
+    linear-gradient(145deg,#0d6c95,#2ca3c7 50%,#8bd8e6 100%);
+}
+.wrap{width:min(940px,94%);margin:26px auto}
+.card{
+  background:rgba(248,253,255,.97);border:1px solid rgba(55,145,186,.26);
+  border-radius:24px;overflow:hidden;box-shadow:0 18px 45px rgba(7,82,126,.22)
+}
+.head{
+  padding:24px;text-align:center;
+  background:linear-gradient(100deg,rgba(255,211,70,.95),rgba(67,172,217,.94))
+}
+.head h1{margin:0;color:#073e5b;font-size:clamp(23px,4vw,36px)}
+.head p{margin:8px 0 0;color:#20576f;font-weight:800}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:14px;background:#eefaff}
+.stat{background:white;border:1px solid #c8e7f1;border-radius:14px;padding:10px;text-align:center}
+.stat b{display:block;font-size:19px;color:#0b4865}
+.stat span{font-size:11px;font-weight:800;color:#67808c}
+.main{padding:22px}
+.progress{height:10px;background:#dceef4;border-radius:20px;overflow:hidden;margin-bottom:22px}
+#bar{height:100%;background:linear-gradient(90deg,#23a6ce,#ffd24e);transition:.3s}
+.q{font-size:21px;font-weight:800;line-height:1.55;margin-bottom:18px;color:#0d4864}
+.answers{display:grid;gap:12px}
+.ans{
+  padding:15px;text-align:left;font-size:17px;border-radius:14px;border:1px solid #bcdfea;
+  background:#fbfeff;color:#173f52;cursor:pointer;transition:.18s
+}
+.ans:hover{transform:translateY(-1px);background:#eaf9fd}
+.ans.ok{background:#d9f8e6;border-color:#39c77a;color:#096039}
+.ans.bad{background:#ffe0e0;border-color:#ef7474;color:#8a2424}
+.feedback{display:none;margin-top:16px;padding:14px;border-radius:14px;background:#eefaff;border:1px solid #bcdfea;line-height:1.6;color:#173f52}
+.feedback.show{display:block}
+.next{
+  display:none;width:100%;margin-top:15px;padding:14px;border:0;border-radius:14px;
+  background:linear-gradient(90deg,#168fb9,#e4aa16);color:white;font-weight:900;font-size:17px;cursor:pointer
+}
+.next.show{display:block}
+.summary{display:none;text-align:center;padding:35px;color:#17465a}
+.summary.show{display:block}
+.summary h2{font-size:32px;color:#08779f}
+.restart{padding:14px 22px;border:0;border-radius:14px;background:#168fb9;color:white;font-weight:900;cursor:pointer}
+@media(max-width:650px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .main{padding:15px}
+  .q{font-size:18px}
+  .ans{font-size:15px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="head">
+      <h1>GRADE 10 • UNIT 3 • EXERCISE 1</h1>
+      <p>(21–40) • OPTION C • MUSIC CHALLENGE</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b id="counter">1/15</b><span>QUESTION</span></div>
+      <div class="stat"><b id="heart">❤️❤️❤️❤️❤️</b><span>HEARTS</span></div>
+      <div class="stat"><b id="xp">0</b><span>XP</span></div>
+      <div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+    </div>
+
+    <div class="main" id="game">
+      <div class="progress"><div id="bar"></div></div>
+      <div class="q" id="q"></div>
+      <div class="answers" id="answers"></div>
+      <div class="feedback" id="feedback"></div>
+      <button class="next" id="next">NEXT →</button>
+    </div>
+
+    <div class="summary" id="summary">
+      <div style="font-size:55px">🎤🏆</div>
+      <h2>HOÀN THÀNH!</h2>
+      <p id="sum"></p>
+      <button class="restart" onclick="restart()">CHƠI LẠI</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const data = [{"q": "Before appearing on television, each contestant had to pass a short _________ in front of three professional judges.", "options": ["A. concert", "B. audition", "C. performance", "D. competition"], "correct": 1, "explain": "“pass an audition” = vượt qua vòng thử giọng. Concert là buổi hòa nhạc; competition là cả cuộc thi."}, {"q": "The young _________ received loud applause after finishing an energetic dance routine on stage.", "options": ["A. performer", "B. spectator", "C. composer", "D. viewer"], "correct": 0, "explain": "“performer” = người biểu diễn. Dấu hiệu là “finishing an energetic dance routine on stage”."}, {"q": "The song became a huge success, although its _________ was almost unknown when he first wrote it.", "options": ["A. audience", "B. competitor", "C. composer", "D. judge"], "correct": 2, "explain": "“composer” = người sáng tác nhạc. Cụm “wrote it” cho biết người này là người sáng tác bài hát."}, {"q": "The _________ reacted excitedly when their favourite singer suddenly appeared on stage.", "options": ["A. judgement", "B. audience", "C. competition", "D. performance"], "correct": 1, "explain": "“audience” = tập thể khán giả của một buổi biểu diễn. Vì vậy “The audience reacted excitedly” là đúng."}, {"q": "After an excellent performance in the semi-final, she became one of the strongest _________ for the top prize.", "options": ["A. competitors", "B. spectators", "C. composers", "D. viewers"], "correct": 0, "explain": "“competitor” = người tham gia tranh tài. Cụm “top prize” cho thấy đây là bối cảnh một cuộc thi."}, {"q": "The contestants will _________ live on television, and the public will be able to vote for their favourite one.", "options": ["A. compose", "B. judge", "C. perform", "D. eliminate"], "correct": 2, "explain": "“perform live” = biểu diễn trực tiếp. Compose = sáng tác; judge = chấm; eliminate = loại."}, {"q": "The judges found it difficult to make their final _________ because the last two contestants were equally talented.", "options": ["A. judgement", "B. audience", "C. record", "D. stage"], "correct": 0, "explain": "“make a judgement” = đưa ra sự đánh giá/quyết định. Hai thí sinh ngang tài nên giám khảo khó đưa ra quyết định cuối cùng."}, {"q": "Although he forgot part of the song, the singer managed to finish his _________ without stopping.", "options": ["A. popularity", "B. preparation", "C. elimination", "D. performance"], "correct": 3, "explain": "“finish a performance” = hoàn thành màn biểu diễn. Việc quên một phần bài hát xảy ra trong lúc biểu diễn."}, {"q": "The two bands will _________ against each other for a place in the final round.", "options": ["A. compete", "B. perform", "C. compose", "D. dress"], "correct": 0, "explain": "“compete against somebody” = tranh tài với ai; “compete for a place” = tranh một suất."}, {"q": "The singer thanked everyone who had voted _________ her throughout the competition.", "options": ["A. with", "B. to", "C. by", "D. for"], "correct": 3, "explain": "“vote for somebody” = bình chọn cho ai. Đây là collocation cố định."}, {"q": "The contestants were asked to _________ as famous singers from the 1980s for a special performance.", "options": ["A. get in", "B. dress up", "C. act on", "D. sing out"], "correct": 1, "explain": "“dress up as + person/character” = hóa trang thành ai. Vì vậy “dress up as famous singers” là đúng."}, {"q": "Much to everyone's surprise, the contestant with the highest number of public votes faced _________ because she broke an important competition rule.", "options": ["A. popularity", "B. preparation", "C. disqualification", "D. performance"], "correct": 2, "explain": "“disqualification” = sự truất quyền thi vì vi phạm luật. Khác với elimination, thường là bị loại do kết quả hoặc điểm số."}, {"q": "Hundreds of _________ gathered around the outdoor stage to watch the musicians perform for free.", "options": ["A. judges", "B. spectators", "C. composers", "D. competitors"], "correct": 1, "explain": "“spectators” = những người trực tiếp xem một sự kiện. Dấu hiệu là “gathered... to watch”."}, {"q": "Her final performance was so _________ that several judges stood up and applauded before she had even left the stage.", "options": ["A. ordinary", "B. disappointing", "C. boring", "D. impressive"], "correct": 3, "explain": "“impressive” = ấn tượng. Phản ứng “stood up and applauded” cho thấy đánh giá rất tích cực."}, {"q": "Nobody expected such a talented singer to be _________ so early in the competition.", "options": ["A. composed", "B. eliminated", "C. performed", "D. competed"], "correct": 1, "explain": "“be eliminated from a competition” = bị loại khỏi cuộc thi. Sau “be” dùng V3 trong cấu trúc bị động."}];
+const bonusQuestions = new Set([3,6,9,12]);
+
+let current=0, hearts=5, xp=0, combo=0, wrong=0, locked=false;
+let bonusGiven = new Set();
+
+const $=id=>document.getElementById(id);
+
+function updateStats(){
+  $("counter").textContent=(current+1)+"/"+data.length;
+  $("heart").textContent="❤️".repeat(hearts)+"🖤".repeat(Math.max(0,5-hearts));
+  $("xp").textContent=xp;
+  $("combo").textContent=combo;
+  $("bar").style.width=(current/data.length*100)+"%";
+}
+
+function render(){
+  locked=false;
+  updateStats();
+  const item=data[current];
+
+  $("q").textContent="Question "+(current+1)+". "+item.q;
+  $("answers").innerHTML="";
+  $("feedback").className="feedback";
+  $("feedback").textContent="";
+  $("next").className="next";
+
+  item.options.forEach((opt,index)=>{
+    const btn=document.createElement("button");
+    btn.className="ans";
+    btn.textContent=opt;
+    btn.onclick=()=>choose(index,btn);
+    $("answers").appendChild(btn);
+  });
+}
+
+function choose(index,btn){
+  if(locked)return;
+  const item=data[current];
+
+  if(index===item.correct){
+    locked=true;
+    btn.classList.add("ok");
+    [...$("answers").children].forEach(b=>b.disabled=true);
+
+    combo++;
+    let gain=10;
+    if(combo>=3) gain=20;
+    else if(combo>=2) gain=15;
+    xp+=gain;
+
+    let bonusText="";
+    const questionNo=current+1;
+    if(bonusQuestions.has(questionNo) && !bonusGiven.has(questionNo)){
+      bonusGiven.add(questionNo);
+      if(hearts<5){
+        hearts++;
+        bonusText="<br>💖 <strong>Bonus +1 tim!</strong>";
+      }else{
+        bonusText="<br>💖 <strong>Câu bonus! Tim đang đầy 5/5.</strong>";
+      }
+    }
+
+    $("feedback").innerHTML=
+      "✅ <strong>Chính xác!</strong><br>"+item.explain+
+      bonusText+"<br><strong>+"+gain+" XP</strong>";
+    $("feedback").classList.add("show");
+
+    updateStats();
+    $("next").classList.add("show");
+    $("next").textContent=current===data.length-1?"XEM KẾT QUẢ →":"NEXT →";
+
+  }else{
+    btn.classList.add("bad");
+    btn.disabled=true;
+    hearts--;
+    wrong++;
+    combo=0;
+    updateStats();
+
+    $("feedback").innerHTML=
+      "❌ <strong>Chưa đúng.</strong> Em hãy chọn lại. Chỉ được qua câu khi chọn đúng.";
+    $("feedback").classList.add("show");
+
+    if(hearts<=0){
+      setTimeout(()=>{
+        alert("💔 Hết 5 trái tim! Em phải làm lại từ câu 1.");
+        restart();
+      },300);
+      return;
+    }
+
+    setTimeout(()=>{
+      btn.classList.remove("bad");
+      btn.disabled=false;
+    },500);
+  }
+}
+
+$("next").onclick=()=>{
+  if(current<data.length-1){
+    current++;
+    render();
+  }else{
+    finish();
+  }
+};
+
+function finish(){
+  $("bar").style.width="100%";
+  $("game").style.display="none";
+  $("summary").classList.add("show");
+
+  $("sum").innerHTML=
+    "Em đã hoàn thành <strong>"+data.length+" câu</strong>.<br>"+
+    "XP: <strong>"+xp+"</strong> • Số lần chọn sai: <strong>"+wrong+"</strong><br>"+
+    "🎉 Great job!";
+}
+
+function restart(){
+  current=0;
+  hearts=5;
+  xp=0;
+  combo=0;
+  wrong=0;
+  locked=false;
+  bonusGiven=new Set();
+
+  $("summary").classList.remove("show");
+  $("game").style.display="block";
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

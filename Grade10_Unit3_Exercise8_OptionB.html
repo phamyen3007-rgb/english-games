@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 3 - Exercise 8 - Option B</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#23435f;
+  background:
+    radial-gradient(circle at 15% 12%,rgba(255,255,255,.95) 0 5%,transparent 6%),
+    radial-gradient(circle at 28% 16%,rgba(255,255,255,.85) 0 4%,transparent 5%),
+    radial-gradient(circle at 82% 15%,rgba(255,255,255,.92) 0 6%,transparent 7%),
+    linear-gradient(180deg,#87d8ff 0%,#bcecff 45%,#eafaff 100%);
+}
+body:before{
+  content:"☁️   🎈   🛩️   🌈   🎵   ☁️";
+  position:fixed;
+  top:18px;left:0;width:100%;
+  text-align:center;
+  font-size:26px;
+  opacity:.62;
+  pointer-events:none;
+}
+.wrap{
+  width:min(1050px,94%);
+  margin:26px auto;
+}
+.card{
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(90,160,205,.28);
+  border-radius:26px;
+  overflow:hidden;
+  box-shadow:0 18px 45px rgba(63,138,181,.22);
+}
+.head{
+  padding:25px;
+  text-align:center;
+  background:linear-gradient(100deg,#79c6f2,#9dddf5,#ffd88b);
+}
+.head h1{
+  margin:0;
+  color:#164f76;
+  font-size:clamp(23px,4vw,36px);
+  text-shadow:0 1px 0 #fff;
+}
+.head p{
+  margin:8px 0 0;
+  color:#315e76;
+  font-weight:800;
+}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  padding:14px;
+  background:#edf9ff;
+}
+.stat{
+  background:#fff;
+  border:1px solid #c6e5f3;
+  border-radius:14px;
+  padding:10px;
+  text-align:center;
+}
+.stat b{
+  display:block;
+  font-size:19px;
+  color:#1b587b;
+}
+.stat span{
+  font-size:11px;
+  font-weight:800;
+  color:#7193a5;
+}
+.content{padding:22px}
+.passage{
+  background:#ffffff;
+  border:1px solid #cfe6f1;
+  border-radius:18px;
+  padding:20px;
+  line-height:1.75;
+  color:#31485a;
+  margin-bottom:22px;
+}
+.passage h2{
+  margin-top:0;
+  text-align:center;
+  color:#2c6f9d;
+  font-size:27px;
+}
+.question-box{
+  background:#f9fdff;
+  color:#30475b;
+  border:1px solid #c8e2ef;
+  border-radius:18px;
+  padding:20px;
+}
+.progress{
+  height:10px;
+  background:#dcecf4;
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:20px;
+}
+#bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#4fb9eb,#69d2c9,#ffc95f);
+  transition:.3s;
+}
+.q{
+  font-size:21px;
+  font-weight:800;
+  line-height:1.55;
+  margin-bottom:18px;
+  color:#24577a;
+}
+.answers{
+  display:grid;
+  gap:12px;
+}
+.ans{
+  padding:15px;
+  text-align:left;
+  font-size:16px;
+  border-radius:14px;
+  border:1px solid #c4dce9;
+  background:#fff;
+  color:#344a5d;
+  cursor:pointer;
+  transition:.18s;
+}
+.ans:hover{
+  transform:translateY(-1px);
+  background:#eefaff;
+  border-color:#62b9df;
+}
+.ans.ok{
+  background:#ddf8e8;
+  border-color:#39c77a;
+  color:#096039;
+}
+.ans.bad{
+  background:#ffe4e4;
+  border-color:#ef7474;
+  color:#8a2424;
+}
+.feedback{
+  display:none;
+  margin-top:16px;
+  padding:14px;
+  border-radius:14px;
+  background:#eef9ff;
+  border:1px solid #c1dce9;
+  line-height:1.65;
+  color:#334a5d;
+}
+.feedback.show{display:block}
+.next{
+  display:none;
+  width:100%;
+  margin-top:15px;
+  padding:14px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(90deg,#4faed8,#57c6ba,#e6ac3f);
+  color:white;
+  font-weight:900;
+  font-size:17px;
+  cursor:pointer;
+}
+.next.show{display:block}
+.summary{
+  display:none;
+  text-align:center;
+  padding:35px;
+  color:#315266;
+}
+.summary.show{display:block}
+.summary h2{
+  font-size:32px;
+  color:#2a78a9;
+}
+.restart{
+  padding:14px 22px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(90deg,#4faed8,#57c6ba);
+  color:white;
+  font-weight:900;
+  cursor:pointer;
+}
+@media(max-width:650px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .content{padding:14px}
+  .q{font-size:18px}
+  .ans{font-size:14px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+
+<div class="head">
+<h1>GRADE 10 • UNIT 3 • EXERCISE 8</h1>
+<p>OPTION B • SKY VOYAGE MUSIC QUEST ☁️🛩️</p>
+</div>
+
+<div class="stats">
+<div class="stat"><b id="counter">1/5</b><span>QUESTION</span></div>
+<div class="stat"><b id="heart">❤️❤️❤️❤️❤️</b><span>HEARTS</span></div>
+<div class="stat"><b id="xp">0</b><span>XP</span></div>
+<div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+</div>
+
+<div class="content" id="game">
+
+<div class="passage">
+<h2>The Value of Performing Music</h2>
+
+<p>For many teenagers, learning music is more than simply knowing how to sing or play an instrument. Regular practice can teach young musicians to be patient because developing a new skill often takes time. They may have to practise the same piece repeatedly before they can perform it successfully. Although this process can sometimes be frustrating, it helps students understand that improvement usually comes from continuous effort.</p>
+
+<p>Performing music with others can provide additional benefits. In a school band, for example, each member has a different role but must listen carefully to the rest of the group. If one musician plays too quickly or loudly, it may affect the whole performance. As a result, students gradually learn to cooperate and become more responsible for their own part. <b>These skills</b> can also be useful when they work with classmates on other school activities.</p>
+
+<p>Live performances can be challenging, particularly for students who are not used to appearing in public. Some may feel extremely nervous before stepping onto the stage. However, successfully completing a performance can give them a strong sense of achievement. Over time, repeated experience of performing in front of others may increase their confidence. Therefore, music education can develop not only musical ability but also useful skills that students can apply in other areas of their lives.</p>
+</div>
+
+<div class="question-box">
+<div class="progress"><div id="bar"></div></div>
+<div class="q" id="q"></div>
+<div class="answers" id="answers"></div>
+<div class="feedback" id="feedback"></div>
+<button class="next" id="next">NEXT →</button>
+</div>
+
+</div>
+
+<div class="summary" id="summary">
+<div style="font-size:58px">☁️🛩️🏆</div>
+<h2>HOÀN THÀNH!</h2>
+<p id="sum"></p>
+<button class="restart" onclick="restart()">CHƠI LẠI</button>
+</div>
+
+</div>
+</div>
+
+<script>
+const data=[
+{
+q:"Question 1. What is the main idea of the passage?",
+options:[
+"A. Why teenagers should become professional musicians",
+"B. The difficulties students face when learning an instrument",
+"C. How learning and performing music can develop useful life skills",
+"D. Why school bands usually perform better than individual musicians"
+],
+correct:2,
+explain:"Bài tập trung vào nhiều lợi ích vượt ra ngoài kỹ năng âm nhạc: patience, continuous effort, cooperation, responsibility và confidence. Vì vậy C bao quát toàn bài tốt nhất."
+},
+{
+q:"Question 2. The word “frustrating” in paragraph 1 is closest in meaning to _________.",
+options:[
+"A. making someone feel annoyed because something is difficult",
+"B. making someone interested in learning something new",
+"C. causing someone to become more successful immediately",
+"D. allowing someone to complete something without effort"
+],
+correct:0,
+explain:"“frustrating” = gây bực bội/nản lòng vì điều gì đó khó hoặc không tiến triển như mong muốn. Ngữ cảnh là phải luyện cùng một đoạn nhiều lần, nên A đúng."
+},
+{
+q:"Question 3. The phrase “These skills” in paragraph 2 refers to _________.",
+options:[
+"A. playing quickly and loudly",
+"B. cooperating with others and taking responsibility",
+"C. listening to different kinds of music",
+"D. performing difficult pieces successfully"
+],
+correct:1,
+explain:"Ngay câu trước nói học sinh học cách “cooperate” và trở nên “more responsible”. Vì vậy “These skills” = cooperation + responsibility. → B."
+},
+{
+q:"Question 4. According to paragraph 3, what may happen when students successfully perform in front of others several times?",
+options:[
+"A. They may become more confident.",
+"B. They may no longer need to practise regularly.",
+"C. They may decide to perform only on their own.",
+"D. They may find every performance easy."
+],
+correct:0,
+explain:"Đoạn 3 nói “repeated experience ... may increase their confidence”. Đây là paraphrase của “They may become more confident.” → A."
+},
+{
+q:"Question 5. Which of the following is NOT mentioned as something students can develop through music?",
+options:[
+"A. Patience when learning difficult skills",
+"B. Responsibility when performing in a group",
+"C. Confidence when appearing in front of others",
+"D. Ability to communicate in a foreign language"
+],
+correct:3,
+explain:"Bài có nhắc patience, responsibility và confidence. Không có thông tin nào về khả năng giao tiếp bằng ngoại ngữ. Vì câu hỏi hỏi NOT mentioned nên chọn D."
+}
+];
+
+let current=0,hearts=5,xp=0,combo=0,wrong=0,locked=false;
+const $=id=>document.getElementById(id);
+
+function updateStats(){
+  $("counter").textContent=(current+1)+"/"+data.length;
+  $("heart").textContent="❤️".repeat(hearts)+"🖤".repeat(Math.max(0,5-hearts));
+  $("xp").textContent=xp;
+  $("combo").textContent=combo;
+  $("bar").style.width=(current/data.length*100)+"%";
+}
+
+function render(){
+  locked=false;
+  updateStats();
+
+  const item=data[current];
+  $("q").textContent=item.q;
+  $("answers").innerHTML="";
+  $("feedback").className="feedback";
+  $("feedback").textContent="";
+  $("next").className="next";
+
+  item.options.forEach((opt,index)=>{
+    const btn=document.createElement("button");
+    btn.className="ans";
+    btn.textContent=opt;
+    btn.onclick=()=>choose(index,btn);
+    $("answers").appendChild(btn);
+  });
+}
+
+function choose(index,btn){
+  if(locked)return;
+  const item=data[current];
+
+  if(index===item.correct){
+    locked=true;
+    btn.classList.add("ok");
+    [...$("answers").children].forEach(b=>b.disabled=true);
+
+    combo++;
+    let gain=combo>=3?20:combo>=2?15:10;
+    xp+=gain;
+
+    $("feedback").innerHTML=
+      "✅ <strong>Chính xác!</strong><br>"+
+      item.explain+
+      "<br><strong>+"+gain+" XP</strong>";
+
+    $("feedback").classList.add("show");
+    updateStats();
+
+    $("next").classList.add("show");
+    $("next").textContent=current===data.length-1?"XEM KẾT QUẢ →":"NEXT →";
+
+  }else{
+    btn.classList.add("bad");
+    btn.disabled=true;
+
+    hearts--;
+    wrong++;
+    combo=0;
+    updateStats();
+
+    $("feedback").innerHTML=
+      "❌ <strong>Chưa đúng.</strong> Em hãy đọc lại đoạn văn và xác định từ khóa liên quan. Chỉ được qua câu khi chọn đúng.";
+    $("feedback").classList.add("show");
+
+    if(hearts<=0){
+      setTimeout(()=>{
+        alert("💔 Hết 5 trái tim! Em phải làm lại từ câu 1.");
+        restart();
+      },300);
+      return;
+    }
+
+    setTimeout(()=>{
+      btn.classList.remove("bad");
+      btn.disabled=false;
+    },500);
+  }
+}
+
+$("next").onclick=()=>{
+  if(current<data.length-1){
+    current++;
+    render();
+  }else{
+    finish();
+  }
+};
+
+function finish(){
+  $("bar").style.width="100%";
+  $("game").style.display="none";
+  $("summary").classList.add("show");
+
+  $("sum").innerHTML=
+    "Em đã hoàn thành <strong>"+data.length+" câu</strong>.<br>"+
+    "XP: <strong>"+xp+"</strong> • Số lần chọn sai: <strong>"+wrong+"</strong><br><br>"+
+    "Đáp án: <strong>1C – 2A – 3B – 4A – 5D</strong>";
+}
+
+function restart(){
+  current=0;
+  hearts=5;
+  xp=0;
+  combo=0;
+  wrong=0;
+  locked=false;
+
+  $("summary").classList.remove("show");
+  $("game").style.display="block";
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

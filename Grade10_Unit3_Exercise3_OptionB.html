@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 3 - Exercise 3 - Option B</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#473a57;
+  background:
+    radial-gradient(circle at 18% 15%,rgba(255,255,255,.42),transparent 20%),
+    radial-gradient(circle at 82% 18%,rgba(255,215,245,.32),transparent 22%),
+    linear-gradient(145deg,#d9c4f3,#cbb7ef 48%,#b8d7ef 100%);
+}
+body:before{
+  content:"💜   🎻   ✨   🌸   🎶   💜";
+  position:fixed;
+  top:18px;left:0;width:100%;
+  text-align:center;
+  font-size:25px;
+  opacity:.36;
+  pointer-events:none;
+}
+.wrap{width:min(1050px,94%);margin:26px auto}
+.card{
+  background:rgba(250,247,255,.96);
+  border:1px solid rgba(145,120,189,.28);
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 18px 45px rgba(90,73,130,.18)
+}
+.head{
+  padding:24px;
+  text-align:center;
+  background:linear-gradient(95deg,rgba(164,127,211,.96),rgba(113,163,207,.94));
+}
+.head h1{
+  margin:0;
+  color:#fff;
+  font-size:clamp(23px,4vw,36px);
+  text-shadow:0 2px 10px rgba(72,54,112,.30)
+}
+.head p{margin:8px 0 0;color:#faf6ff;font-weight:800}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  padding:14px;
+  background:rgba(242,236,252,.96)
+}
+.stat{
+  background:#fff;
+  border:1px solid rgba(154,132,192,.18);
+  border-radius:14px;
+  padding:10px;
+  text-align:center
+}
+.stat b{display:block;font-size:19px;color:#66517a}
+.stat span{font-size:11px;font-weight:800;color:#8d7a9d}
+.content{padding:22px}
+.passage{
+  background:rgba(255,255,255,.98);
+  border:1px solid rgba(161,137,197,.22);
+  border-radius:18px;
+  padding:20px;
+  line-height:1.75;
+  color:#4b4255;
+  margin-bottom:22px;
+  max-height:430px;
+  overflow-y:auto
+}
+.passage h2{
+  margin-top:0;
+  text-align:center;
+  color:#7d5ca7;
+  font-size:27px
+}
+.question-box{
+  background:rgba(255,255,255,.98);
+  color:#443c50;
+  border:1px solid rgba(160,136,197,.22);
+  border-radius:18px;
+  padding:20px
+}
+.progress{
+  height:10px;
+  background:#eee8f5;
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:20px
+}
+#bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#b389dd,#8aaed8,#e2a6d1);
+  transition:.3s
+}
+.q{
+  font-size:21px;
+  font-weight:800;
+  line-height:1.55;
+  margin-bottom:18px;
+  color:#5b476d
+}
+.answers{display:grid;gap:12px}
+.ans{
+  padding:15px;
+  text-align:left;
+  font-size:17px;
+  border-radius:14px;
+  border:1px solid #d7c8e7;
+  background:#fff;
+  color:#4b4255;
+  cursor:pointer;
+  transition:.18s
+}
+.ans:hover{
+  transform:translateY(-1px);
+  background:#f9f4ff;
+  border-color:#b18bd8
+}
+.ans.ok{
+  background:#d9f8e6;
+  border-color:#39c77a;
+  color:#096039
+}
+.ans.bad{
+  background:#ffe0e8;
+  border-color:#ef7474;
+  color:#8a2424
+}
+.feedback{
+  display:none;
+  margin-top:16px;
+  padding:14px;
+  border-radius:14px;
+  background:#f6f1fb;
+  border:1px solid #d9cce6;
+  line-height:1.65;
+  color:#4e4658
+}
+.feedback.show{display:block}
+.next{
+  display:none;
+  width:100%;
+  margin-top:15px;
+  padding:14px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(90deg,#9b73cb,#749fc8);
+  color:white;
+  font-weight:900;
+  font-size:17px;
+  cursor:pointer
+}
+.next.show{display:block}
+.summary{
+  display:none;
+  text-align:center;
+  padding:35px;
+  color:#584969
+}
+.summary.show{display:block}
+.summary h2{
+  font-size:32px;
+  color:#8661b0
+}
+.restart{
+  padding:14px 22px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(90deg,#9b73cb,#749fc8);
+  color:white;
+  font-weight:900;
+  cursor:pointer
+}
+@media(max-width:650px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .content{padding:14px}
+  .q{font-size:18px}
+  .ans{font-size:15px}
+  .passage{max-height:350px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+
+<div class="head">
+<h1>GRADE 10 • UNIT 3 • EXERCISE 3</h1>
+<p>OPTION B • DREAMY LAVENDER MUSIC GARDEN</p>
+</div>
+
+<div class="stats">
+<div class="stat"><b id="counter">1/6</b><span>QUESTION</span></div>
+<div class="stat"><b id="heart">❤️❤️❤️❤️❤️</b><span>HEARTS</span></div>
+<div class="stat"><b id="xp">0</b><span>XP</span></div>
+<div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+</div>
+
+<div class="content" id="game">
+
+<div class="passage">
+<h2>A Young Musician's Journey</h2>
+
+<p>Anna began showing an interest in music when she was a child. Her parents soon realised that she was a highly (1) _________ student who could learn new melodies very quickly. As a young (2) _________, she spent hours practising the violin and often performed at school events. However, she did not take part in her first national music competition (3) _________ she was sixteen.</p>
+
+<p>After finishing school, Anna joined a small orchestra (4) _________ continued developing her skills as a solo performer. Over the next few years, she had opportunities to perform (5) _________ several experienced artists from different countries. Her performances gradually attracted larger audiences because of their energy and beautiful (6) _________.</p>
+</div>
+
+<div class="question-box">
+<div class="progress"><div id="bar"></div></div>
+<div class="q" id="q"></div>
+<div class="answers" id="answers"></div>
+<div class="feedback" id="feedback"></div>
+<button class="next" id="next">NEXT →</button>
+</div>
+
+</div>
+
+<div class="summary" id="summary">
+<div style="font-size:56px">💜🏆</div>
+<h2>HOÀN THÀNH!</h2>
+<p id="sum"></p>
+<button class="restart" onclick="restart()">CHƠI LẠI</button>
+</div>
+
+</div>
+</div>
+
+<script>
+const data=[
+{
+q:"Choose the best answer for blank (1).",
+options:["A. talent","B. talented","C. talents","D. talenting"],
+correct:1,
+explain:"Chỗ trống đứng trước “student” nên cần tính từ. “talented” = có tài năng. “a highly talented student” = một học sinh rất có tài."
+},
+{
+q:"Choose the best answer for blank (2).",
+options:["A. musical","B. music","C. musician","D. musically"],
+correct:2,
+explain:"Sau “a young” cần danh từ số ít chỉ người. “musician” = nhạc sĩ/nhạc công."
+},
+{
+q:"Choose the best answer for blank (3).",
+options:["A. until","B. during","C. after","D. before"],
+correct:0,
+explain:"Cấu trúc “not ... until + time/clause” = mãi đến... mới... Vì vậy: “she did not take part ... until she was sixteen”."
+},
+{
+q:"Choose the best answer for blank (4).",
+options:["A. but","B. so","C. or","D. and"],
+correct:3,
+explain:"Hai hoạt động cùng chiều: “joined a small orchestra and continued developing her skills”. Vì vậy chọn “and”."
+},
+{
+q:"Choose the best answer for blank (5).",
+options:["A. by","B. with","C. for","D. to"],
+correct:1,
+explain:"“perform with + somebody” = biểu diễn cùng ai. Vì vậy “perform with several experienced artists” là đúng."
+},
+{
+q:"Choose the best answer for blank (6).",
+options:["A. voices","B. recordings","C. melodies","D. instruments"],
+correct:2,
+explain:"“beautiful melodies” = những giai điệu đẹp. Ngữ cảnh nói về đặc điểm khiến phần biểu diễn hấp dẫn khán giả nên “melodies” phù hợp nhất."
+}
+];
+
+let current=0,hearts=5,xp=0,combo=0,wrong=0,locked=false;
+const $=id=>document.getElementById(id);
+
+function updateStats(){
+ $("counter").textContent=(current+1)+"/"+data.length;
+ $("heart").textContent="❤️".repeat(hearts)+"🖤".repeat(Math.max(0,5-hearts));
+ $("xp").textContent=xp;
+ $("combo").textContent=combo;
+ $("bar").style.width=(current/data.length*100)+"%";
+}
+
+function render(){
+ locked=false;
+ updateStats();
+
+ const item=data[current];
+ $("q").textContent="Question "+(current+1)+". "+item.q;
+ $("answers").innerHTML="";
+ $("feedback").className="feedback";
+ $("feedback").textContent="";
+ $("next").className="next";
+
+ item.options.forEach((opt,index)=>{
+  const btn=document.createElement("button");
+  btn.className="ans";
+  btn.textContent=opt;
+  btn.onclick=()=>choose(index,btn);
+  $("answers").appendChild(btn);
+ });
+}
+
+function choose(index,btn){
+ if(locked)return;
+
+ const item=data[current];
+
+ if(index===item.correct){
+  locked=true;
+  btn.classList.add("ok");
+  [...$("answers").children].forEach(b=>b.disabled=true);
+
+  combo++;
+  let gain=combo>=3?20:combo>=2?15:10;
+  xp+=gain;
+
+  $("feedback").innerHTML=
+   "✅ <strong>Chính xác!</strong><br>"+
+   item.explain+
+   "<br><strong>+"+gain+" XP</strong>";
+
+  $("feedback").classList.add("show");
+  updateStats();
+
+  $("next").classList.add("show");
+  $("next").textContent=current===data.length-1?"XEM KẾT QUẢ →":"NEXT →";
+
+ }else{
+  btn.classList.add("bad");
+  btn.disabled=true;
+
+  hearts--;
+  wrong++;
+  combo=0;
+  updateStats();
+
+  $("feedback").innerHTML=
+   "❌ <strong>Chưa đúng.</strong> Em hãy chọn lại. Chỉ được qua câu khi chọn đúng.";
+  $("feedback").classList.add("show");
+
+  if(hearts<=0){
+   setTimeout(()=>{
+    alert("💔 Hết 5 trái tim! Em phải làm lại từ câu 1.");
+    restart();
+   },300);
+   return;
+  }
+
+  setTimeout(()=>{
+   btn.classList.remove("bad");
+   btn.disabled=false;
+  },500);
+ }
+}
+
+$("next").onclick=()=>{
+ if(current<data.length-1){
+  current++;
+  render();
+ }else{
+  finish();
+ }
+};
+
+function finish(){
+ $("bar").style.width="100%";
+ $("game").style.display="none";
+ $("summary").classList.add("show");
+
+ $("sum").innerHTML=
+  "Em đã hoàn thành <strong>"+data.length+" câu</strong>.<br>"+
+  "XP: <strong>"+xp+"</strong> • Số lần chọn sai: <strong>"+wrong+"</strong><br>"+
+  "💜 Music Garden complete!";
+}
+
+function restart(){
+ current=0;
+ hearts=5;
+ xp=0;
+ combo=0;
+ wrong=0;
+ locked=false;
+
+ $("summary").classList.remove("show");
+ $("game").style.display="block";
+ render();
+}
+
+render();
+</script>
+</body>
+</html>

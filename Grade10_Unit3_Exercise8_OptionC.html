@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 3 - Exercise 8 - Option C</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#223c47;
+  background:
+    radial-gradient(circle at 18% 15%,rgba(255,255,255,.65),transparent 18%),
+    radial-gradient(circle at 82% 18%,rgba(255,237,191,.45),transparent 20%),
+    linear-gradient(145deg,#d9f1df,#bfe4d5 48%,#f1e4ba 100%);
+}
+body:before{
+  content:"🌿   📻   ☕   🎶   📚   🌿";
+  position:fixed;
+  top:18px;left:0;width:100%;
+  text-align:center;
+  font-size:26px;
+  opacity:.48;
+  pointer-events:none;
+}
+.wrap{width:min(1050px,94%);margin:26px auto}
+.card{
+  background:rgba(255,255,252,.95);
+  border:1px solid rgba(93,140,112,.25);
+  border-radius:26px;
+  overflow:hidden;
+  box-shadow:0 18px 45px rgba(74,108,83,.20)
+}
+.head{
+  padding:25px;
+  text-align:center;
+  background:linear-gradient(100deg,#8dbb9c,#b7d2a4,#e4c98f);
+}
+.head h1{
+  margin:0;
+  color:#244d3a;
+  font-size:clamp(23px,4vw,36px);
+  text-shadow:0 1px 0 #fff;
+}
+.head p{margin:8px 0 0;color:#4d6655;font-weight:800}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  padding:14px;
+  background:#f2f7f1;
+}
+.stat{
+  background:#fff;
+  border:1px solid #d5e4d6;
+  border-radius:14px;
+  padding:10px;
+  text-align:center
+}
+.stat b{display:block;font-size:19px;color:#315a47}
+.stat span{font-size:11px;font-weight:800;color:#7c927f}
+.content{padding:22px}
+.passage{
+  background:#fffef9;
+  border:1px solid #e1dfcf;
+  border-radius:18px;
+  padding:20px;
+  line-height:1.75;
+  color:#3a463f;
+  margin-bottom:22px
+}
+.passage h2{
+  margin-top:0;
+  text-align:center;
+  color:#5f765b;
+  font-size:27px
+}
+.question-box{
+  background:#fbfdf9;
+  color:#37483f;
+  border:1px solid #d8e2d6;
+  border-radius:18px;
+  padding:20px
+}
+.progress{
+  height:10px;
+  background:#e6ece4;
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:20px
+}
+#bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#79b38c,#c5b66d,#d89d74);
+  transition:.3s
+}
+.q{
+  font-size:21px;
+  font-weight:800;
+  line-height:1.55;
+  margin-bottom:18px;
+  color:#365c46
+}
+.answers{display:grid;gap:12px}
+.ans{
+  padding:15px;
+  text-align:left;
+  font-size:16px;
+  border-radius:14px;
+  border:1px solid #d1ddd2;
+  background:#fff;
+  color:#394840;
+  cursor:pointer;
+  transition:.18s
+}
+.ans:hover{
+  transform:translateY(-1px);
+  background:#f4faf4;
+  border-color:#8fb89a
+}
+.ans.ok{
+  background:#d9f8e6;
+  border-color:#39c77a;
+  color:#096039
+}
+.ans.bad{
+  background:#ffe4e4;
+  border-color:#ef7474;
+  color:#8a2424
+}
+.feedback{
+  display:none;
+  margin-top:16px;
+  padding:14px;
+  border-radius:14px;
+  background:#f4f8f2;
+  border:1px solid #d5e1d2;
+  line-height:1.65;
+  color:#3c4b42
+}
+.feedback.show{display:block}
+.next{
+  display:none;
+  width:100%;
+  margin-top:15px;
+  padding:14px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(90deg,#6a9f7b,#b29d59);
+  color:white;
+  font-weight:900;
+  font-size:17px;
+  cursor:pointer
+}
+.next.show{display:block}
+.summary{
+  display:none;
+  text-align:center;
+  padding:35px;
+  color:#3f5648
+}
+.summary.show{display:block}
+.summary h2{
+  font-size:32px;
+  color:#6a855e
+}
+.restart{
+  padding:14px 22px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(90deg,#6a9f7b,#b29d59);
+  color:white;
+  font-weight:900;
+  cursor:pointer
+}
+@media(max-width:650px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .content{padding:14px}
+  .q{font-size:18px}
+  .ans{font-size:14px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+
+<div class="head">
+<h1>GRADE 10 • UNIT 3 • EXERCISE 8</h1>
+<p>OPTION C • BOTANICAL MEMORY CAFE 🌿📻</p>
+</div>
+
+<div class="stats">
+<div class="stat"><b id="counter">1/5</b><span>QUESTION</span></div>
+<div class="stat"><b id="heart">❤️❤️❤️❤️❤️</b><span>HEARTS</span></div>
+<div class="stat"><b id="xp">0</b><span>XP</span></div>
+<div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+</div>
+
+<div class="content" id="game">
+
+<div class="passage">
+<h2>Music and Memory</h2>
+
+<p>Have you ever heard an old song and suddenly remembered a person, a place, or an event from years ago? Music has a strong connection with memory. A familiar song can bring back experiences that we have not thought about for a long time. Interestingly, these memories are often connected not only with what happened but also with how we felt at the time.</p>
+
+<p>This connection may explain why some teachers use songs as part of their lessons. When information is combined with rhythm and melody, students may find it easier to remember. For example, young children often learn the alphabet through songs, while language learners sometimes use music to remember new words and expressions. However, this does not mean that simply listening to music will make everyone learn faster. Students still need to pay attention to what they are studying and use suitable learning methods.</p>
+
+<p>Music can also remind people of important periods in their lives. A song that was popular during someone's childhood may still produce strong emotions many years later. <b>This effect</b> can make music particularly meaningful to older people because familiar songs may help them recall past experiences. For this reason, music is sometimes used in activities designed to encourage people to talk about their memories. Although scientists are still studying exactly how music and memory are connected, it is clear that a simple song can sometimes have a surprisingly powerful effect.</p>
+</div>
+
+<div class="question-box">
+<div class="progress"><div id="bar"></div></div>
+<div class="q" id="q"></div>
+<div class="answers" id="answers"></div>
+<div class="feedback" id="feedback"></div>
+<button class="next" id="next">NEXT →</button>
+</div>
+
+</div>
+
+<div class="summary" id="summary">
+<div style="font-size:58px">🌿📻🏆</div>
+<h2>HOÀN THÀNH!</h2>
+<p id="sum"></p>
+<button class="restart" onclick="restart()">CHƠI LẠI</button>
+</div>
+
+</div>
+</div>
+
+<script>
+const data=[
+{
+q:"Question 1. What is the passage mainly about?",
+options:[
+"A. Why old people prefer traditional songs to modern ones",
+"B. The relationship between music and people's memories",
+"C. How musicians remember difficult pieces of music",
+"D. The most effective ways of teaching children songs"
+],
+correct:1,
+explain:"Cả ba đoạn đều xoay quanh mối quan hệ giữa music và memory: bài hát quen thuộc gợi lại trải nghiệm, hỗ trợ ghi nhớ trong học tập và gợi lại các giai đoạn trong cuộc sống. Vì vậy B bao quát toàn bài."
+},
+{
+q:"Question 2. The word “familiar” in paragraph 1 is closest in meaning to _________.",
+options:[
+"A. well known to someone",
+"B. recently created",
+"C. difficult to remember",
+"D. popular with everyone"
+],
+correct:0,
+explain:"“familiar” = quen thuộc, tức là đã biết hoặc dễ nhận ra đối với một người. “well known to someone” là cách diễn đạt gần nghĩa nhất. → A."
+},
+{
+q:"Question 3. The phrase “This effect” in paragraph 3 refers to _________.",
+options:[
+"A. older people listening only to songs from their childhood",
+"B. scientists studying how the human brain processes music",
+"C. a song from the past bringing back strong feelings and memories",
+"D. people forgetting songs that were once popular"
+],
+correct:2,
+explain:"“This effect” quy chiếu về toàn bộ ý ở câu trước: một bài hát từ quá khứ vẫn có thể gợi lại cảm xúc mạnh và ký ức nhiều năm sau. → C."
+},
+{
+q:"Question 4. According to paragraph 2, which statement is TRUE?",
+options:[
+"A. Listening to music alone is enough to make every student learn faster.",
+"B. Songs are useful only when children are learning the alphabet.",
+"C. Music may make some information easier for students to remember.",
+"D. Language learners should replace other learning methods with songs."
+],
+correct:2,
+explain:"Passage nói khi thông tin kết hợp với rhythm và melody, học sinh “may find it easier to remember”. Đây chính là paraphrase của C."
+},
+{
+q:"Question 5. Which of the following is NOT mentioned in the passage?",
+options:[
+"A. Songs can help some language learners remember new expressions.",
+"B. Music may bring back emotions connected with past experiences.",
+"C. Familiar songs can encourage people to talk about their memories.",
+"D. Playing a musical instrument can improve people's physical health."
+],
+correct:3,
+explain:"A, B và C đều được đề cập trực tiếp trong bài. Bài không nói gì về chơi nhạc cụ để cải thiện sức khỏe thể chất. Vì hỏi NOT mentioned nên chọn D."
+}
+];
+
+let current=0,hearts=5,xp=0,combo=0,wrong=0,locked=false;
+const $=id=>document.getElementById(id);
+
+function updateStats(){
+  $("counter").textContent=(current+1)+"/"+data.length;
+  $("heart").textContent="❤️".repeat(hearts)+"🖤".repeat(Math.max(0,5-hearts));
+  $("xp").textContent=xp;
+  $("combo").textContent=combo;
+  $("bar").style.width=(current/data.length*100)+"%";
+}
+
+function render(){
+  locked=false;
+  updateStats();
+
+  const item=data[current];
+  $("q").textContent=item.q;
+  $("answers").innerHTML="";
+  $("feedback").className="feedback";
+  $("feedback").textContent="";
+  $("next").className="next";
+
+  item.options.forEach((opt,index)=>{
+    const btn=document.createElement("button");
+    btn.className="ans";
+    btn.textContent=opt;
+    btn.onclick=()=>choose(index,btn);
+    $("answers").appendChild(btn);
+  });
+}
+
+function choose(index,btn){
+  if(locked)return;
+  const item=data[current];
+
+  if(index===item.correct){
+    locked=true;
+    btn.classList.add("ok");
+    [...$("answers").children].forEach(b=>b.disabled=true);
+
+    combo++;
+    let gain=combo>=3?20:combo>=2?15:10;
+    xp+=gain;
+
+    $("feedback").innerHTML=
+      "✅ <strong>Chính xác!</strong><br>"+
+      item.explain+
+      "<br><strong>+"+gain+" XP</strong>";
+
+    $("feedback").classList.add("show");
+    updateStats();
+
+    $("next").classList.add("show");
+    $("next").textContent=current===data.length-1?"XEM KẾT QUẢ →":"NEXT →";
+
+  }else{
+    btn.classList.add("bad");
+    btn.disabled=true;
+
+    hearts--;
+    wrong++;
+    combo=0;
+    updateStats();
+
+    $("feedback").innerHTML=
+      "❌ <strong>Chưa đúng.</strong> Em hãy đọc lại đoạn văn và chú ý từ khóa/mối liên kết ý. Chỉ được qua câu khi chọn đúng.";
+    $("feedback").classList.add("show");
+
+    if(hearts<=0){
+      setTimeout(()=>{
+        alert("💔 Hết 5 trái tim! Em phải làm lại từ câu 1.");
+        restart();
+      },300);
+      return;
+    }
+
+    setTimeout(()=>{
+      btn.classList.remove("bad");
+      btn.disabled=false;
+    },500);
+  }
+}
+
+$("next").onclick=()=>{
+  if(current<data.length-1){
+    current++;
+    render();
+  }else{
+    finish();
+  }
+};
+
+function finish(){
+  $("bar").style.width="100%";
+  $("game").style.display="none";
+  $("summary").classList.add("show");
+
+  $("sum").innerHTML=
+    "Em đã hoàn thành <strong>"+data.length+" câu</strong>.<br>"+
+    "XP: <strong>"+xp+"</strong> • Số lần chọn sai: <strong>"+wrong+"</strong><br><br>"+
+    "Đáp án: <strong>1B – 2A – 3C – 4C – 5D</strong>";
+}
+
+function restart(){
+  current=0;
+  hearts=5;
+  xp=0;
+  combo=0;
+  wrong=0;
+  locked=false;
+
+  $("summary").classList.remove("show");
+  $("game").style.display="block";
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

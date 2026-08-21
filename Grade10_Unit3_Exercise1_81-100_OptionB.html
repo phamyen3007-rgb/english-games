@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 3 - Exercise 1 (81-100) - Option B</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#f8f5ff;
+  background:
+    radial-gradient(circle at 18% 14%,rgba(255,138,190,.26),transparent 22%),
+    radial-gradient(circle at 82% 16%,rgba(127,155,255,.22),transparent 20%),
+    radial-gradient(circle at 50% 110%,rgba(255,196,218,.18),transparent 36%),
+    linear-gradient(145deg,#11162f,#1c2550 48%,#40284f 100%);
+}
+body::before{
+  content:"🌸  ✦  🌸  ✧  🌸  ✦  🌸";
+  position:fixed;
+  top:22px;
+  left:0;
+  width:100%;
+  text-align:center;
+  font-size:24px;
+  opacity:.28;
+  pointer-events:none;
+}
+.wrap{width:min(940px,94%);margin:26px auto}
+.card{
+  background:rgba(19,26,58,.95);
+  border:1px solid rgba(255,181,217,.28);
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 0 38px rgba(255,110,184,.16)
+}
+.head{
+  padding:24px;
+  text-align:center;
+  background:linear-gradient(100deg,rgba(79,103,190,.96),rgba(219,91,160,.90))
+}
+.head h1{
+  margin:0;
+  color:#fff;
+  font-size:clamp(23px,4vw,36px);
+  text-shadow:0 0 14px rgba(255,190,224,.6)
+}
+.head p{margin:8px 0 0;color:#fff4fb;font-weight:800}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  padding:14px;
+  background:rgba(13,20,48,.94)
+}
+.stat{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,191,222,.17);
+  border-radius:14px;
+  padding:10px;
+  text-align:center
+}
+.stat b{display:block;font-size:19px;color:#fff}
+.stat span{font-size:11px;font-weight:800;color:#d9cce8}
+.main{padding:22px}
+.progress{
+  height:10px;
+  background:rgba(255,255,255,.08);
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:22px
+}
+#bar{
+  height:100%;
+  background:linear-gradient(90deg,#ff82b9,#b184ff,#7fd8ff);
+  transition:.3s
+}
+.q{
+  font-size:21px;
+  font-weight:800;
+  line-height:1.55;
+  margin-bottom:18px;
+  color:#fff8fc
+}
+.answers{display:grid;gap:12px}
+.ans{
+  padding:15px;
+  text-align:left;
+  font-size:17px;
+  border-radius:14px;
+  border:1px solid rgba(195,172,232,.28);
+  background:rgba(252,250,255,.97);
+  color:#2b304e;
+  cursor:pointer;
+  transition:.18s
+}
+.ans:hover{
+  transform:translateY(-1px);
+  background:#fff2f8;
+  border-color:#d48ab6
+}
+.ans.ok{
+  background:#ddf9e8;
+  border-color:#39c77a;
+  color:#096039
+}
+.ans.bad{
+  background:#ffe0e6;
+  border-color:#ef7474;
+  color:#8a2424
+}
+.feedback{
+  display:none;
+  margin-top:16px;
+  padding:14px;
+  border-radius:14px;
+  background:rgba(252,247,255,.98);
+  border:1px solid rgba(208,176,232,.25);
+  line-height:1.6;
+  color:#2c3150
+}
+.feedback.show{display:block}
+.next{
+  display:none;
+  width:100%;
+  margin-top:15px;
+  padding:14px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(90deg,#d8579b,#6f73d8);
+  color:white;
+  font-weight:900;
+  font-size:17px;
+  cursor:pointer;
+  box-shadow:0 0 18px rgba(219,87,157,.18)
+}
+.next.show{display:block}
+.summary{
+  display:none;
+  text-align:center;
+  padding:35px;
+  color:#f9efff
+}
+.summary.show{display:block}
+.summary h2{font-size:32px;color:#ffb8db}
+.restart{
+  padding:14px 22px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(90deg,#d8579b,#6f73d8);
+  color:white;
+  font-weight:900;
+  cursor:pointer
+}
+@media(max-width:650px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .main{padding:15px}
+  .q{font-size:18px}
+  .ans{font-size:15px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="head">
+      <h1>GRADE 10 • UNIT 3 • EXERCISE 1</h1>
+      <p>(81–100) • OPTION B • SAKURA NIGHT CHALLENGE</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b id="counter">1/15</b><span>QUESTION</span></div>
+      <div class="stat"><b id="heart">❤️❤️❤️❤️❤️</b><span>HEARTS</span></div>
+      <div class="stat"><b id="xp">0</b><span>XP</span></div>
+      <div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+    </div>
+
+    <div class="main" id="game">
+      <div class="progress"><div id="bar"></div></div>
+      <div class="q" id="q"></div>
+      <div class="answers" id="answers"></div>
+      <div class="feedback" id="feedback"></div>
+      <button class="next" id="next">NEXT →</button>
+    </div>
+
+    <div class="summary" id="summary">
+      <div style="font-size:55px">🌸🏆</div>
+      <h2>HOÀN THÀNH!</h2>
+      <p id="sum"></p>
+      <button class="restart" onclick="restart()">CHƠI LẠI</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const data=[
+{
+q:"Listening to soft music can be good _________ helping students relax after a stressful day.",
+options:["A. at","B. for","C. with","D. of"],
+correct:1,
+explain:"“be good for + N/V-ing” = có lợi cho việc gì. Vì vậy chọn “for”."
+},
+{
+q:"After finishing high school, she decided _________ music at university.",
+options:["A. study","B. studying","C. to study","D. studied"],
+correct:2,
+explain:"“decide to + V” = quyết định làm gì. Vì vậy “to study” là đúng."
+},
+{
+q:"The cheerful song made everyone in the room _________ along with the singer.",
+options:["A. sang","B. singing","C. to sing","D. sing"],
+correct:3,
+explain:"“make + O + V nguyên mẫu” = khiến ai làm gì. Vì vậy chọn “sing”."
+},
+{
+q:"The music teacher noticed several students _________ quietly while waiting for their turn to perform.",
+options:["A. practising","B. practised","C. to practise","D. practise to"],
+correct:0,
+explain:"“notice + O + V-ing” = nhận thấy ai đang làm gì. Vì vậy chọn “practising”."
+},
+{
+q:"The young artist became famous _________ mixing traditional melodies with modern pop music.",
+options:["A. with","B. about","C. for","D. from"],
+correct:2,
+explain:"“be/become famous for + N/V-ing” = nổi tiếng vì điều gì. Vì vậy chọn “for”."
+},
+{
+q:"The band's latest music video _________ a national record by reaching ten million views in just one day.",
+options:["A. won","B. broke","C. passed","D. beat up"],
+correct:1,
+explain:"“break a record” = phá kỷ lục. Vì vậy chọn “broke”."
+},
+{
+q:"The school music festival will _________ in the main hall next Friday evening.",
+options:["A. take place","B. take part","C. take up","D. take off"],
+correct:0,
+explain:"“take place” = diễn ra. “take part in” = tham gia."
+},
+{
+q:"The winners will have a _________ to record a song in a professional studio.",
+options:["A. turn","B. dream","C. chance","D. try"],
+correct:2,
+explain:"“have a chance to + V” = có cơ hội làm gì. Vì vậy chọn “chance”."
+},
+{
+q:"The teachers expect all contestants _________ at least thirty minutes before the competition starts.",
+options:["A. arriving","B. arrive","C. arrived","D. to arrive"],
+correct:3,
+explain:"“expect + O + to V” = mong đợi ai làm gì. Vì vậy chọn “to arrive”."
+},
+{
+q:"The concert was organised to raise money for _________ in the local community.",
+options:["A. families disadvantaged","B. disadvantaged local families","C. local disadvantaged families","D. local families disadvantaged"],
+correct:2,
+explain:"Trật tự tự nhiên là “local + disadvantaged + families” = các gia đình khó khăn tại địa phương."
+},
+{
+q:"Several professional musicians performed at the charity event without receiving any _________.",
+options:["A. payment","B. popularity","C. vote","D. result"],
+correct:0,
+explain:"“receive payment” = nhận tiền công/thù lao. Charity event cho thấy họ biểu diễn không lấy tiền."
+},
+{
+q:"The final _________ of the reality programme showed the winner receiving a recording contract.",
+options:["A. scene","B. stage","C. episode","D. round"],
+correct:2,
+explain:"“episode” = một tập của chương trình truyền hình. Vì vậy chọn “episode”."
+},
+{
+q:"My brother prefers watching music reality _________ to watching action movies.",
+options:["A. news","B. shows","C. cartoons","D. records"],
+correct:1,
+explain:"“reality show” = chương trình truyền hình thực tế. Ở đây cần số nhiều “shows”."
+},
+{
+q:"The young band quickly gained _________ after one of their performances was shared widely online.",
+options:["A. length","B. power","C. hesitation","D. popularity"],
+correct:3,
+explain:"“gain popularity” = trở nên nổi tiếng/được yêu thích hơn."
+},
+{
+q:"More than one hundred students participated _________ the school's singing contest this year.",
+options:["A. on","B. at","C. in","D. with"],
+correct:2,
+explain:"“participate in + event/activity” = tham gia vào một sự kiện/hoạt động."
+}
+];
+
+const bonusQuestions=new Set([3,6,9,12]);
+
+let current=0,hearts=5,xp=0,combo=0,wrong=0,locked=false;
+let bonusGiven=new Set();
+
+const $=id=>document.getElementById(id);
+
+function updateStats(){
+  $("counter").textContent=(current+1)+"/"+data.length;
+  $("heart").textContent="❤️".repeat(hearts)+"🖤".repeat(Math.max(0,5-hearts));
+  $("xp").textContent=xp;
+  $("combo").textContent=combo;
+  $("bar").style.width=(current/data.length*100)+"%";
+}
+
+function render(){
+  locked=false;
+  updateStats();
+
+  const item=data[current];
+  $("q").textContent="Question "+(current+1)+". "+item.q;
+  $("answers").innerHTML="";
+  $("feedback").className="feedback";
+  $("feedback").textContent="";
+  $("next").className="next";
+
+  item.options.forEach((opt,index)=>{
+    const btn=document.createElement("button");
+    btn.className="ans";
+    btn.textContent=opt;
+    btn.onclick=()=>choose(index,btn);
+    $("answers").appendChild(btn);
+  });
+}
+
+function choose(index,btn){
+  if(locked)return;
+
+  const item=data[current];
+
+  if(index===item.correct){
+    locked=true;
+    btn.classList.add("ok");
+    [...$("answers").children].forEach(b=>b.disabled=true);
+
+    combo++;
+    let gain=combo>=3?20:combo>=2?15:10;
+    xp+=gain;
+
+    let bonusText="";
+    const qNo=current+1;
+
+    if(bonusQuestions.has(qNo)&&!bonusGiven.has(qNo)){
+      bonusGiven.add(qNo);
+
+      if(hearts<5){
+        hearts++;
+        bonusText="<br>💖 <strong>Bonus +1 tim!</strong>";
+      }else{
+        bonusText="<br>💖 <strong>Câu bonus! Tim đang đầy 5/5.</strong>";
+      }
+    }
+
+    $("feedback").innerHTML=
+      "✅ <strong>Chính xác!</strong><br>"+
+      item.explain+
+      bonusText+
+      "<br><strong>+"+gain+" XP</strong>";
+
+    $("feedback").classList.add("show");
+    updateStats();
+
+    $("next").classList.add("show");
+    $("next").textContent=
+      current===data.length-1 ? "XEM KẾT QUẢ →" : "NEXT →";
+
+  }else{
+    btn.classList.add("bad");
+    btn.disabled=true;
+
+    hearts--;
+    wrong++;
+    combo=0;
+    updateStats();
+
+    $("feedback").innerHTML=
+      "❌ <strong>Chưa đúng.</strong> Em hãy chọn lại. Chỉ được qua câu khi chọn đúng.";
+    $("feedback").classList.add("show");
+
+    if(hearts<=0){
+      setTimeout(()=>{
+        alert("💔 Hết 5 trái tim! Em phải làm lại từ câu 1.");
+        restart();
+      },300);
+      return;
+    }
+
+    setTimeout(()=>{
+      btn.classList.remove("bad");
+      btn.disabled=false;
+    },500);
+  }
+}
+
+$("next").onclick=()=>{
+  if(current<data.length-1){
+    current++;
+    render();
+  }else{
+    finish();
+  }
+};
+
+function finish(){
+  $("bar").style.width="100%";
+  $("game").style.display="none";
+  $("summary").classList.add("show");
+
+  $("sum").innerHTML=
+    "Em đã hoàn thành <strong>"+data.length+" câu</strong>.<br>"+
+    "XP: <strong>"+xp+"</strong> • Số lần chọn sai: <strong>"+wrong+"</strong><br>"+
+    "🌸 Sakura mission complete!";
+}
+
+function restart(){
+  current=0;
+  hearts=5;
+  xp=0;
+  combo=0;
+  wrong=0;
+  locked=false;
+  bonusGiven=new Set();
+
+  $("summary").classList.remove("show");
+  $("game").style.display="block";
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 3 - Exercise 1 (61-80) - Option B</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:#173f52;background:radial-gradient(circle at 15% 15%,rgba(255,220,80,.28),transparent 20%),radial-gradient(circle at 85% 18%,rgba(100,215,255,.28),transparent 22%),linear-gradient(145deg,#0d6b8c,#31a8c7 52%,#91dce5)}
+.wrap{width:min(940px,94%);margin:26px auto}
+.card{background:rgba(249,254,255,.97);border:1px solid #b9dfea;border-radius:24px;overflow:hidden;box-shadow:0 18px 45px rgba(7,82,126,.22)}
+.head{padding:24px;text-align:center;background:linear-gradient(100deg,#ffd34e,#4ab0d4)}
+.head h1{margin:0;color:#073e5b;font-size:clamp(23px,4vw,36px)}
+.head p{margin:8px 0 0;color:#20576f;font-weight:800}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:14px;background:#eefaff}
+.stat{background:#fff;border:1px solid #c8e7f1;border-radius:14px;padding:10px;text-align:center}
+.stat b{display:block;font-size:19px;color:#0b4865}.stat span{font-size:11px;font-weight:800;color:#67808c}
+.main{padding:22px}.progress{height:10px;background:#dceef4;border-radius:20px;overflow:hidden;margin-bottom:22px}
+#bar{height:100%;background:linear-gradient(90deg,#23a6ce,#ffd24e);transition:.3s}
+.q{font-size:21px;font-weight:800;line-height:1.55;margin-bottom:18px;color:#0d4864}
+.answers{display:grid;gap:12px}
+.ans{padding:15px;text-align:left;font-size:17px;border-radius:14px;border:1px solid #bcdfea;background:#fbfeff;color:#173f52;cursor:pointer;transition:.18s}
+.ans:hover{transform:translateY(-1px);background:#eaf9fd}.ans.ok{background:#d9f8e6;border-color:#39c77a;color:#096039}.ans.bad{background:#ffe0e0;border-color:#ef7474;color:#8a2424}
+.feedback{display:none;margin-top:16px;padding:14px;border-radius:14px;background:#eefaff;border:1px solid #bcdfea;line-height:1.6;color:#173f52}.feedback.show{display:block}
+.next{display:none;width:100%;margin-top:15px;padding:14px;border:0;border-radius:14px;background:linear-gradient(90deg,#168fb9,#e4aa16);color:white;font-weight:900;font-size:17px;cursor:pointer}.next.show{display:block}
+.summary{display:none;text-align:center;padding:35px;color:#17465a}.summary.show{display:block}.summary h2{font-size:32px;color:#08779f}
+.restart{padding:14px 22px;border:0;border-radius:14px;background:#168fb9;color:white;font-weight:900;cursor:pointer}
+@media(max-width:650px){.stats{grid-template-columns:repeat(2,1fr)}.main{padding:15px}.q{font-size:18px}.ans{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="card">
+<div class="head"><h1>GRADE 10 • UNIT 3 • EXERCISE 1</h1><p>(61–80) • OPTION B • MUSIC CHALLENGE</p></div>
+<div class="stats">
+<div class="stat"><b id="counter">1/15</b><span>QUESTION</span></div>
+<div class="stat"><b id="heart">❤️❤️❤️❤️❤️</b><span>HEARTS</span></div>
+<div class="stat"><b id="xp">0</b><span>XP</span></div>
+<div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+</div>
+<div class="main" id="game">
+<div class="progress"><div id="bar"></div></div>
+<div class="q" id="q"></div>
+<div class="answers" id="answers"></div>
+<div class="feedback" id="feedback"></div>
+<button class="next" id="next">NEXT →</button>
+</div>
+<div class="summary" id="summary"><div style="font-size:55px">🎵🏆</div><h2>HOÀN THÀNH!</h2><p id="sum"></p><button class="restart" onclick="restart()">CHƠI LẠI</button></div>
+</div></div>
+
+<script>
+const data=[
+{q:"The young singer was _________ as one of the most promising performers in the competition.",options:["A. recognised","B. prepared","C. decided","D. attracted"],correct:0,explain:"“be recognised as + N” = được công nhận là."},
+{q:"Students can _________ for their favourite band by sending a text message.",options:["A. perform","B. vote","C. prepare","D. research"],correct:1,explain:"“vote for + somebody” = bình chọn cho ai."},
+{q:"The teacher allowed the students _________ traditional instruments during the music lesson.",options:["A. try","B. trying","C. to try","D. tried"],correct:2,explain:"“allow + O + to V” = cho phép ai làm gì."},
+{q:"My parents let me _________ in the school singing competition last weekend.",options:["A. participating","B. to participate","C. participated","D. participate"],correct:3,explain:"“let + O + V nguyên mẫu” = cho phép ai làm gì. Không dùng “to”."},
+{q:"The funny performance made everyone in the audience _________ loudly.",options:["A. laughed","B. laugh","C. to laugh","D. laughing"],correct:1,explain:"“make + O + V nguyên mẫu” = khiến ai làm gì."},
+{q:"After talking to her music teacher, Mai decided _________ for the school band.",options:["A. auditioning","B. auditioned","C. to audition","D. audition"],correct:2,explain:"“decide to + V” = quyết định làm gì."},
+{q:"The performers practised for several weeks in order _________ their best performance at the festival.",options:["A. giving","B. to give","C. give","D. gave"],correct:1,explain:"“in order to + V” = để làm gì."},
+{q:"The singer arrived two hours early so that she _________ enough time to prepare for the show.",options:["A. could have","B. has","C. having","D. to have"],correct:0,explain:"“so that + S + could + V” diễn tả mục đích trong quá khứ."},
+{q:"Although the event was unpaid, several local musicians agreed _________ at the school festival.",options:["A. performing","B. perform","C. performed","D. to perform"],correct:3,explain:"“agree to + V” = đồng ý làm gì."},
+{q:"The students stayed after school _________ they could practise their new song together.",options:["A. although","B. because of","C. so that","D. in order to"],correct:2,explain:"Sau chỗ trống có “they could practise” nên dùng “so that + S + V”."},
+{q:"My sister is very good _________ playing the piano, although she has never taken part in a competition.",options:["A. for","B. at","C. with","D. of"],correct:1,explain:"“be good at + N/V-ing” = giỏi việc gì."},
+{q:"Traditional festivals play an important role _________ introducing local culture to younger generations.",options:["A. on","B. at","C. for","D. in"],correct:3,explain:"“play an important role in + N/V-ing” = đóng vai trò quan trọng trong việc gì."},
+{q:"Our group is doing _________ on several traditional forms of Vietnamese music for a class presentation.",options:["A. research","B. homework","C. exercise","D. lesson"],correct:0,explain:"“do research on + topic” = nghiên cứu về chủ đề nào đó."},
+{q:"The students came _________ an interesting idea for combining folk music with a modern dance performance.",options:["A. along with","B. away with","C. up with","D. out with"],correct:2,explain:"“come up with an idea” = nghĩ ra một ý tưởng."},
+{q:"The music teacher plans _________ a small concert at the end of the semester.",options:["A. organising","B. organised","C. organise","D. to organise"],correct:3,explain:"“plan to + V” = dự định làm gì."}
+];
+
+const bonusQuestions=new Set([3,6,9,12]);
+let current=0,hearts=5,xp=0,combo=0,wrong=0,locked=false;
+let bonusGiven=new Set();
+const $=id=>document.getElementById(id);
+
+function updateStats(){
+ $("counter").textContent=(current+1)+"/"+data.length;
+ $("heart").textContent="❤️".repeat(hearts)+"🖤".repeat(Math.max(0,5-hearts));
+ $("xp").textContent=xp;$("combo").textContent=combo;
+ $("bar").style.width=(current/data.length*100)+"%";
+}
+function render(){
+ locked=false;updateStats();
+ const item=data[current];
+ $("q").textContent="Question "+(current+1)+". "+item.q;
+ $("answers").innerHTML="";$("feedback").className="feedback";$("feedback").textContent="";$("next").className="next";
+ item.options.forEach((opt,index)=>{const btn=document.createElement("button");btn.className="ans";btn.textContent=opt;btn.onclick=()=>choose(index,btn);$("answers").appendChild(btn);});
+}
+function choose(index,btn){
+ if(locked)return;
+ const item=data[current];
+ if(index===item.correct){
+   locked=true;btn.classList.add("ok");[...$("answers").children].forEach(b=>b.disabled=true);
+   combo++;let gain=combo>=3?20:combo>=2?15:10;xp+=gain;
+   let bonusText="";const qNo=current+1;
+   if(bonusQuestions.has(qNo)&&!bonusGiven.has(qNo)){
+     bonusGiven.add(qNo);
+     if(hearts<5){hearts++;bonusText="<br>💖 <strong>Bonus +1 tim!</strong>";}
+     else{bonusText="<br>💖 <strong>Câu bonus! Tim đang đầy 5/5.</strong>";}
+   }
+   $("feedback").innerHTML="✅ <strong>Chính xác!</strong><br>"+item.explain+bonusText+"<br><strong>+"+gain+" XP</strong>";
+   $("feedback").classList.add("show");updateStats();$("next").classList.add("show");
+   $("next").textContent=current===data.length-1?"XEM KẾT QUẢ →":"NEXT →";
+ }else{
+   btn.classList.add("bad");btn.disabled=true;hearts--;wrong++;combo=0;updateStats();
+   $("feedback").innerHTML="❌ <strong>Chưa đúng.</strong> Em hãy chọn lại. Chỉ được qua câu khi chọn đúng.";
+   $("feedback").classList.add("show");
+   if(hearts<=0){setTimeout(()=>{alert("💔 Hết 5 trái tim! Em phải làm lại từ câu 1.");restart();},300);return;}
+   setTimeout(()=>{btn.classList.remove("bad");btn.disabled=false;},500);
+ }
+}
+$("next").onclick=()=>{if(current<data.length-1){current++;render();}else finish();};
+function finish(){
+ $("bar").style.width="100%";$("game").style.display="none";$("summary").classList.add("show");
+ $("sum").innerHTML="Em đã hoàn thành <strong>"+data.length+" câu</strong>.<br>XP: <strong>"+xp+"</strong> • Số lần chọn sai: <strong>"+wrong+"</strong><br>🎉 Great job!";
+}
+function restart(){
+ current=0;hearts=5;xp=0;combo=0;wrong=0;locked=false;bonusGiven=new Set();
+ $("summary").classList.remove("show");$("game").style.display="block";render();
+}
+render();
+</script>
+</body>
+</html>

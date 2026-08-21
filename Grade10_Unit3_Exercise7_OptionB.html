@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 3 - Exercise 7 - Option B</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:#eef7ff;
+  background:
+    radial-gradient(circle at 20% 14%,rgba(0,210,255,.18),transparent 22%),
+    radial-gradient(circle at 82% 16%,rgba(161,78,255,.18),transparent 22%),
+    linear-gradient(180deg,#07101f 0%,#0e1f39 48%,#251744 100%);
+}
+body:before{
+  content:"🌧️   🎧   🌃   ✦   🎵   🌧️";
+  position:fixed;top:18px;left:0;width:100%;text-align:center;
+  font-size:25px;opacity:.34;pointer-events:none;
+}
+.wrap{width:min(1050px,94%);margin:26px auto}
+.card{
+  background:rgba(8,17,38,.96);
+  border:1px solid rgba(89,200,255,.24);
+  border-radius:24px;overflow:hidden;
+  box-shadow:0 18px 50px rgba(0,0,0,.30),0 0 28px rgba(82,132,255,.10)
+}
+.head{
+  padding:24px;text-align:center;
+  background:linear-gradient(95deg,rgba(16,104,160,.96),rgba(80,64,154,.94),rgba(149,62,152,.90));
+}
+.head h1{
+  margin:0;color:#fff;font-size:clamp(23px,4vw,36px);
+  text-shadow:0 0 12px rgba(104,221,255,.48)
+}
+.head p{margin:8px 0 0;color:#eff8ff;font-weight:800}
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
+  padding:14px;background:rgba(5,13,30,.96)
+}
+.stat{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(103,196,239,.16);
+  border-radius:14px;padding:10px;text-align:center
+}
+.stat b{display:block;font-size:19px;color:#fff}
+.stat span{font-size:11px;font-weight:800;color:#acd9ef}
+.content{padding:22px}
+.passage{
+  background:rgba(248,252,255,.98);
+  border:1px solid rgba(89,172,214,.22);
+  border-radius:18px;padding:20px;line-height:1.75;color:#2d3e53;
+  margin-bottom:22px;max-height:470px;overflow-y:auto
+}
+.passage h2{margin-top:0;text-align:center;color:#335c96;font-size:27px}
+.question-box{
+  background:rgba(250,253,255,.98);
+  color:#2e4056;border:1px solid rgba(83,169,211,.22);
+  border-radius:18px;padding:20px
+}
+.progress{
+  height:10px;background:#dfeaf2;border-radius:20px;overflow:hidden;margin-bottom:20px
+}
+#bar{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,#00cbe7,#6977ef,#c64fcb);
+  transition:.3s
+}
+.q{
+  font-size:21px;font-weight:800;line-height:1.55;
+  margin-bottom:18px;color:#29466d
+}
+.answers{display:grid;gap:12px}
+.ans{
+  padding:15px;text-align:left;font-size:16px;border-radius:14px;
+  border:1px solid #c4d8e6;background:#fff;color:#2d3d50;
+  cursor:pointer;transition:.18s
+}
+.ans:hover{transform:translateY(-1px);background:#eef9ff;border-color:#58b7da}
+.ans.ok{background:#d9f8e6;border-color:#39c77a;color:#096039}
+.ans.bad{background:#ffe0e4;border-color:#ef7474;color:#8a2424}
+.feedback{
+  display:none;margin-top:16px;padding:14px;border-radius:14px;
+  background:#eef7ff;border:1px solid #bfd7e6;line-height:1.65;color:#314458
+}
+.feedback.show{display:block}
+.next{
+  display:none;width:100%;margin-top:15px;padding:14px;border:0;
+  border-radius:14px;background:linear-gradient(90deg,#149bc3,#655ed2,#b848b8);
+  color:white;font-weight:900;font-size:17px;cursor:pointer
+}
+.next.show{display:block}
+.summary{display:none;text-align:center;padding:35px;color:#eef8ff}
+.summary.show{display:block}
+.summary h2{font-size:32px;color:#8fe6ff}
+.restart{
+  padding:14px 22px;border:0;border-radius:14px;
+  background:linear-gradient(90deg,#149bc3,#655ed2,#b848b8);
+  color:white;font-weight:900;cursor:pointer
+}
+@media(max-width:650px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .content{padding:14px}
+  .q{font-size:18px}
+  .ans{font-size:14px}
+  .passage{max-height:360px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+
+<div class="head">
+<h1>GRADE 10 • UNIT 3 • EXERCISE 7</h1>
+<p>OPTION B • NEON RAIN CITY NIGHTS</p>
+</div>
+
+<div class="stats">
+<div class="stat"><b id="counter">1/5</b><span>QUESTION</span></div>
+<div class="stat"><b id="heart">❤️❤️❤️❤️❤️</b><span>HEARTS</span></div>
+<div class="stat"><b id="xp">0</b><span>XP</span></div>
+<div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+</div>
+
+<div class="content" id="game">
+
+<div class="passage">
+<h2>Music and Teenagers</h2>
+
+<p>Music has become an important part of teenagers' daily lives. With smartphones and online platforms, young people can listen to almost any song whenever they want. <b>(1) ________.</b> Instead of waiting for their favourite songs to be played on the radio, they can now create their own playlists and discover new artists from around the world.</p>
+
+<p>Music is also closely connected with teenagers' emotions. Many young people choose different types of music depending on how they feel. <b>(2) ________.</b> Others may prefer energetic songs when they need motivation before studying or doing exercise. For this reason, the same teenager may enjoy very different kinds of music at different times.</p>
+
+<p>Music can also bring young people together. School concerts and music clubs give students opportunities to meet classmates who share similar interests. <b>(3) ________.</b> Working towards a common performance can therefore help students develop both friendships and teamwork skills.</p>
+
+<p>However, listening to music is not always helpful. Some students enjoy having music on while doing their homework, but songs with strong beats or familiar lyrics may sometimes make it difficult to concentrate. <b>(4) ________.</b> Students therefore need to discover what works best for them rather than assuming that music always improves their study performance.</p>
+
+<p>Another interesting effect of music is its ability to influence behaviour in public places. Some shops and restaurants carefully select the music they play to create a particular atmosphere. <b>(5) ________.</b> This shows that music is not simply entertainment; it can also affect the way people feel and behave.</p>
+</div>
+
+<div class="question-box">
+<div class="progress"><div id="bar"></div></div>
+<div class="q" id="q"></div>
+<div class="answers" id="answers"></div>
+<div class="feedback" id="feedback"></div>
+<button class="next" id="next">NEXT →</button>
+</div>
+
+</div>
+
+<div class="summary" id="summary">
+<div style="font-size:56px">🌧️🌃🏆</div>
+<h2>HOÀN THÀNH!</h2>
+<p id="sum"></p>
+<button class="restart" onclick="restart()">CHƠI LẠI</button>
+</div>
+
+</div>
+</div>
+
+<script>
+const data=[
+{
+q:"Question 1: Choose the sentence that best fits blank (1).",
+options:[
+"A. This has completely changed the way many teenagers experience music.",
+"B. Teenagers generally dislike listening to songs on their phones.",
+"C. Traditional radio stations have stopped playing popular music completely.",
+"D. Most young people only listen to artists from their own countries."
+],
+correct:0,
+explain:"“This” quy chiếu về khả năng nghe gần như bất kỳ bài hát nào qua smartphone và nền tảng trực tuyến. Câu sau tiếp tục giải thích sự thay đổi này bằng việc tự tạo playlist và khám phá nghệ sĩ mới. → A."
+},
+{
+q:"Question 2: Choose the sentence that best fits blank (2).",
+options:[
+"A. As a result, teenagers should avoid listening to slow music.",
+"B. For example, some listen to calm songs when they feel stressed or tired.",
+"C. However, emotional songs are becoming less popular with young listeners.",
+"D. In addition, most teenagers listen to exactly the same kind of music."
+],
+correct:1,
+explain:"Câu trước nói thanh thiếu niên chọn nhạc tùy theo cảm xúc. B đưa ra ví dụ cụ thể: một số nghe nhạc nhẹ khi căng thẳng hoặc mệt. Câu sau có “Others...” tạo cặp “some... others...”. → B."
+},
+{
+q:"Question 3: Choose the sentence that best fits blank (3).",
+options:[
+"A. However, students usually prefer performing alone rather than in groups.",
+"B. For this reason, school concerts should only include professional musicians.",
+"C. They often practise together, exchange ideas and encourage one another.",
+"D. As a result, learning an instrument becomes unnecessary for most students."
+],
+correct:2,
+explain:"“They” = students/classmates ở câu trước. Câu C mô tả đúng hoạt động hợp tác: cùng luyện tập, trao đổi ý tưởng và khuyến khích nhau. Câu sau kết luận về friendships và teamwork skills. → C."
+},
+{
+q:"Question 4: Choose the sentence that best fits blank (4).",
+options:[
+"A. In fact, several students find that studying in silence allows them to focus better.",
+"B. Therefore, every student should listen to music while completing difficult homework.",
+"C. For example, loud music always makes students finish their work more quickly.",
+"D. However, listening to familiar songs guarantees better academic results."
+],
+correct:0,
+explain:"Câu trước nói nhạc đôi khi làm khó tập trung. A phát triển đúng ý: một số học sinh tập trung tốt hơn khi học trong im lặng. Câu sau cũng nhấn mạnh mỗi người cần tìm cách phù hợp với mình. → A."
+},
+{
+q:"Question 5: Choose the sentence that best fits blank (5).",
+options:[
+"A. However, customers rarely notice whether music is playing around them.",
+"B. For example, relaxing music may encourage customers to stay longer and feel more comfortable.",
+"C. As a result, businesses should stop playing music during busy periods.",
+"D. In contrast, the type of music played has no effect on people's feelings."
+],
+correct:1,
+explain:"Câu trước nói cửa hàng và nhà hàng chọn nhạc để tạo bầu không khí. B đưa ra ví dụ cụ thể: nhạc thư giãn có thể khiến khách ở lâu hơn và cảm thấy thoải mái hơn. Điều này liên kết trực tiếp với câu sau về cảm xúc và hành vi. → B."
+}
+];
+
+let current=0,hearts=5,xp=0,combo=0,wrong=0,locked=false;
+const $=id=>document.getElementById(id);
+
+function updateStats(){
+  $("counter").textContent=(current+1)+"/"+data.length;
+  $("heart").textContent="❤️".repeat(hearts)+"🖤".repeat(Math.max(0,5-hearts));
+  $("xp").textContent=xp;
+  $("combo").textContent=combo;
+  $("bar").style.width=(current/data.length*100)+"%";
+}
+
+function render(){
+  locked=false;
+  updateStats();
+
+  const item=data[current];
+  $("q").textContent=item.q;
+  $("answers").innerHTML="";
+  $("feedback").className="feedback";
+  $("feedback").textContent="";
+  $("next").className="next";
+
+  item.options.forEach((opt,index)=>{
+    const btn=document.createElement("button");
+    btn.className="ans";
+    btn.textContent=opt;
+    btn.onclick=()=>choose(index,btn);
+    $("answers").appendChild(btn);
+  });
+}
+
+function choose(index,btn){
+  if(locked)return;
+  const item=data[current];
+
+  if(index===item.correct){
+    locked=true;
+    btn.classList.add("ok");
+    [...$("answers").children].forEach(b=>b.disabled=true);
+
+    combo++;
+    let gain=combo>=3?20:combo>=2?15:10;
+    xp+=gain;
+
+    $("feedback").innerHTML=
+      "✅ <strong>Chính xác!</strong><br>"+
+      item.explain+
+      "<br><strong>+"+gain+" XP</strong>";
+
+    $("feedback").classList.add("show");
+    updateStats();
+
+    $("next").classList.add("show");
+    $("next").textContent=current===data.length-1?"XEM KẾT QUẢ →":"NEXT →";
+
+  }else{
+    btn.classList.add("bad");
+    btn.disabled=true;
+
+    hearts--;
+    wrong++;
+    combo=0;
+    updateStats();
+
+    $("feedback").innerHTML=
+      "❌ <strong>Chưa đúng.</strong> Em hãy đọc kỹ câu trước và câu sau chỗ trống để tìm mạch liên kết. Chỉ được qua câu khi chọn đúng.";
+    $("feedback").classList.add("show");
+
+    if(hearts<=0){
+      setTimeout(()=>{
+        alert("💔 Hết 5 trái tim! Em phải làm lại từ câu 1.");
+        restart();
+      },300);
+      return;
+    }
+
+    setTimeout(()=>{
+      btn.classList.remove("bad");
+      btn.disabled=false;
+    },500);
+  }
+}
+
+$("next").onclick=()=>{
+  if(current<data.length-1){
+    current++;
+    render();
+  }else{
+    finish();
+  }
+};
+
+function finish(){
+  $("bar").style.width="100%";
+  $("game").style.display="none";
+  $("summary").classList.add("show");
+
+  $("sum").innerHTML=
+    "Em đã hoàn thành <strong>"+data.length+" câu</strong>.<br>"+
+    "XP: <strong>"+xp+"</strong> • Số lần chọn sai: <strong>"+wrong+"</strong><br><br>"+
+    "Đáp án: <strong>1A – 2B – 3C – 4A – 5B</strong>";
+}
+
+function restart(){
+  current=0;
+  hearts=5;
+  xp=0;
+  combo=0;
+  wrong=0;
+  locked=false;
+
+  $("summary").classList.remove("show");
+  $("game").style.display="block";
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

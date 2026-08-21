@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 3 - Exercise 2 - Option B</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:#fff7f3;
+  background:
+    radial-gradient(circle at 80% 11%,rgba(255,216,112,.42),transparent 18%),
+    radial-gradient(circle at 14% 19%,rgba(255,115,138,.20),transparent 22%),
+    linear-gradient(180deg,#f39b66 0%,#b76083 35%,#493e72 62%,#143b55 100%);
+}
+body:before{
+  content:"🌴   🎵   🌅   🎸   🎶   🌴";
+  position:fixed;top:18px;left:0;width:100%;text-align:center;font-size:25px;opacity:.35;pointer-events:none;
+}
+.wrap{width:min(1050px,94%);margin:26px auto}
+.card{background:rgba(20,43,66,.95);border:1px solid rgba(255,198,167,.28);border-radius:24px;overflow:hidden;box-shadow:0 18px 48px rgba(18,24,54,.28)}
+.head{padding:24px;text-align:center;background:linear-gradient(95deg,rgba(238,126,91,.96),rgba(156,73,139,.94))}
+.head h1{margin:0;color:#fff;font-size:clamp(23px,4vw,36px);text-shadow:0 2px 12px rgba(88,29,75,.45)}
+.head p{margin:8px 0 0;color:#fff3ec;font-weight:800}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:14px;background:rgba(15,37,57,.96)}
+.stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,211,190,.17);border-radius:14px;padding:10px;text-align:center}
+.stat b{display:block;font-size:19px;color:#fff}.stat span{font-size:11px;font-weight:800;color:#ffd7c8}
+.content{padding:22px}
+.passage{background:rgba(255,250,247,.97);border:1px solid rgba(255,192,162,.28);border-radius:18px;padding:20px;line-height:1.75;color:#3a4353;margin-bottom:22px;max-height:420px;overflow-y:auto}
+.passage h2{margin-top:0;text-align:center;color:#9c426c;font-size:26px}
+.question-box{background:rgba(255,253,252,.98);color:#354056;border:1px solid rgba(221,144,132,.24);border-radius:18px;padding:20px}
+.progress{height:10px;background:#f1e3e1;border-radius:20px;overflow:hidden;margin-bottom:20px}
+#bar{height:100%;width:0%;background:linear-gradient(90deg,#ffae64,#d85b8b,#7659be);transition:.3s}
+.q{font-size:21px;font-weight:800;line-height:1.55;margin-bottom:18px;color:#613753}
+.answers{display:grid;gap:12px}
+.ans{padding:15px;text-align:left;font-size:17px;border-radius:14px;border:1px solid #e6c6c7;background:#fffefe;color:#3b4353;cursor:pointer;transition:.18s}
+.ans:hover{transform:translateY(-1px);background:#fff2ed;border-color:#df907f}
+.ans.ok{background:#d9f8e6;border-color:#39c77a;color:#096039}
+.ans.bad{background:#ffe0e3;border-color:#ef7474;color:#8a2424}
+.feedback{display:none;margin-top:16px;padding:14px;border-radius:14px;background:#fff3ef;border:1px solid #e7c2bd;line-height:1.65;color:#483d48}
+.feedback.show{display:block}
+.next{display:none;width:100%;margin-top:15px;padding:14px;border:0;border-radius:14px;background:linear-gradient(90deg,#e47b57,#b2488a);color:white;font-weight:900;font-size:17px;cursor:pointer}
+.next.show{display:block}
+.summary{display:none;text-align:center;padding:35px;color:#fff5ef}
+.summary.show{display:block}.summary h2{font-size:32px;color:#ffd08f}
+.restart{padding:14px 22px;border:0;border-radius:14px;background:linear-gradient(90deg,#e47b57,#b2488a);color:white;font-weight:900;cursor:pointer}
+@media(max-width:650px){.stats{grid-template-columns:repeat(2,1fr)}.content{padding:14px}.q{font-size:18px}.ans{font-size:15px}.passage{max-height:350px}}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="card">
+<div class="head"><h1>GRADE 10 • UNIT 3 • EXERCISE 2</h1><p>OPTION B • SUNSET BEACH MUSIC FESTIVAL</p></div>
+
+<div class="stats">
+<div class="stat"><b id="counter">1/5</b><span>QUESTION</span></div>
+<div class="stat"><b id="heart">❤️❤️❤️❤️❤️</b><span>HEARTS</span></div>
+<div class="stat"><b id="xp">0</b><span>XP</span></div>
+<div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+</div>
+
+<div class="content" id="game">
+<div class="passage">
+<h2>SCHOOL MUSIC FESTIVAL</h2>
+<p>Taking part in a school music festival can be an exciting experience for young performers. Before appearing on stage, students need (1) _________ enough time practising their songs and checking their instruments carefully. Good preparation not only helps them avoid (2) _________ unnecessary mistakes but also makes them feel more confident in front of an audience.</p>
+<p>Performing live, however, requires more than musical ability. Students must learn how to communicate with the audience (3) _________ work effectively with other members of their group. They should also be prepared for unexpected problems, such as forgetting part of a song or having difficulty with an instrument. Instead of stopping the performance, experienced performers usually try (4) _________ calm and continue playing.</p>
+<p>For many students, the most valuable part of a music festival is not winning a prize. It is the opportunity to perform with others and develop a better (5) _________ for music. These experiences can encourage young people to become more confident and creative.</p>
+</div>
+
+<div class="question-box">
+<div class="progress"><div id="bar"></div></div>
+<div class="q" id="q"></div>
+<div class="answers" id="answers"></div>
+<div class="feedback" id="feedback"></div>
+<button class="next" id="next">NEXT →</button>
+</div>
+</div>
+
+<div class="summary" id="summary">
+<div style="font-size:56px">🌅🏆</div>
+<h2>HOÀN THÀNH!</h2>
+<p id="sum"></p>
+<button class="restart" onclick="restart()">CHƠI LẠI</button>
+</div>
+</div></div>
+
+<script>
+const data=[
+{q:"Students need (1) _________ enough time practising their songs...",options:["A. spend","B. spending","C. to spend","D. spent"],correct:2,explain:"Có hai cấu trúc kết hợp: “need to + V” = cần làm gì và “spend time + V-ing” = dành thời gian làm gì. Vì vậy: “need to spend enough time practising...”"},
+{q:"Good preparation ... helps them avoid (2) _________ unnecessary mistakes...",options:["A. making","B. make","C. to make","D. made"],correct:0,explain:"“avoid + V-ing” = tránh làm gì; “make a mistake” = mắc lỗi. Vì vậy “avoid making mistakes” là đúng."},
+{q:"Students must learn how to communicate with the audience (3) _________ work effectively with other members of their group.",options:["A. but","B. or","C. because","D. and"],correct:3,explain:"Hai kỹ năng đều cần thiết và bổ sung cho nhau: “communicate with the audience and work effectively with others”. “and” nối hai động từ song song."},
+{q:"Experienced performers usually try (4) _________ calm and continue playing.",options:["A. staying","B. to stay","C. stay","D. stayed"],correct:1,explain:"“try to + V” = cố gắng làm gì; “stay calm” = giữ bình tĩnh. Vì vậy “try to stay calm” là đúng. Phân biệt: “try V-ing” = thử làm để xem kết quả."},
+{q:"It is the opportunity to perform with others and develop a better (5) _________ for music.",options:["A. ear","B. sound","C. voice","D. hearing"],correct:0,explain:"“have/develop an ear for music” = có/phát triển khả năng cảm thụ âm nhạc. Đây là collocation tự nhiên nhất."}
+];
+
+let current=0,hearts=5,xp=0,combo=0,wrong=0,locked=false;
+const $=id=>document.getElementById(id);
+
+function updateStats(){
+ $("counter").textContent=(current+1)+"/"+data.length;
+ $("heart").textContent="❤️".repeat(hearts)+"🖤".repeat(Math.max(0,5-hearts));
+ $("xp").textContent=xp;$("combo").textContent=combo;
+ $("bar").style.width=(current/data.length*100)+"%";
+}
+function render(){
+ locked=false;updateStats();
+ const item=data[current];
+ $("q").textContent="Question "+(current+1)+". "+item.q;
+ $("answers").innerHTML="";$("feedback").className="feedback";$("feedback").textContent="";$("next").className="next";
+ item.options.forEach((opt,index)=>{const btn=document.createElement("button");btn.className="ans";btn.textContent=opt;btn.onclick=()=>choose(index,btn);$("answers").appendChild(btn);});
+}
+function choose(index,btn){
+ if(locked)return;
+ const item=data[current];
+ if(index===item.correct){
+   locked=true;btn.classList.add("ok");[...$("answers").children].forEach(b=>b.disabled=true);
+   combo++;let gain=combo>=3?20:combo>=2?15:10;xp+=gain;
+   $("feedback").innerHTML="✅ <strong>Chính xác!</strong><br>"+item.explain+"<br><strong>+"+gain+" XP</strong>";
+   $("feedback").classList.add("show");updateStats();$("next").classList.add("show");
+   $("next").textContent=current===data.length-1?"XEM KẾT QUẢ →":"NEXT →";
+ }else{
+   btn.classList.add("bad");btn.disabled=true;hearts--;wrong++;combo=0;updateStats();
+   $("feedback").innerHTML="❌ <strong>Chưa đúng.</strong> Em hãy chọn lại. Chỉ được qua câu khi chọn đúng.";
+   $("feedback").classList.add("show");
+   if(hearts<=0){setTimeout(()=>{alert("💔 Hết 5 trái tim! Em phải làm lại từ câu 1.");restart();},300);return;}
+   setTimeout(()=>{btn.classList.remove("bad");btn.disabled=false;},500);
+ }
+}
+$("next").onclick=()=>{if(current<data.length-1){current++;render();}else finish();};
+function finish(){
+ $("bar").style.width="100%";$("game").style.display="none";$("summary").classList.add("show");
+ $("sum").innerHTML="Em đã hoàn thành <strong>"+data.length+" câu</strong>.<br>XP: <strong>"+xp+"</strong> • Số lần chọn sai: <strong>"+wrong+"</strong><br>🌅 Festival mission complete!";
+}
+function restart(){
+ current=0;hearts=5;xp=0;combo=0;wrong=0;locked=false;
+ $("summary").classList.remove("show");$("game").style.display="block";render();
+}
+render();
+</script>
+</body>
+</html>

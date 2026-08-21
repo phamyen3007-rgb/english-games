@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Grade 12 - Unit 4 - Exercise 1 (101-130) - Option D</title>
+<style>
+:root{
+ --bg:#06070d;--panel:#101726;--panel2:#182238;--cyan:#5ee7ff;--violet:#8a7dff;
+ --moon:#d8ddff;--amber:#ffcb6b;--green:#51d696;--red:#ff6878;--text:#f5f7ff;--muted:#b9bfd2;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--text);
+ background:
+ radial-gradient(circle at 78% 8%,rgba(216,221,255,.16),transparent 16%),
+ radial-gradient(circle at 15% 15%,rgba(94,231,255,.09),transparent 24%),
+ linear-gradient(160deg,#05060b,#0a0f1b 55%,#020307);
+ padding:20px;overflow-x:hidden
+}
+.bg{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.moon{position:absolute;right:7%;top:6%;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#f4f6ff,#c6ccea 58%,#6d739a 100%);box-shadow:0 0 50px rgba(194,204,255,.22)}
+.shadow{position:absolute;right:3.5%;top:3%;width:170px;height:170px;border-radius:50%;background:#070911}
+.skyline{position:absolute;left:0;right:0;bottom:0;height:30%;display:flex;align-items:flex-end;gap:7px;padding:0 2%;opacity:.42}
+.b{flex:1;background:#0b101b;border-top:1px solid rgba(255,255,255,.04);min-width:35px}.b1{height:36%}.b2{height:54%}.b3{height:43%}.b4{height:68%}.b5{height:48%}.b6{height:61%}.b7{height:38%}.b8{height:58%}.b9{height:46%}.b10{height:64%}
+.line{position:absolute;left:8%;right:8%;bottom:11%;height:3px;background:linear-gradient(90deg,#5ee7ff,#8a7dff,#ffcb6b);box-shadow:0 0 16px rgba(94,231,255,.35);opacity:.65}
+.wrap{max-width:980px;margin:auto;position:relative;z-index:2}
+.hero{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:14px}.icon{font-size:64px}
+h1{margin:0;font-size:clamp(28px,4vw,44px);background:linear-gradient(90deg,#f7f8ff,#5ee7ff,#8a7dff,#d8ddff,#ffcb6b);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{margin-top:6px;color:var(--muted);font-weight:700}
+.sound{border:1px solid rgba(94,231,255,.22);background:#171f33;color:white;padding:10px 14px;border-radius:12px;font-weight:900;cursor:pointer}
+.panel{background:linear-gradient(180deg,rgba(24,34,56,.97),rgba(16,23,38,.97));border:1px solid rgba(94,231,255,.13);border-radius:24px;overflow:hidden;box-shadow:0 25px 70px rgba(0,0,0,.45)}
+.top{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:16px 20px;background:#0c1120}
+.progress{height:12px;background:#04060b;border-radius:999px;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--moon),var(--amber));transition:.25s}
+.pill{background:#1a2540;padding:8px 12px;border-radius:999px;font-weight:900;white-space:nowrap}
+.game{padding:22px}.case{background:#141d30;border:2px solid #334766;border-radius:20px;padding:20px}
+.casehead{display:flex;justify-content:space-between;align-items:center;gap:12px}.qtag{display:inline-block;background:#202c49;color:#e2fbff;padding:7px 12px;border-radius:10px;font-weight:900}.mode{font-size:12px;letter-spacing:1.5px;color:#82e9ff;font-weight:900}
+.question{font-size:22px;line-height:1.55;margin:18px 0}.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.answer{padding:15px;border:2px solid #394d70;border-radius:14px;background:#19243d;color:#fff;text-align:left;font-size:17px;cursor:pointer;transition:.15s}
+.answer:hover:not(:disabled){transform:translateY(-2px);border-color:var(--cyan);box-shadow:0 0 18px rgba(94,231,255,.08)}
+.answer.correct{background:#153e2d!important;border-color:var(--green)!important}.answer.wrong{background:#4b1d28!important;border-color:var(--red)!important}
+.feedback{display:none;margin-top:16px;padding:15px;border-left:5px solid;border-radius:12px;background:#0c1525;line-height:1.55}
+.feedback.good{display:block;border-color:var(--green)}.feedback.bad{display:block;border-color:var(--red)}
+.controls{display:flex;justify-content:flex-end;margin-top:14px}.next{display:none;border:0;border-radius:12px;padding:12px 18px;font-weight:900;background:linear-gradient(90deg,#8cecff,#afa7ff,#e7eaff,#ffd992);color:#17243b;cursor:pointer}
+.result{display:none;text-align:center;padding:34px}.result.show{display:block}.big{font-size:58px;font-weight:1000;color:#8eeaff}.review{text-align:left;margin-top:22px}
+.item{padding:12px 14px;background:#111a2c;border-left:5px solid #60708d;border-radius:12px;margin:9px 0;line-height:1.5}.item.ok{border-left-color:var(--green)}.item.no{border-left-color:var(--red)}
+.restart{border:0;border-radius:12px;padding:12px 20px;background:#81e4ff;font-weight:900;cursor:pointer}
+@media(max-width:720px){.answers{grid-template-columns:1fr}.hero{align-items:flex-start;flex-direction:column}.top{grid-template-columns:1fr 1fr}.progress{grid-column:1/-1;order:3}}
+</style>
+</head>
+<body>
+<div class="bg">
+ <div class="moon"></div><div class="shadow"></div><div class="line"></div>
+ <div class="skyline"><div class="b b1"></div><div class="b b2"></div><div class="b b3"></div><div class="b b4"></div><div class="b b5"></div><div class="b b6"></div><div class="b b7"></div><div class="b b8"></div><div class="b b9"></div><div class="b b10"></div></div>
+</div>
+<div class="wrap">
+<div class="hero">
+ <div class="brand"><div class="icon">🌘🏙️</div><div><h1>Urban Eclipse Protocol</h1><div class="sub">Grade 12 · Unit 4 · Exercise 1 (101–130) · Option D</div></div></div>
+ <button class="sound" id="sound">🔊 Sound On</button>
+</div>
+
+<div class="panel" id="game">
+ <div class="top">
+  <div class="progress"><div class="bar" id="bar"></div></div>
+  <div class="pill">⭐ <span id="score">0</span>/15</div>
+  <div class="pill">🔥 <span id="streak">0</span></div>
+ </div>
+ <div class="game">
+  <div class="case">
+   <div class="casehead"><div class="qtag" id="qtag"></div><div class="mode">ECLIPSE RESPONSE NODE</div></div>
+   <div class="question" id="question"></div>
+   <div class="answers" id="answers"></div>
+   <div class="feedback" id="feedback"></div>
+   <div class="controls"><button class="next" id="next">NEXT NODE →</button></div>
+  </div>
+ </div>
+</div>
+
+<div class="panel result" id="result">
+ <div style="font-size:78px">🌘🏆</div>
+ <h2>Eclipse Protocol Complete!</h2>
+ <div class="big" id="final"></div>
+ <p id="message"></p>
+ <button class="restart" id="restart">Run Protocol Again ↻</button>
+ <div class="review" id="review"></div>
+</div>
+</div>
+
+<script>
+const Q=[{"q": "The unprecedented influx of migrants has created an ____________ shortage of affordable accommodation in several metropolitan areas.", "o": ["intense", "excessive", "acute", "extreme"], "a": 2, "e": "“An acute shortage” = tình trạng thiếu hụt nghiêm trọng. Đây là collocation tự nhiên và phổ biến nhất."}, {"q": "Despite introducing several housing schemes, the local authority has ____________ to address the needs of low-income residents adequately.", "o": ["yet", "still", "already", "ever"], "a": 1, "e": "“has still to address” = vẫn còn phải giải quyết/chưa giải quyết đầy đủ. “Still” phù hợp với cấu trúc hiện tại hoàn thành trong câu này."}, {"q": "The city has approved a number of infrastructure projects, many of ____________ are intended to ease congestion in densely populated districts.", "o": ["them", "that", "those", "which"], "a": 3, "e": "Sau “many of” trong mệnh đề quan hệ dùng “which” để thay cho “infrastructure projects” → many of which."}, {"q": "____________ substantial investment in public transport, traffic congestion in the city centre would be considerably worse.", "o": ["Unless there were", "Were it not for", "Had it not been", "If it had not"], "a": 1, "e": "Cấu trúc giả định: “Were it not for + noun” = nếu không có... → Were it not for substantial investment..."}, {"q": "The economic benefits generated by urbanisation are often far from ____________ evenly among different social groups.", "o": ["having distributed", "distributing", "being distributed", "having been distributing"], "a": 2, "e": "Sau “far from” dùng V-ing. Vì benefits được phân bổ nên dùng bị động → being distributed."}, {"q": "Rising property prices have ____________ home ownership virtually unaffordable for many young urban workers.", "o": ["rendered", "caused", "resulted", "turned"], "a": 0, "e": "“Render + object + adjective” = khiến cho cái gì trở nên... → rendered home ownership virtually unaffordable."}, {"q": "The existing drainage system can no longer ____________ the demands of a rapidly expanding urban population.", "o": ["catch up on", "put up with", "live up to", "keep pace with"], "a": 3, "e": "“Keep pace with” = theo kịp. Hệ thống thoát nước không còn theo kịp nhu cầu của dân số tăng nhanh."}, {"q": "City planners often underestimate the extent ____________ uncontrolled development can damage local ecosystems.", "o": ["that", "to which", "where", "by that"], "a": 1, "e": "Cấu trúc: “the extent to which + clause” = mức độ mà... → the extent to which uncontrolled development can damage..."}, {"q": "Little ____________ that the construction of the industrial zone would eventually force hundreds of families to relocate.", "o": ["the authorities anticipated", "had the authorities anticipated", "did the authorities anticipate", "the authorities had anticipated"], "a": 2, "e": "Khi “Little” mang nghĩa phủ định được đưa lên đầu câu, phải đảo trợ động từ → Little did the authorities anticipate..."}, {"q": "Unless properly regulated, high-density development may ____________ a serious threat to residents’ physical and mental well-being.", "o": ["pose", "cause", "create", "raise"], "a": 0, "e": "Collocation: “pose a threat to” = gây ra/đặt ra mối đe dọa đối với."}, {"q": "Thousands of long-term residents ____________ from their neighbourhoods since the urban renewal programme was launched.", "o": ["displaced", "had displaced", "were displacing", "have been displaced"], "a": 3, "e": "“Since + Past Simple” thường đi với Present Perfect. Residents bị di dời → Present Perfect Passive: have been displaced."}, {"q": "The ____________ employment opportunities there are in rural regions, the more likely young people are to migrate to major cities.", "o": ["least", "fewer", "fewest", "less"], "a": 1, "e": "Employment opportunities là danh từ đếm được số nhiều → fewer. So sánh kép: The fewer employment opportunities..., the more likely..."}, {"q": "The deterioration in air quality can largely be ____________ the sharp rise in construction activity and private vehicle use.", "o": ["contributed to", "accounted for", "attributed to", "resulted from"], "a": 2, "e": "Cấu trúc: “be attributed to + cause” = được quy cho/bắt nguồn từ nguyên nhân nào."}, {"q": "All residents should have access to essential public services, ____________ their income, social status or place of residence.", "o": ["regardless of", "in spite of", "on account of", "in terms of"], "a": 0, "e": "“Regardless of” = bất kể. → regardless of their income, social status or place of residence."}, {"q": "Under no circumstances ____________ to demolish buildings of historical significance without consulting conservation experts.", "o": ["local authorities are allowed", "are allowed local authorities", "local authorities should be allowed", "should local authorities be allowed"], "a": 3, "e": "Cụm phủ định “Under no circumstances” đứng đầu câu → đảo trợ động từ: should local authorities be allowed..."}],L=["A","B","C","D"];
+let i=0,score=0,streak=0,answered=false,history=[],soundOn=true,ctx=null;
+const $=id=>document.getElementById(id);
+
+function audio(){
+ if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();
+ if(ctx.state==="suspended")ctx.resume();
+ return ctx;
+}
+function tone(f,d=.1,t="triangle",delay=0){
+ if(!soundOn)return;
+ const c=audio(),o=c.createOscillator(),g=c.createGain(),s=c.currentTime+delay;
+ o.type=t;o.frequency.value=f;g.gain.setValueAtTime(.001,s);g.gain.exponentialRampToValueAtTime(.03,s+.01);g.gain.exponentialRampToValueAtTime(.001,s+d);
+ o.connect(g);g.connect(c.destination);o.start(s);o.stop(s+d+.03)
+}
+function goodSound(){tone(660,.08);tone(980,.12,"sine",.08)}
+function badSound(){tone(165,.18,"sawtooth")}
+function nextSound(){tone(420,.06);tone(690,.08,"triangle",.06)}
+function winSound(){[523,659,784,1047].forEach((f,k)=>tone(f,.16,"triangle",k*.08))}
+
+$("sound").onclick=()=>{
+ soundOn=!soundOn;
+ $("sound").textContent=soundOn?"🔊 Sound On":"🔇 Sound Off";
+ if(soundOn)nextSound();
+};
+
+function render(){
+ answered=false;
+ const q=Q[i];
+ $("qtag").textContent="Node "+(i+1)+" / "+Q.length;
+ $("question").textContent=q.q;
+ $("bar").style.width=(i/Q.length*100)+"%";
+ $("answers").innerHTML="";
+ $("feedback").className="feedback";
+ $("feedback").style.display="none";
+ $("next").style.display="none";
+
+ q.o.forEach((op,n)=>{
+  const b=document.createElement("button");
+  b.className="answer";
+  b.innerHTML="<strong>"+L[n]+".</strong> "+op;
+  b.onclick=()=>choose(n,b);
+  $("answers").appendChild(b);
+ });
+ $("next").textContent=i===Q.length-1?"FINISH PROTOCOL →":"NEXT NODE →";
+}
+
+function choose(n,btn){
+ if(answered)return;
+ answered=true;
+ const q=Q[i],bs=[...document.querySelectorAll(".answer")];
+ bs.forEach(b=>b.disabled=true);
+ bs[q.a].classList.add("correct");
+ const right=n===q.a;
+
+ if(right){
+  score++;streak++;
+  $("feedback").className="feedback good";
+  $("feedback").innerHTML="<strong>✅ CORRECT — "+L[q.a]+". "+q.o[q.a]+"</strong><br>"+q.e;
+  goodSound();
+ }else{
+  streak=0;
+  btn.classList.add("wrong");
+  $("feedback").className="feedback bad";
+  $("feedback").innerHTML="<strong>❌ INCORRECT. Correct answer: "+L[q.a]+". "+q.o[q.a]+"</strong><br>"+q.e;
+  badSound();
+ }
+
+ $("feedback").style.display="block";
+ $("score").textContent=score;
+ $("streak").textContent=streak;
+ $("bar").style.width=((i+1)/Q.length*100)+"%";
+ history.push({selected:n,correct:right});
+ $("next").style.display="block";
+}
+
+$("next").onclick=()=>{
+ if(!answered)return;
+ nextSound();
+ if(i<Q.length-1){i++;render();}
+ else finish();
+};
+
+function finish(){
+ $("game").style.display="none";
+ $("result").classList.add("show");
+ winSound();
+ const pct=Math.round(score/Q.length*100);
+ $("final").textContent=score+"/"+Q.length+" · "+pct+"%";
+ $("message").textContent=pct>=90?"Outstanding command of advanced urbanisation language!":pct>=75?"Very strong performance.":pct>=60?"Good work — review the missed nodes below.":"Review the explanations and run the protocol again.";
+
+ let h="<h3>🌘 Eclipse Protocol Review</h3>";
+ Q.forEach((q,k)=>{
+  const a=history[k];
+  h+='<div class="item '+(a.correct?"ok":"no")+'"><strong>Node '+(k+1)+': '+(a.correct?"Correct":"Incorrect")+'</strong><br>Your answer: '+L[a.selected]+'. '+q.o[a.selected]+'<br>Correct: '+L[q.a]+'. '+q.o[q.a]+'<br><em>'+q.e+'</em></div>';
+ });
+ $("review").innerHTML=h;
+}
+
+$("restart").onclick=()=>location.reload();
+render();
+</script>
+</body>
+</html>
