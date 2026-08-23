@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 11 - Unit 3 - Exercise 2 - Option C</title>
+<style>
+*{box-sizing:border-box}
+:root{
+ --ink:#4b2459;--pink:#ff6fae;--pink2:#ff9bc8;--purple:#7c4fc5;--mint:#82e6c8;
+ --cream:#fff8fc;--yellow:#ffd86b;--green:#3cae73;--red:#e05668;
+}
+body{
+ margin:0;min-height:100vh;padding:22px;font-family:Arial,sans-serif;color:var(--ink);
+ background:
+ radial-gradient(circle at 15% 10%,rgba(255,255,255,.78),transparent 15%),
+ radial-gradient(circle at 85% 15%,rgba(255,216,107,.25),transparent 18%),
+ linear-gradient(145deg,#ffd5e8,#e8d9ff 45%,#c9f5ea 78%,#fff0b9);
+}
+.wrap{max-width:1160px;margin:auto}
+.hero{
+ position:relative;overflow:hidden;
+ background:linear-gradient(120deg,#7c3f89,#bf4f91 55%,#e87886);
+ color:white;border-radius:30px 30px 0 0;padding:25px 29px;
+ box-shadow:0 18px 48px #6c356855
+}
+.hero:before{content:"🍬";position:absolute;left:4%;bottom:-42px;font-size:120px;opacity:.13}
+.hero:after{content:"🍭";position:absolute;right:4%;top:-25px;font-size:145px;opacity:.14}
+.heroRow{display:flex;justify-content:space-between;align-items:center;gap:18px;position:relative;z-index:2}
+.brand{display:flex;gap:18px;align-items:center}.icon{font-size:68px}
+h1{margin:0;color:#fff2a8;font-size:clamp(28px,4vw,43px);text-shadow:0 3px 9px #54224f}
+.sub{font-weight:900;color:#fff7fd;margin-top:7px}
+.sound{border:1px solid #ffd6ec;background:#fff8fc;color:#8a3f76;border-radius:18px;padding:11px 15px;font-weight:900;cursor:pointer}
+
+.game{background:#fff8fc;border-radius:0 0 30px 30px;overflow:hidden;box-shadow:0 20px 55px #6c356844}
+.status{
+ display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;
+ padding:14px 20px;background:#fbe2ef;border-bottom:1px solid #e7bfd3
+}
+.track{height:13px;background:#e5c5d6;border-radius:99px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,#ff6fae,#8d67d5,#65d7bd);transition:.3s}
+.pill{background:#fff;border:1px solid #e4bed1;border-radius:99px;padding:8px 13px;font-weight:900;white-space:nowrap}
+.hearts{font-size:20px;letter-spacing:2px}
+.main{padding:22px}
+.passage{
+ background:linear-gradient(135deg,#fffdf6,#fff0f7);border:2px solid #efcadc;border-radius:20px;
+ padding:18px 20px;margin-bottom:18px;line-height:1.65;white-space:pre-line
+}
+.passage h2{margin:0 0 10px;color:#a24887}
+.quiz{background:#fff;border:2px solid #e8c7d8;border-radius:22px;padding:23px;box-shadow:inset 0 0 28px #f9e7f055}
+.tag{display:inline-block;background:linear-gradient(90deg,#a24887,#7c4fc5);color:white;padding:8px 14px;border-radius:14px;font-weight:900}
+.q{font-size:20px;line-height:1.55;margin:19px 0;font-weight:700}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ans{
+ border:2px solid #ead2de;background:#fffafd;color:#4b2459;border-radius:16px;padding:15px;text-align:left;
+ font-size:16px;cursor:pointer;transition:.15s
+}
+.ans:hover:not(:disabled){transform:translateY(-2px);border-color:#dc74ad;background:#fff1f8}
+.ans.correct{background:#eafff2;border-color:#3cae73}
+.ans.wrong{background:#fff0f3;border-color:#e05668}
+.fb{display:none;margin-top:15px;padding:14px;border-radius:14px;line-height:1.55}
+.fb.good{display:block;background:#eafff2;border-left:5px solid #3cae73}
+.fb.bad{display:block;background:#fff0f3;border-left:5px solid #e05668}
+.bonus{display:none;margin-top:10px;padding:12px;border-radius:14px;background:#fff5c6;border-left:5px solid #ffd86b;font-weight:900}
+.next{display:none;float:right;margin-top:15px;border:0;border-radius:16px;padding:12px 22px;background:linear-gradient(90deg,#a24887,#7c4fc5);color:#fff;font-weight:900;cursor:pointer}
+
+.overlay{display:none;position:fixed;inset:0;background:#492442e6;z-index:99;align-items:center;justify-content:center;padding:20px}
+.overlay.show{display:flex}
+.box{max-width:520px;width:100%;background:#fff8fc;border:3px solid #d86a9e;border-radius:28px;padding:30px;text-align:center;box-shadow:0 20px 60px #0006}
+.restart{border:0;border-radius:16px;padding:13px 22px;background:#a24887;color:#fff;font-weight:900;cursor:pointer}
+.result{display:none;background:#fff8fc;border-radius:30px;padding:36px;text-align:center;box-shadow:0 20px 55px #6c356844}
+.result.show{display:block}
+.big{font-size:60px;font-weight:1000;color:#a24887}
+.review{text-align:left;margin-top:24px}
+.r{padding:13px 15px;margin:9px 0;border-radius:14px;background:#fcedf5;border-left:5px solid #7c4fc5;line-height:1.55}
+@media(max-width:820px){
+ .answers{grid-template-columns:1fr}
+ .heroRow{flex-direction:column;align-items:flex-start}
+ .status{grid-template-columns:1fr 1fr}
+ .track{grid-column:1/-1;order:4}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+ <div class="heroRow">
+  <div class="brand">
+   <div class="icon">🍭🍬</div>
+   <div>
+    <h1>Candy Factory Challenge</h1>
+    <div class="sub">Grade 11 - Unit 3 - Exercise 2 - Option C</div>
+   </div>
+  </div>
+  <button id="sound" class="sound">🔊 Candy Sound On</button>
+ </div>
+</header>
+
+<section id="game" class="game">
+ <div class="status">
+  <div class="track"><div id="bar" class="bar"></div></div>
+  <div class="pill"><span id="hearts" class="hearts">❤️❤️❤️❤️❤️</span></div>
+  <div class="pill">🍬 Streak <span id="streak">0</span></div>
+  <div class="pill">🔁 Restarts <span id="restarts">0</span></div>
+ </div>
+
+ <main class="main">
+  <section class="passage">
+   <h2>Building Greener Cities</h2>
+   As urban populations continue to grow, city authorities are looking for new ways to make urban life healthier and more sustainable. One important solution is to develop (1) ______ infrastructure that can meet residents' needs without putting too much pressure on natural resources.
+
+Public transport also plays an essential role in sustainable development. By providing reliable bus and rail services, cities can encourage residents to (2) ______ their dependence on private vehicles. This not only helps ease traffic congestion but also contributes (3) ______ lower levels of air pollution.
+
+Another priority is the development of public green spaces. Parks and community gardens provide residents with opportunities for exercise and social (4) ______. They can also help lower temperatures in densely populated neighbourhoods. (5) ______, planting more trees can provide shade and improve air quality during hot weather.
+
+Technology is also changing the way urban services are delivered. Smart sensors can collect information about traffic, energy use, and waste production, allowing authorities to respond more (6) ______ to problems. Residents may also use mobile applications to report damaged roads or find available public services.
+
+However, technological development alone cannot create a truly sustainable city. Local people should be actively (7) ______ in decisions about changes to their neighbourhoods. By combining advanced technology with community participation, cities can become more efficient, inclusive, and ultimately more (8) ______ for everyone.
+  </section>
+
+  <section class="quiz">
+   <div id="tag" class="tag"></div>
+   <div id="q" class="q"></div>
+   <div id="answers" class="answers"></div>
+   <div id="fb" class="fb"></div>
+   <div id="bonus" class="bonus"></div>
+   <button id="next" class="next">NEXT MACHINE →</button>
+   <div style="clear:both"></div>
+  </section>
+ </main>
+</section>
+
+<section id="result" class="result">
+ <div style="font-size:82px">🍭🏆🍬</div>
+ <h2>Candy Factory Completed!</h2>
+ <div id="final" class="big"></div>
+ <p id="msg"></p>
+ <div id="review" class="review"></div>
+</section>
+</div>
+
+<div id="overlay" class="overlay">
+ <div class="box">
+  <div style="font-size:80px">🍫💔</div>
+  <h2>Factory Shutdown!</h2>
+  <p>Hết 5 tim. Học sinh phải làm lại từ Question 1.</p>
+  <p><b>Số lần làm lại:</b> <span id="restartBox">1</span></p>
+  <button id="restartBtn" class="restart">RESTART THE FACTORY ↻</button>
+ </div>
+</div>
+
+<script>
+const Q=[{"q": "As urban populations continue to grow, city authorities are looking for new ways to make urban life healthier and more sustainable. One important solution is to develop (1) ______ infrastructure that can meet residents' needs without putting too much pressure on natural resources.", "o": ["sustainable", "renewable", "available", "continuous"], "a": 0, "e": "<b>sustainable infrastructure</b> = cơ sở hạ tầng bền vững."}, {"q": "By providing reliable bus and rail services, cities can encourage residents to (2) ______ their dependence on private vehicles.", "o": ["decline", "reduce", "prevent", "remove"], "a": 1, "e": "Collocation: <b>reduce one's dependence on sth</b> = giảm sự phụ thuộc vào cái gì."}, {"q": "This not only helps ease traffic congestion but also contributes (3) ______ lower levels of air pollution.", "o": ["for", "with", "to", "in"], "a": 2, "e": "Cấu trúc: <b>contribute to + noun/V-ing</b> = góp phần vào..."}, {"q": "Parks and community gardens provide residents with opportunities for exercise and social (4) ______.", "o": ["interaction", "communication", "relationship", "connection"], "a": 0, "e": "Collocation: <b>social interaction</b> = sự tương tác xã hội."}, {"q": "They can also help lower temperatures in densely populated neighbourhoods. (5) ______, planting more trees can provide shade and improve air quality during hot weather.", "o": ["However", "Otherwise", "For example", "Although"], "a": 2, "e": "Câu sau đưa ra ví dụ cụ thể cho lợi ích của không gian xanh → <b>For example</b>."}, {"q": "Smart sensors can collect information about traffic, energy use, and waste production, allowing authorities to respond more (6) ______ to problems.", "o": ["effectively", "effect", "effective", "effectiveness"], "a": 0, "e": "Sau động từ <b>respond</b> cần trạng từ → <b>effectively</b>."}, {"q": "Local people should be actively (7) ______ in decisions about changes to their neighbourhoods.", "o": ["participated", "included", "involved", "interacted"], "a": 2, "e": "Cấu trúc: <b>be involved in sth</b> = tham gia/có liên quan đến việc gì."}, {"q": "By combining advanced technology with community participation, cities can become more efficient, inclusive, and ultimately more (8) ______ for everyone.", "o": ["workable", "accessible", "usable", "liveable"], "a": 3, "e": "Collocation: <b>liveable city</b> = thành phố đáng sống."}],L=["A","B","C","D"],MAX=5,BONUS=[5,10,15];
+let i=0,hearts=MAX,streak=0,restarts=0,firstTry=0,attempts=Array(Q.length).fill(0),soundOn=true,ctx;
+const $=x=>document.getElementById(x);
+
+function tone(f,d=.1){
+ if(!soundOn)return;
+ if(!ctx)ctx=new(AudioContext||webkitAudioContext)();
+ if(ctx.state==="suspended")ctx.resume();
+ const o=ctx.createOscillator(),g=ctx.createGain();
+ o.frequency.value=f;o.type="sine";g.gain.value=.03;
+ o.connect(g);g.connect(ctx.destination);o.start();setTimeout(()=>o.stop(),d*1000)
+}
+
+$("sound").onclick=()=>{
+ soundOn=!soundOn;
+ $("sound").textContent=soundOn?"🔊 Candy Sound On":"🔇 Sound Off";
+};
+
+function update(){
+ $("hearts").textContent="❤️".repeat(hearts)+"🤍".repeat(MAX-hearts);
+ $("streak").textContent=streak;
+ $("restarts").textContent=restarts;
+ $("bar").style.width=(i/Q.length*100)+"%";
+}
+
+function render(){
+ const x=Q[i];
+ $("tag").textContent="Machine "+(i+1)+" / "+Q.length;
+ $("q").textContent=x.q;
+ $("answers").innerHTML="";
+ $("fb").className="fb";
+ $("fb").style.display="none";
+ $("bonus").style.display="none";
+ $("next").style.display="none";
+ update();
+
+ x.o.forEach((v,n)=>{
+   const b=document.createElement("button");
+   b.className="ans";
+   b.innerHTML="<b>"+L[n]+".</b> "+v;
+   b.onclick=()=>choose(n,b);
+   $("answers").appendChild(b);
+ });
+}
+
+function choose(n,b){
+ const x=Q[i];
+ attempts[i]++;
+
+ if(n!==x.a){
+   hearts--;
+   streak=0;
+   b.classList.add("wrong");
+   b.disabled=true;
+
+   $("fb").className="fb bad";
+   $("fb").style.display="block";
+   $("fb").innerHTML="<b>❌ Chưa đúng.</b> Mất 1 ❤️. Em phải chọn lại đến khi đúng mới được đi tiếp.";
+   tone(170,.2);
+   update();
+
+   if(hearts<=0){
+     restarts++;
+     $("restarts").textContent=restarts;
+     $("restartBox").textContent=restarts;
+     setTimeout(()=>$("overlay").classList.add("show"),250);
+   }
+   return;
+ }
+
+ streak++;
+ if(attempts[i]===1) firstTry++;
+
+ document.querySelectorAll(".ans").forEach(z=>z.disabled=true);
+ b.classList.add("correct");
+
+ $("fb").className="fb good";
+ $("fb").style.display="block";
+ $("fb").innerHTML="<b>✅ CORRECT — "+L[x.a]+". "+x.o[x.a]+"</b><br>"+x.e;
+ tone(820,.11);
+
+ const qn=i+1;
+ if(BONUS.includes(qn)){
+   const before=hearts;
+   hearts=Math.min(MAX,hearts+1);
+   $("bonus").style.display="block";
+   $("bonus").innerHTML=hearts>before
+     ?"🎁 BONUS HEART! +1 ❤️"
+     :"🎁 BONUS MACHINE! Em đang đủ 5 ❤️ nên số tim giữ nguyên.";
+   tone(1120,.12);
+ }
+
+ update();
+ $("bar").style.width=((i+1)/Q.length*100)+"%";
+ $("next").style.display="inline-block";
+ $("next").textContent=i===Q.length-1?"FINISH FACTORY →":"NEXT MACHINE →";
+}
+
+$("next").onclick=()=>{
+ if(i<Q.length-1){i++;render()}
+ else finish();
+};
+
+$("restartBtn").onclick=()=>{
+ $("overlay").classList.remove("show");
+ i=0;
+ hearts=MAX;
+ streak=0;
+ firstTry=0;
+ attempts=Array(Q.length).fill(0);
+ render();
+};
+
+function finish(){
+ $("game").style.display="none";
+ $("result").classList.add("show");
+ $("final").textContent=Q.length+" / "+Q.length;
+ $("msg").innerHTML=
+   "Hoàn thành với <b>"+restarts+"</b> lần làm lại.<br>"+
+   "Đúng ngay lần đầu: <b>"+firstTry+"/"+Q.length+"</b>.";
+
+ let h="<h3>🍬 Final Review</h3>";
+ Q.forEach((x,k)=>{
+   h+='<div class="r"><b>Question '+(k+1)+'</b> — Correct: <b>'+L[x.a]+'. '+x.o[x.a]+'</b><br>'+x.e+'<br>Attempts: <b>'+attempts[k]+'</b></div>';
+ });
+ $("review").innerHTML=h;
+}
+
+render();
+</script>
+</body>
+</html>

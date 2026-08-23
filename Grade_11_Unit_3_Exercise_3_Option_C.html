@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 11 - Unit 3 - Exercise 3 - Option C</title>
+<style>
+*{box-sizing:border-box}
+:root{
+ --ink:#3b2c1c;--stone:#6f665a;--sand:#e9d8b1;--gold:#d6a94e;--moss:#6f8b54;
+ --paper:#fbf6e8;--green:#4d9a63;--red:#cc5860;--brown:#5b4937;
+}
+body{
+ margin:0;min-height:100vh;padding:22px;font-family:Arial,sans-serif;color:var(--ink);
+ background:
+ linear-gradient(rgba(255,255,255,.10),rgba(255,255,255,.10)),
+ radial-gradient(circle at 20% 10%,rgba(255,244,203,.45),transparent 18%),
+ linear-gradient(145deg,#5c5a4f,#86785e 44%,#b49a69 72%,#72664f);
+}
+.wrap{max-width:1160px;margin:auto}
+.hero{
+ position:relative;overflow:hidden;
+ background:linear-gradient(120deg,#3b342b,#5b4b38 58%,#766040);
+ color:white;border-radius:28px 28px 0 0;padding:25px 29px;
+ box-shadow:0 18px 48px #2b241c88
+}
+.hero:before{content:"🏺";position:absolute;left:4%;bottom:-40px;font-size:120px;opacity:.13}
+.hero:after{content:"🗿";position:absolute;right:4%;top:-30px;font-size:145px;opacity:.14}
+.heroRow{display:flex;justify-content:space-between;align-items:center;gap:18px;position:relative;z-index:2}
+.brand{display:flex;gap:18px;align-items:center}.icon{font-size:68px}
+h1{margin:0;color:#ffe6a7;font-size:clamp(28px,4vw,43px);text-shadow:0 3px 9px #231c15}
+.sub{font-weight:900;color:#fff8e8;margin-top:7px}
+.sound{border:1px solid #ead7a7;background:#fff8e8;color:#5f513d;border-radius:16px;padding:11px 15px;font-weight:900;cursor:pointer}
+
+.game{background:#f8f1df;border-radius:0 0 28px 28px;overflow:hidden;box-shadow:0 20px 55px #2b241c66}
+.status{
+ display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;
+ padding:14px 20px;background:#e7dcc5;border-bottom:1px solid #cbb992
+}
+.track{height:13px;background:#c7b99f;border-radius:99px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,#6f8b54,#d6a94e,#9d6d3a);transition:.3s}
+.pill{background:#fffaf0;border:1px solid #ccb98f;border-radius:99px;padding:8px 13px;font-weight:900;white-space:nowrap}
+.hearts{font-size:20px;letter-spacing:2px}
+.main{padding:22px}
+.passage{
+ background:#fbf6e8;border:2px solid #d3c3a4;border-radius:18px;padding:18px 20px;margin-bottom:18px;
+ line-height:1.65;white-space:pre-line;box-shadow:inset 0 0 22px #e9dfc966
+}
+.passage h2{margin:0 0 10px;color:#6f5a3d}
+.quiz{background:#fffaf0;border:2px solid #d4c6a8;border-radius:20px;padding:23px;box-shadow:inset 0 0 28px #eee4cd55}
+.tag{display:inline-block;background:linear-gradient(90deg,#67553e,#8a724c);color:white;padding:8px 14px;border-radius:14px;font-weight:900}
+.q{font-size:20px;line-height:1.55;margin:19px 0;font-weight:700}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ans{
+ border:2px solid #d7c9ae;background:#fffdf7;color:#3b2c1c;border-radius:14px;padding:15px;text-align:left;
+ font-size:16px;cursor:pointer;transition:.15s
+}
+.ans:hover:not(:disabled){transform:translateY(-2px);border-color:#8a724c;background:#f6efdf}
+.ans.correct{background:#e9f8ed;border-color:#4d9a63}
+.ans.wrong{background:#fff0f2;border-color:#cc5860}
+.fb{display:none;margin-top:15px;padding:14px;border-radius:14px;line-height:1.55}
+.fb.good{display:block;background:#e9f8ed;border-left:5px solid #4d9a63}
+.fb.bad{display:block;background:#fff0f2;border-left:5px solid #cc5860}
+.bonus{display:none;margin-top:10px;padding:12px;border-radius:14px;background:#fff2c7;border-left:5px solid #d6a94e;font-weight:900}
+.next{display:none;float:right;margin-top:15px;border:0;border-radius:14px;padding:12px 22px;background:linear-gradient(90deg,#67553e,#8a724c);color:#fff;font-weight:900;cursor:pointer}
+
+.overlay{display:none;position:fixed;inset:0;background:#241e18e8;z-index:99;align-items:center;justify-content:center;padding:20px}
+.overlay.show{display:flex}
+.box{max-width:520px;width:100%;background:#fbf6e8;border:3px solid #96734a;border-radius:26px;padding:30px;text-align:center;box-shadow:0 20px 60px #0006}
+.restart{border:0;border-radius:14px;padding:13px 22px;background:#775b39;color:white;font-weight:900;cursor:pointer}
+.result{display:none;background:#f8f1df;border-radius:28px;padding:36px;text-align:center;box-shadow:0 20px 55px #2b241c66}
+.result.show{display:block}
+.big{font-size:60px;font-weight:1000;color:#6f5a3d}
+.review{text-align:left;margin-top:24px}
+.r{padding:13px 15px;margin:9px 0;border-radius:14px;background:#efe6d2;border-left:5px solid #8a724c;line-height:1.55}
+@media(max-width:820px){
+ .answers{grid-template-columns:1fr}
+ .heroRow{flex-direction:column;align-items:flex-start}
+ .status{grid-template-columns:1fr 1fr}
+ .track{grid-column:1/-1;order:4}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+ <div class="heroRow">
+  <div class="brand">
+   <div class="icon">🏺🗿</div>
+   <div>
+    <h1>Ancient Temple Escape</h1>
+    <div class="sub">Grade 11 - Unit 3 - Exercise 3 - Option C</div>
+   </div>
+  </div>
+  <button id="sound" class="sound">🔊 Temple Sound On</button>
+ </div>
+</header>
+
+<section id="game" class="game">
+ <div class="status">
+  <div class="track"><div id="bar" class="bar"></div></div>
+  <div class="pill"><span id="hearts" class="hearts">❤️❤️❤️❤️❤️</span></div>
+  <div class="pill">🔑 Streak <span id="streak">0</span></div>
+  <div class="pill">🔁 Restarts <span id="restarts">0</span></div>
+ </div>
+
+ <main class="main">
+  <section class="passage">
+    <h2>Urban Redevelopment</h2>
+    As cities continue to expand, local governments are under increasing pressure to provide adequate housing while protecting the environment. In response, many cities have adopted ambitious plans to make urban development more (1) ______ and improve residents' quality of life.
+
+One approach is to transform former industrial sites into mixed-use neighbourhoods where people can live, work, and relax. Instead of demolishing every old structure, planners often (2) ______ existing buildings and adapt them for new purposes. This not only preserves local character but also reduces the amount of construction waste sent to landfills.
+
+Green spaces are another important part of urban redevelopment. Trees and parks can help (3) ______ the effects of extreme heat, while community gardens provide residents with opportunities to grow food and interact with their neighbours. Such projects can therefore contribute significantly (4) ______ creating healthier and more connected communities.
+
+However, successful urban transformation requires more than physical improvements. Residents need to be actively involved in the planning (5) ______ so that development reflects their actual needs. Digital platforms now allow citizens to share suggestions and provide feedback before major decisions are made.
+
+Investment in public transport is equally important. Reliable metro and bus networks make employment and essential services more (6) ______ to people living outside city centres. As a result, residents may become less dependent on private cars, which can lead to a considerable (7) ______ in traffic congestion and air pollution.
+
+When environmental protection, efficient transport, and community participation are successfully combined, urban redevelopment can have a lasting positive (8) ______ on both residents and the environment.
+  </section>
+
+  <section class="quiz">
+   <div id="tag" class="tag"></div>
+   <div id="q" class="q"></div>
+   <div id="answers" class="answers"></div>
+   <div id="fb" class="fb"></div>
+   <div id="bonus" class="bonus"></div>
+   <button id="next" class="next">NEXT CHAMBER →</button>
+   <div style="clear:both"></div>
+  </section>
+ </main>
+</section>
+
+<section id="result" class="result">
+ <div style="font-size:82px">🏺🏆🗿</div>
+ <h2>Temple Escape Complete!</h2>
+ <div id="final" class="big"></div>
+ <p id="msg"></p>
+ <div id="review" class="review"></div>
+</section>
+</div>
+
+<div id="overlay" class="overlay">
+ <div class="box">
+  <div style="font-size:80px">💀💔</div>
+  <h2>The Temple Reset!</h2>
+  <p>Hết 5 tim. Học sinh phải làm lại từ Question 1.</p>
+  <p><b>Số lần làm lại:</b> <span id="restartBox">1</span></p>
+  <button id="restartBtn" class="restart">RETURN TO TEMPLE ENTRANCE ↻</button>
+ </div>
+</div>
+
+<script>
+const Q=[{"q": "As cities continue to expand, local governments are under increasing pressure to provide adequate housing while protecting the environment. In response, many cities have adopted ambitious plans to make urban development more (1) ______ and improve residents' quality of life.", "o": ["renewable", "sustainable", "liveable", "ecological"], "a": 1, "e": "Collocation: <b>sustainable urban development</b> = phát triển đô thị bền vững."}, {"q": "Instead of demolishing every old structure, planners often (2) ______ existing buildings and adapt them for new purposes.", "o": ["preserve", "remain", "maintain", "reserve"], "a": 0, "e": "<b>preserve existing buildings</b> = bảo tồn các tòa nhà hiện có."}, {"q": "Trees and parks can help (3) ______ the effects of extreme heat, while community gardens provide residents with opportunities to grow food and interact with their neighbours.", "o": ["prevent", "decline", "reduce", "decrease from"], "a": 2, "e": "Cụm tự nhiên: <b>reduce the effects of sth</b> = làm giảm tác động của cái gì."}, {"q": "Such projects can therefore contribute significantly (4) ______ creating healthier and more connected communities.", "o": ["for", "with", "in", "to"], "a": 3, "e": "Cấu trúc: <b>contribute to + noun/V-ing</b> = góp phần vào..."}, {"q": "Residents need to be actively involved in the planning (5) ______ so that development reflects their actual needs.", "o": ["procedure", "process", "progress", "operation"], "a": 1, "e": "Collocation: <b>the planning process</b> = quá trình quy hoạch/lập kế hoạch."}, {"q": "Reliable metro and bus networks make employment and essential services more (6) ______ to people living outside city centres.", "o": ["available", "convenient", "approachable", "accessible"], "a": 3, "e": "Cấu trúc: <b>make sth accessible to sb</b> = làm cho cái gì dễ tiếp cận đối với ai."}, {"q": "Residents may become less dependent on private cars, which can lead to a considerable (7) ______ in traffic congestion and air pollution.", "o": ["reduction", "decline", "decrease", "fall"], "a": 0, "e": "Collocation: <b>a considerable reduction in sth</b> = sự giảm đáng kể của..."}, {"q": "Urban redevelopment can have a lasting positive (8) ______ on both residents and the environment.", "o": ["influence", "consequence", "impact", "result"], "a": 2, "e": "Collocation: <b>have a positive impact on sth/sb</b> = có tác động tích cực đến..."}],L=["A","B","C","D"],MAX=5,BONUS=[3,6];
+let i=0,hearts=MAX,streak=0,restarts=0,firstTry=0,attempts=Array(Q.length).fill(0),soundOn=true,ctx;
+const $=x=>document.getElementById(x);
+
+function tone(f,d=.1){
+ if(!soundOn)return;
+ if(!ctx)ctx=new(AudioContext||webkitAudioContext)();
+ if(ctx.state==="suspended")ctx.resume();
+ const o=ctx.createOscillator(),g=ctx.createGain();
+ o.frequency.value=f;o.type="triangle";g.gain.value=.03;
+ o.connect(g);g.connect(ctx.destination);o.start();setTimeout(()=>o.stop(),d*1000)
+}
+
+$("sound").onclick=()=>{
+ soundOn=!soundOn;
+ $("sound").textContent=soundOn?"🔊 Temple Sound On":"🔇 Sound Off";
+};
+
+function update(){
+ $("hearts").textContent="❤️".repeat(hearts)+"🤎".repeat(MAX-hearts);
+ $("streak").textContent=streak;
+ $("restarts").textContent=restarts;
+ $("bar").style.width=(i/Q.length*100)+"%";
+}
+
+function render(){
+ const x=Q[i];
+ $("tag").textContent="Chamber "+(i+1)+" / "+Q.length;
+ $("q").textContent=x.q;
+ $("answers").innerHTML="";
+ $("fb").className="fb";
+ $("fb").style.display="none";
+ $("bonus").style.display="none";
+ $("next").style.display="none";
+ update();
+
+ x.o.forEach((v,n)=>{
+   const b=document.createElement("button");
+   b.className="ans";
+   b.innerHTML="<b>"+L[n]+".</b> "+v;
+   b.onclick=()=>choose(n,b);
+   $("answers").appendChild(b);
+ });
+}
+
+function choose(n,b){
+ const x=Q[i];
+ attempts[i]++;
+
+ if(n!==x.a){
+   hearts--;
+   streak=0;
+   b.classList.add("wrong");
+   b.disabled=true;
+
+   $("fb").className="fb bad";
+   $("fb").style.display="block";
+   $("fb").innerHTML="<b>❌ Chưa đúng.</b> Mất 1 ❤️. Em phải chọn lại đến khi đúng mới được mở căn phòng tiếp theo.";
+   tone(150,.2);
+   update();
+
+   if(hearts<=0){
+     restarts++;
+     $("restarts").textContent=restarts;
+     $("restartBox").textContent=restarts;
+     setTimeout(()=>$("overlay").classList.add("show"),250);
+   }
+   return;
+ }
+
+ streak++;
+ if(attempts[i]===1) firstTry++;
+
+ document.querySelectorAll(".ans").forEach(z=>z.disabled=true);
+ b.classList.add("correct");
+
+ $("fb").className="fb good";
+ $("fb").style.display="block";
+ $("fb").innerHTML="<b>✅ CORRECT — "+L[x.a]+". "+x.o[x.a]+"</b><br>"+x.e;
+ tone(800,.11);
+
+ const qn=i+1;
+ if(BONUS.includes(qn)){
+   const before=hearts;
+   hearts=Math.min(MAX,hearts+1);
+   $("bonus").style.display="block";
+   $("bonus").innerHTML=hearts>before
+     ?"🗝️ BONUS HEART! +1 ❤️"
+     :"🗝️ BONUS CHAMBER! Em đang đủ 5 ❤️ nên số tim giữ nguyên.";
+   tone(1100,.12);
+ }
+
+ update();
+ $("bar").style.width=((i+1)/Q.length*100)+"%";
+ $("next").style.display="inline-block";
+ $("next").textContent=i===Q.length-1?"ESCAPE TEMPLE →":"NEXT CHAMBER →";
+}
+
+$("next").onclick=()=>{
+ if(i<Q.length-1){i++;render()}
+ else finish();
+};
+
+$("restartBtn").onclick=()=>{
+ $("overlay").classList.remove("show");
+ i=0;
+ hearts=MAX;
+ streak=0;
+ firstTry=0;
+ attempts=Array(Q.length).fill(0);
+ render();
+};
+
+function finish(){
+ $("game").style.display="none";
+ $("result").classList.add("show");
+ $("final").textContent=Q.length+" / "+Q.length;
+ $("msg").innerHTML=
+   "Hoàn thành với <b>"+restarts+"</b> lần làm lại.<br>"+
+   "Đúng ngay lần đầu: <b>"+firstTry+"/"+Q.length+"</b>.";
+
+ let h="<h3>📜 Temple Review</h3>";
+ Q.forEach((x,k)=>{
+   h+='<div class="r"><b>Question '+(k+1)+'</b> — Correct: <b>'+L[x.a]+'. '+x.o[x.a]+'</b><br>'+x.e+'<br>Attempts: <b>'+attempts[k]+'</b></div>';
+ });
+ $("review").innerHTML=h;
+}
+
+render();
+</script>
+</body>
+</html>

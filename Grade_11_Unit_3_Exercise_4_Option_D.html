@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 11 - Unit 3 - Exercise 4 - Option D</title>
+<style>
+*{box-sizing:border-box}
+:root{
+ --ink:#fefefe;--black:#17121f;--purple:#6c39a8;--pink:#ff4aa2;--cyan:#45e2ff;
+ --yellow:#ffe45c;--green:#43d17b;--red:#ff5a65;--panel:#241a33;
+}
+body{
+ margin:0;min-height:100vh;padding:22px;font-family:"Trebuchet MS",Arial,sans-serif;color:var(--ink);
+ background:
+ linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px),
+ radial-gradient(circle at 20% 15%,rgba(255,74,162,.16),transparent 20%),
+ radial-gradient(circle at 80% 15%,rgba(69,226,255,.14),transparent 22%),
+ #120d19;
+ background-size:32px 32px,32px 32px,auto,auto,auto;
+}
+.wrap{max-width:1160px;margin:auto}
+.hero{
+ position:relative;overflow:hidden;
+ background:linear-gradient(120deg,#241330,#4d1f65 54%,#952764);
+ border:2px solid #ff4aa266;color:#fff;border-radius:24px 24px 0 0;padding:24px 28px;
+ box-shadow:0 0 34px #ff4aa233,0 18px 55px #0009
+}
+.hero:before{content:"👾";position:absolute;left:3%;bottom:-35px;font-size:115px;opacity:.12}
+.hero:after{content:"🕹️";position:absolute;right:4%;top:-28px;font-size:145px;opacity:.13}
+.heroRow{display:flex;justify-content:space-between;align-items:center;gap:18px;position:relative;z-index:2}
+.brand{display:flex;gap:18px;align-items:center}.icon{font-size:68px}
+h1{margin:0;color:#ffe45c;font-size:clamp(28px,4vw,43px);text-shadow:3px 3px 0 #ff4aa255}
+.sub{font-weight:900;color:#e8faff;margin-top:7px}
+.sound{border:2px solid #45e2ff;background:#181124;color:#8df0ff;border-radius:10px;padding:10px 14px;font-weight:900;cursor:pointer}
+
+.game{background:#18111f;border:2px solid #45e2ff33;border-radius:0 0 24px 24px;overflow:hidden;box-shadow:0 20px 55px #0009}
+.status{
+ display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;
+ padding:14px 18px;background:#20152b;border-bottom:2px solid #372545
+}
+.track{height:14px;background:#38284a;border-radius:4px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,#45e2ff,#8c5cff,#ff4aa2,#ffe45c);transition:.3s}
+.pill{background:#17101f;border:2px solid #4d3a5f;border-radius:8px;padding:8px 12px;font-weight:900;white-space:nowrap}
+.hearts{font-size:20px;letter-spacing:2px}
+.main{padding:20px}
+.passage{
+ background:#21172c;border:2px solid #563c70;border-radius:14px;padding:18px 20px;margin-bottom:18px;
+ line-height:1.65;white-space:pre-line;color:#efe9ff;
+ box-shadow:inset 0 0 28px #45e2ff08
+}
+.passage h2{margin:0 0 10px;color:#7defff;text-shadow:0 0 8px #45e2ff66}
+.quiz{background:#20162b;border:2px solid #4a365f;border-radius:14px;padding:22px}
+.tag{display:inline-block;background:linear-gradient(90deg,#3e2b87,#a22d71);color:white;padding:8px 13px;border-radius:8px;font-weight:900}
+.q{font-size:20px;line-height:1.55;margin:18px 0;font-weight:700}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ans{
+ border:2px solid #503a66;background:#17101f;color:#f5efff;border-radius:10px;padding:15px;text-align:left;
+ font-size:16px;cursor:pointer;transition:.12s
+}
+.ans:hover:not(:disabled){transform:translateY(-2px);border-color:#45e2ff;background:#211934;box-shadow:0 0 12px #45e2ff33}
+.ans.correct{background:#123522;border-color:#43d17b}
+.ans.wrong{background:#3b141b;border-color:#ff5a65}
+.fb{display:none;margin-top:14px;padding:14px;border-radius:10px;line-height:1.55}
+.fb.good{display:block;background:#123522;border-left:5px solid #43d17b}
+.fb.bad{display:block;background:#3b141b;border-left:5px solid #ff5a65}
+.bonus{display:none;margin-top:10px;padding:12px;border-radius:10px;background:#3c3210;border-left:5px solid #ffe45c;font-weight:900;color:#fff0a0}
+.next{display:none;float:right;margin-top:14px;border:0;border-radius:10px;padding:12px 20px;background:linear-gradient(90deg,#5c3bb3,#b5327b);color:white;font-weight:900;cursor:pointer}
+
+.overlay{display:none;position:fixed;inset:0;background:#09060eea;z-index:99;align-items:center;justify-content:center;padding:20px}
+.overlay.show{display:flex}
+.box{max-width:520px;width:100%;background:#21172c;border:3px solid #ff5a65;border-radius:18px;padding:30px;text-align:center;box-shadow:0 0 40px #ff5a6533}
+.restart{border:0;border-radius:10px;padding:13px 22px;background:linear-gradient(90deg,#8c2637,#d53c58);color:#fff;font-weight:900;cursor:pointer}
+.result{display:none;background:#18111f;border:2px solid #45e2ff33;border-radius:24px;padding:36px;text-align:center;box-shadow:0 20px 55px #0009}
+.result.show{display:block}
+.big{font-size:60px;font-weight:1000;color:#ffe45c;text-shadow:2px 2px 0 #ff4aa255}
+.review{text-align:left;margin-top:24px}
+.r{padding:13px 15px;margin:9px 0;border-radius:10px;background:#21182f;border-left:5px solid #45e2ff;line-height:1.55}
+@media(max-width:820px){
+ .answers{grid-template-columns:1fr}
+ .heroRow{flex-direction:column;align-items:flex-start}
+ .status{grid-template-columns:1fr 1fr}
+ .track{grid-column:1/-1;order:4}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+ <div class="heroRow">
+  <div class="brand">
+   <div class="icon">👾🕹️</div>
+   <div>
+    <h1>Retro Arcade Rush</h1>
+    <div class="sub">Grade 11 - Unit 3 - Exercise 4 - Option D</div>
+   </div>
+  </div>
+  <button id="sound" class="sound">🔊 Arcade Sound On</button>
+ </div>
+</header>
+
+<section id="game" class="game">
+ <div class="status">
+  <div class="track"><div id="bar" class="bar"></div></div>
+  <div class="pill"><span id="hearts" class="hearts">❤️❤️❤️❤️❤️</span></div>
+  <div class="pill">⭐ Streak <span id="streak">0</span></div>
+  <div class="pill">🔁 Restarts <span id="restarts">0</span></div>
+ </div>
+
+ <main class="main">
+  <section class="passage">
+    <h2>Urban Growth & Public Spaces</h2>
+    Over the past decade, rapid urban expansion (1) ______ considerable pressure on public spaces in many major cities. As land becomes increasingly valuable, local authorities face the challenge of meeting residents' growing (2) ______ for housing while preserving parks and other recreational areas.
+
+In densely populated neighbourhoods, open spaces are particularly important because many residents (3) ______ depend on public parks for exercise and relaxation when they have no private gardens. Unfortunately, there are often very (4) ______ suitable areas left for new parks once extensive development has taken place.
+
+Protecting existing green spaces is therefore becoming an important part of urban planning. Parks not only provide recreational opportunities but also reduce heat and improve air quality. Nevertheless, their long-term value is sometimes (5) ______ when authorities give priority to short-term economic development.
+
+Several cities have begun introducing regulations to protect public land from unnecessary construction. (6) ______, such regulations are unlikely to succeed unless they are properly enforced. Ultimately, it is careful long-term planning (7) ______ can ensure that growing cities remain healthy and liveable.
+  </section>
+
+  <section class="quiz">
+   <div id="tag" class="tag"></div>
+   <div id="q" class="q"></div>
+   <div id="answers" class="answers"></div>
+   <div id="fb" class="fb"></div>
+   <div id="bonus" class="bonus"></div>
+   <button id="next" class="next">NEXT LEVEL →</button>
+   <div style="clear:both"></div>
+  </section>
+ </main>
+</section>
+
+<section id="result" class="result">
+ <div style="font-size:82px">👾🏆🕹️</div>
+ <h2>Arcade Cleared!</h2>
+ <div id="final" class="big"></div>
+ <p id="msg"></p>
+ <div id="review" class="review"></div>
+</section>
+</div>
+
+<div id="overlay" class="overlay">
+ <div class="box">
+  <div style="font-size:80px">💥💔</div>
+  <h2>GAME OVER!</h2>
+  <p>Hết 5 tim. Học sinh phải làm lại từ Question 1.</p>
+  <p><b>Số lần làm lại:</b> <span id="restartBox">1</span></p>
+  <button id="restartBtn" class="restart">RESTART FROM LEVEL 1 ↻</button>
+ </div>
+</div>
+
+<script>
+const Q=[{"q": "Over the past decade, rapid urban expansion (1) ______ considerable pressure on public spaces in many major cities.", "o": ["placed", "has placed", "is placing", "places"], "a": 1, "e": "Dấu hiệu <b>Over the past decade</b> → dùng Present Perfect: <b>has placed</b>. Collocation: <b>place pressure on sth</b>."}, {"q": "Local authorities face the challenge of meeting residents' growing (2) ______ for housing while preserving parks and other recreational areas.", "o": ["requirement", "request", "demand", "necessity"], "a": 2, "e": "Collocation: <b>demand for + noun</b> = nhu cầu đối với cái gì."}, {"q": "In densely populated neighbourhoods, open spaces are particularly important because many residents (3) ______ depend on public parks for exercise and relaxation when they have no private gardens.", "o": ["have to", "should", "can", "ought to"], "a": 0, "e": "<b>have to</b> diễn tả sự cần thiết do hoàn cảnh thực tế bên ngoài."}, {"q": "Unfortunately, there are often very (4) ______ suitable areas left for new parks once extensive development has taken place.", "o": ["a few", "little", "a little", "few"], "a": 3, "e": "<b>areas</b> là danh từ đếm được số nhiều; cấu trúc đúng là <b>very few + plural noun</b>."}, {"q": "Nevertheless, their long-term value is sometimes (5) ______ when authorities give priority to short-term economic development.", "o": ["underestimated", "unreliable", "unavailable", "inefficient"], "a": 0, "e": "<b>underestimate the value/importance of sth</b> = đánh giá thấp giá trị/tầm quan trọng của..."}, {"q": "Several cities have begun introducing regulations to protect public land from unnecessary construction. (6) ______, such regulations are unlikely to succeed unless they are properly enforced.", "o": ["Consequently", "Moreover", "However", "For instance"], "a": 2, "e": "Hai câu có quan hệ tương phản → <b>However</b> = tuy nhiên."}, {"q": "Ultimately, it is careful long-term planning (7) ______ can ensure that growing cities remain healthy and liveable.", "o": ["which", "what", "who", "that"], "a": 3, "e": "Câu chẻ: <b>It is + thành phần nhấn mạnh + that + clause</b>."}],L=["A","B","C","D"],MAX=5,BONUS=[3,6];
+let i=0,hearts=MAX,streak=0,restarts=0,firstTry=0,attempts=Array(Q.length).fill(0),soundOn=true,ctx;
+const $=x=>document.getElementById(x);
+
+function tone(f,d=.1){
+ if(!soundOn)return;
+ if(!ctx)ctx=new(AudioContext||webkitAudioContext)();
+ if(ctx.state==="suspended")ctx.resume();
+ const o=ctx.createOscillator(),g=ctx.createGain();
+ o.frequency.value=f;o.type="square";g.gain.value=.028;
+ o.connect(g);g.connect(ctx.destination);o.start();setTimeout(()=>o.stop(),d*1000)
+}
+
+$("sound").onclick=()=>{
+ soundOn=!soundOn;
+ $("sound").textContent=soundOn?"🔊 Arcade Sound On":"🔇 Sound Off";
+};
+
+function update(){
+ $("hearts").textContent="❤️".repeat(hearts)+"🖤".repeat(MAX-hearts);
+ $("streak").textContent=streak;
+ $("restarts").textContent=restarts;
+ $("bar").style.width=(i/Q.length*100)+"%";
+}
+
+function render(){
+ const x=Q[i];
+ $("tag").textContent="LEVEL "+(i+1)+" / "+Q.length;
+ $("q").textContent=x.q;
+ $("answers").innerHTML="";
+ $("fb").className="fb";
+ $("fb").style.display="none";
+ $("bonus").style.display="none";
+ $("next").style.display="none";
+ update();
+
+ x.o.forEach((v,n)=>{
+   const b=document.createElement("button");
+   b.className="ans";
+   b.innerHTML="<b>"+L[n]+".</b> "+v;
+   b.onclick=()=>choose(n,b);
+   $("answers").appendChild(b);
+ });
+}
+
+function choose(n,b){
+ const x=Q[i];
+ attempts[i]++;
+
+ if(n!==x.a){
+   hearts--;
+   streak=0;
+   b.classList.add("wrong");
+   b.disabled=true;
+
+   $("fb").className="fb bad";
+   $("fb").style.display="block";
+   $("fb").innerHTML="<b>❌ WRONG MOVE!</b> Mất 1 ❤️. Em phải chọn lại đến khi đúng mới được qua màn.";
+   tone(135,.2);
+   update();
+
+   if(hearts<=0){
+     restarts++;
+     $("restarts").textContent=restarts;
+     $("restartBox").textContent=restarts;
+     setTimeout(()=>$("overlay").classList.add("show"),250);
+   }
+   return;
+ }
+
+ streak++;
+ if(attempts[i]===1) firstTry++;
+
+ document.querySelectorAll(".ans").forEach(z=>z.disabled=true);
+ b.classList.add("correct");
+
+ $("fb").className="fb good";
+ $("fb").style.display="block";
+ $("fb").innerHTML="<b>✅ LEVEL CLEAR — "+L[x.a]+". "+x.o[x.a]+"</b><br>"+x.e;
+ tone(760,.08); setTimeout(()=>tone(1040,.09),80);
+
+ const qn=i+1;
+ if(BONUS.includes(qn)){
+   const before=hearts;
+   hearts=Math.min(MAX,hearts+1);
+   $("bonus").style.display="block";
+   $("bonus").innerHTML=hearts>before
+     ?"🎁 BONUS LIFE! +1 ❤️"
+     :"🎁 BONUS LEVEL! Em đang đủ 5 ❤️ nên số tim giữ nguyên.";
+   setTimeout(()=>tone(1280,.1),150);
+ }
+
+ update();
+ $("bar").style.width=((i+1)/Q.length*100)+"%";
+ $("next").style.display="inline-block";
+ $("next").textContent=i===Q.length-1?"FINAL SCORE →":"NEXT LEVEL →";
+}
+
+$("next").onclick=()=>{
+ if(i<Q.length-1){i++;render()}
+ else finish();
+};
+
+$("restartBtn").onclick=()=>{
+ $("overlay").classList.remove("show");
+ i=0;
+ hearts=MAX;
+ streak=0;
+ firstTry=0;
+ attempts=Array(Q.length).fill(0);
+ render();
+};
+
+function finish(){
+ $("game").style.display="none";
+ $("result").classList.add("show");
+ $("final").textContent=Q.length+" / "+Q.length;
+ $("msg").innerHTML=
+   "Hoàn thành với <b>"+restarts+"</b> lần làm lại.<br>"+
+   "Đúng ngay lần đầu: <b>"+firstTry+"/"+Q.length+"</b>.";
+
+ let h="<h3>🕹️ Arcade Review</h3>";
+ Q.forEach((x,k)=>{
+   h+='<div class="r"><b>Question '+(k+1)+'</b> — Correct: <b>'+L[x.a]+'. '+x.o[x.a]+'</b><br>'+x.e+'<br>Attempts: <b>'+attempts[k]+'</b></div>';
+ });
+ $("review").innerHTML=h;
+}
+
+render();
+</script>
+</body>
+</html>

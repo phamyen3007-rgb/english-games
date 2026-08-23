@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 4 - Exercise 7 - Option C</title>
+<style>
+*{box-sizing:border-box}
+:root{--navy:#10233d;--cream:#fff8e9;--gold:#d8a83e;--paper:#fffdf7;--green:#2f9b69;--red:#d2525f;--blue:#3179a8}
+body{margin:0;padding:22px;min-height:100vh;font-family:Arial,sans-serif;color:var(--navy);
+background:radial-gradient(circle at 8% 12%,rgba(255,255,255,.85),transparent 13%),radial-gradient(circle at 92% 15%,rgba(255,221,137,.38),transparent 18%),linear-gradient(145deg,#dcebf3,#f9efd4 50%,#e4eee2)}
+.wrap{max-width:1120px;margin:auto}
+.hero{background:linear-gradient(115deg,#0e2c45,#235c70 55%,#a57c32);color:white;border-radius:28px 28px 0 0;padding:25px 28px;box-shadow:0 18px 48px #10233d28;position:relative;overflow:hidden}
+.hero:after{content:"🗺️";position:absolute;right:5%;top:-24px;font-size:145px;opacity:.09}
+.heroRow{display:flex;align-items:center;justify-content:space-between;gap:18px;position:relative;z-index:2}
+.brand{display:flex;align-items:center;gap:17px}.icon{font-size:66px}
+h1{margin:0;color:#ffe8a5;font-size:clamp(29px,4vw,43px)}.sub{font-weight:900;color:#e9f8ff;margin-top:7px}
+.sound{border:1px solid #f8dfa1;background:#fff9e9;color:#173d51;border-radius:12px;padding:11px 15px;font-weight:900;cursor:pointer}
+.game{background:var(--paper);border-radius:0 0 28px 28px;overflow:hidden;box-shadow:0 20px 52px #10233d20}
+.status{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;background:#e9f1ef;padding:14px 20px}
+.track{height:13px;background:#cddbd8;border-radius:99px;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,#2c7891,#d8a83e,#5e9b70);transition:.3s}
+.pill{background:white;border:1px solid #d6ded9;border-radius:99px;padding:8px 13px;font-weight:900}
+.stage{padding:22px}.instruction{background:#fff3cf;border-left:5px solid var(--gold);padding:13px 15px;border-radius:11px;margin-bottom:17px;font-weight:800;line-height:1.55}
+.card{background:white;border:2px solid #dce4df;border-radius:20px;padding:21px}
+.qtitle{font-size:22px;font-weight:1000;color:#235c70;margin-bottom:15px}
+.letter{background:#f8f1df;border:1px dashed #b89042;border-radius:12px;padding:11px 14px;margin:11px 0;line-height:1.5}
+.bankTitle,.dropTitle{font-weight:1000;margin:15px 0 9px;color:#6f5722}
+.bank,.dropzone{display:grid;gap:10px;min-height:60px}
+.item{background:#f8fbfc;border:2px solid #cddde2;border-radius:13px;padding:13px 14px;line-height:1.45;cursor:grab;user-select:none;display:flex;gap:10px;align-items:flex-start}
+.item:hover{border-color:#5d9bb3;background:#f2fbff}.item:active{cursor:grabbing}.item.dragging{opacity:.35}
+.item .key{min-width:25px;height:25px;border-radius:50%;background:#235c70;color:white;display:grid;place-items:center;font-weight:900;text-transform:lowercase}
+.slot{min-height:59px;border:2px dashed #a8b9b5;border-radius:13px;background:#f7faf7;display:flex;align-items:center;padding:7px;gap:8px}
+.slot.over{background:#fff3cf;border-color:#d8a83e}.num{font-weight:1000;color:#7d6b4a;min-width:30px;text-align:center}.slot .item{flex:1}
+.actions{display:flex;justify-content:flex-end;gap:10px;margin-top:16px;flex-wrap:wrap}
+.btn{border:0;border-radius:11px;padding:12px 18px;font-weight:900;cursor:pointer}.reset{background:#e7ecec;color:#284654}.check{background:linear-gradient(90deg,#235c70,#a57c32);color:white}.next{display:none;background:#2f7a5b;color:white}
+.feedback{display:none;margin-top:15px;padding:14px;border-radius:12px;line-height:1.5}.feedback.good{display:block;background:#eafff1;border-left:5px solid var(--green)}.feedback.bad{display:block;background:#fff0f2;border-left:5px solid var(--red)}
+.explain{display:none;margin-top:10px;padding:13px 14px;border-radius:12px;background:#eef7fb;border-left:5px solid #3179a8;line-height:1.55}
+.result{display:none;background:var(--paper);padding:36px;border-radius:28px;text-align:center;box-shadow:0 20px 52px #10233d20}.result.show{display:block}.big{font-size:62px;font-weight:1000;color:#235c70}
+.review{text-align:left;margin-top:24px}.reviewItem{background:#eef4f2;border-left:5px solid #235c70;border-radius:11px;padding:13px;margin:9px 0;line-height:1.55}.reviewItem.ok{border-color:var(--green)}.reviewItem.no{border-color:var(--red)}
+.restart{border:0;border-radius:11px;padding:12px 20px;background:#235c70;color:white;font-weight:900;cursor:pointer}
+.tip{font-size:13px;color:#68777d;margin-top:8px}
+@media(max-width:650px){.heroRow{flex-direction:column;align-items:flex-start}.status{grid-template-columns:1fr 1fr}.track{grid-column:1/-1;order:3}.item{font-size:14px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+ <div class="heroRow">
+  <div class="brand"><div class="icon">🏙️🧩</div><div><h1>City Blueprint Challenge</h1><div class="sub">Grade 12 - Unit 4 - Exercise 7 - Option C</div></div></div>
+  <button id="sound" class="sound">🔊 Sound On</button>
+ </div>
+</header>
+
+<section id="game" class="game">
+ <div class="status">
+  <div class="track"><div id="bar" class="bar"></div></div>
+  <div class="pill">🏗️ Score <span id="score">0</span>/5</div>
+  <div class="pill">📍 <span id="count">1</span>/5</div>
+ </div>
+ <main class="stage">
+  <div class="instruction">
+   Kéo-thả câu vào đúng vị trí, hoặc <b>double-click vào câu</b> để câu tự động chuyển vào <b>ô trống đầu tiên</b>. 
+   Double-click một câu đã nằm trong ô để đưa câu đó trở lại Sentence Bank.
+   <b>Nếu thứ tự chưa đúng, game không cho qua câu. Chỉ khi sắp xếp đúng hoàn toàn mới hiện giải thích và nút NEXT.</b>
+  </div>
+  <div class="card">
+   <div id="qtitle" class="qtitle"></div>
+   <div id="prefix"></div>
+   <div class="bankTitle">🧱 Sentence Bank</div>
+   <div id="bank" class="bank"></div>
+   <div class="dropTitle">🏗️ Build the correct order</div>
+   <div id="slots" class="dropzone"></div>
+   <div id="suffix"></div>
+   <div class="tip">Có thể kéo-thả hoặc double-click. Mỗi câu chỉ chiếm một ô.</div>
+   <div id="feedback" class="feedback"></div>
+   <div id="explain" class="explain"></div>
+   <div class="actions">
+    <button id="reset" class="btn reset">RESET</button>
+    <button id="check" class="btn check">CHECK ORDER ✓</button>
+    <button id="next" class="btn next">NEXT →</button>
+   </div>
+  </div>
+ </main>
+</section>
+
+<section id="result" class="result">
+ <div style="font-size:82px">🏙️🏆🧩</div>
+ <h2>Blueprint Complete!</h2>
+ <div id="final" class="big"></div>
+ <p id="message"></p>
+ <button class="restart" onclick="location.reload()">PLAY AGAIN ↻</button>
+ <div id="review" class="review"></div>
+</section>
+</div>
+
+<script>
+const DATA=[{"label": "Question 1 · City Transport", "items": {"a": "Mia: Exactly. Unless public transport improves, I think the problem will only get worse as more people move here.", "b": "Daniel: Have you noticed how much longer it takes to get across the city these days?", "c": "Mia: Definitely. The population has grown so quickly that the transport system can barely cope with the demand.", "d": "Daniel: I agree. Expanding the metro network might encourage commuters to leave their cars at home."}, "answer": ["b", "c", "d", "a"], "explain": "B mở đầu bằng câu hỏi về thời gian di chuyển; C trả lời và nêu nguyên nhân; D đề xuất giải pháp; A đồng tình và kết luận vấn đề sẽ tệ hơn nếu giao thông công cộng không cải thiện."}, {"label": "Question 2 · Urban Renewal", "items": {"a": "Emma: That's true, although higher rents have made it difficult for some long-term residents to remain in the area.", "b": "Ryan: It has certainly become more attractive, but not everyone has benefited equally from those changes.", "c": "Emma: The old industrial district looks completely different now that cafés, offices, and apartment buildings have replaced most of the factories.", "d": "Ryan: Exactly. Urban renewal can improve a neighbourhood while also putting pressure on people who can no longer afford to live there."}, "answer": ["c", "b", "a", "d"], "explain": "C giới thiệu sự thay đổi của khu vực; B nhận xét lợi ích không chia đều; A bổ sung vấn đề giá thuê tăng; D tổng kết hai mặt của cải tạo đô thị."}, {"label": "Question 3 · Letter to Olivia", "prefix": "Dear Olivia,", "suffix": "Best wishes,<br><b>James</b>", "items": {"a": "As a result, several neighbourhoods that once had relatively affordable rents are now beyond the financial reach of many local families.", "b": "I recently read your article about the effects of rapid urban growth, and it reminded me of what has been happening in my own city.", "c": "Hopefully, future development plans will place greater emphasis on affordable housing rather than simply increasing the number of luxury apartments.", "d": "Over the past few years, an increasing number of businesses and professionals have moved into the city centre, creating greater demand for accommodation.", "e": "Although this investment has brought economic benefits, I am concerned that some residents are being left behind."}, "answer": ["b", "d", "a", "e", "c"], "explain": "B mở thư và nêu lý do viết; D trình bày tình hình; A dùng 'As a result' nêu hệ quả; E chuyển sang mối lo; C đưa ra mong muốn/giải pháp cho tương lai."}, {"label": "Question 4 · Integrated Planning", "items": {"a": "This imbalance can force workers to live far from their workplaces, increasing both commuting times and pressure on transport networks.", "b": "Providing housing alone, therefore, is unlikely to solve the problem unless employment, transport, and essential services are considered at the same time.", "c": "Rapid urban growth does not necessarily result in better living conditions for everyone.", "d": "One reason is that affordable housing is often concentrated on the outskirts of cities, while employment opportunities remain largely in central districts.", "e": "A more integrated approach to urban planning could consequently make cities both more accessible and more inclusive."}, "answer": ["c", "d", "a", "b", "e"], "explain": "C nêu ý chính; D giải thích 'One reason'; A phát triển hệ quả của sự mất cân bằng; B dùng 'therefore' rút ra kết luận; E đề xuất cách tiếp cận tích hợp."}, {"label": "Question 5 · Green Spaces", "items": {"a": "Nevertheless, simply increasing the amount of green space is not enough if residents cannot easily reach or use it.", "b": "Such areas can reduce urban temperatures, improve air quality, and provide residents with places for exercise and social interaction.", "c": "As cities become increasingly crowded, urban planners are paying greater attention to the role of parks and other green spaces.", "d": "For this reason, accessibility should be considered alongside the total amount of green space when new neighbourhoods are designed.", "e": "Their benefits, however, depend partly on where they are located and how effectively they are connected to residential areas."}, "answer": ["c", "b", "e", "a", "d"], "explain": "C giới thiệu chủ đề; B giải thích lợi ích của 'such areas'; E nói lợi ích còn phụ thuộc vị trí; A dùng 'Nevertheless' nêu hạn chế; D dùng 'For this reason' kết luận cần chú ý khả năng tiếp cận."}];
+let qi=0,score=0,history=[],soundOn=true,audioCtx;
+const $=id=>document.getElementById(id);
+
+function tone(f,d=.1,delay=0){
+ if(!soundOn)return;
+ if(!audioCtx)audioCtx=new(AudioContext||webkitAudioContext)();
+ if(audioCtx.state==="suspended")audioCtx.resume();
+ const o=audioCtx.createOscillator(),g=audioCtx.createGain(),s=audioCtx.currentTime+delay;
+ o.frequency.value=f;g.gain.setValueAtTime(.001,s);g.gain.exponentialRampToValueAtTime(.035,s+.01);
+ g.gain.exponentialRampToValueAtTime(.001,s+d);o.connect(g);g.connect(audioCtx.destination);o.start(s);o.stop(s+d+.03)
+}
+function success(){tone(540,.08);tone(720,.1,.07);tone(940,.12,.14)}
+function fail(){tone(170,.2)}
+$("sound").onclick=()=>{soundOn=!soundOn;$("sound").textContent=soundOn?"🔊 Sound On":"🔇 Sound Off";if(soundOn)tone(430,.05)};
+
+function firstEmptySlot(){
+ return [...document.querySelectorAll(".slot")].find(s=>!s.querySelector(".item"));
+}
+function makeItem(key,text){
+ const el=document.createElement("div");el.className="item";el.draggable=true;el.dataset.key=key;
+ el.innerHTML='<span class="key">'+key+'</span><span>'+text+'</span>';
+ el.addEventListener("dragstart",e=>{el.classList.add("dragging");e.dataTransfer.setData("text/plain",key);window.dragEl=el});
+ el.addEventListener("dragend",()=>el.classList.remove("dragging"));
+ el.addEventListener("dblclick",()=>{
+   if(el.parentElement.classList.contains("slot")){
+      $("bank").appendChild(el);
+      tone(320,.05);
+   } else {
+      const empty=firstEmptySlot();
+      if(empty){empty.appendChild(el);tone(480,.05)}
+   }
+ });
+ return el
+}
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+function render(){
+ const q=DATA[qi];
+ $("qtitle").textContent=q.label;
+ $("count").textContent=qi+1;
+ $("bar").style.width=(qi/DATA.length*100)+"%";
+ $("prefix").innerHTML=q.prefix?'<div class="letter"><b>'+q.prefix+'</b></div>':"";
+ $("suffix").innerHTML=q.suffix?'<div class="letter">'+q.suffix+'</div>':"";
+ $("bank").innerHTML="";$("slots").innerHTML="";
+ $("feedback").className="feedback";$("feedback").style.display="none";
+ $("explain").style.display="none";$("explain").innerHTML="";
+ $("check").style.display="inline-block";$("reset").style.display="inline-block";$("next").style.display="none";
+
+ shuffle(Object.keys(q.items)).forEach(k=>$("bank").appendChild(makeItem(k,q.items[k])));
+ q.answer.forEach((_,idx)=>{
+   const slot=document.createElement("div");slot.className="slot";slot.dataset.pos=idx;
+   const num=document.createElement("span");num.className="num";num.textContent=(idx+1)+".";
+   slot.appendChild(num);
+   slot.addEventListener("dragover",e=>{e.preventDefault();slot.classList.add("over")});
+   slot.addEventListener("dragleave",()=>slot.classList.remove("over"));
+   slot.addEventListener("drop",e=>{
+      e.preventDefault();slot.classList.remove("over");
+      const el=window.dragEl;if(!el)return;
+      const existing=slot.querySelector(".item");
+      if(existing){
+        const origin=el.parentElement;
+        if(origin.classList.contains("slot")) origin.appendChild(existing); else $("bank").appendChild(existing);
+      }
+      slot.appendChild(el);tone(360,.04)
+   });
+   $("slots").appendChild(slot)
+ });
+ $("bank").addEventListener("dragover",e=>e.preventDefault());
+ $("bank").addEventListener("drop",e=>{e.preventDefault();if(window.dragEl)$("bank").appendChild(window.dragEl)});
+}
+function currentOrder(){
+ return [...document.querySelectorAll(".slot")].map(s=>{const x=s.querySelector(".item");return x?x.dataset.key:null})
+}
+$("reset").onclick=()=>{render();tone(310,.05)};
+$("check").onclick=()=>{
+ const q=DATA[qi],ord=currentOrder();
+
+ if(ord.some(x=>x===null)){
+   $("feedback").className="feedback bad";
+   $("feedback").style.display="block";
+   $("feedback").innerHTML="<b>⚠️ Hãy điền đủ tất cả các ô trước khi kiểm tra.</b>";
+   $("explain").style.display="none";
+   fail();
+   return;
+ }
+
+ const ok=ord.every((x,i)=>x===q.answer[i]);
+
+ if(!ok){
+   fail();
+   $("feedback").className="feedback bad";
+   $("feedback").style.display="block";
+   $("feedback").innerHTML="<b>❌ Chưa đúng. Hãy sửa lại thứ tự rồi bấm CHECK ORDER lần nữa.</b>";
+   $("explain").style.display="none";
+   $("next").style.display="none";
+   document.querySelectorAll(".item").forEach(x=>x.draggable=true);
+   return;
+ }
+
+ // Chỉ khi đúng hoàn toàn mới ghi điểm, hiện giải thích và mở NEXT.
+ score++;
+ success();
+
+ $("feedback").className="feedback good";
+ $("feedback").style.display="block";
+ $("feedback").innerHTML="<b>✅ PERFECT ORDER!</b><br>Correct sequence: <b>"+q.answer.join(" → ")+"</b>";
+
+ $("explain").style.display="block";
+ $("explain").innerHTML="<b>💡 Giải thích ngắn:</b> "+q.explain;
+
+ $("score").textContent=score;
+ $("bar").style.width=((qi+1)/DATA.length*100)+"%";
+ history.push({ok:true,ord});
+
+ document.querySelectorAll(".item").forEach(x=>x.draggable=false);
+ $("check").style.display="none";
+ $("reset").style.display="none";
+ $("next").style.display="inline-block";
+ $("next").textContent=qi===DATA.length-1?"FINISH →":"NEXT →";
+};
+
+$("next").onclick=()=>{
+ tone(440,.05);
+ if(qi<DATA.length-1){qi++;render()}else finish()
+};
+
+function finish(){
+ $("game").style.display="none";$("result").classList.add("show");
+ [523,659,784,1047].forEach((f,k)=>tone(f,.13,k*.08));
+ const pct=Math.round(score/DATA.length*100);
+ $("final").textContent=score+"/"+DATA.length+" · "+pct+"%";
+ $("message").textContent=pct===100?"Outstanding! Every city blueprint is in perfect order.":pct>=80?"Excellent sequencing work!":pct>=60?"Good work. Review the sequences below.":"Review the logical links and try the challenge again.";
+ let h="<h3>🗺️ Blueprint Review</h3>";
+ DATA.forEach((q,k)=>{
+   const r=history[k];
+   h+='<div class="reviewItem '+(r.ok?"ok":"no")+'"><b>'+q.label+' — '+(r.ok?"✅ Correct":"❌ Incorrect")+'</b><br>Your order: '+r.ord.join(" → ")+'<br>Correct order: <b>'+q.answer.join(" → ")+'</b><br><span>💡 '+q.explain+'</span></div>'
+ });
+ $("review").innerHTML=h
+}
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 11 - Unit 3 - Exercise 4 - Option C</title>
+<style>
+*{box-sizing:border-box}
+:root{
+ --ink:#173c45;--teal:#237a83;--teal2:#55a9a7;--coral:#ef8d75;--cream:#fffaf1;
+ --gold:#f0c76b;--green:#3aa26a;--red:#d95b67;
+}
+body{
+ margin:0;min-height:100vh;padding:22px;font-family:Arial,sans-serif;color:var(--ink);
+ background:
+ radial-gradient(circle at 15% 10%,rgba(255,255,255,.7),transparent 16%),
+ radial-gradient(circle at 85% 15%,rgba(240,199,107,.20),transparent 19%),
+ linear-gradient(145deg,#bfe7e3,#e3f4ef 47%,#f6dcc8 78%,#f4e9c5);
+}
+.wrap{max-width:1160px;margin:auto}
+.hero{
+ position:relative;overflow:hidden;
+ background:linear-gradient(120deg,#174d56,#237a83 58%,#c16f5c);
+ color:#fff;border-radius:30px 30px 0 0;padding:25px 29px;
+ box-shadow:0 18px 50px #244c4e44
+}
+.hero:before{content:"🐚";position:absolute;left:4%;bottom:-42px;font-size:120px;opacity:.13}
+.hero:after{content:"🪸";position:absolute;right:4%;top:-28px;font-size:145px;opacity:.14}
+.heroRow{display:flex;justify-content:space-between;align-items:center;gap:18px;position:relative;z-index:2}
+.brand{display:flex;gap:18px;align-items:center}.icon{font-size:68px}
+h1{margin:0;color:#fff0b7;font-size:clamp(28px,4vw,43px);text-shadow:0 3px 9px #14383d}
+.sub{font-weight:900;color:#f8ffff;margin-top:7px}
+.sound{border:1px solid #d0efec;background:#fffdf8;color:#2e7278;border-radius:18px;padding:11px 15px;font-weight:900;cursor:pointer}
+
+.game{background:#fffaf3;border-radius:0 0 30px 30px;overflow:hidden;box-shadow:0 20px 55px #244c4e30}
+.status{
+ display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;
+ padding:14px 20px;background:#e4f0eb;border-bottom:1px solid #bfd8d2
+}
+.track{height:13px;background:#c7dad6;border-radius:99px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,#237a83,#55a9a7,#ef8d75);transition:.3s}
+.pill{background:#fff;border:1px solid #c5dad5;border-radius:99px;padding:8px 13px;font-weight:900;white-space:nowrap}
+.hearts{font-size:20px;letter-spacing:2px}
+.main{padding:22px}
+.passage{
+ background:#fffef9;border:2px solid #d4e1dc;border-radius:20px;padding:18px 20px;margin-bottom:18px;
+ line-height:1.65;white-space:pre-line;box-shadow:inset 0 0 24px #edf5f255
+}
+.passage h2{margin:0 0 10px;color:#237a83}
+.quiz{background:#fff;border:2px solid #d8e3df;border-radius:22px;padding:23px;box-shadow:inset 0 0 28px #edf5f255}
+.tag{display:inline-block;background:linear-gradient(90deg,#237a83,#c16f5c);color:white;padding:8px 14px;border-radius:14px;font-weight:900}
+.q{font-size:20px;line-height:1.55;margin:19px 0;font-weight:700}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ans{
+ border:2px solid #d8e2de;background:#fffefb;color:#173c45;border-radius:16px;padding:15px;text-align:left;
+ font-size:16px;cursor:pointer;transition:.15s
+}
+.ans:hover:not(:disabled){transform:translateY(-2px);border-color:#5aa6a4;background:#f1fbf9}
+.ans.correct{background:#eafff0;border-color:#3aa26a}
+.ans.wrong{background:#fff0f2;border-color:#d95b67}
+.fb{display:none;margin-top:15px;padding:14px;border-radius:14px;line-height:1.55}
+.fb.good{display:block;background:#eafff0;border-left:5px solid #3aa26a}
+.fb.bad{display:block;background:#fff0f2;border-left:5px solid #d95b67}
+.bonus{display:none;margin-top:10px;padding:12px;border-radius:14px;background:#fff3c8;border-left:5px solid #f0c76b;font-weight:900}
+.next{display:none;float:right;margin-top:15px;border:0;border-radius:16px;padding:12px 22px;background:linear-gradient(90deg,#237a83,#c16f5c);color:#fff;font-weight:900;cursor:pointer}
+
+.overlay{display:none;position:fixed;inset:0;background:#12383de6;z-index:99;align-items:center;justify-content:center;padding:20px}
+.overlay.show{display:flex}
+.box{max-width:520px;width:100%;background:#fffaf3;border:3px solid #c77865;border-radius:28px;padding:30px;text-align:center;box-shadow:0 20px 60px #0006}
+.restart{border:0;border-radius:16px;padding:13px 22px;background:#237a83;color:#fff;font-weight:900;cursor:pointer}
+.result{display:none;background:#fffaf3;border-radius:30px;padding:36px;text-align:center;box-shadow:0 20px 55px #244c4e30}
+.result.show{display:block}
+.big{font-size:60px;font-weight:1000;color:#237a83}
+.review{text-align:left;margin-top:24px}
+.r{padding:13px 15px;margin:9px 0;border-radius:14px;background:#eef6f3;border-left:5px solid #c16f5c;line-height:1.55}
+@media(max-width:820px){
+ .answers{grid-template-columns:1fr}
+ .heroRow{flex-direction:column;align-items:flex-start}
+ .status{grid-template-columns:1fr 1fr}
+ .track{grid-column:1/-1;order:4}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+ <div class="heroRow">
+  <div class="brand">
+   <div class="icon">🐚🪸</div>
+   <div>
+    <h1>Coral Lagoon Journey</h1>
+    <div class="sub">Grade 11 - Unit 3 - Exercise 4 - Option C</div>
+   </div>
+  </div>
+  <button id="sound" class="sound">🔊 Lagoon Sound On</button>
+ </div>
+</header>
+
+<section id="game" class="game">
+ <div class="status">
+  <div class="track"><div id="bar" class="bar"></div></div>
+  <div class="pill"><span id="hearts" class="hearts">❤️❤️❤️❤️❤️</span></div>
+  <div class="pill">🐠 Streak <span id="streak">0</span></div>
+  <div class="pill">🔁 Restarts <span id="restarts">0</span></div>
+ </div>
+
+ <main class="main">
+  <section class="passage">
+    <h2>Rapid Urban Growth</h2>
+    Rapid urban growth has created both opportunities and challenges for governments around the world. In recent years, several international organisations (1) ______ reports warning that cities must prepare for further population growth. As more people move into urban areas, local authorities will need to find effective ways to meet the growing (2) ______ for affordable housing and reliable public services.
+
+Housing is already a serious concern in many large cities. Rising property prices mean that some families (3) ______ spend a significant proportion of their income on rent each month. For low-income residents, there may be very (4) ______ affordable options available near their workplaces, forcing them to travel long distances every day.
+
+Transport presents another challenge. Although public transport networks have expanded considerably, services in some areas remain (5) ______, with unexpected delays making it difficult for commuters to arrive at work on time. Improving reliability could therefore benefit both individual workers and the wider economy.
+
+Access to green space is equally important. Parks and community gardens not only improve air quality but also provide places where residents can exercise and socialise. (6) ______, many rapidly developing cities still struggle to protect such spaces from construction. It is local governments (7) ______ must ensure that future development balances economic growth with residents' quality of life.
+  </section>
+
+  <section class="quiz">
+   <div id="tag" class="tag"></div>
+   <div id="q" class="q"></div>
+   <div id="answers" class="answers"></div>
+   <div id="fb" class="fb"></div>
+   <div id="bonus" class="bonus"></div>
+   <button id="next" class="next">NEXT REEF →</button>
+   <div style="clear:both"></div>
+  </section>
+ </main>
+</section>
+
+<section id="result" class="result">
+ <div style="font-size:82px">🐚🏆🪸</div>
+ <h2>Lagoon Journey Complete!</h2>
+ <div id="final" class="big"></div>
+ <p id="msg"></p>
+ <div id="review" class="review"></div>
+</section>
+</div>
+
+<div id="overlay" class="overlay">
+ <div class="box">
+  <div style="font-size:80px">🌊💔</div>
+  <h2>Lost in the Lagoon!</h2>
+  <p>Hết 5 tim. Học sinh phải làm lại từ Question 1.</p>
+  <p><b>Số lần làm lại:</b> <span id="restartBox">1</span></p>
+  <button id="restartBtn" class="restart">RETURN TO THE FIRST REEF ↻</button>
+ </div>
+</div>
+
+<script>
+const Q=[{"q": "In recent years, several international organisations (1) ______ reports warning that cities must prepare for further population growth.", "o": ["produced", "have produced", "are producing", "produce"], "a": 1, "e": "Dấu hiệu <b>In recent years</b> → thường dùng Present Perfect: <b>have produced</b>."}, {"q": "Local authorities will need to find effective ways to meet the growing (2) ______ for affordable housing and reliable public services.", "o": ["demand", "requirement", "request", "necessity"], "a": 0, "e": "Collocation: <b>the demand for sth</b> = nhu cầu đối với cái gì."}, {"q": "Rising property prices mean that some families (3) ______ spend a significant proportion of their income on rent each month.", "o": ["can", "should", "must", "need"], "a": 2, "e": "Ngữ cảnh thể hiện sự bắt buộc → <b>must spend</b>."}, {"q": "For low-income residents, there may be very (4) ______ affordable options available near their workplaces, forcing them to travel long distances every day.", "o": ["little", "a little", "a few", "few"], "a": 3, "e": "<b>options</b> là danh từ đếm được số nhiều, ngữ cảnh tiêu cực → <b>very few</b>."}, {"q": "Although public transport networks have expanded considerably, services in some areas remain (5) ______, with unexpected delays making it difficult for commuters to arrive at work on time.", "o": ["unavailable", "inconvenient", "unreliable", "inefficient"], "a": 2, "e": "Manh mối là <i>unexpected delays</i> và <i>Improving reliability</i> → <b>unreliable</b>."}, {"q": "Parks and community gardens not only improve air quality but also provide places where residents can exercise and socialise. (6) ______, many rapidly developing cities still struggle to protect such spaces from construction.", "o": ["Therefore", "Moreover", "For example", "However"], "a": 3, "e": "Hai ý tương phản → <b>However</b> = tuy nhiên."}, {"q": "It is local governments (7) ______ must ensure that future development balances economic growth with residents' quality of life.", "o": ["who", "which", "that", "what"], "a": 2, "e": "Câu chẻ: <b>It is + thành phần nhấn mạnh + that + clause</b>."}],L=["A","B","C","D"],MAX=5,BONUS=[3,6];
+let i=0,hearts=MAX,streak=0,restarts=0,firstTry=0,attempts=Array(Q.length).fill(0),soundOn=true,ctx;
+const $=x=>document.getElementById(x);
+
+function tone(f,d=.1){
+ if(!soundOn)return;
+ if(!ctx)ctx=new(AudioContext||webkitAudioContext)();
+ if(ctx.state==="suspended")ctx.resume();
+ const o=ctx.createOscillator(),g=ctx.createGain();
+ o.frequency.value=f;o.type="sine";g.gain.value=.03;
+ o.connect(g);g.connect(ctx.destination);o.start();setTimeout(()=>o.stop(),d*1000)
+}
+
+$("sound").onclick=()=>{
+ soundOn=!soundOn;
+ $("sound").textContent=soundOn?"🔊 Lagoon Sound On":"🔇 Sound Off";
+};
+
+function update(){
+ $("hearts").textContent="❤️".repeat(hearts)+"🤍".repeat(MAX-hearts);
+ $("streak").textContent=streak;
+ $("restarts").textContent=restarts;
+ $("bar").style.width=(i/Q.length*100)+"%";
+}
+
+function render(){
+ const x=Q[i];
+ $("tag").textContent="Reef "+(i+1)+" / "+Q.length;
+ $("q").textContent=x.q;
+ $("answers").innerHTML="";
+ $("fb").className="fb";
+ $("fb").style.display="none";
+ $("bonus").style.display="none";
+ $("next").style.display="none";
+ update();
+
+ x.o.forEach((v,n)=>{
+   const b=document.createElement("button");
+   b.className="ans";
+   b.innerHTML="<b>"+L[n]+".</b> "+v;
+   b.onclick=()=>choose(n,b);
+   $("answers").appendChild(b);
+ });
+}
+
+function choose(n,b){
+ const x=Q[i];
+ attempts[i]++;
+
+ if(n!==x.a){
+   hearts--;
+   streak=0;
+   b.classList.add("wrong");
+   b.disabled=true;
+
+   $("fb").className="fb bad";
+   $("fb").style.display="block";
+   $("fb").innerHTML="<b>❌ Chưa đúng.</b> Mất 1 ❤️. Em phải chọn lại đến khi đúng mới được sang rạn san hô tiếp theo.";
+   tone(165,.2);
+   update();
+
+   if(hearts<=0){
+     restarts++;
+     $("restarts").textContent=restarts;
+     $("restartBox").textContent=restarts;
+     setTimeout(()=>$("overlay").classList.add("show"),250);
+   }
+   return;
+ }
+
+ streak++;
+ if(attempts[i]===1) firstTry++;
+
+ document.querySelectorAll(".ans").forEach(z=>z.disabled=true);
+ b.classList.add("correct");
+
+ $("fb").className="fb good";
+ $("fb").style.display="block";
+ $("fb").innerHTML="<b>✅ CORRECT — "+L[x.a]+". "+x.o[x.a]+"</b><br>"+x.e;
+ tone(820,.11);
+
+ const qn=i+1;
+ if(BONUS.includes(qn)){
+   const before=hearts;
+   hearts=Math.min(MAX,hearts+1);
+   $("bonus").style.display="block";
+   $("bonus").innerHTML=hearts>before
+     ?"🎁 BONUS HEART! +1 ❤️"
+     :"🎁 BONUS REEF! Em đang đủ 5 ❤️ nên số tim giữ nguyên.";
+   tone(1130,.12);
+ }
+
+ update();
+ $("bar").style.width=((i+1)/Q.length*100)+"%";
+ $("next").style.display="inline-block";
+ $("next").textContent=i===Q.length-1?"FINISH JOURNEY →":"NEXT REEF →";
+}
+
+$("next").onclick=()=>{
+ if(i<Q.length-1){i++;render()}
+ else finish();
+};
+
+$("restartBtn").onclick=()=>{
+ $("overlay").classList.remove("show");
+ i=0;
+ hearts=MAX;
+ streak=0;
+ firstTry=0;
+ attempts=Array(Q.length).fill(0);
+ render();
+};
+
+function finish(){
+ $("game").style.display="none";
+ $("result").classList.add("show");
+ $("final").textContent=Q.length+" / "+Q.length;
+ $("msg").innerHTML=
+   "Hoàn thành với <b>"+restarts+"</b> lần làm lại.<br>"+
+   "Đúng ngay lần đầu: <b>"+firstTry+"/"+Q.length+"</b>.";
+
+ let h="<h3>🐠 Lagoon Review</h3>";
+ Q.forEach((x,k)=>{
+   h+='<div class="r"><b>Question '+(k+1)+'</b> — Correct: <b>'+L[x.a]+'. '+x.o[x.a]+'</b><br>'+x.e+'<br>Attempts: <b>'+attempts[k]+'</b></div>';
+ });
+ $("review").innerHTML=h;
+}
+
+render();
+</script>
+</body>
+</html>
