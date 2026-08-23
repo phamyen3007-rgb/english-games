@@ -1,247 +1,279 @@
-<!DOCTYPE html>
-<html lang="vi">
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Grade 11 - Unit 2 - Exercise 13 - Option C</title>
 <style>
-:root{
- --night:#171c28;--panel:#f9fbff;--panel2:#eef3ff;--blue:#7aa8ff;--violet:#a487e8;
- --rose:#e98faa;--gold:#f1ca78;--green:#50bf87;--red:#e86b78;--text:#3e4050;--muted:#777d90;
-}
 *{box-sizing:border-box}
-body{
- margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--text);
- background:
- radial-gradient(circle at 12% 12%,rgba(122,168,255,.14),transparent 24%),
- radial-gradient(circle at 86% 16%,rgba(233,143,170,.12),transparent 24%),
- linear-gradient(160deg,#181c29,#10141d 62%,#090c12);
- padding:18px;overflow-x:hidden
+:root{
+ --ink:#f5fbff;--navy:#08172b;--blue:#163f73;--cyan:#4ed7ff;--violet:#8f71ff;
+ --green:#47c987;--red:#ff6675;--gold:#ffd76d;
 }
-.bg{position:fixed;inset:0;pointer-events:none;overflow:hidden}
-.wing{position:absolute;font-size:60px;opacity:.09;animation:drift 18s linear infinite}
-.w1{left:-80px;top:18%}.w2{left:-110px;top:62%;animation-delay:5s}
-@keyframes drift{to{transform:translateX(118vw) rotate(10deg)}}
-.star{position:absolute;width:4px;height:4px;border-radius:50%;background:white;opacity:.45}
-.s1{left:18%;top:10%}.s2{left:38%;top:18%}.s3{right:16%;top:12%}.s4{right:32%;top:28%}
-.wrap{max-width:1180px;margin:auto;position:relative;z-index:2}
-.hero{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px}
-.hero-left{display:flex;align-items:center;gap:14px}
-.icon{font-size:64px;filter:drop-shadow(0 0 16px rgba(164,135,232,.2))}
-h1{margin:0;font-size:clamp(28px,4vw,44px);background:linear-gradient(90deg,#f8fbff,#7aa8ff,#a487e8,#e98faa,#f1ca78);-webkit-background-clip:text;background-clip:text;color:transparent}
-.sub{margin-top:6px;color:#c7c9d6;font-weight:700}
-.sound{border:1px solid rgba(255,255,255,.15);background:#2a3040;color:white;border-radius:12px;padding:11px 14px;font-weight:900;cursor:pointer}
-.shell{background:rgba(249,251,255,.98);border-radius:24px;overflow:hidden;box-shadow:0 24px 65px rgba(0,0,0,.35)}
-.status{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;padding:16px 20px;background:linear-gradient(90deg,#eef3ff,#fff7fb)}
-.track{height:13px;background:#dfe5f2;border-radius:999px;overflow:hidden}
-.bar{height:100%;width:0;background:linear-gradient(90deg,#7aa8ff,#a487e8,#e98faa,#f1ca78);transition:.25s}
-.chip{background:#fff;padding:8px 12px;border-radius:999px;font-weight:900;white-space:nowrap;box-shadow:0 4px 12px rgba(60,60,90,.06)}
-.grid{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;padding:20px}
-.passage{background:#fff;border:2px solid #dfe5f2;border-radius:18px;padding:18px;max-height:700px;overflow:auto;line-height:1.75}
-.passage h2{margin-top:0;color:#6f5b95}
-.passage strong{color:#6c5a85}
-.passage u{text-decoration-thickness:2px;text-underline-offset:3px}
-.quiz{background:#f4f0fb;border:2px solid #ded5ee;border-radius:18px;padding:18px}
-.qtag{display:inline-block;background:#e7e0f4;color:#695982;padding:7px 12px;border-radius:10px;font-weight:900}
-.question{font-size:21px;line-height:1.5;margin:16px 0}
-.options{display:grid;gap:11px}
-.option{padding:14px 15px;border:2px solid #d7cce8;border-radius:14px;background:#fff;color:#3e4050;text-align:left;font-size:16px;cursor:pointer;transition:.15s}
-.option:hover:not(:disabled){transform:translateY(-2px);border-color:#a487e8;box-shadow:0 8px 18px rgba(80,70,120,.07)}
-.option.correct{background:#eafff3!important;border-color:var(--green)!important}
-.option.wrong{background:#fff0f2!important;border-color:var(--red)!important}
-.feedback{display:none;margin-top:15px;padding:15px;border-left:5px solid;border-radius:12px;background:#fff;line-height:1.55}
-.feedback.show{display:block}.feedback.ok{border-color:var(--green)}.feedback.no{border-color:var(--red)}
-.controls{display:flex;justify-content:flex-end;margin-top:14px}
-.next{border:0;border-radius:12px;padding:12px 18px;font-weight:900;background:linear-gradient(90deg,#b9d0ff,#ccb8f2,#f1bdd0,#f6dda0);color:#4c465d;cursor:pointer}
-.next:disabled{opacity:.4}
-.result{display:none;text-align:center;padding:32px}.result.show{display:block}
-.big{font-size:58px;font-weight:1000;color:#8267ad}
-.review{text-align:left;margin-top:22px}
-.item{padding:12px 14px;background:#fff;border-left:5px solid #a9a8b8;border-radius:12px;margin:9px 0;line-height:1.5}
-.item.ok{border-left-color:var(--green)}.item.no{border-left-color:var(--red)}
-@media(max-width:900px){.grid{grid-template-columns:1fr}.passage{max-height:440px}}
-@media(max-width:620px){.hero{align-items:flex-start;flex-direction:column}.status{grid-template-columns:1fr 1fr}.track{grid-column:1/-1;order:4}}
+body{
+ margin:0;min-height:100vh;padding:22px;font-family:Arial,Helvetica,sans-serif;color:#edf8ff;
+ background:
+ radial-gradient(circle at 18% 12%,rgba(78,215,255,.13),transparent 20%),
+ radial-gradient(circle at 82% 15%,rgba(143,113,255,.12),transparent 22%),
+ linear-gradient(160deg,#050b16,#08172b 50%,#0b233f);
+}
+.wrap{max-width:1160px;margin:auto}
+.hero{
+ position:relative;overflow:hidden;
+ background:linear-gradient(120deg,#0b1630,#153e73 58%,#412f77);
+ border:2px solid #4ed7ff55;border-radius:30px 30px 0 0;padding:25px 29px;
+ box-shadow:0 0 38px #4ed7ff22,0 18px 55px #0009
+}
+.hero:before{content:"🛰️";position:absolute;left:3%;bottom:-48px;font-size:145px;opacity:.12}
+.hero:after{content:"🪐";position:absolute;right:4%;top:-28px;font-size:145px;opacity:.14}
+.heroRow{display:flex;justify-content:space-between;align-items:center;gap:18px;position:relative;z-index:2}
+.brand{display:flex;gap:18px;align-items:center}.icon{font-size:68px}
+h1{margin:0;color:#aeeeff;font-size:clamp(28px,4vw,43px);text-shadow:0 3px 10px #000}
+.sub{font-weight:900;color:#fff;margin-top:7px}
+.sound{border:1px solid #70ddff;background:#0b1730;color:#b9efff;border-radius:18px;padding:11px 15px;font-weight:900;cursor:pointer}
+
+.game{background:#0a1324;border:1px solid #4ed7ff33;border-radius:0 0 30px 30px;overflow:hidden;box-shadow:0 20px 55px #0009}
+.status{
+ display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;
+ padding:14px 20px;background:#0d1c32;border-bottom:1px solid #23466c
+}
+.track{height:13px;background:#183452;border-radius:99px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,#4ed7ff,#6f8cff,#a873ff);transition:.3s}
+.pill{background:#0a1528;border:1px solid #2b4e75;border-radius:99px;padding:8px 13px;font-weight:900;white-space:nowrap}
+.hearts{font-size:20px;letter-spacing:2px}
+.main{padding:22px}
+.passage{
+ background:#0c182b;border:1px solid #31567e;border-radius:22px;padding:20px;
+ line-height:1.7;white-space:pre-line;margin-bottom:18px;color:#edf8ff;
+ box-shadow:inset 0 0 24px #4ed7ff08
+}
+.passage h2{margin:0 0 10px;color:#7fe7ff}
+.quiz{background:#0b1628;border:1px solid #31567e;border-radius:22px;padding:23px}
+.tag{display:inline-block;background:linear-gradient(90deg,#163f73,#513f8f);color:white;padding:8px 14px;border-radius:14px;font-weight:900}
+.q{font-size:20px;line-height:1.55;margin:19px 0;font-weight:800}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ans{
+ border:1px solid #365b84;background:#081221;color:#edf8ff;border-radius:16px;padding:15px;text-align:left;
+ font-size:16px;cursor:pointer;transition:.15s
+}
+.ans:hover:not(:disabled){transform:translateY(-2px);border-color:#4ed7ff;background:#0e2039}
+.ans.correct{background:#0e3324;border-color:#47c987}
+.ans.wrong{background:#35131b;border-color:#ff6675}
+.fb{display:none;margin-top:15px;padding:14px;border-radius:14px;line-height:1.55}
+.fb.good{display:block;background:#0e3324;border-left:5px solid #47c987}
+.fb.bad{display:block;background:#35131b;border-left:5px solid #ff6675}
+.bonus{display:none;margin-top:10px;padding:12px;border-radius:14px;background:#3d320e;border-left:5px solid #ffd76d;font-weight:900;color:#fff0a8}
+.next{
+ display:none;float:right;margin-top:15px;border:0;border-radius:16px;padding:12px 22px;
+ background:linear-gradient(90deg,#163f73,#513f8f);color:#fff;font-weight:900;cursor:pointer
+}
+.overlay{display:none;position:fixed;inset:0;background:#020711eb;z-index:99;align-items:center;justify-content:center;padding:20px}
+.overlay.show{display:flex}
+.box{max-width:520px;width:100%;background:#0c182b;border:3px solid #4ed7ff;border-radius:28px;padding:30px;text-align:center;box-shadow:0 0 45px #4ed7ff2c}
+.restart{border:0;border-radius:16px;padding:13px 22px;background:linear-gradient(90deg,#163f73,#513f8f);color:#fff;font-weight:900;cursor:pointer}
+.result{display:none;background:#0a1324;border:1px solid #4ed7ff33;border-radius:30px;padding:36px;text-align:center;box-shadow:0 20px 55px #0009}
+.result.show{display:block}
+.big{font-size:60px;font-weight:1000;color:#7fe7ff}
+.review{text-align:left;margin-top:24px}
+.r{padding:13px 15px;margin:9px 0;border-radius:14px;background:#0d1d33;border-left:5px solid #6f8cff;line-height:1.55}
+@media(max-width:820px){
+ .answers{grid-template-columns:1fr}
+ .heroRow{flex-direction:column;align-items:flex-start}
+ .status{grid-template-columns:1fr 1fr}
+ .track{grid-column:1/-1;order:4}
+}
 </style>
 </head>
 <body>
-<div class="bg">
- <div class="wing w1">🪽</div><div class="wing w2">🪽</div>
- <div class="star s1"></div><div class="star s2"></div><div class="star s3"></div><div class="star s4"></div>
-</div>
-
 <div class="wrap">
- <div class="hero">
-  <div class="hero-left">
-   <div class="icon">🪽🌙</div>
+<header class="hero">
+ <div class="heroRow">
+  <div class="brand">
+   <div class="icon">🛰️🪐</div>
    <div>
-    <h1>Growing Wings Reading Challenge</h1>
-    <div class="sub">Grade 11 · Unit 2 · Exercise 13 · Option C</div>
+    <h1>Galaxy Signal Mission</h1>
+    <div class="sub">Grade 11 - Unit 2 - Exercise 13 - Option C</div>
    </div>
   </div>
-  <button class="sound" id="sound">🔊 Sound On</button>
+  <button id="sound" class="sound">🔊 Space Sound On</button>
+ </div>
+</header>
+
+<section id="game" class="game">
+ <div class="status">
+  <div class="track"><div id="bar" class="bar"></div></div>
+  <div class="pill"><span id="hearts" class="hearts">❤️❤️❤️❤️❤️</span></div>
+  <div class="pill">🛰️ Progress <span id="progress">1/8</span></div>
+  <div class="pill">🔁 Restarts <span id="restarts">0</span></div>
  </div>
 
- <div class="shell">
-  <div id="quizArea">
-   <div class="status">
-    <div class="track"><div class="bar" id="bar"></div></div>
-    <div class="chip" id="count"></div>
-    <div class="chip" id="score"></div>
-    <div class="chip" id="heart"></div>
-   </div>
+ <main class="main">
+  <section class="passage">
+   <h2>📡 Reading Transmission</h2>
+   [I] Teenagers often want more independence as they grow older. [II] They may want to choose their own clothes, spend more time with friends, or make decisions about their studies. [III] This desire for freedom is a natural part of growing up. [IV] However, it can sometimes cause disagreements between teenagers and their parents.
 
-   <div class="grid">
-    <section class="passage">
-     <h2>GROWING INDEPENDENCE AND FAMILY UNDERSTANDING</h2>
-     <div id="passage"></div>
-    </section>
+One common source of conflict is the difference in expectations. Teenagers may believe that they are old enough to make their own decisions, while parents may feel that their children still need guidance. For example, parents might set rules about going out, using smartphones, or completing homework. Teenagers sometimes consider these rules too strict, but parents often create them because they are concerned about their children's safety and responsibilities.
 
-    <section class="quiz">
-     <div class="qtag" id="qtag"></div>
-     <div class="question" id="question"></div>
-     <div class="options" id="options"></div>
-     <div class="feedback" id="feedback"></div>
-     <div class="controls"><button class="next" id="next" disabled>Next Step →</button></div>
-    </section>
-   </div>
-  </div>
+Another challenge involves communication. During an argument, teenagers may become frustrated when they feel that their parents do not understand them. Parents, on the other hand, may become upset if their children refuse to listen to their advice. If both sides react angrily, a small disagreement can quickly become a serious conflict. Therefore, learning to stay calm and listen carefully can prevent many unnecessary arguments.
 
-  <div class="result" id="result">
-   <div style="font-size:74px">🪽✨</div>
-   <h2>Growing Wings Complete!</h2>
-   <div class="big" id="final"></div>
-   <p id="message"></p>
-   <button class="next" id="restart">Play Again ↻</button>
-   <div class="review" id="review"></div>
-  </div>
+Fortunately, disagreements do not have to damage family relationships. Parents can explain the reasons behind their rules instead of simply telling teenagers what they must do. Teenagers, meanwhile, can show that they deserve greater independence by behaving responsibly. When parents see that their children can make sensible decisions, they may become more willing to give them freedom. In this way, trust and open communication can help families find a balance between parental guidance and teenage independence.
+  </section>
+
+  <section class="quiz">
+   <div id="tag" class="tag"></div>
+   <div id="q" class="q"></div>
+   <div id="answers" class="answers"></div>
+   <div id="fb" class="fb"></div>
+   <div id="bonus" class="bonus"></div>
+   <button id="next" class="next">NEXT SIGNAL →</button>
+   <div style="clear:both"></div>
+  </section>
+ </main>
+</section>
+
+<section id="result" class="result">
+ <div style="font-size:82px">🛰️🏆🪐</div>
+ <h2>Galaxy Mission Complete!</h2>
+ <div id="final" class="big"></div>
+ <p id="msg"></p>
+ <div id="review" class="review"></div>
+</section>
+</div>
+
+<div id="overlay" class="overlay">
+ <div class="box">
+  <div style="font-size:78px">💥💔</div>
+  <h2>SIGNAL LOST!</h2>
+  <p>Hết 5 tim. Học sinh phải làm lại từ Question 1.</p>
+  <p><b>Số lần làm lại:</b> <span id="restartBox">1</span></p>
+  <button id="restartBtn" class="restart">RESTART FROM BASE ↻</button>
  </div>
 </div>
 
 <script>
-const passage="<p><strong>[I]</strong> As teenagers move toward adulthood, their relationships with their parents often undergo considerable changes. Young people gradually become more capable of making decisions independently and may begin to challenge ideas that they previously accepted without question. <strong>[II]</strong> Parents, meanwhile, may find it difficult to determine how much independence their children are ready to handle. <strong>[III]</strong> This uncertainty does not necessarily indicate a breakdown in family relationships; rather, it reflects the complicated process through which teenagers develop a stronger sense of identity. <strong>[IV]</strong></p>\n\n<p>One particularly challenging issue is parental involvement in teenagers' decisions. Parents who have accumulated years of experience naturally want to prevent their children from making choices they may later regret. However, excessive involvement can sometimes produce the opposite effect. Teenagers who feel that every decision is being made for them may become frustrated or even deliberately resist parental advice. On the other hand, complete freedom is not necessarily beneficial either, as adolescents may still lack the experience required to anticipate the long-term consequences of their actions. Effective parenting therefore involves <u>striking a balance</u> between providing guidance and allowing young people to learn from their own decisions.</p>\n\n<p>Academic expectations can also become a source of tension. Many parents associate educational achievement with future security and consequently encourage their children to perform well at school. Although such encouragement can motivate teenagers, unrealistic expectations may place them under considerable pressure. Some adolescents may begin to believe that parental approval depends entirely on their academic performance. This perception can <u>undermine</u> their confidence and make them reluctant to discuss failure or disappointment with their parents. For this reason, experts often emphasize that parents should recognize effort and personal development rather than focusing exclusively on grades.</p>\n\n<p>Despite these challenges, disagreement between generations should not automatically be viewed as harmful. Differences of opinion can provide teenagers with opportunities to explain their reasoning, defend their views, and consider alternative perspectives. Parents, in turn, can gain a better understanding of their children's changing needs and concerns. When disagreements are handled respectfully, <u>they</u> can contribute to teenagers' emotional maturity and decision-making skills. The goal, therefore, should not be to eliminate conflict entirely but to create a family environment in which disagreements can occur without damaging trust or mutual respect.</p>";
-const Q=[{"q": "Where in paragraph 1 does the following sentence best fit? “Consequently, disagreements may arise even when both sides genuinely want to maintain a positive relationship.”", "options": ["[I]", "[II]", "[III]", "[IV]"], "answer": 2, "explanation": "Consequently cho thấy câu này là kết quả của hai ý trước: teenagers muốn độc lập hơn và parents không chắc nên trao bao nhiêu quyền tự chủ. Sau đó “This uncertainty...” tiếp tục giải thích tình trạng này. Vì vậy vị trí [III] hợp lý nhất."}, {"q": "According to paragraph 2, which of the following is NOT mentioned as a possible consequence of excessive parental involvement?", "options": ["Teenagers may intentionally reject their parents' suggestions.", "Teenagers may experience frustration when decisions are constantly made for them.", "Teenagers may become less willing to follow parental guidance.", "Teenagers may fail to understand the long-term consequences of their decisions."], "answer": 3, "explanation": "A, B và C đều liên quan đến frustration hoặc deliberately resist parental advice. D thuộc phần nói về rủi ro của complete freedom, không phải hậu quả của excessive parental involvement."}, {"q": "Which of the following best paraphrases the sentence: “Effective parenting therefore involves striking a balance between providing guidance and allowing young people to learn from their own decisions.”", "options": ["Successful parents should offer appropriate support while still giving teenagers opportunities to experience the results of their own choices.", "Parents should gradually stop advising teenagers so that young people can become completely responsible for their future.", "Teenagers should be allowed to make independent decisions only after they have demonstrated that they rarely make mistakes.", "Effective parenting requires parents to intervene whenever teenagers are likely to make decisions with negative consequences."], "answer": 0, "explanation": "A giữ đúng hai vế của strike a balance: offer appropriate support ≈ providing guidance; giving teenagers opportunities ≈ allowing young people to learn from their own decisions."}, {"q": "The word “undermine” in paragraph 3 is closest in meaning to ______.", "options": ["conceal", "weaken", "demonstrate", "restore"], "answer": 1, "explanation": "Undermine = làm suy yếu, làm giảm dần. → undermine confidence = weaken confidence."}, {"q": "Which of the following can be inferred from paragraph 3?", "options": ["High academic expectations always cause teenagers to perform poorly at school.", "Teenagers are generally more concerned about parental approval than about academic achievement itself.", "Focusing only on academic results may discourage teenagers from communicating openly about their difficulties.", "Parents who praise effort rather than grades are unlikely to have disagreements with their children."], "answer": 2, "explanation": "Bài nói teenagers có thể trở nên reluctant to discuss failure or disappointment khi cảm thấy parental approval phụ thuộc vào thành tích. Vì vậy có thể suy ra việc chỉ tập trung vào kết quả học tập làm giảm giao tiếp cởi mở."}, {"q": "The word “they” in paragraph 4 refers to ______.", "options": ["alternative perspectives", "changing needs and concerns", "disagreements", "decision-making skills"], "answer": 2, "explanation": "Câu có cấu trúc: When disagreements are handled respectfully, they can contribute... → they = disagreements."}, {"q": "Which of the following best summarizes paragraph 4?", "options": ["Parents should encourage frequent disagreements because conflict is essential for developing teenagers' reasoning abilities.", "Although generational disagreements can create difficulties, handling them constructively may support teenagers' development while preserving family relationships.", "Teenagers develop emotional maturity primarily by defending their opinions against parental criticism.", "Family conflict should eventually disappear as parents become more aware of their children's changing needs."], "answer": 1, "explanation": "Đoạn 4 nhấn mạnh disagreement không nhất thiết có hại; nếu được xử lý tôn trọng, nó có thể hỗ trợ sự trưởng thành của teen mà vẫn giữ trust và mutual respect."}, {"q": "Which of the following best summarizes the passage?", "options": ["Parent-teen conflict is mainly caused by parents' excessive concern about academic achievement, and families can prevent such conflict by allowing teenagers greater independence.", "As teenagers become increasingly independent, parents should reduce their involvement in their children's lives and allow them to learn primarily through personal experience.", "The changing parent-teen relationship involves challenges concerning independence and academic expectations, but balanced guidance and constructive disagreement can contribute to teenagers' development without weakening family bonds.", "Although disagreements between parents and teenagers are unavoidable, academic pressure remains the most serious threat to teenagers' emotional development and family relationships."], "answer": 2, "explanation": "C bao quát đủ các ý lớn: changing relationship, independence, academic expectations, balanced guidance, constructive disagreement và teenagers' development without weakening family bonds."}];
-const L=["A","B","C","D"];
-let i=0,xp=0,hearts=5,combo=0,answered=false,history=[],soundOn=true,ctx=null;
+const Q=[{"num": 1, "q": "Where in paragraph 1 does the following sentence best fit? “As a result, parents may find it difficult to decide how much freedom they should give their children.”", "o": ["[I]", "[II]", "[III]", "[IV]"], "a": 3, "e": "Câu thêm nói về khó khăn của cha mẹ khi quyết định mức độ tự do → hợp sau ý <b>desire for freedom</b> và trước “However...”."}, {"num": 2, "q": "According to paragraph 2, which of the following is NOT mentioned as something parents may make rules about?", "o": ["Going out", "Using smartphones", "Doing homework", "Choosing friends"], "a": 3, "e": "Bài chỉ nêu <b>going out, using smartphones, completing homework</b>; không nêu <b>choosing friends</b>."}, {"num": 3, "q": "Which of the following best paraphrases the sentence “Teenagers sometimes consider these rules too strict, but parents often create them because they are concerned about their children's safety and responsibilities.”?", "o": ["Teenagers may dislike parental rules, although parents usually make them because they want to protect and guide their children.", "Parents usually make strict rules because they do not trust teenagers to make any decisions by themselves.", "Teenagers understand that strict rules are necessary to protect them from dangerous situations.", "Parents should allow teenagers to make their own decisions instead of creating rules for them."], "a": 0, "e": "Teen có thể thấy quy định quá nghiêm, nhưng cha mẹ đặt ra vì muốn <b>bảo vệ và hướng dẫn</b> con."}, {"num": 4, "q": "The word “prevent” in paragraph 3 could be best replaced by ______.", "o": ["create", "avoid", "increase", "explain"], "a": 1, "e": "<b>prevent arguments ≈ avoid arguments</b> = ngăn/tránh các cuộc tranh cãi."}, {"num": 5, "q": "Which of the following is TRUE according to the passage?", "o": ["Teenagers usually want their parents to make decisions about their studies.", "Parents make rules mainly because they want to control every part of their children's lives.", "Angry reactions can turn a minor disagreement into a more serious conflict.", "Parents should stop giving advice when teenagers become frustrated."], "a": 2, "e": "Đoạn 3 nói một bất đồng nhỏ có thể nhanh chóng trở thành xung đột nghiêm trọng nếu cả hai bên phản ứng tức giận."}, {"num": 6, "q": "The word “they” in the last paragraph refers to ______.", "o": ["teenagers", "parents", "decisions", "family relationships"], "a": 1, "e": "“When <b>parents</b> see... <b>they</b> may become...” → <b>they = parents</b>."}, {"num": 7, "q": "Which of the following best summarizes paragraph 3?", "o": ["Parents should avoid giving advice because teenagers often become angry.", "Poor communication and angry reactions can make disagreements worse, while calm listening can help reduce conflict.", "Teenagers usually start arguments because they do not understand their parents.", "Serious family conflicts are mainly caused by parents who refuse to listen to their children."], "a": 1, "e": "Đoạn 3 bao quát cả nguyên nhân và giải pháp: giao tiếp kém làm xung đột nặng hơn, còn bình tĩnh lắng nghe giúp giảm bất đồng."}, {"num": 8, "q": "Which of the following best summarizes the passage?", "o": ["Teenagers need complete freedom because parental rules often cause unnecessary family conflicts.", "Parents should continue making strict rules until their children become adults.", "Differences over independence can cause conflict, but trust, responsibility, and good communication can help parents and teenagers understand each other.", "Family disagreements mainly occur because teenagers spend too much time with their friends."], "a": 2, "e": "Ý chính toàn bài: mâu thuẫn về sự độc lập có thể xảy ra, nhưng <b>trust + responsibility + communication</b> giúp cải thiện quan hệ."}],L=["A","B","C","D"],MAX=5,BONUS=[3,6,8];
+let i=0,hearts=MAX,restarts=0,firstTry=0,tries=Array(Q.length).fill(0),soundOn=true,ctx;
 const $=id=>document.getElementById(id);
 
-function ac(){
- if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();
- if(ctx.state==="suspended")ctx.resume();
- return ctx;
-}
-function tone(f,d=.1,t="sine",v=.035,delay=0){
+function tone(f,d=.1){
  if(!soundOn)return;
- const c=ac(),o=c.createOscillator(),g=c.createGain(),s=c.currentTime+delay;
- o.type=t;o.frequency.setValueAtTime(f,s);
- g.gain.setValueAtTime(.0001,s);
- g.gain.exponentialRampToValueAtTime(v,s+.01);
- g.gain.exponentialRampToValueAtTime(.0001,s+d);
- o.connect(g);g.connect(c.destination);o.start(s);o.stop(s+d+.03);
+ if(!ctx)ctx=new(AudioContext||webkitAudioContext)();
+ if(ctx.state==="suspended")ctx.resume();
+ const o=ctx.createOscillator(),g=ctx.createGain();
+ o.frequency.value=f;o.type="sine";g.gain.value=.03;
+ o.connect(g);g.connect(ctx.destination);o.start();setTimeout(()=>o.stop(),d*1000)
 }
-function good(){tone(650,.08,"triangle");tone(930,.11,"sine",.03,.08)}
-function bad(){tone(170,.16,"sawtooth");tone(100,.2,"square",.018,.1)}
-function nextSound(){tone(430,.06,"triangle",.018);tone(680,.07,"triangle",.015,.06)}
-function win(){[523,659,784,988].forEach((f,k)=>tone(f,.17,"triangle",.027,k*.09))}
-
 $("sound").onclick=()=>{
  soundOn=!soundOn;
- $("sound").textContent=soundOn?"🔊 Sound On":"🔇 Sound Off";
- if(soundOn)nextSound();
+ $("sound").textContent=soundOn?"🔊 Space Sound On":"🔇 Sound Off";
 };
 
-function render(){
- answered=false;
- $("next").disabled=true;
- $("feedback").className="feedback";
- $("feedback").innerHTML="";
- const q=Q[i];
-
- $("qtag").textContent=`Question ${i+1}`;
- $("question").textContent=q.q;
- $("count").textContent=`${i+1}/${Q.length}`;
- $("score").textContent=`⭐ ${xp} XP · Combo ${combo}`;
- $("heart").textContent=`❤️ ${hearts}`;
- $("bar").style.width=`${i/Q.length*100}%`;
- $("options").innerHTML="";
-
- q.options.forEach((op,n)=>{
-  const b=document.createElement("button");
-  b.className="option";
-  b.innerHTML=`<strong>${L[n]}.</strong> ${op}`;
-  b.onclick=()=>choose(n,b);
-  $("options").appendChild(b);
- });
-
- $("next").textContent=i===Q.length-1?"Finish Wings 🪽":"Next Step →";
+function update(){
+ $("hearts").textContent="❤️".repeat(hearts)+"🖤".repeat(MAX-hearts);
+ $("restarts").textContent=restarts;
+ $("progress").textContent=(i+1)+"/"+Q.length;
+ $("bar").style.width=(i/Q.length*100)+"%";
 }
 
-function choose(n,btn){
- if(answered)return;
- answered=true;
- const q=Q[i];
- const buttons=[...document.querySelectorAll(".option")];
- const right=n===q.answer;
+function render(){
+ const x=Q[i];
+ $("tag").textContent="Question "+x.num+" • Signal "+(i+1)+" / "+Q.length;
+ $("q").textContent=x.q;
+ $("answers").innerHTML="";
+ $("fb").style.display="none";
+ $("bonus").style.display="none";
+ $("next").style.display="none";
+ update();
 
- buttons.forEach(b=>b.disabled=true);
- buttons[q.answer].classList.add("correct");
+ x.o.forEach((v,n)=>{
+   const b=document.createElement("button");
+   b.className="ans";
+   b.innerHTML="<b>"+L[n]+".</b> "+v;
+   b.onclick=()=>choose(n,b);
+   $("answers").appendChild(b);
+ });
+}
 
- if(right){
-  xp+=10+combo*2;
-  combo++;
-  $("feedback").className="feedback ok show";
-  $("feedback").innerHTML=`<strong>✅ Correct: ${L[q.answer]}. ${q.options[q.answer]}</strong><br>${q.explanation}`;
-  good();
- }else{
-  hearts=Math.max(0,hearts-1);
-  combo=0;
-  btn.classList.add("wrong");
-  $("feedback").className="feedback no show";
-  $("feedback").innerHTML=`<strong>❌ Correct answer: ${L[q.answer]}. ${q.options[q.answer]}</strong><br>${q.explanation}`;
-  bad();
+function choose(n,b){
+ const x=Q[i];
+ tries[i]++;
+
+ if(n!==x.a){
+   hearts--;
+   b.classList.add("wrong");
+   b.disabled=true;
+
+   $("fb").className="fb bad";
+   $("fb").style.display="block";
+   $("fb").innerHTML="<b>❌ Chưa đúng.</b> Mất 1 ❤️. Em phải chọn lại đến khi đúng mới được qua câu.";
+   tone(145,.18);
+   update();
+
+   if(hearts<=0){
+     restarts++;
+     $("restarts").textContent=restarts;
+     $("restartBox").textContent=restarts;
+     setTimeout(()=>$("overlay").classList.add("show"),220);
+   }
+   return;
  }
 
- history.push({selected:n,correct:right});
- $("score").textContent=`⭐ ${xp} XP · Combo ${combo}`;
- $("heart").textContent=`❤️ ${hearts}`;
- $("bar").style.width=`${(i+1)/Q.length*100}%`;
- $("next").disabled=false;
+ if(tries[i]===1) firstTry++;
+
+ document.querySelectorAll(".ans").forEach(z=>z.disabled=true);
+ b.classList.add("correct");
+
+ $("fb").className="fb good";
+ $("fb").style.display="block";
+ $("fb").innerHTML="<b>✅ CORRECT — "+L[x.a]+". "+x.o[x.a]+"</b><br>"+x.e;
+ tone(840,.1);
+
+ const pos=i+1;
+ if(BONUS.includes(pos)){
+   const before=hearts;
+   hearts=Math.min(MAX,hearts+1);
+   $("bonus").style.display="block";
+   $("bonus").innerHTML=hearts>before
+     ?"🎁 BONUS HEART! +1 ❤️"
+     :"🎁 BONUS SIGNAL! Em đang đủ 5 ❤️ nên số tim giữ nguyên.";
+   setTimeout(()=>tone(1120,.12),120);
+ }
+
+ update();
+ $("bar").style.width=((i+1)/Q.length*100)+"%";
+ $("next").style.display="inline-block";
+ $("next").textContent=i===Q.length-1?"FINISH MISSION →":"NEXT SIGNAL →";
 }
 
 $("next").onclick=()=>{
- if(!answered)return;
- nextSound();
- if(i<Q.length-1){i++;render();}
+ if(i<Q.length-1){i++;render()}
  else finish();
 };
 
+$("restartBtn").onclick=()=>{
+ $("overlay").classList.remove("show");
+ i=0;
+ hearts=MAX;
+ firstTry=0;
+ tries=Array(Q.length).fill(0);
+ render();
+};
+
 function finish(){
- $("quizArea").style.display="none";
+ $("game").style.display="none";
  $("result").classList.add("show");
- win();
+ $("final").textContent=Q.length+" / "+Q.length;
+ $("msg").innerHTML=
+   "Hoàn thành với <b>"+restarts+"</b> lần làm lại.<br>"+
+   "Đúng ngay lần đầu: <b>"+firstTry+"/"+Q.length+"</b>.";
 
- const correct=history.filter(x=>x.correct).length;
- $("final").textContent=`${correct}/${Q.length} · ${xp} XP`;
-
- if(correct===Q.length) $("message").textContent="Perfect! Em đã hoàn thành toàn bộ Growing Wings.";
- else if(correct>=7) $("message").textContent="Excellent reading comprehension!";
- else if(correct>=5) $("message").textContent="Good job! Hãy xem lại các câu chưa đúng.";
- else $("message").textContent="Hãy đọc lại passage và thử thêm một lần nữa.";
-
- let html="<h3>📘 Growing Wings Review</h3>";
- Q.forEach((q,k)=>{
-  const a=history[k];
-  html+=`<div class="item ${a.correct?"ok":"no"}">
-   <strong>Question ${k+1}: ${a.correct?"Correct":"Incorrect"}</strong><br>
-   Your answer: ${L[a.selected]}. ${q.options[a.selected]}<br>
-   Correct: ${L[q.answer]}. ${q.options[q.answer]}<br>
-   <em>${q.explanation}</em>
-  </div>`;
+ let h="<h3>📡 Answer Review</h3>";
+ Q.forEach((x,k)=>{
+   h+='<div class="r"><b>Question '+x.num+' — '+L[x.a]+'. '+x.o[x.a]+'</b><br>'+
+      x.e+'<br>Attempts: <b>'+tries[k]+'</b></div>';
  });
- $("review").innerHTML=html;
+ $("review").innerHTML=h;
 }
-
-$("restart").onclick=()=>location.reload();
-$("passage").innerHTML=passage;
 render();
 </script>
 </body>
