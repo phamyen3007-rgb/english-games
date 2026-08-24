@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 4 - Exercise 9 - Option C</title>
+<style>
+*{box-sizing:border-box}
+:root{
+ --bg:#070714;--panel:#111126;--panel2:#171735;--cyan:#42f5e9;--pink:#ff4fd8;
+ --purple:#8f6bff;--text:#f4f3ff;--muted:#b9b6d8;--good:#36d98b;--bad:#ff5d73;--gold:#ffd75a;
+}
+body{
+ margin:0;min-height:100vh;padding:22px;font-family:Inter,Arial,Helvetica,sans-serif;color:var(--text);
+ background:
+ radial-gradient(circle at 12% 8%,rgba(66,245,233,.12),transparent 22%),
+ radial-gradient(circle at 88% 12%,rgba(255,79,216,.12),transparent 24%),
+ linear-gradient(145deg,#05050d,#0a0a1b 50%,#111126);
+}
+.wrap{max-width:1160px;margin:auto}
+.hero{
+ position:relative;overflow:hidden;padding:26px 30px;border-radius:30px 30px 0 0;
+ background:linear-gradient(120deg,#101029,#17245c 52%,#4b1761);
+ border:1px solid #6dfaf055;box-shadow:0 0 36px #42f5e922,0 18px 55px #0009
+}
+.hero:before{content:"🌃";position:absolute;left:2%;bottom:-46px;font-size:150px;opacity:.10}
+.hero:after{content:"🤖";position:absolute;right:4%;top:-25px;font-size:140px;opacity:.14}
+.heroRow{display:flex;justify-content:space-between;align-items:center;gap:18px;position:relative;z-index:2}
+.brand{display:flex;align-items:center;gap:18px}.icon{font-size:68px}
+h1{margin:0;color:#9ffcf6;font-size:clamp(29px,4vw,44px);text-shadow:0 0 16px #42f5e966}
+.sub{font-weight:900;margin-top:7px;color:white}
+.sound{border:1px solid #42f5e988;background:#0b0b1d;color:#9ffcf6;border-radius:17px;padding:11px 15px;font-weight:900;cursor:pointer}
+
+.game{background:#0d0d1c;border:1px solid #6dfaf022;border-radius:0 0 30px 30px;overflow:hidden;box-shadow:0 20px 55px #0009}
+.status{
+ display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;
+ padding:14px 20px;background:#11112a;border-bottom:1px solid #2d2d5c
+}
+.track{height:13px;background:#242445;border-radius:99px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));transition:.3s}
+.pill{background:#0c0c1c;border:1px solid #343467;border-radius:99px;padding:8px 13px;font-weight:900;white-space:nowrap}
+.main{padding:22px}
+.passage{
+ background:#111126;border:1px solid #343467;border-radius:22px;padding:21px;line-height:1.72;
+ white-space:pre-line;margin-bottom:18px;color:#f5f4ff;box-shadow:inset 0 0 28px #42f5e908
+}
+.passage h2{margin:0 0 10px;color:#9ffcf6}
+.quiz{background:#101022;border:1px solid #343467;border-radius:22px;padding:23px}
+.tag{display:inline-block;background:linear-gradient(90deg,#176d75,#642c80);padding:8px 14px;border-radius:14px;font-weight:900}
+.q{font-size:20px;line-height:1.55;margin:19px 0;font-weight:800}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ans{
+ border:1px solid #3b3b70;background:#0b0b19;color:#f4f3ff;border-radius:16px;padding:15px;
+ text-align:left;font-size:16px;cursor:pointer;transition:.15s
+}
+.ans:hover:not(:disabled){transform:translateY(-2px);border-color:var(--cyan);background:#11112a}
+.ans.correct{background:#0c3325;border-color:var(--good)}
+.ans.wrong{background:#35101b;border-color:var(--bad)}
+.fb,.bonus{display:none;margin-top:15px;padding:14px;border-radius:14px;line-height:1.55}
+.fb.good{display:block;background:#0c3325;border-left:5px solid var(--good)}
+.fb.bad{display:block;background:#35101b;border-left:5px solid var(--bad)}
+.bonus{background:#3b310d;border-left:5px solid var(--gold);color:#fff0a0;font-weight:900}
+.next{
+ display:none;float:right;margin-top:15px;border:0;border-radius:16px;padding:12px 22px;
+ background:linear-gradient(90deg,#176d75,#642c80);color:white;font-weight:900;cursor:pointer
+}
+.overlay{display:none;position:fixed;inset:0;background:#020207ed;z-index:99;align-items:center;justify-content:center;padding:20px}
+.overlay.show{display:flex}
+.box{max-width:520px;width:100%;background:#111126;border:2px solid var(--cyan);border-radius:28px;padding:30px;text-align:center;box-shadow:0 0 45px #42f5e922}
+.restart{border:0;border-radius:16px;padding:13px 22px;background:linear-gradient(90deg,#176d75,#642c80);color:white;font-weight:900;cursor:pointer}
+.result{display:none;background:#0d0d1c;border:1px solid #343467;border-radius:30px;padding:36px;text-align:center;box-shadow:0 20px 55px #0009}
+.result.show{display:block}
+.big{font-size:60px;font-weight:1000;color:#9ffcf6}
+.review{text-align:left;margin-top:24px}
+.r{padding:13px 15px;margin:9px 0;border-radius:14px;background:#14142d;border-left:5px solid var(--purple);line-height:1.55}
+@media(max-width:820px){
+ .answers{grid-template-columns:1fr}
+ .heroRow{flex-direction:column;align-items:flex-start}
+ .status{grid-template-columns:1fr 1fr}
+ .track{grid-column:1/-1;order:5}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+ <div class="heroRow">
+  <div class="brand">
+   <div class="icon">🤖🌃</div>
+   <div>
+    <h1>Neon Cyber City Challenge</h1>
+    <div class="sub">Grade 12 - Unit 4 - Exercise 9 - Option C</div>
+   </div>
+  </div>
+  <button id="sound" class="sound">🔊 Neon Sound On</button>
+ </div>
+</header>
+
+<section id="game" class="game">
+ <div class="status">
+  <div class="track"><div id="bar" class="bar"></div></div>
+  <div class="pill"><span id="hearts">❤️❤️❤️❤️❤️</span></div>
+  <div class="pill">⚡ Progress <span id="progress">1/8</span></div>
+  <div class="pill">🔁 Restarts <span id="restarts">0</span></div>
+ </div>
+
+ <main class="main">
+  <section class="passage">
+   <h2>🌐 Urbanisation Data File</h2>
+   Urbanisation has become one of the most significant demographic trends of the modern era. People are increasingly leaving rural communities and settling in towns and cities, often in pursuit of stable employment, higher-quality education, and improved public services. This movement can contribute to economic growth by providing businesses with a larger workforce and consumers with easier access to goods and services. However, when population growth occurs faster than cities can adapt, existing infrastructure may struggle to meet the needs of new residents.
+
+The physical environment is particularly affected by rapid urban expansion. As cities extend into surrounding areas, farmland, forests, and other natural spaces may be replaced by housing developments, factories, and transport networks. The loss of vegetation can reduce biodiversity and make urban areas more vulnerable to high temperatures. Moreover, increased construction and transportation contribute to air pollution and greenhouse gas emissions. These environmental consequences can become especially serious when urban development is poorly planned.
+
+Rapid urbanisation can also deepen social inequalities. Although cities often provide better employment prospects and public services, these advantages are not always equally available to everyone. Low-income residents may find themselves unable to afford suitable accommodation close to their workplaces and therefore settle in less developed areas. Such communities may lack reliable water supplies, sanitation, or convenient transport connections. This imbalance between economic opportunity and access to essential services can prevent some urban residents from fully benefiting from city life.
+
+Addressing these problems requires careful planning rather than simply limiting urban growth. Governments can invest in affordable housing and efficient public transport while protecting areas of environmental importance. Urban planners can also design neighbourhoods in which homes, workplaces, schools, and essential services are located relatively close together. By adopting such measures, they can reduce travel demand, improve access to services, and create healthier living environments.
+
+Technology can further support sustainable urban development when it is combined with effective planning. For instance, digital systems can analyse traffic patterns and adjust signals to reduce congestion, while smart energy networks can help buildings use electricity more efficiently. Nevertheless, technology alone cannot solve every urban problem. Its effectiveness depends largely on whether cities integrate technological solutions with appropriate policies and respond to the actual needs of their residents.
+  </section>
+
+  <section class="quiz">
+   <div id="tag" class="tag"></div>
+   <div id="q" class="q"></div>
+   <div id="answers" class="answers"></div>
+   <div id="fb" class="fb"></div>
+   <div id="bonus" class="bonus"></div>
+   <button id="next" class="next">NEXT NODE →</button>
+   <div style="clear:both"></div>
+  </section>
+ </main>
+</section>
+
+<section id="result" class="result">
+ <div style="font-size:82px">🤖🏆🌃</div>
+ <h2>Cyber City Mission Complete!</h2>
+ <div id="final" class="big"></div>
+ <p id="msg"></p>
+ <div id="review" class="review"></div>
+</section>
+</div>
+
+<div id="overlay" class="overlay">
+ <div class="box">
+  <div style="font-size:78px">💔⚠️</div>
+  <h2>SYSTEM FAILURE!</h2>
+  <p>Hết 5 tim. Học sinh phải làm lại từ Question 1.</p>
+  <p><b>Số lần làm lại:</b> <span id="restartBox">1</span></p>
+  <button id="restartBtn" class="restart">REBOOT FROM QUESTION 1 ↻</button>
+ </div>
+</div>
+
+<script>
+const Q=[{"num": 1, "q": "Which of the following is NOT mentioned as a reason why people move to urban areas?", "o": ["Access to better educational opportunities", "The possibility of finding more stable work", "Greater access to public services", "The opportunity to live closer to natural environments"], "a": 3, "e": "Đoạn 1 nêu <b>stable employment, higher-quality education, improved public services</b>. Không nhắc đến việc chuyển lên thành phố để sống gần thiên nhiên."}, {"num": 2, "q": "The word “replaced” in paragraph 2 is closest in meaning to ______.", "o": ["restored", "substituted", "protected", "surrounded"], "a": 1, "e": "<b>be replaced by</b> = bị thay thế bởi → gần nghĩa nhất với <b>substituted</b>."}, {"num": 3, "q": "The word “they” in paragraph 4 refers to ______.", "o": ["governments and urban planners", "homes and workplaces", "urban residents", "essential services"], "a": 0, "e": "Đoạn 4 lần lượt nhắc <b>Governments</b> và <b>Urban planners</b>; <b>they</b> chỉ hai nhóm này."}, {"num": 4, "q": "The word “imbalance” in paragraph 3 could be best replaced by ______.", "o": ["improvement", "connection", "inequality", "cooperation"], "a": 2, "e": "<b>imbalance</b> = sự mất cân bằng/chênh lệch; trong ngữ cảnh này gần nhất với <b>inequality</b>."}, {"num": 5, "q": "Which of the following best paraphrases the sentence: “Its effectiveness depends largely on whether cities integrate technological solutions with appropriate policies and respond to the actual needs of their residents.”", "o": ["Technology is likely to solve urban problems as long as cities invest enough money in advanced digital systems.", "Technological solutions are most useful when they are supported by suitable policies and designed around residents' real needs.", "Cities should introduce technology before developing policies because residents' needs are constantly changing.", "Effective urban policies can replace technological solutions if local governments fully understand what residents require."], "a": 1, "e": "Câu gốc nhấn mạnh hai điều kiện: <b>công nghệ phải đi cùng chính sách phù hợp</b> và <b>đáp ứng nhu cầu thực tế của cư dân</b>."}, {"num": 6, "q": "Which of the following is TRUE according to the passage?", "o": ["Urban expansion generally improves biodiversity by creating new green spaces around cities.", "Low-income residents tend to live far from workplaces mainly because they prefer less developed neighbourhoods.", "Well-planned neighbourhoods may reduce the amount of travelling people need to do.", "Governments can address urban problems most effectively by preventing further population growth."], "a": 2, "e": "Đoạn 4 nói quy hoạch homes, workplaces, schools và services gần nhau có thể <b>reduce travel demand</b>."}, {"num": 7, "q": "In which paragraph does the writer discuss how the benefits of urban life may not be equally accessible to all residents?", "o": ["Paragraph 1", "Paragraph 2", "Paragraph 3", "Paragraph 4"], "a": 2, "e": "<b>Paragraph 3</b> nói các lợi ích của đô thị “are not always equally available to everyone”, đặc biệt với người thu nhập thấp."}, {"num": 8, "q": "In which paragraph does the writer suggest that one solution alone is insufficient to deal effectively with urban challenges?", "o": ["Paragraph 2", "Paragraph 3", "Paragraph 4", "Paragraph 5"], "a": 3, "e": "<b>Paragraph 5</b>: “Technology alone cannot solve every urban problem.” → một giải pháp duy nhất là chưa đủ."}],L=["A","B","C","D"],MAX=5,BONUS=[3,6,8];
+let i=0,hearts=MAX,restarts=0,firstTry=0,tries=Array(Q.length).fill(0),soundOn=true,ctx;
+const $=id=>document.getElementById(id);
+
+function tone(f,d=.1){
+ if(!soundOn)return;
+ if(!ctx)ctx=new(AudioContext||webkitAudioContext)();
+ if(ctx.state==="suspended")ctx.resume();
+ const o=ctx.createOscillator(),g=ctx.createGain();
+ o.frequency.value=f;o.type="square";g.gain.value=.018;
+ o.connect(g);g.connect(ctx.destination);o.start();setTimeout(()=>o.stop(),d*1000)
+}
+$("sound").onclick=()=>{
+ soundOn=!soundOn;
+ $("sound").textContent=soundOn?"🔊 Neon Sound On":"🔇 Sound Off";
+};
+
+function update(){
+ $("hearts").textContent="❤️".repeat(hearts)+"🖤".repeat(MAX-hearts);
+ $("restarts").textContent=restarts;
+ $("progress").textContent=(i+1)+"/"+Q.length;
+ $("bar").style.width=(i/Q.length*100)+"%";
+}
+
+function render(){
+ const x=Q[i];
+ $("tag").textContent="Question "+x.num+" • Node "+(i+1)+" / "+Q.length;
+ $("q").textContent=x.q;
+ $("answers").innerHTML="";
+ $("fb").style.display="none";
+ $("bonus").style.display="none";
+ $("next").style.display="none";
+ update();
+
+ x.o.forEach((v,n)=>{
+   const b=document.createElement("button");
+   b.className="ans";
+   b.innerHTML="<b>"+L[n]+".</b> "+v;
+   b.onclick=()=>choose(n,b);
+   $("answers").appendChild(b);
+ });
+}
+
+function choose(n,b){
+ const x=Q[i];
+ tries[i]++;
+
+ if(n!==x.a){
+   hearts--;
+   b.classList.add("wrong");
+   b.disabled=true;
+   $("fb").className="fb bad";
+   $("fb").style.display="block";
+   $("fb").innerHTML="<b>❌ Chưa đúng.</b> Mất 1 ❤️. Em phải chọn lại đến khi đúng mới được sang câu tiếp theo.";
+   tone(140,.16);
+   update();
+
+   if(hearts<=0){
+     restarts++;
+     $("restarts").textContent=restarts;
+     $("restartBox").textContent=restarts;
+     setTimeout(()=>$("overlay").classList.add("show"),220);
+   }
+   return;
+ }
+
+ if(tries[i]===1) firstTry++;
+
+ document.querySelectorAll(".ans").forEach(z=>z.disabled=true);
+ b.classList.add("correct");
+ $("fb").className="fb good";
+ $("fb").style.display="block";
+ $("fb").innerHTML="<b>✅ CORRECT — "+L[x.a]+". "+x.o[x.a]+"</b><br>"+x.e;
+ tone(920,.10);
+
+ const pos=i+1;
+ if(BONUS.includes(pos)){
+   const before=hearts;
+   hearts=Math.min(MAX,hearts+1);
+   $("bonus").style.display="block";
+   $("bonus").innerHTML=hearts>before
+     ?"⚡ BONUS HEART! +1 ❤️"
+     :"⚡ BONUS NODE! Em đang đủ 5 ❤️ nên số tim giữ nguyên.";
+   setTimeout(()=>tone(1250,.11),110);
+ }
+
+ update();
+ $("bar").style.width=((i+1)/Q.length*100)+"%";
+ $("next").style.display="inline-block";
+ $("next").textContent=i===Q.length-1?"FINISH MISSION →":"NEXT NODE →";
+}
+
+$("next").onclick=()=>{
+ if(i<Q.length-1){i++;render()}
+ else finish();
+};
+
+$("restartBtn").onclick=()=>{
+ $("overlay").classList.remove("show");
+ i=0;hearts=MAX;firstTry=0;tries=Array(Q.length).fill(0);
+ render();
+};
+
+function finish(){
+ $("game").style.display="none";
+ $("result").classList.add("show");
+ $("final").textContent=Q.length+" / "+Q.length;
+ $("msg").innerHTML=
+   "Hoàn thành với <b>"+restarts+"</b> lần làm lại.<br>"+
+   "Đúng ngay lần đầu: <b>"+firstTry+"/"+Q.length+"</b>.";
+
+ let h="<h3>🌐 Answer Review</h3>";
+ Q.forEach((x,k)=>{
+   h+='<div class="r"><b>Question '+x.num+' — '+L[x.a]+'. '+x.o[x.a]+'</b><br>'+
+      x.e+'<br>Attempts: <b>'+tries[k]+'</b></div>';
+ });
+ $("review").innerHTML=h;
+}
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 4 - Exercise 8 - Option D</title>
+<style>
+*{box-sizing:border-box}
+:root{--ink:#17324d;--ice:#eefaff;--blue:#236a9b;--deep:#0e3556;--cyan:#68c9e8;--red:#df5260;--green:#35a66f}
+body{margin:0;min-height:100vh;padding:22px;font-family:Arial,Helvetica,sans-serif;color:var(--ink);
+background:linear-gradient(#bfe9f5,#eaf9ff 48%,#c7e8f1);}
+.wrap{max-width:1160px;margin:auto}
+.hero{position:relative;overflow:hidden;padding:26px 28px;border-radius:30px 30px 0 0;color:#fff;
+background:linear-gradient(120deg,#0b2e4b,#17618e 58%,#4ba7c7);box-shadow:0 18px 50px #173b5555}
+.hero:after{content:"🐋🧊";position:absolute;right:30px;top:-28px;font-size:130px;opacity:.18}
+h1{margin:0;font-size:clamp(29px,4vw,44px);color:#dffaff;text-shadow:0 3px 10px #08253d}
+.sub{font-weight:900;margin-top:7px}
+.game{background:#f9fdff;border-radius:0 0 30px 30px;overflow:hidden;box-shadow:0 20px 55px #173b5545}
+.status{display:grid;grid-template-columns:1fr auto auto auto;gap:11px;align-items:center;padding:14px 20px;background:#dff4fa}
+.track{height:13px;background:#bedde7;border-radius:99px;overflow:hidden} .bar{height:100%;width:0;background:linear-gradient(90deg,#236a9b,#68c9e8);transition:.3s}
+.pill{background:white;border:1px solid #b8dce8;border-radius:99px;padding:8px 13px;font-weight:900;white-space:nowrap}
+.main{padding:22px} .passage{white-space:pre-line;line-height:1.72;background:#fff;border:2px solid #c7e5ee;border-radius:22px;padding:21px;margin-bottom:18px}
+.quiz{background:#fff;border:2px solid #c7e5ee;border-radius:22px;padding:23px}
+.tag{display:inline-block;background:linear-gradient(90deg,#0e3556,#236a9b);color:white;padding:8px 14px;border-radius:14px;font-weight:900}
+.q{font-size:20px;line-height:1.5;font-weight:800;margin:18px 0}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ans{border:2px solid #c9e1e9;background:#fbfeff;border-radius:16px;padding:15px;text-align:left;font-size:16px;cursor:pointer}
+.ans:hover:not(:disabled){border-color:#68c9e8;transform:translateY(-2px)} .ans.wrong{background:#fff0f2;border-color:var(--red)} .ans.correct{background:#eafff2;border-color:var(--green)}
+.fb,.bonus{display:none;margin-top:14px;padding:14px;border-radius:14px;line-height:1.55}
+.fb.bad{display:block;background:#fff0f2;border-left:5px solid var(--red)} .fb.good{display:block;background:#eafff2;border-left:5px solid var(--green)}
+.bonus{background:#e9faff;border-left:5px solid #236a9b;font-weight:900}
+.next{display:none;float:right;margin-top:15px;border:0;border-radius:15px;padding:12px 21px;background:#0e527a;color:white;font-weight:900;cursor:pointer}
+.overlay{display:none;position:fixed;inset:0;background:#071b2be9;z-index:99;align-items:center;justify-content:center;padding:20px} .overlay.show{display:flex}
+.box{max-width:510px;width:100%;background:#f7fdff;border:3px solid #68c9e8;border-radius:27px;padding:30px;text-align:center}
+.restart{border:0;border-radius:15px;padding:13px 22px;background:#0e527a;color:#fff;font-weight:900;cursor:pointer}
+.result{display:none;background:#f9fdff;border-radius:30px;padding:36px;text-align:center;box-shadow:0 20px 55px #173b5545} .result.show{display:block}
+.review{text-align:left;margin-top:22px} .r{padding:13px 15px;margin:9px 0;border-radius:13px;background:#eaf7fb;border-left:5px solid #236a9b;line-height:1.5}
+@media(max-width:800px){.answers{grid-template-columns:1fr}.status{grid-template-columns:1fr 1fr}.track{grid-column:1/-1;order:5}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero"><h1>🐋🧊 Arctic Ocean Rescue</h1><div class="sub">Grade 12 - Unit 4 - Exercise 8 - Option D</div></header>
+<section id="game" class="game">
+<div class="status">
+<div class="track"><div id="bar" class="bar"></div></div>
+<div class="pill" id="hearts">❤️❤️❤️❤️❤️</div>
+<div class="pill">❄️ Question <span id="progress">1/5</span></div>
+<div class="pill">🔁 Restarts <span id="restarts">0</span></div>
+</div>
+<main class="main">
+<section class="passage">The Changing Face of Urban Life
+
+Rapid urbanisation has transformed many cities across Viet Nam over the past few decades. As more people move from rural areas in search of employment and educational opportunities, cities have expanded far beyond their original boundaries. (1) __________, this growth has brought significant changes to the way people live, work, and travel.
+
+One noticeable change is the development of residential areas. As urban populations continue to rise, traditional neighbourhoods are increasingly being replaced by apartment buildings and newly planned communities. Many of these developments are located on the outskirts of cities, (2) __________. This has allowed cities to accommodate more residents without placing all the pressure on central districts.
+
+Transport infrastructure has also received considerable investment. New roads, bridges, and public transport systems have been introduced to meet increasing travel demand. However, the number of private vehicles continues to grow rapidly, (3) __________. As a result, encouraging residents to use public transport has become an important priority for many local authorities.
+
+Urban expansion also has environmental consequences. The replacement of natural areas with buildings and roads can reduce green space, while increasing traffic and construction activities may worsen air pollution. (4) __________, many cities are investing in public parks, improving waste management, and introducing environmentally friendly transport options.
+
+Urbanisation is likely to continue as cities offer greater access to jobs, education, and public services. Yet growth alone cannot guarantee a better quality of life. Cities must ensure that economic development does not come at the expense of the environment or the needs of local communities. (5) __________.</section>
+<section class="quiz">
+<div id="tag" class="tag"></div><div id="q" class="q"></div><div id="answers" class="answers"></div>
+<div id="fb" class="fb"></div><div id="bonus" class="bonus"></div>
+<button id="next" class="next">NEXT ICE STATION →</button><div style="clear:both"></div>
+</section></main></section>
+<section id="result" class="result"><div style="font-size:80px">🐋🏆❄️</div><h2>Arctic Rescue Complete!</h2><p id="summary"></p><div id="review" class="review"></div></section>
+</div>
+<div id="overlay" class="overlay"><div class="box"><div style="font-size:75px">💔🧊</div><h2>OUT OF HEARTS!</h2><p>Hết 5 tim. Học sinh phải làm lại từ Question 1.</p><p><b>Số lần làm lại:</b> <span id="rb"></span></p><button id="restartBtn" class="restart">START FROM QUESTION 1 ↻</button></div></div>
+<script>
+const Q=[{"num": 1, "q": "Choose the option that best fits blank (1).", "o": ["Although urban growth having created considerable pressure on public services", "Driven largely by economic development and changing employment patterns", "Because expanding economic opportunities have encouraged urban residents to leave cities", "Having rural populations remained largely unchanged despite economic development"], "a": 1}, {"num": 2, "q": "Choose the option that best fits blank (2).", "o": ["where land is generally more available for large-scale housing projects", "which available land has encouraged developers to construct larger residential areas", "that more land can be provided to residents at considerably lower costs", "where large-scale housing projects having increasingly attracted urban residents"], "a": 0}, {"num": 3, "q": "Choose the option that best fits blank (3).", "o": ["having made the existing road network was increasingly overcrowded", "which the existing transport systems are placed under considerable pressure", "placing considerable pressure on existing road networks during peak hours", "to place existing roads under pressure despite public transport has improved"], "a": 2}, {"num": 4, "q": "Choose the option that best fits blank (4).", "o": ["Although these problems have resulted from the expansion of urban populations", "Having environmental concerns been ignored during previous periods of development", "Unless local authorities take action, urban development would become more environmentally friendly", "In response to these environmental challenges and growing public concern"], "a": 3}, {"num": 5, "q": "Choose the option that best fits blank (5).", "o": ["Sustainable urban development therefore requires careful planning that balances economic, social, and environmental priorities", "Therefore, economic expansion should be prioritised regardless of its effects on communities and natural resources", "Only when cities expanded their infrastructure could residents have benefited from improved living conditions", "Urbanisation will therefore solve most environmental and social problems as long as cities continue to expand"], "a": 0}], L=["A","B","C","D"], MAX=5, BONUS=[3,6,8];
+let i=0,h=MAX,restarts=0,tries=Array(Q.length).fill(0),first=0;
+const $=x=>document.getElementById(x);
+function update(){$("hearts").textContent="❤️".repeat(h)+"🤍".repeat(MAX-h);$("restarts").textContent=restarts;$("progress").textContent=(i+1)+"/"+Q.length;$("bar").style.width=(i/Q.length*100)+"%"}
+function render(){const x=Q[i];$("tag").textContent="Question "+x.num+" • Ice Station "+(i+1);$("q").textContent=x.q;$("answers").innerHTML="";$("fb").style.display="none";$("bonus").style.display="none";$("next").style.display="none";x.o.forEach((v,n)=>{const b=document.createElement("button");b.className="ans";b.innerHTML="<b>"+L[n]+".</b> "+v;b.onclick=()=>choose(n,b);$("answers").appendChild(b)});update()}
+function choose(n,b){const x=Q[i];tries[i]++;if(n!==x.a){h--;b.disabled=true;b.classList.add("wrong");$("fb").className="fb bad";$("fb").style.display="block";$("fb").innerHTML="<b>❌ Chưa đúng.</b> Mất 1 ❤️. Hãy chọn lại cho đến khi đúng.";update();if(h<=0){restarts++;$("rb").textContent=restarts;setTimeout(()=>$("overlay").classList.add("show"),180)}return}
+if(tries[i]===1)first++;document.querySelectorAll(".ans").forEach(z=>z.disabled=true);b.classList.add("correct");$("fb").className="fb good";$("fb").style.display="block";$("fb").innerHTML="<b>✅ CORRECT! "+L[x.a]+". "+x.o[x.a]+"</b>";
+if(BONUS.includes(i+1)){let old=h;h=Math.min(MAX,h+1);$("bonus").style.display="block";$("bonus").innerHTML=h>old?"🐋 BONUS HEART! +1 ❤️":"🐋 BONUS HEART! Em đang đủ 5 ❤️ nên số tim giữ nguyên."}
+update();$("bar").style.width=((i+1)/Q.length*100)+"%";$("next").style.display="inline-block";$("next").textContent=i===Q.length-1?"FINISH RESCUE →":"NEXT ICE STATION →"}
+$("next").onclick=()=>{if(i<Q.length-1){i++;render()}else finish()};
+$("restartBtn").onclick=()=>{$("overlay").classList.remove("show");i=0;h=MAX;first=0;tries=Array(Q.length).fill(0);render()};
+function finish(){$("game").style.display="none";$("result").classList.add("show");$("summary").innerHTML="Hoàn thành <b>5/5</b> câu.<br>🔁 Số lần làm lại: <b>"+restarts+"</b> &nbsp; | &nbsp; Đúng ngay lần đầu: <b>"+first+"/5</b>";let s="<h3>❄️ Answer Key</h3>";Q.forEach((x,k)=>s+='<div class="r"><b>Question '+x.num+': '+L[x.a]+'. '+x.o[x.a]+'</b><br>Attempts: '+tries[k]+'</div>');$("review").innerHTML=s}
+render();
+</script>
+</body></html>

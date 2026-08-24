@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 11 - Unit 3 - Exercise 8 - Option C</title>
+<style>
+*{box-sizing:border-box}
+:root{
+ --ink:#201f2d;--paper:#fffdf8;--sun:#ffb347;--orange:#ff7f50;--blue:#4f8fd8;--purple:#7d5cc6;
+ --good:#35a96b;--bad:#df5c68;--cream:#fff4df;--navy:#273451;
+}
+body{
+ margin:0;min-height:100vh;padding:22px;font-family:Arial,Helvetica,sans-serif;color:var(--ink);
+ background:
+ radial-gradient(circle at 14% 10%,rgba(255,255,255,.85),transparent 20%),
+ radial-gradient(circle at 86% 14%,rgba(255,179,71,.22),transparent 23%),
+ linear-gradient(145deg,#ffe3bb,#dbe8ff 50%,#e8dcff);
+}
+.wrap{max-width:1160px;margin:auto}
+.hero{
+ position:relative;overflow:hidden;padding:27px 30px;border-radius:30px 30px 0 0;
+ background:linear-gradient(120deg,#273451,#4f6da8 55%,#cc6a4d);
+ color:white;box-shadow:0 18px 50px #40506a50
+}
+.hero:before{content:"🚀";position:absolute;left:2%;bottom:-50px;font-size:150px;opacity:.13}
+.hero:after{content:"🌆";position:absolute;right:4%;top:-30px;font-size:140px;opacity:.16}
+.heroRow{display:flex;justify-content:space-between;align-items:center;gap:18px;position:relative;z-index:2}
+.brand{display:flex;gap:18px;align-items:center}.icon{font-size:66px}
+h1{margin:0;color:#fff0b9;font-size:clamp(29px,4vw,44px);text-shadow:0 3px 10px #1b2740}
+.sub{font-weight:900;margin-top:7px}
+.sound{border:1px solid #fff8;background:#fffaf3;color:#4d5977;border-radius:18px;padding:11px 15px;font-weight:900;cursor:pointer}
+
+.game{background:#fffdf9;border-radius:0 0 30px 30px;overflow:hidden;box-shadow:0 20px 55px #3f486335}
+.status{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;padding:14px 20px;background:#f4edff;border-bottom:1px solid #ddd3ef}
+.track{height:13px;background:#d8cfe9;border-radius:99px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,#4f8fd8,#7d5cc6,#ff7f50,#ffb347);transition:.3s}
+.pill{background:#fff;border:1px solid #ddd3ef;border-radius:99px;padding:8px 13px;font-weight:900;white-space:nowrap}
+.main{padding:22px}
+.passage{background:#fff;border:2px solid #e3dcef;border-radius:22px;padding:21px;line-height:1.72;white-space:pre-line;margin-bottom:18px}
+.passage h2{margin:0 0 10px;color:#6a56ad}
+.quiz{background:#fff;border:2px solid #e3dcef;border-radius:22px;padding:23px}
+.tag{display:inline-block;background:linear-gradient(90deg,#4f6da8,#cc6a4d);color:white;padding:8px 14px;border-radius:14px;font-weight:900}
+.q{font-size:20px;line-height:1.55;margin:19px 0;font-weight:800}
+.tf{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.choice{border:2px solid #ddd5ea;background:#fffcff;border-radius:17px;padding:18px;text-align:center;font-size:18px;font-weight:900;cursor:pointer;transition:.15s}
+.choice:hover:not(:disabled){transform:translateY(-2px);border-color:#7d5cc6;background:#f7f1ff}
+.choice.correct{background:#eafff1;border-color:var(--good)}
+.choice.wrong{background:#fff0f2;border-color:var(--bad)}
+.fb,.bonus{display:none;margin-top:15px;padding:14px;border-radius:14px;line-height:1.55}
+.fb.good{display:block;background:#eafff1;border-left:5px solid var(--good)}
+.fb.bad{display:block;background:#fff0f2;border-left:5px solid var(--bad)}
+.bonus{background:#fff4c8;border-left:5px solid var(--sun);font-weight:900}
+.next{display:none;float:right;margin-top:15px;border:0;border-radius:16px;padding:12px 22px;background:linear-gradient(90deg,#4f6da8,#cc6a4d);color:white;font-weight:900;cursor:pointer}
+.overlay{display:none;position:fixed;inset:0;background:#1a2032e9;z-index:99;align-items:center;justify-content:center;padding:20px}
+.overlay.show{display:flex}
+.box{max-width:520px;width:100%;background:#fffdf9;border:3px solid #7d5cc6;border-radius:28px;padding:30px;text-align:center}
+.restart{border:0;border-radius:16px;padding:13px 22px;background:#4f6da8;color:white;font-weight:900;cursor:pointer}
+.result{display:none;background:#fffdf9;border-radius:30px;padding:36px;text-align:center;box-shadow:0 20px 55px #3f486335}
+.result.show{display:block}
+.big{font-size:60px;font-weight:1000;color:#6a56ad}
+.review{text-align:left;margin-top:24px}
+.r{padding:13px 15px;margin:9px 0;border-radius:14px;background:#f6f1fc;border-left:5px solid #cc6a4d;line-height:1.55}
+@media(max-width:820px){
+ .tf{grid-template-columns:1fr}
+ .heroRow{flex-direction:column;align-items:flex-start}
+ .status{grid-template-columns:1fr 1fr}
+ .track{grid-column:1/-1;order:5}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+ <div class="heroRow">
+  <div class="brand">
+   <div class="icon">🚀🌆</div>
+   <div>
+    <h1>Skyline Future Mission</h1>
+    <div class="sub">Grade 11 - Unit 3 - Exercise 8 - Option C — Rethinking Future Cities</div>
+   </div>
+  </div>
+  <button id="sound" class="sound">🔊 Future Sound On</button>
+ </div>
+</header>
+
+<section id="game" class="game">
+ <div class="status">
+  <div class="track"><div id="bar" class="bar"></div></div>
+  <div class="pill"><span id="hearts">❤️❤️❤️❤️❤️</span></div>
+  <div class="pill">🚀 Progress <span id="progress">1/8</span></div>
+  <div class="pill">🔁 Restarts <span id="restarts">0</span></div>
+ </div>
+
+ <main class="main">
+  <section class="passage">
+   <h2>🏙️ Rethinking the Cities of the Future</h2>
+   Rethinking the Cities of the Future
+
+As cities continue to attract people in search of education, employment and better services, urban populations are expected to increase considerably over the coming decades. This growth can create economic opportunities, but it may also place greater pressure on housing, transport and natural resources. For this reason, many urban planners are reconsidering how cities should develop.
+
+One solution is to create neighbourhoods where most daily needs can be met within a short distance. Instead of travelling across the city by car, residents could walk or cycle to schools, shops and workplaces. This would not necessarily remove cars completely, but it could reduce people's dependence on them. Better public transport would also be required to connect neighbourhoods that are further apart.
+
+Another challenge is the increasing demand for energy. Smart buildings can automatically control lighting and temperature, reducing unnecessary energy use. However, experts warn that introducing advanced technology is not enough. Older buildings may also need to be redesigned, while residents must be encouraged to use energy more responsibly.
+
+Limited space is another concern. Rather than expanding endlessly into the surrounding countryside, some cities are making better use of existing urban areas. Unused rooftops can become gardens, while abandoned buildings can be converted into homes or community facilities. Such solutions may allow cities to accommodate more residents without occupying as much additional land.
+
+Although no single approach can solve every urban problem, these changes suggest that future cities may become more efficient and environmentally friendly. Their success, however, will depend not only on new technology but also on careful planning and the willingness of residents to change some of their habits.
+  </section>
+
+  <section class="quiz">
+   <div id="tag" class="tag"></div>
+   <div id="q" class="q"></div>
+   <div class="tf">
+    <button class="choice" id="trueBtn">✅ TRUE (T)</button>
+    <button class="choice" id="falseBtn">❌ FALSE (F)</button>
+   </div>
+   <div id="fb" class="fb"></div>
+   <div id="bonus" class="bonus"></div>
+   <button id="next" class="next">NEXT SKYLINE STOP →</button>
+   <div style="clear:both"></div>
+  </section>
+ </main>
+</section>
+
+<section id="result" class="result">
+ <div style="font-size:82px">🚀🏆🌆</div>
+ <h2>Skyline Mission Complete!</h2>
+ <div id="final" class="big"></div>
+ <p id="msg"></p>
+ <div id="review" class="review"></div>
+</section>
+</div>
+
+<div id="overlay" class="overlay">
+ <div class="box">
+  <div style="font-size:78px">💔🚨</div>
+  <h2>MISSION FAILED!</h2>
+  <p>Hết 5 tim. Học sinh phải làm lại từ Question a.</p>
+  <p><b>Số lần làm lại:</b> <span id="restartBox">1</span></p>
+  <button id="restartBtn" class="restart">RESTART FROM THE BEGINNING ↻</button>
+ </div>
+</div>
+
+<script>
+const Q=[{"num": "a", "q": "Population growth in cities is presented as having both possible advantages and disadvantages.", "a": "T", "e": "The text says urban growth can create economic opportunities but may also place greater pressure on housing, transport and resources."}, {"num": "b", "q": "The proposed neighbourhoods are intended to eliminate the need for cars entirely.", "a": "F", "e": "The text says this approach would not necessarily remove cars completely; it would reduce people's dependence on them."}, {"num": "c", "q": "Public transport would still play a role even if more people could meet their daily needs close to home.", "a": "T", "e": "Better public transport would still be required to connect neighbourhoods that are further apart."}, {"num": "d", "q": "Smart buildings reduce energy consumption mainly by producing their own renewable energy.", "a": "F", "e": "The passage says smart buildings reduce unnecessary energy use by automatically controlling lighting and temperature."}, {"num": "e", "q": "According to experts, technological improvements alone are unlikely to solve the problem of urban energy use.", "a": "T", "e": "Experts warn that introducing advanced technology is not enough; older buildings and residents' behaviour also matter."}, {"num": "f", "q": "Reusing abandoned buildings could help cities provide additional living space without necessarily spreading further into rural areas.", "a": "T", "e": "Abandoned buildings can be converted into homes, helping cities accommodate more residents without occupying as much additional land."}, {"num": "g", "q": "The text suggests that constructing new buildings on undeveloped land is the main solution to limited urban space.", "a": "F", "e": "The text suggests making better use of existing urban areas, rooftops and abandoned buildings instead of expanding endlessly into the countryside."}, {"num": "h", "q": "The effectiveness of future urban solutions may partly depend on changes in residents' behaviour.", "a": "T", "e": "The final paragraph says success depends partly on residents' willingness to change some of their habits."}],MAX=5,BONUS=[3,6,8];
+let i=0,hearts=MAX,restarts=0,firstTry=0,tries=Array(Q.length).fill(0),soundOn=true,ctx;
+const $=id=>document.getElementById(id);
+
+function tone(f,d=.1){
+ if(!soundOn)return;
+ if(!ctx)ctx=new(AudioContext||webkitAudioContext)();
+ if(ctx.state==="suspended")ctx.resume();
+ const o=ctx.createOscillator(),g=ctx.createGain();
+ o.frequency.value=f;o.type="triangle";g.gain.value=.025;
+ o.connect(g);g.connect(ctx.destination);o.start();setTimeout(()=>o.stop(),d*1000)
+}
+$("sound").onclick=()=>{
+ soundOn=!soundOn;
+ $("sound").textContent=soundOn?"🔊 Future Sound On":"🔇 Sound Off";
+};
+
+function update(){
+ $("hearts").textContent="❤️".repeat(hearts)+"🤍".repeat(MAX-hearts);
+ $("restarts").textContent=restarts;
+ $("progress").textContent=(i+1)+"/"+Q.length;
+ $("bar").style.width=(i/Q.length*100)+"%";
+}
+
+function render(){
+ const x=Q[i];
+ $("tag").textContent="Statement "+x.num.toUpperCase()+" • "+(i+1)+" / "+Q.length;
+ $("q").textContent=x.q;
+ $("fb").style.display="none";
+ $("bonus").style.display="none";
+ $("next").style.display="none";
+ ["trueBtn","falseBtn"].forEach(id=>{
+   const b=$(id); b.disabled=false; b.className="choice";
+ });
+ update();
+}
+
+function choose(ans,btn){
+ const x=Q[i];
+ tries[i]++;
+
+ if(ans!==x.a){
+   hearts--;
+   btn.disabled=true;
+   btn.classList.add("wrong");
+   $("fb").className="fb bad";
+   $("fb").style.display="block";
+   $("fb").innerHTML="<b>❌ Chưa đúng.</b> Mất 1 ❤️. Em phải chọn lại đến khi đúng mới được qua câu.";
+   tone(145,.16);
+   update();
+
+   if(hearts<=0){
+     restarts++;
+     $("restarts").textContent=restarts;
+     $("restartBox").textContent=restarts;
+     setTimeout(()=>$("overlay").classList.add("show"),220);
+   }
+   return;
+ }
+
+ if(tries[i]===1) firstTry++;
+ ["trueBtn","falseBtn"].forEach(id=>$(id).disabled=true);
+ btn.classList.add("correct");
+
+ $("fb").className="fb good";
+ $("fb").style.display="block";
+ $("fb").innerHTML="<b>✅ CORRECT — "+(x.a==="T"?"TRUE":"FALSE")+"</b><br>"+x.e;
+ tone(900,.1);
+
+ const pos=i+1;
+ if(BONUS.includes(pos)){
+   const before=hearts;
+   hearts=Math.min(MAX,hearts+1);
+   $("bonus").style.display="block";
+   $("bonus").innerHTML=hearts>before
+     ?"🎁 BONUS HEART! +1 ❤️"
+     :"🎁 BONUS! Em đang đủ 5 ❤️ nên số tim giữ nguyên.";
+   setTimeout(()=>tone(1200,.12),120);
+ }
+
+ update();
+ $("bar").style.width=((i+1)/Q.length*100)+"%";
+ $("next").style.display="inline-block";
+ $("next").textContent=i===Q.length-1?"FINISH MISSION →":"NEXT SKYLINE STOP →";
+}
+
+$("trueBtn").onclick=()=>choose("T",$("trueBtn"));
+$("falseBtn").onclick=()=>choose("F",$("falseBtn"));
+
+$("next").onclick=()=>{
+ if(i<Q.length-1){i++;render()}
+ else finish();
+};
+
+$("restartBtn").onclick=()=>{
+ $("overlay").classList.remove("show");
+ i=0; hearts=MAX; firstTry=0; tries=Array(Q.length).fill(0);
+ render();
+};
+
+function finish(){
+ $("game").style.display="none";
+ $("result").classList.add("show");
+ $("final").textContent=Q.length+" / "+Q.length;
+ $("msg").innerHTML=
+   "Hoàn thành với <b>"+restarts+"</b> lần làm lại.<br>"+
+   "Đúng ngay lần đầu: <b>"+firstTry+"/"+Q.length+"</b>.";
+
+ let h="<h3>🚀 Answer Review</h3>";
+ Q.forEach((x,k)=>{
+   h+='<div class="r"><b>'+x.num+'. '+(x.a==="T"?"TRUE":"FALSE")+'</b><br>'+
+      x.e+'<br>Attempts: <b>'+tries[k]+'</b></div>';
+ });
+ $("review").innerHTML=h;
+}
+render();
+</script>
+</body>
+</html>

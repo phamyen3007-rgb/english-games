@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 4 - Exercise 9 - Option D</title>
+<style>
+*{box-sizing:border-box}
+:root{
+ --ink:#2c241d;--paper:#fffaf1;--forest:#2d5d45;--moss:#6a8f61;--amber:#d39b45;
+ --brown:#6d4c35;--good:#3ca66b;--bad:#d95c62;--cream:#f3ead8;
+}
+body{
+ margin:0;min-height:100vh;padding:22px;font-family:Georgia,Arial,sans-serif;color:var(--ink);
+ background:
+ radial-gradient(circle at 14% 11%,rgba(255,255,255,.65),transparent 20%),
+ radial-gradient(circle at 83% 13%,rgba(255,226,156,.18),transparent 20%),
+ linear-gradient(145deg,#b8c9b4,#e7dfcd 45%,#c6b392 74%,#7f6b55);
+}
+.wrap{max-width:1160px;margin:auto}
+.hero{
+ position:relative;overflow:hidden;padding:26px 30px;border-radius:30px 30px 0 0;
+ background:linear-gradient(120deg,#253d30,#2d5d45 58%,#7a5d36);
+ color:#fff;box-shadow:0 18px 50px #2c362f55
+}
+.hero:before{content:"🌲";position:absolute;left:3%;bottom:-42px;font-size:145px;opacity:.12}
+.hero:after{content:"🦌";position:absolute;right:4%;top:-25px;font-size:135px;opacity:.15}
+.heroRow{display:flex;justify-content:space-between;align-items:center;gap:18px;position:relative;z-index:2}
+.brand{display:flex;gap:18px;align-items:center}.icon{font-size:68px}
+h1{margin:0;color:#ffe3a6;font-size:clamp(29px,4vw,44px);text-shadow:0 3px 10px #17251d}
+.sub{font-weight:900;margin-top:7px}
+.sound{border:1px solid #d7e6d8;background:#fffaf1;color:#2d5d45;border-radius:18px;padding:11px 15px;font-weight:900;cursor:pointer}
+
+.game{background:var(--paper);border-radius:0 0 30px 30px;overflow:hidden;box-shadow:0 20px 55px #2b322b45}
+.status{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;padding:14px 20px;background:#e8efe6;border-bottom:1px solid #cfd9cc}
+.track{height:13px;background:#c9d4c5;border-radius:99px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,#2d5d45,#6a8f61,#d39b45);transition:.3s}
+.pill{background:#fff;border:1px solid #cad4c8;border-radius:99px;padding:8px 13px;font-weight:900;white-space:nowrap}
+.main{padding:22px}
+.passage{background:#fff;border:2px solid #d7decf;border-radius:22px;padding:21px;line-height:1.72;white-space:pre-line;margin-bottom:18px;box-shadow:inset 0 0 24px #eef3ea60}
+.passage h2{margin:0 0 10px;color:#2d5d45}
+.quiz{background:#fff;border:2px solid #d7decf;border-radius:22px;padding:23px}
+.tag{display:inline-block;background:linear-gradient(90deg,#2d5d45,#7a5d36);color:white;padding:8px 14px;border-radius:14px;font-weight:900}
+.q{font-size:20px;line-height:1.55;margin:19px 0;font-weight:800}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ans{border:2px solid #d7decf;background:#fcfdf9;color:#2c241d;border-radius:16px;padding:15px;text-align:left;font-size:16px;cursor:pointer;transition:.15s}
+.ans:hover:not(:disabled){transform:translateY(-2px);border-color:#6a8f61;background:#f3f8f1}
+.ans.correct{background:#eafff1;border-color:var(--good)}
+.ans.wrong{background:#fff0f1;border-color:var(--bad)}
+.fb,.bonus{display:none;margin-top:15px;padding:14px;border-radius:14px;line-height:1.55}
+.fb.good{display:block;background:#eafff1;border-left:5px solid var(--good)}
+.fb.bad{display:block;background:#fff0f1;border-left:5px solid var(--bad)}
+.bonus{background:#fff3ce;border-left:5px solid var(--amber);font-weight:900}
+.next{display:none;float:right;margin-top:15px;border:0;border-radius:16px;padding:12px 22px;background:linear-gradient(90deg,#2d5d45,#7a5d36);color:white;font-weight:900;cursor:pointer}
+.overlay{display:none;position:fixed;inset:0;background:#172019e8;z-index:99;align-items:center;justify-content:center;padding:20px}
+.overlay.show{display:flex}
+.box{max-width:520px;width:100%;background:#fffaf1;border:3px solid #6a8f61;border-radius:28px;padding:30px;text-align:center;box-shadow:0 20px 60px #0006}
+.restart{border:0;border-radius:16px;padding:13px 22px;background:#2d5d45;color:#fff;font-weight:900;cursor:pointer}
+.result{display:none;background:#fffaf1;border-radius:30px;padding:36px;text-align:center;box-shadow:0 20px 55px #2b322b45}
+.result.show{display:block}
+.big{font-size:60px;font-weight:1000;color:#2d5d45}
+.review{text-align:left;margin-top:24px}
+.r{padding:13px 15px;margin:9px 0;border-radius:14px;background:#eef3ea;border-left:5px solid #7a5d36;line-height:1.55}
+@media(max-width:820px){
+ .answers{grid-template-columns:1fr}
+ .heroRow{flex-direction:column;align-items:flex-start}
+ .status{grid-template-columns:1fr 1fr}
+ .track{grid-column:1/-1;order:5}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+ <div class="heroRow">
+  <div class="brand">
+   <div class="icon">🌲🦌</div>
+   <div>
+    <h1>Ancient Forest Ranger Quest</h1>
+    <div class="sub">Grade 12 - Unit 4 - Exercise 9 - Option D</div>
+   </div>
+  </div>
+  <button id="sound" class="sound">🔊 Forest Sound On</button>
+ </div>
+</header>
+
+<section id="game" class="game">
+ <div class="status">
+  <div class="track"><div id="bar" class="bar"></div></div>
+  <div class="pill"><span id="hearts">❤️❤️❤️❤️❤️</span></div>
+  <div class="pill">🌿 Progress <span id="progress">1/8</span></div>
+  <div class="pill">🔁 Restarts <span id="restarts">0</span></div>
+ </div>
+
+ <main class="main">
+  <section class="passage">
+   <h2>📜 Ranger Field Notes</h2>
+   Urbanisation is frequently associated with economic progress, yet the relationship between urban growth and improved living standards is far from straightforward. Cities attract people not only because they offer a wider range of employment opportunities but also because educational institutions, healthcare facilities, and other essential services tend to be concentrated there. Nevertheless, when migration outpaces a city's capacity to accommodate newcomers, the advantages of urban life may be unevenly distributed. Economic expansion, therefore, does not automatically translate into improved well-being for every urban resident.
+
+One consequence of rapid urban expansion is increasing pressure on land. As demand for housing, commercial facilities, and transport infrastructure rises, undeveloped land on the urban fringe is often absorbed into the built environment. Although this process provides space for economic activities and a growing population, it can reduce agricultural land and fragment natural habitats. The removal of vegetation may also increase surface temperatures because built-up areas absorb and retain more heat. Consequently, poorly controlled expansion can create environmental costs that may not become fully apparent until years later.
+
+Urbanisation can also reshape patterns of social inequality. Improvements in employment, transport, and public services may raise overall living standards, but access to these benefits varies considerably. Housing prices in well-connected districts, for instance, may rise beyond what lower-income households can afford. Such residents may consequently move to peripheral areas where accommodation is cheaper but access to employment and essential services is more limited. This disparity can reinforce existing disadvantages: those who can least afford long journeys may be required to travel the greatest distances to work, school, or healthcare.
+
+Urban planners have increasingly recognised that expanding infrastructure alone is insufficient. Building additional roads may temporarily reduce congestion, but improved road capacity can encourage more people to drive, eventually creating similar levels of traffic. Instead, planners can combine reliable public transport with neighbourhoods designed around shorter journeys. They can also encourage mixed-use development, in which housing, workplaces, shops, and services are located within the same area. Such measures aim not simply to increase a city's capacity but to make daily life more accessible and efficient.
+
+Technological innovation offers further possibilities, although its contribution should not be exaggerated. Sensors can provide real-time information about traffic and energy consumption, allowing urban systems to respond more efficiently to changing conditions. However, advanced technology is unlikely to compensate for ineffective planning or unequal access to services. A city may become more technologically sophisticated without necessarily becoming more inclusive or sustainable. For this reason, technology is most valuable when it supports broader policies rather than substituting for them.
+  </section>
+
+  <section class="quiz">
+   <div id="tag" class="tag"></div>
+   <div id="q" class="q"></div>
+   <div id="answers" class="answers"></div>
+   <div id="fb" class="fb"></div>
+   <div id="bonus" class="bonus"></div>
+   <button id="next" class="next">NEXT TRAIL →</button>
+   <div style="clear:both"></div>
+  </section>
+ </main>
+</section>
+
+<section id="result" class="result">
+ <div style="font-size:82px">🌲🏆🦌</div>
+ <h2>Forest Mission Complete!</h2>
+ <div id="final" class="big"></div>
+ <p id="msg"></p>
+ <div id="review" class="review"></div>
+</section>
+</div>
+
+<div id="overlay" class="overlay">
+ <div class="box">
+  <div style="font-size:78px">💔🌧️</div>
+  <h2>MISSION FAILED!</h2>
+  <p>Hết 5 tim. Học sinh phải làm lại từ Question 1.</p>
+  <p><b>Số lần làm lại:</b> <span id="restartBox">1</span></p>
+  <button id="restartBtn" class="restart">RETURN TO TRAILHEAD ↻</button>
+ </div>
+</div>
+
+<script>
+const Q=[{"num": 1, "q": "Which of the following is NOT mentioned as a reason why cities attract people?", "o": ["Greater availability of essential services", "Wider employment opportunities", "Concentration of educational facilities", "Lower housing costs in well-connected districts"], "a": 3, "e": "Đoạn 1 nhắc đến việc làm, giáo dục, y tế và dịch vụ thiết yếu. Không nói nhà ở tại khu kết nối tốt có giá thấp."}, {"num": 2, "q": "The word “absorbed” in paragraph 2 is closest in meaning to ______.", "o": ["incorporated", "restored", "separated", "preserved"], "a": 0, "e": "<b>absorbed into</b> = được sáp nhập/đưa vào như một phần của → gần nghĩa nhất với <b>incorporated</b>."}, {"num": 3, "q": "The word “They” in paragraph 4 refers to ______.", "o": ["shorter journeys", "urban planners", "additional roads", "similar levels of traffic"], "a": 1, "e": "Trước đó có <b>planners can combine...</b>, sau đó <b>They can also...</b> → <b>They = urban planners</b>."}, {"num": 4, "q": "The word “disparity” in paragraph 3 could be best replaced by ______.", "o": ["transition", "restriction", "inequality", "inconvenience"], "a": 2, "e": "<b>disparity</b> = sự chênh lệch/bất bình đẳng → gần nhất với <b>inequality</b>."}, {"num": 5, "q": "Which of the following best paraphrases the sentence “For this reason, technology is most valuable when it supports broader policies rather than substituting for them.”?", "o": ["Technology can make broader urban policies unnecessary if cities invest sufficiently in advanced systems.", "Technological development is most effective when it complements wider urban policies instead of being treated as a replacement for them.", "Broader urban policies should primarily be designed to promote technological innovation in rapidly growing cities.", "Cities should rely on technological solutions whenever traditional planning policies fail to produce immediate results."], "a": 1, "e": "<b>supports broader policies</b> ≈ complements wider policies; <b>rather than substituting for them</b> ≈ không thay thế các chính sách đó."}, {"num": 6, "q": "Which of the following is TRUE according to the passage?", "o": ["Expanding road capacity can permanently solve traffic congestion by allowing a larger number of vehicles to travel efficiently.", "Lower-income households often choose peripheral districts because such areas provide better access to employment and essential public services.", "A technologically advanced city may still fail to achieve social inclusion and environmental sustainability.", "The environmental effects of urban expansion usually become obvious immediately after natural land is developed."], "a": 2, "e": "Đoạn 5 nói một thành phố có thể hiện đại về công nghệ nhưng chưa chắc trở nên <b>inclusive</b> hay <b>sustainable</b>."}, {"num": 7, "q": "In which paragraph does the writer mention a situation in which an apparent solution may eventually recreate the problem it was intended to reduce?", "o": ["Paragraph 2", "Paragraph 3", "Paragraph 4", "Paragraph 5"], "a": 2, "e": "<b>Paragraph 4</b>: mở rộng đường có thể giảm tắc nghẽn tạm thời nhưng lại khuyến khích nhiều người lái xe hơn, khiến tắc nghẽn quay trở lại."}, {"num": 8, "q": "In which paragraph does the writer explain how economic benefits at the city level do not necessarily result in equal improvements for individual residents?", "o": ["Paragraph 1", "Paragraph 2", "Paragraph 3", "Paragraph 5"], "a": 0, "e": "<b>Paragraph 1</b>: economic expansion does not automatically translate into improved well-being for every urban resident."}],L=["A","B","C","D"],MAX=5,BONUS=[3,6,8];
+let i=0,hearts=MAX,restarts=0,firstTry=0,tries=Array(Q.length).fill(0),soundOn=true,ctx;
+const $=id=>document.getElementById(id);
+
+function tone(f,d=.1){
+ if(!soundOn)return;
+ if(!ctx)ctx=new(AudioContext||webkitAudioContext)();
+ if(ctx.state==="suspended")ctx.resume();
+ const o=ctx.createOscillator(),g=ctx.createGain();
+ o.frequency.value=f;o.type="triangle";g.gain.value=.025;
+ o.connect(g);g.connect(ctx.destination);o.start();setTimeout(()=>o.stop(),d*1000)
+}
+$("sound").onclick=()=>{
+ soundOn=!soundOn;
+ $("sound").textContent=soundOn?"🔊 Forest Sound On":"🔇 Sound Off";
+};
+
+function update(){
+ $("hearts").textContent="❤️".repeat(hearts)+"🤍".repeat(MAX-hearts);
+ $("restarts").textContent=restarts;
+ $("progress").textContent=(i+1)+"/"+Q.length;
+ $("bar").style.width=(i/Q.length*100)+"%";
+}
+
+function render(){
+ const x=Q[i];
+ $("tag").textContent="Question "+x.num+" • Trail "+(i+1)+" / "+Q.length;
+ $("q").textContent=x.q;
+ $("answers").innerHTML="";
+ $("fb").style.display="none";
+ $("bonus").style.display="none";
+ $("next").style.display="none";
+ update();
+
+ x.o.forEach((v,n)=>{
+   const b=document.createElement("button");
+   b.className="ans";
+   b.innerHTML="<b>"+L[n]+".</b> "+v;
+   b.onclick=()=>choose(n,b);
+   $("answers").appendChild(b);
+ });
+}
+
+function choose(n,b){
+ const x=Q[i];
+ tries[i]++;
+
+ if(n!==x.a){
+   hearts--;
+   b.classList.add("wrong");
+   b.disabled=true;
+   $("fb").className="fb bad";
+   $("fb").style.display="block";
+   $("fb").innerHTML="<b>❌ Chưa đúng.</b> Mất 1 ❤️. Em phải chọn lại đến khi đúng mới được sang câu tiếp theo.";
+   tone(145,.17);
+   update();
+
+   if(hearts<=0){
+     restarts++;
+     $("restarts").textContent=restarts;
+     $("restartBox").textContent=restarts;
+     setTimeout(()=>$("overlay").classList.add("show"),220);
+   }
+   return;
+ }
+
+ if(tries[i]===1) firstTry++;
+
+ document.querySelectorAll(".ans").forEach(z=>z.disabled=true);
+ b.classList.add("correct");
+
+ $("fb").className="fb good";
+ $("fb").style.display="block";
+ $("fb").innerHTML="<b>✅ CORRECT — "+L[x.a]+". "+x.o[x.a]+"</b><br>"+x.e;
+ tone(860,.1);
+
+ const pos=i+1;
+ if(BONUS.includes(pos)){
+   const before=hearts;
+   hearts=Math.min(MAX,hearts+1);
+   $("bonus").style.display="block";
+   $("bonus").innerHTML=hearts>before
+     ?"🎁 BONUS HEART! +1 ❤️"
+     :"🎁 BONUS TRAIL! Em đang đủ 5 ❤️ nên số tim giữ nguyên.";
+   setTimeout(()=>tone(1120,.12),120);
+ }
+
+ update();
+ $("bar").style.width=((i+1)/Q.length*100)+"%";
+ $("next").style.display="inline-block";
+ $("next").textContent=i===Q.length-1?"FINISH MISSION →":"NEXT TRAIL →";
+}
+
+$("next").onclick=()=>{
+ if(i<Q.length-1){i++;render()}
+ else finish();
+};
+
+$("restartBtn").onclick=()=>{
+ $("overlay").classList.remove("show");
+ i=0;
+ hearts=MAX;
+ firstTry=0;
+ tries=Array(Q.length).fill(0);
+ render();
+};
+
+function finish(){
+ $("game").style.display="none";
+ $("result").classList.add("show");
+ $("final").textContent=Q.length+" / "+Q.length;
+ $("msg").innerHTML=
+   "Hoàn thành với <b>"+restarts+"</b> lần làm lại.<br>"+
+   "Đúng ngay lần đầu: <b>"+firstTry+"/"+Q.length+"</b>.";
+
+ let h="<h3>📜 Answer Review</h3>";
+ Q.forEach((x,k)=>{
+   h+='<div class="r"><b>Question '+x.num+' — '+L[x.a]+'. '+x.o[x.a]+'</b><br>'+
+      x.e+'<br>Attempts: <b>'+tries[k]+'</b></div>';
+ });
+ $("review").innerHTML=h;
+}
+render();
+</script>
+</body>
+</html>

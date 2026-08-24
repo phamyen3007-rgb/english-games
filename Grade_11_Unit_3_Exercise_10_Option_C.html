@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 11 - Unit 3 - Exercise 10 - Option C</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:22px;font-family:Arial,Helvetica,sans-serif;color:#223127;
+background:
+radial-gradient(circle at 12% 10%,rgba(255,255,255,.82),transparent 18%),
+radial-gradient(circle at 88% 15%,rgba(255,216,120,.18),transparent 22%),
+linear-gradient(145deg,#dcefdc,#f8f1dc 48%,#d8eadf)}
+.wrap{max-width:1160px;margin:auto}
+.hero{position:relative;overflow:hidden;padding:27px 30px;border-radius:30px 30px 0 0;background:linear-gradient(120deg,#315e3e,#5f8e55 55%,#c88a4b);color:#fff;box-shadow:0 18px 50px #38583e50}
+.hero:before{content:"🌻";position:absolute;left:2%;bottom:-50px;font-size:150px;opacity:.14}
+.hero:after{content:"🪴";position:absolute;right:4%;top:-30px;font-size:140px;opacity:.18}
+.heroRow{display:flex;justify-content:space-between;align-items:center;gap:18px;position:relative;z-index:2}
+.brand{display:flex;gap:18px;align-items:center} .icon{font-size:66px}
+h1{margin:0;color:#fff2b5;font-size:clamp(29px,4vw,44px);text-shadow:0 3px 10px #233d2a} .sub{font-weight:900;margin-top:7px}
+.sound{border:1px solid #fff8;background:#fffdf6;color:#47674b;border-radius:18px;padding:11px 15px;font-weight:900;cursor:pointer}
+.game{background:#fffef9;border-radius:0 0 30px 30px;overflow:hidden;box-shadow:0 20px 55px #43554435}
+.status{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;padding:14px 20px;background:#edf5e8;border-bottom:1px solid #d6e2cf}
+.track{height:13px;background:#d2dfcc;border-radius:99px;overflow:hidden} .bar{height:100%;width:0;background:linear-gradient(90deg,#315e3e,#5f8e55,#c88a4b,#e2ba55);transition:.3s}
+.pill{background:#fff;border:1px solid #d4dfce;border-radius:99px;padding:8px 13px;font-weight:900;white-space:nowrap}
+.main{padding:22px} .passage{background:#fff;border:2px solid #dde8d7;border-radius:22px;padding:21px;line-height:1.72;white-space:pre-line;margin-bottom:18px}
+.quiz{background:#fff;border:2px solid #dde8d7;border-radius:22px;padding:23px} .tag{display:inline-block;background:linear-gradient(90deg,#315e3e,#c88a4b);color:#fff;padding:8px 14px;border-radius:14px;font-weight:900}
+.q{font-size:20px;line-height:1.55;margin:19px 0;font-weight:800} .answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ans{border:2px solid #dce5d7;background:#fffefd;border-radius:16px;padding:15px;text-align:left;font-size:16px;cursor:pointer;transition:.15s}
+.ans:hover:not(:disabled){transform:translateY(-2px);border-color:#5f8e55;background:#f4fbf2} .ans.correct{background:#eafff1;border-color:#39a86d} .ans.wrong{background:#fff0f2;border-color:#dc5966}
+.fb,.bonus{display:none;margin-top:15px;padding:14px;border-radius:14px;line-height:1.55} .fb.good{display:block;background:#eafff1;border-left:5px solid #39a86d} .fb.bad{display:block;background:#fff0f2;border-left:5px solid #dc5966}
+.bonus{background:#fff4c9;border-left:5px solid #e2ba55;font-weight:900} .next{display:none;float:right;margin-top:15px;border:0;border-radius:16px;padding:12px 22px;background:linear-gradient(90deg,#315e3e,#c88a4b);color:#fff;font-weight:900;cursor:pointer}
+.overlay{display:none;position:fixed;inset:0;background:#213126e9;z-index:99;align-items:center;justify-content:center;padding:20px} .overlay.show{display:flex}
+.box{max-width:520px;width:100%;background:#fffef9;border:3px solid #5f8e55;border-radius:28px;padding:30px;text-align:center} .restart{border:0;border-radius:16px;padding:13px 22px;background:#315e3e;color:white;font-weight:900;cursor:pointer}
+.result{display:none;background:#fffef9;border-radius:30px;padding:36px;text-align:center;box-shadow:0 20px 55px #43554435} .result.show{display:block}
+.review{text-align:left;margin-top:24px} .r{padding:13px 15px;margin:9px 0;border-radius:14px;background:#f0f7ed;border-left:5px solid #c88a4b;line-height:1.55}
+@media(max-width:820px){.answers{grid-template-columns:1fr}.heroRow{flex-direction:column;align-items:flex-start}.status{grid-template-columns:1fr 1fr}.track{grid-column:1/-1;order:5}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero"><div class="heroRow"><div class="brand"><div class="icon">🌻🪴</div><div><h1>Urban Garden Challenge</h1><div class="sub">Grade 11 - Unit 3 - Exercise 10 - Option C — Community Gardens in Modern Cities</div></div></div><button id="sound" class="sound">🔊 Garden Sound On</button></div></header>
+<section id="game" class="game">
+<div class="status"><div class="track"><div id="bar" class="bar"></div></div><div class="pill"><span id="hearts">❤️❤️❤️❤️❤️</span></div><div class="pill">🌱 Progress <span id="progress">1/8</span></div><div class="pill">🔁 Restarts <span id="restarts">0</span></div></div>
+<main class="main">
+<section class="passage"><h2>🌿 Community Gardens in Modern Cities</h2>Community Gardens in Modern Cities
+
+As cities become more crowded, community gardens are gaining attention as a practical way to make use of limited urban space. These gardens are usually established on vacant land where local residents grow vegetables, herbs, and flowers together. Unlike private gardens, they are shared by people who may have little or no outdoor space at home. Some local authorities even provide unused public land for such projects, allowing neglected areas to be transformed into productive green spaces.
+
+The environmental benefits of community gardens extend beyond food production. Plants can absorb carbon dioxide and help lower temperatures in densely built-up neighbourhoods. Gardens also provide habitats for insects and birds that might otherwise struggle to survive in urban environments. In addition, growing food locally may reduce the distance it needs to travel before reaching consumers, potentially lowering emissions associated with transportation. Composting food waste in these gardens can further reduce the amount of rubbish sent to landfills.
+
+Community gardens can also strengthen relationships among residents. People of different ages and backgrounds work alongside one another, exchanging gardening knowledge and sharing responsibility for maintaining the space. They may develop stronger connections with their neighbours as a result. Furthermore, families can obtain fresh produce at relatively low cost, while children have opportunities to learn where food comes from. Nevertheless, maintaining a successful garden requires regular commitment, and disagreements may arise over how shared areas should be used.
+
+Despite these challenges, interest in urban gardening is expected to continue growing. Digital platforms now allow participants to organise activities, exchange advice, and coordinate tasks more efficiently. Some city governments have also begun incorporating community gardens into broader plans for sustainable development. Although such gardens cannot solve every environmental or social problem facing modern cities, they can make urban neighbourhoods greener while encouraging residents to become more involved in their communities.</section>
+<section class="quiz"><div id="tag" class="tag"></div><div id="q" class="q"></div><div id="answers" class="answers"></div><div id="fb" class="fb"></div><div id="bonus" class="bonus"></div><button id="next" class="next">NEXT GARDEN STOP →</button><div style="clear:both"></div></section>
+</main></section>
+<section id="result" class="result"><div style="font-size:82px">🌻🏆🪴</div><h2>Urban Garden Mission Complete!</h2><p id="msg"></p><div id="review" class="review"></div></section>
+</div>
+<div id="overlay" class="overlay"><div class="box"><div style="font-size:78px">💔🌱</div><h2>OUT OF HEARTS!</h2><p>Hết 5 tim. Học sinh phải làm lại từ Question 1.</p><p><b>Số lần làm lại:</b> <span id="restartBox">1</span></p><button id="restartBtn" class="restart">RETURN TO QUESTION 1 ↻</button></div></div>
+<script>
+const Q=[{"num": 1, "q": "Which of the following is NOT mentioned as a benefit of community gardens?", "o": ["Providing urban wildlife with places to live", "Helping residents develop stronger social connections", "Creating permanent employment opportunities for local people", "Giving families access to relatively inexpensive fresh food"], "a": 2, "e": "The passage mentions wildlife habitats, stronger social connections, and low-cost fresh produce. It does not mention permanent employment opportunities."}, {"num": 2, "q": "The word “vacant” in paragraph 1 is OPPOSITE in meaning to ______.", "o": ["occupied", "available", "neglected", "spacious"], "a": 0, "e": "<b>vacant</b> = trống, chưa được sử dụng; trái nghĩa phù hợp nhất là <b>occupied</b>."}, {"num": 3, "q": "The word “potentially” in paragraph 2 could be best replaced by ______.", "o": ["gradually", "possibly", "considerably", "frequently"], "a": 1, "e": "<b>potentially</b> = có khả năng/có thể → gần nghĩa nhất với <b>possibly</b>."}, {"num": 4, "q": "The word “They” in paragraph 3 refers to ______.", "o": ["different backgrounds", "community gardens", "shared responsibilities", "people of different ages and backgrounds"], "a": 3, "e": "The previous sentence mentions <b>People of different ages and backgrounds</b>; therefore <b>They</b> refers to those people."}, {"num": 5, "q": "Which of the following best paraphrases the underlined sentence in paragraph 4?", "o": ["Community gardens are mainly effective when residents use them to deal with environmental rather than social issues.", "Despite their limited ability to address all urban problems, community gardens can improve the environment and promote greater community participation.", "Community gardens will eventually solve most urban problems if enough residents participate in environmental activities.", "The main purpose of community gardens is to encourage residents to solve environmental problems without government assistance."], "a": 1, "e": "The sentence means community gardens cannot solve every problem, but they can make neighbourhoods greener and encourage stronger community involvement."}, {"num": 6, "q": "Which of the following is TRUE according to the passage?", "o": ["Community gardens are generally created only on land owned by local residents.", "Food produced in community gardens completely eliminates emissions caused by transportation.", "Maintaining community gardens may sometimes lead to conflicts among participants.", "City governments consider community gardens a complete solution to sustainable urban development."], "a": 2, "e": "Paragraph 3 says disagreements may arise over how shared areas should be used."}, {"num": 7, "q": "In which paragraph does the writer mention a way in which community gardens may indirectly reduce pollution caused by moving goods?", "o": ["Paragraph 3", "Paragraph 1", "Paragraph 2", "Paragraph 4"], "a": 2, "e": "<b>Paragraph 2</b> says locally grown food may travel a shorter distance, potentially reducing transportation emissions."}, {"num": 8, "q": "In which paragraph does the writer mention both a social advantage and a possible difficulty of community gardens?", "o": ["Paragraph 4", "Paragraph 3", "Paragraph 1", "Paragraph 2"], "a": 1, "e": "<b>Paragraph 3</b> mentions stronger neighbour connections as a benefit and possible disagreements as a difficulty."}],L=["A","B","C","D"],MAX=5,BONUS=[3,6,8];
+let i=0,hearts=MAX,restarts=0,firstTry=0,tries=Array(Q.length).fill(0),soundOn=true,ctx;
+const $=id=>document.getElementById(id);
+
+function tone(f,d=.1){if(!soundOn)return;if(!ctx)ctx=new(AudioContext||webkitAudioContext)();if(ctx.state==="suspended")ctx.resume();const o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=f;o.type="sine";g.gain.value=.024;o.connect(g);g.connect(ctx.destination);o.start();setTimeout(()=>o.stop(),d*1000)}
+$("sound").onclick=()=>{soundOn=!soundOn;$("sound").textContent=soundOn?"🔊 Garden Sound On":"🔇 Sound Off"};
+
+function update(){$("hearts").textContent="❤️".repeat(hearts)+"🤍".repeat(MAX-hearts);$("restarts").textContent=restarts;$("progress").textContent=(i+1)+"/"+Q.length;$("bar").style.width=(i/Q.length*100)+"%"}
+
+function render(){const x=Q[i];$("tag").textContent="Question "+x.num+" • Garden Stop "+(i+1)+" / "+Q.length;$("q").textContent=x.q;$("answers").innerHTML="";$("fb").style.display="none";$("bonus").style.display="none";$("next").style.display="none";update();x.o.forEach((v,n)=>{const b=document.createElement("button");b.className="ans";b.innerHTML="<b>"+L[n]+".</b> "+v;b.onclick=()=>choose(n,b);$("answers").appendChild(b)})}
+
+function choose(n,b){const x=Q[i];tries[i]++;if(n!==x.a){hearts--;b.classList.add("wrong");b.disabled=true;$("fb").className="fb bad";$("fb").style.display="block";$("fb").innerHTML="<b>❌ Chưa đúng.</b> Mất 1 ❤️. Em phải chọn lại đến khi đúng. Không thể qua câu tiếp theo.";update();if(hearts<=0){restarts++;$("restarts").textContent=restarts;$("restartBox").textContent=restarts;setTimeout(()=>$("overlay").classList.add("show"),220)}return}
+if(tries[i]===1)firstTry++;document.querySelectorAll(".ans").forEach(z=>z.disabled=true);b.classList.add("correct");$("fb").className="fb good";$("fb").style.display="block";$("fb").innerHTML="<b>✅ CORRECT — "+L[x.a]+". "+x.o[x.a]+"</b><br>"+x.e;
+if(BONUS.includes(i+1)){const before=hearts;hearts=Math.min(MAX,hearts+1);$("bonus").style.display="block";$("bonus").innerHTML=hearts>before?"🎁 BONUS HEART! +1 ❤️":"🎁 BONUS HEART! Em đang đủ 5 ❤️ nên số tim giữ nguyên."}
+update();$("bar").style.width=((i+1)/Q.length*100)+"%";$("next").style.display="inline-block";$("next").textContent=i===Q.length-1?"FINISH MISSION →":"NEXT GARDEN STOP →"}
+
+$("next").onclick=()=>{if(i<Q.length-1){i++;render()}else finish()};
+$("restartBtn").onclick=()=>{$("overlay").classList.remove("show");i=0;hearts=MAX;firstTry=0;tries=Array(Q.length).fill(0);render()};
+
+function finish(){$("game").style.display="none";$("result").classList.add("show");$("msg").innerHTML="Hoàn thành với <b>"+restarts+"</b> lần làm lại.<br>Đúng ngay lần đầu: <b>"+firstTry+"/"+Q.length+"</b>.";let h="<h3>🌿 Answer Review</h3>";Q.forEach((x,k)=>{h+='<div class="r"><b>Question '+x.num+' — '+L[x.a]+'. '+x.o[x.a]+'</b><br>'+x.e+'<br>Attempts: <b>'+tries[k]+'</b></div>'});$("review").innerHTML=h}
+render();
+</script>
+</body>
+</html>

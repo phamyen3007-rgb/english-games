@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 11 - Unit 3 - Exercise 7 - Option C</title>
+<style>
+*{box-sizing:border-box}
+:root{
+ --ink:#261a32;--paper:#fff9ff;--pink:#ff5ea8;--purple:#7656d8;--yellow:#ffd65a;
+ --blue:#46b9e8;--green:#35b875;--red:#e55567;
+}
+body{
+ margin:0;min-height:100vh;padding:22px;
+ font-family:Trebuchet MS,Arial,sans-serif;color:var(--ink);
+ background:
+ radial-gradient(circle at 14% 10%,rgba(255,255,255,.8),transparent 18%),
+ radial-gradient(circle at 86% 14%,rgba(255,214,90,.25),transparent 22%),
+ linear-gradient(145deg,#ffe3f2,#e6ddff 48%,#d9f4ff);
+}
+.wrap{max-width:1160px;margin:auto}
+.hero{
+ position:relative;overflow:hidden;padding:27px 30px;border-radius:30px 30px 0 0;
+ background:linear-gradient(120deg,#24445c,#3e6f72 55%,#9b7046);
+ color:#fff;box-shadow:0 18px 50px #6a3b7355;border:2px solid #fff6
+}
+.hero:before{content:"🚂";position:absolute;left:2%;bottom:-50px;font-size:150px;opacity:.14}
+.hero:after{content:"🌄";position:absolute;right:4%;top:-35px;font-size:145px;opacity:.18}
+h1{margin:0;color:#fff0bf;font-size:clamp(29px,4vw,44px);text-shadow:0 3px 10px #512350}
+.sub{font-weight:900;margin-top:7px}
+.game{background:#fffafd;border-radius:0 0 30px 30px;overflow:hidden;box-shadow:0 20px 55px #5e426b35}
+.status{
+ display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;
+ padding:14px 20px;background:#f5e8ff;border-bottom:1px solid #dbcbed
+}
+.track{height:13px;background:#ddcceb;border-radius:99px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,#4c91a6,#5c7f77,#b47d52,#e4c46a);transition:.3s}
+.pill{background:#fff;border:1px solid #d8c8e8;border-radius:99px;padding:8px 13px;font-weight:900;white-space:nowrap}
+.main{padding:22px}
+.card{background:#fff;border:2px solid #ead7f0;border-radius:22px;padding:22px;margin-bottom:18px}
+.instructions{line-height:1.6}
+.wordbank{display:flex;flex-wrap:wrap;gap:10px;margin-top:15px}
+.word{
+ border:2px solid #d7c2e5;background:#fff8ff;border-radius:14px;padding:10px 14px;
+ font-weight:900;cursor:pointer;user-select:none;transition:.15s
+}
+.word:hover{transform:translateY(-2px);border-color:#6d9b92}
+.word.used{opacity:.35;cursor:not-allowed}
+.summary{line-height:1.9;font-size:17px}
+.drop{
+ display:inline-flex;min-width:175px;min-height:42px;vertical-align:middle;align-items:center;justify-content:center;
+ border:2px dashed #b77bd6;border-radius:12px;background:#fff4fd;padding:5px 10px;margin:0 4px;
+ font-weight:900;color:#3e6f72;transition:.15s
+}
+.drop.over{background:#f4e5ff;border-color:#7656d8}
+.drop.filled{border-style:solid;background:#f8efff}
+.drop.correct{background:#eafff2;border-color:var(--green);color:#176a43}
+.drop.wrong{background:#fff0f2;border-color:var(--red);color:#a43141}
+.controls{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}
+.btn{
+ border:0;border-radius:15px;padding:12px 20px;background:linear-gradient(90deg,#3e6f72,#9b7046);
+ color:white;font-weight:900;cursor:pointer
+}
+.btn.secondary{background:#6f6177}
+.msg{display:none;margin-top:15px;padding:14px;border-radius:14px;line-height:1.55}
+.msg.bad{display:block;background:#fff0f2;border-left:5px solid var(--red)}
+.msg.good{display:block;background:#eafff2;border-left:5px solid var(--green)}
+.bonus{display:none;margin-top:10px;padding:12px;border-radius:14px;background:#fff5c9;border-left:5px solid var(--yellow);font-weight:900}
+.overlay{display:none;position:fixed;inset:0;background:#24152ce9;z-index:99;align-items:center;justify-content:center;padding:20px}
+.overlay.show{display:flex}
+.box{max-width:520px;width:100%;background:#fff9ff;border:3px solid #6d9b92;border-radius:28px;padding:30px;text-align:center;box-shadow:0 20px 60px #0005}
+.result{display:none}.result.show{display:block}
+.review{margin-top:15px}
+.r{padding:12px 14px;margin:8px 0;background:#f6ebfb;border-left:5px solid #9b7046;border-radius:12px}
+@media(max-width:800px){
+ .status{grid-template-columns:1fr 1fr}.track{grid-column:1/-1;order:5}
+ .drop{min-width:145px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <h1>🚂🌄 Mountain Railway Click & Fill</h1>
+  <div class="sub">Grade 11 - Unit 3 - Exercise 7 - Option C — Report on the Quality of Urban Life</div>
+</header>
+
+<section id="game" class="game">
+  <div class="status">
+    <div class="track"><div id="bar" class="bar"></div></div>
+    <div class="pill" id="hearts">❤️❤️❤️❤️❤️</div>
+    <div class="pill">🎫 Bonus: Q3</div>
+    <div class="pill">🔁 Restarts <span id="restarts">0</span></div>
+  </div>
+
+  <main class="main">
+    <section class="card instructions">
+      <h2>🚉 Complete the summary</h2>
+      <p><b>Cách làm:</b> Click vào một đáp án A–H, sau đó click vào ô trống cần điền.</p>
+      <div id="wordbank" class="wordbank"></div>
+    </section>
+
+    <section class="card summary">
+      <h3>Report on the Quality of Urban Life</h3>
+
+      <p>A recent report has examined the factors that may reduce the quality of life in rapidly developing cities. One major concern is
+      <span class="drop" data-q="1">(1) Drop here</span>,
+      particularly in districts where large numbers of people are moving in but the supply of homes has failed to keep pace. As a result, many low-income families struggle to find suitable places to live.</p>
+
+      <p>The report also suggests that inadequate
+      <span class="drop" data-q="2">(2) Drop here</span>
+      can have consequences beyond longer journey times. When residents cannot travel efficiently between their homes and workplaces, businesses may find it more difficult to attract and retain employees.</p>
+
+      <p>Another issue receiving increasing attention is
+      <span class="drop" data-q="3">(3) Drop here</span>.
+      Although it may not directly affect the economy, constant traffic, construction work, and late-night activities can seriously disturb residents. Researchers also point to
+      <span class="drop" data-q="4">(4) Drop here</span>
+      as a concern in crowded neighbourhoods, particularly when vandalism and disruptive behaviour make people feel less secure.</p>
+
+      <p>To improve urban living conditions in the long term, planners are advised to invest in
+      <span class="drop" data-q="5">(5) Drop here</span>.
+      Providing parks and other natural spaces can encourage physical activity while also making densely populated neighbourhoods more pleasant places to live.</p>
+
+      <div id="msg" class="msg"></div>
+      <div id="bonus" class="bonus"></div>
+
+      <div class="controls">
+        <button id="resetBtn" class="btn secondary">CLEAR ANSWERS</button>
+        <button id="checkBtn" class="btn">CHECK ANSWERS</button>
+      </div>
+    </section>
+
+    <section id="result" class="card result">
+      <h2>🏆 Completed!</h2>
+      <p id="summaryResult"></p>
+      <div id="review" class="review"></div>
+    </section>
+  </main>
+</section>
+</div>
+
+<div id="overlay" class="overlay">
+  <div class="box">
+    <div style="font-size:78px">💔🚂</div>
+    <h2>OUT OF HEARTS!</h2>
+    <p>Hết 5 tim. Học sinh phải làm lại từ đầu.</p>
+    <p><b>Số lần làm lại:</b> <span id="restartBox">1</span></p>
+    <button id="restartAll" class="btn">RESTART FROM THE BEGINNING ↻</button>
+  </div>
+</div>
+
+<script>
+const WORDS = {
+ A:"employment opportunities",
+ B:"affordable housing",
+ C:"noise pollution",
+ D:"population growth",
+ E:"recycling facilities",
+ F:"public transport",
+ G:"green areas",
+ H:"antisocial behaviour"
+};
+const ANSWERS={1:"B",2:"F",3:"C",4:"H",5:"G"};
+const MAX=5;
+let hearts=MAX,restarts=0,selectedLetter=null;
+let placements={1:null,2:null,3:null,4:null,5:null};
+
+const $=id=>document.getElementById(id);
+
+function update(){
+  $("hearts").textContent="❤️".repeat(hearts)+"🤍".repeat(MAX-hearts);
+  $("restarts").textContent=restarts;
+  const done=Object.values(placements).filter(Boolean).length;
+  $("bar").style.width=(done/5*100)+"%";
+}
+
+function buildBank(){
+  const bank=$("wordbank");
+  bank.innerHTML="";
+  Object.entries(WORDS).forEach(([letter,text])=>{
+    const w=document.createElement("div");
+    w.className="word";
+    w.draggable=false;
+    w.dataset.letter=letter;
+    w.innerHTML="<b>"+letter+".</b> "+text;
+
+    w.addEventListener("click",()=>{
+      if(w.classList.contains("used")) return;
+      selectedLetter=letter;
+      document.querySelectorAll(".word").forEach(x=>x.style.outline="none");
+      w.style.outline="3px solid #7656d8";
+    });
+
+    bank.appendChild(w);
+  });
+  syncUsed();
+}
+
+function syncUsed(){
+  const used=new Set(Object.values(placements).filter(Boolean));
+  document.querySelectorAll(".word").forEach(w=>{
+    w.classList.toggle("used",used.has(w.dataset.letter));
+    if(used.has(w.dataset.letter)) w.style.outline="none";
+  });
+}
+
+function place(letter,drop){
+  const q=drop.dataset.q;
+
+  // If this letter was placed elsewhere, clear old position.
+  Object.keys(placements).forEach(k=>{
+    if(placements[k]===letter && k!==q){
+      placements[k]=null;
+      const old=document.querySelector('.drop[data-q="'+k+'"]');
+      old.textContent="("+k+") Drop here";
+      old.className="drop";
+    }
+  });
+
+  placements[q]=letter;
+  drop.textContent=letter+". "+WORDS[letter];
+  drop.className="drop filled";
+  selectedLetter=null;
+  document.querySelectorAll(".word").forEach(x=>x.style.outline="none");
+  syncUsed();
+  update();
+}
+
+document.querySelectorAll(".drop").forEach(drop=>{
+  drop.addEventListener("click",()=>{
+    if(selectedLetter) place(selectedLetter,drop);
+  });
+});
+
+$("resetBtn").onclick=()=>{
+  placements={1:null,2:null,3:null,4:null,5:null};
+  document.querySelectorAll(".drop").forEach(d=>{
+    d.textContent="("+d.dataset.q+") Drop here";
+    d.className="drop";
+  });
+  $("msg").style.display="none";
+  $("bonus").style.display="none";
+  selectedLetter=null;
+  buildBank();
+  update();
+};
+
+$("checkBtn").onclick=()=>{
+  const missing=Object.values(placements).some(v=>!v);
+  if(missing){
+    $("msg").className="msg bad";
+    $("msg").style.display="block";
+    $("msg").innerHTML="<b>⚠️ Chưa hoàn thành.</b> Hãy kéo đủ 5 đáp án vào các ô trống trước khi kiểm tra.";
+    return;
+  }
+
+  let wrong=[];
+  for(const q of Object.keys(ANSWERS)){
+    const d=document.querySelector('.drop[data-q="'+q+'"]');
+    if(placements[q]===ANSWERS[q]){
+      d.className="drop correct";
+    }else{
+      d.className="drop wrong";
+      wrong.push(q);
+    }
+  }
+
+  if(wrong.length===0){
+    $("msg").className="msg good";
+    $("msg").style.display="block";
+    $("msg").innerHTML="<b>✅ PERFECT!</b> Tất cả đáp án đều đúng.";
+    $("bonus").style.display="block";
+    $("bonus").innerHTML="🎁 Bonus tại câu 3 đã được tính trong thử thách.";
+    $("result").classList.add("show");
+    $("summaryResult").innerHTML="Đáp án: <b>1B – 2F – 3C – 4H – 5G</b><br>🔁 Số lần làm lại: <b>"+restarts+"</b>";
+    $("review").innerHTML=
+      '<div class="r"><b>1. B — affordable housing</b></div>'+
+      '<div class="r"><b>2. F — public transport</b></div>'+
+      '<div class="r"><b>3. C — noise pollution</b></div>'+
+      '<div class="r"><b>4. H — antisocial behaviour</b></div>'+
+      '<div class="r"><b>5. G — green areas</b></div>';
+    $("bar").style.width="100%";
+    return;
+  }
+
+  // Lose one heart for an incorrect check, then allow correction.
+  hearts--;
+  update();
+  $("msg").className="msg bad";
+  $("msg").style.display="block";
+  $("msg").innerHTML="<b>❌ Chưa đúng.</b> Có "+wrong.length+" ô sai. Mất 1 ❤️. Hãy sửa các ô màu đỏ rồi kiểm tra lại.";
+
+  if(hearts<=0){
+    restarts++;
+    $("restartBox").textContent=restarts;
+    $("restarts").textContent=restarts;
+    setTimeout(()=>$("overlay").classList.add("show"),180);
+  }
+};
+
+$("restartAll").onclick=()=>{
+  $("overlay").classList.remove("show");
+  hearts=MAX;
+  placements={1:null,2:null,3:null,4:null,5:null};
+  selectedLetter=null;
+  document.querySelectorAll(".drop").forEach(d=>{
+    d.textContent="("+d.dataset.q+") Drop here";
+    d.className="drop";
+  });
+  $("msg").style.display="none";
+  $("bonus").style.display="none";
+  $("result").classList.remove("show");
+  buildBank();
+  update();
+};
+
+buildBank();
+update();
+</script>
+</body>
+</html>

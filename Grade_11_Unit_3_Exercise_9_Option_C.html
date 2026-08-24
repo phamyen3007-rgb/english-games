@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 11 - Unit 3 - Exercise 9 - Option C</title>
+<style>
+*{box-sizing:border-box}
+:root{
+ --ink:#1f2630;--paper:#fffdf8;--lav:#7f73d8;--indigo:#394a80;--peach:#e9956f;
+ --gold:#e7bf5a;--good:#38a86b;--bad:#df5b67;
+}
+body{
+ margin:0;min-height:100vh;padding:22px;font-family:Arial,Helvetica,sans-serif;color:var(--ink);
+ background:
+ radial-gradient(circle at 14% 10%,rgba(255,255,255,.82),transparent 19%),
+ radial-gradient(circle at 86% 15%,rgba(231,191,90,.2),transparent 22%),
+ linear-gradient(145deg,#e7e3ff,#f7eee4 48%,#dce8f1);
+}
+.wrap{max-width:1160px;margin:auto}
+.hero{
+ position:relative;overflow:hidden;padding:27px 30px;border-radius:30px 30px 0 0;
+ background:linear-gradient(120deg,#394a80,#7f73d8 55%,#e9956f);
+ color:#fff;box-shadow:0 18px 50px #454f7650
+}
+.hero:before{content:"🎈";position:absolute;left:2%;bottom:-48px;font-size:150px;opacity:.14}
+.hero:after{content:"🏙️";position:absolute;right:4%;top:-28px;font-size:140px;opacity:.16}
+.heroRow{display:flex;justify-content:space-between;align-items:center;gap:18px;position:relative;z-index:2}
+.brand{display:flex;gap:18px;align-items:center}.icon{font-size:66px}
+h1{margin:0;color:#fff1bd;font-size:clamp(29px,4vw,44px);text-shadow:0 3px 10px #28345c}
+.sub{font-weight:900;margin-top:7px}
+.sound{border:1px solid #fff8;background:#fffaf4;color:#4e527c;border-radius:18px;padding:11px 15px;font-weight:900;cursor:pointer}
+
+.game{background:#fffdfa;border-radius:0 0 30px 30px;overflow:hidden;box-shadow:0 20px 55px #4d4f6535}
+.status{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;padding:14px 20px;background:#f1edff;border-bottom:1px solid #ddd8ef}
+.track{height:13px;background:#d8d2eb;border-radius:99px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,#394a80,#7f73d8,#e9956f,#e7bf5a);transition:.3s}
+.pill{background:#fff;border:1px solid #d8d2e8;border-radius:99px;padding:8px 13px;font-weight:900;white-space:nowrap}
+.main{padding:22px}
+.passage{background:#fff;border:2px solid #e1ddee;border-radius:22px;padding:21px;line-height:1.72;white-space:pre-line;margin-bottom:18px}
+.passage h2{margin:0 0 10px;color:#5f57ad}
+.quiz{background:#fff;border:2px solid #e1ddee;border-radius:22px;padding:23px}
+.tag{display:inline-block;background:linear-gradient(90deg,#394a80,#e9956f);color:#fff;padding:8px 14px;border-radius:14px;font-weight:900}
+.q{font-size:20px;line-height:1.55;margin:19px 0;font-weight:800}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ans{border:2px solid #dfdbea;background:#fffefe;border-radius:16px;padding:15px;text-align:left;font-size:16px;cursor:pointer;transition:.15s}
+.ans:hover:not(:disabled){transform:translateY(-2px);border-color:#7f73d8;background:#f7f5ff}
+.ans.correct{background:#eafff1;border-color:var(--good)}
+.ans.wrong{background:#fff0f2;border-color:var(--bad)}
+.fb,.bonus{display:none;margin-top:15px;padding:14px;border-radius:14px;line-height:1.55}
+.fb.good{display:block;background:#eafff1;border-left:5px solid var(--good)}
+.fb.bad{display:block;background:#fff0f2;border-left:5px solid var(--bad)}
+.bonus{background:#fff5cd;border-left:5px solid var(--gold);font-weight:900}
+.next{display:none;float:right;margin-top:15px;border:0;border-radius:16px;padding:12px 22px;background:linear-gradient(90deg,#394a80,#e9956f);color:#fff;font-weight:900;cursor:pointer}
+
+.overlay{display:none;position:fixed;inset:0;background:#23263be9;z-index:99;align-items:center;justify-content:center;padding:20px}
+.overlay.show{display:flex}
+.box{max-width:520px;width:100%;background:#fffdfa;border:3px solid #7f73d8;border-radius:28px;padding:30px;text-align:center}
+.restart{border:0;border-radius:16px;padding:13px 22px;background:#394a80;color:white;font-weight:900;cursor:pointer}
+.result{display:none;background:#fffdfa;border-radius:30px;padding:36px;text-align:center;box-shadow:0 20px 55px #4d4f6535}
+.result.show{display:block}
+.big{font-size:60px;font-weight:1000;color:#5f57ad}
+.review{text-align:left;margin-top:24px}
+.r{padding:13px 15px;margin:9px 0;border-radius:14px;background:#f5f2fb;border-left:5px solid #e9956f;line-height:1.55}
+@media(max-width:820px){
+ .answers{grid-template-columns:1fr}
+ .heroRow{flex-direction:column;align-items:flex-start}
+ .status{grid-template-columns:1fr 1fr}
+ .track{grid-column:1/-1;order:5}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+ <div class="heroRow">
+  <div class="brand">
+   <div class="icon">🎈🏙️</div>
+   <div>
+    <h1>Sky Balloon City Challenge</h1>
+    <div class="sub">Grade 11 - Unit 3 - Exercise 9 - Option C — Managing the Cities of the Future</div>
+   </div>
+  </div>
+  <button id="sound" class="sound">🔊 Balloon Sound On</button>
+ </div>
+</header>
+
+<section id="game" class="game">
+ <div class="status">
+  <div class="track"><div id="bar" class="bar"></div></div>
+  <div class="pill"><span id="hearts">❤️❤️❤️❤️❤️</span></div>
+  <div class="pill">🎈 Progress <span id="progress">1/5</span></div>
+  <div class="pill">🔁 Restarts <span id="restarts">0</span></div>
+ </div>
+
+ <main class="main">
+  <section class="passage">
+   <h2>🏙️ Managing the Cities of the Future</h2>
+   Managing the Cities of the Future
+
+As urban populations continue to increase, governments are under pressure to make cities both more efficient and more liveable. Yet developing a successful future city involves more than simply introducing advanced technology. Whether authorities are redesigning transport networks, improving energy efficiency, or (1) __________, they must consider how each decision may affect different groups of residents.
+
+Data-driven systems are increasingly being used to support urban management. By analysing information collected from sensors throughout a city, authorities can identify patterns in traffic flow, energy consumption, and the use of public services. (2) __________. However, such efficiency may come at a cost if residents have little control over how information about them is collected and stored.
+
+This concern explains why public trust has become an important part of smart-city development. Residents may appreciate the convenience offered by digital services while remaining uncomfortable about sharing personal information. (3) __________. Without sufficient transparency, even technologies designed to improve daily life may be viewed with suspicion.
+
+Technology is not the only consideration. As urban areas expand, demand for housing and transport can place increasing pressure on the environment. Some planners therefore support compact neighbourhoods in which homes, workplaces, and essential services are located relatively close together. (4) __________. Nevertheless, such developments must be carefully designed to avoid creating overcrowded areas with insufficient public facilities.
+
+Ultimately, the success of future cities will depend partly on whether residents are involved in decisions affecting their communities. Authorities that consult the public can gain a better understanding of local priorities and concerns. Such participation does not guarantee that everyone will agree with every decision, (5) __________.
+  </section>
+
+  <section class="quiz">
+   <div id="tag" class="tag"></div>
+   <div id="q" class="q"></div>
+   <div id="answers" class="answers"></div>
+   <div id="fb" class="fb"></div>
+   <div id="bonus" class="bonus"></div>
+   <button id="next" class="next">NEXT SKY STOP →</button>
+   <div style="clear:both"></div>
+  </section>
+ </main>
+</section>
+
+<section id="result" class="result">
+ <div style="font-size:82px">🎈🏆🏙️</div>
+ <h2>Sky Balloon Mission Complete!</h2>
+ <div id="final" class="big"></div>
+ <p id="msg"></p>
+ <div id="review" class="review"></div>
+</section>
+</div>
+
+<div id="overlay" class="overlay">
+ <div class="box">
+  <div style="font-size:78px">💔🌩️</div>
+  <h2>MISSION FAILED!</h2>
+  <p>Hết 5 tim. Học sinh phải làm lại từ Question 1.</p>
+  <p><b>Số lần làm lại:</b> <span id="restartBox">1</span></p>
+  <button id="restartBtn" class="restart">RETURN TO QUESTION 1 ↻</button>
+ </div>
+</div>
+
+<script>
+const Q=[{"num": 1, "q": "Choose the option that best fits blank (1).", "o": ["affordable homes being provided without considering their location", "they provide housing that different income groups can afford", "providing access to housing that remains affordable for a range of income groups", "to provide affordable housing for residents from different income groups"], "a": 2, "e": "Cấu trúc song song: <b>redesigning – improving – providing</b>. Vì vậy đáp án đúng là C."}, {"num": 2, "q": "Choose the option that best fits blank (2).", "o": ["The information collected is therefore useful only when traffic conditions remain unchanged", "This can allow city services to be adjusted according to changing conditions rather than fixed assumptions", "Nevertheless, urban authorities rarely depend on such information when making everyday decisions", "In contrast, collecting more information necessarily makes public services less responsive to residents"], "a": 1, "e": "Dữ liệu thời gian thực giúp dịch vụ đô thị được <b>điều chỉnh theo điều kiện đang thay đổi</b>, thay vì dựa vào giả định cố định."}, {"num": 3, "q": "Choose the option that best fits blank (3).", "o": ["Consequently, residents generally prefer authorities to collect as much personal data as possible", "Digital services are therefore unlikely to create concerns provided that they operate efficiently", "The convenience of these systems means that questions about privacy have become largely irrelevant", "Authorities must therefore demonstrate that the data collected will be protected and used responsibly"], "a": 3, "e": "Mạch ý: <b>privacy concerns → responsible data use → transparency → public trust</b>. D là lựa chọn phù hợp nhất."}, {"num": 4, "q": "Choose the option that best fits blank (4).", "o": ["This approach may reduce the need for long journeys while making walking and cycling more practical", "As a result, residents would have to travel greater distances to reach schools and workplaces", "Such neighbourhoods are primarily intended to increase people's dependence on private vehicles", "This means public transport would no longer be necessary in densely populated urban areas"], "a": 0, "e": "Compact neighbourhoods đặt nhà ở, nơi làm việc và dịch vụ gần nhau nên có thể <b>giảm các chuyến đi xa</b> và khuyến khích đi bộ, đạp xe."}, {"num": 5, "q": "Choose the option that best fits blank (5).", "o": ["because disagreement should be prevented before any urban policy is introduced", "unless citizens are allowed to make all final decisions themselves", "but it can make policies more responsive to the needs of the people they affect", "so public consultation can ensure that urban policies receive complete support"], "a": 2, "e": "Cấu trúc tương phản tự nhiên: <b>does not guarantee..., but it can...</b>. Vì vậy C là chính xác."}],L=["A","B","C","D"],MAX=5,BONUS=[3];
+let i=0,hearts=MAX,restarts=0,firstTry=0,tries=Array(Q.length).fill(0),soundOn=true,ctx;
+const $=id=>document.getElementById(id);
+
+function tone(f,d=.1){
+ if(!soundOn)return;
+ if(!ctx)ctx=new(AudioContext||webkitAudioContext)();
+ if(ctx.state==="suspended")ctx.resume();
+ const o=ctx.createOscillator(),g=ctx.createGain();
+ o.frequency.value=f;o.type="triangle";g.gain.value=.025;
+ o.connect(g);g.connect(ctx.destination);o.start();setTimeout(()=>o.stop(),d*1000)
+}
+$("sound").onclick=()=>{
+ soundOn=!soundOn;
+ $("sound").textContent=soundOn?"🔊 Balloon Sound On":"🔇 Sound Off";
+};
+
+function update(){
+ $("hearts").textContent="❤️".repeat(hearts)+"🤍".repeat(MAX-hearts);
+ $("restarts").textContent=restarts;
+ $("progress").textContent=(i+1)+"/"+Q.length;
+ $("bar").style.width=(i/Q.length*100)+"%";
+}
+
+function render(){
+ const x=Q[i];
+ $("tag").textContent="Question "+x.num+" • Sky Stop "+(i+1)+" / "+Q.length;
+ $("q").textContent=x.q;
+ $("answers").innerHTML="";
+ $("fb").style.display="none";
+ $("bonus").style.display="none";
+ $("next").style.display="none";
+ update();
+
+ x.o.forEach((v,n)=>{
+   const b=document.createElement("button");
+   b.className="ans";
+   b.innerHTML="<b>"+L[n]+".</b> "+v;
+   b.onclick=()=>choose(n,b);
+   $("answers").appendChild(b);
+ });
+}
+
+function choose(n,b){
+ const x=Q[i];
+ tries[i]++;
+
+ if(n!==x.a){
+   hearts--;
+   b.classList.add("wrong");
+   b.disabled=true;
+   $("fb").className="fb bad";
+   $("fb").style.display="block";
+   $("fb").innerHTML="<b>❌ Chưa đúng.</b> Mất 1 ❤️. Em phải chọn lại đến khi đúng. Không thể qua câu tiếp theo.";
+   tone(145,.16);
+   update();
+
+   if(hearts<=0){
+     restarts++;
+     $("restarts").textContent=restarts;
+     $("restartBox").textContent=restarts;
+     setTimeout(()=>$("overlay").classList.add("show"),220);
+   }
+   return;
+ }
+
+ if(tries[i]===1) firstTry++;
+
+ document.querySelectorAll(".ans").forEach(z=>z.disabled=true);
+ b.classList.add("correct");
+
+ $("fb").className="fb good";
+ $("fb").style.display="block";
+ $("fb").innerHTML="<b>✅ CORRECT — "+L[x.a]+". "+x.o[x.a]+"</b><br>"+x.e;
+ tone(900,.1);
+
+ if(BONUS.includes(i+1)){
+   const before=hearts;
+   hearts=Math.min(MAX,hearts+1);
+   $("bonus").style.display="block";
+   $("bonus").innerHTML=hearts>before
+      ?"🎁 CÂU 3 BONUS HEART! +1 ❤️"
+      :"🎁 CÂU 3 BONUS HEART! Em đang đủ 5 ❤️ nên số tim giữ nguyên.";
+   setTimeout(()=>tone(1200,.12),120);
+ }
+
+ update();
+ $("bar").style.width=((i+1)/Q.length*100)+"%";
+ $("next").style.display="inline-block";
+ $("next").textContent=i===Q.length-1?"FINISH MISSION →":"NEXT SKY STOP →";
+}
+
+$("next").onclick=()=>{
+ if(i<Q.length-1){i++;render()}
+ else finish();
+};
+
+$("restartBtn").onclick=()=>{
+ $("overlay").classList.remove("show");
+ i=0;
+ hearts=MAX;
+ firstTry=0;
+ tries=Array(Q.length).fill(0);
+ render();
+};
+
+function finish(){
+ $("game").style.display="none";
+ $("result").classList.add("show");
+ $("final").textContent=Q.length+" / "+Q.length;
+ $("msg").innerHTML=
+   "Hoàn thành với <b>"+restarts+"</b> lần làm lại.<br>"+
+   "Đúng ngay lần đầu: <b>"+firstTry+"/"+Q.length+"</b>.";
+
+ let h="<h3>🎈 Answer Review</h3>";
+ Q.forEach((x,k)=>{
+   h+='<div class="r"><b>Question '+x.num+' — '+L[x.a]+'. '+x.o[x.a]+'</b><br>'+
+      x.e+'<br>Attempts: <b>'+tries[k]+'</b></div>';
+ });
+ $("review").innerHTML=h;
+}
+render();
+</script>
+</body>
+</html>

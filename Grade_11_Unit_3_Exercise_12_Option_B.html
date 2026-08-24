@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Grade 11 - Unit 3 - Exercise 12 - Option B</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(255,255,255,.25), transparent 28%),
+      radial-gradient(circle at 80% 10%, rgba(255,255,255,.18), transparent 24%),
+      linear-gradient(135deg, #9be7ff, #c8f7d4 52%, #fff2b7);
+    color: #17324d;
+    padding: 24px;
+  }
+
+  .game-shell {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(255,255,255,.94);
+    border-radius: 26px;
+    box-shadow: 0 18px 55px rgba(19, 60, 90, .20);
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.65);
+  }
+
+  .header {
+    padding: 26px 30px 20px;
+    background: linear-gradient(120deg, #235789, #3a86ff);
+    color: white;
+  }
+
+  .header h1 {
+    margin: 0 0 8px;
+    font-size: clamp(26px, 4vw, 38px);
+  }
+
+  .header p {
+    margin: 4px 0;
+    opacity: .95;
+    font-size: 16px;
+  }
+
+  .status-bar {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    background: #f5fbff;
+    border-bottom: 1px solid #dcecf5;
+  }
+
+  .status-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .pill {
+    background: white;
+    border: 1px solid #d7e7ef;
+    border-radius: 999px;
+    padding: 8px 13px;
+    font-weight: 700;
+    box-shadow: 0 3px 10px rgba(0,0,0,.04);
+  }
+
+  #hearts { letter-spacing: 2px; }
+
+  .audio-card {
+    margin: 22px 24px 0;
+    padding: 20px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #eef8ff, #f7fff6);
+    border: 1px solid #d9edf6;
+  }
+
+  .audio-top {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .audio-title {
+    font-weight: 800;
+    font-size: 18px;
+  }
+
+  .play-btn {
+    border: 0;
+    border-radius: 14px;
+    padding: 12px 18px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    background: #ffbe0b;
+    color: #4c3500;
+    box-shadow: 0 5px 0 #d99d00;
+    transition: transform .08s ease, box-shadow .08s ease, opacity .2s;
+  }
+
+  .play-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #d99d00;
+  }
+
+  .play-btn:disabled {
+    cursor: not-allowed;
+    opacity: .55;
+    box-shadow: none;
+  }
+
+  .progress-track {
+    height: 10px;
+    background: #dce8ef;
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 15px;
+  }
+
+  .progress-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #3a86ff, #06d6a0);
+    transition: width .25s linear;
+  }
+
+  .audio-note {
+    margin: 10px 0 0;
+    font-size: 14px;
+    color: #587086;
+  }
+
+  .content {
+    padding: 24px;
+  }
+
+  .instruction {
+    margin: 0 0 20px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .question-card {
+    background: #fff;
+    border: 1px solid #dfeaf0;
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 9px 25px rgba(27, 78, 112, .08);
+  }
+
+  .q-number {
+    display: inline-block;
+    padding: 6px 11px;
+    border-radius: 999px;
+    background: #e7f1ff;
+    color: #1b5ba7;
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+
+  .question-text {
+    font-size: 21px;
+    font-weight: 800;
+    line-height: 1.4;
+    margin-bottom: 18px;
+  }
+
+  .answers {
+    display: grid;
+    gap: 12px;
+  }
+
+  .answer-btn {
+    width: 100%;
+    text-align: left;
+    border: 2px solid #dce7ee;
+    background: #fbfdff;
+    border-radius: 15px;
+    padding: 14px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .18s ease;
+    line-height: 1.4;
+  }
+
+  .answer-btn:hover:not(:disabled) {
+    border-color: #76aef8;
+    background: #f0f7ff;
+    transform: translateY(-1px);
+  }
+
+  .answer-btn.correct {
+    border-color: #2fb344;
+    background: #eaf9ed;
+  }
+
+  .answer-btn.wrong {
+    border-color: #ef476f;
+    background: #fff0f3;
+  }
+
+  .feedback {
+    min-height: 28px;
+    margin-top: 15px;
+    font-weight: 800;
+  }
+
+  .feedback.good { color: #20813a; }
+  .feedback.bad { color: #c6284c; }
+
+  .next-wrap {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+  }
+
+  .next-btn, .restart-btn {
+    border: 0;
+    border-radius: 13px;
+    padding: 12px 19px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    background: #3a86ff;
+    color: white;
+  }
+
+  .next-btn:disabled {
+    background: #a9bfdc;
+    cursor: not-allowed;
+  }
+
+  .hidden { display: none !important; }
+
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(12, 32, 50, .72);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 999;
+  }
+
+  .modal {
+    width: min(520px, 94vw);
+    background: white;
+    border-radius: 24px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 25px 70px rgba(0,0,0,.25);
+  }
+
+  .modal h2 {
+    margin-top: 0;
+    font-size: 30px;
+  }
+
+  .big-icon {
+    font-size: 62px;
+    margin-bottom: 8px;
+  }
+
+  .score {
+    font-size: 22px;
+    font-weight: 800;
+    margin: 12px 0 20px;
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 10px; }
+    .header, .content { padding-left: 18px; padding-right: 18px; }
+    .audio-card { margin-left: 18px; margin-right: 18px; }
+    .status-bar { padding-left: 18px; padding-right: 18px; }
+    .question-text { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="game-shell">
+  <div class="header">
+    <h1>🎧 Grade 11 - Unit 3 - Exercise 12 - Option B</h1>
+    <p><strong>Topic:</strong> Finding a Balance at Home</p>
+    <p>Listen and choose the correct answer A, B, C, or D. You will hear the recording twice.</p>
+  </div>
+
+  <div class="status-bar">
+    <div class="status-group">
+      <div class="pill">Question: <span id="qStatus">1/6</span></div>
+      <div class="pill">Score: <span id="score">0</span>/6</div>
+    </div>
+    <div class="status-group">
+      <div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+      <div class="pill">🎧 Listening: <span id="listenCount">0/2</span></div>
+    </div>
+  </div>
+
+  <div class="audio-card">
+    <div class="audio-top">
+      <div class="audio-title">🔊 Audio recording</div>
+      <button id="playBtn" class="play-btn">▶ PLAY AUDIO</button>
+    </div>
+    <div class="progress-track">
+      <div id="progressFill" class="progress-fill"></div>
+    </div>
+    <p id="audioNote" class="audio-note">You can play the recording a maximum of 2 times.</p>
+    <audio id="audio" preload="metadata">
+      <source src="Grade_11_Unit_3_Exercise_12_Option_B.mp3" type="audio/mpeg">
+      Your browser does not support audio playback.
+    </audio>
+  </div>
+
+  <div class="content">
+    <p class="instruction">Choose the best answer. A wrong answer costs one heart. You must answer correctly before moving to the next question.</p>
+
+    <div class="question-card">
+      <div id="qNumber" class="q-number">Question 1</div>
+      <div id="questionText" class="question-text"></div>
+      <div id="answers" class="answers"></div>
+      <div id="feedback" class="feedback"></div>
+      <div class="next-wrap">
+        <button id="nextBtn" class="next-btn" disabled>Next ➜</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="gameOverOverlay" class="overlay hidden">
+  <div class="modal">
+    <div class="big-icon">💔</div>
+    <h2>Out of hearts!</h2>
+    <p>You have used all your hearts. Please restart the exercise.</p>
+    <button id="restartBtn1" class="restart-btn">↻ Try Again</button>
+  </div>
+</div>
+
+<div id="completeOverlay" class="overlay hidden">
+  <div class="modal">
+    <div class="big-icon">🏆</div>
+    <h2>Excellent work!</h2>
+    <p>You have completed the listening practice.</p>
+    <div class="score">Final score: <span id="finalScore">0</span>/6</div>
+    <button id="restartBtn2" class="restart-btn">↻ Play Again</button>
+  </div>
+</div>
+
+<script>
+const originalQuestions = [
+  {
+    question: "What was the main cause of disagreement between Lily and her parents?",
+    options: [
+      { text: "the friends she spent time with", correct: false },
+      { text: "the amount of time she spent online", correct: true },
+      { text: "her poor performance at school", correct: false },
+      { text: "the household chores she avoided", correct: false }
+    ]
+  },
+  {
+    question: "Why did Lily think her parents did not understand her?",
+    options: [
+      { text: "They refused to let her meet her friends.", correct: false },
+      { text: "They compared her with other teenagers.", correct: false },
+      { text: "They saw phones mainly as a distraction.", correct: true },
+      { text: "They often checked her private messages.", correct: false }
+    ]
+  },
+  {
+    question: "What did the family agree to do?",
+    options: [
+      { text: "Avoid using phones during dinner.", correct: true },
+      { text: "Turn off the Internet after 9 p.m.", correct: false },
+      { text: "Spend every Sunday together.", correct: false },
+      { text: "Limit social media to one hour a day.", correct: false }
+    ]
+  },
+  {
+    question: "What surprised Lily after the new rule was introduced?",
+    options: [
+      { text: "She had more time to study.", correct: false },
+      { text: "Her parents also followed the rule.", correct: true },
+      { text: "Her friends supported the decision.", correct: false },
+      { text: "She stopped checking social media.", correct: false }
+    ]
+  },
+  {
+    question: "What was one result of the change?",
+    options: [
+      { text: "Lily became more independent.", correct: false },
+      { text: "The family had fewer meals together.", correct: false },
+      { text: "Lily communicated more with her parents.", correct: true },
+      { text: "Her parents became stricter about technology.", correct: false }
+    ]
+  },
+  {
+    question: "What lesson did Lily learn from the experience?",
+    options: [
+      { text: "Teenagers should always follow their parents' decisions.", correct: false },
+      { text: "Technology is the main cause of family conflict.", correct: false },
+      { text: "Parents usually understand technology better than teenagers.", correct: false },
+      { text: "Family problems can improve when both sides are willing to change.", correct: true }
+    ]
+  }
+];
+
+let questions = [];
+let currentQuestion = 0;
+let lives = 5;
+let score = 0;
+let listenCount = 0;
+const maxListens = 2;
+let currentAnswered = false;
+
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("playBtn");
+const progressFill = document.getElementById("progressFill");
+const listenCountEl = document.getElementById("listenCount");
+const audioNote = document.getElementById("audioNote");
+
+const qStatus = document.getElementById("qStatus");
+const scoreEl = document.getElementById("score");
+const heartsEl = document.getElementById("hearts");
+const qNumber = document.getElementById("qNumber");
+const questionText = document.getElementById("questionText");
+const answers = document.getElementById("answers");
+const feedback = document.getElementById("feedback");
+const nextBtn = document.getElementById("nextBtn");
+
+function shuffleArray(array) {
+  const copy = [...array];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function prepareQuestions() {
+  questions = originalQuestions.map(q => ({
+    question: q.question,
+    options: shuffleArray(q.options.map(o => ({...o})))
+  }));
+}
+
+function updateHearts() {
+  heartsEl.textContent = "❤️".repeat(lives) + "🖤".repeat(5 - lives);
+}
+
+function renderQuestion() {
+  currentAnswered = false;
+  nextBtn.disabled = true;
+  feedback.textContent = "";
+  feedback.className = "feedback";
+
+  const q = questions[currentQuestion];
+  qStatus.textContent = `${currentQuestion + 1}/${questions.length}`;
+  qNumber.textContent = `Question ${currentQuestion + 1}`;
+  questionText.textContent = q.question;
+  answers.innerHTML = "";
+
+  const labels = ["A", "B", "C", "D"];
+
+  q.options.forEach((option, index) => {
+    const btn = document.createElement("button");
+    btn.className = "answer-btn";
+    btn.innerHTML = `<strong>${labels[index]}.</strong> ${option.text}`;
+    btn.addEventListener("click", () => handleAnswer(btn, option));
+    answers.appendChild(btn);
+  });
+}
+
+function handleAnswer(btn, option) {
+  if (currentAnswered || btn.disabled) return;
+
+  if (option.correct) {
+    currentAnswered = true;
+    score++;
+    scoreEl.textContent = score;
+    btn.classList.add("correct");
+    feedback.textContent = "✅ Correct! Great listening.";
+    feedback.className = "feedback good";
+    [...answers.children].forEach(b => b.disabled = true);
+    nextBtn.disabled = false;
+  } else {
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled = true;
+    feedback.textContent = "❌ Not quite. Try again.";
+    feedback.className = "feedback bad";
+
+    if (lives <= 0) {
+      setTimeout(() => {
+        audio.pause();
+        document.getElementById("gameOverOverlay").classList.remove("hidden");
+      }, 350);
+    }
+  }
+}
+
+nextBtn.addEventListener("click", () => {
+  if (!currentAnswered) return;
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    renderQuestion();
+  } else {
+    audio.pause();
+    document.getElementById("finalScore").textContent = score;
+    document.getElementById("completeOverlay").classList.remove("hidden");
+  }
+});
+
+let hasStartedCurrentListen = false;
+
+playBtn.addEventListener("click", async () => {
+  // If audio is currently playing, pause it. Pausing does NOT use another listening attempt.
+  if (!audio.paused && !audio.ended) {
+    audio.pause();
+    playBtn.textContent = "▶ RESUME AUDIO";
+    playBtn.disabled = false;
+    audioNote.textContent = `Paused — Listening ${listenCount} of ${maxListens}.`;
+    return;
+  }
+
+  // Resume a paused recording without increasing the listening counter.
+  if (audio.paused && hasStartedCurrentListen && audio.currentTime > 0 && !audio.ended) {
+    try {
+      await audio.play();
+      playBtn.textContent = "⏸ PAUSE AUDIO";
+      playBtn.disabled = false;
+      audioNote.textContent = `Listening ${listenCount} of ${maxListens}.`;
+    } catch (e) {
+      audioNote.textContent = "The browser blocked playback. Please click again.";
+    }
+    return;
+  }
+
+  // Start a new full listening attempt.
+  if (listenCount >= maxListens) return;
+
+  listenCount++;
+  listenCountEl.textContent = `${listenCount}/${maxListens}`;
+  audio.currentTime = 0;
+  hasStartedCurrentListen = true;
+
+  try {
+    await audio.play();
+    playBtn.textContent = "⏸ PAUSE AUDIO";
+    playBtn.disabled = false;
+    audioNote.textContent = `Listening ${listenCount} of ${maxListens}.`;
+  } catch (e) {
+    listenCount = Math.max(0, listenCount - 1);
+    listenCountEl.textContent = `${listenCount}/${maxListens}`;
+    hasStartedCurrentListen = false;
+    playBtn.textContent = "▶ PLAY AUDIO";
+    playBtn.disabled = false;
+    audioNote.textContent = "The browser blocked playback. Please click PLAY AUDIO again.";
+  }
+});
+
+audio.addEventListener("timeupdate", () => {
+  if (audio.duration) {
+    progressFill.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
+  }
+});
+
+audio.addEventListener("ended", () => {
+  progressFill.style.width = "100%";
+  hasStartedCurrentListen = false;
+
+  if (listenCount >= maxListens) {
+    playBtn.textContent = "🔒 LISTENING LIMIT REACHED";
+    playBtn.disabled = true;
+    audioNote.textContent = "You have used both listening attempts.";
+  } else {
+    playBtn.textContent = "▶ PLAY AUDIO AGAIN";
+    playBtn.disabled = false;
+    audioNote.textContent = `You have ${maxListens - listenCount} listening attempt left.`;
+  }
+});
+
+function restartGame() {
+  audio.pause();
+  audio.currentTime = 0;
+  progressFill.style.width = "0%";
+
+  currentQuestion = 0;
+  lives = 5;
+  score = 0;
+  listenCount = 0;
+  hasStartedCurrentListen = false;
+  scoreEl.textContent = "0";
+  listenCountEl.textContent = "0/2";
+  playBtn.disabled = false;
+  playBtn.textContent = "▶ PLAY AUDIO";
+  audioNote.textContent = "You can play the recording a maximum of 2 times.";
+
+  updateHearts();
+  prepareQuestions();
+  renderQuestion();
+
+  document.getElementById("gameOverOverlay").classList.add("hidden");
+  document.getElementById("completeOverlay").classList.add("hidden");
+}
+
+document.getElementById("restartBtn1").addEventListener("click", restartGame);
+document.getElementById("restartBtn2").addEventListener("click", restartGame);
+
+prepareQuestions();
+updateHearts();
+renderQuestion();
+</script>
+</body>
+</html>
