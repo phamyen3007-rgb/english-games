@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Grade 11 - Unit 2 - Exercise 17 - Option B</title>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#eef8ff,#fff8f0);color:#123}
+.wrap{max-width:1100px;margin:auto;padding:24px} .top{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.pill{background:white;border:1px solid #dbeafe;border-radius:999px;padding:12px 18px;font-weight:800;box-shadow:0 8px 22px #0001}
+h1{margin:10px 0 6px;color:#0b3d66} .sub{color:#557085;font-weight:600}
+.audio-box{margin:22px 0;background:white;border-radius:24px;padding:22px;box-shadow:0 12px 35px #0001;border:1px solid #d7eaf7}
+.audio-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap} button{border:0;border-radius:14px;padding:13px 18px;font-size:16px;font-weight:800;cursor:pointer}
+#playBtn{background:#ffbf18;color:#2a2100} #pauseBtn{background:#e8f1f8;color:#123} #pauseBtn:disabled,#playBtn:disabled{opacity:.45;cursor:not-allowed}
+.bar{height:12px;background:#e5edf4;border-radius:99px;overflow:hidden;margin-top:16px} #progress{height:100%;width:0;background:#4d8ec7}
+.note{margin-top:12px;color:#557085}
+.card{background:white;border-radius:24px;padding:28px;box-shadow:0 12px 35px #0001;border:1px solid #e4edf4}
+.instructions{font-weight:800;font-size:20px;margin-bottom:20px} .passage{font-size:18px;line-height:2.25}
+.blank-wrap{white-space:nowrap} input{width:175px;padding:9px 10px;border:2px solid #cbdce8;border-radius:10px;font-size:16px;margin:0 4px}
+input:focus{outline:none;border-color:#3988c9} input.correct{border-color:#16a34a;background:#ecfdf3} input.wrong{border-color:#dc2626;background:#fff1f2}
+.actions{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap} #checkBtn{background:#146ca4;color:white} #restartBtn{background:#edf2f7;color:#123}
+#feedback{margin-top:20px} .fb{padding:12px 14px;border-radius:12px;margin:8px 0;background:#f7fafc} .good{border-left:5px solid #16a34a} .bad{border-left:5px solid #dc2626}
+#finish{display:none;margin-top:20px;padding:18px;border-radius:16px;background:#ecfdf3;font-weight:800;color:#166534}
+@media(max-width:650px){.wrap{padding:12px}.card{padding:18px}.passage{font-size:16px}input{width:145px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="pill">❤️ Lives: <span id="lives">❤️❤️❤️❤️❤️</span></div>
+    <div class="pill">🎧 Listening: <span id="plays">0/2</span></div>
+  </div>
+  <h1>Grade 11 - Unit 2 - Exercise 17 - Option B</h1>
+  <div class="sub">Family Relationships</div>
+
+  <div class="audio-box">
+    <div class="audio-row">
+      <strong style="font-size:21px">🔊 Audio recording</strong>
+      <button id="playBtn">▶ PLAY AUDIO</button>
+      <button id="pauseBtn" disabled>⏸ PAUSE</button>
+    </div>
+    <div class="bar"><div id="progress"></div></div>
+    <div class="note">You can play the recording a maximum of 2 times. Pausing and resuming does not use another play.</div>
+    <audio id="audio" preload="metadata" src="Grade_11_Unit_2_Exercise_17_Option_B.mp3"></audio>
+  </div>
+
+  <div class="card">
+    <div class="instructions">Listen and fill in each blank with <u>NO MORE THAN THREE WORDS</u>.</div>
+    <div class="passage">Family life has changed a lot in recent years. Today, parents are often <span class="blank-wrap"><b>(1)</b> <input id="q1" autocomplete="off" spellcheck="false" placeholder="Type answer"></span> with their jobs, while teenagers spend more time studying or using technology. As a result, family members may have <span class="blank-wrap"><b>(2)</b> <input id="q2" autocomplete="off" spellcheck="false" placeholder="Type answer"></span> to talk to one another. This can sometimes cause misunderstandings between parents and their children.<br><br>However, there are many simple ways to build a <span class="blank-wrap"><b>(3)</b> <input id="q3" autocomplete="off" spellcheck="false" placeholder="Type answer"></span> family relationship. Having meals together gives everyone a chance to <span class="blank-wrap"><b>(4)</b> <input id="q4" autocomplete="off" spellcheck="false" placeholder="Type answer"></span> their daily experiences. Parents should also listen carefully when their children talk about their problems instead of immediately giving <span class="blank-wrap"><b>(5)</b> <input id="q5" autocomplete="off" spellcheck="false" placeholder="Type answer"></span>.<br><br>Teenagers can also help improve family life. Doing <span class="blank-wrap"><b>(6)</b> <input id="q6" autocomplete="off" spellcheck="false" placeholder="Type answer"></span>, such as washing the dishes or cleaning the house, teaches them to be more responsible. They should also respect their parents&#39; <span class="blank-wrap"><b>(7)</b> <input id="q7" autocomplete="off" spellcheck="false" placeholder="Type answer"></span>, even when they disagree with them.<br><br>Another useful idea is to have regular <span class="blank-wrap"><b>(8)</b> <input id="q8" autocomplete="off" spellcheck="false" placeholder="Type answer"></span>, such as watching a film or going for a walk together. These activities can help family members understand each other <span class="blank-wrap"><b>(9)</b> <input id="q9" autocomplete="off" spellcheck="false" placeholder="Type answer"></span>. In the end, good communication and mutual respect are important for creating a <span class="blank-wrap"><b>(10)</b> <input id="q10" autocomplete="off" spellcheck="false" placeholder="Type answer"></span> home.</div>
+    <div class="actions">
+      <button id="checkBtn">✓ CHECK ANSWERS</button>
+      <button id="restartBtn">↻ RESTART</button>
+    </div>
+    <div id="feedback"></div>
+    <div id="finish">🎉 Excellent! You completed the listening exercise.</div>
+  </div>
+</div>
+
+<script>
+const audio=document.getElementById('audio'), playBtn=document.getElementById('playBtn'),
+pauseBtn=document.getElementById('pauseBtn'), progress=document.getElementById('progress');
+let playCount=0, paused=false, lives=5, lockedWrong=new Set();
+const data=[{a:'busy',e:'be busy with their jobs = bận rộn với công việc.'},{a:'less time',e:'Gia đình có ít thời gian trò chuyện với nhau hơn.'},{a:'stronger',e:'a stronger family relationship = mối quan hệ gia đình bền chặt hơn.'},{a:'share',e:'share their daily experiences = chia sẻ trải nghiệm hằng ngày.'},{a:'advice',e:'give advice = đưa ra lời khuyên.'},{a:'household chores',e:'household chores = việc nhà như rửa chén, dọn dẹp.'},{a:'opinions',e:"respect their parents' opinions = tôn trọng ý kiến của cha mẹ."},{a:'family activities',e:'family activities = các hoạt động chung của gia đình.'},{a:'better',e:'understand each other better = hiểu nhau hơn.'},{a:'happy',e:'a happy home = một mái ấm hạnh phúc.'}];
+
+function norm(s){return s.trim().toLowerCase().replace(/[’]/g,"'").replace(/\s+/g,' ')}
+function updateLives(){document.getElementById('lives').textContent='❤️'.repeat(lives)+'🖤'.repeat(5-lives)}
+function updatePlayUI(){document.getElementById('plays').textContent=playCount+'/2'}
+
+playBtn.onclick=()=>{
+  if(paused){ audio.play(); paused=false; return; }
+  if(playCount>=2) return;
+  playCount++; updatePlayUI(); audio.currentTime=0; audio.play();
+  if(playCount>=2) playBtn.disabled=true;
+};
+pauseBtn.onclick=()=>{ if(!audio.paused){audio.pause();paused=true;} else if(paused){audio.play();paused=false;} };
+audio.onplay=()=>{pauseBtn.disabled=false;pauseBtn.textContent='⏸ PAUSE';playBtn.textContent='▶ PLAY AUDIO'};
+audio.onpause=()=>{if(!audio.ended && audio.currentTime>0) pauseBtn.textContent='▶ RESUME'};
+pauseBtn.addEventListener('click',()=>{if(paused) pauseBtn.textContent='▶ RESUME'});
+audio.ontimeupdate=()=>{if(audio.duration) progress.style.width=(audio.currentTime/audio.duration*100)+'%'};
+audio.onended=()=>{paused=false;pauseBtn.disabled=true;pauseBtn.textContent='⏸ PAUSE';progress.style.width='100%'};
+
+document.getElementById('checkBtn').onclick=()=>{
+  let all=true, fb='';
+  data.forEach((d,i)=>{
+    const el=document.getElementById('q'+(i+1)), ok=norm(el.value)===norm(d.a);
+    el.classList.remove('correct','wrong');
+    if(ok){el.classList.add('correct'); fb+=`<div class="fb good"><b>${i+1}. ${d.a}</b> — ${d.e}</div>`;}
+    else{all=false;el.classList.add('wrong');
+      if(el.value.trim() && !lockedWrong.has(i) && lives>0){lives--;lockedWrong.add(i);}
+      fb+=`<div class="fb bad"><b>Question ${i+1}:</b> Try again.</div>`;
+    }
+  });
+  updateLives(); document.getElementById('feedback').innerHTML=fb;
+  if(lives<=0 && !all){alert('You have run out of hearts. The exercise will restart.');location.reload();}
+  if(all) document.getElementById('finish').style.display='block';
+};
+
+document.getElementById('restartBtn').onclick=()=>location.reload();
+updateLives(); updatePlayUI();
+</script>
+</body>
+</html>
