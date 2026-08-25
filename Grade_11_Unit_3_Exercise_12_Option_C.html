@@ -34,14 +34,14 @@ button.action:disabled{opacity:.45;cursor:not-allowed}
 .modal{background:white;border-radius:24px;padding:30px;text-align:center;width:min(500px,92vw)}
 .modal button{padding:12px 18px;border:0;border-radius:12px;background:#3a86ff;color:white;font-weight:bold}
 @media(max-width:600px){body{padding:10px}header,section{padding-left:18px;padding-right:18px}.audio{margin-left:18px;margin-right:18px}}
-</style>
+audio{display:block;width:100%;margin-top:12px}</style>
 </head>
 <body>
 <main>
 <header>
 <h1>🎧 Grade 11 - Unit 3 - Exercise 12 - Option C</h1>
 <div><b>Topic:</b> A Greener City of the Future</div>
-<p>Listen to a short talk about a future city and fill in each blank with <b>NO MORE THAN TWO WORDS</b>. You will hear the recording twice.</p>
+<p>Listen to a short talk about a future city and fill in each blank with <b>NO MORE THAN TWO WORDS</b>.</p>
 </header>
 
 <div class="status">
@@ -51,17 +51,16 @@ button.action:disabled{opacity:.45;cursor:not-allowed}
 </div>
 <div>
 <span class="pill">❤️ <span id="hearts">❤️❤️❤️❤️❤️</span></span>
-<span class="pill">🎧 <span id="count">0/2</span></span>
+
 </div>
 </div>
 
 <div class="audio">
-<b>🔊 Audio recording</b> &nbsp;
-<button id="play">▶ PLAY AUDIO</button>
-<div class="track"><div id="bar"></div></div>
-<p id="note">Maximum 2 listening attempts. You may pause and resume without using another attempt.</p>
-<audio id="audio" preload="metadata">
+<b>🔊 Audio recording</b>
+<p id="note">You can play, pause, rewind, or fast-forward freely.</p>
+<audio id="audio" controls preload="metadata" style="width:100%;margin-top:12px;">
 <source src="Grade_11_Unit_3_Exercise_12_Option_C.mp3" type="audio/mpeg">
+Your browser does not support audio playback.
 </audio>
 </div>
 
@@ -97,8 +96,8 @@ City planners will also create more (5) ________ where people can exercise, rela
 
 <script>
 const qs=[["In the future, residents will use (1) ________ to travel around the city.", ["electric buses"]], ["Many apartment blocks will have (2) ________ on their roofs.", ["rooftop gardens"]], ["Some buildings will produce electricity using (3) ________.", ["solar panels"]], ["Smart rubbish bins will send a message when they are (4) ________.", ["nearly full"]], ["City planners will create more (5) ________ for exercise and relaxation.", ["green spaces"]], ["Future cities could become much more (6) ________.", ["liveable"]]];
-let i=0,lives=5,score=0,listens=0,started=false,answered=false;
-const A=document.getElementById("audio"),P=document.getElementById("play"),bar=document.getElementById("bar"),inp=document.getElementById("input");
+let i=0,lives=5,score=0,answered=false;
+const A=document.getElementById("audio"),inp=document.getElementById("input");
 function norm(s){return s.trim().toLowerCase().replace(/[–—]/g,"-").replace(/\s+/g," ")}
 function hearts(){document.getElementById("hearts").textContent="❤️".repeat(lives)+"🖤".repeat(5-lives)}
 function render(){
@@ -132,31 +131,11 @@ if(!answered)return;
 if(i<5){i++;render()}
 else{A.pause();final.textContent=score;done.classList.remove("hide")}
 };
-P.onclick=async()=>{
-if(!A.paused&&!A.ended){
-A.pause();P.textContent="▶ RESUME AUDIO";note.textContent=`Paused — Listening ${listens}/2`;return;
-}
-if(A.paused&&started&&A.currentTime>0&&!A.ended){
-try{await A.play();P.textContent="⏸ PAUSE AUDIO";note.textContent=`Listening ${listens}/2`;}catch(e){}
-return;
-}
-if(listens>=2)return;
-listens++;count.textContent=`${listens}/2`;A.currentTime=0;started=true;
-try{await A.play();P.textContent="⏸ PAUSE AUDIO";note.textContent=`Listening ${listens}/2`;}
-catch(e){listens--;count.textContent=`${listens}/2`;started=false;P.textContent="▶ PLAY AUDIO";}
-};
-A.ontimeupdate=()=>{if(A.duration)bar.style.width=(A.currentTime/A.duration*100)+"%"};
-A.onended=()=>{
-started=false;bar.style.width="100%";
-if(listens>=2){P.disabled=true;P.textContent="🔒 LISTENING LIMIT REACHED";note.textContent="You have used both listening attempts."}
-else{P.textContent="▶ PLAY AUDIO AGAIN";note.textContent="You have 1 listening attempt left."}
-};
 function restart(){
-A.pause();A.currentTime=0;i=0;lives=5;score=0;listens=0;started=false;
-document.getElementById("score").textContent="0";count.textContent="0/2";
-P.disabled=false;P.textContent="▶ PLAY AUDIO";bar.style.width="0";
-note.textContent="Maximum 2 listening attempts. You may pause and resume without using another attempt.";
-over.classList.add("hide");done.classList.add("hide");hearts();render();
+A.pause();A.currentTime=0;i=0;lives=5;score=0;answered=false;
+document.getElementById("score").textContent="0";
+over.classList.add("hide");done.classList.add("hide");
+hearts();render();
 }
 hearts();render();
 </script>

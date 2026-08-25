@@ -285,6 +285,8 @@
     .status-bar { padding-left: 18px; padding-right: 18px; }
     .question-text { font-size: 18px; }
   }
+
+  audio { display:block; width:100%; margin-top:12px; }
 </style>
 </head>
 <body>
@@ -292,7 +294,7 @@
   <div class="header">
     <h1>🎧 Grade 11 - Unit 3 - Exercise 12 - Option B</h1>
     <p><strong>Topic:</strong> Finding a Balance at Home</p>
-    <p>Listen and choose the correct answer A, B, C, or D. You will hear the recording twice.</p>
+    <p>Listen and choose the correct answer A, B, C, or D.</p>
   </div>
 
   <div class="status-bar">
@@ -302,20 +304,14 @@
     </div>
     <div class="status-group">
       <div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
-      <div class="pill">🎧 Listening: <span id="listenCount">0/2</span></div>
+      
     </div>
   </div>
 
   <div class="audio-card">
-    <div class="audio-top">
-      <div class="audio-title">🔊 Audio recording</div>
-      <button id="playBtn" class="play-btn">▶ PLAY AUDIO</button>
-    </div>
-    <div class="progress-track">
-      <div id="progressFill" class="progress-fill"></div>
-    </div>
-    <p id="audioNote" class="audio-note">You can play the recording a maximum of 2 times.</p>
-    <audio id="audio" preload="metadata">
+    <div class="audio-title">🔊 Audio recording</div>
+    <p class="audio-note">You can play, pause, rewind, or fast-forward freely.</p>
+    <audio id="audio" controls preload="metadata" style="width:100%; margin-top:12px;">
       <source src="Grade_11_Unit_3_Exercise_12_Option_B.mp3" type="audio/mpeg">
       Your browser does not support audio playback.
     </audio>
@@ -417,15 +413,9 @@ let questions = [];
 let currentQuestion = 0;
 let lives = 5;
 let score = 0;
-let listenCount = 0;
-const maxListens = 2;
 let currentAnswered = false;
 
 const audio = document.getElementById("audio");
-const playBtn = document.getElementById("playBtn");
-const progressFill = document.getElementById("progressFill");
-const listenCountEl = document.getElementById("listenCount");
-const audioNote = document.getElementById("audioNote");
 
 const qStatus = document.getElementById("qStatus");
 const scoreEl = document.getElementById("score");
@@ -520,90 +510,15 @@ nextBtn.addEventListener("click", () => {
   }
 });
 
-let hasStartedCurrentListen = false;
-
-playBtn.addEventListener("click", async () => {
-  // If audio is currently playing, pause it. Pausing does NOT use another listening attempt.
-  if (!audio.paused && !audio.ended) {
-    audio.pause();
-    playBtn.textContent = "▶ RESUME AUDIO";
-    playBtn.disabled = false;
-    audioNote.textContent = `Paused — Listening ${listenCount} of ${maxListens}.`;
-    return;
-  }
-
-  // Resume a paused recording without increasing the listening counter.
-  if (audio.paused && hasStartedCurrentListen && audio.currentTime > 0 && !audio.ended) {
-    try {
-      await audio.play();
-      playBtn.textContent = "⏸ PAUSE AUDIO";
-      playBtn.disabled = false;
-      audioNote.textContent = `Listening ${listenCount} of ${maxListens}.`;
-    } catch (e) {
-      audioNote.textContent = "The browser blocked playback. Please click again.";
-    }
-    return;
-  }
-
-  // Start a new full listening attempt.
-  if (listenCount >= maxListens) return;
-
-  listenCount++;
-  listenCountEl.textContent = `${listenCount}/${maxListens}`;
-  audio.currentTime = 0;
-  hasStartedCurrentListen = true;
-
-  try {
-    await audio.play();
-    playBtn.textContent = "⏸ PAUSE AUDIO";
-    playBtn.disabled = false;
-    audioNote.textContent = `Listening ${listenCount} of ${maxListens}.`;
-  } catch (e) {
-    listenCount = Math.max(0, listenCount - 1);
-    listenCountEl.textContent = `${listenCount}/${maxListens}`;
-    hasStartedCurrentListen = false;
-    playBtn.textContent = "▶ PLAY AUDIO";
-    playBtn.disabled = false;
-    audioNote.textContent = "The browser blocked playback. Please click PLAY AUDIO again.";
-  }
-});
-
-audio.addEventListener("timeupdate", () => {
-  if (audio.duration) {
-    progressFill.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
-  }
-});
-
-audio.addEventListener("ended", () => {
-  progressFill.style.width = "100%";
-  hasStartedCurrentListen = false;
-
-  if (listenCount >= maxListens) {
-    playBtn.textContent = "🔒 LISTENING LIMIT REACHED";
-    playBtn.disabled = true;
-    audioNote.textContent = "You have used both listening attempts.";
-  } else {
-    playBtn.textContent = "▶ PLAY AUDIO AGAIN";
-    playBtn.disabled = false;
-    audioNote.textContent = `You have ${maxListens - listenCount} listening attempt left.`;
-  }
-});
-
 function restartGame() {
   audio.pause();
   audio.currentTime = 0;
-  progressFill.style.width = "0%";
 
   currentQuestion = 0;
   lives = 5;
   score = 0;
-  listenCount = 0;
-  hasStartedCurrentListen = false;
+  currentAnswered = false;
   scoreEl.textContent = "0";
-  listenCountEl.textContent = "0/2";
-  playBtn.disabled = false;
-  playBtn.textContent = "▶ PLAY AUDIO";
-  audioNote.textContent = "You can play the recording a maximum of 2 times.";
 
   updateHearts();
   prepareQuestions();
