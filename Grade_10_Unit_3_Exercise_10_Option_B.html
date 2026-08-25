@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 10 - Unit 3 - Exercise 10 - Option B</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:22px;font-family:Arial,sans-serif;background:linear-gradient(135deg,#e8f7ff,#fff5dc,#f1ffe9);color:#17344d}
+main{max-width:900px;margin:auto;background:#fffffff2;border-radius:25px;overflow:hidden;box-shadow:0 15px 50px #1233}
+header{padding:26px 30px;background:linear-gradient(120deg,#285f9e,#4b8df8);color:#fff}
+h1{margin:0 0 8px;font-size:27px}
+.status{padding:14px 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;background:#f4faff}
+.pill{background:#fff;border:1px solid #d6e7f0;border-radius:30px;padding:9px 14px;font-weight:bold}
+.audio,.card{margin:22px 24px;padding:20px;border:1px solid #d9e8ef;border-radius:20px;background:#fff}
+audio{display:block;width:100%;margin-top:14px}
+.note{margin-top:8px;color:#5a6c79;font-size:14px}
+#q{font-size:20px;font-weight:bold;line-height:1.5;margin:16px 0}
+input{width:100%;padding:14px 15px;border:2px solid #d7e4ec;border-radius:13px;font-size:18px;outline:none}
+input:focus{border-color:#4b8df8}
+.actions{margin-top:14px;display:flex;gap:10px;justify-content:flex-end}
+button{padding:12px 18px;border:0;border-radius:12px;font-weight:bold;font-size:15px;cursor:pointer}
+#check{background:#ffbd0a;color:#27313b}
+#next{background:#3a86ff;color:white}
+#next:disabled{opacity:.4;cursor:not-allowed}
+#feedback{min-height:30px;margin-top:14px;font-weight:bold}
+.correct{border-color:#2fb344!important;background:#effbef}
+.wrong{border-color:#ef476f!important;background:#fff1f3}
+.overlay{position:fixed;inset:0;background:#123b;display:flex;align-items:center;justify-content:center;z-index:20}
+.hide{display:none}
+.modal{background:#fff;padding:30px;border-radius:22px;text-align:center;width:min(480px,92vw)}
+.modal button{background:#3a86ff;color:#fff}
+@media(max-width:550px){body{padding:10px}h1{font-size:22px}.audio,.card{margin:14px;padding:16px}}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h1>🎧 Grade 10 - Unit 3 - Exercise 10 - Option B</h1>
+<b>Music in My Life</b>
+<p>Listen carefully and fill in each blank with <b>NO MORE THAN TWO WORDS</b>.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Question: <span id="num">1/7</span></span>
+<span class="pill">Score: <span id="score">0</span>/7</span>
+</div>
+<div class="pill">❤️ <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="audio">
+<b>🔊 Audio recording</b>
+<p class="note">You can play, pause, rewind, or fast-forward freely.</p>
+<audio id="audio" controls preload="metadata">
+<source src="Grade_10_Unit_3_Exercise_10_Option_B.mp3" type="audio/mpeg">
+Your browser does not support audio playback.
+</audio>
+</div>
+
+<div class="card">
+<b id="qn">Question 1</b>
+<div id="q"></div>
+<input id="answer" type="text" autocomplete="off" placeholder="Type your answer here...">
+<div id="feedback"></div>
+<div class="actions">
+<button id="check">CHECK</button>
+<button id="next" disabled>NEXT ➜</button>
+</div>
+</div>
+</main>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Out of hearts!</h1>
+<p>You must start again.</p>
+<button onclick="restart()">↻ Try Again</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>🏆 Excellent!</h1>
+<p>You completed the listening exercise.</p>
+<h2>Score: <span id="final">0</span>/7</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const qs=[["I usually listen to music when I am doing my (1) __________ or travelling to school.", ["homework"]], ["It helps me relax, especially after a (2) __________ at school.", ["long day"]], ["I enjoy many different types of music, but (3) __________ is my favourite.", ["pop music"]], ["The songs are often easy to remember and they put me in a (4) __________.", ["good mood"]], ["At weekends, my friends and I sometimes (5) __________ music with each other.", ["share"]], ["Music gives us something interesting to (6) __________ and helps us become closer.", ["talk about"]], ["There is always a song that matches my (7) __________.", ["feelings"]]];
+let i=0,lives=5,score=0,answered=false;
+const audio=document.getElementById("audio");
+const input=document.getElementById("answer");
+
+function norm(s){
+ return s.toLowerCase().trim().replace(/[’‘]/g,"'").replace(/\s+/g," ");
+}
+function heartsUI(){
+ hearts.textContent="❤️".repeat(lives)+"🖤".repeat(5-lives);
+}
+function render(){
+ answered=false;
+ num.textContent=`${i+1}/7`;
+ qn.textContent=`Question ${i+1}`;
+ q.textContent=qs[i][0];
+ input.value="";
+ input.disabled=false;
+ input.className="";
+ feedback.textContent="";
+ next.disabled=true;
+ check.disabled=false;
+ input.focus();
+}
+function checkAnswer(){
+ if(answered) return;
+ const val=norm(input.value);
+ if(!val){feedback.textContent="⚠️ Please enter an answer.";return;}
+ const ok=qs[i][1].some(a=>norm(a)===val);
+ if(ok){
+   answered=true;score++;
+   document.getElementById("score").textContent=score;
+   input.className="correct";input.disabled=true;check.disabled=true;next.disabled=false;
+   feedback.textContent="✅ Correct!";
+ }else{
+   lives--;heartsUI();input.className="wrong";
+   feedback.textContent="❌ Incorrect. Try again.";
+   input.select();
+   if(lives<=0){audio.pause();over.classList.remove("hide");}
+ }
+}
+check.onclick=checkAnswer;
+input.addEventListener("keydown",e=>{if(e.key==="Enter")checkAnswer();});
+next.onclick=()=>{
+ if(i<6){i++;render();}
+ else{audio.pause();final.textContent=score;done.classList.remove("hide");}
+};
+function restart(){
+ audio.pause();audio.currentTime=0;i=0;lives=5;score=0;answered=false;
+ document.getElementById("score").textContent="0";
+ over.classList.add("hide");done.classList.add("hide");
+ heartsUI();render();
+}
+heartsUI();render();
+</script>
+</body>
+</html>

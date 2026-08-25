@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 10 - Unit 3 - Exercise 11 - Option C</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  padding:22px;
+  font-family:Arial,sans-serif;
+  background:linear-gradient(135deg,#e5f7ff,#fff4dc,#efffe8);
+  color:#15344d
+}
+main{
+  max-width:980px;
+  margin:auto;
+  background:#fffffff2;
+  border-radius:25px;
+  overflow:hidden;
+  box-shadow:0 15px 50px #1233
+}
+header{
+  padding:26px 30px;
+  background:linear-gradient(120deg,#285f9e,#4b8df8);
+  color:white
+}
+h1{margin:0 0 8px}
+.status{
+  padding:14px 24px;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+  background:#f4faff
+}
+.pill{
+  background:white;
+  border:1px solid #d6e7f0;
+  border-radius:30px;
+  padding:9px 14px;
+  font-weight:bold
+}
+.audio,.card{
+  margin:22px 24px;
+  padding:20px;
+  border:1px solid #d9e8ef;
+  border-radius:20px;
+  background:white
+}
+audio{display:block;width:100%;margin-top:14px}
+.note{font-size:14px;color:#60717c}
+.instructions{
+  font-weight:800;
+  font-size:19px;
+  margin-bottom:18px
+}
+.passage{
+  font-size:18px;
+  line-height:2.05
+}
+.blank-wrap{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  white-space:nowrap;
+  margin:2px 2px
+}
+.blank-wrap input{
+  width:165px;
+  padding:8px 10px;
+  border:2px solid #d7e4ec;
+  border-radius:10px;
+  font-size:16px;
+  outline:none
+}
+.blank-wrap input:focus{border-color:#4b8df8}
+.blank-wrap input.ok{background:#eaf9ed;border-color:#2fb344}
+.blank-wrap input.no{background:#fff0f3;border-color:#ef476f}
+.actions{
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+  margin-top:22px;
+  flex-wrap:wrap
+}
+button{
+  padding:12px 18px;
+  border:0;
+  border-radius:12px;
+  font-weight:bold;
+  cursor:pointer
+}
+#checkBtn{background:#ffbd0a;color:#27313b}
+#restartBtn{background:#3a86ff;color:white}
+#feedback{margin-top:18px}
+.fb{
+  padding:10px 12px;
+  margin:7px 0;
+  border-radius:10px;
+  font-weight:bold
+}
+.good{background:#ecfdf3;color:#166534}
+.bad{background:#fff1f2;color:#be123c}
+#finish{
+  display:none;
+  margin-top:18px;
+  padding:16px;
+  border-radius:14px;
+  background:#ecfdf3;
+  color:#166534;
+  font-weight:800
+}
+@media(max-width:600px){
+  body{padding:10px}
+  .audio,.card{margin:14px;padding:16px}
+  .passage{font-size:16px}
+  .blank-wrap input{width:135px}
+}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <h1>🎧 Grade 10 - Unit 3 - Exercise 11 - Option C</h1>
+  <b>Music and Memories</b>
+  <p>Listen carefully and fill in each blank with <b>NO MORE THAN TWO WORDS</b>.</p>
+</header>
+
+<div class="status">
+  <div class="pill">Score: <span id="score">0</span>/7</div>
+  <div class="pill">❤️ <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="audio">
+  <b>🔊 Audio recording</b>
+  <p class="note">You can play, pause, rewind, or fast-forward freely.</p>
+  <audio id="audio" controls preload="metadata">
+    <source src="Grade_10_Unit_3_Exercise_11_Option_C.mp3" type="audio/mpeg">
+    Your browser does not support audio playback.
+  </audio>
+</div>
+
+<div class="card">
+  <div class="instructions">
+    Listen and complete the whole passage. Write <u>NO MORE THAN TWO WORDS</u> in each blank.
+  </div>
+
+  <div class="passage">
+    Music can bring back memories in a very special way. For me, certain songs remind me of important
+    <span class="blank-wrap"><b>(1)</b><input id="q1" autocomplete="off" spellcheck="false"></span>
+    in my life. Whenever I hear them again, I can often remember exactly where I was and what I was doing.
+    <br><br>
+
+    One song always makes me think of my first
+    <span class="blank-wrap"><b>(2)</b><input id="q2" autocomplete="off" spellcheck="false"></span>
+    with my family. My father played it several times while we were driving to the beach. Even today, hearing that song makes me remember the long journey and the beautiful
+    <span class="blank-wrap"><b>(3)</b><input id="q3" autocomplete="off" spellcheck="false"></span>
+    we saw along the way.
+    <br><br>
+
+    Another song reminds me of a school performance. My classmates and I had to practise for several
+    <span class="blank-wrap"><b>(4)</b><input id="q4" autocomplete="off" spellcheck="false"></span>
+    before the event. I was extremely nervous, but the audience gave us a lot of
+    <span class="blank-wrap"><b>(5)</b><input id="q5" autocomplete="off" spellcheck="false"></span>
+    when we finished.
+    <br><br>
+
+    I now keep a special playlist of songs connected with my favourite memories. I usually add a song when something
+    <span class="blank-wrap"><b>(6)</b><input id="q6" autocomplete="off" spellcheck="false"></span>
+    happens in my life. For me, music is more than entertainment. It is like a personal
+    <span class="blank-wrap"><b>(7)</b><input id="q7" autocomplete="off" spellcheck="false"></span>
+    that I can listen to whenever I want.
+  </div>
+
+  <div class="actions">
+    <button id="checkBtn">✓ CHECK ANSWERS</button>
+    <button id="restartBtn">↻ RESTART</button>
+  </div>
+
+  <div id="feedback"></div>
+  <div id="finish">🎉 Excellent! You completed the listening exercise.</div>
+</div>
+</main>
+
+<script>
+const audio=document.getElementById("audio");
+let lives=5;
+let score=0;
+let wrongCounted=new Set();
+
+const answers=[
+  "moments",
+  "family trip",
+  "scenery",
+  "weeks",
+  "encouragement",
+  "memorable",
+  "photo album"
+];
+
+function norm(s){
+  return s.toLowerCase().trim().replace(/[’‘]/g,"'").replace(/\s+/g," ");
+}
+
+function updateHearts(){
+  hearts.textContent="❤️".repeat(lives)+"🖤".repeat(5-lives);
+}
+
+checkBtn.onclick=()=>{
+  let allCorrect=true;
+  score=0;
+  let fb="";
+
+  answers.forEach((ans,i)=>{
+    const el=document.getElementById("q"+(i+1));
+    const value=norm(el.value);
+    const ok=value===norm(ans);
+
+    el.classList.remove("ok","no");
+
+    if(ok){
+      score++;
+      el.classList.add("ok");
+      fb+=`<div class="fb good">✅ ${i+1}. Correct</div>`;
+    }else{
+      allCorrect=false;
+      el.classList.add("no");
+
+      if(value && !wrongCounted.has(i) && lives>0){
+        lives--;
+        wrongCounted.add(i);
+      }
+
+      fb+=`<div class="fb bad">❌ Question ${i+1}: Try again.</div>`;
+    }
+  });
+
+  document.getElementById("score").textContent=score;
+  updateHearts();
+  feedback.innerHTML=fb;
+
+  if(lives<=0 && !allCorrect){
+    audio.pause();
+    alert("You have run out of hearts. The exercise will restart.");
+    location.reload();
+  }
+
+  if(allCorrect){
+    finish.style.display="block";
+    audio.pause();
+  }else{
+    finish.style.display="none";
+  }
+};
+
+restartBtn.onclick=()=>location.reload();
+updateHearts();
+</script>
+</body>
+</html>

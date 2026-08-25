@@ -1,0 +1,38 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 10 - Unit 3 - Exercise 10 - Option C</title>
+<style>
+*{box-sizing:border-box}body{margin:0;padding:22px;font-family:Arial,sans-serif;background:linear-gradient(135deg,#e7f7ff,#fff4db,#efffe8);color:#15344d}
+main{max-width:900px;margin:auto;background:#fffffff2;border-radius:25px;overflow:hidden;box-shadow:0 15px 50px #1233}
+header{padding:26px 30px;background:linear-gradient(120deg,#285f9e,#4b8df8);color:#fff}h1{margin:0 0 8px}
+.status{padding:14px 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;background:#f4faff}
+.pill{background:white;border:1px solid #d6e7f0;border-radius:30px;padding:9px 14px;font-weight:bold}
+.audio,.card{margin:22px 24px;padding:20px;border:1px solid #d9e8ef;border-radius:20px;background:#fff}
+audio{display:block;width:100%;margin-top:14px}.note{color:#5d6e7a;font-size:14px}
+#q{font-size:21px;font-weight:bold;line-height:1.45;margin:16px 0}#answers{display:grid;gap:11px}
+#answers button{text-align:left;padding:14px;border:2px solid #dce7ee;border-radius:14px;background:#fbfdff;font-size:16px;cursor:pointer}
+#answers button.ok{background:#eaf9ed;border-color:#2fb344}#answers button.no{background:#fff0f3;border-color:#ef476f}
+#feedback{min-height:30px;margin-top:14px;font-weight:bold}#next{float:right;padding:12px 19px;border:0;border-radius:12px;background:#3a86ff;color:#fff;font-weight:bold;cursor:pointer}
+#next:disabled{opacity:.4;cursor:not-allowed}.overlay{position:fixed;inset:0;background:#123b;display:flex;align-items:center;justify-content:center;z-index:10}.hide{display:none}
+.modal{background:white;padding:30px;border-radius:22px;text-align:center;width:min(480px,92vw)}.modal button{padding:12px 18px;border:0;border-radius:12px;background:#3a86ff;color:white;font-weight:bold}
+@media(max-width:550px){body{padding:10px}.audio,.card{margin:14px;padding:16px}h1{font-size:22px}}
+</style></head><body><main>
+<header><h1>🎧 Grade 10 - Unit 3 - Exercise 10 - Option C</h1><b>My First School Performance</b>
+<p>Listen to a student talking about a school music event. Choose A, B, C, or D.</p></header>
+<div class="status"><div><span class="pill">Question: <span id="num">1/6</span></span> <span class="pill">Score: <span id="score">0</span>/6</span></div><div class="pill">❤️ <span id="hearts">❤️❤️❤️❤️❤️</span></div></div>
+<div class="audio"><b>🔊 Audio recording</b><p class="note">You can play, pause, rewind, or fast-forward freely.</p>
+<audio id="audio" controls preload="metadata"><source src="Grade_10_Unit_3_Exercise_10_Option_C.mp3" type="audio/mpeg">Your browser does not support audio playback.</audio></div>
+<div class="card"><b id="qn">Question 1</b><div id="q"></div><div id="answers"></div><div id="feedback"></div><button id="next" disabled>NEXT ➜</button><div style="clear:both"></div></div>
+</main>
+<div id="over" class="overlay hide"><div class="modal"><h1>💔 Out of hearts!</h1><p>You must start again.</p><button onclick="restart()">↻ Try Again</button></div></div>
+<div id="done" class="overlay hide"><div class="modal"><h1>🏆 Excellent!</h1><p>You completed the listening exercise.</p><h2>Score: <span id="final">0</span>/6</h2><button onclick="restart()">↻ Play Again</button></div></div>
+<script>
+const base=[{"q": "Why did Leo decide to join the school music event?", "o": [{"t": "His music teacher recommended it.", "ok": false}, {"t": "His classmates encouraged him to try.", "ok": true}, {"t": "He wanted to improve his singing skills.", "ok": false}, {"t": "He hoped to perform with his best friend.", "ok": false}]}, {"q": "What was Leo most worried about before the performance?", "o": [{"t": "Making a mistake in front of the audience", "ok": true}, {"t": "Forgetting part of the song on stage", "ok": false}, {"t": "Playing differently from the other musicians", "ok": false}, {"t": "Having too little time to practise", "ok": false}]}, {"q": "What helped Leo feel more confident?", "o": [{"t": "Practising alone after school", "ok": false}, {"t": "Receiving advice from his teacher", "ok": false}, {"t": "Performing in front of a small group", "ok": true}, {"t": "Choosing a song he already knew well", "ok": false}]}, {"q": "What happened during the actual performance?", "o": [{"t": "One member of the band started too early.", "ok": false}, {"t": "Leo made a small mistake while playing.", "ok": true}, {"t": "The audience began singing with the band.", "ok": false}, {"t": "The musicians had a problem with the sound.", "ok": false}]}, {"q": "How did Leo feel immediately after the performance?", "o": [{"t": "Surprised that the audience liked the song", "ok": false}, {"t": "Disappointed with part of his performance", "ok": false}, {"t": "Relieved that everything had finished", "ok": false}, {"t": "Proud that the group had performed successfully", "ok": true}]}, {"q": "What has Leo decided to do next?", "o": [{"t": "Learn to play another musical instrument", "ok": false}, {"t": "Perform a song on his own next time", "ok": false}, {"t": "Take part in another school music event", "ok": true}, {"t": "Practise regularly with the same band", "ok": false}]}];let qs=[],i=0,lives=5,score=0,answered=false;const audio=document.getElementById("audio"),L=["A","B","C","D"];
+function shuffle(a){a=[...a];for(let x=a.length-1;x>0;x--){let y=Math.floor(Math.random()*(x+1));[a[x],a[y]]=[a[y],a[x]]}return a}
+function prep(){qs=base.map(x=>({q:x.q,o:shuffle(x.o.map(y=>({...y})))}))}
+function heartsUI(){hearts.textContent="❤️".repeat(lives)+"🖤".repeat(5-lives)}
+function render(){answered=false;next.disabled=true;feedback.textContent="";num.textContent=`${i+1}/6`;qn.textContent=`Question ${i+1}`;q.textContent=qs[i].q;answers.innerHTML="";qs[i].o.forEach((o,j)=>{let b=document.createElement("button");b.innerHTML=`<b>${L[j]}.</b> ${o.t}`;b.onclick=()=>choose(b,o);answers.appendChild(b)})}
+function choose(b,o){if(answered||b.disabled)return;if(o.ok){answered=true;score++;document.getElementById("score").textContent=score;b.classList.add("ok");feedback.textContent="✅ Correct!";[...answers.children].forEach(x=>x.disabled=true);next.disabled=false}else{lives--;heartsUI();b.classList.add("no");b.disabled=true;feedback.textContent="❌ Incorrect. Try again.";if(lives<=0){audio.pause();over.classList.remove("hide")}}}
+next.onclick=()=>{if(i<5){i++;render()}else{audio.pause();final.textContent=score;done.classList.remove("hide")}};
+function restart(){audio.pause();audio.currentTime=0;i=0;lives=5;score=0;answered=false;document.getElementById("score").textContent="0";over.classList.add("hide");done.classList.add("hide");prep();heartsUI();render()}
+prep();heartsUI();render();
+</script></body></html>
