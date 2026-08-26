@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 4 - Exercise 9 - Option C</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg:#070b18;
+  --panel:#0f1729;
+  --panel2:#131d33;
+  --cyan:#4de8ff;
+  --violet:#9b7bff;
+  --pink:#ff5fa2;
+  --text:#edf7ff;
+  --muted:#a9bed2;
+  --good:#48d597;
+  --bad:#ff6b81;
+}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  padding:22px;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(77,232,255,.16), transparent 26%),
+    radial-gradient(circle at 85% 15%, rgba(155,123,255,.18), transparent 24%),
+    radial-gradient(circle at 80% 85%, rgba(255,95,162,.12), transparent 26%),
+    linear-gradient(145deg,#050816,#0b1022 55%,#10182c);
+}
+.shell{
+  max-width:1180px;margin:auto;border-radius:28px;overflow:hidden;
+  background:rgba(8,14,29,.92);
+  border:1px solid rgba(117,217,255,.18);
+  box-shadow:0 25px 80px rgba(0,0,0,.48),0 0 50px rgba(77,232,255,.06)
+}
+header{
+  position:relative;overflow:hidden;padding:28px 30px;
+  background:linear-gradient(120deg,rgba(21,87,128,.95),rgba(46,38,112,.95) 55%,rgba(116,35,98,.92))
+}
+header:before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 0 48%,rgba(255,255,255,.05) 49% 50%,transparent 51%),
+             linear-gradient(0deg,transparent 0 48%,rgba(255,255,255,.035) 49% 50%,transparent 51%);
+  background-size:42px 42px;opacity:.35;pointer-events:none
+}
+header h1{position:relative;margin:0 0 8px;font-size:clamp(26px,4vw,38px)}
+header p{position:relative;margin:5px 0;color:#e8f6ff;line-height:1.5}
+.status{
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  padding:14px 24px;background:#0b1326;border-bottom:1px solid #1d2b45
+}
+.pill{
+  background:#111c33;border:1px solid #263958;border-radius:999px;padding:8px 13px;font-weight:800;
+  box-shadow:inset 0 0 18px rgba(77,232,255,.03)
+}
+.main{display:grid;grid-template-columns:1.12fr .88fr;gap:18px;padding:20px}
+.panel{
+  background:linear-gradient(180deg,rgba(16,25,45,.98),rgba(11,18,34,.98));
+  border:1px solid #263958;border-radius:22px;
+  box-shadow:0 12px 30px rgba(0,0,0,.24)
+}
+.passage{padding:22px;max-height:73vh;overflow:auto;line-height:1.72;font-size:16px}
+.passage h2{margin-top:0;color:var(--cyan);letter-spacing:.4px}
+.passage p{margin:0 0 16px;color:#d9e9f7}
+.passage u{text-decoration-color:var(--pink);text-decoration-thickness:2px;text-underline-offset:3px}
+.question{padding:22px;position:sticky;top:16px;align-self:start}
+.qtag{
+  display:inline-block;padding:7px 12px;border-radius:999px;font-weight:900;
+  color:#07101f;background:linear-gradient(90deg,var(--cyan),#93f0ff)
+}
+#qtext{font-size:20px;font-weight:800;line-height:1.45;margin:16px 0}
+#answers{display:grid;gap:11px}
+.answer{
+  text-align:left;border:1.5px solid #314567;background:#111b30;color:#eaf5ff;
+  border-radius:14px;padding:13px 14px;font-size:15px;line-height:1.42;cursor:pointer;
+  transition:.18s ease
+}
+.answer:hover:not(:disabled){
+  transform:translateY(-1px);border-color:var(--cyan);background:#142440;
+  box-shadow:0 0 0 3px rgba(77,232,255,.06)
+}
+.answer.correct{border-color:var(--good);background:#103126}
+.answer.wrong{border-color:var(--bad);background:#351626}
+#feedback{
+  min-height:68px;margin-top:14px;padding:12px 14px;border-radius:12px;
+  background:#0b1426;color:var(--muted);line-height:1.45;border:1px solid #223654
+}
+#feedback.good{background:#0e2b22;color:#c7ffe3;border-color:#267b59}
+#feedback.bad{background:#341421;color:#ffd2dc;border-color:#8f314c}
+.nextwrap{display:flex;justify-content:flex-end;margin-top:14px}
+#next{
+  border:0;border-radius:12px;padding:12px 18px;font-weight:900;cursor:pointer;color:#07101f;
+  background:linear-gradient(90deg,var(--cyan),var(--violet))
+}
+#next:disabled{opacity:.38;cursor:not-allowed}
+.overlay{
+  position:fixed;inset:0;background:rgba(3,7,18,.82);display:flex;align-items:center;justify-content:center;
+  z-index:20;padding:20px;backdrop-filter:blur(8px)
+}
+.hide{display:none}
+.modal{
+  width:min(500px,94vw);background:#101a2f;border:1px solid #2b4062;border-radius:24px;padding:30px;text-align:center;
+  box-shadow:0 25px 80px rgba(0,0,0,.5)
+}
+.modal button{
+  border:0;border-radius:12px;padding:12px 18px;font-weight:900;cursor:pointer;color:#07101f;
+  background:linear-gradient(90deg,var(--cyan),var(--violet))
+}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-thumb{background:#28415f;border-radius:10px}
+::-webkit-scrollbar-track{background:#0b1324}
+@media(max-width:850px){.main{grid-template-columns:1fr}.question{position:static}.passage{max-height:none}}
+@media(max-width:560px){body{padding:10px}header{padding:22px 18px}.main{padding:12px}.passage,.question{padding:17px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<h1>🌃 Grade 12 - Unit 4 - Exercise 9 - Option C</h1>
+<p><b>Neon Smart City Challenge</b></p>
+<p>Read the passage and choose the best answer A, B, C, or D for Questions 1–8.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Question: <span id="qnum">1/8</span></span>
+<span class="pill">Score: <span id="score">0</span>/8</span>
+</div>
+<div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="main">
+<div class="panel passage">
+<h2>Urbanization: Opportunity, Pressure, and Inclusion</h2>
+<p>Urbanization is often associated with economic progress, yet its consequences are far more complex than this assumption suggests. Cities attract people not only because they provide employment but also because they offer access to education, healthcare, transportation, and social networks. This concentration of people and resources can stimulate innovation and productivity. However, when urban populations expand more rapidly than local authorities can respond, the very advantages that attract newcomers may become increasingly difficult to maintain.</p>
+
+<p>Housing provides a clear example of this contradiction. As demand rises, property values and rents may increase beyond what lower-income households can afford. Some residents are consequently displaced from central districts and move to peripheral areas where housing is cheaper. Yet these locations are frequently poorly connected to employment centres and essential services. As a result, affordable housing does not necessarily translate into affordable urban living: money saved on rent may instead be spent on transportation, while lengthy commutes impose additional costs in terms of time and personal well-being.</p>
+
+<p>The environmental consequences of urban expansion are similarly complicated. High-density cities can, in principle, use land and public transportation more efficiently than widely dispersed communities. Nevertheless, poorly managed growth may produce the opposite outcome. Urban sprawl can consume agricultural land, fragment ecosystems, and increase dependence on private vehicles. Moreover, replacing vegetation with concrete and asphalt reduces the ability of urban surfaces to absorb heat. This contributes to the urban heat island effect, in which cities experience higher temperatures than surrounding rural areas.</p>
+
+<p>Addressing these challenges requires more than simply expanding physical infrastructure. Policymakers increasingly recognize that urban development must also consider who benefits from investment and who may be excluded. A new metro line, for instance, can reduce traffic congestion and improve mobility. However, if improved transport connections cause nearby property prices to rise sharply, poorer residents may eventually be pushed away from the very service intended to benefit them. <u>Thus, an urban policy that appears successful according to one measure may produce unintended disadvantages when evaluated from a broader social perspective.</u></p>
+
+<p>Technology offers additional tools for managing urban growth. Data collected from sensors and digital platforms can help authorities predict traffic patterns, monitor pollution, and improve energy efficiency. Yet technological sophistication should not be confused with effective urban governance. Without transparent decision-making, adequate privacy protection, and equal access to digital services, smart-city initiatives may reinforce existing inequalities rather than reduce them. Sustainable urbanization therefore depends on balancing economic efficiency, environmental protection, technological innovation, and social inclusion rather than maximizing any single objective.</p>
+</div>
+
+<div class="panel question">
+<div class="qtag" id="qtag">Question 1</div>
+<div id="qtext"></div>
+<div id="answers"></div>
+<div id="feedback">Choose the best answer.</div>
+<div class="nextwrap"><button id="next" disabled>Next ➜</button></div>
+</div>
+</div>
+</div>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Out of hearts!</h1>
+<p>You have used all 5 hearts. Restart the challenge and try again.</p>
+<button onclick="restart()">↻ Try Again</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>🏆 Mission Complete!</h1>
+<p>You completed the Neon Smart City Challenge.</p>
+<h2>Final score: <span id="final">0</span>/8</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const base=[{"q": "Which of the following is NOT mentioned in paragraph 1 as an advantage associated with cities?", "opts": [["Greater access to educational opportunities", false], ["Increased opportunities for social connection", false], ["Improved access to transportation", false], ["Lower household living expenses", true]], "exp": "Đoạn 1 nêu education, transportation và social networks, nhưng không đề cập chi phí sinh hoạt thấp hơn."}, {"q": "The word “displaced” in paragraph 2 is closest in meaning to ______.", "opts": [["compelled to leave a place", true], ["encouraged to purchase property", false], ["prevented from finding employment", false], ["temporarily separated from their families", false]], "exp": "“Displaced” ở đây nghĩa là bị buộc phải rời khỏi nơi đang sống do giá nhà và tiền thuê tăng."}, {"q": "The phrase “the opposite outcome” in paragraph 3 refers to a situation in which ______.", "opts": [["densely populated cities completely eliminate environmental damage", false], ["urban growth results in inefficient land use and greater environmental pressure", true], ["rural communities become more dependent on urban transportation", false], ["agricultural areas benefit from the outward expansion of cities", false]], "exp": "“The opposite outcome” đối lập với việc sử dụng đất và giao thông hiệu quả: tăng trưởng kém quản lý dẫn tới sprawl, mất đất và áp lực môi trường."}, {"q": "Which of the following best paraphrases the underlined sentence in paragraph 4?", "opts": [["The effectiveness of urban policies should be judged exclusively by their immediate economic benefits.", false], ["A policy may achieve its primary goal while simultaneously creating negative consequences for certain groups.", true], ["Urban policies generally fail because governments are unable to predict their economic consequences.", false], ["Social considerations should replace transportation efficiency as the main objective of urban development.", false]], "exp": "Một chính sách có thể thành công theo một tiêu chí nhưng đồng thời gây tác động bất lợi cho một số nhóm khác."}, {"q": "Which of the following can be inferred from paragraph 2?", "opts": [["Reducing housing costs alone may not significantly reduce the total financial burden of urban life.", true], ["Residents living in peripheral areas generally spend less time travelling to their workplaces.", false], ["High housing prices are mainly caused by improvements in transportation infrastructure.", false], ["Moving away from central districts usually improves residents' overall quality of life.", false]], "exp": "Tiền thuê rẻ hơn có thể bị bù lại bởi chi phí đi lại và thời gian commute dài, nên tổng gánh nặng vẫn có thể cao."}, {"q": "According to paragraph 4, improved public transportation may unintentionally ______.", "opts": [["reduce employment opportunities in central districts", false], ["discourage investment in urban infrastructure", false], ["contribute to the displacement of lower-income residents", true], ["increase dependence on private vehicles among wealthy residents", false]], "exp": "Đường metro tốt hơn có thể làm giá bất động sản xung quanh tăng, khiến người thu nhập thấp bị đẩy ra xa."}, {"q": "In which paragraph does the writer challenge the assumption that advanced technology automatically leads to successful city management?", "opts": [["Paragraph 2", false], ["Paragraph 3", false], ["Paragraph 4", false], ["Paragraph 5", true]], "exp": "Đoạn 5 nói rõ technological sophistication không đồng nghĩa với effective urban governance."}, {"q": "Which of the following best expresses the main idea of the passage?", "opts": [["Urbanization creates unavoidable social and environmental problems, so governments should attempt to limit migration into cities.", false], ["Technological innovation is the most effective solution because it enables authorities to manage transportation, pollution, and energy consumption.", false], ["Urban development produces both opportunities and interconnected challenges, requiring policies that balance efficiency, sustainability, technology, and social fairness.", true], ["The negative effects of urbanization mainly result from housing shortages and can therefore be addressed through affordable housing programs.", false]], "exp": "Toàn bài nhấn mạnh đô thị hóa vừa tạo cơ hội vừa tạo thách thức liên kết với nhau, nên cần cân bằng hiệu quả, bền vững, công nghệ và công bằng xã hội."}];
+let qs=[],i=0,lives=5,score=0,answered=false;
+const letters=["A","B","C","D"];
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const y=Math.floor(Math.random()*(x+1));
+    [a[x],a[y]]=[a[y],a[x]];
+  }
+  return a;
+}
+
+function prepare(){
+  qs=base.map(x=>({
+    q:x.q,
+    exp:x.exp,
+    opts:shuffle(x.opts.map(o=>({text:o[0],correct:o[1]})))
+  }));
+}
+
+function updateHearts(){
+  hearts.textContent="❤️".repeat(lives)+"🖤".repeat(5-lives);
+}
+
+function render(){
+  answered=false;
+  next.disabled=true;
+  feedback.className="";
+  feedback.textContent="Choose the best answer.";
+  qnum.textContent=`${i+1}/8`;
+  qtag.textContent=`Question ${i+1}`;
+  qtext.textContent=qs[i].q;
+  answers.innerHTML="";
+
+  qs[i].opts.forEach((o,j)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<b>${letters[j]}.</b> ${o.text}`;
+    b.onclick=()=>choose(b,o);
+    answers.appendChild(b);
+  });
+}
+
+function choose(btn,opt){
+  if(answered||btn.disabled)return;
+
+  if(opt.correct){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    [...answers.children].forEach(b=>b.disabled=true);
+    feedback.className="good";
+    feedback.innerHTML=`✅ <b>Correct!</b><br>${qs[i].exp}`;
+    next.disabled=false;
+  }else{
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    feedback.className="bad";
+    feedback.textContent="❌ Incorrect. Try again.";
+
+    if(lives<=0){
+      over.classList.remove("hide");
+    }
+  }
+}
+
+next.onclick=()=>{
+  if(!answered)return;
+  if(i<7){
+    i++;
+    render();
+  }else{
+    final.textContent=score;
+    done.classList.remove("hide");
+  }
+};
+
+function restart(){
+  i=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  over.classList.add("hide");
+  done.classList.add("hide");
+  prepare();
+  updateHearts();
+  render();
+}
+
+prepare();
+updateHearts();
+render();
+</script>
+</body>
+</html>

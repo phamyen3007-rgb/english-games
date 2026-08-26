@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 4 - Exercise 9 - Option B</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#eef6ff,#f5f3ff,#ecfeff);color:#14263b;padding:20px}
+.shell{max-width:1180px;margin:auto;background:#ffffffeb;border-radius:28px;overflow:hidden;box-shadow:0 20px 60px rgba(15,23,42,.16)}
+header{padding:26px 30px;background:linear-gradient(135deg,#0f4c81,#2563eb 55%,#0f766e);color:white}
+header h1{margin:0 0 8px;font-size:clamp(25px,4vw,38px)}
+header p{margin:4px 0;line-height:1.5}
+.status{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 24px;background:#f8fbff;border-bottom:1px solid #dbe7f1}
+.pill{background:white;border:1px solid #d7e4ee;border-radius:999px;padding:8px 13px;font-weight:800}
+.main{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;padding:20px}
+.panel{background:white;border:1px solid #dde7ef;border-radius:22px;box-shadow:0 10px 28px rgba(15,23,42,.07)}
+.passage{padding:22px;max-height:72vh;overflow:auto;line-height:1.72;font-size:16px}
+.passage h2{margin-top:0;color:#0f4c81}
+.passage p{margin:0 0 16px}
+.question{padding:22px;position:sticky;top:16px;align-self:start}
+.qtag{display:inline-block;background:#e8f1ff;color:#1d4ed8;border-radius:999px;padding:7px 12px;font-weight:900}
+#qtext{font-size:20px;font-weight:800;line-height:1.45;margin:16px 0}
+#answers{display:grid;gap:11px}
+.answer{text-align:left;border:2px solid #dce7ee;background:#fbfdff;border-radius:14px;padding:13px 14px;font-size:15px;line-height:1.4;cursor:pointer;transition:.18s}
+.answer:hover:not(:disabled){border-color:#73a7f5;background:#f1f7ff;transform:translateY(-1px)}
+.answer.correct{background:#ebf9ef;border-color:#2fb344}
+.answer.wrong{background:#fff0f3;border-color:#ef476f}
+#feedback{min-height:64px;margin-top:14px;padding:12px 14px;border-radius:12px;background:#f8fafc;line-height:1.45}
+#feedback.good{background:#ecfdf3;color:#166534}
+#feedback.bad{background:#fff1f2;color:#be123c}
+.nextwrap{display:flex;justify-content:flex-end;margin-top:14px}
+#next{border:0;border-radius:12px;background:#2563eb;color:white;padding:12px 18px;font-weight:900;cursor:pointer}
+#next:disabled{opacity:.4;cursor:not-allowed}
+.overlay{position:fixed;inset:0;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;z-index:20;padding:20px}
+.hide{display:none}
+.modal{width:min(500px,94vw);background:white;border-radius:24px;padding:30px;text-align:center}
+.modal button{border:0;border-radius:12px;background:#2563eb;color:white;padding:12px 18px;font-weight:900;cursor:pointer}
+@media(max-width:850px){.main{grid-template-columns:1fr}.question{position:static}.passage{max-height:none}}
+@media(max-width:560px){body{padding:10px}header{padding:22px 18px}.main{padding:12px}.passage,.question{padding:17px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<h1>🏙️ Grade 12 - Unit 4 - Exercise 9 - Option B</h1>
+<p><b>Urbanization Reading Challenge</b></p>
+<p>Read the passage and choose the best answer A, B, C, or D for Questions 1–8.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Question: <span id="qnum">1/8</span></span>
+<span class="pill">Score: <span id="score">0</span>/8</span>
+</div>
+<div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="main">
+<div class="panel passage">
+<h2>Urbanization</h2>
+<p>Urbanization has accelerated dramatically over the past few decades as millions of people have moved from rural communities to expanding cities. While employment remains a major attraction, access to specialized education, healthcare, and modern services also encourages migration. For many individuals, cities represent the possibility of greater economic mobility. Nevertheless, when population growth occurs faster than urban infrastructure can accommodate, the advantages of city life may be accompanied by serious challenges.</p>
+
+<p>One particularly significant consequence is the pressure placed on housing and transportation systems. A sudden increase in population can push housing demand beyond the existing supply, causing rents and property prices to rise. Low-income residents may consequently be forced to settle on the outskirts of cities, where affordable housing is more readily available but public services are often limited. Meanwhile, longer commuting distances increase traffic congestion and place additional pressure on transportation networks.</p>
+
+<p>Environmental concerns are equally important. As cities spread outward, forests, farmland, and other undeveloped areas may be replaced by roads, housing projects, and commercial facilities. Such expansion can fragment natural habitats and threaten local biodiversity. Furthermore, densely populated urban areas consume enormous amounts of energy and generate substantial quantities of waste. Unless cities adopt more efficient systems of waste management and energy production, their environmental footprint is likely to increase as their populations grow.</p>
+
+<p>However, urbanization does not inevitably result in declining living standards. Well-planned cities can use population density to their advantage. Efficient public transportation, for instance, can reduce dependence on private vehicles, while compact neighborhoods can make essential services more accessible. Urban planners are also increasingly incorporating parks, rooftop gardens, and other forms of green infrastructure into city design. <u>Rather than treating population growth solely as a burden, these approaches attempt to reshape cities so that growth can be managed more sustainably.</u></p>
+
+<p>Technology is also transforming the way urban authorities respond to population growth. Sensors can provide real-time information about traffic conditions, energy consumption, and air quality, enabling authorities to allocate resources more efficiently. Nevertheless, technology alone cannot resolve every urban problem. Digital systems require substantial investment and skilled personnel, and concerns have also been raised about privacy and unequal access to technology. Therefore, successful urban development depends not simply on adopting sophisticated technologies but on combining innovation with effective planning and inclusive social policies.</p>
+</div>
+
+<div class="panel question">
+<div class="qtag" id="qtag">Question 1</div>
+<div id="qtext"></div>
+<div id="answers"></div>
+<div id="feedback">Choose the best answer.</div>
+<div class="nextwrap"><button id="next" disabled>Next ➜</button></div>
+</div>
+</div>
+</div>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Out of hearts!</h1>
+<p>You have used all 5 hearts. Restart the exercise and try again.</p>
+<button onclick="restart()">↻ Try Again</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>🏆 Excellent work!</h1>
+<p>You completed the reading challenge.</p>
+<h2>Final score: <span id="final">0</span>/8</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const base=[{"q": "According to paragraph 1, which of the following is NOT mentioned as a reason people move to cities?", "opts": [["Greater employment opportunities", false], ["Access to specialized healthcare", false], ["More advanced educational opportunities", false], ["Greater availability of affordable housing", true]], "exp": "Đoạn 1 nêu employment, specialized education và healthcare, nhưng không nói affordable housing là lý do chuyển đến thành phố."}, {"q": "The phrase “forced to settle” in paragraph 2 is closest in meaning to ______.", "opts": [["encouraged to invest", false], ["required by circumstances to live", true], ["legally permitted to remain", false], ["financially supported to relocate", false]], "exp": "“Forced to settle” = do hoàn cảnh buộc phải sống/định cư ở một nơi nào đó."}, {"q": "The word “Such expansion” in paragraph 3 refers to ______.", "opts": [["the increasing production of urban waste", false], ["the replacement of natural areas by urban development", true], ["the rising consumption of energy in populated areas", false], ["the development of waste-management systems", false]], "exp": "“Such expansion” chỉ việc thành phố mở rộng, khiến forests/farmland bị thay thế bởi roads, housing và commercial facilities."}, {"q": "Which of the following best paraphrases the underlined sentence in paragraph 4?", "opts": [["Urban growth should be prevented because population increases inevitably reduce living standards.", false], ["Sustainable planning seeks to accommodate population growth instead of viewing it only as a problem.", true], ["Population growth becomes beneficial only when cities completely redesign their infrastructure.", false], ["Urban planners regard population growth as less important than environmental sustainability.", false]], "exp": "Câu gạch chân nhấn mạnh không chỉ xem tăng dân số là gánh nặng; quy hoạch nên giúp quản lý tăng trưởng theo hướng bền vững."}, {"q": "Which of the following can be inferred from paragraph 2?", "opts": [["People living farther from city centres may experience disadvantages despite paying less for housing.", true], ["Rising property prices encourage most low-income residents to purchase homes in central districts.", false], ["Transportation networks usually expand before a city's population begins to increase rapidly.", false], ["Affordable housing on city outskirts generally provides residents with better access to public services.", false]], "exp": "Nhà ở ngoại ô có thể rẻ hơn nhưng dịch vụ công hạn chế và quãng đường đi lại dài hơn, nên cư dân vẫn gặp nhiều bất lợi."}, {"q": "Which of the following is TRUE according to the passage?", "opts": [["Higher population density necessarily causes a decline in people's quality of life.", false], ["Smart technologies can eliminate the need for traditional urban planning.", false], ["Green infrastructure can form part of a strategy for managing urban growth sustainably.", true], ["Technological investment is sufficient to guarantee equal access to urban services.", false]], "exp": "Đoạn 4 nêu parks, rooftop gardens và green infrastructure như một phần của chiến lược quản lý tăng trưởng bền vững."}, {"q": "In which paragraph does the writer discuss how urban density may potentially be beneficial rather than harmful?", "opts": [["Paragraph 1", false], ["Paragraph 2", false], ["Paragraph 3", false], ["Paragraph 4", true]], "exp": "Đoạn 4 có câu: “Well-planned cities can use population density to their advantage.”"}, {"q": "Which of the following best summarises the passage?", "opts": [["Rapid urbanization mainly creates environmental problems that technological development will eventually solve.", false], ["Although urbanization creates social, infrastructural, and environmental pressures, appropriate planning, technology, and inclusive policies can help cities manage growth sustainably.", true], ["Urbanization should be restricted because infrastructure and public services are unable to keep pace with increasing urban populations.", false], ["Technological innovation is more important than housing, transportation, and environmental policies in determining the success of modern cities.", false]], "exp": "Đáp án B bao quát toàn bài: đô thị hóa tạo nhiều áp lực, nhưng planning + technology + inclusive policies có thể giúp quản lý tăng trưởng bền vững."}];
+let qs=[],i=0,lives=5,score=0,answered=false;
+const letters=["A","B","C","D"];
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const y=Math.floor(Math.random()*(x+1));
+    [a[x],a[y]]=[a[y],a[x]];
+  }
+  return a;
+}
+function prepare(){
+  qs=base.map(x=>({
+    q:x.q,
+    exp:x.exp,
+    opts:shuffle(x.opts.map(o=>({text:o[0],correct:o[1]})))
+  }));
+}
+function updateHearts(){
+  hearts.textContent="❤️".repeat(lives)+"🖤".repeat(5-lives);
+}
+function render(){
+  answered=false;
+  next.disabled=true;
+  feedback.className="";
+  feedback.textContent="Choose the best answer.";
+  qnum.textContent=`${i+1}/8`;
+  qtag.textContent=`Question ${i+1}`;
+  qtext.textContent=qs[i].q;
+  answers.innerHTML="";
+  qs[i].opts.forEach((o,j)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<b>${letters[j]}.</b> ${o.text}`;
+    b.onclick=()=>choose(b,o);
+    answers.appendChild(b);
+  });
+}
+function choose(btn,opt){
+  if(answered||btn.disabled)return;
+  if(opt.correct){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    [...answers.children].forEach(b=>b.disabled=true);
+    feedback.className="good";
+    feedback.innerHTML=`✅ <b>Correct!</b><br>${qs[i].exp}`;
+    next.disabled=false;
+  }else{
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    feedback.className="bad";
+    feedback.textContent="❌ Incorrect. Try again.";
+    if(lives<=0){
+      over.classList.remove("hide");
+    }
+  }
+}
+next.onclick=()=>{
+  if(!answered)return;
+  if(i<7){
+    i++;
+    render();
+  }else{
+    final.textContent=score;
+    done.classList.remove("hide");
+  }
+};
+function restart(){
+  i=0;lives=5;score=0;answered=false;
+  document.getElementById("score").textContent="0";
+  over.classList.add("hide");
+  done.classList.add("hide");
+  prepare();updateHearts();render();
+}
+prepare();updateHearts();render();
+</script>
+</body>
+</html>

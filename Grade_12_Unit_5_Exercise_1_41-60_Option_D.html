@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 5 - Exercise 1 (41-60) - Option D</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg1:#07131c;
+  --bg2:#15202a;
+  --panel:#0e1b26;
+  --panel2:#152737;
+  --lav:#66e3ff;
+  --rose:#ffb35c;
+  --mint:#8df0d0;
+  --text:#f4fbff;
+  --muted:#bdced8;
+  --good:#5ce0a7;
+  --bad:#ff6f7d;
+}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:22px;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 14% 18%,rgba(102,227,255,.16),transparent 24%),
+    radial-gradient(circle at 88% 10%,rgba(255,179,92,.15),transparent 22%),
+    radial-gradient(circle at 80% 84%,rgba(141,240,208,.11),transparent 25%),
+    linear-gradient(145deg,#06111a,#0c1b27 52%,#18232d);
+}
+.shell{
+  max-width:1180px;
+  margin:auto;
+  border-radius:30px;
+  overflow:hidden;
+  background:rgba(7,20,30,.97);
+  border:1px solid rgba(102,227,255,.2);
+  box-shadow:0 25px 80px rgba(0,0,0,.55),0 0 70px rgba(102,227,255,.06);
+}
+header{
+  position:relative;
+  overflow:hidden;
+  padding:28px 30px;
+  background:linear-gradient(120deg,#0b4f6c,#126782 52%,#7a4b1e);
+}
+header:after{
+  content:"🏙️  🚇  ⚡  🚦  🌉";
+  position:absolute;
+  right:20px;
+  top:18px;
+  font-size:30px;
+  letter-spacing:10px;
+  opacity:.3;
+}
+header h1{position:relative;margin:0 0 8px;font-size:clamp(26px,4vw,38px);z-index:1}
+header p{position:relative;margin:5px 0;line-height:1.5;color:#eefaff;z-index:1}
+.status{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:14px 24px;
+  background:#081722;
+  border-bottom:1px solid #203846;
+}
+.pill{
+  background:#102430;
+  border:1px solid #294555;
+  border-radius:999px;
+  padding:8px 13px;
+  font-weight:800;
+}
+.main{
+  display:grid;
+  grid-template-columns:1.14fr .86fr;
+  gap:18px;
+  padding:20px;
+}
+.panel{
+  background:linear-gradient(180deg,#0d1d28,#091720);
+  border:1px solid #284251;
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(0,0,0,.26);
+}
+.passage{
+  padding:22px;
+  max-height:73vh;
+  overflow:auto;
+  line-height:1.72;
+  font-size:16px;
+}
+.passage h2{margin-top:0;color:var(--mint)}
+.passage p{margin:0 0 16px;color:#e9f4f8}
+.passage u{
+  text-decoration-color:var(--rose);
+  text-decoration-thickness:2px;
+  text-underline-offset:3px
+}
+.passage b{color:#ffd9ee}
+.question{
+  padding:22px;
+  position:sticky;
+  top:16px;
+  align-self:start;
+  background:linear-gradient(180deg,#102430,#0d1b25);
+}
+.qtag{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:999px;
+  font-weight:900;
+  color:#07141d;
+  background:linear-gradient(90deg,var(--lav),var(--rose));
+}
+#qtext{
+  font-size:20px;
+  font-weight:800;
+  line-height:1.45;
+  margin:16px 0;
+}
+#answers{display:grid;gap:11px}
+.answer{
+  text-align:left;
+  border:1.5px solid #3a3b52;
+  background:#102733;
+  color:#f3fbff;
+  border-radius:14px;
+  padding:13px 14px;
+  font-size:15px;
+  line-height:1.42;
+  cursor:pointer;
+  transition:.18s ease;
+}
+.answer:hover:not(:disabled){
+  transform:translateY(-1px);
+  border-color:var(--lav);
+  background:#163444;
+  box-shadow:0 0 0 3px rgba(202,168,255,.05)
+}
+.answer.correct{background:#123126;border-color:var(--good)}
+.answer.wrong{background:#351623;border-color:var(--bad)}
+#feedback{
+  min-height:68px;
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#0a1c27;
+  color:var(--muted);
+  line-height:1.45;
+  border:1px solid #294552;
+}
+#feedback.good{background:#10291f;color:#d2ffe8;border-color:#2f7a58}
+#feedback.bad{background:#35141f;color:#ffd8e1;border-color:#8b334c}
+.nextwrap{display:flex;justify-content:flex-end;margin-top:14px}
+#next{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#07141d;
+  background:linear-gradient(90deg,var(--lav),var(--mint));
+}
+#next:disabled{opacity:.38;cursor:not-allowed}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(3,12,18,.86);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
+  padding:20px;
+  backdrop-filter:blur(8px);
+}
+.hide{display:none}
+.modal{
+  width:min(500px,94vw);
+  background:#0d202b;
+  border:1px solid #315362;
+  border-radius:24px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 25px 80px rgba(0,0,0,.5);
+}
+.modal button{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#07141d;
+  background:linear-gradient(90deg,var(--lav),var(--mint));
+}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-thumb{background:#2e6075;border-radius:10px}
+::-webkit-scrollbar-track{background:#121320}
+@media(max-width:850px){
+  .main{grid-template-columns:1fr}
+  .question{position:static}
+  .passage{max-height:none}
+}
+@media(max-width:560px){
+  body{padding:10px}
+  header{padding:22px 18px}
+  header:after{font-size:22px;right:6px;top:8px}
+  .main{padding:12px}
+  .passage,.question{padding:17px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<h1>🧪 Grade 12 - Unit 5 - Exercise 1 (41-60) - Option D</h1>
+<p><b>Career Lab Challenge</b></p>
+<p>Navigate the modern city and choose the best answer A, B, C, or D for Questions 1–10.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Question: <span id="qnum">1/15</span></span>
+<span class="pill">Score: <span id="score">0</span>/15</span>
+</div>
+<div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="main">
+<div class="panel passage">
+<h2>🧪 Career Lab Challenge</h2>
+<p>Welcome to the World of Work laboratory. Each correct answer completes one workplace experiment.</p>
+<p><b>Rules:</b> A wrong answer costs one heart. You must choose the correct answer before moving to the next experiment.</p>
+<p>🔬 Topics include responsibilities, unpaid internships, training, job positions, temporary and casual work, interviews, preferences, employment prospects, qualifications, salaries, production targets, HR duties, and application letters.</p>
+<p>⚙️ Finish every experiment before all five hearts are lost.</p>
+</div>
+
+<div class="panel question">
+<div class="qtag" id="qtag">Question 1</div>
+<div id="qtext"></div>
+<div id="answers"></div>
+<div id="feedback">Choose the best answer.</div>
+<div class="nextwrap"><button id="next" disabled>Next ➜</button></div>
+</div>
+</div>
+</div>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Out of hearts!</h1>
+<p>You have used all 5 hearts. Restart the mission and try again.</p>
+<button onclick="restart()">↻ Try Again</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>🗺️ City Challenge Completed!</h1>
+<p>You completed the Urbanization challenge.</p>
+<h2>Final score: <span id="final">0</span>/15</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const base=[{"q":"When two members of the team unexpectedly left the company, the remaining staff had to _________ additional responsibilities until replacements were found.","opts":[["take on",true],["turn down",false],["put off",false],["give up",false]],"exp":"The correct collocation is “take on responsibilities” = accept/assume additional responsibilities."},{"q":"Despite receiving no salary, many students consider _________ internships worthwhile because of the practical experience they provide.","opts":[["temporary",false],["casual",false],["unpaid",true],["flexible",false]],"exp":"“Receiving no salary” means the internships are “unpaid.”"},{"q":"Rather than expecting new recruits to learn everything independently, the company provides _________ during their first three months.","opts":[["academic qualifications",false],["on-the-job training",true],["employment opportunities",false],["performance bonuses",false]],"exp":"“On-the-job training” helps new recruits learn practical workplace skills."},{"q":"The company received more than 200 applications for the _________, although only five candidates were shortlisted.","opts":[["profession",false],["position",true],["promotion",false],["qualification",false]],"exp":"The standard phrase is “applications for the position.”"},{"q":"Retailers often recruit _________ staff during the holiday season to deal with the temporary increase in customer demand.","opts":[["permanent",false],["long-term",false],["temporary",true],["regular",false]],"exp":"Seasonal demand calls for “temporary staff.”"},{"q":"_________ employment may appeal to people who value flexibility, although the lack of guaranteed hours can make their income unpredictable.","opts":[["Permanent",false],["Casual",true],["Full-time",false],["Regular",false]],"exp":"“Casual employment” typically offers flexibility but no guaranteed hours."},{"q":"Candidates who successfully pass the initial screening process will be _________ for an interview with the department manager.","opts":[["requested",false],["invited",true],["applied",false],["employed",false]],"exp":"The natural collocation is “be invited for an interview.”"},{"q":"When reviewing applications, employers usually give _________ to candidates whose qualifications closely match the requirements of the position.","opts":[["preferable",false],["preference",true],["preferably",false],["preferred",false]],"exp":"The fixed expression is “give preference to somebody.”"},{"q":"The government has introduced several vocational training schemes designed to improve young people's _________ prospects.","opts":[["employed",false],["employer",false],["employment",true],["employable",false]],"exp":"The standard collocation is “employment prospects.”"},{"q":"For most professional positions, relevant experience is considered important, but formal academic _________ may also be required.","opts":[["qualifications",true],["regulations",false],["occupations",false],["conditions",false]],"exp":"The natural collocation is “academic qualifications.”"},{"q":"Software engineers with specialist skills are generally well _________ because qualified workers remain in high demand.","opts":[["paying",false],["paid",true],["payment",false],["payable",false]],"exp":"“Well-paid” means receiving a high salary."},{"q":"The manufacturer risks losing an important customer if it repeatedly fails to _________ the production targets specified in the contract.","opts":[["reach for",false],["meet",true],["arrive",false],["attend",false]],"exp":"The correct collocation is “meet production targets.”"},{"q":"The human resources department is responsible for _________ applications and selecting suitable candidates for interview.","opts":[["reviewing",true],["promoting",false],["employing",false],["qualifying",false]],"exp":"Use “be responsible for + V-ing”; HR typically reviews applications."},{"q":"Many young professionals prefer _________ additional qualifications online to attending evening classes after a full day at work.","opts":[["gain",false],["to gain",false],["gaining",true],["having gained",false]],"exp":"Use parallel gerunds: “prefer gaining ... to attending ...”"},{"q":"All candidates are required to submit an application letter clearly _________ how their skills and experience are relevant to the advertised position.","opts":[["explained",false],["explaining",true],["to explain",false],["having explained",false]],"exp":"The letter actively explains the information, so the reduced active relative clause uses “explaining.”"}];
+let qs=[],i=0,lives=5,score=0,answered=false;
+const letters=["A","B","C","D"];
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const y=Math.floor(Math.random()*(x+1));
+    [a[x],a[y]]=[a[y],a[x]];
+  }
+  return a;
+}
+
+function prepare(){
+  qs=base.map(x=>({
+    q:x.q,
+    exp:x.exp,
+    opts:shuffle(x.opts.map(o=>({text:o[0],correct:o[1]})))
+  }));
+}
+
+function updateHearts(){
+  hearts.textContent="❤️".repeat(lives)+"🖤".repeat(5-lives);
+}
+
+function render(){
+  answered=false;
+  next.disabled=true;
+  feedback.className="";
+  feedback.textContent="Choose the best answer.";
+  qnum.textContent=`${i+1}/${qs.length}`;
+  qtag.textContent=`Question ${i+1}`;
+  qtext.textContent=qs[i].q;
+  answers.innerHTML="";
+
+  qs[i].opts.forEach((o,j)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<b>${letters[j]}.</b> ${o.text}`;
+    b.onclick=()=>choose(b,o);
+    answers.appendChild(b);
+  });
+}
+
+function choose(btn,opt){
+  if(answered||btn.disabled)return;
+
+  if(opt.correct){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    [...answers.children].forEach(b=>b.disabled=true);
+    feedback.className="good";
+    feedback.innerHTML=`✅ <b>Correct!</b><br>${qs[i].exp}`;
+    next.disabled=false;
+  }else{
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    feedback.className="bad";
+    feedback.textContent="❌ Incorrect. Try again.";
+
+    if(lives<=0){
+      over.classList.remove("hide");
+    }
+  }
+}
+
+next.onclick=()=>{
+  if(!answered)return;
+  if(i<qs.length-1){
+    i++;
+    render();
+  }else{
+    final.textContent=score;
+    done.classList.remove("hide");
+  }
+};
+
+function restart(){
+  i=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  over.classList.add("hide");
+  done.classList.add("hide");
+  prepare();
+  updateHearts();
+  render();
+}
+
+prepare();
+updateHearts();
+render();
+</script>
+</body>
+</html>

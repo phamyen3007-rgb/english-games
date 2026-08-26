@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 5 - Exercise 1 (21-40) - Option C</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg1:#07131c;
+  --bg2:#15202a;
+  --panel:#0e1b26;
+  --panel2:#152737;
+  --lav:#66e3ff;
+  --rose:#ffb35c;
+  --mint:#8df0d0;
+  --text:#f4fbff;
+  --muted:#bdced8;
+  --good:#5ce0a7;
+  --bad:#ff6f7d;
+}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:22px;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 14% 18%,rgba(102,227,255,.16),transparent 24%),
+    radial-gradient(circle at 88% 10%,rgba(255,179,92,.15),transparent 22%),
+    radial-gradient(circle at 80% 84%,rgba(141,240,208,.11),transparent 25%),
+    linear-gradient(145deg,#06111a,#0c1b27 52%,#18232d);
+}
+.shell{
+  max-width:1180px;
+  margin:auto;
+  border-radius:30px;
+  overflow:hidden;
+  background:rgba(7,20,30,.97);
+  border:1px solid rgba(102,227,255,.2);
+  box-shadow:0 25px 80px rgba(0,0,0,.55),0 0 70px rgba(102,227,255,.06);
+}
+header{
+  position:relative;
+  overflow:hidden;
+  padding:28px 30px;
+  background:linear-gradient(120deg,#0b4f6c,#126782 52%,#7a4b1e);
+}
+header:after{
+  content:"🏙️  🚇  ⚡  🚦  🌉";
+  position:absolute;
+  right:20px;
+  top:18px;
+  font-size:30px;
+  letter-spacing:10px;
+  opacity:.3;
+}
+header h1{position:relative;margin:0 0 8px;font-size:clamp(26px,4vw,38px);z-index:1}
+header p{position:relative;margin:5px 0;line-height:1.5;color:#eefaff;z-index:1}
+.status{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:14px 24px;
+  background:#081722;
+  border-bottom:1px solid #203846;
+}
+.pill{
+  background:#102430;
+  border:1px solid #294555;
+  border-radius:999px;
+  padding:8px 13px;
+  font-weight:800;
+}
+.main{
+  display:grid;
+  grid-template-columns:1.14fr .86fr;
+  gap:18px;
+  padding:20px;
+}
+.panel{
+  background:linear-gradient(180deg,#0d1d28,#091720);
+  border:1px solid #284251;
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(0,0,0,.26);
+}
+.passage{
+  padding:22px;
+  max-height:73vh;
+  overflow:auto;
+  line-height:1.72;
+  font-size:16px;
+}
+.passage h2{margin-top:0;color:var(--mint)}
+.passage p{margin:0 0 16px;color:#e9f4f8}
+.passage u{
+  text-decoration-color:var(--rose);
+  text-decoration-thickness:2px;
+  text-underline-offset:3px
+}
+.passage b{color:#ffd9ee}
+.question{
+  padding:22px;
+  position:sticky;
+  top:16px;
+  align-self:start;
+  background:linear-gradient(180deg,#102430,#0d1b25);
+}
+.qtag{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:999px;
+  font-weight:900;
+  color:#07141d;
+  background:linear-gradient(90deg,var(--lav),var(--rose));
+}
+#qtext{
+  font-size:20px;
+  font-weight:800;
+  line-height:1.45;
+  margin:16px 0;
+}
+#answers{display:grid;gap:11px}
+.answer{
+  text-align:left;
+  border:1.5px solid #3a3b52;
+  background:#102733;
+  color:#f3fbff;
+  border-radius:14px;
+  padding:13px 14px;
+  font-size:15px;
+  line-height:1.42;
+  cursor:pointer;
+  transition:.18s ease;
+}
+.answer:hover:not(:disabled){
+  transform:translateY(-1px);
+  border-color:var(--lav);
+  background:#163444;
+  box-shadow:0 0 0 3px rgba(202,168,255,.05)
+}
+.answer.correct{background:#123126;border-color:var(--good)}
+.answer.wrong{background:#351623;border-color:var(--bad)}
+#feedback{
+  min-height:68px;
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#0a1c27;
+  color:var(--muted);
+  line-height:1.45;
+  border:1px solid #294552;
+}
+#feedback.good{background:#10291f;color:#d2ffe8;border-color:#2f7a58}
+#feedback.bad{background:#35141f;color:#ffd8e1;border-color:#8b334c}
+.nextwrap{display:flex;justify-content:flex-end;margin-top:14px}
+#next{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#07141d;
+  background:linear-gradient(90deg,var(--lav),var(--mint));
+}
+#next:disabled{opacity:.38;cursor:not-allowed}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(3,12,18,.86);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
+  padding:20px;
+  backdrop-filter:blur(8px);
+}
+.hide{display:none}
+.modal{
+  width:min(500px,94vw);
+  background:#0d202b;
+  border:1px solid #315362;
+  border-radius:24px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 25px 80px rgba(0,0,0,.5);
+}
+.modal button{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#07141d;
+  background:linear-gradient(90deg,var(--lav),var(--mint));
+}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-thumb{background:#2e6075;border-radius:10px}
+::-webkit-scrollbar-track{background:#121320}
+@media(max-width:850px){
+  .main{grid-template-columns:1fr}
+  .question{position:static}
+  .passage{max-height:none}
+}
+@media(max-width:560px){
+  body{padding:10px}
+  header{padding:22px 18px}
+  header:after{font-size:22px;right:6px;top:8px}
+  .main{padding:12px}
+  .passage,.question{padding:17px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<h1>🎡 Grade 12 - Unit 5 - Exercise 1 (21-40) - Option C</h1>
+<p><b>Career Fair Adventure</b></p>
+<p>Navigate the modern city and choose the best answer A, B, C, or D for Questions 1–10.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Question: <span id="qnum">1/15</span></span>
+<span class="pill">Score: <span id="score">0</span>/15</span>
+</div>
+<div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="main">
+<div class="panel passage">
+<h2>🎡 Career Fair Adventure</h2>
+<p>Welcome to the Grade 12 World of Work career fair. Each correct answer lets you move to the next recruitment booth.</p>
+<p><b>Rules:</b> A wrong answer costs one heart and you must try again. You cannot continue until the correct answer is selected.</p>
+<p>🎟️ Topics include clients, promotion, work-life balance, part-time employment, applications, welfare, CVs, retirement benefits, and workplace communication.</p>
+<p>⭐ Complete every booth before all five hearts are lost.</p>
+</div>
+
+<div class="panel question">
+<div class="qtag" id="qtag">Question 1</div>
+<div id="qtext"></div>
+<div id="answers"></div>
+<div id="feedback">Choose the best answer.</div>
+<div class="nextwrap"><button id="next" disabled>Next ➜</button></div>
+</div>
+</div>
+</div>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Out of hearts!</h1>
+<p>You have used all 5 hearts. Restart the mission and try again.</p>
+<button onclick="restart()">↻ Try Again</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>🗺️ City Challenge Completed!</h1>
+<p>You completed the Urbanization challenge.</p>
+<h2>Final score: <span id="final">0</span>/15</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const base=[{"q":"Before giving legal advice, the lawyer arranged a private meeting with her _________ to obtain further details about the case.","opts":[["customer",false],["client",true],["passenger",false],["colleague",false]],"exp":"A person who receives professional legal services from a lawyer is a “client.”"},{"q":"Rather than throwing away their old electronic devices, consumers can _________ them through online marketplaces and recover part of their original cost.","opts":[["resell",true],["consume",false],["manufacture",false],["withdraw",false]],"exp":"“Resell” means sell something again, which allows consumers to recover part of the original cost."},{"q":"Despite considerable pressure from his parents, Nam refused to _________ in their footsteps and instead pursued a career in digital design.","opts":[["keep",false],["follow",true],["take",false],["move",false]],"exp":"The fixed expression is “follow in somebody's footsteps.”"},{"q":"Employees exposed to _________ for extended periods are more likely to experience reduced motivation and job satisfaction.","opts":[["conditions stressful working",false],["stressful conditions working",false],["stressful working conditions",true],["working stressful conditions",false]],"exp":"The correct word order is adjective + noun modifier + head noun: “stressful working conditions.”"},{"q":"Employees who consistently demonstrate leadership potential are more likely to get _________ to positions involving greater responsibility.","opts":[["promoted",true],["qualified",false],["employed",false],["appointed",false]],"exp":"“Get promoted to a position” means move to a higher-level job."},{"q":"One reason some employees leave traditional nine-to-five positions is that fixed schedules offer little _________ when unexpected personal responsibilities arise.","opts":[["stability",false],["flexibility",true],["productivity",false],["regularity",false]],"exp":"Fixed schedules provide little “flexibility,” especially when personal responsibilities arise unexpectedly."},{"q":"A _________ income enables employees to plan long-term expenses more confidently because they know approximately how much they will receive each month.","opts":[["repetitive",false],["regular",true],["flexible",false],["temporary",false]],"exp":"“Regular income” means money received consistently or predictably."},{"q":"Increasing numbers of young professionals value _________ and may reject highly paid positions that leave them almost no time for family or personal interests.","opts":[["employment security",false],["work-life balance",true],["working conditions",false],["career promotion",false]],"exp":"Having time for both work and personal life refers to “work-life balance.”"},{"q":"Many secondary school students take _________ employment during school holidays to gain practical experience without committing themselves to a full-time position.","opts":[["permanent",false],["part-time",true],["lifelong",false],["compulsory",false]],"exp":"“Part-time employment” means working fewer hours than a full-time position."},{"q":"Rather than keeping his concerns to himself, the new employee eventually _________ to his supervisor about the pressure he was experiencing at work.","opts":[["opened up",true],["looked after",false],["carried out",false],["turned down",false]],"exp":"“Open up to somebody about something” means speak honestly about personal concerns."},{"q":"Career advisers recommend submitting applications several weeks _________ a summer position is due to begin, as employers often complete recruitment early.","opts":[["until",false],["before",true],["since",false],["during",false]],"exp":"Applications should be submitted “before” the job begins because recruitment may finish early."},{"q":"Graduates are advised not to _________ positions for which they lack the essential qualifications stated in the job description.","opts":[["apply for",true],["concentrate on",false],["take after",false],["put up",false]],"exp":"The correct expression is “apply for a position/job.”"},{"q":"Government-funded _________ are intended to provide financial and practical assistance to people who temporarily find themselves without employment.","opts":[["welfare programs",true],["retirement packages",false],["recruitment policies",false],["performance bonuses",false]],"exp":"“Welfare programs” provide support to people facing financial or employment difficulties."},{"q":"Applicants should ensure that the qualifications _________ on their CV are directly relevant to the requirements of the position.","opts":[["listing",false],["to list",false],["listed",true],["having listed",false]],"exp":"“Listed” is the reduced passive relative clause: qualifications which are listed on the CV."},{"q":"The company offers long-serving employees a _________ that includes pension contributions, health insurance, and other benefits after retirement.","opts":[["retirement generous package",false],["package generous retirement",false],["generous retirement package",true],["generous package retirement",false]],"exp":"The correct order is adjective + noun modifier + head noun: “a generous retirement package.”"}];
+let qs=[],i=0,lives=5,score=0,answered=false;
+const letters=["A","B","C","D"];
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const y=Math.floor(Math.random()*(x+1));
+    [a[x],a[y]]=[a[y],a[x]];
+  }
+  return a;
+}
+
+function prepare(){
+  qs=base.map(x=>({
+    q:x.q,
+    exp:x.exp,
+    opts:shuffle(x.opts.map(o=>({text:o[0],correct:o[1]})))
+  }));
+}
+
+function updateHearts(){
+  hearts.textContent="❤️".repeat(lives)+"🖤".repeat(5-lives);
+}
+
+function render(){
+  answered=false;
+  next.disabled=true;
+  feedback.className="";
+  feedback.textContent="Choose the best answer.";
+  qnum.textContent=`${i+1}/${qs.length}`;
+  qtag.textContent=`Question ${i+1}`;
+  qtext.textContent=qs[i].q;
+  answers.innerHTML="";
+
+  qs[i].opts.forEach((o,j)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<b>${letters[j]}.</b> ${o.text}`;
+    b.onclick=()=>choose(b,o);
+    answers.appendChild(b);
+  });
+}
+
+function choose(btn,opt){
+  if(answered||btn.disabled)return;
+
+  if(opt.correct){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    [...answers.children].forEach(b=>b.disabled=true);
+    feedback.className="good";
+    feedback.innerHTML=`✅ <b>Correct!</b><br>${qs[i].exp}`;
+    next.disabled=false;
+  }else{
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    feedback.className="bad";
+    feedback.textContent="❌ Incorrect. Try again.";
+
+    if(lives<=0){
+      over.classList.remove("hide");
+    }
+  }
+}
+
+next.onclick=()=>{
+  if(!answered)return;
+  if(i<qs.length-1){
+    i++;
+    render();
+  }else{
+    final.textContent=score;
+    done.classList.remove("hide");
+  }
+};
+
+function restart(){
+  i=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  over.classList.add("hide");
+  done.classList.add("hide");
+  prepare();
+  updateHearts();
+  render();
+}
+
+prepare();
+updateHearts();
+render();
+</script>
+</body>
+</html>

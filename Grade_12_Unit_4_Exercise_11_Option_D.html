@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 4 - Exercise 11 - Option D</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg1:#07131c;
+  --bg2:#15202a;
+  --panel:#0e1b26;
+  --panel2:#152737;
+  --lav:#66e3ff;
+  --rose:#ffb35c;
+  --mint:#8df0d0;
+  --text:#f4fbff;
+  --muted:#bdced8;
+  --good:#5ce0a7;
+  --bad:#ff6f7d;
+}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:22px;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 14% 18%,rgba(102,227,255,.16),transparent 24%),
+    radial-gradient(circle at 88% 10%,rgba(255,179,92,.15),transparent 22%),
+    radial-gradient(circle at 80% 84%,rgba(141,240,208,.11),transparent 25%),
+    linear-gradient(145deg,#06111a,#0c1b27 52%,#18232d);
+}
+.shell{
+  max-width:1180px;
+  margin:auto;
+  border-radius:30px;
+  overflow:hidden;
+  background:rgba(7,20,30,.97);
+  border:1px solid rgba(102,227,255,.2);
+  box-shadow:0 25px 80px rgba(0,0,0,.55),0 0 70px rgba(102,227,255,.06);
+}
+header{
+  position:relative;
+  overflow:hidden;
+  padding:28px 30px;
+  background:linear-gradient(120deg,#0b4f6c,#126782 52%,#7a4b1e);
+}
+header:after{
+  content:"🏙️  🚇  ⚡  🚦  🌉";
+  position:absolute;
+  right:20px;
+  top:18px;
+  font-size:30px;
+  letter-spacing:10px;
+  opacity:.3;
+}
+header h1{position:relative;margin:0 0 8px;font-size:clamp(26px,4vw,38px);z-index:1}
+header p{position:relative;margin:5px 0;line-height:1.5;color:#eefaff;z-index:1}
+.status{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:14px 24px;
+  background:#081722;
+  border-bottom:1px solid #203846;
+}
+.pill{
+  background:#102430;
+  border:1px solid #294555;
+  border-radius:999px;
+  padding:8px 13px;
+  font-weight:800;
+}
+.main{
+  display:grid;
+  grid-template-columns:1.14fr .86fr;
+  gap:18px;
+  padding:20px;
+}
+.panel{
+  background:linear-gradient(180deg,#0d1d28,#091720);
+  border:1px solid #284251;
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(0,0,0,.26);
+}
+.passage{
+  padding:22px;
+  max-height:73vh;
+  overflow:auto;
+  line-height:1.72;
+  font-size:16px;
+}
+.passage h2{margin-top:0;color:var(--mint)}
+.passage p{margin:0 0 16px;color:#e9f4f8}
+.passage u{
+  text-decoration-color:var(--rose);
+  text-decoration-thickness:2px;
+  text-underline-offset:3px
+}
+.passage b{color:#ffd9ee}
+.question{
+  padding:22px;
+  position:sticky;
+  top:16px;
+  align-self:start;
+  background:linear-gradient(180deg,#102430,#0d1b25);
+}
+.qtag{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:999px;
+  font-weight:900;
+  color:#07141d;
+  background:linear-gradient(90deg,var(--lav),var(--rose));
+}
+#qtext{
+  font-size:20px;
+  font-weight:800;
+  line-height:1.45;
+  margin:16px 0;
+}
+#answers{display:grid;gap:11px}
+.answer{
+  text-align:left;
+  border:1.5px solid #3a3b52;
+  background:#102733;
+  color:#f3fbff;
+  border-radius:14px;
+  padding:13px 14px;
+  font-size:15px;
+  line-height:1.42;
+  cursor:pointer;
+  transition:.18s ease;
+}
+.answer:hover:not(:disabled){
+  transform:translateY(-1px);
+  border-color:var(--lav);
+  background:#163444;
+  box-shadow:0 0 0 3px rgba(202,168,255,.05)
+}
+.answer.correct{background:#123126;border-color:var(--good)}
+.answer.wrong{background:#351623;border-color:var(--bad)}
+#feedback{
+  min-height:68px;
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#0a1c27;
+  color:var(--muted);
+  line-height:1.45;
+  border:1px solid #294552;
+}
+#feedback.good{background:#10291f;color:#d2ffe8;border-color:#2f7a58}
+#feedback.bad{background:#35141f;color:#ffd8e1;border-color:#8b334c}
+.nextwrap{display:flex;justify-content:flex-end;margin-top:14px}
+#next{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#07141d;
+  background:linear-gradient(90deg,var(--lav),var(--mint));
+}
+#next:disabled{opacity:.38;cursor:not-allowed}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(3,12,18,.86);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
+  padding:20px;
+  backdrop-filter:blur(8px);
+}
+.hide{display:none}
+.modal{
+  width:min(500px,94vw);
+  background:#0d202b;
+  border:1px solid #315362;
+  border-radius:24px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 25px 80px rgba(0,0,0,.5);
+}
+.modal button{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#07141d;
+  background:linear-gradient(90deg,var(--lav),var(--mint));
+}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-thumb{background:#2e6075;border-radius:10px}
+::-webkit-scrollbar-track{background:#121320}
+@media(max-width:850px){
+  .main{grid-template-columns:1fr}
+  .question{position:static}
+  .passage{max-height:none}
+}
+@media(max-width:560px){
+  body{padding:10px}
+  header{padding:22px 18px}
+  header:after{font-size:22px;right:6px;top:8px}
+  .main{padding:12px}
+  .passage,.question{padding:17px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<h1>🌆 Grade 12 - Unit 4 - Exercise 11 - Option D</h1>
+<p><b>Neon Metro Control</b></p>
+<p>Navigate the modern city and choose the best answer A, B, C, or D for Questions 1–10.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Question: <span id="qnum">1/10</span></span>
+<span class="pill">Score: <span id="score">0</span>/10</span>
+</div>
+<div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="main">
+<div class="panel passage">
+<h2>Urban Growth: Rethinking the Modern City</h2>
+<p>[I] Urbanization is often portrayed as a straightforward movement of people from rural communities to cities, yet the process is considerably more complex. [II] As urban populations expand, cities do not merely grow in size; their economies, social structures, and patterns of resource consumption are transformed as well. [III] In many rapidly developing regions, however, the speed of this transformation has exceeded the ability of institutions to adapt. [IV] Consequently, whether urbanization improves people's lives depends not simply on population growth itself but also on how effectively that growth is anticipated and managed.</p>
+
+<p>The economic case for urbanization is compelling. By bringing workers, consumers, and businesses into close proximity, cities can reduce the costs associated with transportation, communication, and the exchange of information. This concentration can also create what economists describe as “agglomeration benefits”: businesses gain access to larger pools of skilled workers, while employees can choose from a wider range of potential employers. Ideas circulate more readily as well, potentially accelerating innovation. Nevertheless, such advantages are neither automatic nor equally shared. Workers lacking relevant skills may find themselves excluded from the most productive sectors of the urban economy, even while living alongside considerable wealth.</p>
+
+<p>Housing illustrates this contradiction particularly clearly. An expanding urban economy can increase incomes and employment while simultaneously pushing land and rental prices upward. When housing supply fails to keep pace with demand, lower-income households may be forced to devote an excessive proportion of their earnings to accommodation or relocate to distant areas where housing is cheaper. The latter option can create another burden: lengthy commutes increase both transportation expenses and the amount of time residents spend travelling to work. Thus, an opportunity that appears economically beneficial at the city level may impose substantial costs on particular groups of residents.</p>
+
+<p>Urban expansion also has complicated environmental implications. Low-density development on the outskirts of cities can consume agricultural land and natural habitats while making residents increasingly dependent on private vehicles. This, in turn, can contribute to traffic congestion, air pollution, and greenhouse gas emissions. Yet densely populated cities are not necessarily environmentally damaging. When accompanied by reliable public transportation, energy-efficient buildings, and mixed-use neighborhoods where homes, workplaces, and services are located close together, density can reduce both energy consumption and travel distances. <u>The environmental consequences of urbanization, therefore, are shaped at least as much by the form cities take as by the number of people they contain.</u></p>
+
+<p>Addressing these challenges requires policymakers to move beyond short-term responses. Building additional roads, for example, may temporarily relieve congestion but can encourage greater car use over time, eventually restoring the problem it was intended to solve. Similarly, constructing affordable housing without considering its proximity to employment and public transportation may simply replace one form of disadvantage with another. Effective urban policy therefore requires coordination across housing, transport, employment, and environmental planning. The objective should not be to prevent cities from growing, but to ensure that urban growth expands opportunities without disproportionately transferring its social and environmental costs to those least able to bear them.</p>
+</div>
+
+<div class="panel question">
+<div class="qtag" id="qtag">Question 1</div>
+<div id="qtext"></div>
+<div id="answers"></div>
+<div id="feedback">Choose the best answer.</div>
+<div class="nextwrap"><button id="next" disabled>Next ➜</button></div>
+</div>
+</div>
+</div>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Out of hearts!</h1>
+<p>You have used all 5 hearts. Restart the mission and try again.</p>
+<button onclick="restart()">↻ Try Again</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>🌆 City Challenge Completed!</h1>
+<p>You completed the Urbanization challenge.</p>
+<h2>Final score: <span id="final">0</span>/10</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const base=[{"q":"Where in paragraph 1 does the following sentence best fit? “Such rapid change places considerable pressure on systems of governance, infrastructure, and public service provision.”","opts":[["[I]",false],["[II]",false],["[III]",false],["[IV]",true]],"exp":"“Such rapid change” refers to the transformation whose speed has exceeded institutions’ ability to adapt. The sentence then leads naturally to “Consequently,” so [IV] is the best position."},{"q":"The word “compelling” in paragraph 2 is closest in meaning to _________.","opts":[["difficult to justify",false],["strongly convincing",true],["financially uncertain",false],["increasingly controversial",false]],"exp":"“Compelling” means convincing or persuasive. The paragraph then supports this economic case with several urban advantages."},{"q":"According to paragraph 2, which of the following is TRUE about the economic benefits of urbanization?","opts":[["They are mainly created by reducing competition among urban workers.",false],["They ensure that most city residents gain access to highly productive employment.",false],["They may exist at the city level without benefiting all urban residents equally.",true],["They depend primarily on businesses employing workers from rural communities.",false]],"exp":"The passage says these advantages are “neither automatic nor equally shared,” and some workers may be excluded from productive sectors."},{"q":"The phrase “The latter option” in paragraph 3 refers to _________.","opts":[["spending a large proportion of income on housing",false],["increasing the supply of affordable accommodation",false],["moving farther away in search of cheaper housing",true],["earning higher incomes through urban employment",false]],"exp":"Two options are mentioned: spending too much on housing or relocating to distant cheaper areas. “The latter” refers to the second option."},{"q":"What can be inferred from paragraph 3 about economic growth in cities?","opts":[["Higher average incomes inevitably make housing more affordable for low-income residents.",false],["City-wide economic improvement may conceal financial difficulties experienced by certain households.",true],["Longer commuting distances generally allow residents to reduce their overall living expenses.",false],["Urban economic growth benefits households only when they live near their workplaces.",false]],"exp":"A city can show higher incomes and employment overall while some households face rising housing costs and expensive, time-consuming commutes."},{"q":"The word “This” in paragraph 4 refers to _________.","opts":[["the loss of agricultural land and natural habitats",false],["low-density urban development itself",false],["residents' growing dependence on private vehicles",true],["the expansion of public transportation networks",false]],"exp":"“This, in turn” most directly refers to residents becoming increasingly dependent on private vehicles, which contributes to congestion, pollution, and emissions."},{"q":"Which of the following best paraphrases the underlined sentence in paragraph 4?","opts":[["The size of the urban population is less relevant to the environment than any other characteristic of a city.",false],["How cities are designed may be just as important as their population size in determining their environmental impact.",true],["Increasing urban population density generally produces less environmental damage than changing city design.",false],["Environmental problems arise mainly because cities accommodate more residents than their infrastructure was designed for.",false]],"exp":"“At least as much by X as by Y” means X is at least equally important. Here, city form/design may matter as much as population size for environmental outcomes."},{"q":"Why does the author mention “building additional roads” in paragraph 5?","opts":[["To demonstrate that an apparently reasonable solution may eventually recreate the problem it addresses",true],["To suggest that road construction should receive priority over investment in public transportation",false],["To illustrate how infrastructure investment consistently reduces congestion in rapidly growing cities",false],["To show that urban governments often lack sufficient resources to maintain transportation networks",false]],"exp":"The example shows a short-term fix can encourage more car use and eventually bring congestion back, recreating the original problem."},{"q":"Which of the following can be inferred from paragraph 5?","opts":[["Urban problems should be addressed independently because coordination tends to delay policy implementation.",false],["Affordable housing is sufficient to reduce urban inequality regardless of where it is constructed.",false],["Policies aimed at solving one urban problem can create or preserve another if different sectors are planned separately.",true],["Governments should focus on limiting city growth until existing infrastructure can support the population.",false]],"exp":"The paragraph argues that housing, transport, employment, and environmental planning must be coordinated because solving one problem in isolation can create another."},{"q":"Which of the following best summarizes the passage?","opts":[["Urbanization creates substantial economic advantages through the concentration of workers and businesses, and its remaining social and environmental problems can largely be solved through housing construction.",false],["Although urbanization can improve economic efficiency and generate opportunities, its benefits may be unevenly distributed and its social and environmental outcomes depend heavily on coordinated, long-term urban planning.",true],["The environmental consequences of city growth are more serious than its economic advantages, particularly when urban residents depend heavily on private transportation.",false],["Rapid urban growth primarily disadvantages low-income residents because rising housing costs force them to relocate, making population control the most effective policy response.",false]],"exp":"The passage balances urban economic benefits against unequal social and environmental costs, then emphasizes coordinated, long-term planning as the key to better outcomes."}];
+let qs=[],i=0,lives=5,score=0,answered=false;
+const letters=["A","B","C","D"];
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const y=Math.floor(Math.random()*(x+1));
+    [a[x],a[y]]=[a[y],a[x]];
+  }
+  return a;
+}
+
+function prepare(){
+  qs=base.map(x=>({
+    q:x.q,
+    exp:x.exp,
+    opts:shuffle(x.opts.map(o=>({text:o[0],correct:o[1]})))
+  }));
+}
+
+function updateHearts(){
+  hearts.textContent="❤️".repeat(lives)+"🖤".repeat(5-lives);
+}
+
+function render(){
+  answered=false;
+  next.disabled=true;
+  feedback.className="";
+  feedback.textContent="Choose the best answer.";
+  qnum.textContent=`${i+1}/10`;
+  qtag.textContent=`Question ${i+1}`;
+  qtext.textContent=qs[i].q;
+  answers.innerHTML="";
+
+  qs[i].opts.forEach((o,j)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<b>${letters[j]}.</b> ${o.text}`;
+    b.onclick=()=>choose(b,o);
+    answers.appendChild(b);
+  });
+}
+
+function choose(btn,opt){
+  if(answered||btn.disabled)return;
+
+  if(opt.correct){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    [...answers.children].forEach(b=>b.disabled=true);
+    feedback.className="good";
+    feedback.innerHTML=`✅ <b>Correct!</b><br>${qs[i].exp}`;
+    next.disabled=false;
+  }else{
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    feedback.className="bad";
+    feedback.textContent="❌ Incorrect. Try again.";
+
+    if(lives<=0){
+      over.classList.remove("hide");
+    }
+  }
+}
+
+next.onclick=()=>{
+  if(!answered)return;
+  if(i<9){
+    i++;
+    render();
+  }else{
+    final.textContent=score;
+    done.classList.remove("hide");
+  }
+};
+
+function restart(){
+  i=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  over.classList.add("hide");
+  done.classList.add("hide");
+  prepare();
+  updateHearts();
+  render();
+}
+
+prepare();
+updateHearts();
+render();
+</script>
+</body>
+</html>

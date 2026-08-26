@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 5 - Exercise 1 (21-40) - Option D</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg1:#07131c;
+  --bg2:#15202a;
+  --panel:#0e1b26;
+  --panel2:#152737;
+  --lav:#66e3ff;
+  --rose:#ffb35c;
+  --mint:#8df0d0;
+  --text:#f4fbff;
+  --muted:#bdced8;
+  --good:#5ce0a7;
+  --bad:#ff6f7d;
+}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:22px;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 14% 18%,rgba(102,227,255,.16),transparent 24%),
+    radial-gradient(circle at 88% 10%,rgba(255,179,92,.15),transparent 22%),
+    radial-gradient(circle at 80% 84%,rgba(141,240,208,.11),transparent 25%),
+    linear-gradient(145deg,#06111a,#0c1b27 52%,#18232d);
+}
+.shell{
+  max-width:1180px;
+  margin:auto;
+  border-radius:30px;
+  overflow:hidden;
+  background:rgba(7,20,30,.97);
+  border:1px solid rgba(102,227,255,.2);
+  box-shadow:0 25px 80px rgba(0,0,0,.55),0 0 70px rgba(102,227,255,.06);
+}
+header{
+  position:relative;
+  overflow:hidden;
+  padding:28px 30px;
+  background:linear-gradient(120deg,#0b4f6c,#126782 52%,#7a4b1e);
+}
+header:after{
+  content:"🏙️  🚇  ⚡  🚦  🌉";
+  position:absolute;
+  right:20px;
+  top:18px;
+  font-size:30px;
+  letter-spacing:10px;
+  opacity:.3;
+}
+header h1{position:relative;margin:0 0 8px;font-size:clamp(26px,4vw,38px);z-index:1}
+header p{position:relative;margin:5px 0;line-height:1.5;color:#eefaff;z-index:1}
+.status{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:14px 24px;
+  background:#081722;
+  border-bottom:1px solid #203846;
+}
+.pill{
+  background:#102430;
+  border:1px solid #294555;
+  border-radius:999px;
+  padding:8px 13px;
+  font-weight:800;
+}
+.main{
+  display:grid;
+  grid-template-columns:1.14fr .86fr;
+  gap:18px;
+  padding:20px;
+}
+.panel{
+  background:linear-gradient(180deg,#0d1d28,#091720);
+  border:1px solid #284251;
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(0,0,0,.26);
+}
+.passage{
+  padding:22px;
+  max-height:73vh;
+  overflow:auto;
+  line-height:1.72;
+  font-size:16px;
+}
+.passage h2{margin-top:0;color:var(--mint)}
+.passage p{margin:0 0 16px;color:#e9f4f8}
+.passage u{
+  text-decoration-color:var(--rose);
+  text-decoration-thickness:2px;
+  text-underline-offset:3px
+}
+.passage b{color:#ffd9ee}
+.question{
+  padding:22px;
+  position:sticky;
+  top:16px;
+  align-self:start;
+  background:linear-gradient(180deg,#102430,#0d1b25);
+}
+.qtag{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:999px;
+  font-weight:900;
+  color:#07141d;
+  background:linear-gradient(90deg,var(--lav),var(--rose));
+}
+#qtext{
+  font-size:20px;
+  font-weight:800;
+  line-height:1.45;
+  margin:16px 0;
+}
+#answers{display:grid;gap:11px}
+.answer{
+  text-align:left;
+  border:1.5px solid #3a3b52;
+  background:#102733;
+  color:#f3fbff;
+  border-radius:14px;
+  padding:13px 14px;
+  font-size:15px;
+  line-height:1.42;
+  cursor:pointer;
+  transition:.18s ease;
+}
+.answer:hover:not(:disabled){
+  transform:translateY(-1px);
+  border-color:var(--lav);
+  background:#163444;
+  box-shadow:0 0 0 3px rgba(202,168,255,.05)
+}
+.answer.correct{background:#123126;border-color:var(--good)}
+.answer.wrong{background:#351623;border-color:var(--bad)}
+#feedback{
+  min-height:68px;
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#0a1c27;
+  color:var(--muted);
+  line-height:1.45;
+  border:1px solid #294552;
+}
+#feedback.good{background:#10291f;color:#d2ffe8;border-color:#2f7a58}
+#feedback.bad{background:#35141f;color:#ffd8e1;border-color:#8b334c}
+.nextwrap{display:flex;justify-content:flex-end;margin-top:14px}
+#next{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#07141d;
+  background:linear-gradient(90deg,var(--lav),var(--mint));
+}
+#next:disabled{opacity:.38;cursor:not-allowed}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(3,12,18,.86);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
+  padding:20px;
+  backdrop-filter:blur(8px);
+}
+.hide{display:none}
+.modal{
+  width:min(500px,94vw);
+  background:#0d202b;
+  border:1px solid #315362;
+  border-radius:24px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 25px 80px rgba(0,0,0,.5);
+}
+.modal button{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#07141d;
+  background:linear-gradient(90deg,var(--lav),var(--mint));
+}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-thumb{background:#2e6075;border-radius:10px}
+::-webkit-scrollbar-track{background:#121320}
+@media(max-width:850px){
+  .main{grid-template-columns:1fr}
+  .question{position:static}
+  .passage{max-height:none}
+}
+@media(max-width:560px){
+  body{padding:10px}
+  header{padding:22px 18px}
+  header:after{font-size:22px;right:6px;top:8px}
+  .main{padding:12px}
+  .passage,.question{padding:17px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<h1>🧳 Grade 12 - Unit 5 - Exercise 1 (21-40) - Option D</h1>
+<p><b>Job Quest Airport</b></p>
+<p>Navigate the modern city and choose the best answer A, B, C, or D for Questions 1–10.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Question: <span id="qnum">1/15</span></span>
+<span class="pill">Score: <span id="score">0</span>/15</span>
+</div>
+<div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="main">
+<div class="panel passage">
+<h2>🧳 Job Quest Airport</h2>
+<p>Welcome to the World of Work departure terminal. Each correct answer unlocks the next career gate.</p>
+<p><b>Rules:</b> A wrong answer costs one heart and you must try again. You cannot board the next gate until the correct answer is selected.</p>
+<p>✈️ Topics include clients, reselling, career choices, working conditions, promotion, flexibility, income, work-life balance, part-time jobs, applications, qualifications, CVs, and retirement packages.</p>
+<p>🗺️ Reach the final departure gate before all five hearts are lost.</p>
+</div>
+
+<div class="panel question">
+<div class="qtag" id="qtag">Question 1</div>
+<div id="qtext"></div>
+<div id="answers"></div>
+<div id="feedback">Choose the best answer.</div>
+<div class="nextwrap"><button id="next" disabled>Next ➜</button></div>
+</div>
+</div>
+</div>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Out of hearts!</h1>
+<p>You have used all 5 hearts. Restart the mission and try again.</p>
+<button onclick="restart()">↻ Try Again</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>🗺️ City Challenge Completed!</h1>
+<p>You completed the Urbanization challenge.</p>
+<h2>Final score: <span id="final">0</span>/15</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const base=[{"q":"Before recommending any legal action, the lawyer carefully discussed the possible consequences with her _________.","opts":[["client",true],["customer",false],["employer",false],["applicant",false]],"exp":"A person receiving professional legal services from a lawyer is a “client.”"},{"q":"Instead of discarding unwanted clothes, many consumers now _________ them through online platforms, allowing the items to be used by someone else.","opts":[["replace",false],["resell",true],["consume",false],["manufacture",false]],"exp":"“Resell” means to sell something again."},{"q":"Although his parents hoped he would _________ in their footsteps by joining the family business, Minh decided to pursue a career in engineering.","opts":[["follow",true],["move",false],["take",false],["keep",false]],"exp":"The fixed expression is “follow in someone's footsteps.”"},{"q":"Poor lighting, excessive noise, and unreasonable workloads can all contribute to _________ that negatively affect employee wellbeing.","opts":[["conditions stressful working",false],["stressful working conditions",true],["stressful conditions working",false],["working conditions stress",false]],"exp":"The correct word order is “stressful working conditions.”"},{"q":"Employees who consistently perform well and demonstrate leadership skills are more likely to be _________ to senior positions.","opts":[["employed",false],["promoted",true],["applied",false],["recruited",false]],"exp":"“Be promoted to a senior position” means move to a higher-level job."},{"q":"Many employees value _________ working arrangements because they allow them to adjust their schedules to meet family responsibilities.","opts":[["flexible",true],["repetitive",false],["regular",false],["compulsory",false]],"exp":"“Flexible working arrangements” allow employees to adjust their schedules."},{"q":"Although freelance work may offer greater independence, some workers prefer permanent employment because it provides a more _________ source of income.","opts":[["demanding",false],["regular",true],["challenging",false],["occasional",false]],"exp":"Permanent employment often provides a more “regular” source of income."},{"q":"Despite being offered a higher salary, Lan rejected the position because the long working hours would seriously affect her _________.","opts":[["job vacancy",false],["work-life balance",true],["career qualification",false],["employment benefit",false]],"exp":"Long working hours can harm a person's “work-life balance.”"},{"q":"University students often take _________ jobs during their studies to earn extra income without giving up their academic responsibilities.","opts":[["full-time",false],["part-time",true],["permanent",false],["long-term",false]],"exp":"Students commonly take “part-time” jobs so they can continue studying."},{"q":"After months of trying to deal with the pressure alone, she finally decided to _________ to her manager about the difficulties she was facing.","opts":[["carry out",false],["open up",true],["turn down",false],["give up",false]],"exp":"“Open up to somebody about something” means share concerns honestly."},{"q":"Students hoping to find summer employment are advised to submit their applications well _________ the holiday begins, as popular positions are filled quickly.","opts":[["before",true],["after",false],["until",false],["since",false]],"exp":"Because positions fill quickly, applications should be sent well “before” the holiday begins."},{"q":"When _________ a position, candidates should carefully check whether their qualifications match the requirements stated in the advertisement.","opts":[["applying for",true],["carrying out",false],["looking after",false],["taking over",false]],"exp":"The correct phrase is “apply for a position/job.”"},{"q":"Applicants should highlight the skills and professional _________ that are most relevant to the position they are applying for.","opts":[["regulations",false],["qualifications",true],["promotions",false],["conditions",false]],"exp":"The natural collocation is “skills and qualifications.”"},{"q":"During an interview, candidates should be prepared to explain the responsibilities _________ on their CV rather than simply repeating the information.","opts":[["listing",false],["listed",true],["which listing",false],["to listing",false]],"exp":"“Listed” is a reduced passive relative clause: responsibilities which are listed on the CV."},{"q":"To retain experienced staff, the company introduced a _________ that includes pension contributions and additional health benefits.","opts":[["retirement generous package",false],["generous package retirement",false],["generous retirement package",true],["package retirement generous",false]],"exp":"The correct order is adjective + noun modifier + head noun: “generous retirement package.”"}];
+let qs=[],i=0,lives=5,score=0,answered=false;
+const letters=["A","B","C","D"];
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const y=Math.floor(Math.random()*(x+1));
+    [a[x],a[y]]=[a[y],a[x]];
+  }
+  return a;
+}
+
+function prepare(){
+  qs=base.map(x=>({
+    q:x.q,
+    exp:x.exp,
+    opts:shuffle(x.opts.map(o=>({text:o[0],correct:o[1]})))
+  }));
+}
+
+function updateHearts(){
+  hearts.textContent="❤️".repeat(lives)+"🖤".repeat(5-lives);
+}
+
+function render(){
+  answered=false;
+  next.disabled=true;
+  feedback.className="";
+  feedback.textContent="Choose the best answer.";
+  qnum.textContent=`${i+1}/${qs.length}`;
+  qtag.textContent=`Question ${i+1}`;
+  qtext.textContent=qs[i].q;
+  answers.innerHTML="";
+
+  qs[i].opts.forEach((o,j)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<b>${letters[j]}.</b> ${o.text}`;
+    b.onclick=()=>choose(b,o);
+    answers.appendChild(b);
+  });
+}
+
+function choose(btn,opt){
+  if(answered||btn.disabled)return;
+
+  if(opt.correct){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    [...answers.children].forEach(b=>b.disabled=true);
+    feedback.className="good";
+    feedback.innerHTML=`✅ <b>Correct!</b><br>${qs[i].exp}`;
+    next.disabled=false;
+  }else{
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    feedback.className="bad";
+    feedback.textContent="❌ Incorrect. Try again.";
+
+    if(lives<=0){
+      over.classList.remove("hide");
+    }
+  }
+}
+
+next.onclick=()=>{
+  if(!answered)return;
+  if(i<qs.length-1){
+    i++;
+    render();
+  }else{
+    final.textContent=score;
+    done.classList.remove("hide");
+  }
+};
+
+function restart(){
+  i=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  over.classList.add("hide");
+  done.classList.add("hide");
+  prepare();
+  updateHearts();
+  render();
+}
+
+prepare();
+updateHearts();
+render();
+</script>
+</body>
+</html>

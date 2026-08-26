@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 4 - Exercise 10 - Option B</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --cream:#fff8e8;
+  --honey:#f5b301;
+  --gold:#ffc928;
+  --leaf:#2f8f4e;
+  --leaf2:#6ebf59;
+  --brown:#5d4524;
+  --ink:#2f2a22;
+  --muted:#6f6658;
+  --panel:#fffdf7;
+}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:22px;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 12% 18%,rgba(255,221,87,.35),transparent 22%),
+    radial-gradient(circle at 88% 14%,rgba(107,190,96,.25),transparent 24%),
+    radial-gradient(circle at 82% 86%,rgba(245,179,1,.22),transparent 24%),
+    linear-gradient(135deg,#fff7d8,#f3ffe8 52%,#fff2bf);
+}
+.shell{
+  max-width:1180px;
+  margin:auto;
+  border-radius:30px;
+  overflow:hidden;
+  background:rgba(255,253,247,.97);
+  border:1px solid #f1ddb2;
+  box-shadow:0 22px 65px rgba(93,69,36,.18);
+}
+header{
+  position:relative;
+  overflow:hidden;
+  padding:28px 30px;
+  color:#3b2d0f;
+  background:
+    linear-gradient(135deg,rgba(255,215,68,.96),rgba(255,239,151,.97) 50%,rgba(151,213,111,.92));
+}
+header:after{
+  content:"🐝  🌼  🐝  🌻  🐝";
+  position:absolute;
+  right:24px;
+  top:18px;
+  font-size:32px;
+  letter-spacing:12px;
+  opacity:.35;
+  transform:rotate(-6deg);
+}
+header h1{position:relative;margin:0 0 8px;font-size:clamp(26px,4vw,38px);z-index:1}
+header p{position:relative;margin:5px 0;line-height:1.5;z-index:1}
+.status{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:14px 24px;
+  background:#fffaf0;
+  border-bottom:1px solid #efdfbf;
+}
+.pill{
+  background:#fff;
+  border:1px solid #ecd9ad;
+  border-radius:999px;
+  padding:8px 13px;
+  font-weight:800;
+}
+.main{
+  display:grid;
+  grid-template-columns:1.14fr .86fr;
+  gap:18px;
+  padding:20px;
+}
+.panel{
+  background:var(--panel);
+  border:1px solid #ecdcb8;
+  border-radius:22px;
+  box-shadow:0 10px 28px rgba(93,69,36,.08);
+}
+.passage{
+  padding:22px;
+  max-height:73vh;
+  overflow:auto;
+  line-height:1.72;
+  font-size:16px;
+  background:
+    linear-gradient(rgba(255,253,247,.96),rgba(255,253,247,.96)),
+    repeating-linear-gradient(60deg,#f9df73 0 2px,transparent 2px 22px);
+}
+.passage h2{margin-top:0;color:#277447}
+.passage p{margin:0 0 16px}
+.passage u{
+  text-decoration-color:#d99000;
+  text-decoration-thickness:2px;
+  text-underline-offset:3px
+}
+.question{
+  padding:22px;
+  position:sticky;
+  top:16px;
+  align-self:start;
+  background:linear-gradient(180deg,#fffdf8,#fff9e8);
+}
+.qtag{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:999px;
+  font-weight:900;
+  background:#fff0a6;
+  color:#654800;
+  border:1px solid #e7c55b;
+}
+#qtext{
+  font-size:20px;
+  font-weight:800;
+  line-height:1.45;
+  margin:16px 0;
+}
+#answers{display:grid;gap:11px}
+.answer{
+  text-align:left;
+  border:2px solid #eadcb8;
+  background:#fffef9;
+  border-radius:14px;
+  padding:13px 14px;
+  font-size:15px;
+  line-height:1.42;
+  cursor:pointer;
+  transition:.18s ease;
+}
+.answer:hover:not(:disabled){
+  transform:translateY(-1px);
+  border-color:var(--honey);
+  background:#fff9df;
+}
+.answer.correct{background:#edf9eb;border-color:#48a05c}
+.answer.wrong{background:#fff0ef;border-color:#dd6f6f}
+#feedback{
+  min-height:68px;
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#fffaf0;
+  color:var(--muted);
+  line-height:1.45;
+  border:1px solid #efdfbf;
+}
+#feedback.good{background:#edf9eb;color:#246b38;border-color:#8ac596}
+#feedback.bad{background:#fff0ef;color:#a13d3d;border-color:#e5a0a0}
+.nextwrap{display:flex;justify-content:flex-end;margin-top:14px}
+#next{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#3e2d00;
+  background:linear-gradient(90deg,#ffd84d,#8fd06b);
+}
+#next:disabled{opacity:.38;cursor:not-allowed}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(60,44,18,.7);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
+  padding:20px;
+  backdrop-filter:blur(7px);
+}
+.hide{display:none}
+.modal{
+  width:min(500px,94vw);
+  background:#fffdf6;
+  border:1px solid #e7d3a2;
+  border-radius:24px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 25px 80px rgba(60,44,18,.28);
+}
+.modal button{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#3e2d00;
+  background:linear-gradient(90deg,#ffd84d,#8fd06b);
+}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-thumb{background:#d4b34b;border-radius:10px}
+::-webkit-scrollbar-track{background:#fff8e4}
+@media(max-width:850px){
+  .main{grid-template-columns:1fr}
+  .question{position:static}
+  .passage{max-height:none}
+}
+@media(max-width:560px){
+  body{padding:10px}
+  header{padding:22px 18px}
+  header:after{font-size:24px;right:8px;top:8px}
+  .main{padding:12px}
+  .passage,.question{padding:17px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<h1>🐝 Grade 12 - Unit 4 - Exercise 10 - Option B</h1>
+<p><b>Pollinator Garden Mission</b></p>
+<p>Read the passage and choose the best answer A, B, C, or D for Questions 1–8.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Question: <span id="qnum">1/8</span></span>
+<span class="pill">Score: <span id="score">0</span>/8</span>
+</div>
+<div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="main">
+<div class="panel passage">
+<h2>Pollinators and the Future of Biodiversity</h2>
+<p>Pollinators, particularly bees, are essential to both natural ecosystems and global agriculture. By transferring pollen between flowers, they enable many plants to reproduce and produce seeds and fruit. A considerable proportion of crops consumed by humans depends, at least partly, on animal pollination. Beyond agriculture, bees also support biodiversity because the plants they pollinate provide food and shelter for numerous other species. Their importance, therefore, extends far beyond the production of honey.</p>
+
+<p>Despite their ecological value, many bee populations are under increasing pressure. The expansion of agricultural and urban areas has reduced the availability of natural habitats and flowering plants. In addition, certain pesticides can interfere with bees' ability to navigate and locate food. Climate change presents another challenge by altering flowering seasons, potentially creating a mismatch between the periods when plants produce flowers and when bees are most active. <u>Together, these pressures can weaken bee populations and make their long-term survival increasingly uncertain.</u></p>
+
+<p>Efforts to reverse this trend have taken several forms. Farmers can reduce their reliance on harmful chemicals and maintain strips of wildflowers along the edges of agricultural fields. In urban areas, parks, gardens, balconies, and even rooftops can provide valuable sources of food for pollinators. Local authorities in some cities have also changed how public green spaces are managed, allowing more native flowers to grow instead of regularly cutting all vegetation. Such measures may appear relatively minor, but when implemented across large areas, their combined impact can be substantial.</p>
+
+<p>Public participation is equally important. Conservation organizations increasingly encourage households to grow native flowering plants and avoid unnecessary pesticide use. Schools can also contribute by teaching students how pollination supports food production and healthy ecosystems. However, raising awareness alone is unlikely to be sufficient. People must translate their understanding into practical changes in the way gardens, farms, and public spaces are managed. Effective conservation therefore requires cooperation among individuals, farmers, scientists, businesses, and governments.</p>
+
+<p>Although protecting bees requires sustained effort, the benefits extend to entire ecosystems. Measures that provide bees with food and suitable habitats often support butterflies, birds, and other wildlife as well. Protecting pollinators should therefore not be regarded as an attempt to save a single group of insects. Instead, it represents a broader strategy for maintaining biodiversity and strengthening the ecological systems upon which human societies depend.</p>
+</div>
+
+<div class="panel question">
+<div class="qtag" id="qtag">Question 1</div>
+<div id="qtext"></div>
+<div id="answers"></div>
+<div id="feedback">Choose the best answer.</div>
+<div class="nextwrap"><button id="next" disabled>Next ➜</button></div>
+</div>
+</div>
+</div>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Out of hearts!</h1>
+<p>You have used all 5 hearts. Restart the mission and try again.</p>
+<button onclick="restart()">↻ Try Again</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>🌼 Mission Complete!</h1>
+<p>You completed the Pollinator Garden Mission.</p>
+<h2>Final score: <span id="final">0</span>/8</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const base=[{"q": "Which of the following is NOT mentioned in paragraph 1 as a benefit associated with bees?", "opts": [["Helping plants reproduce", false], ["Supporting agricultural production", false], ["Providing resources for other species", false], ["Improving the nutritional quality of crops", true]], "exp": "Đoạn 1 nói reproduction, agriculture và hỗ trợ loài khác; không nói ong làm tăng nutritional quality của cây trồng."}, {"q": "The word “uncertain” in paragraph 2 is OPPOSITE in meaning to ______.", "opts": [["doubtful", false], ["unpredictable", false], ["assured", true], ["threatened", false]], "exp": "“Uncertain” = không chắc chắn; trái nghĩa gần nhất là “assured” = chắc chắn/được đảm bảo."}, {"q": "The phrase “Such measures” in paragraph 3 refers to ______.", "opts": [["the various actions taken to provide better conditions for pollinators", true], ["the expansion of agricultural fields into natural habitats", false], ["the regular removal of vegetation from public areas", false], ["the increased use of pesticides by farmers and local authorities", false]], "exp": "“Such measures” chỉ các biện pháp vừa nêu: giảm hóa chất, trồng hoa dại và tạo nguồn thức ăn cho pollinators."}, {"q": "The word “translate” in paragraph 4 is closest in meaning to ______.", "opts": [["explain something in another language", false], ["transform something into practical action", true], ["communicate scientific information", false], ["simplify a complicated idea", false]], "exp": "Trong cụm “translate their understanding into practical changes”, translate nghĩa là biến hiểu biết thành hành động thực tế."}, {"q": "Which of the following best paraphrases the underlined sentence in paragraph 2?", "opts": [["Each environmental threat independently determines whether bees can survive.", false], ["Several environmental pressures acting together may threaten the future survival of bees.", true], ["Bee populations can easily adapt to environmental pressures over the long term.", false], ["The survival of bees depends primarily on their ability to respond to climate change.", false]], "exp": "Câu gạch chân nhấn mạnh nhiều áp lực môi trường kết hợp với nhau làm tương lai sống sót của ong trở nên không chắc chắn."}, {"q": "Which of the following is TRUE according to the passage?", "opts": [["Raising public awareness by itself is sufficient to protect bee populations.", false], ["Urban environments are incapable of providing useful habitats for pollinators.", false], ["Conservation measures designed for bees may also benefit other forms of wildlife.", true], ["Regularly removing native vegetation is recommended as a way of supporting bees.", false]], "exp": "Đoạn 5 nói các biện pháp bảo vệ ong cũng hỗ trợ butterflies, birds và other wildlife."}, {"q": "In which paragraph does the writer explain a cause-and-effect relationship involving changes in timing?", "opts": [["Paragraph 1", false], ["Paragraph 2", true], ["Paragraph 3", false], ["Paragraph 4", false]], "exp": "Đoạn 2: climate change làm thay đổi flowering seasons, từ đó tạo mismatch giữa thời điểm cây ra hoa và thời điểm ong hoạt động."}, {"q": "In which paragraph does the writer broaden bee conservation into an issue concerning the health of ecosystems as a whole?", "opts": [["Paragraph 2", false], ["Paragraph 3", false], ["Paragraph 4", false], ["Paragraph 5", true]], "exp": "Đoạn 5 mở rộng từ bảo vệ ong sang biodiversity và toàn bộ ecological systems."}];
+let qs=[],i=0,lives=5,score=0,answered=false;
+const letters=["A","B","C","D"];
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const y=Math.floor(Math.random()*(x+1));
+    [a[x],a[y]]=[a[y],a[x]];
+  }
+  return a;
+}
+
+function prepare(){
+  qs=base.map(x=>({
+    q:x.q,
+    exp:x.exp,
+    opts:shuffle(x.opts.map(o=>({text:o[0],correct:o[1]})))
+  }));
+}
+
+function updateHearts(){
+  hearts.textContent="❤️".repeat(lives)+"🖤".repeat(5-lives);
+}
+
+function render(){
+  answered=false;
+  next.disabled=true;
+  feedback.className="";
+  feedback.textContent="Choose the best answer.";
+  qnum.textContent=`${i+1}/8`;
+  qtag.textContent=`Question ${i+1}`;
+  qtext.textContent=qs[i].q;
+  answers.innerHTML="";
+
+  qs[i].opts.forEach((o,j)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<b>${letters[j]}.</b> ${o.text}`;
+    b.onclick=()=>choose(b,o);
+    answers.appendChild(b);
+  });
+}
+
+function choose(btn,opt){
+  if(answered||btn.disabled)return;
+
+  if(opt.correct){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    [...answers.children].forEach(b=>b.disabled=true);
+    feedback.className="good";
+    feedback.innerHTML=`✅ <b>Correct!</b><br>${qs[i].exp}`;
+    next.disabled=false;
+  }else{
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    feedback.className="bad";
+    feedback.textContent="❌ Incorrect. Try again.";
+
+    if(lives<=0){
+      over.classList.remove("hide");
+    }
+  }
+}
+
+next.onclick=()=>{
+  if(!answered)return;
+  if(i<7){
+    i++;
+    render();
+  }else{
+    final.textContent=score;
+    done.classList.remove("hide");
+  }
+};
+
+function restart(){
+  i=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  over.classList.add("hide");
+  done.classList.add("hide");
+  prepare();
+  updateHearts();
+  render();
+}
+
+prepare();
+updateHearts();
+render();
+</script>
+</body>
+</html>

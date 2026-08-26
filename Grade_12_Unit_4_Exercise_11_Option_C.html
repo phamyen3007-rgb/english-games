@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 4 - Exercise 11 - Option C</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg1:#0f1020;
+  --bg2:#1a0f24;
+  --panel:#171827;
+  --panel2:#21172b;
+  --lav:#caa8ff;
+  --rose:#ff9dcf;
+  --mint:#9ef0cc;
+  --text:#f8f5ff;
+  --muted:#cfc6dc;
+  --good:#62d79c;
+  --bad:#ff7f9a;
+}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:22px;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 12% 18%,rgba(202,168,255,.18),transparent 24%),
+    radial-gradient(circle at 88% 12%,rgba(255,157,207,.14),transparent 22%),
+    radial-gradient(circle at 80% 84%,rgba(158,240,204,.12),transparent 25%),
+    linear-gradient(145deg,#0b0c18,#16101f 52%,#1e1022);
+}
+.shell{
+  max-width:1180px;
+  margin:auto;
+  border-radius:30px;
+  overflow:hidden;
+  background:rgba(16,17,30,.96);
+  border:1px solid rgba(202,168,255,.2);
+  box-shadow:0 25px 80px rgba(0,0,0,.52),0 0 60px rgba(202,168,255,.05);
+}
+header{
+  position:relative;
+  overflow:hidden;
+  padding:28px 30px;
+  background:linear-gradient(120deg,#3a2456,#5d315f 50%,#29534f);
+}
+header:after{
+  content:"🦋  ✨  🌿  ✨  🐝";
+  position:absolute;
+  right:20px;
+  top:18px;
+  font-size:30px;
+  letter-spacing:10px;
+  opacity:.3;
+}
+header h1{position:relative;margin:0 0 8px;font-size:clamp(26px,4vw,38px);z-index:1}
+header p{position:relative;margin:5px 0;line-height:1.5;color:#f6efff;z-index:1}
+.status{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:14px 24px;
+  background:#121421;
+  border-bottom:1px solid #2b2940;
+}
+.pill{
+  background:#1a1d2e;
+  border:1px solid #35364c;
+  border-radius:999px;
+  padding:8px 13px;
+  font-weight:800;
+}
+.main{
+  display:grid;
+  grid-template-columns:1.14fr .86fr;
+  gap:18px;
+  padding:20px;
+}
+.panel{
+  background:linear-gradient(180deg,#171927,#131521);
+  border:1px solid #34364a;
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(0,0,0,.26);
+}
+.passage{
+  padding:22px;
+  max-height:73vh;
+  overflow:auto;
+  line-height:1.72;
+  font-size:16px;
+}
+.passage h2{margin-top:0;color:var(--mint)}
+.passage p{margin:0 0 16px;color:#eee9f5}
+.passage u{
+  text-decoration-color:var(--rose);
+  text-decoration-thickness:2px;
+  text-underline-offset:3px
+}
+.passage b{color:#ffd9ee}
+.question{
+  padding:22px;
+  position:sticky;
+  top:16px;
+  align-self:start;
+  background:linear-gradient(180deg,#1b1b2b,#171520);
+}
+.qtag{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:999px;
+  font-weight:900;
+  color:#17111f;
+  background:linear-gradient(90deg,var(--lav),var(--rose));
+}
+#qtext{
+  font-size:20px;
+  font-weight:800;
+  line-height:1.45;
+  margin:16px 0;
+}
+#answers{display:grid;gap:11px}
+.answer{
+  text-align:left;
+  border:1.5px solid #3a3b52;
+  background:#1d1f31;
+  color:#f7f4fb;
+  border-radius:14px;
+  padding:13px 14px;
+  font-size:15px;
+  line-height:1.42;
+  cursor:pointer;
+  transition:.18s ease;
+}
+.answer:hover:not(:disabled){
+  transform:translateY(-1px);
+  border-color:var(--lav);
+  background:#252039;
+  box-shadow:0 0 0 3px rgba(202,168,255,.05)
+}
+.answer.correct{background:#123126;border-color:var(--good)}
+.answer.wrong{background:#351623;border-color:var(--bad)}
+#feedback{
+  min-height:68px;
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#121522;
+  color:var(--muted);
+  line-height:1.45;
+  border:1px solid #303248;
+}
+#feedback.good{background:#10291f;color:#d2ffe8;border-color:#2f7a58}
+#feedback.bad{background:#35141f;color:#ffd8e1;border-color:#8b334c}
+.nextwrap{display:flex;justify-content:flex-end;margin-top:14px}
+#next{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#18111d;
+  background:linear-gradient(90deg,var(--lav),var(--mint));
+}
+#next:disabled{opacity:.38;cursor:not-allowed}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(8,8,18,.82);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
+  padding:20px;
+  backdrop-filter:blur(8px);
+}
+.hide{display:none}
+.modal{
+  width:min(500px,94vw);
+  background:#181927;
+  border:1px solid #3b3c52;
+  border-radius:24px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 25px 80px rgba(0,0,0,.5);
+}
+.modal button{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#18111d;
+  background:linear-gradient(90deg,var(--lav),var(--mint));
+}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-thumb{background:#5d4b74;border-radius:10px}
+::-webkit-scrollbar-track{background:#121320}
+@media(max-width:850px){
+  .main{grid-template-columns:1fr}
+  .question{position:static}
+  .passage{max-height:none}
+}
+@media(max-width:560px){
+  body{padding:10px}
+  header{padding:22px 18px}
+  header:after{font-size:22px;right:6px;top:8px}
+  .main{padding:12px}
+  .passage,.question{padding:17px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<h1>🏙️ Grade 12 - Unit 4 - Exercise 11 - Option C</h1>
+<p><b>Urbanization: Growth at a Cost</b></p>
+<p>Read the passage and choose the best answer A, B, C, or D for Questions 1–10.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Question: <span id="qnum">1/10</span></span>
+<span class="pill">Score: <span id="score">0</span>/10</span>
+</div>
+<div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="main">
+<div class="panel passage">
+<h2>Urbanization: Growth at a Cost</h2>
+<p><b>[I]</b> For much of human history, the majority of people lived in rural communities, but the balance has shifted dramatically over the past century. <b>[II]</b> Today, more than half of the world's population resides in urban areas, and this proportion is expected to continue rising. <b>[III]</b> The expansion of cities is particularly rapid in developing countries, where people are often drawn to urban centers by <u>the prospect of</u> better employment, education, and healthcare. <b>[IV]</b> Yet the pace of this transformation has raised concerns about whether cities can accommodate growing populations without sacrificing residents' quality of life.</p>
+
+<p>Urbanization can generate substantial economic and social benefits. The concentration of workers, businesses, and consumers allows companies to operate more efficiently and gives individuals access to a broader range of employment opportunities. Cities also tend to facilitate the exchange of knowledge and ideas. When universities, research institutions, entrepreneurs, and skilled workers are located close to one another, innovation can occur more rapidly. Furthermore, densely populated areas can make certain public services, such as mass transportation, more cost-effective because they serve large numbers of people within relatively small areas.</p>
+
+<p>Nevertheless, the advantages of urban growth are not distributed evenly. As demand for land and housing increases, property prices may rise beyond the reach of low-income residents. <b>Those</b> unable to afford formal housing may be pushed into overcrowded neighborhoods or informal settlements, where access to clean water, sanitation, and healthcare can be inadequate. Rapid urban expansion may also outpace the capacity of local authorities to improve infrastructure. Roads become congested, public transport systems are overwhelmed, and waste-management services struggle to keep pace with population growth. <u>These pressures can gradually undermine the very improvements in living standards that initially attracted people to cities.</u></p>
+
+<p>Environmental consequences pose an additional challenge. As cities spread outward, forests, farmland, and natural habitats may be replaced by roads, residential developments, and industrial zones. At the same time, higher levels of traffic and energy consumption can worsen air pollution and increase greenhouse gas emissions. However, high population density does not <u>inevitably</u> result in environmental degradation. Compact urban development, efficient public transport, energy-efficient buildings, and accessible green spaces can significantly reduce the environmental footprint of city residents.</p>
+
+<p>For this reason, the future success of urbanization will depend less on whether cities continue to grow than on how that growth is managed. Policymakers must anticipate population changes rather than simply respond to problems after they have emerged. Investments in affordable housing, resilient infrastructure, reliable public transportation, and environmental protection can enable cities to benefit from economic growth without allowing inequality and environmental damage to become entrenched. Urbanization, therefore, should not be viewed as either inherently beneficial or harmful; its consequences largely depend on the choices societies make in shaping their cities.</p></div>
+
+<div class="panel question">
+<div class="qtag" id="qtag">Question 1</div>
+<div id="qtext"></div>
+<div id="answers"></div>
+<div id="feedback">Choose the best answer.</div>
+<div class="nextwrap"><button id="next" disabled>Next ➜</button></div>
+</div>
+</div>
+</div>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Out of hearts!</h1>
+<p>You have used all 5 hearts. Restart the mission and try again.</p>
+<button onclick="restart()">↻ Try Again</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>🌆 City Challenge Completed!</h1>
+<p>You completed the Urbanization challenge.</p>
+<h2>Final score: <span id="final">0</span>/10</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const base=[{"q": "Where in paragraph 1 does the following sentence best fit? “This trend represents one of the most significant demographic transformations of the modern era.”", "opts": [["[I]", false], ["[II]", true], ["[III]", false], ["[IV]", false]], "exp": "“This trend” refers back to the shift from rural to urban living mentioned immediately before [II]. The inserted sentence then leads naturally into the present-day evidence that more than half the world’s population lives in urban areas."}, {"q": "The phrase “the prospect of” in paragraph 1 is closest in meaning to _________.", "opts": [["the guarantee of", false], ["the possibility of", true], ["the consequence of", false], ["the necessity of", false]], "exp": "“The prospect of” means the possibility or chance of something happening, especially something desirable. It does not imply certainty."}, {"q": "According to paragraph 2, why can densely populated cities provide some public services more efficiently?", "opts": [["Urban residents generally require fewer public services than rural residents.", false], ["Governments are able to eliminate the operating costs of urban services.", false], ["Large numbers of residents can use the same services within a limited area.", true], ["Private companies usually take complete responsibility for urban infrastructure.", false]], "exp": "The passage states that such services can be more cost-effective because they serve large numbers of people within relatively small areas."}, {"q": "The word “Those” in paragraph 3 refers to _________.", "opts": [["low-income residents unable to afford formal housing", true], ["local authorities responsible for urban development", false], ["companies investing in residential property", false], ["people moving from overcrowded neighborhoods", false]], "exp": "“Those” means “those people” and refers to the low-income residents who cannot afford formal housing."}, {"q": "Which of the following best paraphrases the underlined sentence in paragraph 3?", "opts": [["Urban problems may eventually reduce some of the benefits that encouraged people to move to cities in the first place.", true], ["People are increasingly attracted to cities because urban infrastructure is becoming less reliable.", false], ["Declining living standards are the main reason people initially decide to leave urban areas.", false], ["Urban residents generally accept poorer living conditions in exchange for higher property values.", false]], "exp": "“Undermine” means weaken or reduce. The sentence means urban pressures can erode the same improvements in living standards that originally attracted people to cities."}, {"q": "The word “inevitably” in paragraph 4 is closest in meaning to _________.", "opts": [["temporarily", false], ["necessarily", true], ["unexpectedly", false], ["approximately", false]], "exp": "“Inevitably” means necessarily or unavoidably. Therefore, “does not inevitably result in” is equivalent to “does not necessarily result in.”"}, {"q": "Which of the following is NOT mentioned in the passage as a possible consequence of rapid urban growth?", "opts": [["Pressure on waste-management systems", false], ["Rising housing costs", false], ["Loss of natural habitats", false], ["A decline in educational opportunities", true]], "exp": "The passage mentions waste-management pressure, rising property prices, and loss of natural habitats. It does not mention declining educational opportunities as a consequence."}, {"q": "Which of the following can be inferred from paragraph 4?", "opts": [["Expanding cities horizontally is the only effective way to accommodate population growth.", false], ["Urban population density can be environmentally sustainable if cities are appropriately designed.", true], ["Environmental degradation occurs mainly in cities with efficient public transportation.", false], ["Reducing urban populations is necessary to lower greenhouse gas emissions.", false]], "exp": "The paragraph says high density does not necessarily cause environmental degradation and gives examples of compact development, efficient transport, energy-efficient buildings, and green spaces."}, {"q": "Which of the following best describes the author's view of urbanization?", "opts": [["Urbanization should be discouraged because its environmental costs always exceed its economic benefits.", false], ["Urbanization is largely beneficial, so governments should interfere as little as possible with city growth.", false], ["The effects of urbanization are shaped substantially by how effectively cities plan and manage their growth.", true], ["The problems associated with urbanization are temporary and will disappear as cities become wealthier.", false]], "exp": "The final paragraph states that urbanization is not inherently beneficial or harmful; its outcomes depend largely on how societies manage and shape city growth."}, {"q": "Which of the following best summarizes the passage?", "opts": [["Although urbanization can promote economic efficiency, innovation, and access to services, poorly managed growth may intensify inequality, infrastructure pressure, and environmental damage, making effective long-term planning essential.", true], ["Urbanization primarily occurs because rural residents seek higher incomes, but its economic benefits are generally outweighed by housing shortages and environmental destruction.", false], ["Rapid city growth creates serious social and environmental problems that can only be addressed by limiting migration from rural areas and reducing urban population density.", false], ["Modern cities have become economically successful because population concentration automatically improves public services, housing affordability, and environmental sustainability.", false]], "exp": "This option captures the whole structure of the passage: benefits, social and infrastructure challenges, environmental impacts, and the need for effective long-term planning."}];
+let qs=[],i=0,lives=5,score=0,answered=false;
+const letters=["A","B","C","D"];
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const y=Math.floor(Math.random()*(x+1));
+    [a[x],a[y]]=[a[y],a[x]];
+  }
+  return a;
+}
+
+function prepare(){
+  qs=base.map(x=>({
+    q:x.q,
+    exp:x.exp,
+    opts:shuffle(x.opts.map(o=>({text:o[0],correct:o[1]})))
+  }));
+}
+
+function updateHearts(){
+  hearts.textContent="❤️".repeat(lives)+"🖤".repeat(5-lives);
+}
+
+function render(){
+  answered=false;
+  next.disabled=true;
+  feedback.className="";
+  feedback.textContent="Choose the best answer.";
+  qnum.textContent=`${i+1}/10`;
+  qtag.textContent=`Question ${i+1}`;
+  qtext.textContent=qs[i].q;
+  answers.innerHTML="";
+
+  qs[i].opts.forEach((o,j)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<b>${letters[j]}.</b> ${o.text}`;
+    b.onclick=()=>choose(b,o);
+    answers.appendChild(b);
+  });
+}
+
+function choose(btn,opt){
+  if(answered||btn.disabled)return;
+
+  if(opt.correct){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    [...answers.children].forEach(b=>b.disabled=true);
+    feedback.className="good";
+    feedback.innerHTML=`✅ <b>Correct!</b><br>${qs[i].exp}`;
+    next.disabled=false;
+  }else{
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    feedback.className="bad";
+    feedback.textContent="❌ Incorrect. Try again.";
+
+    if(lives<=0){
+      over.classList.remove("hide");
+    }
+  }
+}
+
+next.onclick=()=>{
+  if(!answered)return;
+  if(i<9){
+    i++;
+    render();
+  }else{
+    final.textContent=score;
+    done.classList.remove("hide");
+  }
+};
+
+function restart(){
+  i=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  over.classList.add("hide");
+  done.classList.add("hide");
+  prepare();
+  updateHearts();
+  render();
+}
+
+prepare();
+updateHearts();
+render();
+</script>
+</body>
+</html>

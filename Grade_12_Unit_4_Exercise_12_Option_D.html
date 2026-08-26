@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 4 - Exercise 12 - Option D</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg1:#07131c;
+  --bg2:#15202a;
+  --panel:#0e1b26;
+  --panel2:#152737;
+  --lav:#66e3ff;
+  --rose:#ffb35c;
+  --mint:#8df0d0;
+  --text:#f4fbff;
+  --muted:#bdced8;
+  --good:#5ce0a7;
+  --bad:#ff6f7d;
+}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:22px;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 14% 18%,rgba(102,227,255,.16),transparent 24%),
+    radial-gradient(circle at 88% 10%,rgba(255,179,92,.15),transparent 22%),
+    radial-gradient(circle at 80% 84%,rgba(141,240,208,.11),transparent 25%),
+    linear-gradient(145deg,#06111a,#0c1b27 52%,#18232d);
+}
+.shell{
+  max-width:1180px;
+  margin:auto;
+  border-radius:30px;
+  overflow:hidden;
+  background:rgba(7,20,30,.97);
+  border:1px solid rgba(102,227,255,.2);
+  box-shadow:0 25px 80px rgba(0,0,0,.55),0 0 70px rgba(102,227,255,.06);
+}
+header{
+  position:relative;
+  overflow:hidden;
+  padding:28px 30px;
+  background:linear-gradient(120deg,#0b4f6c,#126782 52%,#7a4b1e);
+}
+header:after{
+  content:"🏙️  🚇  ⚡  🚦  🌉";
+  position:absolute;
+  right:20px;
+  top:18px;
+  font-size:30px;
+  letter-spacing:10px;
+  opacity:.3;
+}
+header h1{position:relative;margin:0 0 8px;font-size:clamp(26px,4vw,38px);z-index:1}
+header p{position:relative;margin:5px 0;line-height:1.5;color:#eefaff;z-index:1}
+.status{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:14px 24px;
+  background:#081722;
+  border-bottom:1px solid #203846;
+}
+.pill{
+  background:#102430;
+  border:1px solid #294555;
+  border-radius:999px;
+  padding:8px 13px;
+  font-weight:800;
+}
+.main{
+  display:grid;
+  grid-template-columns:1.14fr .86fr;
+  gap:18px;
+  padding:20px;
+}
+.panel{
+  background:linear-gradient(180deg,#0d1d28,#091720);
+  border:1px solid #284251;
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(0,0,0,.26);
+}
+.passage{
+  padding:22px;
+  max-height:73vh;
+  overflow:auto;
+  line-height:1.72;
+  font-size:16px;
+}
+.passage h2{margin-top:0;color:var(--mint)}
+.passage p{margin:0 0 16px;color:#e9f4f8}
+.passage u{
+  text-decoration-color:var(--rose);
+  text-decoration-thickness:2px;
+  text-underline-offset:3px
+}
+.passage b{color:#ffd9ee}
+.question{
+  padding:22px;
+  position:sticky;
+  top:16px;
+  align-self:start;
+  background:linear-gradient(180deg,#102430,#0d1b25);
+}
+.qtag{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:999px;
+  font-weight:900;
+  color:#07141d;
+  background:linear-gradient(90deg,var(--lav),var(--rose));
+}
+#qtext{
+  font-size:20px;
+  font-weight:800;
+  line-height:1.45;
+  margin:16px 0;
+}
+#answers{display:grid;gap:11px}
+.answer{
+  text-align:left;
+  border:1.5px solid #3a3b52;
+  background:#102733;
+  color:#f3fbff;
+  border-radius:14px;
+  padding:13px 14px;
+  font-size:15px;
+  line-height:1.42;
+  cursor:pointer;
+  transition:.18s ease;
+}
+.answer:hover:not(:disabled){
+  transform:translateY(-1px);
+  border-color:var(--lav);
+  background:#163444;
+  box-shadow:0 0 0 3px rgba(202,168,255,.05)
+}
+.answer.correct{background:#123126;border-color:var(--good)}
+.answer.wrong{background:#351623;border-color:var(--bad)}
+#feedback{
+  min-height:68px;
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#0a1c27;
+  color:var(--muted);
+  line-height:1.45;
+  border:1px solid #294552;
+}
+#feedback.good{background:#10291f;color:#d2ffe8;border-color:#2f7a58}
+#feedback.bad{background:#35141f;color:#ffd8e1;border-color:#8b334c}
+.nextwrap{display:flex;justify-content:flex-end;margin-top:14px}
+#next{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#07141d;
+  background:linear-gradient(90deg,var(--lav),var(--mint));
+}
+#next:disabled{opacity:.38;cursor:not-allowed}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(3,12,18,.86);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
+  padding:20px;
+  backdrop-filter:blur(8px);
+}
+.hide{display:none}
+.modal{
+  width:min(500px,94vw);
+  background:#0d202b;
+  border:1px solid #315362;
+  border-radius:24px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 25px 80px rgba(0,0,0,.5);
+}
+.modal button{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#07141d;
+  background:linear-gradient(90deg,var(--lav),var(--mint));
+}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-thumb{background:#2e6075;border-radius:10px}
+::-webkit-scrollbar-track{background:#121320}
+@media(max-width:850px){
+  .main{grid-template-columns:1fr}
+  .question{position:static}
+  .passage{max-height:none}
+}
+@media(max-width:560px){
+  body{padding:10px}
+  header{padding:22px 18px}
+  header:after{font-size:22px;right:6px;top:8px}
+  .main{padding:12px}
+  .passage,.question{padding:17px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<h1>🗺️ Grade 12 - Unit 4 - Exercise 12 - Option D</h1>
+<p><b>Urban Planning Command Center</b></p>
+<p>Navigate the modern city and choose the best answer A, B, C, or D for Questions 1–10.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Question: <span id="qnum">1/10</span></span>
+<span class="pill">Score: <span id="score">0</span>/10</span>
+</div>
+<div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="main">
+<div class="panel passage">
+<h2>Ha Noi’s Urban Transformation: Opportunity and Strain</h2>
+<p>For much of the twentieth century, Ha Noi remained comparatively compact, with residential, commercial, and administrative activities concentrated around its historic core. Streets were narrower, buildings were generally low-rise, and daily travel distances were relatively short. Many residents relied on bicycles, walking, buses, and, for several decades, trams. The slower pace of expansion meant that the distinction between urban neighborhoods and surrounding rural settlements remained relatively clear.</p>
+
+<p><b>[I]</b> This pattern began to change rapidly as population growth accelerated and economic activity spread beyond the traditional center. <b>[II]</b> Villages once located on the urban fringe were gradually incorporated into the expanding city, while farmland was converted into housing developments, roads, industrial areas, and commercial districts. <b>[III]</b> The physical expansion of Ha Noi was therefore accompanied by a significant restructuring of how land was used and how people moved through the city. <b>[IV]</b> What had once been a relatively compact urban area increasingly became a complex metropolitan region composed of multiple residential and employment centers.</p>
+
+<p>This transformation has brought substantial benefits. New roads and bridges have improved connections between districts, while high-rise housing has increased the number of people who can live within the urban area. Public transportation has also received greater investment, including expanded bus networks and urban railway projects intended to provide alternatives to private vehicles. At the same time, new commercial and industrial zones have created employment opportunities outside the historic center. <u>Yet these improvements have not eliminated the difficulties associated with rapid urban growth; in some cases, they have simply changed their form.</u></p>
+
+<p>One example is transportation. As residential districts spread farther from major employment centers, many workers now travel considerably greater distances each day. Although road construction can increase capacity in the short term, improved roads may encourage more people to use private vehicles, eventually restoring congestion. Similarly, expanding public transport does not guarantee that all residents will benefit equally if stations and routes do not connect effectively with where people live and work. Accessibility, therefore, depends not only on the existence of infrastructure but also on how well different parts of the transport system are integrated.</p>
+
+<p>Housing presents a similar contradiction. Large apartment developments can increase overall housing supply, but they do not necessarily make accommodation affordable for lower-income households. In some cases, rising land values around newly developed areas may actually push prices beyond the reach of residents with modest incomes. Those who move farther from the city center in search of cheaper housing may then face higher commuting costs and longer travel times. Thus, a policy that appears to solve one urban problem may unintentionally create another.</p>
+
+<p>Environmental pressures further complicate Ha Noi's transformation. The replacement of farmland and open space with buildings and roads can reduce natural drainage and increase the risk of local flooding. Rising vehicle use contributes to air pollution, while construction and higher energy demand add to the city's environmental footprint. Nevertheless, these outcomes are not unavoidable. Compact development, efficient public transportation, green infrastructure, and better coordination between land-use and transport planning can reduce some of the negative consequences of continued growth.</p>
+
+<p>The central challenge, therefore, is not whether Ha Noi should continue to develop, but how that development should be managed. Urban growth can expand economic opportunity and improve access to services, but without coordinated planning, its benefits may remain uneven and its costs may fall disproportionately on those least able to absorb them. Ha Noi's future success will depend on whether policymakers can move from reacting to individual problems toward designing an urban system in which housing, transport, employment, and environmental protection are planned together.</p>
+</div>
+
+<div class="panel question">
+<div class="qtag" id="qtag">Question 1</div>
+<div id="qtext"></div>
+<div id="answers"></div>
+<div id="feedback">Choose the best answer.</div>
+<div class="nextwrap"><button id="next" disabled>Next ➜</button></div>
+</div>
+</div>
+</div>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Out of hearts!</h1>
+<p>You have used all 5 hearts. Restart the mission and try again.</p>
+<button onclick="restart()">↻ Try Again</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>🗺️ City Challenge Completed!</h1>
+<p>You completed the Urbanization challenge.</p>
+<h2>Final score: <span id="final">0</span>/10</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const base=[{"q":"Where in paragraph 2 does the following sentence best fit? “Expansion was no longer simply outward; it also altered the internal structure of the city.”","opts":[["[I]",false],["[II]",false],["[III]",true],["[IV]",false]],"exp":"[III] is best: the previous sentence describes outward expansion, while the following sentence explains the restructuring of land use and movement."},{"q":"The word “incorporated” in paragraph 2 is closest in meaning to _________.","opts":[["separated from",false],["absorbed into",true],["restored to",false],["protected from",false]],"exp":"“Incorporated into” means included or absorbed as part of something larger."},{"q":"Which of the following best paraphrases the underlined sentence in paragraph 3?","opts":[["Infrastructure improvements have solved most urban problems, although a few minor difficulties remain.",false],["Some problems caused by urban growth may persist in different forms even after cities invest in better infrastructure.",true],["Rapid urban growth creates new problems only when governments fail to invest in roads and public transport.",false],["Urban difficulties become less serious once development spreads beyond the historic center.",false]],"exp":"The sentence says improvements may not remove urban difficulties; instead, the same difficulties may continue in a different form."},{"q":"According to paragraph 4, why may road expansion fail to solve congestion permanently?","opts":[["Improved roads may attract additional private-vehicle use.",true],["Most residents refuse to use roads outside the city center.",false],["New roads usually reduce the capacity of public transport.",false],["Road construction causes employment centers to move farther away.",false]],"exp":"The passage says better roads may encourage more private-vehicle use, causing congestion to return."},{"q":"The word “they” in paragraph 4 refers to _________.","opts":[["residents",false],["stations and routes",true],["public transport systems",false],["employment centers",false]],"exp":"The logical subject doing the connecting is “stations and routes.”"},{"q":"What can be inferred from paragraph 5?","opts":[["Increasing housing supply automatically lowers prices for all income groups.",false],["Cheaper housing located farther from employment centers may involve hidden financial and time costs.",true],["High-rise apartment construction mainly benefits residents who already own private vehicles.",false],["Rising land values generally make central housing more affordable for low-income families.",false]],"exp":"Cheaper housing farther away can lead to higher commuting costs and longer travel times."},{"q":"The phrase “a policy that appears to solve one urban problem may unintentionally create another” mainly suggests that _________.","opts":[["urban policies often fail because residents resist change",false],["isolated solutions may produce unintended consequences elsewhere",true],["governments should avoid intervening in urban development",false],["housing problems are more difficult to solve than transport problems",false]],"exp":"A solution to one problem can create a new problem elsewhere if policies are not coordinated."},{"q":"Which of the following is NOT mentioned as a possible environmental consequence of Ha Noi's urban expansion?","opts":[["Reduced natural drainage",false],["Greater air pollution",false],["Increased energy demand",false],["Declining access to clean drinking water",true]],"exp":"The passage mentions drainage, air pollution and energy demand, but not access to clean drinking water."},{"q":"Which of the following can be inferred from the final paragraph?","opts":[["Urban growth should be slowed until all existing problems are solved.",false],["The main purpose of urban planning is to prevent lower-income residents from moving to outer districts.",false],["Coordinating different areas of policy may be more effective than dealing with each urban problem separately.",true],["Economic growth will eventually remove social inequality without government intervention.",false]],"exp":"The final paragraph argues for planning housing, transport, employment and environmental protection together."},{"q":"Which of the following best summarizes the passage?","opts":[["Ha Noi's urban expansion has improved infrastructure and employment, but because growth can shift rather than eliminate problems, coordinated planning is needed to balance accessibility, affordability, and environmental sustainability.",true],["Ha Noi's transformation has mainly resulted from the replacement of rural villages by high-rise housing and improved roads, which have largely solved transport and housing shortages.",false],["Although rapid urbanization creates environmental pressure, continued road construction and outward expansion remain the most effective ways to support future population growth.",false],["Ha Noi's major urban challenges are primarily caused by population growth, so limiting migration into the city would be the most practical long-term solution.",false]],"exp":"This option captures the benefits, the shifting forms of urban problems, and the need for coordinated planning across major policy areas."}];
+let qs=[],i=0,lives=5,score=0,answered=false;
+const letters=["A","B","C","D"];
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const y=Math.floor(Math.random()*(x+1));
+    [a[x],a[y]]=[a[y],a[x]];
+  }
+  return a;
+}
+
+function prepare(){
+  qs=base.map(x=>({
+    q:x.q,
+    exp:x.exp,
+    opts:shuffle(x.opts.map(o=>({text:o[0],correct:o[1]})))
+  }));
+}
+
+function updateHearts(){
+  hearts.textContent="❤️".repeat(lives)+"🖤".repeat(5-lives);
+}
+
+function render(){
+  answered=false;
+  next.disabled=true;
+  feedback.className="";
+  feedback.textContent="Choose the best answer.";
+  qnum.textContent=`${i+1}/10`;
+  qtag.textContent=`Question ${i+1}`;
+  qtext.textContent=qs[i].q;
+  answers.innerHTML="";
+
+  qs[i].opts.forEach((o,j)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<b>${letters[j]}.</b> ${o.text}`;
+    b.onclick=()=>choose(b,o);
+    answers.appendChild(b);
+  });
+}
+
+function choose(btn,opt){
+  if(answered||btn.disabled)return;
+
+  if(opt.correct){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    [...answers.children].forEach(b=>b.disabled=true);
+    feedback.className="good";
+    feedback.innerHTML=`✅ <b>Correct!</b><br>${qs[i].exp}`;
+    next.disabled=false;
+  }else{
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    feedback.className="bad";
+    feedback.textContent="❌ Incorrect. Try again.";
+
+    if(lives<=0){
+      over.classList.remove("hide");
+    }
+  }
+}
+
+next.onclick=()=>{
+  if(!answered)return;
+  if(i<9){
+    i++;
+    render();
+  }else{
+    final.textContent=score;
+    done.classList.remove("hide");
+  }
+};
+
+function restart(){
+  i=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  over.classList.add("hide");
+  done.classList.add("hide");
+  prepare();
+  updateHearts();
+  render();
+}
+
+prepare();
+updateHearts();
+render();
+</script>
+</body>
+</html>

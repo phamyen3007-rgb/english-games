@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 4 - Exercise 10 - Option C</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg1:#0f1020;
+  --bg2:#1a0f24;
+  --panel:#171827;
+  --panel2:#21172b;
+  --lav:#caa8ff;
+  --rose:#ff9dcf;
+  --mint:#9ef0cc;
+  --text:#f8f5ff;
+  --muted:#cfc6dc;
+  --good:#62d79c;
+  --bad:#ff7f9a;
+}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:22px;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 12% 18%,rgba(202,168,255,.18),transparent 24%),
+    radial-gradient(circle at 88% 12%,rgba(255,157,207,.14),transparent 22%),
+    radial-gradient(circle at 80% 84%,rgba(158,240,204,.12),transparent 25%),
+    linear-gradient(145deg,#0b0c18,#16101f 52%,#1e1022);
+}
+.shell{
+  max-width:1180px;
+  margin:auto;
+  border-radius:30px;
+  overflow:hidden;
+  background:rgba(16,17,30,.96);
+  border:1px solid rgba(202,168,255,.2);
+  box-shadow:0 25px 80px rgba(0,0,0,.52),0 0 60px rgba(202,168,255,.05);
+}
+header{
+  position:relative;
+  overflow:hidden;
+  padding:28px 30px;
+  background:linear-gradient(120deg,#3a2456,#5d315f 50%,#29534f);
+}
+header:after{
+  content:"🦋  ✨  🌿  ✨  🐝";
+  position:absolute;
+  right:20px;
+  top:18px;
+  font-size:30px;
+  letter-spacing:10px;
+  opacity:.3;
+}
+header h1{position:relative;margin:0 0 8px;font-size:clamp(26px,4vw,38px);z-index:1}
+header p{position:relative;margin:5px 0;line-height:1.5;color:#f6efff;z-index:1}
+.status{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:14px 24px;
+  background:#121421;
+  border-bottom:1px solid #2b2940;
+}
+.pill{
+  background:#1a1d2e;
+  border:1px solid #35364c;
+  border-radius:999px;
+  padding:8px 13px;
+  font-weight:800;
+}
+.main{
+  display:grid;
+  grid-template-columns:1.14fr .86fr;
+  gap:18px;
+  padding:20px;
+}
+.panel{
+  background:linear-gradient(180deg,#171927,#131521);
+  border:1px solid #34364a;
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(0,0,0,.26);
+}
+.passage{
+  padding:22px;
+  max-height:73vh;
+  overflow:auto;
+  line-height:1.72;
+  font-size:16px;
+}
+.passage h2{margin-top:0;color:var(--mint)}
+.passage p{margin:0 0 16px;color:#eee9f5}
+.passage u{
+  text-decoration-color:var(--rose);
+  text-decoration-thickness:2px;
+  text-underline-offset:3px
+}
+.passage b{color:#ffd9ee}
+.question{
+  padding:22px;
+  position:sticky;
+  top:16px;
+  align-self:start;
+  background:linear-gradient(180deg,#1b1b2b,#171520);
+}
+.qtag{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:999px;
+  font-weight:900;
+  color:#17111f;
+  background:linear-gradient(90deg,var(--lav),var(--rose));
+}
+#qtext{
+  font-size:20px;
+  font-weight:800;
+  line-height:1.45;
+  margin:16px 0;
+}
+#answers{display:grid;gap:11px}
+.answer{
+  text-align:left;
+  border:1.5px solid #3a3b52;
+  background:#1d1f31;
+  color:#f7f4fb;
+  border-radius:14px;
+  padding:13px 14px;
+  font-size:15px;
+  line-height:1.42;
+  cursor:pointer;
+  transition:.18s ease;
+}
+.answer:hover:not(:disabled){
+  transform:translateY(-1px);
+  border-color:var(--lav);
+  background:#252039;
+  box-shadow:0 0 0 3px rgba(202,168,255,.05)
+}
+.answer.correct{background:#123126;border-color:var(--good)}
+.answer.wrong{background:#351623;border-color:var(--bad)}
+#feedback{
+  min-height:68px;
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#121522;
+  color:var(--muted);
+  line-height:1.45;
+  border:1px solid #303248;
+}
+#feedback.good{background:#10291f;color:#d2ffe8;border-color:#2f7a58}
+#feedback.bad{background:#35141f;color:#ffd8e1;border-color:#8b334c}
+.nextwrap{display:flex;justify-content:flex-end;margin-top:14px}
+#next{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#18111d;
+  background:linear-gradient(90deg,var(--lav),var(--mint));
+}
+#next:disabled{opacity:.38;cursor:not-allowed}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(8,8,18,.82);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
+  padding:20px;
+  backdrop-filter:blur(8px);
+}
+.hide{display:none}
+.modal{
+  width:min(500px,94vw);
+  background:#181927;
+  border:1px solid #3b3c52;
+  border-radius:24px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 25px 80px rgba(0,0,0,.5);
+}
+.modal button{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#18111d;
+  background:linear-gradient(90deg,var(--lav),var(--mint));
+}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-thumb{background:#5d4b74;border-radius:10px}
+::-webkit-scrollbar-track{background:#121320}
+@media(max-width:850px){
+  .main{grid-template-columns:1fr}
+  .question{position:static}
+  .passage{max-height:none}
+}
+@media(max-width:560px){
+  body{padding:10px}
+  header{padding:22px 18px}
+  header:after{font-size:22px;right:6px;top:8px}
+  .main{padding:12px}
+  .passage,.question{padding:17px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<h1>🦋 Grade 12 - Unit 4 - Exercise 10 - Option C</h1>
+<p><b>Moonlit Pollinator Network</b></p>
+<p>Read the passage and choose the best answer A, B, C, or D for Questions 1–8.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Question: <span id="qnum">1/8</span></span>
+<span class="pill">Score: <span id="score">0</span>/8</span>
+</div>
+<div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="main">
+<div class="panel passage">
+<h2>Bees, Connectivity, and Ecological Resilience</h2>
+<p>Bees are frequently valued for their contribution to agriculture, but their ecological significance extends considerably further. Most flowering plants depend to some degree on animals to transfer pollen, and bees are among the most efficient of these pollinators. Their activity enables plants to reproduce, thereby sustaining the fruits, seeds, and vegetation on which numerous other organisms rely. Consequently, a decline in bee populations may trigger effects throughout an ecosystem rather than merely reducing the productivity of particular crops. This interdependence means that changes affecting pollinators can eventually influence species that have no direct interaction with bees.</p>
+
+<p>One reason bee decline is difficult to address is that it rarely has a single cause. Habitat fragmentation reduces both nesting sites and the variety of flowers available to bees, while intensive agriculture may expose them to pesticides over extended periods. Climate change adds another layer of complexity. Rising temperatures can cause some plants to flower earlier, whereas the seasonal activity of their pollinators may not shift at the same rate. <u>The resulting mismatch can disrupt relationships that have developed between plants and pollinators over long periods of time.</u> Individually, these pressures may not always prove fatal, but their combined effects can substantially reduce a bee population's ability to recover from environmental disturbance.</p>
+
+<p>Conservation strategies have traditionally focused on increasing the quantity of bee-friendly habitat. Yet researchers increasingly emphasize that habitat <b>quality and connectivity</b> are equally important. A small garden filled with suitable native plants may provide food, but if it is isolated from other habitats, bees may struggle to move between feeding and nesting areas. For this reason, some urban planners are developing networks of green spaces that function as ecological corridors. Parks, roadside vegetation, gardens, and green roofs can collectively create routes through which pollinators move across otherwise heavily developed landscapes.</p>
+
+<p>Nevertheless, creating habitat does not automatically guarantee successful conservation. Poorly selected flowering plants may provide little nutritional value, and some ornamental varieties produce almost no accessible pollen or nectar. Similarly, reducing pesticide use in one location may have limited benefits if nearby areas remain heavily treated. These examples illustrate why conservation measures need to be evaluated according to ecological outcomes rather than simply by the number of projects implemented. In other words, an initiative that appears environmentally friendly may accomplish relatively little if it fails to address the conditions that pollinators actually require.</p>
+
+<p>The challenge, therefore, is not simply to persuade more people to “save the bees.” Effective conservation requires an understanding of how agricultural practices, urban development, climate patterns, and individual behaviour interact. It also requires long-term monitoring because the success of an intervention may not become apparent immediately. Protecting pollinators is thus less a matter of finding a single solution than of coordinating multiple strategies across different environments. Such an approach may be demanding, but it is essential if pollination systems are to remain resilient in the face of continuing environmental change.</p>
+</div>
+
+<div class="panel question">
+<div class="qtag" id="qtag">Question 1</div>
+<div id="qtext"></div>
+<div id="answers"></div>
+<div id="feedback">Choose the best answer.</div>
+<div class="nextwrap"><button id="next" disabled>Next ➜</button></div>
+</div>
+</div>
+</div>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Out of hearts!</h1>
+<p>You have used all 5 hearts. Restart the mission and try again.</p>
+<button onclick="restart()">↻ Try Again</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>✨ Network Restored!</h1>
+<p>You completed the Moonlit Pollinator Network challenge.</p>
+<h2>Final score: <span id="final">0</span>/8</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const base=[{"q": "Which of the following is NOT mentioned in paragraph 1 as part of the wider ecological significance of bees?", "opts": [["They enable flowering plants to reproduce.", false], ["They indirectly support organisms dependent on plants.", false], ["Their decline may have consequences beyond agricultural production.", false], ["They allow plant species to adapt genetically to environmental change.", true]], "exp": "Đoạn 1 không nói ong giúp thực vật genetically adapt với môi trường."}, {"q": "The word “resilient” in paragraph 5 is OPPOSITE in meaning to ______.", "opts": [["vulnerable", true], ["adaptable", false], ["persistent", false], ["resistant", false]], "exp": "“Resilient” = có khả năng phục hồi/chống chịu; trái nghĩa gần nhất là “vulnerable” = dễ bị tổn thương."}, {"q": "The phrase “The resulting mismatch” in paragraph 2 refers to ______.", "opts": [["the difference between the rate at which bee and plant populations decline", false], ["the failure of agricultural practices to adapt to rising temperatures", false], ["the lack of synchronization between plant flowering and pollinator activity", true], ["the imbalance between the availability of nesting sites and flowering plants", false]], "exp": "Cây có thể flower earlier nhưng hoạt động của ong không thay đổi cùng tốc độ, nên hai thời điểm không còn đồng bộ."}, {"q": "The word “connectivity” in paragraph 3 is closest in meaning to ______.", "opts": [["the degree to which separate habitats are linked to one another", true], ["the amount of vegetation contained within an individual habitat", false], ["the ability of plants to survive in heavily developed environments", false], ["the diversity of pollinator species occupying the same location", false]], "exp": "“Connectivity” = mức độ các môi trường sống được kết nối với nhau."}, {"q": "Which of the following best paraphrases the underlined sentence in paragraph 2?", "opts": [["Changes in seasonal timing may interfere with long-established interactions between plants and their pollinators.", true], ["Plants and bees have gradually learned to overcome differences in their responses to climate change.", false], ["Long-term relationships between plants and bees prevent seasonal changes from affecting pollination.", false], ["Pollinators are increasingly adapting their periods of activity to match earlier flowering seasons.", false]], "exp": "Mismatch về thời gian có thể làm gián đoạn các mối quan hệ lâu đời giữa cây và loài thụ phấn."}, {"q": "Which of the following can be inferred from paragraphs 3 and 4?", "opts": [["Increasing the total area of green space will always be more effective than improving existing habitats.", false], ["Conservation projects should be judged by whether they meet pollinators' ecological needs rather than by their appearance or number.", true], ["Native plants can support bees effectively even when suitable habitats are completely isolated from one another.", false], ["Urban environments cannot contribute substantially to bee conservation because habitats are naturally fragmented.", false]], "exp": "Nhiều dự án hoặc nhiều mảng xanh chưa chắc hiệu quả; quan trọng là đáp ứng đúng nhu cầu sinh thái của ong."}, {"q": "In which paragraph does the writer challenge the assumption that a conservation action is effective simply because it appears environmentally beneficial?", "opts": [["Paragraph 2", false], ["Paragraph 3", false], ["Paragraph 4", true], ["Paragraph 5", false]], "exp": "Đoạn 4 nói một sáng kiến trông environmentally friendly vẫn có thể accomplish relatively little."}, {"q": "Which of the following best summarises the passage?", "opts": [["Bee decline is primarily caused by climate change, so conservation should concentrate on helping pollinators adjust to changing flowering seasons.", false], ["Creating more urban green spaces is the most effective way to reverse bee decline because habitat loss represents the greatest threat to pollinators.", false], ["Because bee decline results from interacting environmental pressures, effective conservation requires connected, appropriate habitats and coordinated, long-term strategies rather than isolated actions.", true], ["Protecting bees mainly depends on reducing pesticide use and persuading individuals to plant more native flowers in their gardens.", false]], "exp": "Ý toàn bài: nhiều nguyên nhân tương tác với nhau, nên cần habitat phù hợp, kết nối và nhiều chiến lược phối hợp lâu dài."}];
+let qs=[],i=0,lives=5,score=0,answered=false;
+const letters=["A","B","C","D"];
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const y=Math.floor(Math.random()*(x+1));
+    [a[x],a[y]]=[a[y],a[x]];
+  }
+  return a;
+}
+
+function prepare(){
+  qs=base.map(x=>({
+    q:x.q,
+    exp:x.exp,
+    opts:shuffle(x.opts.map(o=>({text:o[0],correct:o[1]})))
+  }));
+}
+
+function updateHearts(){
+  hearts.textContent="❤️".repeat(lives)+"🖤".repeat(5-lives);
+}
+
+function render(){
+  answered=false;
+  next.disabled=true;
+  feedback.className="";
+  feedback.textContent="Choose the best answer.";
+  qnum.textContent=`${i+1}/8`;
+  qtag.textContent=`Question ${i+1}`;
+  qtext.textContent=qs[i].q;
+  answers.innerHTML="";
+
+  qs[i].opts.forEach((o,j)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<b>${letters[j]}.</b> ${o.text}`;
+    b.onclick=()=>choose(b,o);
+    answers.appendChild(b);
+  });
+}
+
+function choose(btn,opt){
+  if(answered||btn.disabled)return;
+
+  if(opt.correct){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    [...answers.children].forEach(b=>b.disabled=true);
+    feedback.className="good";
+    feedback.innerHTML=`✅ <b>Correct!</b><br>${qs[i].exp}`;
+    next.disabled=false;
+  }else{
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    feedback.className="bad";
+    feedback.textContent="❌ Incorrect. Try again.";
+
+    if(lives<=0){
+      over.classList.remove("hide");
+    }
+  }
+}
+
+next.onclick=()=>{
+  if(!answered)return;
+  if(i<7){
+    i++;
+    render();
+  }else{
+    final.textContent=score;
+    done.classList.remove("hide");
+  }
+};
+
+function restart(){
+  i=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  over.classList.add("hide");
+  done.classList.add("hide");
+  prepare();
+  updateHearts();
+  render();
+}
+
+prepare();
+updateHearts();
+render();
+</script>
+</body>
+</html>
