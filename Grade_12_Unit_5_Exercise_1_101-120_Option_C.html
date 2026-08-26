@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 5 - Exercise 1 (101-120) - Option C</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --cream:#fffaf3;
+  --pink:#ffd7e7;
+  --pink2:#ffb8d1;
+  --mint:#dff8ec;
+  --mint2:#9ee7c5;
+  --sky:#dff3ff;
+  --sky2:#9fdcff;
+  --lav:#eee3ff;
+  --lav2:#c8b5ff;
+  --text:#51394d;
+  --muted:#7b6879;
+  --good:#50b98a;
+  --bad:#e96d87;
+}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:22px;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 12% 18%,rgba(255,184,209,.45),transparent 24%),
+    radial-gradient(circle at 88% 14%,rgba(159,220,255,.42),transparent 24%),
+    radial-gradient(circle at 75% 88%,rgba(158,231,197,.35),transparent 26%),
+    linear-gradient(145deg,#fffaf3,#fff1f6 52%,#effcff);
+}
+.shell{
+  max-width:1180px;
+  margin:auto;
+  border-radius:30px;
+  overflow:hidden;
+  background:rgba(255,255,255,.88);
+  border:1px solid rgba(255,184,209,.55);
+  box-shadow:0 24px 70px rgba(120,80,110,.16);
+}
+header{
+  position:relative;
+  overflow:hidden;
+  padding:28px 30px;
+  background:linear-gradient(120deg,#ffc9dc,#dff3ff 52%,#dff8ec);
+}
+header:after{
+  content:"🌸  🧁  ☕  💼  🎀";
+  position:absolute;
+  right:20px;
+  top:18px;
+  font-size:30px;
+  letter-spacing:10px;
+  opacity:.55;
+}
+header h1{
+  position:relative;
+  margin:0 0 8px;
+  font-size:clamp(26px,4vw,38px);
+  z-index:1;
+  color:#5b4158;
+}
+header p{
+  position:relative;
+  margin:5px 0;
+  line-height:1.5;
+  color:#6d5267;
+  z-index:1;
+}
+.status{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:14px 24px;
+  background:#fffafd;
+  border-bottom:1px solid #f4dbe5;
+}
+.pill{
+  background:#fff;
+  border:1px solid #f2d7e2;
+  border-radius:999px;
+  padding:8px 13px;
+  font-weight:800;
+  box-shadow:0 6px 16px rgba(120,80,110,.06);
+}
+.main{
+  display:grid;
+  grid-template-columns:.72fr 1.28fr;
+  gap:18px;
+  padding:20px;
+}
+.panel{
+  background:linear-gradient(180deg,#ffffff,#fffafd);
+  border:1px solid #f1dce5;
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(120,80,110,.08);
+}
+.mission{
+  padding:22px;
+  line-height:1.7;
+  font-size:16px;
+}
+.mission h2{margin-top:0;color:#d66f9d}
+.mission p{color:#6f5a6c}
+.question{
+  padding:22px;
+  position:sticky;
+  top:16px;
+  align-self:start;
+  background:linear-gradient(180deg,#fffafd,#fff4f8);
+}
+.qtag{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:999px;
+  font-weight:900;
+  color:#5d4052;
+  background:linear-gradient(90deg,var(--pink),var(--sky),var(--mint));
+}
+#qtext{
+  font-size:20px;
+  font-weight:800;
+  line-height:1.45;
+  margin:16px 0;
+}
+#answers{display:grid;gap:11px}
+.answer{
+  text-align:left;
+  border:1.5px solid #ead8e2;
+  background:#fff;
+  color:#574553;
+  border-radius:14px;
+  padding:13px 14px;
+  font-size:15px;
+  line-height:1.42;
+  cursor:pointer;
+  transition:.18s ease;
+  box-shadow:0 6px 14px rgba(120,80,110,.04);
+}
+.answer:hover:not(:disabled){
+  transform:translateY(-1px);
+  border-color:var(--pink2);
+  background:#fff8fb;
+}
+.answer.correct{
+  background:#ecfff6;
+  border-color:var(--good);
+}
+.answer.wrong{
+  background:#fff0f3;
+  border-color:var(--bad);
+}
+#feedback{
+  min-height:68px;
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#fff;
+  color:var(--muted);
+  line-height:1.45;
+  border:1px solid #eddbe4;
+}
+#feedback.good{
+  background:#effff7;
+  color:#2f7a5e;
+  border-color:#9eddbf;
+}
+#feedback.bad{
+  background:#fff1f4;
+  color:#b55268;
+  border-color:#efb1bf;
+}
+.nextwrap{display:flex;justify-content:flex-end;margin-top:14px}
+#next{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#5b4158;
+  background:linear-gradient(90deg,var(--pink),var(--sky),var(--mint));
+  box-shadow:0 8px 18px rgba(120,80,110,.1);
+}
+#next:disabled{opacity:.38;cursor:not-allowed}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(95,70,90,.26);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
+  padding:20px;
+  backdrop-filter:blur(8px);
+}
+.hide{display:none}
+.modal{
+  width:min(500px,94vw);
+  background:#fffafd;
+  border:1px solid #f1d6e2;
+  border-radius:24px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 25px 80px rgba(100,70,95,.2);
+}
+.modal button{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#5b4158;
+  background:linear-gradient(90deg,var(--pink),var(--sky),var(--mint));
+}
+@media(max-width:850px){
+  .main{grid-template-columns:1fr}
+  .question{position:static}
+}
+@media(max-width:560px){
+  body{padding:10px}
+  header{padding:22px 18px}
+  header:after{font-size:22px;right:6px;top:8px}
+  .main{padding:12px}
+  .mission,.question{padding:17px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<h1>🌸 Grade 12 - Unit 5 - Exercise 1 (101-120) - Option C</h1>
+<p><b>Pastel Career Café</b></p>
+<p>Choose the best answer A, B, C, or D to complete each sentence.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Order: <span id="qnum">1/15</span></span>
+<span class="pill">Stars: <span id="score">0</span>/15</span>
+</div>
+<div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="main">
+<div class="panel mission">
+<h2>🧁 Pastel Career Café</h2>
+<p>Welcome to the cutest workplace café! Each correct answer completes one sweet career order.</p>
+<p><b>Rules:</b> A wrong answer costs one heart. You cannot serve the next order until you choose the correct answer.</p>
+<p>🎀 Focus: workplace collocations, employment vocabulary, phrasal verbs, word choice, and grammar.</p>
+<p>☕ Finish all 15 orders before losing all five hearts.</p>
+</div>
+
+<div class="panel question">
+<div class="qtag" id="qtag">Order 1</div>
+<div id="qtext"></div>
+<div id="answers"></div>
+<div id="feedback">Choose the best answer.</div>
+<div class="nextwrap"><button id="next" disabled>Next Order ➜</button></div>
+</div>
+</div>
+</div>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Café Closed!</h1>
+<p>You have used all 5 hearts. Restart the café and try again.</p>
+<button onclick="restart()">↻ Reopen Café</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>🎉 All Orders Complete!</h1>
+<p>You completed the Pastel Career Café challenge.</p>
+<h2>Final score: <span id="final">0</span>/15</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const base=[{"q": "Employees who repeatedly work beyond their normal hours may eventually _________ from exhaustion and reduced productivity.", "opts": [["undergo", false], ["suffer", true], ["experience", false], ["endure", false]], "exp": "The natural structure is “suffer from + noun” = chịu đựng/bị ảnh hưởng bởi điều gì."}, {"q": "Many graduates are attracted to companies that offer a competitive salary together with a generous _________ package.", "opts": [["welfare", false], ["profit", false], ["benefit", true], ["allowance", false]], "exp": "The standard collocation is “benefit package” = gói phúc lợi."}, {"q": "Although the job is financially _________, it involves considerable pressure and frequent business trips.", "opts": [["rewarding", true], ["rewarded", false], ["worthwhile", false], ["profitable", false]], "exp": "“Financially rewarding” means providing good financial rewards or income."}, {"q": "Workers are expected to _________ themselves with the company's health and safety regulations before operating any machinery.", "opts": [["recognise", false], ["familiarise", true], ["introduce", false], ["identify", false]], "exp": "The fixed structure is “familiarise oneself with something.”"}, {"q": "The rapid expansion of online shopping has _________ a significant increase in employment opportunities in the delivery sector.", "opts": [["resulted from", false], ["accounted for", false], ["brought about", true], ["contributed", false]], "exp": "“Bring about” means cause something to happen."}, {"q": "Because the position involves dealing directly with dissatisfied customers, applicants need to be able to remain calm _________ pressure.", "opts": [["below", false], ["beneath", false], ["through", false], ["under", true]], "exp": "The fixed expression is “under pressure.”"}, {"q": "The company decided to _________ additional funds to employee training after several workplace accidents were reported.", "opts": [["allocate", true], ["distribute", false], ["contribute", false], ["assign", false]], "exp": "“Allocate funds to something” means assign money for a particular purpose."}, {"q": "Staff members who regularly _________ their performance targets may be considered for an annual bonus.", "opts": [["accomplish", false], ["fulfil", false], ["achieve with", false], ["exceed", true]], "exp": "“Exceed performance targets” means perform beyond the required targets."}, {"q": "The flexible schedule allows employees to _________ personal appointments without taking an entire day off work.", "opts": [["fit in", true], ["take over", false], ["put through", false], ["bring forward", false]], "exp": "“Fit in” means find time for something within an existing schedule."}, {"q": "Employers should take reasonable measures to _________ excessive workloads from affecting employees' physical and mental well-being.", "opts": [["avoid", false], ["prevent", true], ["protect", false], ["prohibit", false]], "exp": "The correct structure is “prevent something from V-ing.”"}, {"q": "A good reference from a former employer may _________ considerable weight when a company is deciding between equally qualified candidates.", "opts": [["make", false], ["bring", false], ["carry", true], ["hold", false]], "exp": "The collocation is “carry weight” = have influence or importance."}, {"q": "The new regulations are _________ to all employees, regardless of whether they work full-time, part-time, or on temporary contracts.", "opts": [["suitable", false], ["relevant", false], ["available", false], ["applicable", true]], "exp": "“Applicable to” means relevant or valid for a particular person or situation."}, {"q": "Employees are more likely to find their work _________ when they can see that their efforts have a positive impact on other people.", "opts": [["rewarding", true], ["rewarded", false], ["awardable", false], ["rewardingly", false]], "exp": "“Rewarding” means satisfying and worthwhile."}, {"q": "The successful candidate will be responsible for maintaining _________ financial records and preparing monthly reports for senior management.", "opts": [["accuracy detailed", false], ["detailed accurate", false], ["accurate detailed", true], ["accurately detailed", false]], "exp": "According to the provided answer key, the correct option is “accurate detailed.”"}, {"q": "Rather than _________ an important meeting because of a minor scheduling conflict, the manager rearranged her other appointments.", "opts": [["withdrawing", false], ["cancelling", true], ["resigning", false], ["suspending", false]], "exp": "“Cancel a meeting” is the natural collocation."}];
+let qs=[],i=0,lives=5,score=0,answered=false;
+const letters=["A","B","C","D"];
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const y=Math.floor(Math.random()*(x+1));
+    [a[x],a[y]]=[a[y],a[x]];
+  }
+  return a;
+}
+
+function prepare(){
+  qs=base.map(x=>({
+    q:x.q,
+    exp:x.exp,
+    opts:shuffle(x.opts.map(o=>({text:o[0],correct:o[1]})))
+  }));
+}
+
+function updateHearts(){
+  hearts.textContent="❤️".repeat(lives)+"🤍".repeat(5-lives);
+}
+
+function render(){
+  answered=false;
+  next.disabled=true;
+  feedback.className="";
+  feedback.textContent="Choose the best answer.";
+  qnum.textContent=`${i+1}/${qs.length}`;
+  qtag.textContent=`Order ${i+1}`;
+  qtext.textContent=qs[i].q;
+  answers.innerHTML="";
+  qs[i].opts.forEach((o,j)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<b>${letters[j]}.</b> ${o.text}`;
+    b.onclick=()=>choose(b,o);
+    answers.appendChild(b);
+  });
+}
+
+function choose(btn,opt){
+  if(answered||btn.disabled)return;
+
+  if(opt.correct){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    [...answers.children].forEach(b=>b.disabled=true);
+    feedback.className="good";
+    feedback.innerHTML=`✅ <b>Correct!</b><br>${qs[i].exp}`;
+    next.disabled=false;
+  }else{
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    feedback.className="bad";
+    feedback.textContent="❌ Incorrect. Try again.";
+    if(lives<=0) over.classList.remove("hide");
+  }
+}
+
+next.onclick=()=>{
+  if(!answered)return;
+  if(i<qs.length-1){
+    i++;
+    render();
+  }else{
+    final.textContent=score;
+    done.classList.remove("hide");
+  }
+};
+
+function restart(){
+  i=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  over.classList.add("hide");
+  done.classList.add("hide");
+  prepare();
+  updateHearts();
+  render();
+}
+
+prepare();
+updateHearts();
+render();
+</script>
+</body>
+</html>

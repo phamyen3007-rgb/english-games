@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 5 - Exercise 5 - Option C</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --leaf:#76c893;
+  --mint:#dff8e7;
+  --mint2:#a8e6c1;
+  --aqua:#dff7f5;
+  --sky:#e8f7ff;
+  --cream:#fffef9;
+  --text:#355a4a;
+  --muted:#6c8579;
+  --good:#4cb887;
+  --bad:#e96e84;
+}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:22px;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 12% 18%,rgba(168,230,193,.42),transparent 25%),
+    radial-gradient(circle at 88% 14%,rgba(223,247,245,.55),transparent 24%),
+    radial-gradient(circle at 78% 88%,rgba(232,247,255,.50),transparent 26%),
+    linear-gradient(145deg,#f8fffb,#effcf5 52%,#f6fdff);
+}
+.shell{
+  max-width:1200px;
+  margin:auto;
+  border-radius:30px;
+  overflow:hidden;
+  background:rgba(255,255,255,.95);
+  border:1px solid #d8eee0;
+  box-shadow:0 24px 70px rgba(70,120,90,.14);
+}
+header{
+  position:relative;
+  overflow:hidden;
+  padding:30px;
+  background:linear-gradient(120deg,#dff8e7,#c9f1d8 48%,#dff7f5);
+}
+header:after{
+  content:"🌿  🎪  🌱  💼  🍃";
+  position:absolute;
+  right:18px;
+  top:18px;
+  font-size:30px;
+  letter-spacing:10px;
+  opacity:.62;
+}
+header h1{
+  position:relative;
+  z-index:1;
+  margin:0 0 8px;
+  font-size:clamp(26px,4vw,38px);
+  color:#355a4a;
+}
+header p{
+  position:relative;
+  z-index:1;
+  margin:5px 0;
+  line-height:1.5;
+  color:#58776a;
+}
+.status{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:14px 24px;
+  background:#fbfffc;
+  border-bottom:1px solid #dcefe3;
+}
+.pill{
+  background:#fff;
+  border:1px solid #d6ebdd;
+  border-radius:999px;
+  padding:8px 13px;
+  font-weight:800;
+}
+.main{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:18px;
+  padding:20px;
+}
+.panel{
+  background:linear-gradient(180deg,#ffffff,#fbfffc);
+  border:1px solid #dceee3;
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(70,120,90,.07);
+}
+.passage{
+  padding:22px;
+  line-height:1.75;
+  font-size:16px;
+  max-height:72vh;
+  overflow:auto;
+}
+.passage h2{margin-top:0;color:#3f9569}
+.passage h3{color:#4f876c;margin-bottom:6px}
+.passage b{
+  color:#317f5b;
+  background:#eafff1;
+  padding:2px 5px;
+  border-radius:6px;
+}
+.passage ul{padding-left:22px}
+.passage li{margin:5px 0}
+.question{
+  padding:22px;
+  position:sticky;
+  top:16px;
+  align-self:start;
+  background:linear-gradient(180deg,#fcfffd,#f5fcf8);
+}
+.qtag{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:999px;
+  font-weight:900;
+  color:#355a4a;
+  background:linear-gradient(90deg,var(--mint),var(--aqua),var(--sky));
+}
+#answers{display:grid;gap:11px;margin-top:18px}
+.answer{
+  text-align:left;
+  border:1.5px solid #d8eae0;
+  background:#fff;
+  color:#426254;
+  border-radius:14px;
+  padding:13px 14px;
+  font-size:15px;
+  line-height:1.42;
+  cursor:pointer;
+  transition:.18s;
+}
+.answer:hover:not(:disabled){
+  transform:translateY(-1px);
+  border-color:var(--mint2);
+  background:#f9fffb;
+}
+.answer.correct{
+  background:#ecfff5;
+  border-color:var(--good);
+}
+.answer.wrong{
+  background:#fff0f3;
+  border-color:var(--bad);
+}
+#feedback{
+  min-height:68px;
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#fff;
+  color:var(--muted);
+  line-height:1.45;
+  border:1px solid #dcebe2;
+}
+#feedback.good{
+  background:#effff7;
+  color:#2f7a5e;
+  border-color:#9eddbf;
+}
+#feedback.bad{
+  background:#fff1f4;
+  color:#b55268;
+  border-color:#efb1bf;
+}
+.nextwrap{display:flex;justify-content:flex-end;margin-top:14px}
+#next{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#355a4a;
+  background:linear-gradient(90deg,var(--mint),var(--aqua),var(--sky));
+}
+#next:disabled{opacity:.38;cursor:not-allowed}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(55,95,75,.24);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
+  padding:20px;
+  backdrop-filter:blur(8px);
+}
+.hide{display:none}
+.modal{
+  width:min(500px,94vw);
+  background:#fbfffc;
+  border:1px solid #d6ebdd;
+  border-radius:24px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 25px 80px rgba(70,120,90,.18);
+}
+.modal button{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#355a4a;
+  background:linear-gradient(90deg,var(--mint),var(--aqua),var(--sky));
+}
+@media(max-width:900px){
+  .main{grid-template-columns:1fr}
+  .question{position:static}
+  .passage{max-height:none}
+}
+@media(max-width:560px){
+  body{padding:10px}
+  header{padding:22px 18px}
+  header:after{font-size:22px;right:6px;top:8px}
+  .main{padding:12px}
+  .passage,.question{padding:17px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<h1>🌿 Grade 12 - Unit 5 - Exercise 5 - Option C</h1>
+<p><b>Fresh Event Garden</b></p>
+<p>Read the job advertisement and choose the best answer A, B, C, or D for blanks 1–6.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Garden Stop: <span id="qnum">1/6</span></span>
+<span class="pill">Score: <span id="score">0</span>/6</span>
+</div>
+<div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="main">
+<div class="panel passage">
+
+<h2>LOOKING FOR A PART-TIME EVENT ASSISTANT?</h2>
+
+<p>Are you organised, energetic, and comfortable working with different people? Bright Star Events is currently looking for a part-time event assistant to help us <b>(1) _________</b> a range of conferences and community events at weekends.</p>
+
+<h3>Job Description:</h3>
+<ul>
+  <li>Welcome guests and provide them with relevant information.</li>
+  <li>Assist in setting up equipment and preparing event areas.</li>
+  <li>Deal with unexpected problems that may <b>(2) _________</b> during events.</li>
+  <li>Work closely with other team members to ensure that activities run smoothly.</li>
+</ul>
+
+<h3>Requirements:</h3>
+<p>Previous experience in event organisation is not essential. <b>(3) _________</b>, applicants who have worked in customer service or hospitality will be given preference. Candidates should have excellent communication skills and be capable of working <b>(4) _________</b> pressure, particularly when several tasks need to be completed within a limited period of time.</p>
+
+<p>Successful applicants will receive practical training before taking <b>(5) _________</b> their duties. Since some events finish late in the evening, candidates must also be willing to work flexible hours.</p>
+
+<h3>Benefits:</h3>
+<ul>
+  <li>Competitive hourly pay.</li>
+  <li>Free meals during longer events.</li>
+  <li>Opportunities to gain practical experience.</li>
+  <li>Possibility of being offered more regular work in the future.</li>
+</ul>
+
+<p>Anyone interested in the position should submit an application by Friday. Only candidates whose qualifications and availability <b>(6) _________</b> our requirements will be invited for an interview.</p>
+
+</div>
+
+<div class="panel question">
+<div class="qtag" id="qtag">Garden Stop 1</div>
+<div id="answers"></div>
+<div id="feedback">Choose the best answer for the current blank.</div>
+<div class="nextwrap"><button id="next" disabled>Next Stop ➜</button></div>
+</div>
+</div>
+</div>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Garden Break!</h1>
+<p>You have used all 5 hearts. Restart and try again.</p>
+<button onclick="restart()">↻ Try Again</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>🌱 Event Garden Complete!</h1>
+<p>You completed all 6 event-assistant blanks.</p>
+<h2>Final score: <span id="final">0</span>/6</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const base=[{"q": "Question 1", "opts": [["carry out", true], ["bring about", false], ["take over", false], ["put forward", false]], "exp": "“Carry out events/tasks/activities” = thực hiện, tiến hành."}, {"q": "Question 2", "opts": [["raise", false], ["arise", true], ["rise", false], ["arouse", false]], "exp": "“Problems may arise” = các vấn đề có thể phát sinh."}, {"q": "Question 3", "opts": [["Therefore", false], ["Otherwise", false], ["Nevertheless", true], ["Moreover", false]], "exp": "“Nevertheless” expresses contrast: experience is not essential; however, experienced applicants get preference."}, {"q": "Question 4", "opts": [["below", false], ["under", true], ["within", false], ["through", false]], "exp": "The fixed collocation is “work under pressure.”"}, {"q": "Question 5", "opts": [["over", false], ["up", false], ["on", true], ["after", false]], "exp": "“Take on duties/responsibilities” = đảm nhận nhiệm vụ/trách nhiệm."}, {"q": "Question 6", "opts": [["achieve", false], ["satisfy", true], ["accomplish", false], ["fulfil", false]], "exp": "“Satisfy requirements” = đáp ứng yêu cầu."}];
+let qs=[],i=0,lives=5,score=0,answered=false;
+const letters=["A","B","C","D"];
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const y=Math.floor(Math.random()*(x+1));
+    [a[x],a[y]]=[a[y],a[x]];
+  }
+  return a;
+}
+
+function prepare(){
+  qs=base.map(x=>({
+    q:x.q,
+    exp:x.exp,
+    opts:shuffle(x.opts.map(o=>({text:o[0],correct:o[1]})))
+  }));
+}
+
+function updateHearts(){
+  document.getElementById("hearts").textContent="❤️".repeat(lives)+"🤍".repeat(5-lives);
+}
+
+function render(){
+  answered=false;
+  document.getElementById("next").disabled=true;
+  const feedback=document.getElementById("feedback");
+  feedback.className="";
+  feedback.textContent="Choose the best answer for the current blank.";
+  document.getElementById("qnum").textContent=`${i+1}/${qs.length}`;
+  document.getElementById("qtag").textContent=`Garden Stop ${i+1}`;
+
+  const answers=document.getElementById("answers");
+  answers.innerHTML="";
+  qs[i].opts.forEach((o,j)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<b>${letters[j]}.</b> ${o.text}`;
+    b.onclick=()=>choose(b,o);
+    answers.appendChild(b);
+  });
+}
+
+function choose(btn,opt){
+  if(answered||btn.disabled)return;
+  const feedback=document.getElementById("feedback");
+  const answers=document.getElementById("answers");
+
+  if(opt.correct){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    [...answers.children].forEach(b=>b.disabled=true);
+    feedback.className="good";
+    feedback.innerHTML=`✅ <b>Correct!</b><br>${qs[i].exp}`;
+    document.getElementById("next").disabled=false;
+  }else{
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    feedback.className="bad";
+    feedback.textContent="❌ Incorrect. Try again.";
+    if(lives<=0) document.getElementById("over").classList.remove("hide");
+  }
+}
+
+document.getElementById("next").onclick=()=>{
+  if(!answered)return;
+  if(i<qs.length-1){
+    i++;
+    render();
+  }else{
+    document.getElementById("final").textContent=score;
+    document.getElementById("done").classList.remove("hide");
+  }
+};
+
+function restart(){
+  i=0;lives=5;score=0;answered=false;
+  document.getElementById("score").textContent="0";
+  document.getElementById("over").classList.add("hide");
+  document.getElementById("done").classList.add("hide");
+  prepare();
+  updateHearts();
+  render();
+}
+
+prepare();
+updateHearts();
+render();
+</script>
+</body>
+</html>

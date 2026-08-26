@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 5 - Exercise 1 (101-120) - Option D</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --cream:#fffaf0;
+  --pink:#ffd6e8;
+  --pink2:#ffb7d4;
+  --mint:#dff8e8;
+  --mint2:#9be4bc;
+  --yellow:#fff0b8;
+  --lav:#eee3ff;
+  --sky:#dff4ff;
+  --text:#5b4053;
+  --muted:#806d7b;
+  --good:#58bd8e;
+  --bad:#eb708b;
+}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:22px;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 12% 16%,rgba(255,183,212,.42),transparent 24%),
+    radial-gradient(circle at 88% 14%,rgba(223,244,255,.65),transparent 25%),
+    radial-gradient(circle at 75% 88%,rgba(155,228,188,.32),transparent 26%),
+    linear-gradient(145deg,#fffaf0,#fff4f8 52%,#f1fff8);
+}
+.shell{
+  max-width:1180px;
+  margin:auto;
+  border-radius:30px;
+  overflow:hidden;
+  background:rgba(255,255,255,.9);
+  border:1px solid #f3dbe6;
+  box-shadow:0 24px 70px rgba(120,80,110,.15);
+}
+header{
+  position:relative;
+  overflow:hidden;
+  padding:28px 30px;
+  background:linear-gradient(120deg,#ffd6e8,#fff0b8 50%,#dff8e8);
+}
+header:after{
+  content:"🧸  🍭  🌼  💼  🎀";
+  position:absolute;
+  right:20px;
+  top:18px;
+  font-size:30px;
+  letter-spacing:10px;
+  opacity:.58;
+}
+header h1{
+  position:relative;
+  margin:0 0 8px;
+  font-size:clamp(26px,4vw,38px);
+  z-index:1;
+  color:#5d4054;
+}
+header p{
+  position:relative;
+  margin:5px 0;
+  line-height:1.5;
+  color:#705767;
+  z-index:1;
+}
+.status{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:14px 24px;
+  background:#fffafd;
+  border-bottom:1px solid #f2dde6;
+}
+.pill{
+  background:#fff;
+  border:1px solid #efd8e2;
+  border-radius:999px;
+  padding:8px 13px;
+  font-weight:800;
+  box-shadow:0 6px 15px rgba(120,80,110,.06);
+}
+.main{
+  display:grid;
+  grid-template-columns:.72fr 1.28fr;
+  gap:18px;
+  padding:20px;
+}
+.panel{
+  background:linear-gradient(180deg,#fff,#fffafd);
+  border:1px solid #f0dce5;
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(120,80,110,.08);
+}
+.mission{
+  padding:22px;
+  line-height:1.7;
+  font-size:16px;
+}
+.mission h2{margin-top:0;color:#d8759d}
+.mission p{color:#725d6e}
+.question{
+  padding:22px;
+  position:sticky;
+  top:16px;
+  align-self:start;
+  background:linear-gradient(180deg,#fffafd,#fff6f9);
+}
+.qtag{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:999px;
+  font-weight:900;
+  color:#5c4051;
+  background:linear-gradient(90deg,var(--pink),var(--yellow),var(--mint));
+}
+#qtext{
+  font-size:20px;
+  font-weight:800;
+  line-height:1.45;
+  margin:16px 0;
+}
+#answers{display:grid;gap:11px}
+.answer{
+  text-align:left;
+  border:1.5px solid #ead8e1;
+  background:#fff;
+  color:#584654;
+  border-radius:14px;
+  padding:13px 14px;
+  font-size:15px;
+  line-height:1.42;
+  cursor:pointer;
+  transition:.18s;
+  box-shadow:0 6px 14px rgba(120,80,110,.04);
+}
+.answer:hover:not(:disabled){
+  transform:translateY(-1px);
+  border-color:var(--pink2);
+  background:#fff8fb;
+}
+.answer.correct{
+  background:#ecfff5;
+  border-color:var(--good);
+}
+.answer.wrong{
+  background:#fff0f3;
+  border-color:var(--bad);
+}
+#feedback{
+  min-height:68px;
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#fff;
+  color:var(--muted);
+  line-height:1.45;
+  border:1px solid #eddbe4;
+}
+#feedback.good{
+  background:#effff7;
+  color:#2f7a5e;
+  border-color:#9eddbf;
+}
+#feedback.bad{
+  background:#fff1f4;
+  color:#b55268;
+  border-color:#efb1bf;
+}
+.nextwrap{display:flex;justify-content:flex-end;margin-top:14px}
+#next{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#5c4051;
+  background:linear-gradient(90deg,var(--pink),var(--yellow),var(--mint));
+}
+#next:disabled{opacity:.38;cursor:not-allowed}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(100,70,90,.25);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
+  padding:20px;
+  backdrop-filter:blur(8px);
+}
+.hide{display:none}
+.modal{
+  width:min(500px,94vw);
+  background:#fffafd;
+  border:1px solid #efd8e2;
+  border-radius:24px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 25px 80px rgba(100,70,95,.18);
+}
+.modal button{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#5c4051;
+  background:linear-gradient(90deg,var(--pink),var(--yellow),var(--mint));
+}
+@media(max-width:850px){
+  .main{grid-template-columns:1fr}
+  .question{position:static}
+}
+@media(max-width:560px){
+  body{padding:10px}
+  header{padding:22px 18px}
+  header:after{font-size:22px;right:6px;top:8px}
+  .main{padding:12px}
+  .mission,.question{padding:17px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<h1>🧸 Grade 12 - Unit 5 - Exercise 1 (101-120) - Option D</h1>
+<p><b>Career Candy Garden</b></p>
+<p>Choose the best answer A, B, C, or D to complete each sentence.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Flower: <span id="qnum">1/15</span></span>
+<span class="pill">Stars: <span id="score">0</span>/15</span>
+</div>
+<div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="main">
+<div class="panel mission">
+<h2>🌼 Career Candy Garden</h2>
+<p>Grow your cute career garden by solving all 15 workplace questions.</p>
+<p><b>Rules:</b> A wrong answer costs one heart. You cannot open the next flower until you choose the correct answer.</p>
+<p>🍭 Focus: workplace collocations, recruitment vocabulary, phrasal expressions, word order, and professional English.</p>
+<p>🎀 Bloom all 15 flowers before losing all five hearts.</p>
+</div>
+
+<div class="panel question">
+<div class="qtag" id="qtag">Flower 1</div>
+<div id="qtext"></div>
+<div id="answers"></div>
+<div id="feedback">Choose the best answer.</div>
+<div class="nextwrap"><button id="next" disabled>Next Flower ➜</button></div>
+</div>
+</div>
+</div>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Garden Resting!</h1>
+<p>You have used all 5 hearts. Restart the garden and try again.</p>
+<button onclick="restart()">↻ Grow Again</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>🌸 Garden in Full Bloom!</h1>
+<p>You completed the Career Candy Garden challenge.</p>
+<h2>Final score: <span id="final">0</span>/15</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const base=[{"q": "Employees who wish to move into senior positions are expected to _________ a high level of competence in both leadership and decision-making.", "opts": [["expose", false], ["demonstrate", true], ["reveal", false], ["indicate", false]], "exp": "“Demonstrate competence” = thể hiện/chứng minh năng lực."}, {"q": "The company has taken steps to _________ the workload more evenly among team members so that no individual is placed under excessive pressure.", "opts": [["deliver", false], ["allocate", false], ["assign", false], ["distribute", true]], "exp": "“Distribute the workload among team members” = phân chia khối lượng công việc giữa các thành viên."}, {"q": "Before committing herself to the position, Lan carefully _________ the advantages of career advancement against the inconvenience of frequent travel.", "opts": [["balanced", false], ["measured", false], ["weighed", true], ["judged", false]], "exp": "“Weigh A against B” = cân nhắc A so với B."}, {"q": "Employees who fail to _________ company procedures may put both themselves and their colleagues at risk.", "opts": [["comply with", true], ["conform", false], ["obey with", false], ["follow to", false]], "exp": "The correct collocation is “comply with procedures/regulations/rules.”"}, {"q": "A lack of opportunities for advancement is one of the factors that may _________ talented employees to seek employment elsewhere.", "opts": [["persuade", false], ["motivate", false], ["encourage", false], ["prompt", true]], "exp": "“Prompt somebody to do something” = khiến/thúc đẩy ai làm gì."}, {"q": "During periods of high demand, employees may be required to work _________ hours in order to meet production deadlines.", "opts": [["enlarged", false], ["extended", true], ["expanded", false], ["prolonged", false]], "exp": "“Work extended hours” = làm việc trong thời gian dài hơn giờ bình thường."}, {"q": "The interview panel was particularly impressed by her ability to _________ practical solutions to unexpected problems.", "opts": [["come up with", true], ["catch up with", false], ["put up with", false], ["keep up with", false]], "exp": "“Come up with a solution” = nghĩ ra một giải pháp."}, {"q": "The company is attempting to _________ its reputation as an employer by introducing better working conditions and clearer promotion procedures.", "opts": [["increase", false], ["develop", false], ["enhance", true], ["raise", false]], "exp": "“Enhance a reputation” = nâng cao/cải thiện danh tiếng."}, {"q": "Although several candidates possessed the required qualifications, only two were _________ for a second interview.", "opts": [["shortened", false], ["shortlisted", true], ["selected in", false], ["reduced", false]], "exp": "“Be shortlisted for an interview” = được đưa vào danh sách rút gọn."}, {"q": "Employees are encouraged to keep _________ of developments in their field so that their professional knowledge does not become outdated.", "opts": [["track", true], ["pace", false], ["touch", false], ["notice", false]], "exp": "“Keep track of something” = theo dõi/nắm bắt điều gì."}, {"q": "The manager decided to _________ responsibility for the mistake rather than place the blame on a junior member of staff.", "opts": [["accept for", false], ["bear with", false], ["assume", true], ["undertake for", false]], "exp": "“Assume responsibility for something” = nhận/chịu trách nhiệm."}, {"q": "Companies should provide clear job descriptions so that employees know exactly what is _________ of them.", "opts": [["requested", false], ["expected", true], ["demanded to", false], ["required for", false]], "exp": "The fixed structure is “what is expected of somebody.”"}, {"q": "A temporary reduction in working hours enabled the company to _________ compulsory redundancies during the economic downturn.", "opts": [["escape", false], ["prevent from", false], ["avoid", true], ["refuse", false]], "exp": "“Avoid + noun/V-ing” = tránh điều gì."}, {"q": "Employees with _________ knowledge of both the local market and international business practices are particularly valuable to multinational companies.", "opts": [["extensive practical", true], ["practically extensive", false], ["practical extensively", false], ["extensively practice", false]], "exp": "The correct word order is “extensive practical knowledge.”"}, {"q": "The company agreed to _________ certain requirements for applicants who could provide evidence of substantial relevant experience.", "opts": [["release", false], ["remove from", false], ["abandon", false], ["waive", true]], "exp": "“Waive a requirement” = miễn/bỏ một yêu cầu."}];
+let qs=[],i=0,lives=5,score=0,answered=false;
+const letters=["A","B","C","D"];
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const y=Math.floor(Math.random()*(x+1));
+    [a[x],a[y]]=[a[y],a[x]];
+  }
+  return a;
+}
+
+function prepare(){
+  qs=base.map(x=>({
+    q:x.q,
+    exp:x.exp,
+    opts:shuffle(x.opts.map(o=>({text:o[0],correct:o[1]})))
+  }));
+}
+
+function updateHearts(){
+  hearts.textContent="❤️".repeat(lives)+"🤍".repeat(5-lives);
+}
+
+function render(){
+  answered=false;
+  next.disabled=true;
+  feedback.className="";
+  feedback.textContent="Choose the best answer.";
+  qnum.textContent=`${i+1}/${qs.length}`;
+  qtag.textContent=`Flower ${i+1}`;
+  qtext.textContent=qs[i].q;
+  answers.innerHTML="";
+  qs[i].opts.forEach((o,j)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<b>${letters[j]}.</b> ${o.text}`;
+    b.onclick=()=>choose(b,o);
+    answers.appendChild(b);
+  });
+}
+
+function choose(btn,opt){
+  if(answered||btn.disabled)return;
+
+  if(opt.correct){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    [...answers.children].forEach(b=>b.disabled=true);
+    feedback.className="good";
+    feedback.innerHTML=`✅ <b>Correct!</b><br>${qs[i].exp}`;
+    next.disabled=false;
+  }else{
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    feedback.className="bad";
+    feedback.textContent="❌ Incorrect. Try again.";
+    if(lives<=0) over.classList.remove("hide");
+  }
+}
+
+next.onclick=()=>{
+  if(!answered)return;
+  if(i<qs.length-1){
+    i++;
+    render();
+  }else{
+    final.textContent=score;
+    done.classList.remove("hide");
+  }
+};
+
+function restart(){
+  i=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  over.classList.add("hide");
+  done.classList.add("hide");
+  prepare();
+  updateHearts();
+  render();
+}
+
+prepare();
+updateHearts();
+render();
+</script>
+</body>
+</html>

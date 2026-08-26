@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 5 - Exercise 3 - Option C</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --gold:#ffd86b;
+  --gold2:#ffefb3;
+  --champagne:#fff9e8;
+  --cream:#fffdf8;
+  --pearl:#fff8ef;
+  --text:#5f4a2f;
+  --muted:#846f52;
+  --good:#55b98a;
+  --bad:#e87086;
+}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:22px;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 12% 18%,rgba(255,216,107,.34),transparent 25%),
+    radial-gradient(circle at 88% 14%,rgba(255,239,179,.52),transparent 24%),
+    radial-gradient(circle at 78% 88%,rgba(255,248,239,.70),transparent 26%),
+    linear-gradient(145deg,#fffdf7,#fff9e8 52%,#fffefb);
+}
+.shell{
+  max-width:1200px;
+  margin:auto;
+  border-radius:30px;
+  overflow:hidden;
+  background:rgba(255,255,255,.96);
+  border:1px solid #f0ddb0;
+  box-shadow:0 24px 70px rgba(148,112,35,.15);
+}
+header{
+  position:relative;
+  overflow:hidden;
+  padding:28px 30px;
+  background:linear-gradient(120deg,#fff2ad,#ffd86b 50%,#fff7cf);
+}
+header:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 8% 25%,rgba(255,255,255,.75) 0 2px,transparent 3px),
+    radial-gradient(circle at 22% 70%,rgba(255,255,255,.72) 0 2px,transparent 3px),
+    radial-gradient(circle at 70% 30%,rgba(255,255,255,.68) 0 2px,transparent 3px),
+    radial-gradient(circle at 84% 72%,rgba(255,255,255,.78) 0 2px,transparent 3px);
+}
+header:after{
+  content:"✨  🌟  💼  🏆  ✨";
+  position:absolute;
+  right:20px;
+  top:18px;
+  font-size:30px;
+  letter-spacing:10px;
+  opacity:.64;
+}
+header h1{
+  position:relative;
+  margin:0 0 8px;
+  font-size:clamp(26px,4vw,38px);
+  z-index:1;
+  color:#624d2c;
+}
+header p{
+  position:relative;
+  margin:5px 0;
+  line-height:1.5;
+  color:#725b36;
+  z-index:1;
+}
+.status{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:14px 24px;
+  background:#fffdf7;
+  border-bottom:1px solid #efe2bd;
+}
+.pill{
+  background:#fff;
+  border:1px solid #ecdca9;
+  border-radius:999px;
+  padding:8px 13px;
+  font-weight:800;
+  box-shadow:0 6px 15px rgba(148,112,35,.06);
+}
+.main{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:18px;
+  padding:20px;
+}
+.panel{
+  background:linear-gradient(180deg,#ffffff,#fffdf8);
+  border:1px solid #efe1ba;
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(148,112,35,.08);
+}
+.passage{
+  padding:22px;
+  line-height:1.75;
+  font-size:16px;
+  max-height:72vh;
+  overflow:auto;
+}
+.passage h2{margin-top:0;color:#b0831b}
+.passage b{
+  color:#9b751b;
+  background:#fff8d7;
+  padding:2px 5px;
+  border-radius:6px;
+}
+.question{
+  padding:22px;
+  position:sticky;
+  top:16px;
+  align-self:start;
+  background:linear-gradient(180deg,#fffefb,#fffaf0);
+}
+.qtag{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:999px;
+  font-weight:900;
+  color:#5f4a2f;
+  background:linear-gradient(90deg,var(--gold2),var(--gold),var(--gold2));
+  box-shadow:0 4px 12px rgba(188,145,45,.14);
+}
+#answers{display:grid;gap:11px;margin-top:18px}
+.answer{
+  text-align:left;
+  border:1.5px solid #ebdfbd;
+  background:#fff;
+  color:#5f4d33;
+  border-radius:14px;
+  padding:13px 14px;
+  font-size:15px;
+  line-height:1.42;
+  cursor:pointer;
+  transition:.18s;
+}
+.answer:hover:not(:disabled){
+  transform:translateY(-1px);
+  border-color:var(--gold);
+  background:#fffdf5;
+}
+.answer.correct{
+  background:#effff7;
+  border-color:var(--good);
+}
+.answer.wrong{
+  background:#fff1f4;
+  border-color:var(--bad);
+}
+#feedback{
+  min-height:68px;
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#fff;
+  color:var(--muted);
+  line-height:1.45;
+  border:1px solid #eee1bd;
+}
+#feedback.good{
+  background:#effff7;
+  color:#2f7a5e;
+  border-color:#9eddbf;
+}
+#feedback.bad{
+  background:#fff1f4;
+  color:#b55268;
+  border-color:#efb1bf;
+}
+.nextwrap{display:flex;justify-content:flex-end;margin-top:14px}
+#next{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#5e4a2e;
+  background:linear-gradient(90deg,var(--gold2),var(--gold),var(--gold2));
+  box-shadow:0 8px 18px rgba(188,145,45,.12);
+}
+#next:disabled{opacity:.38;cursor:not-allowed}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(105,82,38,.24);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
+  padding:20px;
+  backdrop-filter:blur(8px);
+}
+.hide{display:none}
+.modal{
+  width:min(500px,94vw);
+  background:#fffdf7;
+  border:1px solid #ecdca9;
+  border-radius:24px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 25px 80px rgba(148,112,35,.18);
+}
+.modal button{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#5e4a2e;
+  background:linear-gradient(90deg,var(--gold2),var(--gold),var(--gold2));
+}
+@media(max-width:900px){
+  .main{grid-template-columns:1fr}
+  .question{position:static}
+  .passage{max-height:none}
+}
+@media(max-width:560px){
+  body{padding:10px}
+  header{padding:22px 18px}
+  header:after{font-size:22px;right:6px;top:8px}
+  .main{padding:12px}
+  .passage,.question{padding:17px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<h1>✨ Grade 12 - Unit 5 - Exercise 3 - Option C</h1>
+<p><b>Golden Career Sparkle</b></p>
+<p>Read the passage and choose the best answer A, B, C, or D for blanks 1–8.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Sparkle: <span id="qnum">1/8</span></span>
+<span class="pill">Score: <span id="score">0</span>/8</span>
+</div>
+<div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="main">
+<div class="panel passage">
+
+<h2>Working in Customer Service</h2>
+<p>Working in customer service can be more demanding than many people expect. Employees are responsible not only for responding to customers' enquiries but also for ensuring that any problems are dealt <b>(1) _________</b> efficiently. Since they represent the company directly, staff members are expected to remain professional even when faced with customers who are dissatisfied with the service they have received.</p>
+
+<p>New employees usually receive practical training before being allowed to deal with customers independently. <b>(2) _________</b>, they may spend several days observing experienced colleagues so that they can become familiar with common procedures. Particular attention is paid to situations <b>(3) _________</b> require employees to make quick decisions without immediately consulting a supervisor.</p>
+
+<p>Another important skill is the ability to respond appropriately <b>(4) _________</b> customer complaints. Instead of simply offering an apology, employees should identify the cause of the problem and suggest a suitable solution. Complaints, if <b>(5) _________</b> properly, can actually provide businesses with valuable information about areas in which their services need improvement.</p>
+
+<p>The job can become particularly stressful during busy periods, when staff may be required to <b>(6) _________</b> additional duties for absent colleagues. Nevertheless, employees who consistently perform well are more likely to be considered <b>(7) _________</b> promotion. For this reason, many workers regard customer-service positions as an opportunity to <b>(8) _________</b> valuable experience before moving into more senior roles.</p>
+
+</div>
+
+<div class="panel question">
+<div class="qtag" id="qtag">Sparkle 1</div>
+<div id="answers"></div>
+<div id="feedback">Choose the best answer for the current blank.</div>
+<div class="nextwrap"><button id="next" disabled>Next Sparkle ➜</button></div>
+</div>
+</div>
+</div>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Sparkle Paused!</h1>
+<p>You have used all 5 hearts. Restart and try again.</p>
+<button onclick="restart()">↻ Shine Again</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>🌟 Golden Finish!</h1>
+<p>You completed all 8 customer-service blanks.</p>
+<h2>Final score: <span id="final">0</span>/8</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const base=[{"q": "Question 1", "opts": [["on", false], ["with", true], ["by", false], ["over", false]], "exp": "The fixed expression is “deal with a problem” = xử lý/giải quyết vấn đề."}, {"q": "Question 2", "opts": [["In contrast", false], ["For instance", true], ["Nevertheless", false], ["Consequently", false]], "exp": "“For instance” introduces an example of practical training."}, {"q": "Question 3", "opts": [["where", false], ["whose", false], ["which", true], ["when", false]], "exp": "“Which” refers to “situations” and is the subject of “require.”"}, {"q": "Question 4", "opts": [["with", false], ["for", false], ["towards", false], ["to", true]], "exp": "The correct collocation is “respond to complaints.”"}, {"q": "Question 5", "opts": [["handling", false], ["handled", true], ["having handled", false], ["being handling", false]], "exp": "“If handled properly” is a reduced passive clause meaning “if they are handled properly.”"}, {"q": "Question 6", "opts": [["take on", true], ["put aside", false], ["bring about", false], ["turn down", false]], "exp": "“Take on additional duties” = đảm nhận thêm nhiệm vụ."}, {"q": "Question 7", "opts": [["with", false], ["to", false], ["for", true], ["on", false]], "exp": "The standard expression is “be considered for promotion.”"}, {"q": "Question 8", "opts": [["achieve", false], ["gain", true], ["earn", false], ["collect", false]], "exp": "The natural collocation is “gain valuable experience.”"}];
+let qs=[],i=0,lives=5,score=0,answered=false;
+const letters=["A","B","C","D"];
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const y=Math.floor(Math.random()*(x+1));
+    [a[x],a[y]]=[a[y],a[x]];
+  }
+  return a;
+}
+
+function prepare(){
+  qs=base.map(x=>({
+    q:x.q,
+    exp:x.exp,
+    opts:shuffle(x.opts.map(o=>({text:o[0],correct:o[1]})))
+  }));
+}
+
+function updateHearts(){
+  document.getElementById("hearts").textContent="❤️".repeat(lives)+"🤍".repeat(5-lives);
+}
+
+function render(){
+  answered=false;
+  document.getElementById("next").disabled=true;
+  const feedback=document.getElementById("feedback");
+  feedback.className="";
+  feedback.textContent="Choose the best answer for the current blank.";
+  document.getElementById("qnum").textContent=`${i+1}/${qs.length}`;
+  document.getElementById("qtag").textContent=`Sparkle ${i+1}`;
+  const answers=document.getElementById("answers");
+  answers.innerHTML="";
+  qs[i].opts.forEach((o,j)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<b>${letters[j]}.</b> ${o.text}`;
+    b.onclick=()=>choose(b,o);
+    answers.appendChild(b);
+  });
+}
+
+function choose(btn,opt){
+  if(answered||btn.disabled)return;
+  const feedback=document.getElementById("feedback");
+  const answers=document.getElementById("answers");
+
+  if(opt.correct){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    [...answers.children].forEach(b=>b.disabled=true);
+    feedback.className="good";
+    feedback.innerHTML=`✅ <b>Correct!</b><br>${qs[i].exp}`;
+    document.getElementById("next").disabled=false;
+  }else{
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    feedback.className="bad";
+    feedback.textContent="❌ Incorrect. Try again.";
+    if(lives<=0) document.getElementById("over").classList.remove("hide");
+  }
+}
+
+document.getElementById("next").onclick=()=>{
+  if(!answered)return;
+  if(i<qs.length-1){
+    i++;
+    render();
+  }else{
+    document.getElementById("final").textContent=score;
+    document.getElementById("done").classList.remove("hide");
+  }
+};
+
+function restart(){
+  i=0;lives=5;score=0;answered=false;
+  document.getElementById("score").textContent="0";
+  document.getElementById("over").classList.add("hide");
+  document.getElementById("done").classList.add("hide");
+  prepare();updateHearts();render();
+}
+
+prepare();
+updateHearts();
+render();
+</script>
+</body>
+</html>

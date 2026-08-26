@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 12 - Unit 5 - Exercise 5 - Option D</title>
+<style>
+  *{box-sizing:border-box}
+  body{
+    margin:0;font-family:"Segoe UI",Arial,sans-serif;color:#17324d;
+    min-height:100vh;overflow-x:hidden;
+    background:
+      radial-gradient(circle at 10% 10%,rgba(255,255,255,.95) 0 3%,transparent 3.2%),
+      radial-gradient(circle at 90% 15%,rgba(255,255,255,.8) 0 4%,transparent 4.2%),
+      linear-gradient(135deg,#eaf7ff,#f8fcff 45%,#e8f4ff);
+  }
+  .decor{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+  .paper{position:absolute;width:90px;height:115px;border-radius:8px;background:#fff;
+    box-shadow:0 8px 25px rgba(28,79,117,.12);opacity:.55;transform:rotate(-10deg)}
+  .paper:before,.paper:after{content:"";position:absolute;left:15px;right:15px;height:5px;border-radius:4px;background:#b9d8ee}
+  .paper:before{top:28px;box-shadow:0 18px 0 #d2e6f4,0 36px 0 #d2e6f4,0 54px 0 #d2e6f4}
+  .p1{left:2%;top:12%}.p2{right:3%;top:45%;transform:rotate(12deg)}.p3{left:7%;bottom:4%;transform:rotate(7deg)}
+  .container{position:relative;z-index:1;max-width:1180px;margin:auto;padding:24px}
+  .header{
+    background:rgba(255,255,255,.92);border:1px solid #cfe6f5;border-radius:24px;padding:22px 26px;
+    box-shadow:0 12px 35px rgba(27,83,125,.12);display:flex;align-items:center;gap:18px
+  }
+  .icon{width:70px;height:70px;border-radius:18px;background:linear-gradient(135deg,#3b82f6,#06b6d4);
+    display:grid;place-items:center;font-size:36px;color:#fff;box-shadow:0 8px 20px rgba(59,130,246,.25)}
+  h1{font-size:clamp(23px,3vw,35px);margin:0;color:#0f4c81}
+  .subtitle{margin-top:5px;color:#5d7890;font-weight:600}
+  .status{
+    margin:18px 0;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between
+  }
+  .pill{background:#fff;border:1px solid #d5e8f5;border-radius:999px;padding:10px 16px;
+    box-shadow:0 5px 16px rgba(24,73,110,.08);font-weight:700}
+  #hearts{font-size:24px;letter-spacing:4px}
+  .progressWrap{flex:1;min-width:230px;height:16px;background:#dbeaf4;border-radius:999px;overflow:hidden}
+  #progress{height:100%;width:0;background:linear-gradient(90deg,#38bdf8,#2563eb);transition:.35s}
+  .card{
+    background:rgba(255,255,255,.96);border:1px solid #d4e8f5;border-radius:24px;
+    box-shadow:0 15px 40px rgba(31,82,120,.12);padding:26px;margin-bottom:20px
+  }
+  .passage h2{margin:0 0 12px;color:#12669b}
+  .passage p{line-height:1.72;margin:10px 0}
+  .passage ul{line-height:1.75;padding-left:24px}
+  .blank{display:inline-block;min-width:135px;border-bottom:2px dashed #3b82f6;color:#2563eb;font-weight:800;text-align:center}
+  .questionHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+  #qtitle{font-size:22px;font-weight:800;color:#0f4c81}
+  #qnum{font-weight:800;background:#e6f3ff;padding:8px 12px;border-radius:12px}
+  .options{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+  button.option{
+    border:2px solid #d7e8f3;background:#fafdff;border-radius:16px;padding:15px 16px;text-align:left;
+    font-size:17px;color:#21415b;cursor:pointer;transition:.18s;font-weight:650
+  }
+  button.option:hover{transform:translateY(-2px);border-color:#66b8ee;background:#f1f9ff}
+  button.option.correct{background:#e8fff3;border-color:#22c55e;color:#126b39}
+  button.option.wrong{background:#fff0f0;border-color:#ef4444;color:#a51f1f;animation:shake .25s}
+  button.option:disabled{cursor:default}
+  @keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  #feedback{
+      display:none;margin-top:18px;padding:16px 18px;border-radius:16px;
+      font-weight:650;line-height:1.55;font-size:16px;
+      border:2px solid transparent;
+    }
+  #feedback.good{
+      display:block !important;background:#eafaf1;color:#176b3a;
+      border-color:#86d7aa;
+    }
+  #feedback.bad{
+      display:block !important;background:#fff1f1;color:#a52727;
+      border-color:#f2aaaa;
+    }
+  .controls{display:flex;justify-content:flex-end;margin-top:16px}
+  .next,.restart{
+    border:0;border-radius:14px;padding:12px 22px;font-size:16px;font-weight:800;color:#fff;cursor:pointer;
+    background:linear-gradient(135deg,#2563eb,#0891b2);box-shadow:0 7px 18px rgba(37,99,235,.25)
+  }
+  .next{display:none}
+  .finish{text-align:center;padding:20px 8px}
+  .finish .big{font-size:58px}.finish h2{font-size:30px;color:#0f4c81;margin:8px}
+  .answerKey{margin:16px auto;max-width:600px;background:#eef8ff;border-radius:16px;padding:15px;font-weight:800}
+  .footer{text-align:center;color:#6c8294;font-size:13px;padding:5px}
+  @media(max-width:720px){.options{grid-template-columns:1fr}.header{align-items:flex-start}.icon{width:58px;height:58px}.container{padding:12px}.card{padding:18px}}
+</style>
+</head>
+<body>
+<div class="decor"><div class="paper p1"></div><div class="paper p2"></div><div class="paper p3"></div></div>
+<div class="container">
+  <div class="header">
+    <div class="icon">📋</div>
+    <div>
+      <h1>PART-TIME ADMINISTRATIVE ASSISTANT WANTED</h1>
+      <div class="subtitle">Grade 12 • Unit 5 • Exercise 5 • Option D</div>
+    </div>
+  </div>
+
+  <div class="status">
+    <div class="pill">❤️ Lives: <span id="hearts"></span></div>
+    <div class="progressWrap"><div id="progress"></div></div>
+    <div class="pill" id="score">Score: 0/6</div>
+  </div>
+
+  <div class="card passage">
+    <h2>🏢 Greenfield Education Centre</h2>
+    <p>Greenfield Education Centre is seeking a responsible and well-organised part-time administrative assistant to support our office team. The successful candidate will be expected to deal with enquiries, maintain student records, and <span class="blank">(1) ________</span> arrangements for meetings and training sessions.</p>
+    <p><b>Main Responsibilities:</b></p>
+    <ul>
+      <li>Respond to emails and telephone enquiries professionally.</li>
+      <li>Keep records accurate and up to date.</li>
+      <li>Assist staff with preparing documents and reports.</li>
+      <li>Handle confidential information with appropriate <span class="blank">(2) ________</span>.</li>
+    </ul>
+    <p>Previous office experience would be an advantage but is not compulsory. <span class="blank">(3) ________</span> applicants have limited practical experience, they should be able to demonstrate strong organisational skills and a willingness to learn. Candidates must also be capable of working independently and dealing with several tasks simultaneously without constant <span class="blank">(4) ________</span>.</p>
+    <p>The position initially involves fifteen hours of work per week. However, employees may occasionally be asked to work additional hours when the centre is particularly busy. Those who consistently perform well may eventually be considered <span class="blank">(5) ________</span> a permanent position.</p>
+    <p>We are particularly interested in applicants who are willing to take initiative rather than simply wait to be given instructions. If you believe you have the qualities required to <span class="blank">(6) ________</span> this role successfully, please submit your CV and a short cover letter by 30 September.</p>
+  </div>
+
+  <div class="card" id="gameCard">
+    <div class="questionHead">
+      <div id="qtitle">Choose the best answer.</div>
+      <div id="qnum">Question 1/6</div>
+    </div>
+    <div class="options" id="options"></div>
+    <div id="feedback"></div>
+    <div class="controls"><button class="next" id="nextBtn">Next ➜</button></div>
+  </div>
+  <div class="footer">Choose carefully — a wrong answer costs one heart.</div>
+</div>
+
+<script>
+const questions=[
+ {n:1,opts:["make","perform","establish","conduct"],ans:"make",exp:"<b>make arrangements for sth</b> = sắp xếp/chuẩn bị cho việc gì. Đây là collocation cố định. Không dùng <i>perform/conduct arrangements</i>."},
+ {n:2,opts:["caution","attention","concern","awareness"],ans:"caution",exp:"<b>handle something with caution</b> = xử lý điều gì một cách thận trọng. Với <i>confidential information</i> (thông tin mật), <b>caution</b> phù hợp nhất."},
+ {n:3,opts:["Provided that","Even though","In case","As long as"],ans:"Even though",exp:"<b>Even though + S + V</b> = mặc dù. Hai vế mang quan hệ nhượng bộ: dù ứng viên có ít kinh nghiệm thực tế, họ vẫn phải thể hiện kỹ năng tổ chức tốt."},
+ {n:4,opts:["supervision","observation","inspection","management"],ans:"supervision",exp:"<b>without constant supervision</b> = không cần sự giám sát liên tục. Cụm tự nhiên trong mô tả công việc là <b>work independently without supervision</b>."},
+ {n:5,opts:["with","about","for","to"],ans:"for",exp:"Cấu trúc đúng là <b>consider somebody for something</b>. Vì vậy <b>be considered for a permanent position</b> = được cân nhắc cho một vị trí lâu dài."},
+ {n:6,opts:["accomplish","fulfil","achieve","succeed"],ans:"fulfil",exp:"<b>fulfil a role</b> = đảm nhiệm/thực hiện một vai trò. So sánh: <i>accomplish a task/mission</i>, <i>achieve a goal/result</i>, và <i>succeed in doing sth</i>."}
+];
+
+let current=0,lives=5,score=0,locked=false;
+
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}
+  return a;
+}
+function renderHearts(){
+  document.getElementById("hearts").textContent="❤️".repeat(lives)+"🖤".repeat(5-lives);
+}
+function render(){
+  locked=false;
+  const q=questions[current];
+  document.getElementById("qnum").textContent=`Question ${current+1}/6`;
+  document.getElementById("score").textContent=`Score: ${score}/6`;
+  document.getElementById("progress").style.width=`${current/6*100}%`;
+  const fb=document.getElementById("feedback"); fb.style.display="none";fb.className="";fb.innerHTML="";
+  document.getElementById("nextBtn").style.display="none";
+  const box=document.getElementById("options");box.innerHTML="";
+  const letters=["A","B","C","D"];
+  shuffle(q.opts).forEach((text,i)=>{
+    const b=document.createElement("button");b.className="option";
+    b.innerHTML=`<b>${letters[i]}.</b> ${text}`;
+    b.onclick=()=>choose(b,text);box.appendChild(b);
+  });
+  renderHearts();
+}
+function choose(btn,text){
+  if(locked)return;
+  const q=questions[current];
+  if(text===q.ans){
+    locked=true;score++;btn.classList.add("correct");
+    [...document.querySelectorAll(".option")].forEach(x=>x.disabled=true);
+    const fb=document.getElementById("feedback");fb.className="good";
+    fb.style.display="block";
+    fb.innerHTML=`<div style="font-size:18px;font-weight:850;margin-bottom:8px">✅ Correct!</div>
+      <div style="font-size:17px;font-weight:850;color:#0f4c81;margin-bottom:6px">📘 Giải thích</div>
+      <div>${q.exp}</div>`;
+    document.getElementById("nextBtn").style.display="inline-block";
+    document.getElementById("score").textContent=`Score: ${score}/6`;
+  }else{
+    lives--;btn.classList.add("wrong");btn.disabled=true;
+    const fb=document.getElementById("feedback");fb.className="bad";
+    fb.innerHTML="❌ Not quite. You lose one heart. Try another answer.";
+    renderHearts();
+    if(lives<=0){setTimeout(gameOver,650)}
+  }
+}
+document.getElementById("nextBtn").onclick=()=>{
+  current++;
+  if(current>=questions.length)finish();else render();
+};
+function gameOver(){
+  document.getElementById("gameCard").innerHTML=`
+    <div class="finish"><div class="big">💔</div><h2>Out of hearts!</h2>
+    <p>You need to restart the exercise from Question 1.</p>
+    <button class="restart" onclick="restart()">↻ Try Again</button></div>`;
+  document.getElementById("progress").style.width="0%";
+}
+function finish(){
+  document.getElementById("progress").style.width="100%";
+  document.getElementById("gameCard").innerHTML=`
+    <div class="finish"><div class="big">🎉</div><h2>Excellent work!</h2>
+    <p>You completed the administrative assistant challenge.</p>
+    <div class="answerKey">Answer key: 1A – 2A – 3B – 4A – 5C – 6B</div>
+    <p><b>Final score: ${score}/6</b> &nbsp; • &nbsp; Hearts left: ${lives}/5</p>
+    <button class="restart" onclick="restart()">↻ Play Again</button></div>`;
+}
+function restart(){location.reload()}
+render();
+</script>
+</body>
+</html>

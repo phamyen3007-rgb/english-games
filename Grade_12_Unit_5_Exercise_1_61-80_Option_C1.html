@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 5 - Exercise 1 (61-80) - Option C1</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#080d1f;--panel:#111831;--panel2:#172244;--gold:#ffe27a;--pink:#b28cff;--cyan:#68e1ff;--green:#8df0c0;--text:#fff8ff;--muted:#d7cde0;--good:#59d98e;--bad:#ff7185}
+body{margin:0;min-height:100vh;padding:22px;font-family:Arial,Helvetica,sans-serif;color:var(--text);
+background:radial-gradient(circle at 10% 15%,rgba(255,209,102,.15),transparent 25%),radial-gradient(circle at 90% 20%,rgba(120,214,255,.13),transparent 24%),linear-gradient(145deg,#100818,#1d0f2c 55%,#2b1535)}
+.shell{max-width:1180px;margin:auto;border-radius:30px;overflow:hidden;background:rgba(22,13,34,.97);border:1px solid rgba(255,255,255,.1);box-shadow:0 26px 80px rgba(0,0,0,.5)}
+header{position:relative;overflow:hidden;padding:28px 30px;background:linear-gradient(120deg,#5b2a74,#8a3d64 52%,#3b6b72)}
+header:after{content:"🛸  🌌  💼  ⭐  🚀";position:absolute;right:20px;top:18px;font-size:30px;letter-spacing:10px;opacity:.32}
+header h1{position:relative;margin:0 0 8px;font-size:clamp(26px,4vw,38px);z-index:1}
+header p{position:relative;margin:5px 0;line-height:1.5;color:#fff4fb;z-index:1}
+.status{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 24px;background:#190f25;border-bottom:1px solid #3b2947}
+.pill{background:#281936;border:1px solid #493257;border-radius:999px;padding:8px 13px;font-weight:800}
+.main{display:grid;grid-template-columns:.72fr 1.28fr;gap:18px;padding:20px}
+.panel{background:linear-gradient(180deg,var(--panel),#1a1026);border:1px solid #493257;border-radius:22px;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+.mission{padding:22px;line-height:1.7;font-size:16px}
+.mission h2{margin-top:0;color:var(--gold)}
+.mission p{color:#eee5f3}
+.question{padding:22px;position:sticky;top:16px;align-self:start;background:linear-gradient(180deg,#281936,#21152f)}
+.qtag{display:inline-block;padding:7px 12px;border-radius:999px;font-weight:900;color:#1d1027;background:linear-gradient(90deg,var(--gold),var(--pink))}
+#qtext{font-size:20px;font-weight:800;line-height:1.45;margin:16px 0}
+#answers{display:grid;gap:11px}
+.answer{text-align:left;border:1.5px solid #4c3958;background:#2a1d38;color:#fff;border-radius:14px;padding:13px 14px;font-size:15px;line-height:1.42;cursor:pointer;transition:.18s}
+.answer:hover:not(:disabled){transform:translateY(-1px);border-color:var(--cyan);background:#342347}
+.answer.correct{background:#123525;border-color:var(--good)}
+.answer.wrong{background:#3b1520;border-color:var(--bad)}
+#feedback{min-height:68px;margin-top:14px;padding:12px 14px;border-radius:12px;background:#181020;color:var(--muted);line-height:1.45;border:1px solid #40304c}
+#feedback.good{background:#102c20;color:#d8ffe8;border-color:#2e7e57}
+#feedback.bad{background:#37131e;color:#ffdbe1;border-color:#8a3149}
+.nextwrap{display:flex;justify-content:flex-end;margin-top:14px}
+#next{border:0;border-radius:12px;padding:12px 18px;font-weight:900;cursor:pointer;color:#1d1027;background:linear-gradient(90deg,var(--gold),var(--cyan))}
+#next:disabled{opacity:.38;cursor:not-allowed}
+.overlay{position:fixed;inset:0;background:rgba(10,6,16,.84);display:flex;align-items:center;justify-content:center;z-index:20;padding:20px;backdrop-filter:blur(8px)}
+.hide{display:none}
+.modal{width:min(500px,94vw);background:#21152f;border:1px solid #4a3356;border-radius:24px;padding:30px;text-align:center;box-shadow:0 25px 80px rgba(0,0,0,.5)}
+.modal button{border:0;border-radius:12px;padding:12px 18px;font-weight:900;cursor:pointer;color:#1d1027;background:linear-gradient(90deg,var(--gold),var(--cyan))}
+@media(max-width:850px){.main{grid-template-columns:1fr}.question{position:static}}
+@media(max-width:560px){body{padding:10px}header{padding:22px 18px}header:after{font-size:22px;right:6px;top:8px}.main{padding:12px}.mission,.question{padding:17px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<h1>🛸 Grade 12 - Unit 5 - Exercise 1 (61-80) - Option C1</h1>
+<p><b>Career Space Mission</b></p><p>Choose the best answer A, B, C, or D to complete each sentence.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Question: <span id="qnum">1/15</span></span>
+<span class="pill">Score: <span id="score">0</span>/15</span>
+</div>
+<div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="main">
+<div class="panel mission">
+<h2>🛸 Career Space Mission</h2>
+<p>Welcome aboard the World of Work spacecraft. Each correct answer powers the ship toward the next career checkpoint.</p>
+<p><b>Rules:</b> A wrong answer costs one heart. You cannot continue until the correct answer is selected.</p>
+<p>🌌 Focus: workplace collocations, phrasal verbs, word choice, prepositions, and employment vocabulary.</p>
+<p>🚀 Complete all 15 checkpoints before all five hearts are lost.</p>
+</div>
+
+<div class="panel question">
+<div class="qtag" id="qtag">Question 1</div>
+<div id="qtext"></div>
+<div id="answers"></div>
+<div id="feedback">Choose the best answer.</div>
+<div class="nextwrap"><button id="next" disabled>Next ➜</button></div>
+</div>
+</div>
+</div>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Out of hearts!</h1>
+<p>You have used all 5 hearts. Restart the adventure and try again.</p>
+<button onclick="restart()">↻ Try Again</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>🚀 Mission Complete!</h1>
+<p>You completed the Career Space Mission challenge.</p>
+<h2>Final score: <span id="final">0</span>/15</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const base=[{"q":"Candidates who can demonstrate strong communication skills are more likely to _________ out from others with similar academic qualifications.","opts":[["stand",true],["turn",false],["set",false],["bring",false]],"exp":"The fixed expression is “stand out from” = nổi bật so với người/cái khác."},{"q":"Before signing an employment contract, applicants should carefully _________ themselves of the working conditions and benefits offered by the company.","opts":[["assure",true],["ensure",false],["insure",false],["secure",false]],"exp":"“Assure oneself of something” means check or make certain of it."},{"q":"The company has decided to _________ several new positions in response to the growing demand for its services.","opts":[["generate",false],["create",true],["establish",false],["produce",false]],"exp":"The natural collocation is “create new jobs/positions.”"},{"q":"Employees who want to _________ their career prospects should be willing to learn new skills and take on challenging tasks.","opts":[["improve",true],["promote",false],["raise",false],["increase",false]],"exp":"The natural collocation is “improve one's career prospects.”"},{"q":"The new manager quickly earned the _________ of her colleagues by treating everyone fairly and taking responsibility for difficult decisions.","opts":[["respect",true],["reputation",false],["impression",false],["appreciation",false]],"exp":"The fixed collocation is “earn the respect of somebody.”"},{"q":"Some graduates find that their first job does not _________ their expectations, particularly in terms of salary and career prospects.","opts":[["achieve",false],["reach",false],["meet",true],["accomplish",false]],"exp":"We say “meet expectations/requirements/standards/targets.”"},{"q":"The employer agreed to _________ the employee's request for flexible working hours after considering her circumstances.","opts":[["grant",true],["provide",false],["supply",false],["deliver",false]],"exp":"“Grant a request” means officially approve or allow it."},{"q":"Workers are encouraged to _________ advantage of professional development programmes provided by their employers.","opts":[["get",false],["make",false],["take",true],["gain",false]],"exp":"The fixed expression is “take advantage of something.”"},{"q":"The recruitment process is designed to _________ applicants who do not possess the minimum qualifications required for the position.","opts":[["rule out",true],["break down",false],["put off",false],["take away",false]],"exp":"“Rule out” means eliminate or exclude from consideration."},{"q":"Employees are expected to keep their professional knowledge _________ to date in an increasingly competitive labour market.","opts":[["in",false],["on",false],["up",true],["at",false]],"exp":"The fixed expression is “keep something up to date.”"},{"q":"The company has earned a good _________ for providing its employees with fair pay and opportunities for career development.","opts":[["impression",false],["reputation",true],["recognition",false],["consideration",false]],"exp":"The standard collocation is “earn/have a good reputation for something.”"},{"q":"During the interview, candidates may be asked how they would _________ with a difficult customer or an unexpected problem at work.","opts":[["cope",false],["deal",true],["handle with",false],["manage to",false]],"exp":"The correct structure is “deal with + person/problem.” “Cope” would require “cope with.”"},{"q":"Instead of focusing solely on academic qualifications, many employers now place greater _________ on practical skills and relevant experience.","opts":[["emphasis",true],["attention",false],["importance",false],["consideration",false]],"exp":"The fixed collocation is “place emphasis on something.”"},{"q":"Employees who consistently perform well may become _________ for performance-related bonuses at the end of the year.","opts":[["suitable",false],["capable",false],["eligible",true],["available",false]],"exp":"The correct structure is “be eligible for something.”"},{"q":"The company offered several experienced employees higher salaries in an effort to _________ them from leaving for rival firms.","opts":[["avoid",false],["prevent",true],["protect",false],["restrict",false]],"exp":"The correct structure is “prevent somebody from V-ing.”"}];
+let qs=[],i=0,lives=5,score=0,answered=false;
+const letters=["A","B","C","D"];
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const y=Math.floor(Math.random()*(x+1));
+    [a[x],a[y]]=[a[y],a[x]];
+  }
+  return a;
+}
+
+function prepare(){
+  qs=base.map(x=>({
+    q:x.q,
+    exp:x.exp,
+    opts:shuffle(x.opts.map(o=>({text:o[0],correct:o[1]})))
+  }));
+}
+
+function updateHearts(){
+  hearts.textContent="❤️".repeat(lives)+"🖤".repeat(5-lives);
+}
+
+function render(){
+  answered=false;
+  next.disabled=true;
+  feedback.className="";
+  feedback.textContent="Choose the best answer.";
+  qnum.textContent=`${i+1}/${qs.length}`;
+  qtag.textContent=`Question ${i+1}`;
+  qtext.textContent=qs[i].q;
+  answers.innerHTML="";
+
+  qs[i].opts.forEach((o,j)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<b>${letters[j]}.</b> ${o.text}`;
+    b.onclick=()=>choose(b,o);
+    answers.appendChild(b);
+  });
+}
+
+function choose(btn,opt){
+  if(answered||btn.disabled)return;
+
+  if(opt.correct){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    [...answers.children].forEach(b=>b.disabled=true);
+    feedback.className="good";
+    feedback.innerHTML=`✅ <b>Correct!</b><br>${qs[i].exp}`;
+    next.disabled=false;
+  }else{
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    feedback.className="bad";
+    feedback.textContent="❌ Incorrect. Try again.";
+
+    if(lives<=0){
+      over.classList.remove("hide");
+    }
+  }
+}
+
+next.onclick=()=>{
+  if(!answered)return;
+  if(i<qs.length-1){
+    i++;
+    render();
+  }else{
+    final.textContent=score;
+    done.classList.remove("hide");
+  }
+};
+
+function restart(){
+  i=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  over.classList.add("hide");
+  done.classList.add("hide");
+  prepare();
+  updateHearts();
+  render();
+}
+
+prepare();
+updateHearts();
+render();
+</script>
+</body>
+</html>

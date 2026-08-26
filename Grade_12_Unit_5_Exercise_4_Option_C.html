@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 5 - Exercise 4 - Option C</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --gold:#f6c453;
+  --gold2:#ffe89f;
+  --gold3:#fff6cf;
+  --cream:#fffdf8;
+  --paper:#fffaf0;
+  --rose:#f6d4c9;
+  --text:#634c2f;
+  --muted:#8c7658;
+  --good:#55b98a;
+  --bad:#e97086;
+}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:22px;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 10% 16%,rgba(246,196,83,.28),transparent 24%),
+    radial-gradient(circle at 88% 14%,rgba(255,232,159,.46),transparent 24%),
+    radial-gradient(circle at 78% 88%,rgba(246,212,201,.24),transparent 26%),
+    linear-gradient(145deg,#fffdf8,#fff9eb 52%,#fffdf9);
+}
+.shell{
+  max-width:1200px;
+  margin:auto;
+  border-radius:30px;
+  overflow:hidden;
+  background:rgba(255,255,255,.96);
+  border:1px solid #efdca9;
+  box-shadow:0 24px 70px rgba(150,112,35,.15);
+}
+header{
+  position:relative;
+  overflow:hidden;
+  padding:30px;
+  background:linear-gradient(120deg,#fff2b8,#f6c453 48%,#fff6cf);
+}
+header:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 8% 20%,rgba(255,255,255,.85) 0 2px,transparent 3px),
+    radial-gradient(circle at 22% 72%,rgba(255,255,255,.75) 0 2px,transparent 3px),
+    radial-gradient(circle at 66% 26%,rgba(255,255,255,.8) 0 2px,transparent 3px),
+    radial-gradient(circle at 84% 70%,rgba(255,255,255,.86) 0 2px,transparent 3px);
+}
+header:after{
+  content:"💌  ✉️  ✨  💼  🌟";
+  position:absolute;
+  right:18px;
+  top:18px;
+  font-size:30px;
+  letter-spacing:10px;
+  opacity:.67;
+}
+header h1{
+  position:relative;
+  z-index:1;
+  margin:0 0 8px;
+  font-size:clamp(26px,4vw,38px);
+  color:#624b2c;
+}
+header p{
+  position:relative;
+  z-index:1;
+  margin:5px 0;
+  line-height:1.5;
+  color:#775d39;
+}
+.status{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:14px 24px;
+  background:#fffdf8;
+  border-bottom:1px solid #efdfb8;
+}
+.pill{
+  background:#fff;
+  border:1px solid #ecdba7;
+  border-radius:999px;
+  padding:8px 13px;
+  font-weight:800;
+  box-shadow:0 6px 15px rgba(150,112,35,.06);
+}
+.main{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:18px;
+  padding:20px;
+}
+.panel{
+  background:linear-gradient(180deg,#ffffff,#fffdf8);
+  border:1px solid #efdfb9;
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(150,112,35,.08);
+}
+.passage{
+  padding:22px;
+  line-height:1.75;
+  font-size:16px;
+  max-height:72vh;
+  overflow:auto;
+}
+.passage h2{margin-top:0;color:#b3831c}
+.passage b{
+  color:#9f7718;
+  background:#fff7d9;
+  padding:2px 5px;
+  border-radius:6px;
+}
+.question{
+  padding:22px;
+  position:sticky;
+  top:16px;
+  align-self:start;
+  background:linear-gradient(180deg,#fffefb,#fffaf1);
+}
+.qtag{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:999px;
+  font-weight:900;
+  color:#5f4b2d;
+  background:linear-gradient(90deg,var(--gold3),var(--gold),var(--gold2));
+  box-shadow:0 4px 12px rgba(188,145,45,.14);
+}
+#answers{display:grid;gap:11px;margin-top:18px}
+.answer{
+  text-align:left;
+  border:1.5px solid #eadfbd;
+  background:#fff;
+  color:#5f4d33;
+  border-radius:14px;
+  padding:13px 14px;
+  font-size:15px;
+  line-height:1.42;
+  cursor:pointer;
+  transition:.18s;
+}
+.answer:hover:not(:disabled){
+  transform:translateY(-1px);
+  border-color:var(--gold);
+  background:#fffdf6;
+}
+.answer.correct{
+  background:#effff7;
+  border-color:var(--good);
+}
+.answer.wrong{
+  background:#fff1f4;
+  border-color:var(--bad);
+}
+#feedback{
+  min-height:68px;
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#fff;
+  color:var(--muted);
+  line-height:1.45;
+  border:1px solid #eee1bd;
+}
+#feedback.good{
+  background:#effff7;
+  color:#2f7a5e;
+  border-color:#9eddbf;
+}
+#feedback.bad{
+  background:#fff1f4;
+  color:#b55268;
+  border-color:#efb1bf;
+}
+.nextwrap{display:flex;justify-content:flex-end;margin-top:14px}
+#next{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#5e4a2e;
+  background:linear-gradient(90deg,var(--gold3),var(--gold),var(--gold2));
+}
+#next:disabled{opacity:.38;cursor:not-allowed}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(105,82,38,.24);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
+  padding:20px;
+  backdrop-filter:blur(8px);
+}
+.hide{display:none}
+.modal{
+  width:min(500px,94vw);
+  background:#fffdf7;
+  border:1px solid #ecdca9;
+  border-radius:24px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 25px 80px rgba(148,112,35,.18);
+}
+.modal button{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#5e4a2e;
+  background:linear-gradient(90deg,var(--gold3),var(--gold),var(--gold2));
+}
+@media(max-width:900px){
+  .main{grid-template-columns:1fr}
+  .question{position:static}
+  .passage{max-height:none}
+}
+@media(max-width:560px){
+  body{padding:10px}
+  header{padding:22px 18px}
+  header:after{font-size:22px;right:6px;top:8px}
+  .main{padding:12px}
+  .passage,.question{padding:17px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<h1>💌 Grade 12 - Unit 5 - Exercise 4 - Option C</h1>
+<p><b>Golden Career Mailbox</b></p>
+<p>Job Application Letter — Choose the best answer A, B, C, or D for blanks 1–5.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Letter Blank: <span id="qnum">1/5</span></span>
+<span class="pill">Stars: <span id="score">0</span>/5</span>
+</div>
+<div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="main">
+<div class="panel passage">
+
+<h2>Job Application Letter</h2>
+
+<p><b>Dear Hiring Manager,</b></p>
+
+<p>I am writing in response to your advertisement for a part-time customer service assistant. Having previously worked in a busy retail environment, I believe that my experience makes me well <b>(1) _________</b> for the position. In my previous job, I was responsible for dealing with customer enquiries, processing orders, and resolving minor complaints.</p>
+
+<p>Working directly with the public taught me the importance of remaining patient and professional, particularly when dealing with <b>(2) _________</b> dissatisfied customers. I also learned how to respond effectively <b>(3) _________</b> unexpected problems without having to rely constantly on a supervisor. These experiences have enabled me to develop strong communication and problem-solving skills.</p>
+
+<p>I am currently completing my final year of college and would therefore prefer a position with flexible working hours. <b>(4) _________</b> my limited availability during weekday mornings, I am able to work every afternoon as well as at weekends. I would be pleased to attend an interview at your convenience and can provide professional references if required.</p>
+
+<p>Should my application be <b>(5) _________</b>, I would be available to start work at the beginning of September.</p>
+
+<p>I look forward to hearing from you.</p>
+
+<p><b>Yours faithfully,<br>Minh Anh</b></p>
+
+</div>
+
+<div class="panel question">
+<div class="qtag" id="qtag">Letter Blank 1</div>
+<div id="answers"></div>
+<div id="feedback">Choose the best answer for the current blank.</div>
+<div class="nextwrap"><button id="next" disabled>Next Letter ➜</button></div>
+</div>
+</div>
+</div>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Mailbox Paused!</h1>
+<p>You have used all 5 hearts. Restart and try again.</p>
+<button onclick="restart()">↻ Send Again</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>🌟 Application Sent!</h1>
+<p>You completed all 5 application-letter blanks.</p>
+<h2>Final score: <span id="final">0</span>/5</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const base=[{"q": "Question 1", "opts": [["qualified", false], ["suitable", true], ["relevant", false], ["applicable", false]], "exp": "“Be suitable for a position” = phù hợp với một vị trí."}, {"q": "Question 2", "opts": [["a", false], ["an", false], ["the", false], ["Ø", true]], "exp": "“Dissatisfied customers” is a plural noun phrase used generally, so no article is needed."}, {"q": "Question 3", "opts": [["for", false], ["with", false], ["to", true], ["on", false]], "exp": "The correct structure is “respond to + noun/problem.”"}, {"q": "Question 4", "opts": [["Although", false], ["Despite", true], ["Because", false], ["However", false]], "exp": "“Despite” is followed by a noun phrase: “my limited availability...”"}, {"q": "Question 5", "opts": [["successful", true], ["successive", false], ["succeeding", false], ["successfully", false]], "exp": "“Should my application be successful...” is an inverted conditional meaning “If my application is successful...”"}];
+let qs=[],i=0,lives=5,score=0,answered=false;
+const letters=["A","B","C","D"];
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const y=Math.floor(Math.random()*(x+1));
+    [a[x],a[y]]=[a[y],a[x]];
+  }
+  return a;
+}
+
+function prepare(){
+  qs=base.map(x=>({
+    q:x.q,
+    exp:x.exp,
+    opts:shuffle(x.opts.map(o=>({text:o[0],correct:o[1]})))
+  }));
+}
+
+function updateHearts(){
+  document.getElementById("hearts").textContent="❤️".repeat(lives)+"🤍".repeat(5-lives);
+}
+
+function render(){
+  answered=false;
+  document.getElementById("next").disabled=true;
+  const feedback=document.getElementById("feedback");
+  feedback.className="";
+  feedback.textContent="Choose the best answer for the current blank.";
+  document.getElementById("qnum").textContent=`${i+1}/${qs.length}`;
+  document.getElementById("qtag").textContent=`Letter Blank ${i+1}`;
+  const answers=document.getElementById("answers");
+  answers.innerHTML="";
+  qs[i].opts.forEach((o,j)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<b>${letters[j]}.</b> ${o.text}`;
+    b.onclick=()=>choose(b,o);
+    answers.appendChild(b);
+  });
+}
+
+function choose(btn,opt){
+  if(answered||btn.disabled)return;
+  const feedback=document.getElementById("feedback");
+  const answers=document.getElementById("answers");
+
+  if(opt.correct){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    [...answers.children].forEach(b=>b.disabled=true);
+    feedback.className="good";
+    feedback.innerHTML=`✅ <b>Correct!</b><br>${qs[i].exp}`;
+    document.getElementById("next").disabled=false;
+  }else{
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    feedback.className="bad";
+    feedback.textContent="❌ Incorrect. Try again.";
+    if(lives<=0) document.getElementById("over").classList.remove("hide");
+  }
+}
+
+document.getElementById("next").onclick=()=>{
+  if(!answered)return;
+  if(i<qs.length-1){
+    i++;
+    render();
+  }else{
+    document.getElementById("final").textContent=score;
+    document.getElementById("done").classList.remove("hide");
+  }
+};
+
+function restart(){
+  i=0;lives=5;score=0;answered=false;
+  document.getElementById("score").textContent="0";
+  document.getElementById("over").classList.add("hide");
+  document.getElementById("done").classList.add("hide");
+  prepare();updateHearts();render();
+}
+
+prepare();
+updateHearts();
+render();
+</script>
+</body>
+</html>

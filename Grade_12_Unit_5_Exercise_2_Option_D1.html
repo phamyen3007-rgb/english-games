@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 5 - Exercise 2 - Option D1</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --mint:#e8fff4;
+  --mint2:#bcefd5;
+  --lemon:#fff7b8;
+  --lemon2:#ffe985;
+  --sky:#e8f7ff;
+  --aqua:#bfefff;
+  --cream:#fffef8;
+  --text:#3d5b57;
+  --muted:#6d8580;
+  --good:#51b98a;
+  --bad:#ea7186;
+}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:22px;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 12% 18%,rgba(188,239,213,.48),transparent 25%),
+    radial-gradient(circle at 88% 14%,rgba(255,233,133,.40),transparent 24%),
+    radial-gradient(circle at 78% 88%,rgba(191,239,255,.40),transparent 26%),
+    linear-gradient(145deg,#f9fffc,#f2fffa 48%,#f7fdff);
+}
+.shell{
+  max-width:1200px;
+  margin:auto;
+  border-radius:30px;
+  overflow:hidden;
+  background:rgba(255,255,255,.95);
+  border:1px solid #dcefe6;
+  box-shadow:0 24px 70px rgba(70,120,105,.13);
+}
+header{
+  position:relative;
+  overflow:hidden;
+  padding:28px 30px;
+  background:linear-gradient(120deg,#e8fff4,#fff7b8 52%,#e8f7ff);
+}
+header:after{
+  content:"🍋  🧃  🌿  💼  ☀️";
+  position:absolute;
+  right:20px;
+  top:18px;
+  font-size:30px;
+  letter-spacing:10px;
+  opacity:.60;
+}
+header h1{
+  position:relative;
+  margin:0 0 8px;
+  font-size:clamp(26px,4vw,38px);
+  z-index:1;
+  color:#3f5e59;
+}
+header p{
+  position:relative;
+  margin:5px 0;
+  line-height:1.5;
+  color:#628078;
+  z-index:1;
+}
+.status{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:14px 24px;
+  background:#fbfffd;
+  border-bottom:1px solid #dcefe6;
+}
+.pill{
+  background:#fff;
+  border:1px solid #d7ece3;
+  border-radius:999px;
+  padding:8px 13px;
+  font-weight:800;
+  box-shadow:0 6px 15px rgba(70,120,105,.05);
+}
+.main{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:18px;
+  padding:20px;
+}
+.panel{
+  background:linear-gradient(180deg,#ffffff,#fbfffd);
+  border:1px solid #dceee7;
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(70,120,105,.07);
+}
+.passage{
+  padding:22px;
+  line-height:1.75;
+  font-size:16px;
+  max-height:72vh;
+  overflow:auto;
+}
+.passage h2{margin-top:0;color:#4a9a80}
+.passage b{
+  color:#3c8b76;
+  background:#edfff6;
+  padding:2px 5px;
+  border-radius:6px;
+}
+.question{
+  padding:22px;
+  position:sticky;
+  top:16px;
+  align-self:start;
+  background:linear-gradient(180deg,#fcfffd,#f6fffb);
+}
+.qtag{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:999px;
+  font-weight:900;
+  color:#3f5b56;
+  background:linear-gradient(90deg,var(--mint),var(--lemon),var(--sky));
+}
+#answers{display:grid;gap:11px;margin-top:18px}
+.answer{
+  text-align:left;
+  border:1.5px solid #d9eae4;
+  background:#fff;
+  color:#46635e;
+  border-radius:14px;
+  padding:13px 14px;
+  font-size:15px;
+  line-height:1.42;
+  cursor:pointer;
+  transition:.18s;
+}
+.answer:hover:not(:disabled){
+  transform:translateY(-1px);
+  border-color:var(--mint2);
+  background:#f9fffc;
+}
+.answer.correct{
+  background:#ecfff6;
+  border-color:var(--good);
+}
+.answer.wrong{
+  background:#fff0f3;
+  border-color:var(--bad);
+}
+#feedback{
+  min-height:68px;
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#fff;
+  color:var(--muted);
+  line-height:1.45;
+  border:1px solid #dcebe6;
+}
+#feedback.good{
+  background:#effff7;
+  color:#2f7a5e;
+  border-color:#9eddbf;
+}
+#feedback.bad{
+  background:#fff1f4;
+  color:#b55268;
+  border-color:#efb1bf;
+}
+.nextwrap{display:flex;justify-content:flex-end;margin-top:14px}
+#next{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#3f5b56;
+  background:linear-gradient(90deg,var(--mint),var(--lemon),var(--sky));
+}
+#next:disabled{opacity:.38;cursor:not-allowed}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(60,95,85,.24);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
+  padding:20px;
+  backdrop-filter:blur(8px);
+}
+.hide{display:none}
+.modal{
+  width:min(500px,94vw);
+  background:#fbfffd;
+  border:1px solid #d7ece3;
+  border-radius:24px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 25px 80px rgba(70,120,105,.18);
+}
+.modal button{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#3f5b56;
+  background:linear-gradient(90deg,var(--mint),var(--lemon),var(--sky));
+}
+@media(max-width:900px){
+  .main{grid-template-columns:1fr}
+  .question{position:static}
+  .passage{max-height:none}
+}
+@media(max-width:560px){
+  body{padding:10px}
+  header{padding:22px 18px}
+  header:after{font-size:22px;right:6px;top:8px}
+  .main{padding:12px}
+  .passage,.question{padding:17px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<h1>🍋 Grade 12 - Unit 5 - Exercise 2 - Option D1</h1>
+<p><b>Fresh Career Lemonade Stand</b></p>
+<p>WORLD OF WORK — Read the passage and choose the best answer A, B, C, or D for blanks 1–8.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Cup: <span id="qnum">1/8</span></span>
+<span class="pill">Score: <span id="score">0</span>/8</span>
+</div>
+<div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="main">
+<div class="panel passage">
+<h2>🧃 Lan's Career Journey</h2>
+
+<p>When Lan first joined an international logistics company, she was employed on a temporary contract. Although the position offered valuable experience, there was no guarantee of long-term job <b>(1) _________</b>. Determined to prove herself, she volunteered for challenging assignments and was always willing to <b>(2) _________</b> additional responsibilities when colleagues were absent.</p>
+
+<p>Her dedication soon impressed her supervisor. Within several months, Lan was trusted to <b>(3) _________</b> important tasks without constant guidance. However, the job was far from easy. During particularly busy periods, employees were sometimes required to work <b>(4) _________</b> in order to ensure that customers' orders were processed on schedule.</p>
+
+<p>When a permanent position became <b>(5) _________</b> in another department, Lan decided to apply for it. Competition was intense, as several candidates had more experience than she did. Nevertheless, her manager agreed to <b>(6) _________</b> a strong recommendation on her behalf, highlighting both her reliability and her ability to work under pressure.</p>
+
+<p>Lan eventually secured the position. Apart from a higher salary, the company offered several additional <b>(7) _________</b>, including private health insurance and paid professional training. More importantly, her new role provided opportunities to <b>(8) _________</b> valuable experience in managing international projects.</p>
+
+</div>
+
+<div class="panel question">
+<div class="qtag" id="qtag">Cup 1</div>
+<div id="answers"></div>
+<div id="feedback">Choose the best answer for the current blank.</div>
+<div class="nextwrap"><button id="next" disabled>Next Cup ➜</button></div>
+</div>
+</div>
+</div>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Lemonade Break!</h1>
+<p>You have used all 5 hearts. Restart and try again.</p>
+<button onclick="restart()">↻ Refill & Try Again</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>☀️ Stand Complete!</h1>
+<p>You completed all 8 career blanks.</p>
+<h2>Final score: <span id="final">0</span>/8</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const base=[{"q": "Question 1", "opts": [["stability", false], ["security", true], ["protection", false], ["certainty", false]], "exp": "“Job security” = sự đảm bảo/ổn định việc làm."}, {"q": "Question 2", "opts": [["undertake", true], ["carry", false], ["hold", false], ["bear", false]], "exp": "“Undertake responsibilities” = đảm nhận trách nhiệm."}, {"q": "Question 3", "opts": [["perform", true], ["operate", false], ["conduct", false], ["execute", false]], "exp": "“Perform a task” = thực hiện nhiệm vụ."}, {"q": "Question 4", "opts": [["overtime", true], ["extra-time", false], ["overwork", false], ["supplementary", false]], "exp": "The fixed expression is “work overtime.”"}, {"q": "Question 5", "opts": [["vacant", false], ["available", true], ["accessible", false], ["applicable", false]], "exp": "“A position becomes available” = có vị trí trống để ứng tuyển."}, {"q": "Question 6", "opts": [["submit", false], ["deliver", false], ["provide", true], ["issue", false]], "exp": "“Provide a recommendation” = đưa/cung cấp lời giới thiệu."}, {"q": "Question 7", "opts": [["profits", false], ["allowances", false], ["benefits", true], ["bonuses", false]], "exp": "“Employee benefits” = phúc lợi dành cho nhân viên."}, {"q": "Question 8", "opts": [["earn", false], ["gain", true], ["achieve", false], ["collect", false]], "exp": "The standard collocation is “gain valuable experience.”"}];
+let qs=[],i=0,lives=5,score=0,answered=false;
+const letters=["A","B","C","D"];
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const y=Math.floor(Math.random()*(x+1));
+    [a[x],a[y]]=[a[y],a[x]];
+  }
+  return a;
+}
+
+function prepare(){
+  qs=base.map(x=>({
+    q:x.q,
+    exp:x.exp,
+    opts:shuffle(x.opts.map(o=>({text:o[0],correct:o[1]})))
+  }));
+}
+
+function updateHearts(){
+  document.getElementById("hearts").textContent="❤️".repeat(lives)+"🤍".repeat(5-lives);
+}
+
+function render(){
+  answered=false;
+  document.getElementById("next").disabled=true;
+  const feedback=document.getElementById("feedback");
+  feedback.className="";
+  feedback.textContent="Choose the best answer for the current blank.";
+  document.getElementById("qnum").textContent=`${i+1}/${qs.length}`;
+  document.getElementById("qtag").textContent=`Cup ${i+1}`;
+  const answers=document.getElementById("answers");
+  answers.innerHTML="";
+  qs[i].opts.forEach((o,j)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<b>${letters[j]}.</b> ${o.text}`;
+    b.onclick=()=>choose(b,o);
+    answers.appendChild(b);
+  });
+}
+
+function choose(btn,opt){
+  if(answered||btn.disabled)return;
+  const feedback=document.getElementById("feedback");
+  const answers=document.getElementById("answers");
+
+  if(opt.correct){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    [...answers.children].forEach(b=>b.disabled=true);
+    feedback.className="good";
+    feedback.innerHTML=`✅ <b>Correct!</b><br>${qs[i].exp}`;
+    document.getElementById("next").disabled=false;
+  }else{
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    feedback.className="bad";
+    feedback.textContent="❌ Incorrect. Try again.";
+    if(lives<=0) document.getElementById("over").classList.remove("hide");
+  }
+}
+
+document.getElementById("next").onclick=()=>{
+  if(!answered)return;
+  if(i<qs.length-1){
+    i++;
+    render();
+  }else{
+    document.getElementById("final").textContent=score;
+    document.getElementById("done").classList.remove("hide");
+  }
+};
+
+function restart(){
+  i=0;lives=5;score=0;answered=false;
+  document.getElementById("score").textContent="0";
+  document.getElementById("over").classList.add("hide");
+  document.getElementById("done").classList.add("hide");
+  prepare();updateHearts();render();
+}
+
+prepare();
+updateHearts();
+render();
+</script>
+</body>
+</html>

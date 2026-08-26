@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 5 - Exercise 3 - Option D</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --gold:#f7cc5f;
+  --gold2:#ffe89a;
+  --gold3:#fff4c9;
+  --cream:#fffdf7;
+  --champagne:#fff8e7;
+  --text:#624d2d;
+  --muted:#8a7455;
+  --good:#55b98a;
+  --bad:#e97086;
+}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:22px;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 10% 15%,rgba(247,204,95,.28),transparent 24%),
+    radial-gradient(circle at 90% 12%,rgba(255,232,154,.48),transparent 24%),
+    radial-gradient(circle at 75% 88%,rgba(255,244,201,.52),transparent 26%),
+    linear-gradient(145deg,#fffdf8,#fff9e9 52%,#fffefb);
+}
+.shell{
+  max-width:1200px;
+  margin:auto;
+  border-radius:30px;
+  overflow:hidden;
+  background:rgba(255,255,255,.96);
+  border:1px solid #efddae;
+  box-shadow:0 24px 70px rgba(150,112,35,.15);
+}
+header{
+  position:relative;
+  overflow:hidden;
+  padding:30px;
+  background:linear-gradient(120deg,#fff2b5,#f7cc5f 48%,#fff7d7);
+}
+header:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 8% 22%,rgba(255,255,255,.85) 0 2px,transparent 3px),
+    radial-gradient(circle at 18% 70%,rgba(255,255,255,.75) 0 2px,transparent 3px),
+    radial-gradient(circle at 62% 25%,rgba(255,255,255,.8) 0 2px,transparent 3px),
+    radial-gradient(circle at 82% 68%,rgba(255,255,255,.88) 0 2px,transparent 3px);
+}
+header:after{
+  content:"🎠  ✨  🌟  💼  🪙";
+  position:absolute;
+  right:18px;
+  top:18px;
+  font-size:30px;
+  letter-spacing:10px;
+  opacity:.66;
+}
+header h1{
+  position:relative;
+  z-index:1;
+  margin:0 0 8px;
+  font-size:clamp(26px,4vw,38px);
+  color:#624c29;
+}
+header p{
+  position:relative;
+  z-index:1;
+  margin:5px 0;
+  line-height:1.5;
+  color:#765e36;
+}
+.status{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:14px 24px;
+  background:#fffdf7;
+  border-bottom:1px solid #efdfb7;
+}
+.pill{
+  background:#fff;
+  border:1px solid #ecdba8;
+  border-radius:999px;
+  padding:8px 13px;
+  font-weight:800;
+  box-shadow:0 6px 15px rgba(150,112,35,.06);
+}
+.main{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:18px;
+  padding:20px;
+}
+.panel{
+  background:linear-gradient(180deg,#ffffff,#fffdf8);
+  border:1px solid #efdfb9;
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(150,112,35,.08);
+}
+.passage{
+  padding:22px;
+  line-height:1.75;
+  font-size:16px;
+  max-height:72vh;
+  overflow:auto;
+}
+.passage h2{margin-top:0;color:#b4861e}
+.passage b{
+  color:#9d7619;
+  background:#fff7d8;
+  padding:2px 5px;
+  border-radius:6px;
+}
+.question{
+  padding:22px;
+  position:sticky;
+  top:16px;
+  align-self:start;
+  background:linear-gradient(180deg,#fffefb,#fffaf0);
+}
+.qtag{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:999px;
+  font-weight:900;
+  color:#5f4b2c;
+  background:linear-gradient(90deg,var(--gold3),var(--gold),var(--gold2));
+  box-shadow:0 4px 12px rgba(188,145,45,.14);
+}
+#answers{display:grid;gap:11px;margin-top:18px}
+.answer{
+  text-align:left;
+  border:1.5px solid #eadfbd;
+  background:#fff;
+  color:#5f4d33;
+  border-radius:14px;
+  padding:13px 14px;
+  font-size:15px;
+  line-height:1.42;
+  cursor:pointer;
+  transition:.18s;
+}
+.answer:hover:not(:disabled){
+  transform:translateY(-1px);
+  border-color:var(--gold);
+  background:#fffdf6;
+}
+.answer.correct{
+  background:#effff7;
+  border-color:var(--good);
+}
+.answer.wrong{
+  background:#fff1f4;
+  border-color:var(--bad);
+}
+#feedback{
+  min-height:68px;
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#fff;
+  color:var(--muted);
+  line-height:1.45;
+  border:1px solid #eee1bd;
+}
+#feedback.good{
+  background:#effff7;
+  color:#2f7a5e;
+  border-color:#9eddbf;
+}
+#feedback.bad{
+  background:#fff1f4;
+  color:#b55268;
+  border-color:#efb1bf;
+}
+.nextwrap{display:flex;justify-content:flex-end;margin-top:14px}
+#next{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#5e4a2e;
+  background:linear-gradient(90deg,var(--gold3),var(--gold),var(--gold2));
+}
+#next:disabled{opacity:.38;cursor:not-allowed}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(105,82,38,.24);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
+  padding:20px;
+  backdrop-filter:blur(8px);
+}
+.hide{display:none}
+.modal{
+  width:min(500px,94vw);
+  background:#fffdf7;
+  border:1px solid #ecdca9;
+  border-radius:24px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 25px 80px rgba(148,112,35,.18);
+}
+.modal button{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#5e4a2e;
+  background:linear-gradient(90deg,var(--gold3),var(--gold),var(--gold2));
+}
+@media(max-width:900px){
+  .main{grid-template-columns:1fr}
+  .question{position:static}
+  .passage{max-height:none}
+}
+@media(max-width:560px){
+  body{padding:10px}
+  header{padding:22px 18px}
+  header:after{font-size:22px;right:6px;top:8px}
+  .main{padding:12px}
+  .passage,.question{padding:17px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<h1>🎠 Grade 12 - Unit 5 - Exercise 3 - Option D</h1>
+<p><b>Golden Career Carousel</b></p>
+<p>Read the passage and choose the best answer A, B, C, or D for blanks 1–8.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Golden Stop: <span id="qnum">1/8</span></span>
+<span class="pill">Stars: <span id="score">0</span>/8</span>
+</div>
+<div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="main">
+<div class="panel passage">
+
+<h2>Starting a Career in Recruitment</h2>
+
+<p>Working in recruitment involves considerably more than simply matching applicants with available positions. Recruitment consultants are expected to assess candidates carefully and determine whether their qualifications and experience are relevant <b>(1) _________</b> the requirements of a particular role. A poor decision can be costly, especially when a company is seeking employees for positions involving considerable responsibility.</p>
+
+<p>Before recommending a candidate, recruiters normally conduct interviews and check professional references. <b>(2) _________</b> an applicant may appear highly suitable on paper, recruiters must also consider whether the person is likely to adapt successfully to the company's working environment. This is particularly important for positions <b>(3) _________</b> employees are expected to work closely with others and make decisions under pressure.</p>
+
+<p>Once a suitable candidate has been identified, the recruiter may be responsible for negotiating employment conditions. Applicants are increasingly interested not only in salary but also in benefits such as flexible working arrangements and opportunities for professional development. Companies that fail to <b>(4) _________</b> these expectations may find it difficult to attract highly qualified employees.</p>
+
+<p>The first few months after recruitment are equally important. New employees often need time to <b>(5) _________</b> themselves with unfamiliar procedures and workplace expectations. Managers should therefore provide appropriate guidance rather than assuming that new recruits can immediately work entirely on their own <b>(6) _________</b>.</p>
+
+<p>Recruitment can be particularly challenging when suitably qualified workers are in short supply. Under such circumstances, employers may have to reconsider their requirements or offer more attractive employment packages. Nevertheless, lowering recruitment standards simply to <b>(7) _________</b> a vacancy may create more serious problems in the long term. For this reason, successful companies tend to place considerable <b>(8) _________</b> on selecting employees whose abilities and attitudes match the demands of the job.</p>
+
+</div>
+
+<div class="panel question">
+<div class="qtag" id="qtag">Golden Stop 1</div>
+<div id="answers"></div>
+<div id="feedback">Choose the best answer for the current blank.</div>
+<div class="nextwrap"><button id="next" disabled>Next Golden Stop ➜</button></div>
+</div>
+</div>
+</div>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Carousel Paused!</h1>
+<p>You have used all 5 hearts. Restart and try again.</p>
+<button onclick="restart()">↻ Shine Again</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>🌟 Golden Carousel Complete!</h1>
+<p>You completed all 8 recruitment blanks.</p>
+<h2>Final score: <span id="final">0</span>/8</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const base=[{"q": "Question 1", "opts": [["for", false], ["with", false], ["to", true], ["on", false]], "exp": "The fixed structure is “be relevant to something.”"}, {"q": "Question 2", "opts": [["Since", false], ["Although", true], ["Provided", false], ["Unless", false]], "exp": "“Although” introduces the contrast between appearing suitable on paper and needing to assess real workplace adaptability."}, {"q": "Question 3", "opts": [["which", false], ["whose", false], ["where", true], ["when", false]], "exp": "“Where” can refer to positions in the sense of jobs in which employees are expected to do something."}, {"q": "Question 4", "opts": [["achieve", false], ["satisfy", true], ["fulfil", false], ["accomplish", false]], "exp": "The natural collocation is “satisfy expectations.”"}, {"q": "Question 5", "opts": [["familiarise", true], ["recognise", false], ["associate", false], ["identify", false]], "exp": "The correct structure is “familiarise oneself with something.”"}, {"q": "Question 6", "opts": [["responsibility", false], ["initiative", true], ["supervision", false], ["authority", false]], "exp": "The fixed phrase is “on one's own initiative.”"}, {"q": "Question 7", "opts": [["occupy", false], ["fill", true], ["cover", false], ["complete", false]], "exp": "The standard collocation is “fill a vacancy.”"}, {"q": "Question 8", "opts": [["emphasis", true], ["attention", false], ["priority", false], ["preference", false]], "exp": "The fixed structure is “place considerable emphasis on something.”"}];
+let qs=[],i=0,lives=5,score=0,answered=false;
+const letters=["A","B","C","D"];
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const y=Math.floor(Math.random()*(x+1));
+    [a[x],a[y]]=[a[y],a[x]];
+  }
+  return a;
+}
+
+function prepare(){
+  qs=base.map(x=>({
+    q:x.q,
+    exp:x.exp,
+    opts:shuffle(x.opts.map(o=>({text:o[0],correct:o[1]})))
+  }));
+}
+
+function updateHearts(){
+  document.getElementById("hearts").textContent="❤️".repeat(lives)+"🤍".repeat(5-lives);
+}
+
+function render(){
+  answered=false;
+  document.getElementById("next").disabled=true;
+  const feedback=document.getElementById("feedback");
+  feedback.className="";
+  feedback.textContent="Choose the best answer for the current blank.";
+  document.getElementById("qnum").textContent=`${i+1}/${qs.length}`;
+  document.getElementById("qtag").textContent=`Golden Stop ${i+1}`;
+
+  const answers=document.getElementById("answers");
+  answers.innerHTML="";
+  qs[i].opts.forEach((o,j)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<b>${letters[j]}.</b> ${o.text}`;
+    b.onclick=()=>choose(b,o);
+    answers.appendChild(b);
+  });
+}
+
+function choose(btn,opt){
+  if(answered||btn.disabled)return;
+  const feedback=document.getElementById("feedback");
+  const answers=document.getElementById("answers");
+
+  if(opt.correct){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    [...answers.children].forEach(b=>b.disabled=true);
+    feedback.className="good";
+    feedback.innerHTML=`✅ <b>Correct!</b><br>${qs[i].exp}`;
+    document.getElementById("next").disabled=false;
+  }else{
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    feedback.className="bad";
+    feedback.textContent="❌ Incorrect. Try again.";
+    if(lives<=0) document.getElementById("over").classList.remove("hide");
+  }
+}
+
+document.getElementById("next").onclick=()=>{
+  if(!answered)return;
+  if(i<qs.length-1){
+    i++;
+    render();
+  }else{
+    document.getElementById("final").textContent=score;
+    document.getElementById("done").classList.remove("hide");
+  }
+};
+
+function restart(){
+  i=0;lives=5;score=0;answered=false;
+  document.getElementById("score").textContent="0";
+  document.getElementById("over").classList.add("hide");
+  document.getElementById("done").classList.add("hide");
+  prepare();updateHearts();render();
+}
+
+prepare();
+updateHearts();
+render();
+</script>
+</body>
+</html>

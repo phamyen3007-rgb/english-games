@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 5 - Exercise 1 (61-80) - Option C</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#160d22;--panel:#21152f;--panel2:#2c1a3d;--gold:#ffd166;--pink:#ff8fab;--cyan:#78d6ff;--green:#88e0a8;--text:#fff8ff;--muted:#d7cde0;--good:#59d98e;--bad:#ff7185}
+body{margin:0;min-height:100vh;padding:22px;font-family:Arial,Helvetica,sans-serif;color:var(--text);
+background:radial-gradient(circle at 10% 15%,rgba(255,209,102,.15),transparent 25%),radial-gradient(circle at 90% 20%,rgba(120,214,255,.13),transparent 24%),linear-gradient(145deg,#100818,#1d0f2c 55%,#2b1535)}
+.shell{max-width:1180px;margin:auto;border-radius:30px;overflow:hidden;background:rgba(22,13,34,.97);border:1px solid rgba(255,255,255,.1);box-shadow:0 26px 80px rgba(0,0,0,.5)}
+header{position:relative;overflow:hidden;padding:28px 30px;background:linear-gradient(120deg,#5b2a74,#8a3d64 52%,#3b6b72)}
+header:after{content:"🎢  🎡  💼  🎯  🏆";position:absolute;right:20px;top:18px;font-size:30px;letter-spacing:10px;opacity:.32}
+header h1{position:relative;margin:0 0 8px;font-size:clamp(26px,4vw,38px);z-index:1}
+header p{position:relative;margin:5px 0;line-height:1.5;color:#fff4fb;z-index:1}
+.status{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 24px;background:#190f25;border-bottom:1px solid #3b2947}
+.pill{background:#281936;border:1px solid #493257;border-radius:999px;padding:8px 13px;font-weight:800}
+.main{display:grid;grid-template-columns:.72fr 1.28fr;gap:18px;padding:20px}
+.panel{background:linear-gradient(180deg,var(--panel),#1a1026);border:1px solid #493257;border-radius:22px;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+.mission{padding:22px;line-height:1.7;font-size:16px}
+.mission h2{margin-top:0;color:var(--gold)}
+.mission p{color:#eee5f3}
+.question{padding:22px;position:sticky;top:16px;align-self:start;background:linear-gradient(180deg,#281936,#21152f)}
+.qtag{display:inline-block;padding:7px 12px;border-radius:999px;font-weight:900;color:#1d1027;background:linear-gradient(90deg,var(--gold),var(--pink))}
+#qtext{font-size:20px;font-weight:800;line-height:1.45;margin:16px 0}
+#answers{display:grid;gap:11px}
+.answer{text-align:left;border:1.5px solid #4c3958;background:#2a1d38;color:#fff;border-radius:14px;padding:13px 14px;font-size:15px;line-height:1.42;cursor:pointer;transition:.18s}
+.answer:hover:not(:disabled){transform:translateY(-1px);border-color:var(--cyan);background:#342347}
+.answer.correct{background:#123525;border-color:var(--good)}
+.answer.wrong{background:#3b1520;border-color:var(--bad)}
+#feedback{min-height:68px;margin-top:14px;padding:12px 14px;border-radius:12px;background:#181020;color:var(--muted);line-height:1.45;border:1px solid #40304c}
+#feedback.good{background:#102c20;color:#d8ffe8;border-color:#2e7e57}
+#feedback.bad{background:#37131e;color:#ffdbe1;border-color:#8a3149}
+.nextwrap{display:flex;justify-content:flex-end;margin-top:14px}
+#next{border:0;border-radius:12px;padding:12px 18px;font-weight:900;cursor:pointer;color:#1d1027;background:linear-gradient(90deg,var(--gold),var(--cyan))}
+#next:disabled{opacity:.38;cursor:not-allowed}
+.overlay{position:fixed;inset:0;background:rgba(10,6,16,.84);display:flex;align-items:center;justify-content:center;z-index:20;padding:20px;backdrop-filter:blur(8px)}
+.hide{display:none}
+.modal{width:min(500px,94vw);background:#21152f;border:1px solid #4a3356;border-radius:24px;padding:30px;text-align:center;box-shadow:0 25px 80px rgba(0,0,0,.5)}
+.modal button{border:0;border-radius:12px;padding:12px 18px;font-weight:900;cursor:pointer;color:#1d1027;background:linear-gradient(90deg,var(--gold),var(--cyan))}
+@media(max-width:850px){.main{grid-template-columns:1fr}.question{position:static}}
+@media(max-width:560px){body{padding:10px}header{padding:22px 18px}header:after{font-size:22px;right:6px;top:8px}.main{padding:12px}.mission,.question{padding:17px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<h1>🎢 Grade 12 - Unit 5 - Exercise 1 (61-80) - Option C</h1>
+<p><b>Career Adventure Park</b></p>
+<p>Choose the best answer A, B, C, or D to complete each sentence.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Question: <span id="qnum">1/15</span></span>
+<span class="pill">Score: <span id="score">0</span>/15</span>
+</div>
+<div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="main">
+<div class="panel mission">
+<h2>🎡 Career Adventure Park</h2>
+<p>Travel through 15 career stations and clear each workplace challenge.</p>
+<p><b>Rules:</b> A wrong answer costs one heart. You cannot move to the next station until you choose the correct answer.</p>
+<p>🎯 Focus: workplace collocations, phrasal verbs, word forms, prepositions, and noun-phrase order.</p>
+<p>🏆 Complete all stations before losing all five hearts.</p>
+</div>
+
+<div class="panel question">
+<div class="qtag" id="qtag">Question 1</div>
+<div id="qtext"></div>
+<div id="answers"></div>
+<div id="feedback">Choose the best answer.</div>
+<div class="nextwrap"><button id="next" disabled>Next ➜</button></div>
+</div>
+</div>
+</div>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Out of hearts!</h1>
+<p>You have used all 5 hearts. Restart the adventure and try again.</p>
+<button onclick="restart()">↻ Try Again</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>🏆 Adventure Complete!</h1>
+<p>You completed the Career Adventure Park challenge.</p>
+<h2>Final score: <span id="final">0</span>/15</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const base=[{"q": "Although Mai lacked formal qualifications, her extensive experience in customer service _________ her an advantage over the other applicants.", "opts": [["made", false], ["gave", true], ["took", false], ["brought", false]], "exp": "The fixed collocation is “give somebody an advantage over somebody.”"}, {"q": "New employees are expected to _________ themselves with the company's safety procedures before they begin working independently.", "opts": [["familiarize", true], ["recognize", false], ["identify", false], ["introduce", false]], "exp": "“Familiarize oneself with something” means become familiar with or learn about it."}, {"q": "Many graduates are willing to _________ lower starting salaries if the position offers valuable training and clear opportunities for promotion.", "opts": [["settle for", true], ["put up", false], ["turn down", false], ["take over", false]], "exp": "“Settle for” means accept something less than what one ideally wants."}, {"q": "When two senior employees resigned unexpectedly, their colleagues had to _________ the additional workload until replacements could be recruited.", "opts": [["take on", true], ["bring about", false], ["carry off", false], ["put aside", false]], "exp": "“Take on a workload/responsibility” means accept or assume it."}, {"q": "Employers are increasingly looking for candidates who can _________ initiative rather than wait to be told exactly what to do.", "opts": [["make", false], ["take", true], ["do", false], ["hold", false]], "exp": "The standard collocation is “take initiative.”"}, {"q": "The company introduced a mentoring programme to help newly recruited employees _________ more quickly to the demands of the workplace.", "opts": [["adopt", false], ["adapt", true], ["convert", false], ["transfer", false]], "exp": "The correct structure is “adapt to + noun.”"}, {"q": "Despite being highly qualified, Nam was _________ for promotion because management believed he lacked sufficient leadership experience.", "opts": [["passed over", true], ["turned over", false], ["taken over", false], ["put through", false]], "exp": "“Be passed over for promotion” means be overlooked and not selected."}, {"q": "Employees who consistently _________ expectations are more likely to be considered for positions involving greater responsibility.", "opts": [["overcome", false], ["exceed", true], ["overtake", false], ["expand", false]], "exp": "“Exceed expectations” means perform better than expected."}, {"q": "Before accepting the offer, she carefully _________ the benefits of a higher salary against the longer working hours involved.", "opts": [["measured", false], ["weighed", true], ["counted", false], ["estimated", false]], "exp": "“Weigh A against B” means compare advantages and disadvantages carefully."}, {"q": "The ability to remain calm and make sensible decisions _________ pressure is particularly important in jobs involving public safety.", "opts": [["at", false], ["with", false], ["under", true], ["through", false]], "exp": "The fixed expression is “under pressure.”"}, {"q": "The successful candidate will be responsible for _________ that all members of the team meet their weekly production targets.", "opts": [["assuring", false], ["ensuring", true], ["confirming", false], ["securing", false]], "exp": "The standard structure is “be responsible for ensuring that + clause.”"}, {"q": "Employees should be given regular feedback so that they can identify areas in which their performance falls _________ the required standard.", "opts": [["below", true], ["behind", false], ["under", false], ["beneath", false]], "exp": "The natural collocation is “fall below the required standard.”"}, {"q": "Rather than _________ employees when business slowed down, the company reduced working hours temporarily in order to retain experienced staff.", "opts": [["laying off", true], ["giving up", false], ["turning down", false], ["putting aside", false]], "exp": "“Lay off employees” means make workers redundant, usually for business/economic reasons."}, {"q": "The position requires applicants to have _________ knowledge of current workplace regulations as well as excellent communication skills.", "opts": [["broadly practical relevant", false], ["relevant broadly practical", false], ["broad practical knowledge", true], ["practical knowledge broadly", false]], "exp": "The natural noun phrase is “broad practical knowledge.”"}, {"q": "Although flexible working arrangements can improve job satisfaction, employers must ensure that productivity is not _________ as a result.", "opts": [["compromised", true], ["resigned", false], ["withdrawn", false], ["dismissed", false]], "exp": "“Compromise productivity” means weaken or negatively affect productivity."}];
+let qs=[],i=0,lives=5,score=0,answered=false;
+const letters=["A","B","C","D"];
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const y=Math.floor(Math.random()*(x+1));
+    [a[x],a[y]]=[a[y],a[x]];
+  }
+  return a;
+}
+
+function prepare(){
+  qs=base.map(x=>({
+    q:x.q,
+    exp:x.exp,
+    opts:shuffle(x.opts.map(o=>({text:o[0],correct:o[1]})))
+  }));
+}
+
+function updateHearts(){
+  hearts.textContent="❤️".repeat(lives)+"🖤".repeat(5-lives);
+}
+
+function render(){
+  answered=false;
+  next.disabled=true;
+  feedback.className="";
+  feedback.textContent="Choose the best answer.";
+  qnum.textContent=`${i+1}/${qs.length}`;
+  qtag.textContent=`Question ${i+1}`;
+  qtext.textContent=qs[i].q;
+  answers.innerHTML="";
+
+  qs[i].opts.forEach((o,j)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<b>${letters[j]}.</b> ${o.text}`;
+    b.onclick=()=>choose(b,o);
+    answers.appendChild(b);
+  });
+}
+
+function choose(btn,opt){
+  if(answered||btn.disabled)return;
+
+  if(opt.correct){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    [...answers.children].forEach(b=>b.disabled=true);
+    feedback.className="good";
+    feedback.innerHTML=`✅ <b>Correct!</b><br>${qs[i].exp}`;
+    next.disabled=false;
+  }else{
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    feedback.className="bad";
+    feedback.textContent="❌ Incorrect. Try again.";
+
+    if(lives<=0){
+      over.classList.remove("hide");
+    }
+  }
+}
+
+next.onclick=()=>{
+  if(!answered)return;
+  if(i<qs.length-1){
+    i++;
+    render();
+  }else{
+    final.textContent=score;
+    done.classList.remove("hide");
+  }
+};
+
+function restart(){
+  i=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  over.classList.add("hide");
+  done.classList.add("hide");
+  prepare();
+  updateHearts();
+  render();
+}
+
+prepare();
+updateHearts();
+render();
+</script>
+</body>
+</html>

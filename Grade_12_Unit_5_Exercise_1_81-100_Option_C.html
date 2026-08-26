@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 5 - Exercise 1 (81-100) - Option C</title>
+<style>
+*{box-sizing:border-box}
+:root{--navy:#0a1322;--panel:#101d31;--panel2:#162944;--gold:#f3c96b;--cyan:#77d7ff;--green:#79e3b2;--text:#f8fbff;--muted:#c9d4df;--good:#59d98e;--bad:#ff748a}
+body{margin:0;min-height:100vh;padding:22px;font-family:Arial,Helvetica,sans-serif;color:var(--text);
+background:
+radial-gradient(circle at 12% 18%,rgba(119,215,255,.16),transparent 24%),
+radial-gradient(circle at 88% 12%,rgba(243,201,107,.13),transparent 22%),
+linear-gradient(145deg,#07101d,#0d1b2d 55%,#142b3f)}
+.shell{max-width:1180px;margin:auto;border-radius:30px;overflow:hidden;background:rgba(8,17,29,.97);border:1px solid rgba(119,215,255,.16);box-shadow:0 25px 80px rgba(0,0,0,.5)}
+header{position:relative;overflow:hidden;padding:28px 30px;background:linear-gradient(120deg,#16395a,#244f70 52%,#66552f)}
+header:after{content:"🕵️  🔎  📁  💼  🧩";position:absolute;right:20px;top:18px;font-size:30px;letter-spacing:10px;opacity:.32}
+header h1{position:relative;margin:0 0 8px;font-size:clamp(26px,4vw,38px);z-index:1}
+header p{position:relative;margin:5px 0;line-height:1.5;color:#eff8ff;z-index:1}
+.status{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 24px;background:#0d1727;border-bottom:1px solid #263b55}
+.pill{background:#142239;border:1px solid #304864;border-radius:999px;padding:8px 13px;font-weight:800}
+.main{display:grid;grid-template-columns:.72fr 1.28fr;gap:18px;padding:20px}
+.panel{background:linear-gradient(180deg,var(--panel),#0d1828);border:1px solid #304863;border-radius:22px;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+.mission{padding:22px;line-height:1.7;font-size:16px}
+.mission h2{margin-top:0;color:var(--gold)}
+.mission p{color:#e7eef5}
+.question{padding:22px;position:sticky;top:16px;align-self:start;background:linear-gradient(180deg,#14263e,#101d31)}
+.qtag{display:inline-block;padding:7px 12px;border-radius:999px;font-weight:900;color:#0b1624;background:linear-gradient(90deg,var(--gold),var(--cyan))}
+#qtext{font-size:20px;font-weight:800;line-height:1.45;margin:16px 0}
+#answers{display:grid;gap:11px}
+.answer{text-align:left;border:1.5px solid #314961;background:#172842;color:#f7fbff;border-radius:14px;padding:13px 14px;font-size:15px;line-height:1.42;cursor:pointer;transition:.18s}
+.answer:hover:not(:disabled){transform:translateY(-1px);border-color:var(--cyan);background:#1d3352}
+.answer.correct{background:#103426;border-color:var(--good)}
+.answer.wrong{background:#391521;border-color:var(--bad)}
+#feedback{min-height:68px;margin-top:14px;padding:12px 14px;border-radius:12px;background:#0d1727;color:var(--muted);line-height:1.45;border:1px solid #293e56}
+#feedback.good{background:#102c20;color:#d8ffe8;border-color:#2e7e57}
+#feedback.bad{background:#37131e;color:#ffdbe1;border-color:#8a3149}
+.nextwrap{display:flex;justify-content:flex-end;margin-top:14px}
+#next{border:0;border-radius:12px;padding:12px 18px;font-weight:900;cursor:pointer;color:#0b1624;background:linear-gradient(90deg,var(--gold),var(--cyan))}
+#next:disabled{opacity:.38;cursor:not-allowed}
+.overlay{position:fixed;inset:0;background:rgba(5,10,18,.84);display:flex;align-items:center;justify-content:center;z-index:20;padding:20px;backdrop-filter:blur(8px)}
+.hide{display:none}
+.modal{width:min(500px,94vw);background:#101d31;border:1px solid #304863;border-radius:24px;padding:30px;text-align:center;box-shadow:0 25px 80px rgba(0,0,0,.5)}
+.modal button{border:0;border-radius:12px;padding:12px 18px;font-weight:900;cursor:pointer;color:#0b1624;background:linear-gradient(90deg,var(--gold),var(--cyan))}
+@media(max-width:850px){.main{grid-template-columns:1fr}.question{position:static}}
+@media(max-width:560px){body{padding:10px}header{padding:22px 18px}header:after{font-size:22px;right:6px;top:8px}.main{padding:12px}.mission,.question{padding:17px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<h1>🕵️ Grade 12 - Unit 5 - Exercise 1 (81-100) - Option C</h1>
+<p><b>Career Detective Agency</b></p>
+<p>Choose the best answer A, B, C, or D to complete each sentence.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Case: <span id="qnum">1/15</span></span>
+<span class="pill">Solved: <span id="score">0</span>/15</span>
+</div>
+<div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="main">
+<div class="panel mission">
+<h2>🔎 Career Detective Agency</h2>
+<p>You are investigating 15 workplace cases. Solve each language clue to unlock the next file.</p>
+<p><b>Rules:</b> A wrong answer costs one heart. You cannot open the next case until the correct answer is selected.</p>
+<p>📁 Focus: collocations, workplace vocabulary, word order, verb patterns, and phrasal expressions.</p>
+<p>🧩 Solve all cases before all five hearts are lost.</p>
+</div>
+
+<div class="panel question">
+<div class="qtag" id="qtag">Case 1</div>
+<div id="qtext"></div>
+<div id="answers"></div>
+<div id="feedback">Choose the best answer.</div>
+<div class="nextwrap"><button id="next" disabled>Next Case ➜</button></div>
+</div>
+</div>
+</div>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Case Closed!</h1>
+<p>You have used all 5 hearts. Restart the investigation and try again.</p>
+<button onclick="restart()">↻ Restart Investigation</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>🏆 All Cases Solved!</h1>
+<p>You completed the Career Detective Agency challenge.</p>
+<h2>Final score: <span id="final">0</span>/15</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const base=[{"q": "Applicants with limited work experience can _________ for this disadvantage by demonstrating strong communication and problem-solving skills.", "opts": [["recover", false], ["compensate", true], ["repay", false], ["replace", false]], "exp": "The correct phrase is “compensate for a disadvantage” = bù đắp cho một bất lợi."}, {"q": "Before accepting the position, she wanted to _________ whether the company provided opportunities for further training and promotion.", "opts": [["secure", false], ["assure", false], ["ensure", false], ["establish", true]], "exp": "“Establish whether...” means find out or determine whether something is true."}, {"q": "The company offers a highly _________ benefits package, including private health insurance, paid leave, and financial support for further education.", "opts": [["competitive", true], ["competent", false], ["comparative", false], ["competing", false]], "exp": "“A competitive benefits package” means a package that compares favorably with those offered by other employers."}, {"q": "Employees are expected to _________ themselves professionally when dealing with customers, even in difficult situations.", "opts": [["perform", false], ["operate", false], ["conduct", true], ["behave", false]], "exp": "The fixed expression is “conduct oneself professionally.”"}, {"q": "The company introduced flexible working arrangements partly to _________ the needs of employees with young children.", "opts": [["accumulate", false], ["accompany", false], ["accommodate", true], ["accomplish", false]], "exp": "“Accommodate the needs of...” means adapt or make arrangements to meet those needs."}, {"q": "Although the position involves considerable responsibility, the salary is _________ with what similar companies in the industry offer.", "opts": [["corresponding", false], ["comparable", true], ["compatible", false], ["comparative", false]], "exp": "“Be comparable with/to” means similar in level or quality."}, {"q": "When considering potential employees, recruiters often _________ greater importance on relevant experience than on academic results alone.", "opts": [["give", false], ["make", false], ["put", false], ["place", true]], "exp": "The fixed collocation is “place importance on something.”"}, {"q": "After several months of training, new employees are expected to work with minimal _________ from their supervisors.", "opts": [["supervision", true], ["inspection", false], ["observation", false], ["attention", false]], "exp": "“Work with minimal supervision” is the natural workplace collocation."}, {"q": "Candidates should avoid _________ claims about their achievements because employers may ask them to provide evidence during the interview.", "opts": [["taking exaggerating", false], ["giving exaggeration", false], ["making exaggerated", true], ["doing exaggerated", false]], "exp": "The natural phrase is “make exaggerated claims.”"}, {"q": "The company is trying to create a working environment in which employees feel _________ to express their opinions and suggest improvements.", "opts": [["persuaded", false], ["encouraged", true], ["insisted", false], ["convinced", false]], "exp": "“Feel encouraged to do something” means feel supported or motivated to do it."}, {"q": "Employees who consistently produce work of a high standard are more likely to be _________ additional responsibilities.", "opts": [["relied with", false], ["provided to", false], ["depended on", false], ["trusted with", true]], "exp": "The correct collocation is “be trusted with responsibilities.”"}, {"q": "The successful applicant will receive _________ before taking full responsibility for dealing with major clients.", "opts": [["workplace comprehensive training", false], ["comprehensive training workplace", false], ["comprehensive workplace training", true], ["training comprehensive workplace", false]], "exp": "The natural word order is “comprehensive workplace training.”"}, {"q": "Since the company could no longer afford to employ such a large workforce, several positions had to be _________.", "opts": [["retired", false], ["abolished", true], ["withdrawn", false], ["resigned", false]], "exp": "A position can be “abolished” when the job itself is removed from the organisation."}, {"q": "A good manager should be able to _________ tasks effectively so that team members understand exactly what they are responsible for.", "opts": [["delegate", true], ["deliver", false], ["transfer", false], ["distribute", false]], "exp": "“Delegate tasks” means assign tasks and responsibility to other people."}, {"q": "Despite receiving a higher salary, he found it difficult to _________ the increased demands that came with his new managerial role.", "opts": [["get over with", false], ["take after", false], ["put through", false], ["cope with", true]], "exp": "The correct phrase is “cope with demands” = đối phó/xử lý được các yêu cầu hoặc áp lực."}];
+let qs=[],i=0,lives=5,score=0,answered=false;
+const letters=["A","B","C","D"];
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const y=Math.floor(Math.random()*(x+1));
+    [a[x],a[y]]=[a[y],a[x]];
+  }
+  return a;
+}
+
+function prepare(){
+  qs=base.map(x=>({
+    q:x.q,
+    exp:x.exp,
+    opts:shuffle(x.opts.map(o=>({text:o[0],correct:o[1]})))
+  }));
+}
+
+function updateHearts(){
+  hearts.textContent="❤️".repeat(lives)+"🖤".repeat(5-lives);
+}
+
+function render(){
+  answered=false;
+  next.disabled=true;
+  feedback.className="";
+  feedback.textContent="Choose the best answer.";
+  qnum.textContent=`${i+1}/${qs.length}`;
+  qtag.textContent=`Case ${i+1}`;
+  qtext.textContent=qs[i].q;
+  answers.innerHTML="";
+  qs[i].opts.forEach((o,j)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<b>${letters[j]}.</b> ${o.text}`;
+    b.onclick=()=>choose(b,o);
+    answers.appendChild(b);
+  });
+}
+
+function choose(btn,opt){
+  if(answered||btn.disabled)return;
+  if(opt.correct){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    [...answers.children].forEach(b=>b.disabled=true);
+    feedback.className="good";
+    feedback.innerHTML=`✅ <b>Correct!</b><br>${qs[i].exp}`;
+    next.disabled=false;
+  }else{
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    feedback.className="bad";
+    feedback.textContent="❌ Incorrect. Try again.";
+    if(lives<=0) over.classList.remove("hide");
+  }
+}
+
+next.onclick=()=>{
+  if(!answered)return;
+  if(i<qs.length-1){i++;render();}
+  else{final.textContent=score;done.classList.remove("hide");}
+};
+
+function restart(){
+  i=0;lives=5;score=0;answered=false;
+  document.getElementById("score").textContent="0";
+  over.classList.add("hide");
+  done.classList.add("hide");
+  prepare();updateHearts();render();
+}
+
+prepare();
+updateHearts();
+render();
+</script>
+</body>
+</html>

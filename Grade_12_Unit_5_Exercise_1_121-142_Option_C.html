@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 12 - Unit 5 - Exercise 1 (121-142) - Option C</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --cream:#fffdf5;
+  --pink:#ffd9e8;
+  --pink2:#ffbdd5;
+  --butter:#fff0b5;
+  --mint:#dcf8e8;
+  --mint2:#9ee3bd;
+  --sky:#dff3ff;
+  --lav:#eee5ff;
+  --text:#584456;
+  --muted:#7d6a79;
+  --good:#57ba8b;
+  --bad:#ea718b;
+}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:22px;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 12% 16%,rgba(255,189,213,.42),transparent 24%),
+    radial-gradient(circle at 86% 16%,rgba(223,243,255,.62),transparent 24%),
+    radial-gradient(circle at 78% 86%,rgba(158,227,189,.34),transparent 26%),
+    linear-gradient(145deg,#fffdf5,#fff5f9 52%,#f2fff8);
+}
+.shell{
+  max-width:1180px;
+  margin:auto;
+  border-radius:30px;
+  overflow:hidden;
+  background:rgba(255,255,255,.92);
+  border:1px solid #f1dbe5;
+  box-shadow:0 24px 70px rgba(120,80,110,.14);
+}
+header{
+  position:relative;
+  overflow:hidden;
+  padding:28px 30px;
+  background:linear-gradient(120deg,#ffd9e8,#fff0b5 50%,#dcf8e8);
+}
+header:after{
+  content:"🐰  🧺  🌷  💼  🍓";
+  position:absolute;
+  right:20px;
+  top:18px;
+  font-size:30px;
+  letter-spacing:10px;
+  opacity:.58;
+}
+header h1{
+  position:relative;
+  margin:0 0 8px;
+  font-size:clamp(26px,4vw,38px);
+  z-index:1;
+  color:#5a4153;
+}
+header p{
+  position:relative;
+  margin:5px 0;
+  line-height:1.5;
+  color:#705868;
+  z-index:1;
+}
+.status{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:14px 24px;
+  background:#fffafd;
+  border-bottom:1px solid #f2dde6;
+}
+.pill{
+  background:#fff;
+  border:1px solid #efd8e2;
+  border-radius:999px;
+  padding:8px 13px;
+  font-weight:800;
+  box-shadow:0 6px 15px rgba(120,80,110,.06);
+}
+.main{
+  display:grid;
+  grid-template-columns:.72fr 1.28fr;
+  gap:18px;
+  padding:20px;
+}
+.panel{
+  background:linear-gradient(180deg,#fff,#fffafd);
+  border:1px solid #f0dce5;
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(120,80,110,.08);
+}
+.mission{
+  padding:22px;
+  line-height:1.7;
+  font-size:16px;
+}
+.mission h2{margin-top:0;color:#d47399}
+.mission p{color:#725e6e}
+.question{
+  padding:22px;
+  position:sticky;
+  top:16px;
+  align-self:start;
+  background:linear-gradient(180deg,#fffafd,#fff7fa);
+}
+.qtag{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:999px;
+  font-weight:900;
+  color:#5a4150;
+  background:linear-gradient(90deg,var(--pink),var(--butter),var(--mint));
+}
+#qtext{
+  font-size:20px;
+  font-weight:800;
+  line-height:1.45;
+  margin:16px 0;
+}
+#answers{display:grid;gap:11px}
+.answer{
+  text-align:left;
+  border:1.5px solid #ead8e1;
+  background:#fff;
+  color:#584654;
+  border-radius:14px;
+  padding:13px 14px;
+  font-size:15px;
+  line-height:1.42;
+  cursor:pointer;
+  transition:.18s;
+  box-shadow:0 6px 14px rgba(120,80,110,.04);
+}
+.answer:hover:not(:disabled){
+  transform:translateY(-1px);
+  border-color:var(--pink2);
+  background:#fff8fb;
+}
+.answer.correct{
+  background:#ecfff5;
+  border-color:var(--good);
+}
+.answer.wrong{
+  background:#fff0f3;
+  border-color:var(--bad);
+}
+#feedback{
+  min-height:68px;
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#fff;
+  color:var(--muted);
+  line-height:1.45;
+  border:1px solid #eddbe4;
+}
+#feedback.good{
+  background:#effff7;
+  color:#2f7a5e;
+  border-color:#9eddbf;
+}
+#feedback.bad{
+  background:#fff1f4;
+  color:#b55268;
+  border-color:#efb1bf;
+}
+.nextwrap{display:flex;justify-content:flex-end;margin-top:14px}
+#next{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#5a4150;
+  background:linear-gradient(90deg,var(--pink),var(--butter),var(--mint));
+}
+#next:disabled{opacity:.38;cursor:not-allowed}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(100,70,90,.24);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
+  padding:20px;
+  backdrop-filter:blur(8px);
+}
+.hide{display:none}
+.modal{
+  width:min(500px,94vw);
+  background:#fffafd;
+  border:1px solid #efd8e2;
+  border-radius:24px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 25px 80px rgba(100,70,95,.18);
+}
+.modal button{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#5a4150;
+  background:linear-gradient(90deg,var(--pink),var(--butter),var(--mint));
+}
+@media(max-width:850px){
+  .main{grid-template-columns:1fr}
+  .question{position:static}
+}
+@media(max-width:560px){
+  body{padding:10px}
+  header{padding:22px 18px}
+  header:after{font-size:22px;right:6px;top:8px}
+  .main{padding:12px}
+  .mission,.question{padding:17px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<h1>🐰 Grade 12 - Unit 5 - Exercise 1 (121-142) - Option C</h1>
+<p><b>Career Bunny Picnic</b></p>
+<p>Choose the best answer A, B, C, or D to complete each sentence.</p>
+</header>
+
+<div class="status">
+<div>
+<span class="pill">Picnic Stop: <span id="qnum">1/15</span></span>
+<span class="pill">Berries: <span id="score">0</span>/15</span>
+</div>
+<div class="pill">❤️ Lives: <span id="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+
+<div class="main">
+<div class="panel mission">
+<h2>🧺 Career Bunny Picnic</h2>
+<p>Help the bunny complete 15 cute career picnic stops by solving each workplace question.</p>
+<p><b>Rules:</b> A wrong answer costs one heart. You cannot move to the next picnic stop until the correct answer is selected.</p>
+<p>🌷 Focus: workplace collocations, career vocabulary, word order, phrasal verbs, and professional English.</p>
+<p>🍓 Collect all 15 berries before losing all five hearts.</p>
+</div>
+
+<div class="panel question">
+<div class="qtag" id="qtag">Picnic Stop 1</div>
+<div id="qtext"></div>
+<div id="answers"></div>
+<div id="feedback">Choose the best answer.</div>
+<div class="nextwrap"><button id="next" disabled>Next Stop ➜</button></div>
+</div>
+</div>
+</div>
+
+<div id="over" class="overlay hide">
+<div class="modal">
+<h1>💔 Picnic Paused!</h1>
+<p>You have used all 5 hearts. Restart the picnic and try again.</p>
+<button onclick="restart()">↻ Picnic Again</button>
+</div>
+</div>
+
+<div id="done" class="overlay hide">
+<div class="modal">
+<h1>🌷 Picnic Complete!</h1>
+<p>You completed the Career Bunny Picnic challenge.</p>
+<h2>Final score: <span id="final">0</span>/15</h2>
+<button onclick="restart()">↻ Play Again</button>
+</div>
+</div>
+
+<script>
+const base=[{"q": "Graduates with strong technical skills and relevant experience are often in a better _________ to compete for well-paid positions.", "opts": [["condition", false], ["situation", false], ["position", true], ["location", false]], "exp": "“Be in a better position to do something” = ở vị thế/điều kiện thuận lợi hơn để làm gì."}, {"q": "Many companies _________ certain administrative functions to external providers so that their employees can focus on core business activities.", "opts": [["outsource", true], ["withdraw", false], ["distribute", false], ["transfer", false]], "exp": "“Outsource functions/services” = thuê ngoài các chức năng hoặc dịch vụ."}, {"q": "Taking part in an internship allows students to _________ valuable insight into how a professional organisation operates.", "opts": [["achieve", false], ["earn", false], ["gain", true], ["collect", false]], "exp": "The natural collocation is “gain insight into something.”"}, {"q": "Employees working irregular shifts may find it difficult to _________ a healthy balance between their professional and personal lives.", "opts": [["remain", false], ["maintain", true], ["preserve", false], ["retain", false]], "exp": "The standard collocation is “maintain a balance / maintain a work-life balance.”"}, {"q": "The company decided to _________ the deadline after several employees requested additional time to complete the project.", "opts": [["expand", false], ["extend", true], ["enlarge", false], ["lengthen", false]], "exp": "“Extend a deadline” = gia hạn thời hạn."}, {"q": "Although the starting salary is relatively modest, the position offers excellent _________ for career development.", "opts": [["prospects", true], ["expectations", false], ["intentions", false], ["predictions", false]], "exp": "“Career prospects / prospects for career development” = triển vọng nghề nghiệp."}, {"q": "Applicants who lack formal qualifications may still be considered if they can provide evidence of _________ practical experience.", "opts": [["considerably relevant", false], ["relevant considerable", false], ["considerable relevant", false], ["considerable practical", true]], "exp": "The correct word order is “considerable practical experience.”"}, {"q": "Before taking on additional responsibilities, employees should consider whether the extra workload is _________ with their existing commitments.", "opts": [["comparable", false], ["compatible", true], ["competitive", false], ["corresponding", false]], "exp": "“Be compatible with something” = tương thích/phù hợp với điều gì."}, {"q": "Staff are expected to _________ urgent matters first rather than spend time on tasks that can easily be postponed.", "opts": [["prioritise", true], ["emphasise", false], ["concentrate", false], ["specialise", false]], "exp": "“Prioritise urgent matters/tasks” = ưu tiên các vấn đề hoặc nhiệm vụ cấp bách."}, {"q": "The manager agreed to _________ an exception for an employee who needed to work from home temporarily because of unusual circumstances.", "opts": [["do", false], ["take", false], ["make", true], ["give", false]], "exp": "The fixed collocation is “make an exception for somebody.”"}, {"q": "Employees who consistently perform beyond expectations may be _________ greater responsibility within the organisation.", "opts": [["assigned with", false], ["entrusted with", true], ["provided for", false], ["allocated to", false]], "exp": "“Be entrusted with something” = được tin tưởng giao trách nhiệm/công việc."}, {"q": "A candidate's ability to communicate clearly can have a significant _________ on the impression they make during an interview.", "opts": [["effect", true], ["consequence", false], ["influence to", false], ["result", false]], "exp": "The fixed expression is “have a significant effect on something.”"}, {"q": "Rather than simply waiting for instructions, successful employees are often expected to _________ the initiative when they identify a problem.", "opts": [["do", false], ["make", false], ["take", true], ["bring", false]], "exp": "The fixed collocation is “take the initiative.”"}, {"q": "The company provides _________ professional development opportunities for employees seeking to move into management positions.", "opts": [["regularly structured", false], ["structured regularly", false], ["regular structured", true], ["regular structure", false]], "exp": "The correct noun phrase is “regular structured professional development opportunities.”"}, {"q": "Employees who are dissatisfied with their current position should carefully _________ their options before handing in their resignation.", "opts": [["regard", false], ["weigh up", true], ["calculate", false], ["estimate", false]], "exp": "“Weigh up one's options” = cân nhắc kỹ các lựa chọn."}];
+let qs=[],i=0,lives=5,score=0,answered=false;
+const letters=["A","B","C","D"];
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const y=Math.floor(Math.random()*(x+1));
+    [a[x],a[y]]=[a[y],a[x]];
+  }
+  return a;
+}
+
+function prepare(){
+  qs=base.map(x=>({
+    q:x.q,
+    exp:x.exp,
+    opts:shuffle(x.opts.map(o=>({text:o[0],correct:o[1]})))
+  }));
+}
+
+function updateHearts(){
+  hearts.textContent="❤️".repeat(lives)+"🤍".repeat(5-lives);
+}
+
+function render(){
+  answered=false;
+  next.disabled=true;
+  feedback.className="";
+  feedback.textContent="Choose the best answer.";
+  qnum.textContent=`${i+1}/${qs.length}`;
+  qtag.textContent=`Picnic Stop ${i+1}`;
+  qtext.textContent=qs[i].q;
+  answers.innerHTML="";
+  qs[i].opts.forEach((o,j)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<b>${letters[j]}.</b> ${o.text}`;
+    b.onclick=()=>choose(b,o);
+    answers.appendChild(b);
+  });
+}
+
+function choose(btn,opt){
+  if(answered||btn.disabled)return;
+  if(opt.correct){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    [...answers.children].forEach(b=>b.disabled=true);
+    feedback.className="good";
+    feedback.innerHTML=`✅ <b>Correct!</b><br>${qs[i].exp}`;
+    next.disabled=false;
+  }else{
+    lives--;
+    updateHearts();
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    feedback.className="bad";
+    feedback.textContent="❌ Incorrect. Try again.";
+    if(lives<=0) over.classList.remove("hide");
+  }
+}
+
+next.onclick=()=>{
+  if(!answered)return;
+  if(i<qs.length-1){
+    i++;
+    render();
+  }else{
+    final.textContent=score;
+    done.classList.remove("hide");
+  }
+};
+
+function restart(){
+  i=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  over.classList.add("hide");
+  done.classList.add("hide");
+  prepare();
+  updateHearts();
+  render();
+}
+
+prepare();
+updateHearts();
+render();
+</script>
+</body>
+</html>
