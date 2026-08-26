@@ -280,7 +280,79 @@
       .grid{grid-template-columns:1fr}
       .section-title h2{font-size:24px}
     }
-  </style>
+
+/* ===== GRADE TABS ===== */
+
+.grade-tabs{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin:22px 0;
+  flex-wrap:wrap;
+}
+
+.grade-tab{
+  border:0;
+  padding:13px 24px;
+  border-radius:16px;
+  background:white;
+  color:#334155;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 8px 22px rgba(15,23,42,.08);
+  transition:.2s ease;
+}
+
+.grade-tab:hover{
+  transform:translateY(-2px);
+}
+
+.grade-tab.active{
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:white;
+  box-shadow:0 10px 28px rgba(37,99,235,.25);
+}
+
+/* Ẩn các lớp chưa được chọn */
+.grade-section{
+  display:none;
+}
+
+.grade-section.active-grade{
+  display:block;
+}
+
+/* card gọn hơn */
+.game-card{
+  padding:16px;
+  border-radius:18px;
+}
+
+.game-card h3{
+  font-size:17px;
+}
+
+.game-card p{
+  font-size:13px;
+  line-height:1.4;
+  margin-bottom:10px;
+}
+
+.icon{
+  width:44px;
+  height:44px;
+  font-size:22px;
+  margin-bottom:10px;
+}
+
+/* màn hình lớn: 4 cột */
+@media(min-width:1100px){
+  .grid{
+    grid-template-columns:repeat(4,1fr);
+  }
+}
+</style>
 </head>
 <body>
   <main class="container">
@@ -293,7 +365,11 @@
     <section class="search-wrap">
       <input id="search" type="text" placeholder="🔍 Tìm game..." aria-label="Tìm game" />
     </section>
-
+<div class="grade-tabs">
+  <button class="grade-tab active" data-show-grade="10">📘 Grade 10</button>
+  <button class="grade-tab" data-show-grade="11">📗 Grade 11</button>
+  <button class="grade-tab" data-show-grade="12">📕 Grade 12</button>
+</div>
     <section class="grade-section">
       <div class="section-title">
         <h2>📘 Grade 10</h2>
@@ -3165,7 +3241,41 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
         card.style.display = title.includes(keyword) ? "block" : "none";
       });
     });
+// ===== CHỌN GRADE =====
 
+const gradeTabs = [...document.querySelectorAll(".grade-tab")];
+const gradeSections = [...document.querySelectorAll(".grade-section")];
+
+function showGrade(grade){
+  gradeSections.forEach(section => {
+    const heading = section.querySelector("h2");
+    if(!heading) return;
+
+    const isTarget = heading.textContent.includes("Grade " + grade);
+    section.classList.toggle("active-grade", isTarget);
+  });
+
+  gradeTabs.forEach(tab => {
+    tab.classList.toggle(
+      "active",
+      tab.dataset.showGrade === grade
+    );
+  });
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+gradeTabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    showGrade(tab.dataset.showGrade);
+  });
+});
+
+// mặc định mở Grade 10
+showGrade("10");
     refreshLocks();
   </script>
 </body>
