@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 12 - Unit 5 - Exercise 11 - Option E</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh; font-family:"Segoe UI",Arial,sans-serif; color:#173f2d;
+  background:
+    radial-gradient(circle at 14% 10%,rgba(255,255,255,.84),transparent 22%),
+    radial-gradient(circle at 86% 15%,rgba(255,255,255,.46),transparent 24%),
+    linear-gradient(135deg,#efffe8 0%,#d8f5c8 48%,#dff7e4 100%);
+  overflow-x:hidden;
+}
+.bamboo{
+  position:fixed;
+  width:10px;
+  height:150px;
+  background:linear-gradient(#7eb85f,#65a44f);
+  border-radius:8px;
+  opacity:.10;
+  z-index:0;
+}
+.b1{left:4%;bottom:0}
+.b2{right:6%;bottom:0;height:180px}
+.b3{left:48%;top:0;height:120px}
+.leaf{
+  position:fixed;
+  width:32px;height:12px;
+  background:#6eb45f;
+  opacity:.14;
+  border-radius:100% 0 100% 0;
+  z-index:0;
+  animation:floatLeaf 9s ease-in-out infinite;
+}
+.l1{left:8%;top:18%}
+.l2{right:10%;top:26%;animation-delay:2s}
+.l3{left:52%;top:7%;animation-delay:4s}
+.l4{right:16%;bottom:12%;animation-delay:6s}
+@keyframes floatLeaf{
+  0%,100%{transform:translateY(0) rotate(0)}
+  50%{transform:translateY(-20px) rotate(150deg)}
+}
+.wrap{position:relative;z-index:2;width:min(1150px,94%);margin:28px auto 50px}
+.panel{
+  background:rgba(255,255,255,.93); border:1px solid #cbe4bc; border-radius:30px; padding:26px;
+  box-shadow:0 18px 48px rgba(62,112,55,.15); backdrop-filter:blur(7px);
+}
+h1{margin:0;text-align:center;color:#3f7d34;font-size:clamp(28px,4vw,44px)}
+.subtitle{text-align:center;margin:8px 0 22px;color:#67805f;font-weight:800}
+.status{
+  display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; padding:12px 16px;
+  background:#f5fff1; border:1px solid #d8ebcf; border-radius:18px;
+}
+.status-item{color:#4e7542;font-weight:900}.hearts{font-size:23px}
+.track{height:12px;background:#e6f0de;border-radius:999px;overflow:hidden;margin:12px 0 22px}
+.track span{display:block;width:0;height:100%;background:linear-gradient(90deg,#69ad53,#9acb78);transition:.3s}
+.instructions{
+  background:#fbfff8; border-left:6px solid #74b75e; padding:16px 18px; border-radius:16px;
+  line-height:1.6; margin-bottom:20px; font-weight:700;
+}
+.passage{
+  background:#fcfff9; border:1px solid #deecd7; border-radius:20px; padding:20px 22px;
+  line-height:1.72; font-size:17px; margin-bottom:22px;
+}
+.passage h2{margin-top:0;text-align:center;color:#4f7b42}
+.passage b{font-weight:800;color:#3d6c35}
+.passage u{text-decoration-thickness:2px;text-underline-offset:4px;text-decoration-color:#6fa85d}
+.card{
+  background:#fff; border:1px solid #dbead5; border-radius:24px; padding:24px;
+  box-shadow:0 10px 28px rgba(58,103,53,.10);
+}
+.qtag{font-size:14px;color:#70876d;font-weight:900;letter-spacing:1px;text-transform:uppercase}
+.prompt{margin:8px 0 18px;font-size:22px;line-height:1.5;color:#284c2d;font-weight:900}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.option{
+  border:2px solid #d9e8d3; background:#fbfff9; border-radius:16px; padding:15px 16px; text-align:left;
+  cursor:pointer; color:#456047; font-size:16.5px; line-height:1.5; font-weight:800; transition:.2s;
+}
+.option:hover:not(:disabled){transform:translateY(-2px);background:#f1faed;border-color:#8dbb7a}
+.option.correct{background:#e8f6df;border-color:#6fa853;color:#3c642f}
+.option.wrong{background:#ffe8e8;border-color:#e36f6f;color:#963838;animation:shake .28s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.feedback{display:none;margin-top:18px;border-radius:16px;padding:16px;line-height:1.62}
+.feedback.show{display:block}
+.feedback.good{background:#f1f9ec;border:1px solid #a9cc98;color:#446235}
+.feedback.bad{background:#fff2f2;border:1px solid #efb4b4;color:#8b3b3b}
+.explain{margin-top:14px;padding:15px 16px;background:#fcfff9;border:1px dashed #9dbd91;border-radius:14px;color:#4c5f45}
+.controls{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}
+.btn{border:none;border-radius:14px;padding:12px 20px;font-size:16px;font-weight:900;cursor:pointer}
+.restart{background:#eaf4e4;color:#4b7341}.next{background:#5d984a;color:#fff;display:none}
+.final{display:none;text-align:center;padding:38px 20px}
+.final.show{display:block}.final .icon{font-size:60px}.final h2{font-size:32px;color:#4f7b42}.final p{font-size:18px}
+@media(max-width:700px){
+  .panel{padding:16px}.passage{padding:16px;font-size:16px}.prompt{font-size:20px}.options{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="bamboo b1"></div><div class="bamboo b2"></div><div class="bamboo b3"></div>
+<div class="leaf l1"></div><div class="leaf l2"></div><div class="leaf l3"></div><div class="leaf l4"></div>
+
+<div class="wrap">
+<div class="panel">
+<h1>🎋 Bamboo Tech Balance 🌿</h1>
+<div class="subtitle">Grade 12 - Unit 5 - Exercise 11 - Option E</div>
+
+<div class="status">
+  <div class="status-item">Question: <span id="counter">1 / 8</span></div>
+  <div class="status-item">Score: <span id="score">0</span></div>
+  <div class="status-item">Lives: <span id="hearts" class="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+<div class="track"><span id="progress"></span></div>
+
+<div class="instructions">
+Read the passage and mark the letter A, B, C, or D to indicate the best answer to each question.
+</div>
+
+<div class="passage">
+<h2>WHEN TECHNOLOGY SAVES TIME BUT CREATES MORE WORK</h2>
+
+<p>Digital technology was expected to make office work dramatically more efficient. Email replaced much written correspondence, shared documents made collaboration faster, and automated systems took over tasks that once required hours of manual effort. Yet many employees do not feel that technological progress has left them with more free time. Instead, some report having to respond to more messages, attend more virtual meetings, and manage a growing number of digital platforms. This apparent contradiction has led researchers to examine whether tools designed to save time may also generate new demands on workers.</p>
+
+<p>One explanation involves what economists sometimes call the <b>rebound effect</b>. When technology makes an activity faster or cheaper, people do not necessarily use the resulting savings to do less. Instead, they may perform more of the activity. Email illustrates this clearly. Because sending a message requires little effort, employees can communicate with far more colleagues than was practical when correspondence was slower. Each individual message may take less time to produce, but the total volume of communication can increase so substantially that workers ultimately spend more, rather than less, time managing it. <u>Efficiency at the level of an individual task, therefore, does not automatically translate into a reduction in overall workload.</u></p>
+
+<p>Technology can also alter expectations about availability. When communication required employees to be physically present in an office, the boundary between working and non-working time was relatively visible. Smartphones and cloud-based platforms have weakened that boundary by making work accessible almost anywhere. Although such accessibility provides valuable flexibility, it may also create an <b>implicit</b> expectation that employees will respond outside conventional working hours. Importantly, managers do not always need to state this expectation directly. If colleagues regularly answer messages late at night, others may feel pressure to do the same.</p>
+
+<p>Nor does introducing more technology necessarily improve coordination. Organisations sometimes adopt multiple digital tools to solve separate problems, only to discover that employees must repeatedly transfer information between systems or check several platforms for updates. The resulting <b>fragmentation</b> can interrupt concentration and increase the mental effort required to determine where information is located. In such cases, the difficulty does not arise because any individual tool is ineffective; rather, it emerges from the way numerous tools interact within the same working environment.</p>
+
+<p>This does not mean that digital technology has failed to improve productivity. Many tasks can unquestionably be completed faster and more accurately than before. The more useful question is whether organisations actually convert those efficiencies into better working conditions and improved performance. Doing so may require them to examine not merely what each technology enables employees to do, but also what new expectations, behaviours, and processes emerge after it is introduced. <u>The value of workplace technology, in other words, depends partly on how organisations respond to the changes that efficiency itself creates.</u></p>
+</div>
+
+<div id="game" class="card">
+  <div class="qtag" id="qtag">Question 1</div>
+  <div class="prompt" id="prompt"></div>
+  <div id="options" class="options"></div>
+  <div id="feedback" class="feedback"></div>
+  <div class="controls">
+    <button class="btn restart" onclick="restartGame()">Restart</button>
+    <button id="nextBtn" class="btn next" onclick="nextQuestion()">Next ➜</button>
+  </div>
+</div>
+
+<div id="final" class="final">
+  <div class="icon">🏆🎋🌿</div>
+  <h2>Excellent work!</h2>
+  <p>You completed all 8 questions.</p>
+  <p><b>Final score:</b> <span id="finalScore"></span>/8</p>
+  <button class="btn restart" onclick="restartGame()">Play Again</button>
+</div>
+</div>
+</div>
+
+<script>
+const questions = [
+{
+q:"Which of the following best expresses the main idea of the passage?",
+options:[
+"A. Digital tools have failed to increase workplace productivity because employees now spend most of their time communicating rather than completing meaningful work.",
+"B. Technological efficiency can reduce the effort required for individual tasks without necessarily reducing employees' total workload.",
+"C. Organisations should limit the number of technologies employees use because digital communication inevitably damages work-life balance.",
+"D. Workplace technology is most effective when employees are prevented from accessing professional information outside conventional working hours."
+],
+answer:1,
+explanation:`<b>B</b> is correct.<br><br>
+The passage does not deny that technology improves efficiency. Its main point is that <b>individual task efficiency may increase without total workload decreasing</b>.<br>
+Examples include more email, expectations of after-hours availability, and fragmentation caused by multiple tools.`
+},
+{
+q:"Which of the following best paraphrases the underlined sentence in paragraph 2?",
+options:[
+"A. Making one activity more efficient may not decrease the amount of work employees face when the activity becomes more frequent.",
+"B. Employees generally experience heavier workloads because they fail to use time-saving technologies efficiently.",
+"C. An efficient task contributes to lower overall workload only when employees perform it without using digital communication.",
+"D. Technological improvements reduce workload primarily by enabling employees to complete a greater number of individual tasks."
+],
+answer:0,
+explanation:`<b>A</b> is correct.<br><br>
+The sentence means that saving time on each individual task does not guarantee a reduction in total workload if the activity becomes much more frequent.<br>
+The email example shows this clearly: <b>time per message ↓ but number of messages ↑</b>.`
+},
+{
+q:"What can be inferred from the example of email in paragraph 2?",
+options:[
+"A. Reducing the cost or effort associated with an activity can sometimes encourage enough additional use to offset the original saving.",
+"B. Employees would spend considerably less time communicating if organisations returned to slower forms of correspondence.",
+"C. Email has increased workload mainly because digital messages require more concentration than traditional correspondence.",
+"D. The amount of workplace communication is largely independent of how easy communication technologies are to use."
+],
+answer:0,
+explanation:`<b>A</b> is correct.<br><br>
+Email illustrates the <b>rebound effect</b>: when an activity becomes easier, people may do much more of it.<br>
+Thus, lower effort per unit can lead to enough additional use to <b>offset the original saving</b>.`
+},
+{
+q:'The word “implicit” in paragraph 3 is closest in meaning to ________.',
+options:[
+"A. formally established and carefully monitored",
+"B. understood without being directly expressed",
+"C. temporarily accepted despite disagreement",
+"D. difficult to recognise because it rarely influences behaviour"
+],
+answer:1,
+explanation:`<b>B</b> is correct.<br><br>
+The clue is the next sentence: managers do not always need to <b>state this expectation directly</b>.<br>
+So <b>implicit</b> means <b>understood without being directly expressed</b>.`
+},
+{
+q:"According to paragraph 3, why might employees respond to work messages outside normal working hours even when managers have not instructed them to do so?",
+options:[
+"A. Digital platforms automatically require employees to acknowledge every message immediately.",
+"B. Employees generally prefer working outside office hours because they have greater flexibility.",
+"C. The behaviour of colleagues may create an unwritten social expectation that others feel obliged to follow.",
+"D. Managers usually evaluate employees according to how many messages they answer at night."
+],
+answer:2,
+explanation:`<b>C</b> is correct.<br><br>
+The passage says that if colleagues regularly respond late at night, others may feel pressure to do the same.<br>
+This creates an <b>unwritten social expectation</b> even without direct instructions from managers.`
+},
+{
+q:'The word “fragmentation” in paragraph 4 most nearly refers to ________.',
+options:[
+"A. the division of information and work across multiple disconnected systems",
+"B. the replacement of outdated digital platforms with integrated technologies",
+"C. the gradual reduction in employees' ability to operate sophisticated software",
+"D. the practice of dividing complicated projects among specialised employees"
+],
+answer:0,
+explanation:`<b>A</b> is correct.<br><br>
+The context mentions transferring information between systems, checking several platforms, and difficulty locating information.<br>
+So <b>fragmentation</b> means that information and work are <b>spread across multiple disconnected systems</b>.`
+},
+{
+q:"Which of the following can be inferred from paragraph 4?",
+options:[
+"A. A collection of individually useful technologies may collectively make work less efficient if they are poorly integrated.",
+"B. Organisations should select a single digital platform capable of performing every workplace function.",
+"C. The main disadvantage of digital tools is that employees frequently lack the technical skills needed to operate them.",
+"D. Technologies designed for different purposes become ineffective once they are used within the same organisation."
+],
+answer:0,
+explanation:`<b>A</b> is correct.<br><br>
+Paragraph 4 says the problem does not come from any individual tool being ineffective. It comes from the way <b>numerous tools interact</b>.<br>
+Therefore, individually useful tools can collectively reduce efficiency when integration is poor.`
+},
+{
+q:"Which of the following best describes the author's view of workplace technology?",
+options:[
+"A. Technology is inherently beneficial, so organisations should focus primarily on increasing employees' access to digital tools.",
+"B. The productivity benefits of technology are largely cancelled out by its effects on communication and employee availability.",
+"C. Technology can produce genuine efficiency gains, but organisations must manage the secondary changes those gains may generate.",
+"D. Whether technology improves work depends almost entirely on the technical quality of the individual tools being introduced."
+],
+answer:2,
+explanation:`<b>C</b> is correct.<br><br>
+The author clearly accepts that technology can improve productivity, but also argues that organisations must manage the <b>new expectations, behaviours, and processes</b> created by those efficiency gains.<br>
+So the view is balanced rather than strongly positive or negative.`
+}
+];
+
+let current=0,lives=5,score=0,answered=false;
+
+function updateHearts(){
+  document.getElementById("hearts").textContent="❤️".repeat(lives)+"🩶".repeat(5-lives);
+}
+
+function renderQuestion(){
+  answered=false;
+  const q=questions[current];
+  document.getElementById("counter").textContent=`${current+1} / ${questions.length}`;
+  document.getElementById("qtag").textContent=`Question ${current+1}`;
+  document.getElementById("prompt").textContent=q.q;
+  document.getElementById("progress").style.width=`${(current/questions.length)*100}%`;
+  document.getElementById("nextBtn").style.display="none";
+
+  const box=document.getElementById("options");
+  box.innerHTML="";
+  q.options.forEach((text,index)=>{
+    const btn=document.createElement("button");
+    btn.className="option";
+    btn.textContent=text;
+    btn.onclick=()=>choose(index,btn);
+    box.appendChild(btn);
+  });
+
+  const fb=document.getElementById("feedback");
+  fb.className="feedback";
+  fb.innerHTML="";
+  updateHearts();
+}
+
+function choose(index,btn){
+  if(answered) return;
+  const q=questions[current];
+  const fb=document.getElementById("feedback");
+
+  if(index===q.answer){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    document.querySelectorAll(".option").forEach(b=>b.disabled=true);
+    fb.className="feedback good show";
+    fb.innerHTML=`✅ <b>Correct!</b><div class="explain">${q.explanation}</div>`;
+    document.getElementById("nextBtn").style.display="inline-block";
+  }else{
+    lives--;
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    updateHearts();
+    fb.className="feedback bad show";
+    fb.innerHTML=`❌ <b>Incorrect.</b> Try again. You cannot move to the next question until you choose the correct answer.`;
+
+    if(lives<=0){
+      setTimeout(()=>{
+        alert("You have run out of hearts. The game will restart from Question 1.");
+        restartGame();
+      },250);
+    }
+  }
+}
+
+function nextQuestion(){
+  if(!answered) return;
+  current++;
+  if(current>=questions.length){
+    document.getElementById("progress").style.width="100%";
+    document.getElementById("game").style.display="none";
+    document.getElementById("final").classList.add("show");
+    document.getElementById("finalScore").textContent=score;
+  }else{
+    renderQuestion();
+  }
+}
+
+function restartGame(){
+  current=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  document.getElementById("game").style.display="block";
+  document.getElementById("final").classList.remove("show");
+  renderQuestion();
+}
+
+renderQuestion();
+</script>
+</body>
+</html>

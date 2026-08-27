@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 12 - Unit 5 - Exercise 9 - Option C</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh; font-family:"Segoe UI",Arial,sans-serif; color:#123c4b;
+  background:radial-gradient(circle at 15% 10%,rgba(255,255,255,.8),transparent 22%),
+             radial-gradient(circle at 86% 14%,rgba(255,255,255,.4),transparent 24%),
+             linear-gradient(135deg,#e6f9ff 0%,#c9eff7 48%,#d7f8f2 100%);
+  overflow-x:hidden;
+}
+.wave{position:fixed;left:-10vw;width:120vw;height:120px;border-radius:50%;border-top:3px solid rgba(55,150,182,.12);z-index:0;animation:waveMove 9s ease-in-out infinite}
+.w1{top:16%}.w2{top:58%;animation-delay:3s}
+@keyframes waveMove{0%,100%{transform:translateX(0) translateY(0)}50%{transform:translateX(4vw) translateY(-10px)}}
+.bubble{position:fixed;border:2px solid rgba(65,170,190,.17);border-radius:50%;z-index:0;animation:rise 11s linear infinite}
+.b1{width:22px;height:22px;left:8%;bottom:-30px}.b2{width:34px;height:34px;left:28%;bottom:-40px;animation-delay:2s}
+.b3{width:18px;height:18px;left:72%;bottom:-25px;animation-delay:4s}.b4{width:28px;height:28px;left:90%;bottom:-35px;animation-delay:1s}
+@keyframes rise{from{transform:translateY(0)}to{transform:translateY(-115vh)}}
+.wrap{position:relative;z-index:2;width:min(1150px,94%);margin:28px auto 50px}
+.panel{background:rgba(255,255,255,.92);border:1px solid #bedfe8;border-radius:30px;padding:26px;box-shadow:0 18px 48px rgba(38,101,125,.15);backdrop-filter:blur(7px)}
+h1{margin:0;text-align:center;color:#19718b;font-size:clamp(28px,4vw,44px)}
+.subtitle{text-align:center;margin:8px 0 22px;color:#557d89;font-weight:800}
+.status{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding:12px 16px;background:#f0fbfd;border:1px solid #d0e7ec;border-radius:18px}
+.status-item{color:#246a7f;font-weight:900}.hearts{font-size:23px}
+.track{height:12px;background:#dceef2;border-radius:999px;overflow:hidden;margin:12px 0 22px}
+.track span{display:block;width:0;height:100%;background:linear-gradient(90deg,#39a4c4,#65c7b4);transition:.3s}
+.instructions{background:#f8fdff;border-left:6px solid #49a9c5;padding:16px 18px;border-radius:16px;line-height:1.6;margin-bottom:20px;font-weight:700}
+.passage{background:#fafdff;border:1px solid #d5e9ef;border-radius:20px;padding:20px 22px;line-height:1.72;font-size:17px;margin-bottom:22px}
+.passage h2{margin-top:0;text-align:center;color:#176f86}
+.blank{background:#dff5fa;color:#0d7089;font-weight:900;padding:2px 5px;border-radius:6px}
+.card{background:#fff;border:1px solid #d2e7ec;border-radius:24px;padding:24px;box-shadow:0 10px 28px rgba(45,103,126,.10)}
+.qtag{font-size:14px;color:#698792;font-weight:900;letter-spacing:1px;text-transform:uppercase}
+.prompt{margin:8px 0 18px;font-size:22px;line-height:1.5;color:#214a59;font-weight:900}
+.options{display:grid;grid-template-columns:1fr;gap:12px}
+.option{border:2px solid #d3e6eb;background:#fbfeff;border-radius:16px;padding:15px 16px;text-align:left;cursor:pointer;color:#345766;font-size:16.5px;line-height:1.5;font-weight:800;transition:.2s}
+.option:hover:not(:disabled){transform:translateY(-2px);background:#eef9fc;border-color:#71b7cc}
+.option.correct{background:#def5ef;border-color:#3fa97d;color:#1d6347}
+.option.wrong{background:#ffe8e8;border-color:#e36f6f;color:#963838;animation:shake .28s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.feedback{display:none;margin-top:18px;border-radius:16px;padding:16px;line-height:1.62}
+.feedback.show{display:block}.feedback.good{background:#edf9f3;border:1px solid #99d0b2;color:#255b43}.feedback.bad{background:#fff2f2;border:1px solid #efb4b4;color:#8b3b3b}
+.explain{margin-top:14px;padding:15px 16px;background:#fbfffd;border:1px dashed #8cbcac;border-radius:14px;color:#345247}
+.controls{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}
+.btn{border:none;border-radius:14px;padding:12px 20px;font-size:16px;font-weight:900;cursor:pointer}
+.restart{background:#e3f3f7;color:#246b7f}.next{background:#2687a2;color:#fff;display:none}
+.final{display:none;text-align:center;padding:38px 20px}.final.show{display:block}.final .icon{font-size:60px}.final h2{font-size:32px;color:#1f738b}.final p{font-size:18px}
+@media(max-width:700px){.panel{padding:16px}.passage{padding:16px;font-size:16px}.prompt{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="wave w1"></div><div class="wave w2"></div>
+<div class="bubble b1"></div><div class="bubble b2"></div><div class="bubble b3"></div><div class="bubble b4"></div>
+
+<div class="wrap">
+<div class="panel">
+<h1>🌊 Ocean Career Wave 🐚</h1>
+<div class="subtitle">Grade 12 - Unit 5 - Exercise 9 - Option C</div>
+
+<div class="status">
+<div class="status-item">Question: <span id="counter">18 / 22</span></div>
+<div class="status-item">Score: <span id="score">0</span></div>
+<div class="status-item">Lives: <span id="hearts" class="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+<div class="track"><span id="progress"></span></div>
+
+<div class="instructions">Read the passage and mark the letter A, B, C, or D to indicate the option that best fits each numbered blank.</div>
+
+<div class="passage">
+<h2>THE CHANGING NATURE OF CAREER DEVELOPMENT</h2>
+<p>The traditional idea of spending an entire career with a single employer is becoming increasingly uncommon. Rapid technological change, shifting business priorities, and new forms of employment have encouraged workers to reconsider how they develop professionally. In response to these changes, many employees now view career development as a continuous process, <span class="blank">(18) ________</span>.</p>
+<p>One important consequence of this shift is the growing emphasis on transferable skills. Technical knowledge may be valuable in a particular position, but communication, problem-solving, and adaptability can be applied across a wide range of occupations. Although specialised expertise remains important, <span class="blank">(19) ________</span>. As a result, employers increasingly value candidates who can demonstrate both professional knowledge and the ability to adjust to unfamiliar situations.</p>
+<p>Technology has also transformed the way employees acquire new skills. Online courses and digital training platforms allow workers to study at their own pace and choose programmes that meet their individual needs. However, <span class="blank">(20) ________</span>, particularly when employees are expected to manage their learning without regular guidance or feedback. For this reason, many organisations combine digital courses with mentoring and collaborative activities.</p>
+<p>Career mobility has also become more common. Rather than viewing a change of employer or occupation as evidence of instability, <span class="blank">(21) ________</span>. Such transitions may expose workers to different working environments, broaden their professional networks, and enable them to acquire skills that would be difficult to develop in a single position.</p>
+<p>Nevertheless, greater responsibility for career development can create uncertainty. Workers must make decisions about which skills to develop and which opportunities are worth pursuing. Therefore, lifelong learning, <span class="blank">(22) ________</span>, is likely to remain essential for those seeking to maintain their employability in an unpredictable labour market.</p>
+</div>
+
+<div id="game" class="card">
+<div class="qtag" id="qtag">Question 18</div>
+<div class="prompt" id="prompt">Choose the best option for blank (18).</div>
+<div id="options" class="options"></div>
+<div id="feedback" class="feedback"></div>
+<div class="controls">
+<button class="btn restart" onclick="restartGame()">Restart</button>
+<button id="nextBtn" class="btn next" onclick="nextQuestion()">Next ➜</button>
+</div>
+</div>
+
+<div id="final" class="final">
+<div class="icon">🏆🌊🐚</div>
+<h2>Excellent work!</h2>
+<p>You completed all 5 questions.</p>
+<p><b>Final score:</b> <span id="finalScore"></span>/5</p>
+<button class="btn restart" onclick="restartGame()">Play Again</button>
+</div>
+</div>
+</div>
+
+<script>
+const questions=[
+{num:18,options:[
+"A. requiring workers to update their skills and knowledge throughout their working lives",
+"B. which workers were required to remain with the same employer throughout their careers",
+"C. because professional development was once regarded as the responsibility of employers alone",
+"D. having prevented employees from responding effectively to changes in the labour market"
+],answer:0,explanation:`<b>A</b> is correct.<br><br><b>requiring...</b> is a V-ing phrase adding a result/characteristic to <i>a continuous process</i>.<br>Logic: career development is continuous → workers need to keep updating skills and knowledge.<br>B contradicts the opening idea; C refers to an old view; D gives the opposite meaning.`},
+{num:19,options:[
+"A. employees with specialised qualifications rarely need to develop broader workplace skills",
+"B. possessing technical knowledge prevents workers from moving between different occupations",
+"C. workers who combine it with broader abilities may be better prepared for changing job requirements",
+"D. employers have therefore become less interested in candidates capable of adapting to new situations"
+],answer:2,explanation:`<b>C</b> is correct.<br><br>The structure is <b>Although A, B</b>. Specialised expertise remains important, but workers are better prepared when they combine it with broader transferable abilities.<br>The pronoun <b>it</b> refers to <b>specialised expertise</b>.<br>The following sentence confirms the idea: employers value both professional knowledge and adaptability.`},
+{num:20,options:[
+"A. digital learning automatically guarantees that employees will successfully master new skills",
+"B. the flexibility offered by online learning does not necessarily result in effective skill development",
+"C. employees are unlikely to benefit from training unless all courses are completed in traditional classrooms",
+"D. online platforms have made mentoring and workplace collaboration largely unnecessary"
+],answer:1,explanation:`<b>B</b> is correct.<br><br>Before the blank, the passage presents benefits of online learning. <b>However</b> signals a limitation, so B fits: flexibility does <b>not necessarily result in</b> effective skill development.<br>The following phrase about lack of guidance or feedback explains why.<br>A, C and D are too absolute or contradict the passage.`},
+{num:21,options:[
+"A. employers increasingly assume that workers who change jobs lack professional commitment",
+"B. career changes were traditionally considered the most reliable way to achieve job security",
+"C. many professionals now regard such moves as opportunities for learning and career advancement",
+"D. employees should avoid changing occupations until they have acquired every skill required for the new role"
+],answer:2,explanation:`<b>C</b> is correct.<br><br><b>Rather than viewing...</b> creates a contrast between an old negative view and a newer positive view.<br><b>Such moves</b> refers to changing employer or occupation.<br>The next sentence lists benefits: new environments, wider networks, and new skills, supporting the idea of learning and career advancement.`},
+{num:22,options:[
+"A. which involves continuously acquiring and updating knowledge throughout one's career",
+"B. that employees undertake only when their existing qualifications become completely irrelevant",
+"C. where workers are prevented from applying previously acquired skills in new situations",
+"D. having been replaced by short-term training programmes in most modern organisations"
+],answer:0,explanation:`<b>A</b> is correct.<br><br>The commas show a <b>non-defining relative clause</b>: <b>N, which + V...,</b><br><b>which</b> refers to <b>lifelong learning</b>.<br>The meaning also matches the passage: lifelong learning means continuously acquiring and updating knowledge throughout one's career.<br><b>That</b> is not used in this non-defining structure.`}
+];
+
+let current=0,lives=5,score=0,answered=false;
+function updateHearts(){document.getElementById("hearts").textContent="❤️".repeat(lives)+"🩶".repeat(5-lives)}
+function renderQuestion(){
+  answered=false;
+  const q=questions[current];
+  document.getElementById("counter").textContent=`${q.num} / 22`;
+  document.getElementById("qtag").textContent=`Question ${q.num}`;
+  document.getElementById("prompt").textContent=`Choose the best option for blank (${q.num}).`;
+  document.getElementById("progress").style.width=`${(current/questions.length)*100}%`;
+  document.getElementById("nextBtn").style.display="none";
+  const box=document.getElementById("options"); box.innerHTML="";
+  q.options.forEach((text,index)=>{const btn=document.createElement("button");btn.className="option";btn.textContent=text;btn.onclick=()=>choose(index,btn);box.appendChild(btn)});
+  const fb=document.getElementById("feedback");fb.className="feedback";fb.innerHTML="";
+  updateHearts();
+}
+function choose(index,btn){
+  if(answered)return;
+  const q=questions[current],fb=document.getElementById("feedback");
+  if(index===q.answer){
+    answered=true;score++;document.getElementById("score").textContent=score;
+    btn.classList.add("correct");document.querySelectorAll(".option").forEach(b=>b.disabled=true);
+    fb.className="feedback good show";fb.innerHTML=`✅ <b>Correct!</b><div class="explain">${q.explanation}</div>`;
+    document.getElementById("nextBtn").style.display="inline-block";
+  }else{
+    lives--;btn.classList.add("wrong");btn.disabled=true;updateHearts();
+    fb.className="feedback bad show";fb.innerHTML=`❌ <b>Incorrect.</b> Try again. You cannot move to the next question until you choose the correct answer.`;
+    if(lives<=0)setTimeout(()=>{alert("You have run out of hearts. The game will restart from Question 18.");restartGame()},250);
+  }
+}
+function nextQuestion(){
+  if(!answered)return;
+  current++;
+  if(current>=questions.length){
+    document.getElementById("progress").style.width="100%";
+    document.getElementById("game").style.display="none";
+    document.getElementById("final").classList.add("show");
+    document.getElementById("finalScore").textContent=score;
+  }else renderQuestion();
+}
+function restartGame(){
+  current=0;lives=5;score=0;answered=false;
+  document.getElementById("score").textContent="0";
+  document.getElementById("game").style.display="block";
+  document.getElementById("final").classList.remove("show");
+  renderQuestion();
+}
+renderQuestion();
+</script>
+</body>
+</html>

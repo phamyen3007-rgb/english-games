@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 12 - Unit 5 - Exercise 10 - Option C</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh; font-family:"Segoe UI",Arial,sans-serif; color:#143d49;
+  background:
+    radial-gradient(circle at 14% 10%,rgba(255,255,255,.82),transparent 22%),
+    radial-gradient(circle at 86% 15%,rgba(255,255,255,.44),transparent 24%),
+    linear-gradient(135deg,#e9faff 0%,#cbeef8 46%,#d9f7f5 100%);
+  overflow-x:hidden;
+}
+.wave{
+  position:fixed; left:-12vw; width:125vw; height:115px; border-radius:50%;
+  border-top:3px solid rgba(42,137,179,.13); z-index:0; animation:waveMove 10s ease-in-out infinite;
+}
+.w1{top:16%}.w2{top:61%;animation-delay:3s}
+@keyframes waveMove{0%,100%{transform:translateX(0) translateY(0)}50%{transform:translateX(4vw) translateY(-10px)}}
+.bubble{
+  position:fixed; border:2px solid rgba(53,164,192,.18); border-radius:50%; z-index:0; animation:rise 12s linear infinite;
+}
+.b1{width:20px;height:20px;left:7%;bottom:-30px}
+.b2{width:34px;height:34px;left:31%;bottom:-40px;animation-delay:2s}
+.b3{width:18px;height:18px;left:72%;bottom:-25px;animation-delay:4s}
+.b4{width:28px;height:28px;left:91%;bottom:-35px;animation-delay:1s}
+@keyframes rise{from{transform:translateY(0)}to{transform:translateY(-115vh)}}
+.wrap{position:relative;z-index:2;width:min(1150px,94%);margin:28px auto 50px}
+.panel{
+  background:rgba(255,255,255,.93); border:1px solid #bfdfe8; border-radius:30px; padding:26px;
+  box-shadow:0 18px 48px rgba(34,98,124,.15); backdrop-filter:blur(7px);
+}
+h1{margin:0;text-align:center;color:#1b7088;font-size:clamp(28px,4vw,44px)}
+.subtitle{text-align:center;margin:8px 0 22px;color:#587a86;font-weight:800}
+.status{
+  display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; padding:12px 16px;
+  background:#f1fbfd; border:1px solid #d0e7ed; border-radius:18px;
+}
+.status-item{color:#25697e;font-weight:900}.hearts{font-size:23px}
+.track{height:12px;background:#deeff3;border-radius:999px;overflow:hidden;margin:12px 0 22px}
+.track span{display:block;width:0;height:100%;background:linear-gradient(90deg,#3b9fc4,#65c7b9);transition:.3s}
+.instructions{
+  background:#f8fdff; border-left:6px solid #49a6c3; padding:16px 18px; border-radius:16px;
+  line-height:1.6; margin-bottom:20px; font-weight:700;
+}
+.passage{
+  background:#fbfdff; border:1px solid #d5e8ef; border-radius:20px; padding:20px 22px;
+  line-height:1.72; font-size:17px; margin-bottom:22px;
+}
+.passage h2{margin-top:0;text-align:center;color:#176c84}
+.passage u{text-decoration-thickness:2px;text-underline-offset:3px}
+.card{
+  background:#fff; border:1px solid #d2e7ec; border-radius:24px; padding:24px;
+  box-shadow:0 10px 28px rgba(45,103,126,.10);
+}
+.qtag{font-size:14px;color:#6c8790;font-weight:900;letter-spacing:1px;text-transform:uppercase}
+.prompt{margin:8px 0 18px;font-size:22px;line-height:1.5;color:#214956;font-weight:900}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.option{
+  border:2px solid #d3e6eb; background:#fbfeff; border-radius:16px; padding:15px 16px; text-align:left;
+  cursor:pointer; color:#345766; font-size:16.5px; line-height:1.5; font-weight:800; transition:.2s;
+}
+.option:hover:not(:disabled){transform:translateY(-2px);background:#eef9fc;border-color:#71b7cc}
+.option.correct{background:#def5ef;border-color:#3fa97d;color:#1d6347}
+.option.wrong{background:#ffe8e8;border-color:#e36f6f;color:#963838;animation:shake .28s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.feedback{display:none;margin-top:18px;border-radius:16px;padding:16px;line-height:1.62}
+.feedback.show{display:block}
+.feedback.good{background:#edf9f3;border:1px solid #99d0b2;color:#255b43}
+.feedback.bad{background:#fff2f2;border:1px solid #efb4b4;color:#8b3b3b}
+.explain{margin-top:14px;padding:15px 16px;background:#fbfffd;border:1px dashed #8cbcac;border-radius:14px;color:#345247}
+.controls{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}
+.btn{border:none;border-radius:14px;padding:12px 20px;font-size:16px;font-weight:900;cursor:pointer}
+.restart{background:#e3f3f7;color:#246b7f}.next{background:#2687a2;color:#fff;display:none}
+.final{display:none;text-align:center;padding:38px 20px}
+.final.show{display:block}.final .icon{font-size:60px}.final h2{font-size:32px;color:#1f738b}.final p{font-size:18px}
+@media(max-width:700px){
+  .panel{padding:16px}.passage{padding:16px;font-size:16px}.prompt{font-size:20px}.options{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wave w1"></div><div class="wave w2"></div>
+<div class="bubble b1"></div><div class="bubble b2"></div><div class="bubble b3"></div><div class="bubble b4"></div>
+
+<div class="wrap">
+<div class="panel">
+<h1>🌊 Seaside Knowledge Harbor 📚</h1>
+<div class="subtitle">Grade 12 - Unit 5 - Exercise 10 - Option C</div>
+
+<div class="status">
+  <div class="status-item">Question: <span id="counter">1 / 8</span></div>
+  <div class="status-item">Score: <span id="score">0</span></div>
+  <div class="status-item">Lives: <span id="hearts" class="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+<div class="track"><span id="progress"></span></div>
+
+<div class="instructions">
+Read the passage and mark the letter A, B, C, or D to indicate the best answer to each question.
+</div>
+
+<div class="passage">
+<h2>LIBRARIES IN THE DIGITAL AGE</h2>
+
+<p>For centuries, libraries were primarily regarded as places where books were collected, preserved, and made available to readers. The rapid expansion of digital technology, however, has challenged this traditional role. With vast amounts of information now accessible online, some predicted that public libraries would gradually become unnecessary. Instead, many libraries have responded by redefining what they provide and whom they serve.</p>
+
+<p>One significant change has been the growing emphasis on digital access. Modern libraries often provide electronic books, online databases, and free internet access in addition to printed materials. For individuals who cannot afford computers or reliable internet connections at home, these services can be particularly valuable. Librarians have also taken on a broader educational role, helping visitors distinguish reliable information from misleading or inaccurate online content. This function has become increasingly important as the quantity of information available on the Internet has expanded.</p>
+
+<p>Libraries have also evolved into community spaces. Many now host language classes, career workshops, children's activities, and public lectures. Some even provide equipment such as 3D printers or recording facilities that would otherwise be too expensive for individual users. <u>Such developments reflect a broader shift in the purpose of libraries: rather than simply providing access to information, they increasingly provide access to opportunities.</u> This transformation has helped libraries remain relevant even as people's reading and information-seeking habits have changed.</p>
+
+<p>Nevertheless, adapting to new expectations presents difficulties. Digital resources and modern equipment require considerable investment, while libraries often operate with limited public funding. There is also disagreement over how resources should be allocated. Some argue that libraries should devote more money to digital services, whereas others fear that doing so may disadvantage elderly visitors or other users who continue to depend heavily on printed materials. Library managers must therefore balance innovation with the needs of communities whose technological abilities and preferences vary considerably.</p>
+
+<p>The future of libraries is unlikely to depend on whether printed books disappear entirely. Rather, their survival may depend on their ability to identify needs that commercial services do not adequately meet. By providing trustworthy information, technology, learning opportunities, and shared public spaces, libraries can continue to serve an important social function. Their greatest strength may ultimately lie not in any particular technology or collection, but in their capacity to adapt while remaining accessible to everyone.</p>
+</div>
+
+<div id="game" class="card">
+  <div class="qtag" id="qtag">Question 1</div>
+  <div class="prompt" id="prompt"></div>
+  <div id="options" class="options"></div>
+  <div id="feedback" class="feedback"></div>
+  <div class="controls">
+    <button class="btn restart" onclick="restartGame()">Restart</button>
+    <button id="nextBtn" class="btn next" onclick="nextQuestion()">Next ➜</button>
+  </div>
+</div>
+
+<div id="final" class="final">
+  <div class="icon">🏆🌊📚</div>
+  <h2>Excellent work!</h2>
+  <p>You completed all 8 questions.</p>
+  <p><b>Final score:</b> <span id="finalScore"></span>/8</p>
+  <button class="btn restart" onclick="restartGame()">Play Again</button>
+</div>
+
+</div>
+</div>
+
+<script>
+const questions = [
+{
+q:"Which of the following best expresses the main idea of the passage?",
+options:[
+"A. Printed books will eventually disappear as libraries invest more heavily in technology.",
+"B. Public libraries are adapting their traditional functions to remain useful in a changing society.",
+"C. Modern libraries should concentrate primarily on providing technology to disadvantaged people.",
+"D. Digital technology has made the traditional services of public libraries largely unnecessary."
+],
+answer:1,
+explanation:`<b>B</b> is correct.<br><br>
+The whole passage focuses on how libraries are <b>adapting their roles</b> to remain useful: digital access, community spaces, balanced resource allocation, and long-term adaptability.<br>
+A and D are too extreme. C is too narrow because technology for disadvantaged users is only one part of the passage.`
+},
+{
+q:"According to paragraph 2, why has the educational role of librarians become increasingly important?",
+options:[
+"A. Many library users are unwilling to obtain information from printed sources.",
+"B. Online databases have become too complicated for ordinary people to operate independently.",
+"C. The abundance of online information makes evaluating its reliability increasingly necessary.",
+"D. Libraries are attempting to replace schools as the main providers of digital education."
+],
+answer:2,
+explanation:`<b>C</b> is correct.<br><br>
+Paragraph 2 says librarians help visitors distinguish <b>reliable information</b> from misleading or inaccurate content, and this role has become more important as the amount of online information has expanded.<br>
+Logic: <b>more online information → greater need to evaluate reliability</b>.`
+},
+{
+q:'The phrase “This function” in paragraph 2 refers to ________.',
+options:[
+"A. providing visitors with reliable internet connections",
+"B. making electronic books available without charge",
+"C. helping people evaluate the reliability of online information",
+"D. expanding the quantity of information available on the Internet"
+],
+answer:2,
+explanation:`<b>C</b> is correct.<br><br>
+<b>This function</b> refers directly to the immediately preceding action: librarians are <b>helping visitors distinguish reliable information from misleading or inaccurate online content</b>.`
+},
+{
+q:'The word “allocated” in paragraph 4 is closest in meaning to ________.',
+options:[
+"A. distributed",
+"B. accumulated",
+"C. generated",
+"D. preserved"
+],
+answer:0,
+explanation:`<b>A. distributed</b> is correct.<br><br>
+<b>allocate resources</b> = phân bổ nguồn lực.<br>
+So <b>allocated</b> is closest in meaning to <b>distributed</b>.`
+},
+{
+q:"Which of the following best paraphrases the underlined sentence in paragraph 3?",
+options:[
+"A. Libraries are increasingly creating opportunities for people rather than limiting their role to supplying information.",
+"B. Libraries have reduced access to information because community programmes have become their main responsibility.",
+"C. Technological development has forced libraries to abandon information services in favour of commercial activities.",
+"D. Libraries can provide greater access to information only when users participate in educational programmes."
+],
+answer:0,
+explanation:`<b>A</b> is correct.<br><br>
+The original sentence contrasts two roles:<br>
+<b>simply providing access to information → increasingly providing access to opportunities</b>.<br>
+A preserves this meaning accurately without adding or removing important ideas.`
+},
+{
+q:"What can be inferred from paragraph 4 about decisions concerning library resources?",
+options:[
+"A. Investing heavily in digital resources will eventually satisfy the needs of nearly all library users.",
+"B. Maintaining traditional services prevents libraries from responding effectively to technological change.",
+"C. Library managers must consider that different groups may benefit from different types of services.",
+"D. Elderly visitors generally oppose the introduction of technology into public libraries."
+],
+answer:2,
+explanation:`<b>C</b> is correct.<br><br>
+Paragraph 4 contrasts users who support greater spending on digital services with users who still rely heavily on printed materials.<br>
+Therefore, managers must consider that <b>different groups have different needs and preferences</b>.<br>
+D is too strong: dependence on printed materials does not mean opposition to technology.`
+},
+{
+q:"Which of the following is NOT mentioned as something modern libraries may provide?",
+options:[
+"A. Assistance in identifying trustworthy information",
+"B. Access to specialised technological equipment",
+"C. Programmes related to employment and careers",
+"D. Financial assistance for users to purchase digital devices"
+],
+answer:3,
+explanation:`<b>D</b> is correct.<br><br>
+The passage mentions:<br>
+• trustworthy information support → A<br>
+• 3D printers and recording facilities → B<br>
+• career workshops → C<br>
+It does <b>not</b> mention giving users money to purchase digital devices.`
+},
+{
+q:"Which statement would the author most likely agree with?",
+options:[
+"A. Libraries will remain relevant only if they eventually replace printed materials with digital resources.",
+"B. The continued existence of libraries depends more on adaptability and public accessibility than on any single type of resource.",
+"C. Commercial information services are likely to perform most traditional library functions more efficiently.",
+"D. Libraries should prioritise technologically skilled users because they are more likely to benefit from modern services."
+],
+answer:1,
+explanation:`<b>B</b> is correct.<br><br>
+The final sentence states that libraries' greatest strength lies not in any particular technology or collection, but in their <b>capacity to adapt while remaining accessible to everyone</b>.<br>
+That directly matches <b>adaptability + accessibility</b> in B.`
+}
+];
+
+let current=0,lives=5,score=0,answered=false;
+
+function updateHearts(){
+  document.getElementById("hearts").textContent="❤️".repeat(lives)+"🩶".repeat(5-lives);
+}
+
+function renderQuestion(){
+  answered=false;
+  const q=questions[current];
+  document.getElementById("counter").textContent=`${current+1} / ${questions.length}`;
+  document.getElementById("qtag").textContent=`Question ${current+1}`;
+  document.getElementById("prompt").textContent=q.q;
+  document.getElementById("progress").style.width=`${(current/questions.length)*100}%`;
+  document.getElementById("nextBtn").style.display="none";
+
+  const box=document.getElementById("options");
+  box.innerHTML="";
+  q.options.forEach((text,index)=>{
+    const btn=document.createElement("button");
+    btn.className="option";
+    btn.textContent=text;
+    btn.onclick=()=>choose(index,btn);
+    box.appendChild(btn);
+  });
+
+  const fb=document.getElementById("feedback");
+  fb.className="feedback";
+  fb.innerHTML="";
+  updateHearts();
+}
+
+function choose(index,btn){
+  if(answered) return;
+  const q=questions[current];
+  const fb=document.getElementById("feedback");
+
+  if(index===q.answer){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    document.querySelectorAll(".option").forEach(b=>b.disabled=true);
+
+    fb.className="feedback good show";
+    fb.innerHTML=`✅ <b>Correct!</b><div class="explain">${q.explanation}</div>`;
+    document.getElementById("nextBtn").style.display="inline-block";
+  }else{
+    lives--;
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    updateHearts();
+
+    fb.className="feedback bad show";
+    fb.innerHTML=`❌ <b>Incorrect.</b> Try again. You cannot move to the next question until you choose the correct answer.`;
+
+    if(lives<=0){
+      setTimeout(()=>{
+        alert("You have run out of hearts. The game will restart from Question 1.");
+        restartGame();
+      },250);
+    }
+  }
+}
+
+function nextQuestion(){
+  if(!answered) return;
+  current++;
+  if(current>=questions.length){
+    document.getElementById("progress").style.width="100%";
+    document.getElementById("game").style.display="none";
+    document.getElementById("final").classList.add("show");
+    document.getElementById("finalScore").textContent=score;
+  }else{
+    renderQuestion();
+  }
+}
+
+function restartGame(){
+  current=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  document.getElementById("game").style.display="block";
+  document.getElementById("final").classList.remove("show");
+  renderQuestion();
+}
+
+renderQuestion();
+</script>
+</body>
+</html>

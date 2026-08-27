@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 12 - Unit 5 - Exercise 10 - Option C1</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh; font-family:"Segoe UI",Arial,sans-serif; color:#143d49;
+  background:
+    radial-gradient(circle at 14% 10%,rgba(255,255,255,.84),transparent 22%),
+    radial-gradient(circle at 86% 15%,rgba(255,255,255,.46),transparent 24%),
+    linear-gradient(135deg,#e8fbff 0%,#c9edf7 45%,#d8f7f2 100%);
+  overflow-x:hidden;
+}
+.wave{
+  position:fixed; left:-12vw; width:125vw; height:115px; border-radius:50%;
+  border-top:3px solid rgba(43,139,181,.13); z-index:0; animation:waveMove 10s ease-in-out infinite;
+}
+.w1{top:16%}.w2{top:61%;animation-delay:3s}
+@keyframes waveMove{0%,100%{transform:translateX(0) translateY(0)}50%{transform:translateX(4vw) translateY(-10px)}}
+.bubble{
+  position:fixed; border:2px solid rgba(53,164,192,.18); border-radius:50%; z-index:0; animation:rise 12s linear infinite;
+}
+.b1{width:20px;height:20px;left:7%;bottom:-30px}
+.b2{width:34px;height:34px;left:31%;bottom:-40px;animation-delay:2s}
+.b3{width:18px;height:18px;left:72%;bottom:-25px;animation-delay:4s}
+.b4{width:28px;height:28px;left:91%;bottom:-35px;animation-delay:1s}
+@keyframes rise{from{transform:translateY(0)}to{transform:translateY(-115vh)}}
+.coral{
+  position:fixed; bottom:0; width:100%; height:90px; z-index:0; opacity:.12;
+  background:
+    radial-gradient(circle at 10% 100%,#4ea8b8 0 12%,transparent 13%),
+    radial-gradient(circle at 35% 100%,#58b7a5 0 10%,transparent 11%),
+    radial-gradient(circle at 65% 100%,#4ea8b8 0 11%,transparent 12%),
+    radial-gradient(circle at 90% 100%,#58b7a5 0 12%,transparent 13%);
+}
+.wrap{position:relative;z-index:2;width:min(1150px,94%);margin:28px auto 50px}
+.panel{
+  background:rgba(255,255,255,.93); border:1px solid #bfdfe8; border-radius:30px; padding:26px;
+  box-shadow:0 18px 48px rgba(34,98,124,.15); backdrop-filter:blur(7px);
+}
+h1{margin:0;text-align:center;color:#1b7088;font-size:clamp(28px,4vw,44px)}
+.subtitle{text-align:center;margin:8px 0 22px;color:#587a86;font-weight:800}
+.status{
+  display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; padding:12px 16px;
+  background:#f1fbfd; border:1px solid #d0e7ed; border-radius:18px;
+}
+.status-item{color:#25697e;font-weight:900}.hearts{font-size:23px}
+.track{height:12px;background:#deeff3;border-radius:999px;overflow:hidden;margin:12px 0 22px}
+.track span{display:block;width:0;height:100%;background:linear-gradient(90deg,#3b9fc4,#65c7b9);transition:.3s}
+.instructions{
+  background:#f8fdff; border-left:6px solid #49a6c3; padding:16px 18px; border-radius:16px;
+  line-height:1.6; margin-bottom:20px; font-weight:700;
+}
+.passage{
+  background:#fbfdff; border:1px solid #d5e8ef; border-radius:20px; padding:20px 22px;
+  line-height:1.72; font-size:17px; margin-bottom:22px;
+}
+.passage h2{margin-top:0;text-align:center;color:#176c84}
+.passage u{text-decoration-thickness:2px;text-underline-offset:3px}
+.card{
+  background:#fff; border:1px solid #d2e7ec; border-radius:24px; padding:24px;
+  box-shadow:0 10px 28px rgba(45,103,126,.10);
+}
+.qtag{font-size:14px;color:#6c8790;font-weight:900;letter-spacing:1px;text-transform:uppercase}
+.prompt{margin:8px 0 18px;font-size:22px;line-height:1.5;color:#214956;font-weight:900}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.option{
+  border:2px solid #d3e6eb; background:#fbfeff; border-radius:16px; padding:15px 16px; text-align:left;
+  cursor:pointer; color:#345766; font-size:16.5px; line-height:1.5; font-weight:800; transition:.2s;
+}
+.option:hover:not(:disabled){transform:translateY(-2px);background:#eef9fc;border-color:#71b7cc}
+.option.correct{background:#def5ef;border-color:#3fa97d;color:#1d6347}
+.option.wrong{background:#ffe8e8;border-color:#e36f6f;color:#963838;animation:shake .28s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.feedback{display:none;margin-top:18px;border-radius:16px;padding:16px;line-height:1.62}
+.feedback.show{display:block}
+.feedback.good{background:#edf9f3;border:1px solid #99d0b2;color:#255b43}
+.feedback.bad{background:#fff2f2;border:1px solid #efb4b4;color:#8b3b3b}
+.explain{margin-top:14px;padding:15px 16px;background:#fbfffd;border:1px dashed #8cbcac;border-radius:14px;color:#345247}
+.controls{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}
+.btn{border:none;border-radius:14px;padding:12px 20px;font-size:16px;font-weight:900;cursor:pointer}
+.restart{background:#e3f3f7;color:#246b7f}.next{background:#2687a2;color:#fff;display:none}
+.final{display:none;text-align:center;padding:38px 20px}
+.final.show{display:block}.final .icon{font-size:60px}.final h2{font-size:32px;color:#1f738b}.final p{font-size:18px}
+@media(max-width:700px){
+  .panel{padding:16px}.passage{padding:16px;font-size:16px}.prompt{font-size:20px}.options{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wave w1"></div><div class="wave w2"></div>
+<div class="bubble b1"></div><div class="bubble b2"></div><div class="bubble b3"></div><div class="bubble b4"></div>
+<div class="coral"></div>
+
+<div class="wrap">
+<div class="panel">
+<h1>🌊 Coral Bay Innovation Lab 🪸</h1>
+<div class="subtitle">Grade 12 - Unit 5 - Exercise 10 - Option C1</div>
+
+<div class="status">
+  <div class="status-item">Question: <span id="counter">1 / 8</span></div>
+  <div class="status-item">Score: <span id="score">0</span></div>
+  <div class="status-item">Lives: <span id="hearts" class="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+<div class="track"><span id="progress"></span></div>
+
+<div class="instructions">
+Read the passage and mark the letter A, B, C, or D to indicate the best answer to each question.
+</div>
+
+<div class="passage">
+<h2>WHEN FAILURE BECOMES PART OF INNOVATION</h2>
+
+<p>In workplaces that depend heavily on innovation, failure is often treated as something to be avoided. Employees may hesitate to propose unusual ideas because an unsuccessful project could damage their professional reputation. Yet some researchers and business leaders argue that this attitude can actually discourage innovation. When employees are expected to succeed every time, they may simply repeat familiar methods rather than experiment with approaches whose outcomes are uncertain.</p>
+
+<p>This does not mean, however, that organisations should celebrate every unsuccessful project. A distinction needs to be made between avoidable mistakes and what some experts call “intelligent failures”. Avoidable mistakes may result from carelessness, inadequate preparation, or failure to follow established procedures. Intelligent failures, by contrast, occur when a carefully planned attempt to explore something genuinely new produces an unexpected result. Although such an attempt may not achieve its original objective, the information obtained from it can influence subsequent decisions.</p>
+
+<p>For this reason, some organisations have begun encouraging employees to examine unsuccessful projects systematically rather than quietly abandoning them. Teams may discuss which assumptions proved incorrect, what warning signs were overlooked, and how similar problems could be prevented in the future. <u>The purpose of such discussions is not to determine who deserves blame but to extract knowledge that can improve future performance.</u> This approach is particularly valuable when the causes of failure are complex and cannot be attributed to a single individual.</p>
+
+<p>Nevertheless, creating a workplace in which people can discuss mistakes openly is not straightforward. Managers who claim to welcome experimentation may unintentionally discourage it if employees are severely criticised whenever an idea fails. Similarly, an organisation that tolerates every mistake without examining its causes may encourage irresponsibility rather than innovation. The challenge, therefore, is to establish an environment where reasonable experimentation is supported while employees remain accountable for decisions they could reasonably have controlled.</p>
+
+<p>This balance has become increasingly important as companies face rapidly changing technologies and consumer expectations. In such conditions, organisations cannot always rely on solutions that succeeded in the past. They need employees who are willing to test new possibilities but also capable of learning when those attempts do not work as intended. From this perspective, the ability to respond constructively to failure may be just as valuable as the ability to achieve immediate success.</p>
+</div>
+
+<div id="game" class="card">
+  <div class="qtag" id="qtag">Question 1</div>
+  <div class="prompt" id="prompt"></div>
+  <div id="options" class="options"></div>
+  <div id="feedback" class="feedback"></div>
+  <div class="controls">
+    <button class="btn restart" onclick="restartGame()">Restart</button>
+    <button id="nextBtn" class="btn next" onclick="nextQuestion()">Next ➜</button>
+  </div>
+</div>
+
+<div id="final" class="final">
+  <div class="icon">🏆🌊🪸</div>
+  <h2>Excellent work!</h2>
+  <p>You completed all 8 questions.</p>
+  <p><b>Final score:</b> <span id="finalScore"></span>/8</p>
+  <button class="btn restart" onclick="restartGame()">Play Again</button>
+</div>
+</div>
+</div>
+
+<script>
+const questions = [
+{
+q:"Which of the following best expresses the main idea of the passage?",
+options:[
+"A. Organisations should accept all forms of failure because experimentation is more important than immediate success.",
+"B. Employees generally avoid innovation because managers refuse to allow them to experiment with new technology.",
+"C. Organisations can benefit from certain failures when experimentation is responsible and lessons are drawn from unsuccessful attempts.",
+"D. Innovative companies are gradually replacing traditional measures of employee performance with tolerance for mistakes."
+],
+answer:2,
+explanation:`<b>C</b> is correct.<br><br>
+The passage does not argue that all failure is good. Its main idea is that <b>some failures can be valuable when experimentation is responsible and organisations learn from the outcome</b>.<br>
+A is too absolute because of <b>all forms of failure</b>. B is too narrow, and D is not stated.`
+},
+{
+q:"According to paragraph 1, why might expecting employees to succeed every time reduce innovation?",
+options:[
+"A. Employees may prefer safe and familiar approaches to uncertain alternatives.",
+"B. Employees may become unable to recognise which projects are likely to succeed.",
+"C. Managers may spend too much time evaluating unsuccessful projects.",
+"D. Organisations may become dependent on ideas developed by their competitors."
+],
+answer:0,
+explanation:`<b>A</b> is correct.<br><br>
+Paragraph 1 says that when employees are expected to succeed every time, they may <b>repeat familiar methods</b> rather than experiment with uncertain approaches.<br>
+So pressure to succeed encourages safer choices and reduces innovation.`
+},
+{
+q:'The phrase “such an attempt” in paragraph 2 refers to ________.',
+options:[
+"A. failing to follow procedures that have already been established",
+"B. making an avoidable mistake because of insufficient preparation",
+"C. trying a carefully planned but genuinely new approach",
+"D. repeating a method that has previously produced successful results"
+],
+answer:2,
+explanation:`<b>C</b> is correct.<br><br>
+The phrase <b>such an attempt</b> refers back to the immediately preceding description: <i>a carefully planned attempt to explore something genuinely new</i>.<br>
+This is a classic reference question: trace <b>such / this / these / that</b> back to the nearest logical antecedent.`
+},
+{
+q:'The word “extract” in paragraph 3 is closest in meaning to ________.',
+options:[
+"A. conceal",
+"B. obtain",
+"C. distribute",
+"D. replace"
+],
+answer:1,
+explanation:`<b>B. obtain</b> is correct.<br><br>
+In the phrase <b>extract knowledge</b>, <i>extract</i> means <b>rút ra / thu được</b>.<br>
+So <b>obtain</b> is the closest synonym.`
+},
+{
+q:"Which of the following best paraphrases the underlined sentence in paragraph 3?",
+options:[
+"A. Discussions about failed projects should identify the employees responsible before improvements can be made.",
+"B. Analysing unsuccessful projects is intended to produce useful lessons rather than assign responsibility for the failure.",
+"C. Employees should be protected from responsibility whenever a failed project provides useful information.",
+"D. Organisations can improve performance only by preventing managers from criticising unsuccessful employees."
+],
+answer:1,
+explanation:`<b>B</b> is correct.<br><br>
+The sentence uses <b>not A but B</b>: not to decide who deserves blame, but to extract useful knowledge.<br>
+B accurately paraphrases this as <b>produce useful lessons rather than assign responsibility</b>.`
+},
+{
+q:"What can be inferred from paragraph 4 about an effective approach to workplace failure?",
+options:[
+"A. Employees should be free to experiment without being held responsible for the consequences of their decisions.",
+"B. Managers should discourage projects whose outcomes cannot be predicted with reasonable certainty.",
+"C. Organisations need to distinguish productive experimentation from mistakes that could reasonably have been avoided.",
+"D. Innovation is most likely to occur when organisations avoid investigating why unsuccessful projects failed."
+],
+answer:2,
+explanation:`<b>C</b> is correct.<br><br>
+Paragraph 4 rejects two extremes: punishing every failed experiment, and tolerating every mistake without analysis.<br>
+The effective approach is to <b>support reasonable experimentation while keeping employees accountable for controllable decisions</b>.<br>
+Therefore, organisations must distinguish productive experimentation from avoidable mistakes.`
+},
+{
+q:"Which of the following is NOT mentioned as something organisations may do when examining an unsuccessful project?",
+options:[
+"A. Identify assumptions that turned out to be incorrect",
+"B. Consider warning signs that were previously missed",
+"C. Discuss ways of preventing similar problems",
+"D. Compare the failed project with successful projects run by competitors"
+],
+answer:3,
+explanation:`<b>D</b> is correct.<br><br>
+Paragraph 3 explicitly mentions:<br>
+• assumptions that proved incorrect → A<br>
+• warning signs that were overlooked → B<br>
+• preventing similar future problems → C<br>
+It does <b>not</b> mention comparing the project with competitors' successful projects.`
+},
+{
+q:"Which of the following can be inferred from the final paragraph?",
+options:[
+"A. Previous solutions become completely useless whenever technology or consumer preferences change.",
+"B. Organisations that respond constructively to unsuccessful experiments may be better prepared to deal with change.",
+"C. Immediate success is becoming irrelevant as a measure of organisational performance.",
+"D. Employees who frequently fail are generally more innovative than those who consistently succeed."
+],
+answer:1,
+explanation:`<b>B</b> is correct.<br><br>
+The final paragraph says organisations cannot always rely on past solutions and need employees who can test new possibilities and learn when attempts fail.<br>
+So constructive responses to unsuccessful experiments can help organisations <b>adapt better to change</b>.<br>
+A, C, and D are all too absolute or unsupported.`
+}
+];
+
+let current=0,lives=5,score=0,answered=false;
+
+function updateHearts(){
+  document.getElementById("hearts").textContent="❤️".repeat(lives)+"🩶".repeat(5-lives);
+}
+
+function renderQuestion(){
+  answered=false;
+  const q=questions[current];
+  document.getElementById("counter").textContent=`${current+1} / ${questions.length}`;
+  document.getElementById("qtag").textContent=`Question ${current+1}`;
+  document.getElementById("prompt").textContent=q.q;
+  document.getElementById("progress").style.width=`${(current/questions.length)*100}%`;
+  document.getElementById("nextBtn").style.display="none";
+
+  const box=document.getElementById("options");
+  box.innerHTML="";
+  q.options.forEach((text,index)=>{
+    const btn=document.createElement("button");
+    btn.className="option";
+    btn.textContent=text;
+    btn.onclick=()=>choose(index,btn);
+    box.appendChild(btn);
+  });
+
+  const fb=document.getElementById("feedback");
+  fb.className="feedback";
+  fb.innerHTML="";
+  updateHearts();
+}
+
+function choose(index,btn){
+  if(answered) return;
+  const q=questions[current];
+  const fb=document.getElementById("feedback");
+
+  if(index===q.answer){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    document.querySelectorAll(".option").forEach(b=>b.disabled=true);
+
+    fb.className="feedback good show";
+    fb.innerHTML=`✅ <b>Correct!</b><div class="explain">${q.explanation}</div>`;
+    document.getElementById("nextBtn").style.display="inline-block";
+  } else {
+    lives--;
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    updateHearts();
+
+    fb.className="feedback bad show";
+    fb.innerHTML=`❌ <b>Incorrect.</b> Try again. You cannot move to the next question until you choose the correct answer.`;
+
+    if(lives<=0){
+      setTimeout(()=>{
+        alert("You have run out of hearts. The game will restart from Question 1.");
+        restartGame();
+      },250);
+    }
+  }
+}
+
+function nextQuestion(){
+  if(!answered) return;
+  current++;
+  if(current>=questions.length){
+    document.getElementById("progress").style.width="100%";
+    document.getElementById("game").style.display="none";
+    document.getElementById("final").classList.add("show");
+    document.getElementById("finalScore").textContent=score;
+  }else{
+    renderQuestion();
+  }
+}
+
+function restartGame(){
+  current=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  document.getElementById("game").style.display="block";
+  document.getElementById("final").classList.remove("show");
+  renderQuestion();
+}
+
+renderQuestion();
+</script>
+</body>
+</html>

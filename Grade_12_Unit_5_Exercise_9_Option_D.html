@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 12 - Unit 5 - Exercise 9 - Option D</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:"Segoe UI",Arial,sans-serif;
+  color:#153a49;
+  background:
+    radial-gradient(circle at 14% 10%,rgba(255,255,255,.82),transparent 22%),
+    radial-gradient(circle at 86% 14%,rgba(255,255,255,.42),transparent 24%),
+    linear-gradient(135deg,#e9f8ff 0%,#c9ebf8 45%,#d8f6f6 100%);
+  overflow-x:hidden;
+}
+.wave{
+  position:fixed;
+  left:-12vw;
+  width:125vw;
+  height:115px;
+  border-radius:50%;
+  border-top:3px solid rgba(44,130,180,.13);
+  z-index:0;
+  animation:waveMove 10s ease-in-out infinite;
+}
+.w1{top:15%}
+.w2{top:59%;animation-delay:3s}
+@keyframes waveMove{
+  0%,100%{transform:translateX(0) translateY(0)}
+  50%{transform:translateX(4vw) translateY(-10px)}
+}
+.bubble{
+  position:fixed;
+  border:2px solid rgba(60,160,195,.18);
+  border-radius:50%;
+  z-index:0;
+  animation:rise 12s linear infinite;
+}
+.b1{width:20px;height:20px;left:7%;bottom:-30px}
+.b2{width:34px;height:34px;left:31%;bottom:-40px;animation-delay:2s}
+.b3{width:18px;height:18px;left:72%;bottom:-25px;animation-delay:4s}
+.b4{width:28px;height:28px;left:91%;bottom:-35px;animation-delay:1s}
+@keyframes rise{
+  from{transform:translateY(0)}
+  to{transform:translateY(-115vh)}
+}
+.wrap{
+  position:relative;
+  z-index:2;
+  width:min(1150px,94%);
+  margin:28px auto 50px;
+}
+.panel{
+  background:rgba(255,255,255,.93);
+  border:1px solid #bddce8;
+  border-radius:30px;
+  padding:26px;
+  box-shadow:0 18px 48px rgba(35,95,125,.16);
+  backdrop-filter:blur(7px);
+}
+h1{
+  margin:0;
+  text-align:center;
+  color:#17698b;
+  font-size:clamp(28px,4vw,44px);
+}
+.subtitle{
+  text-align:center;
+  margin:8px 0 22px;
+  color:#567989;
+  font-weight:800;
+}
+.status{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 16px;
+  background:#f0fafd;
+  border:1px solid #cfe5ec;
+  border-radius:18px;
+}
+.status-item{
+  color:#24657e;
+  font-weight:900;
+}
+.hearts{font-size:23px}
+.track{
+  height:12px;
+  background:#deedf3;
+  border-radius:999px;
+  overflow:hidden;
+  margin:12px 0 22px;
+}
+.track span{
+  display:block;
+  width:0;
+  height:100%;
+  background:linear-gradient(90deg,#2f96c7,#61c6bf);
+  transition:.3s;
+}
+.instructions{
+  background:#f8fdff;
+  border-left:6px solid #3b9fc5;
+  padding:16px 18px;
+  border-radius:16px;
+  line-height:1.6;
+  margin-bottom:20px;
+  font-weight:700;
+}
+.passage{
+  background:#fbfdff;
+  border:1px solid #d3e7ef;
+  border-radius:20px;
+  padding:20px 22px;
+  line-height:1.72;
+  font-size:17px;
+  margin-bottom:22px;
+}
+.passage h2{
+  margin-top:0;
+  text-align:center;
+  color:#176b87;
+}
+.blank{
+  background:#dff3fa;
+  color:#0d6e88;
+  font-weight:900;
+  padding:2px 5px;
+  border-radius:6px;
+}
+.card{
+  background:#fff;
+  border:1px solid #d1e5ed;
+  border-radius:24px;
+  padding:24px;
+  box-shadow:0 10px 28px rgba(42,99,126,.10);
+}
+.qtag{
+  font-size:14px;
+  color:#69828f;
+  font-weight:900;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+.prompt{
+  margin:8px 0 18px;
+  font-size:22px;
+  line-height:1.5;
+  color:#214856;
+  font-weight:900;
+}
+.options{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+.option{
+  border:2px solid #d1e5ec;
+  background:#fbfeff;
+  border-radius:16px;
+  padding:15px 16px;
+  text-align:left;
+  cursor:pointer;
+  color:#345666;
+  font-size:16.5px;
+  line-height:1.5;
+  font-weight:800;
+  transition:.2s;
+}
+.option:hover:not(:disabled){
+  transform:translateY(-2px);
+  background:#eef8fc;
+  border-color:#70b5cc;
+}
+.option.correct{
+  background:#def4ef;
+  border-color:#40a77d;
+  color:#1d6147;
+}
+.option.wrong{
+  background:#ffe8e8;
+  border-color:#e36f6f;
+  color:#963838;
+  animation:shake .28s;
+}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-5px)}
+  75%{transform:translateX(5px)}
+}
+.feedback{
+  display:none;
+  margin-top:18px;
+  border-radius:16px;
+  padding:16px;
+  line-height:1.62;
+}
+.feedback.show{display:block}
+.feedback.good{
+  background:#edf9f3;
+  border:1px solid #99d0b2;
+  color:#255b43;
+}
+.feedback.bad{
+  background:#fff2f2;
+  border:1px solid #efb4b4;
+  color:#8b3b3b;
+}
+.explain{
+  margin-top:14px;
+  padding:15px 16px;
+  background:#fbfffd;
+  border:1px dashed #8dbbab;
+  border-radius:14px;
+  color:#345247;
+}
+.controls{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:18px;
+}
+.btn{
+  border:none;
+  border-radius:14px;
+  padding:12px 20px;
+  font-size:16px;
+  font-weight:900;
+  cursor:pointer;
+}
+.restart{background:#e3f2f7;color:#24657f}
+.next{background:#217fa0;color:#fff;display:none}
+.final{
+  display:none;
+  text-align:center;
+  padding:38px 20px;
+}
+.final.show{display:block}
+.final .icon{font-size:60px}
+.final h2{font-size:32px;color:#1f6d88}
+.final p{font-size:18px}
+@media(max-width:700px){
+  .panel{padding:16px}
+  .passage{padding:16px;font-size:16px}
+  .prompt{font-size:20px}
+}
+</style>
+</head>
+<body>
+<div class="wave w1"></div>
+<div class="wave w2"></div>
+<div class="bubble b1"></div>
+<div class="bubble b2"></div>
+<div class="bubble b3"></div>
+<div class="bubble b4"></div>
+
+<div class="wrap">
+  <div class="panel">
+    <h1>🌊 Deep Blue Recruitment Hub 🤖</h1>
+    <div class="subtitle">Grade 12 - Unit 5 - Exercise 9 - Option D</div>
+
+    <div class="status">
+      <div class="status-item">Question: <span id="counter">18 / 22</span></div>
+      <div class="status-item">Score: <span id="score">0</span></div>
+      <div class="status-item">Lives: <span id="hearts" class="hearts">❤️❤️❤️❤️❤️</span></div>
+    </div>
+    <div class="track"><span id="progress"></span></div>
+
+    <div class="instructions">
+      Read the passage and mark the letter A, B, C, or D to indicate the option that best fits each numbered blank.
+    </div>
+
+    <div class="passage">
+      <h2>THE GROWING ROLE OF ARTIFICIAL INTELLIGENCE IN RECRUITMENT</h2>
+
+      <p>Artificial intelligence is becoming increasingly common in recruitment as employers search for faster and more efficient ways to identify suitable candidates. AI-powered systems can screen large numbers of applications, identify relevant qualifications, and compare candidates against predetermined criteria. By automating some of the most time-consuming stages of recruitment, <span class="blank">(18) ________</span>.</p>
+
+      <p>One major advantage of these systems is their ability to process information consistently. Human recruiters may unintentionally allow personal impressions to influence their decisions, whereas automated systems can apply the same criteria to every application. Nevertheless, AI should not automatically be regarded as completely objective, <span class="blank">(19) ________</span>. If historical recruitment decisions contain unfair patterns, an AI system trained on such information may reproduce them.</p>
+
+      <p>Another concern involves the qualities that automated systems are capable of evaluating. Technical qualifications and years of experience can often be identified relatively easily from an application. However, characteristics such as creativity, motivation, and interpersonal ability are considerably harder to measure. Consequently, <span class="blank">(20) ________</span> rather than allowing automated systems to make final recruitment decisions independently.</p>
+
+      <p>The increasing use of AI has also changed how job seekers prepare their applications. Some applicants now modify their résumés to include keywords that automated screening systems are likely to recognise. Although this may increase the likelihood of an application passing the initial screening stage, <span class="blank">(21) ________</span>. Candidates who concentrate excessively on satisfying an algorithm may fail to communicate what actually makes them suitable for the position.</p>
+
+      <p>For these reasons, many experts argue that AI is most effective when it supports rather than replaces human decision-making. Used appropriately, the technology can improve efficiency while recruiters remain responsible for evaluating qualities that require judgement and contextual understanding. Such an approach, <span class="blank">(22) ________</span>, may allow organisations to benefit from automation without becoming entirely dependent on it.</p>
+    </div>
+
+    <div id="game" class="card">
+      <div class="qtag" id="qtag">Question 18</div>
+      <div class="prompt" id="prompt">Choose the best option for blank (18).</div>
+      <div id="options" class="options"></div>
+      <div id="feedback" class="feedback"></div>
+
+      <div class="controls">
+        <button class="btn restart" onclick="restartGame()">Restart</button>
+        <button id="nextBtn" class="btn next" onclick="nextQuestion()">Next ➜</button>
+      </div>
+    </div>
+
+    <div id="final" class="final">
+      <div class="icon">🏆🌊🤖</div>
+      <h2>Excellent work!</h2>
+      <p>You completed all 5 questions.</p>
+      <p><b>Final score:</b> <span id="finalScore"></span>/5</p>
+      <button class="btn restart" onclick="restartGame()">Play Again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const questions = [
+{
+num:18,
+options:[
+"A. recruitment teams can devote more attention to tasks requiring human judgement and interaction",
+"B. human recruiters are no longer expected to participate in decisions concerning suitable candidates",
+"C. applicants have become increasingly unwilling to provide information about their professional experience",
+"D. the recruitment process has prevented organisations from considering larger numbers of applications"
+],
+answer:0,
+explanation:`<b>A</b> is correct.<br><br>
+Structure: <b>By + V-ing, S + V</b> = bằng cách làm gì, chủ ngữ có thể...<br>
+Automating time-consuming recruitment stages saves time, so recruitment teams can focus more on tasks requiring human judgement and interaction.<br>
+B is too absolute, C is irrelevant, and D gives the opposite meaning.`
+},
+{
+num:19,
+options:[
+"A. despite employers having already removed all forms of human judgement from recruitment",
+"B. since its decisions may reflect biases contained in the data on which it was trained",
+"C. unless recruiters allow automated systems to make decisions without using historical information",
+"D. whereas biased recruitment data can guarantee more consistent decisions in the future"
+],
+answer:1,
+explanation:`<b>B</b> is correct.<br><br>
+<b>since = because</b>, so it gives the reason AI should not be considered completely objective.<br>
+Its decisions may reflect <b>biases in the training data</b>.<br>
+The next sentence directly confirms this: unfair historical patterns may be reproduced by the AI system.<br>
+Notice the structure <b>data on which it was trained</b> = preposition + relative pronoun.`
+},
+{
+num:20,
+options:[
+"A. employers should evaluate applicants exclusively through automated screening procedures",
+"B. applicants whose technical qualifications are strongest should automatically receive job offers",
+"C. human judgement remains important when assessing whether a candidate is suitable overall",
+"D. automated systems have made interviews unnecessary for positions requiring interpersonal skills"
+],
+answer:2,
+explanation:`<b>C</b> is correct.<br><br>
+The passage says AI can assess qualifications and experience more easily, but creativity, motivation, and interpersonal ability are harder to measure.<br>
+Therefore, <b>human judgement remains important</b> when deciding overall suitability.<br>
+This fits the contrast with <b>rather than allowing automated systems to make final decisions independently</b>.`
+},
+{
+num:21,
+options:[
+"A. it does not necessarily mean that the candidate will ultimately be judged suitable for the job",
+"B. employers consequently have no reason to examine applications once they have passed automated screening",
+"C. candidates are therefore guaranteed to perform successfully during subsequent interviews",
+"D. this ensures that applicants with the greatest number of keywords will receive employment offers"
+],
+answer:0,
+explanation:`<b>A</b> is correct.<br><br>
+Structure: <b>Although A, B</b> expresses concession.<br>
+Using keywords may help an application pass initial screening, but it <b>does not necessarily</b> mean the candidate will eventually be considered suitable.<br>
+The next sentence supports this by warning that candidates may fail to communicate their real suitability if they focus too much on satisfying an algorithm.`
+},
+{
+num:22,
+options:[
+"A. that eliminates the need for recruiters to understand how automated systems reach their conclusions",
+"B. having required organisations to transfer responsibility for hiring entirely to computer systems",
+"C. in which technology handles appropriate tasks while humans retain responsibility for complex decisions",
+"D. where applicants are selected without their professional qualities being examined by recruiters"
+],
+answer:2,
+explanation:`<b>C</b> is correct.<br><br>
+<b>Such an approach</b> refers to the idea that AI should <b>support rather than replace</b> human decision-making.<br>
+The non-defining relative clause <b>in which...</b> explains this approach:<br>
+technology handles suitable automated tasks <b>while</b> humans retain responsibility for complex decisions.<br>
+This matches the final message of the passage exactly.`
+}
+];
+
+let current=0,lives=5,score=0,answered=false;
+
+function updateHearts(){
+  document.getElementById("hearts").textContent="❤️".repeat(lives)+"🩶".repeat(5-lives);
+}
+
+function renderQuestion(){
+  answered=false;
+  const q=questions[current];
+  document.getElementById("counter").textContent=`${q.num} / 22`;
+  document.getElementById("qtag").textContent=`Question ${q.num}`;
+  document.getElementById("prompt").textContent=`Choose the best option for blank (${q.num}).`;
+  document.getElementById("progress").style.width=`${(current/questions.length)*100}%`;
+  document.getElementById("nextBtn").style.display="none";
+
+  const box=document.getElementById("options");
+  box.innerHTML="";
+  q.options.forEach((text,index)=>{
+    const btn=document.createElement("button");
+    btn.className="option";
+    btn.textContent=text;
+    btn.onclick=()=>choose(index,btn);
+    box.appendChild(btn);
+  });
+
+  const fb=document.getElementById("feedback");
+  fb.className="feedback";
+  fb.innerHTML="";
+  updateHearts();
+}
+
+function choose(index,btn){
+  if(answered) return;
+  const q=questions[current];
+  const fb=document.getElementById("feedback");
+
+  if(index===q.answer){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    document.querySelectorAll(".option").forEach(b=>b.disabled=true);
+
+    fb.className="feedback good show";
+    fb.innerHTML=`✅ <b>Correct!</b><div class="explain">${q.explanation}</div>`;
+    document.getElementById("nextBtn").style.display="inline-block";
+  }else{
+    lives--;
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    updateHearts();
+
+    fb.className="feedback bad show";
+    fb.innerHTML=`❌ <b>Incorrect.</b> Try again. You cannot move to the next question until you choose the correct answer.`;
+
+    if(lives<=0){
+      setTimeout(()=>{
+        alert("You have run out of hearts. The game will restart from Question 18.");
+        restartGame();
+      },250);
+    }
+  }
+}
+
+function nextQuestion(){
+  if(!answered) return;
+  current++;
+  if(current>=questions.length){
+    document.getElementById("progress").style.width="100%";
+    document.getElementById("game").style.display="none";
+    document.getElementById("final").classList.add("show");
+    document.getElementById("finalScore").textContent=score;
+  }else{
+    renderQuestion();
+  }
+}
+
+function restartGame(){
+  current=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  document.getElementById("game").style.display="block";
+  document.getElementById("final").classList.remove("show");
+  renderQuestion();
+}
+
+renderQuestion();
+</script>
+</body>
+</html>

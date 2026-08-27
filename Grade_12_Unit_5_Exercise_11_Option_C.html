@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 12 - Unit 5 - Exercise 11 - Option C</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:"Segoe UI",Arial,sans-serif;
+  color:#4e4a20;
+  background:
+    radial-gradient(circle at 14% 10%,rgba(255,255,255,.84),transparent 22%),
+    radial-gradient(circle at 86% 15%,rgba(255,255,255,.46),transparent 24%),
+    linear-gradient(135deg,#fff9d8 0%,#ffef9d 46%,#eef5bf 100%);
+  overflow-x:hidden;
+}
+.pine{
+  position:fixed;
+  z-index:0;
+  opacity:.12;
+  font-size:46px;
+  animation:floatPine 10s ease-in-out infinite;
+}
+.p1{left:6%;top:17%}
+.p2{right:8%;top:24%;animation-delay:2s}
+.p3{left:50%;top:5%;animation-delay:4s}
+.p4{right:12%;bottom:8%;animation-delay:6s}
+@keyframes floatPine{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-18px) rotate(8deg)}
+}
+.sunleaf{
+  position:fixed;
+  width:18px;height:42px;
+  background:#88ad4f;
+  opacity:.13;
+  border-radius:50% 50% 12% 12%;
+  z-index:0;
+  animation:sway 8s ease-in-out infinite;
+}
+.l1{left:16%;bottom:3%;transform:rotate(-14deg)}
+.l2{left:20%;bottom:2%;transform:rotate(10deg);animation-delay:2s}
+.l3{right:18%;bottom:3%;transform:rotate(12deg);animation-delay:4s}
+@keyframes sway{0%,100%{margin-top:0}50%{margin-top:-8px}}
+.wrap{
+  position:relative;
+  z-index:2;
+  width:min(1150px,94%);
+  margin:28px auto 50px;
+}
+.panel{
+  background:rgba(255,255,255,.93);
+  border:1px solid #eadb8f;
+  border-radius:30px;
+  padding:26px;
+  box-shadow:0 18px 48px rgba(130,115,45,.15);
+  backdrop-filter:blur(7px);
+}
+h1{
+  margin:0;
+  text-align:center;
+  color:#9b7910;
+  font-size:clamp(28px,4vw,44px);
+}
+.subtitle{
+  text-align:center;
+  margin:8px 0 22px;
+  color:#7f7950;
+  font-weight:800;
+}
+.status{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 16px;
+  background:#fffbea;
+  border:1px solid #eee1a7;
+  border-radius:18px;
+}
+.status-item{color:#8a741a;font-weight:900}
+.hearts{font-size:23px}
+.track{
+  height:12px;
+  background:#f3ecc7;
+  border-radius:999px;
+  overflow:hidden;
+  margin:12px 0 22px;
+}
+.track span{
+  display:block;
+  width:0;
+  height:100%;
+  background:linear-gradient(90deg,#d8ad2f,#8fb95b);
+  transition:.3s;
+}
+.instructions{
+  background:#fffdf3;
+  border-left:6px solid #d6b13a;
+  padding:16px 18px;
+  border-radius:16px;
+  line-height:1.6;
+  margin-bottom:20px;
+  font-weight:700;
+}
+.passage{
+  background:#fffef8;
+  border:1px solid #eee4b8;
+  border-radius:20px;
+  padding:20px 22px;
+  line-height:1.72;
+  font-size:17px;
+  margin-bottom:22px;
+}
+.passage h2{
+  margin-top:0;
+  text-align:center;
+  color:#8d7418;
+}
+.passage u{text-decoration-thickness:2px;text-underline-offset:3px}
+.card{
+  background:#fff;
+  border:1px solid #eee2b4;
+  border-radius:24px;
+  padding:24px;
+  box-shadow:0 10px 28px rgba(120,105,50,.10);
+}
+.qtag{
+  font-size:14px;
+  color:#8d8665;
+  font-weight:900;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+.prompt{
+  margin:8px 0 18px;
+  font-size:22px;
+  line-height:1.5;
+  color:#5a5228;
+  font-weight:900;
+}
+.options{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.option{
+  border:2px solid #eadfb1;
+  background:#fffef8;
+  border-radius:16px;
+  padding:15px 16px;
+  text-align:left;
+  cursor:pointer;
+  color:#5d583c;
+  font-size:16.5px;
+  line-height:1.5;
+  font-weight:800;
+  transition:.2s;
+}
+.option:hover:not(:disabled){
+  transform:translateY(-2px);
+  background:#fff9dc;
+  border-color:#d7bb55;
+}
+.option.correct{
+  background:#eef6d9;
+  border-color:#89ad55;
+  color:#46672d;
+}
+.option.wrong{
+  background:#ffe8e8;
+  border-color:#e36f6f;
+  color:#963838;
+  animation:shake .28s;
+}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-5px)}
+  75%{transform:translateX(5px)}
+}
+.feedback{
+  display:none;
+  margin-top:18px;
+  border-radius:16px;
+  padding:16px;
+  line-height:1.62;
+}
+.feedback.show{display:block}
+.feedback.good{
+  background:#f2f8e5;
+  border:1px solid #b6cf89;
+  color:#4e682f;
+}
+.feedback.bad{
+  background:#fff2f2;
+  border:1px solid #efb4b4;
+  color:#8b3b3b;
+}
+.explain{
+  margin-top:14px;
+  padding:15px 16px;
+  background:#fffef8;
+  border:1px dashed #c6b76f;
+  border-radius:14px;
+  color:#5e563a;
+}
+.controls{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:18px;
+}
+.btn{
+  border:none;
+  border-radius:14px;
+  padding:12px 20px;
+  font-size:16px;
+  font-weight:900;
+  cursor:pointer;
+}
+.restart{background:#f4edc7;color:#7e6b1c}
+.next{background:#b88c16;color:#fff;display:none}
+.final{
+  display:none;
+  text-align:center;
+  padding:38px 20px;
+}
+.final.show{display:block}
+.final .icon{font-size:60px}
+.final h2{font-size:32px;color:#8d7418}
+.final p{font-size:18px}
+@media(max-width:700px){
+  .panel{padding:16px}
+  .passage{padding:16px;font-size:16px}
+  .prompt{font-size:20px}
+  .options{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="pine p1">🍍</div>
+<div class="pine p2">🍍</div>
+<div class="pine p3">🍍</div>
+<div class="pine p4">🍍</div>
+<div class="sunleaf l1"></div>
+<div class="sunleaf l2"></div>
+<div class="sunleaf l3"></div>
+
+<div class="wrap">
+<div class="panel">
+<h1>🍍 Pineapple Reward Garden 🌼</h1>
+<div class="subtitle">Grade 12 - Unit 5 - Exercise 11 - Option C</div>
+
+<div class="status">
+  <div class="status-item">Question: <span id="counter">1 / 8</span></div>
+  <div class="status-item">Score: <span id="score">0</span></div>
+  <div class="status-item">Lives: <span id="hearts" class="hearts">❤️❤️❤️❤️❤️</span></div>
+</div>
+<div class="track"><span id="progress"></span></div>
+
+<div class="instructions">
+Read the passage and mark the letter A, B, C, or D to indicate the best answer to each question.
+</div>
+
+<div class="passage">
+<h2>WHY RECOGNITION MATTERS AT WORK</h2>
+
+<p>For many employees, a good salary is an important reason for accepting or remaining in a job. However, money alone does not determine whether people feel satisfied at work. Research into workplace motivation suggests that employees also want to feel that their efforts are noticed and appreciated. When people believe their contributions are taken for granted, their motivation may gradually decline, even if they are reasonably well paid.</p>
+
+<p>Recognition can take many forms. Some companies offer financial rewards or bonuses to employees who achieve outstanding results. Others use less costly approaches, such as publicly thanking workers, giving them additional responsibilities, or allowing them to lead important projects. Interestingly, recognition does not always have to come from senior managers. Positive feedback from colleagues can also strengthen employees' sense that their work has value. What appears to matter most is that the recognition is sincere and connected to a specific contribution rather than offered automatically.</p>
+
+<p>Nevertheless, recognition programmes can produce unintended consequences if they are poorly designed. If the same employees repeatedly receive rewards, their colleagues may begin to regard the system as unfair. Similarly, rewarding individual performance too heavily can discourage cooperation when employees are expected to work as a team. <u>A programme intended to increase motivation may therefore have the opposite effect if workers believe that recognition is distributed unfairly.</u> For this reason, some organisations combine individual rewards with recognition for team achievements.</p>
+
+<p>Recognition is also unlikely to compensate for serious problems in the working environment. An employee who is regularly praised may still become dissatisfied if workloads are unreasonable, managers are disrespectful, or opportunities for professional development are limited. In other words, recognition works best as part of a broader effort to create positive working conditions rather than as a substitute for them.</p>
+
+<p>Ultimately, effective employee recognition is less about the monetary value of a reward than about the message it communicates. Employees want evidence that their work is meaningful and that their contribution is understood. Organisations that recognise achievement fairly while also addressing employees' broader needs may therefore be better positioned to maintain motivation over the long term.</p>
+</div>
+
+<div id="game" class="card">
+  <div class="qtag" id="qtag">Question 1</div>
+  <div class="prompt" id="prompt"></div>
+  <div id="options" class="options"></div>
+  <div id="feedback" class="feedback"></div>
+  <div class="controls">
+    <button class="btn restart" onclick="restartGame()">Restart</button>
+    <button id="nextBtn" class="btn next" onclick="nextQuestion()">Next ➜</button>
+  </div>
+</div>
+
+<div id="final" class="final">
+  <div class="icon">🏆🍍🌼</div>
+  <h2>Excellent work!</h2>
+  <p>You completed all 8 questions.</p>
+  <p><b>Final score:</b> <span id="finalScore"></span>/8</p>
+  <button class="btn restart" onclick="restartGame()">Play Again</button>
+</div>
+</div>
+</div>
+
+<script>
+const questions = [
+{
+q:"Which of the following is NOT mentioned as a form of employee recognition?",
+options:[
+"A. Allowing an employee to take charge of an important project",
+"B. Giving workers positive comments about their performance",
+"C. Offering financial rewards for excellent performance",
+"D. Providing employees with additional paid holidays"
+],
+answer:3,
+explanation:`<b>D</b> is correct.<br><br>
+Paragraph 2 mentions:<br>
+• financial rewards or bonuses → C<br>
+• publicly thanking workers / positive feedback → B<br>
+• allowing employees to lead important projects → A<br>
+There is no mention of <b>additional paid holidays</b>.`
+},
+{
+q:'The phrase “taken for granted” in paragraph 1 is closest in meaning to ________.',
+options:[
+"A. accepted without proper appreciation",
+"B. rewarded beyond expectations",
+"C. examined with great attention",
+"D. regarded as unusually difficult"
+],
+answer:0,
+explanation:`<b>A</b> is correct.<br><br>
+<b>Take somebody/something for granted</b> means to treat someone or something as if their value is obvious, without giving proper appreciation.<br>
+So <b>accepted without proper appreciation</b> is the closest meaning.`
+},
+{
+q:'The word “their” in paragraph 2 refers to ________.',
+options:[
+"A. senior managers",
+"B. colleagues",
+"C. employees",
+"D. companies"
+],
+answer:2,
+explanation:`<b>C</b> is correct.<br><br>
+The sentence says: <i>Positive feedback from colleagues can also strengthen employees' sense that <b>their work</b> has value.</i><br>
+<b>Their</b> refers to <b>employees</b>.`
+},
+{
+q:"Which of the following best paraphrases the underlined sentence in paragraph 3?",
+options:[
+"A. Recognition programmes normally fail because employees prefer individual rewards to team recognition.",
+"B. A system designed to motivate workers can actually reduce motivation when employees consider the way rewards are given to be unfair.",
+"C. Employees become less motivated whenever organisations offer rewards for outstanding individual performance.",
+"D. Recognition programmes can improve motivation only when every employee receives exactly the same reward."
+],
+answer:1,
+explanation:`<b>B</b> is correct.<br><br>
+The original sentence contains three ideas:<br>
+• the programme is intended to motivate<br>
+• it may have the opposite effect<br>
+• this can happen when recognition is perceived as unfair<br>
+B keeps all three ideas accurately.`
+},
+{
+q:"What can be inferred from paragraph 3 about individual performance rewards?",
+options:[
+"A. They should never be used in organisations where employees work in teams.",
+"B. They are generally more effective than rewards based on team performance.",
+"C. They may create undesirable competition if too much importance is placed on individual achievement.",
+"D. They motivate lower-performing workers to cooperate more closely with successful colleagues."
+],
+answer:2,
+explanation:`<b>C</b> is correct.<br><br>
+Paragraph 3 says that rewarding individual performance too heavily can <b>discourage cooperation</b> in teams.<br>
+From this, we can infer that overemphasis on individual rewards may create unhealthy or undesirable competition.`
+},
+{
+q:"Which of the following is TRUE according to the passage?",
+options:[
+"A. Recognition from colleagues may have a positive effect on an employee's sense of value.",
+"B. Financial rewards are the most effective form of recognition because employees value money above other benefits.",
+"C. Employees who receive regular praise are unlikely to become dissatisfied with their working conditions.",
+"D. Recognition is most effective when it is given frequently regardless of what an employee has achieved."
+],
+answer:0,
+explanation:`<b>A</b> is correct.<br><br>
+The passage directly states that <b>positive feedback from colleagues</b> can strengthen employees' sense that their work has value.<br>
+B, C, and D contradict information elsewhere in the passage.`
+},
+{
+q:"In which paragraph does the writer discuss circumstances in which recognition cannot solve deeper workplace problems?",
+options:[
+"A. Paragraph 1",
+"B. Paragraph 2",
+"C. Paragraph 3",
+"D. Paragraph 4"
+],
+answer:3,
+explanation:`<b>D. Paragraph 4</b> is correct.<br><br>
+Paragraph 4 begins: <i>Recognition is also unlikely to compensate for serious problems in the working environment.</i><br>
+It then gives examples such as unreasonable workloads, disrespectful managers, and limited development opportunities.`
+},
+{
+q:"Which of the following best describes the author's view of employee recognition?",
+options:[
+"A. It is valuable when used fairly and alongside other measures that support employees.",
+"B. It should replace financial incentives because employees primarily want their work to be appreciated.",
+"C. Its effectiveness depends mainly on how expensive the rewards offered to employees are.",
+"D. It creates more workplace problems than benefits unless rewards are given equally to everyone."
+],
+answer:0,
+explanation:`<b>A</b> is correct.<br><br>
+The final paragraph emphasises <b>fair recognition</b> together with attention to employees' <b>broader needs</b>.<br>
+So recognition is useful, but it works best as part of good overall working conditions rather than as a substitute for them.`
+}
+];
+
+let current=0,lives=5,score=0,answered=false;
+
+function updateHearts(){
+  document.getElementById("hearts").textContent="❤️".repeat(lives)+"🩶".repeat(5-lives);
+}
+
+function renderQuestion(){
+  answered=false;
+  const q=questions[current];
+  document.getElementById("counter").textContent=`${current+1} / ${questions.length}`;
+  document.getElementById("qtag").textContent=`Question ${current+1}`;
+  document.getElementById("prompt").textContent=q.q;
+  document.getElementById("progress").style.width=`${(current/questions.length)*100}%`;
+  document.getElementById("nextBtn").style.display="none";
+
+  const box=document.getElementById("options");
+  box.innerHTML="";
+  q.options.forEach((text,index)=>{
+    const btn=document.createElement("button");
+    btn.className="option";
+    btn.textContent=text;
+    btn.onclick=()=>choose(index,btn);
+    box.appendChild(btn);
+  });
+
+  const fb=document.getElementById("feedback");
+  fb.className="feedback";
+  fb.innerHTML="";
+  updateHearts();
+}
+
+function choose(index,btn){
+  if(answered) return;
+  const q=questions[current];
+  const fb=document.getElementById("feedback");
+
+  if(index===q.answer){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    document.querySelectorAll(".option").forEach(b=>b.disabled=true);
+
+    fb.className="feedback good show";
+    fb.innerHTML=`✅ <b>Correct!</b><div class="explain">${q.explanation}</div>`;
+    document.getElementById("nextBtn").style.display="inline-block";
+  } else {
+    lives--;
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    updateHearts();
+
+    fb.className="feedback bad show";
+    fb.innerHTML=`❌ <b>Incorrect.</b> Try again. You cannot move to the next question until you choose the correct answer.`;
+
+    if(lives<=0){
+      setTimeout(()=>{
+        alert("You have run out of hearts. The game will restart from Question 1.");
+        restartGame();
+      },250);
+    }
+  }
+}
+
+function nextQuestion(){
+  if(!answered) return;
+  current++;
+  if(current>=questions.length){
+    document.getElementById("progress").style.width="100%";
+    document.getElementById("game").style.display="none";
+    document.getElementById("final").classList.add("show");
+    document.getElementById("finalScore").textContent=score;
+  }else{
+    renderQuestion();
+  }
+}
+
+function restartGame(){
+  current=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  document.getElementById("game").style.display="block";
+  document.getElementById("final").classList.remove("show");
+  renderQuestion();
+}
+
+renderQuestion();
+</script>
+</body>
+</html>

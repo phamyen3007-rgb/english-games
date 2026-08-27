@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 12 - Unit 5 - Exercise 9 - Option C1</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:"Segoe UI",Arial,sans-serif;
+  color:#153f4a;
+  background:
+    radial-gradient(circle at 16% 10%,rgba(255,255,255,.82),transparent 22%),
+    radial-gradient(circle at 86% 15%,rgba(255,255,255,.42),transparent 24%),
+    linear-gradient(135deg,#e9fbff 0%,#cceff8 46%,#d8f8f5 100%);
+  overflow-x:hidden;
+}
+.wave{
+  position:fixed;
+  left:-12vw;
+  width:125vw;
+  height:110px;
+  border-radius:50%;
+  border-top:3px solid rgba(51,145,181,.12);
+  z-index:0;
+  animation:waveMove 10s ease-in-out infinite;
+}
+.w1{top:17%}
+.w2{top:61%;animation-delay:3s}
+@keyframes waveMove{
+  0%,100%{transform:translateX(0) translateY(0)}
+  50%{transform:translateX(4vw) translateY(-10px)}
+}
+.bubble{
+  position:fixed;
+  border:2px solid rgba(57,165,190,.18);
+  border-radius:50%;
+  z-index:0;
+  animation:rise 12s linear infinite;
+}
+.b1{width:20px;height:20px;left:8%;bottom:-30px}
+.b2{width:34px;height:34px;left:30%;bottom:-40px;animation-delay:2s}
+.b3{width:18px;height:18px;left:72%;bottom:-25px;animation-delay:4s}
+.b4{width:28px;height:28px;left:91%;bottom:-35px;animation-delay:1s}
+@keyframes rise{
+  from{transform:translateY(0)}
+  to{transform:translateY(-115vh)}
+}
+.wrap{
+  position:relative;
+  z-index:2;
+  width:min(1150px,94%);
+  margin:28px auto 50px;
+}
+.panel{
+  background:rgba(255,255,255,.92);
+  border:1px solid #bfdfe8;
+  border-radius:30px;
+  padding:26px;
+  box-shadow:0 18px 48px rgba(38,101,125,.15);
+  backdrop-filter:blur(7px);
+}
+h1{
+  margin:0;
+  text-align:center;
+  color:#1a728d;
+  font-size:clamp(28px,4vw,44px);
+}
+.subtitle{
+  text-align:center;
+  margin:8px 0 22px;
+  color:#587d88;
+  font-weight:800;
+}
+.status{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 16px;
+  background:#f1fbfd;
+  border:1px solid #d2e8ed;
+  border-radius:18px;
+}
+.status-item{
+  color:#246b7f;
+  font-weight:900;
+}
+.hearts{font-size:23px}
+.track{
+  height:12px;
+  background:#deeff3;
+  border-radius:999px;
+  overflow:hidden;
+  margin:12px 0 22px;
+}
+.track span{
+  display:block;
+  width:0;
+  height:100%;
+  background:linear-gradient(90deg,#3aa6c8,#66c9bc);
+  transition:.3s;
+}
+.instructions{
+  background:#f8fdff;
+  border-left:6px solid #4aa9c7;
+  padding:16px 18px;
+  border-radius:16px;
+  line-height:1.6;
+  margin-bottom:20px;
+  font-weight:700;
+}
+.passage{
+  background:#fafdff;
+  border:1px solid #d5e9ef;
+  border-radius:20px;
+  padding:20px 22px;
+  line-height:1.72;
+  font-size:17px;
+  margin-bottom:22px;
+}
+.passage h2{
+  margin-top:0;
+  text-align:center;
+  color:#176f88;
+}
+.blank{
+  background:#dff4fa;
+  color:#0d7089;
+  font-weight:900;
+  padding:2px 5px;
+  border-radius:6px;
+}
+.card{
+  background:#fff;
+  border:1px solid #d2e7ec;
+  border-radius:24px;
+  padding:24px;
+  box-shadow:0 10px 28px rgba(45,103,126,.10);
+}
+.qtag{
+  font-size:14px;
+  color:#698792;
+  font-weight:900;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+.prompt{
+  margin:8px 0 18px;
+  font-size:22px;
+  line-height:1.5;
+  color:#214a59;
+  font-weight:900;
+}
+.options{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+.option{
+  border:2px solid #d3e6eb;
+  background:#fbfeff;
+  border-radius:16px;
+  padding:15px 16px;
+  text-align:left;
+  cursor:pointer;
+  color:#345766;
+  font-size:16.5px;
+  line-height:1.5;
+  font-weight:800;
+  transition:.2s;
+}
+.option:hover:not(:disabled){
+  transform:translateY(-2px);
+  background:#eef9fc;
+  border-color:#71b7cc;
+}
+.option.correct{
+  background:#def5ef;
+  border-color:#3fa97d;
+  color:#1d6347;
+}
+.option.wrong{
+  background:#ffe8e8;
+  border-color:#e36f6f;
+  color:#963838;
+  animation:shake .28s;
+}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-5px)}
+  75%{transform:translateX(5px)}
+}
+.feedback{
+  display:none;
+  margin-top:18px;
+  border-radius:16px;
+  padding:16px;
+  line-height:1.62;
+}
+.feedback.show{display:block}
+.feedback.good{
+  background:#edf9f3;
+  border:1px solid #99d0b2;
+  color:#255b43;
+}
+.feedback.bad{
+  background:#fff2f2;
+  border:1px solid #efb4b4;
+  color:#8b3b3b;
+}
+.explain{
+  margin-top:14px;
+  padding:15px 16px;
+  background:#fbfffd;
+  border:1px dashed #8cbcac;
+  border-radius:14px;
+  color:#345247;
+}
+.controls{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:18px;
+}
+.btn{
+  border:none;
+  border-radius:14px;
+  padding:12px 20px;
+  font-size:16px;
+  font-weight:900;
+  cursor:pointer;
+}
+.restart{background:#e3f3f7;color:#246b7f}
+.next{background:#2687a2;color:#fff;display:none}
+.final{
+  display:none;
+  text-align:center;
+  padding:38px 20px;
+}
+.final.show{display:block}
+.final .icon{font-size:60px}
+.final h2{font-size:32px;color:#1f738b}
+.final p{font-size:18px}
+@media(max-width:700px){
+  .panel{padding:16px}
+  .passage{padding:16px;font-size:16px}
+  .prompt{font-size:20px}
+}
+</style>
+</head>
+<body>
+<div class="wave w1"></div>
+<div class="wave w2"></div>
+<div class="bubble b1"></div>
+<div class="bubble b2"></div>
+<div class="bubble b3"></div>
+<div class="bubble b4"></div>
+
+<div class="wrap">
+  <div class="panel">
+    <h1>🌊 Blue Lagoon Skills Lab 🫧</h1>
+    <div class="subtitle">Grade 12 - Unit 5 - Exercise 9 - Option C1</div>
+
+    <div class="status">
+      <div class="status-item">Question: <span id="counter">18 / 22</span></div>
+      <div class="status-item">Score: <span id="score">0</span></div>
+      <div class="status-item">Lives: <span id="hearts" class="hearts">❤️❤️❤️❤️❤️</span></div>
+    </div>
+    <div class="track"><span id="progress"></span></div>
+
+    <div class="instructions">
+      Read the passage and mark the letter A, B, C, or D to indicate the option that best fits each numbered blank.
+    </div>
+
+    <div class="passage">
+      <h2>WHY SOFT SKILLS MATTER IN THE MODERN WORKPLACE</h2>
+
+      <p>Academic qualifications and technical expertise have traditionally played an important role in recruitment. However, as workplaces become increasingly collaborative and fast-changing, employers are paying greater attention to soft skills. These abilities, which include communication, teamwork, adaptability, and emotional intelligence, <span class="blank">(18) ________</span>.</p>
+
+      <p>Communication is particularly important because employees rarely work entirely on their own. They need to exchange information with colleagues, explain ideas to clients, and respond appropriately to feedback. Even employees with outstanding technical knowledge may struggle professionally <span class="blank">(19) ________</span>. This is especially true in positions that involve teamwork or regular contact with customers.</p>
+
+      <p>Adaptability has also become increasingly valuable. Technological advances and changing consumer expectations mean that job requirements can evolve rapidly. Rather than relying entirely on knowledge acquired during their education, <span class="blank">(20) ________</span>. Employees who respond positively to change are therefore more likely to remain valuable to their organisations.</p>
+
+      <p>Soft skills are also closely connected with leadership. Effective leaders are expected not only to make decisions but also to understand the needs of the people they supervise. <span class="blank">(21) ________</span>, they may find it difficult to motivate employees or resolve disagreements within their teams. For this reason, many organisations now include communication and interpersonal skills in their leadership development programmes.</p>
+
+      <p>Nevertheless, evaluating soft skills during recruitment can be challenging because they are difficult to measure through qualifications alone. Employers increasingly use behavioural interview questions and practical tasks to observe how candidates respond to realistic situations. Such methods can provide evidence of how applicants communicate, cooperate, and solve problems, <span class="blank">(22) ________</span>.</p>
+    </div>
+
+    <div id="game" class="card">
+      <div class="qtag" id="qtag">Question 18</div>
+      <div class="prompt" id="prompt">Choose the best option for blank (18).</div>
+      <div id="options" class="options"></div>
+      <div id="feedback" class="feedback"></div>
+
+      <div class="controls">
+        <button class="btn restart" onclick="restartGame()">Restart</button>
+        <button id="nextBtn" class="btn next" onclick="nextQuestion()">Next ➜</button>
+      </div>
+    </div>
+
+    <div id="final" class="final">
+      <div class="icon">🏆🌊🫧</div>
+      <h2>Excellent work!</h2>
+      <p>You completed all 5 questions.</p>
+      <p><b>Final score:</b> <span id="finalScore"></span>/5</p>
+      <button class="btn restart" onclick="restartGame()">Play Again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const questions = [
+{
+num:18,
+options:[
+"A. allowing employees to avoid developing the specialised knowledge required for their occupations",
+"B. are increasingly regarded as essential to effective performance across a wide range of professions",
+"C. which have gradually replaced academic qualifications as the only requirement for employment",
+"D. have become less relevant as organisations increasingly rely on automated technologies"
+],
+answer:1,
+explanation:`<b>B</b> is correct.<br><br>
+The subject is <b>These abilities</b>, so the sentence needs a main verb: <b>are increasingly regarded as...</b><br>
+Structure: <b>be regarded as + adjective/noun</b> = được coi là...<br>
+The meaning also matches the previous sentence: employers are paying greater attention to soft skills.`
+},
+{
+num:19,
+options:[
+"A. unless they are able to complete most of their responsibilities without assistance",
+"B. although their employers rarely require them to interact with other people",
+"C. if they are unable to communicate their ideas clearly or cooperate effectively with others",
+"D. because possessing advanced expertise generally reduces their ability to work collaboratively"
+],
+answer:2,
+explanation:`<b>C</b> is correct.<br><br>
+This is a conditional relationship: even highly technical employees may struggle <b>if</b> they cannot communicate clearly or cooperate effectively.<br>
+The following sentence confirms this idea because it mentions jobs involving teamwork and customer contact.`
+},
+{
+num:20,
+options:[
+"A. workers increasingly need to update their skills and adjust to unfamiliar ways of working",
+"B. employers should prevent workers from changing established methods of completing their tasks",
+"C. professional knowledge becomes unnecessary once employees have gained sufficient workplace experience",
+"D. workers who possess formal qualifications are unlikely to be affected by technological developments"
+],
+answer:0,
+explanation:`<b>A</b> is correct.<br><br>
+Structure: <b>Rather than + V-ing, S + V</b> = thay vì... thì...<br>
+Here: rather than relying only on old knowledge, workers need to update skills and adapt to new ways of working.<br>
+The next sentence reinforces this with <i>respond positively to change</i>.`
+},
+{
+num:21,
+options:[
+"A. Since managers are technically qualified for their positions",
+"B. Unless managers can communicate effectively and respond appropriately to others",
+"C. Although successful managers rarely need to consider employees' concerns",
+"D. Provided that workplace disagreements are completely avoided"
+],
+answer:1,
+explanation:`<b>B</b> is correct.<br><br>
+<b>Unless = if...not</b>.<br>
+Meaning: if managers cannot communicate effectively and respond appropriately, they may find it difficult to motivate staff or resolve disagreements.<br>
+This directly supports the paragraph's focus on communication and leadership.`
+},
+{
+num:22,
+options:[
+"A. despite practical performance being less useful than information presented on a résumé",
+"B. whereas employers should rely entirely on academic qualifications when making recruitment decisions",
+"C. making it easier for employers to assess abilities that may not be apparent from qualifications alone",
+"D. which prevents candidates with limited professional experience from demonstrating their potential"
+],
+answer:2,
+explanation:`<b>C</b> is correct.<br><br>
+The pattern is <b>S + V, V-ing...</b>, where the V-ing phrase expresses a result.<br>
+Practical tasks provide evidence of candidates' behaviour, <b>making it easier</b> for employers to assess soft skills.<br>
+The phrase <i>abilities that may not be apparent from qualifications alone</i> links directly to the previous idea that soft skills are difficult to measure through qualifications alone.`
+}
+];
+
+let current=0,lives=5,score=0,answered=false;
+
+function updateHearts(){
+  document.getElementById("hearts").textContent="❤️".repeat(lives)+"🩶".repeat(5-lives);
+}
+
+function renderQuestion(){
+  answered=false;
+  const q=questions[current];
+  document.getElementById("counter").textContent=`${q.num} / 22`;
+  document.getElementById("qtag").textContent=`Question ${q.num}`;
+  document.getElementById("prompt").textContent=`Choose the best option for blank (${q.num}).`;
+  document.getElementById("progress").style.width=`${(current/questions.length)*100}%`;
+  document.getElementById("nextBtn").style.display="none";
+
+  const box=document.getElementById("options");
+  box.innerHTML="";
+  q.options.forEach((text,index)=>{
+    const btn=document.createElement("button");
+    btn.className="option";
+    btn.textContent=text;
+    btn.onclick=()=>choose(index,btn);
+    box.appendChild(btn);
+  });
+
+  const fb=document.getElementById("feedback");
+  fb.className="feedback";
+  fb.innerHTML="";
+  updateHearts();
+}
+
+function choose(index,btn){
+  if(answered) return;
+  const q=questions[current];
+  const fb=document.getElementById("feedback");
+
+  if(index===q.answer){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    document.querySelectorAll(".option").forEach(b=>b.disabled=true);
+    fb.className="feedback good show";
+    fb.innerHTML=`✅ <b>Correct!</b><div class="explain">${q.explanation}</div>`;
+    document.getElementById("nextBtn").style.display="inline-block";
+  }else{
+    lives--;
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    updateHearts();
+    fb.className="feedback bad show";
+    fb.innerHTML=`❌ <b>Incorrect.</b> Try again. You cannot move to the next question until you choose the correct answer.`;
+
+    if(lives<=0){
+      setTimeout(()=>{
+        alert("You have run out of hearts. The game will restart from Question 18.");
+        restartGame();
+      },250);
+    }
+  }
+}
+
+function nextQuestion(){
+  if(!answered) return;
+  current++;
+  if(current>=questions.length){
+    document.getElementById("progress").style.width="100%";
+    document.getElementById("game").style.display="none";
+    document.getElementById("final").classList.add("show");
+    document.getElementById("finalScore").textContent=score;
+  }else{
+    renderQuestion();
+  }
+}
+
+function restartGame(){
+  current=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  document.getElementById("game").style.display="block";
+  document.getElementById("final").classList.remove("show");
+  renderQuestion();
+}
+
+renderQuestion();
+</script>
+</body>
+</html>

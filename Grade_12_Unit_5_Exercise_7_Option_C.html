@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 12 - Unit 5 - Exercise 7 - Option C</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:"Segoe UI",Arial,sans-serif;
+  color:#173f36;
+  background:
+    radial-gradient(circle at 12% 12%,rgba(255,255,255,.72),transparent 24%),
+    radial-gradient(circle at 88% 18%,rgba(255,255,255,.4),transparent 22%),
+    linear-gradient(135deg,#e4fbef 0%,#c9f0df 48%,#d8f7e8 100%);
+  overflow-x:hidden;
+}
+.breeze{
+  position:fixed;
+  width:120px;height:28px;
+  border-top:2px solid rgba(70,170,125,.16);
+  border-radius:50%;
+  z-index:0;
+  animation:wind 10s linear infinite;
+}
+.b1{top:14%;left:-130px}
+.b2{top:48%;left:-170px;animation-delay:3s}
+.b3{top:78%;left:-150px;animation-delay:6s}
+@keyframes wind{
+  from{transform:translateX(0)}
+  to{transform:translateX(120vw)}
+}
+.leaf{
+  position:fixed;
+  width:20px;height:11px;
+  background:#63b98a;
+  opacity:.20;
+  border-radius:100% 0 100% 0;
+  z-index:0;
+  animation:leafFloat 9s ease-in-out infinite;
+}
+.l1{left:8%;top:22%}
+.l2{left:85%;top:30%;animation-delay:2s}
+.l3{left:52%;top:7%;animation-delay:4s}
+.l4{left:92%;top:72%;animation-delay:6s}
+@keyframes leafFloat{
+  0%,100%{transform:translateY(0) rotate(0)}
+  50%{transform:translateY(-22px) rotate(160deg)}
+}
+.wrap{
+  position:relative;
+  z-index:2;
+  width:min(1120px,94%);
+  margin:28px auto 50px;
+}
+.panel{
+  background:rgba(255,255,255,.91);
+  border:1px solid #bde2cf;
+  border-radius:30px;
+  padding:26px;
+  box-shadow:0 18px 48px rgba(37,111,81,.16);
+  backdrop-filter:blur(7px);
+}
+h1{
+  margin:0;
+  text-align:center;
+  color:#19724f;
+  font-size:clamp(28px,4vw,44px);
+}
+.subtitle{
+  text-align:center;
+  margin:8px 0 22px;
+  color:#4c7d68;
+  font-weight:800;
+}
+.status{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 16px;
+  background:#effbf4;
+  border:1px solid #cee8d8;
+  border-radius:18px;
+}
+.status-item{
+  color:#1d6b4b;
+  font-weight:900;
+}
+.hearts{font-size:23px}
+.track{
+  height:12px;
+  background:#dcefe4;
+  border-radius:999px;
+  overflow:hidden;
+  margin:12px 0 22px;
+}
+.track span{
+  display:block;
+  width:0;
+  height:100%;
+  background:linear-gradient(90deg,#35a86f,#78c99a);
+  transition:.3s;
+}
+.instructions{
+  background:#f7fffa;
+  border-left:6px solid #4bab78;
+  padding:16px 18px;
+  border-radius:16px;
+  line-height:1.6;
+  margin-bottom:20px;
+  font-weight:700;
+}
+.card{
+  background:#fff;
+  border:1px solid #cbe5d6;
+  border-radius:24px;
+  padding:24px;
+  box-shadow:0 10px 28px rgba(45,110,79,.11);
+}
+.qtag{
+  font-size:14px;
+  color:#648779;
+  font-weight:900;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+.qtext{
+  margin:8px 0 20px;
+  font-size:23px;
+  line-height:1.5;
+  color:#174b39;
+  font-weight:900;
+}
+.options{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.option{
+  border:2px solid #c9e3d3;
+  background:#f7fcf9;
+  border-radius:16px;
+  padding:15px 16px;
+  text-align:left;
+  cursor:pointer;
+  color:#2c5846;
+  font-size:17px;
+  font-weight:800;
+  transition:.2s;
+}
+.option:hover:not(:disabled){
+  transform:translateY(-2px);
+  background:#edf9f2;
+  border-color:#68b88d;
+}
+.option.correct{
+  background:#ddf6e7;
+  border-color:#2fa96c;
+  color:#17613e;
+}
+.option.wrong{
+  background:#ffe7e7;
+  border-color:#e36d6d;
+  color:#973737;
+  animation:shake .28s;
+}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-5px)}
+  75%{transform:translateX(5px)}
+}
+.feedback{
+  display:none;
+  margin-top:18px;
+  border-radius:16px;
+  padding:16px;
+  line-height:1.62;
+}
+.feedback.show{display:block}
+.feedback.good{
+  background:#eaf9f0;
+  border:1px solid #8fd1aa;
+  color:#205d42;
+}
+.feedback.bad{
+  background:#fff1f1;
+  border:1px solid #efb0b0;
+  color:#8a3838;
+}
+.explain{
+  margin-top:14px;
+  padding:15px 16px;
+  background:#fbfffc;
+  border:1px dashed #83bfa1;
+  border-radius:14px;
+  color:#28513f;
+}
+.controls{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:18px;
+}
+.btn{
+  border:none;
+  border-radius:14px;
+  padding:12px 20px;
+  font-size:16px;
+  font-weight:900;
+  cursor:pointer;
+}
+.restart{background:#e1f3e8;color:#176846}
+.next{background:#1d8d5a;color:#fff;display:none}
+.final{
+  display:none;
+  text-align:center;
+  padding:38px 20px;
+}
+.final.show{display:block}
+.final .icon{font-size:60px}
+.final h2{font-size:32px;color:#176c4b}
+.final p{font-size:18px}
+@media(max-width:700px){
+  .options{grid-template-columns:1fr}
+  .panel{padding:16px}
+  .qtext{font-size:20px}
+}
+</style>
+</head>
+<body>
+<div class="breeze b1"></div>
+<div class="breeze b2"></div>
+<div class="breeze b3"></div>
+<div class="leaf l1"></div>
+<div class="leaf l2"></div>
+<div class="leaf l3"></div>
+<div class="leaf l4"></div>
+
+<div class="wrap">
+  <div class="panel">
+    <h1>🌿 Emerald Breeze Office 🍃</h1>
+    <div class="subtitle">Grade 12 - Unit 5 - Exercise 7 - Option C</div>
+
+    <div class="status">
+      <div class="status-item">Question: <span id="counter">1 / 15</span></div>
+      <div class="status-item">Score: <span id="score">0</span></div>
+      <div class="status-item">Lives: <span id="hearts" class="hearts">❤️❤️❤️❤️❤️</span></div>
+    </div>
+    <div class="track"><span id="progress"></span></div>
+
+    <div class="instructions">
+      Mark the letter A, B, C, or D to indicate the correct answer to each of the following questions.
+    </div>
+
+    <div id="game" class="card">
+      <div class="qtag" id="qtag">Question 1</div>
+      <div class="qtext" id="qtext"></div>
+      <div id="options" class="options"></div>
+      <div id="feedback" class="feedback"></div>
+
+      <div class="controls">
+        <button class="btn restart" onclick="restartGame()">Restart</button>
+        <button id="nextBtn" class="btn next" onclick="nextQuestion()">Next ➜</button>
+      </div>
+    </div>
+
+    <div id="final" class="final">
+      <div class="icon">🏆🌿✨</div>
+      <h2>Excellent work!</h2>
+      <p>You completed all 15 questions.</p>
+      <p><b>Final score:</b> <span id="finalScore"></span>/15</p>
+      <button class="btn restart" onclick="restartGame()">Play Again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const questions = [
+{
+q:"________ having relatively little professional experience, Linda was offered the position because of her exceptional communication skills.",
+options:["A. Although","B. Despite","C. Because","D. Given that"],
+answer:1,
+explanation:`<b>B. Despite</b> is correct.<br><br>
+Structure: <b>despite + noun / V-ing</b> = mặc dù.<br>
+Here we have <b>having</b>, a V-ing form, so <b>Despite having</b> is correct.<br>
+<b>Although</b> must be followed by a full clause: <i>Although Linda had relatively little experience...</i>`
+},
+{
+q:"Applicants are advised to research the organisation thoroughly ________ they can demonstrate genuine interest during the interview.",
+options:["A. in order to","B. so as to","C. so that","D. because"],
+answer:2,
+explanation:`<b>C. so that</b> is correct.<br><br>
+Structure: <b>so that + subject + can/will + verb</b> = để ai có thể làm gì.<br>
+The words after the blank are <b>they can demonstrate</b>, a full clause.<br>
+By contrast, <b>in order to / so as to + bare infinitive</b>.`
+},
+{
+q:"The company has introduced a flexible working policy; ________, employees are now able to achieve a better work-life balance.",
+options:["A. otherwise","B. nevertheless","C. consequently","D. likewise"],
+answer:2,
+explanation:`<b>C. consequently</b> is correct.<br><br>
+<b>Consequently</b> = as a result = do đó/kết quả là.<br>
+Cause: the company introduced a flexible working policy.<br>
+Result: employees can achieve a better work-life balance.`
+},
+{
+q:"________ demanding the position may appear at first, new employees are expected to adapt to its requirements within a few months.",
+options:["A. However","B. Although","C. Whatever","D. Despite"],
+answer:0,
+explanation:`<b>A. However</b> is correct.<br><br>
+Advanced structure: <b>However + adjective/adverb + S + V, S + V</b> = dù... đến mức nào.<br>
+Here: <i>However demanding the position may appear...</i><br>
+This is a useful high-level structure for the THPT exam.`
+},
+{
+q:"The recruitment process will continue ________ a suitable candidate has been found to fill the vacancy.",
+options:["A. provided that","B. unless","C. in case","D. even though"],
+answer:1,
+explanation:`<b>B. unless</b> is correct.<br><br>
+<b>Unless = if...not</b> = trừ khi.<br>
+The recruitment process will continue unless a suitable candidate has been found.<br>
+In other words, finding a suitable candidate is the condition that stops the process.`
+},
+{
+q:"Candidates should provide specific examples of their achievements ________ merely claiming that they possess excellent leadership skills.",
+options:["A. rather than","B. apart from","C. owing to","D. regardless of"],
+answer:0,
+explanation:`<b>A. rather than</b> is correct.<br><br>
+<b>rather than + V-ing</b> = thay vì.<br>
+The sentence contrasts giving concrete evidence with simply making claims.<br>
+So: <i>provide specific examples rather than merely claiming...</i>`
+},
+{
+q:"The company is willing to recruit inexperienced graduates ________ they demonstrate both a willingness to learn and the ability to work independently.",
+options:["A. even if","B. provided that","C. whereas","D. in spite of"],
+answer:1,
+explanation:`<b>B. provided that</b> is correct.<br><br>
+<b>provided that</b> = với điều kiện là / miễn là.<br>
+The company will recruit inexperienced graduates on the condition that they show willingness to learn and independence.`
+},
+{
+q:"Not only ________ responsible for supervising the sales team, but she also deals directly with several of the company's largest clients.",
+options:["A. she is","B. is she","C. she has been","D. has she"],
+answer:1,
+explanation:`<b>B. is she</b> is correct.<br><br>
+When <b>Not only</b> begins the clause, inversion is required:<br>
+<b>Not only + auxiliary/be + subject + ...</b><br>
+Normal: <i>She is responsible...</i><br>
+Inverted: <i>Not only is she responsible...</i>`
+},
+{
+q:"The position offers considerable opportunities for professional development; ________, employees are occasionally required to work at weekends.",
+options:["A. similarly","B. therefore","C. nevertheless","D. consequently"],
+answer:2,
+explanation:`<b>C. nevertheless</b> is correct.<br><br>
+The two ideas contrast:<br>
+Benefit: many professional development opportunities.<br>
+Drawback: employees sometimes have to work at weekends.<br>
+<b>Nevertheless</b> = tuy nhiên/dẫu vậy.`
+},
+{
+q:"Employees are encouraged to raise concerns as soon as they arise, ________ minor problems may eventually develop into serious ones.",
+options:["A. otherwise","B. whereas","C. nevertheless","D. despite"],
+answer:0,
+explanation:`<b>A. otherwise</b> is correct.<br><br>
+<b>otherwise</b> = nếu không thì.<br>
+Meaning: Employees should raise concerns early. If they do not, minor problems may become serious.`
+},
+{
+q:"The manager decided to extend the application deadline ________ several highly qualified candidates had been unable to submit their documents on time.",
+options:["A. although","B. because","C. so that","D. despite"],
+answer:1,
+explanation:`<b>B. because</b> is correct.<br><br>
+<b>because + S + V</b> introduces a reason.<br>
+Reason: several highly qualified candidates could not submit on time.<br>
+Result: the manager extended the deadline.<br>
+<b>Despite</b> cannot be used before this full clause in this form.`
+},
+{
+q:"________ employees receive adequate training, introducing new technology may actually reduce rather than improve workplace productivity.",
+options:["A. Unless","B. Provided that","C. Because","D. As long as"],
+answer:0,
+explanation:`<b>A. Unless</b> is correct.<br><br>
+<b>Unless = if...not</b>.<br>
+Meaning: If employees do not receive adequate training, new technology may reduce productivity instead of improving it.`
+},
+{
+q:"The organisation is looking for candidates ________ qualifications are relevant to the position and who are capable of working under considerable pressure.",
+options:["A. whom","B. whose","C. which","D. that"],
+answer:1,
+explanation:`<b>B. whose</b> is correct.<br><br>
+<b>whose + noun</b> expresses possession.<br>
+Here, the qualifications belong to the candidates:<br>
+<i>candidates whose qualifications are relevant...</i><br>
+Common patterns: <i>employees whose performance...</i>, <i>applicants whose qualifications...</i>`
+},
+{
+q:"________ had the interview begun when the candidate was asked to deal with an unexpected problem-solving task.",
+options:["A. No sooner","B. Hardly","C. Not until","D. Only after"],
+answer:1,
+explanation:`<b>B. Hardly</b> is correct.<br><br>
+Structure: <b>Hardly + had + S + V3 + when + S + V2</b> = vừa mới... thì...<br>
+So: <i>Hardly had the interview begun when...</i><br>
+Compare: <b>No sooner ... than ...</b>, not <i>when</i>.`
+},
+{
+q:"Candidates may choose ________ submitting a digital portfolio ________ providing evidence of previous projects during the interview.",
+options:["A. both / and","B. neither / nor","C. either / or","D. not only / but also"],
+answer:2,
+explanation:`<b>C. either / or</b> is correct.<br><br>
+<b>either A or B</b> = hoặc A hoặc B.<br>
+The structure is also parallel:<br>
+<b>submitting</b> ... <b>providing</b> ...<br>
+Both elements are V-ing forms, so the sentence is grammatically balanced.`
+}
+];
+
+let current=0;
+let lives=5;
+let score=0;
+let answered=false;
+
+function updateHearts(){
+  document.getElementById("hearts").textContent="❤️".repeat(lives)+"🩶".repeat(5-lives);
+}
+
+function renderQuestion(){
+  answered=false;
+  const q=questions[current];
+  document.getElementById("counter").textContent=`${current+1} / ${questions.length}`;
+  document.getElementById("qtag").textContent=`Question ${current+1}`;
+  document.getElementById("qtext").textContent=q.q;
+  document.getElementById("progress").style.width=`${(current/questions.length)*100}%`;
+  document.getElementById("nextBtn").style.display="none";
+
+  const fb=document.getElementById("feedback");
+  fb.className="feedback";
+  fb.innerHTML="";
+
+  const box=document.getElementById("options");
+  box.innerHTML="";
+  q.options.forEach((text,index)=>{
+    const btn=document.createElement("button");
+    btn.className="option";
+    btn.textContent=text;
+    btn.onclick=()=>choose(index,btn);
+    box.appendChild(btn);
+  });
+  updateHearts();
+}
+
+function choose(index,btn){
+  if(answered) return;
+  const q=questions[current];
+  const fb=document.getElementById("feedback");
+
+  if(index===q.answer){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    document.querySelectorAll(".option").forEach(b=>b.disabled=true);
+
+    fb.className="feedback good show";
+    fb.innerHTML=`✅ <b>Correct!</b><div class="explain">${q.explanation}</div>`;
+    document.getElementById("nextBtn").style.display="inline-block";
+  }else{
+    lives--;
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    updateHearts();
+
+    fb.className="feedback bad show";
+    fb.innerHTML=`❌ <b>Incorrect.</b> Try again. You cannot move to the next question until you choose the correct answer.`;
+
+    if(lives<=0){
+      setTimeout(()=>{
+        alert("You have run out of hearts. The game will restart from Question 1.");
+        restartGame();
+      },250);
+    }
+  }
+}
+
+function nextQuestion(){
+  if(!answered) return;
+  current++;
+  if(current>=questions.length){
+    document.getElementById("progress").style.width="100%";
+    document.getElementById("game").style.display="none";
+    document.getElementById("final").classList.add("show");
+    document.getElementById("finalScore").textContent=score;
+  }else{
+    renderQuestion();
+  }
+}
+
+function restartGame(){
+  current=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  document.getElementById("game").style.display="block";
+  document.getElementById("final").classList.remove("show");
+  renderQuestion();
+}
+
+renderQuestion();
+</script>
+</body>
+</html>

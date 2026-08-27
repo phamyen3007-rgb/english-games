@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 12 - Unit 5 - Exercise 7 - Option C1</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:"Segoe UI",Arial,sans-serif;
+  color:#173f39;
+  background:
+    radial-gradient(circle at 14% 12%,rgba(255,255,255,.78),transparent 22%),
+    radial-gradient(circle at 88% 16%,rgba(255,255,255,.44),transparent 24%),
+    linear-gradient(135deg,#e8fff7 0%,#c9f3e2 48%,#d7f6ee 100%);
+  overflow-x:hidden;
+}
+.wave{
+  position:fixed;
+  left:-15vw;
+  width:130vw;
+  height:90px;
+  border-radius:50%;
+  border-top:2px solid rgba(49,161,134,.12);
+  z-index:0;
+  animation:waveMove 10s ease-in-out infinite;
+}
+.w1{top:18%}
+.w2{top:58%;animation-delay:3s}
+@keyframes waveMove{
+  0%,100%{transform:translateX(0) translateY(0)}
+  50%{transform:translateX(4vw) translateY(-10px)}
+}
+.leaf{
+  position:fixed;
+  width:22px;height:12px;
+  background:#63bd8d;
+  opacity:.18;
+  border-radius:100% 0 100% 0;
+  z-index:0;
+  animation:floatLeaf 9s ease-in-out infinite;
+}
+.l1{left:9%;top:24%}
+.l2{left:86%;top:27%;animation-delay:2s}
+.l3{left:55%;top:8%;animation-delay:4s}
+.l4{left:92%;top:76%;animation-delay:6s}
+@keyframes floatLeaf{
+  0%,100%{transform:translateY(0) rotate(0)}
+  50%{transform:translateY(-24px) rotate(150deg)}
+}
+.wrap{
+  position:relative;
+  z-index:2;
+  width:min(1120px,94%);
+  margin:28px auto 50px;
+}
+.panel{
+  background:rgba(255,255,255,.92);
+  border:1px solid #bfe6d8;
+  border-radius:30px;
+  padding:26px;
+  box-shadow:0 18px 48px rgba(30,108,84,.16);
+  backdrop-filter:blur(7px);
+}
+h1{
+  margin:0;
+  text-align:center;
+  color:#18745e;
+  font-size:clamp(28px,4vw,44px);
+}
+.subtitle{
+  text-align:center;
+  margin:8px 0 22px;
+  color:#4c7f71;
+  font-weight:800;
+}
+.status{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 16px;
+  background:#effcf7;
+  border:1px solid #cdeade;
+  border-radius:18px;
+}
+.status-item{
+  color:#1d6c57;
+  font-weight:900;
+}
+.hearts{font-size:23px}
+.track{
+  height:12px;
+  background:#dcefe8;
+  border-radius:999px;
+  overflow:hidden;
+  margin:12px 0 22px;
+}
+.track span{
+  display:block;
+  width:0;
+  height:100%;
+  background:linear-gradient(90deg,#36aa86,#75cda2);
+  transition:.3s;
+}
+.instructions{
+  background:#f8fffb;
+  border-left:6px solid #48ad84;
+  padding:16px 18px;
+  border-radius:16px;
+  line-height:1.6;
+  margin-bottom:20px;
+  font-weight:700;
+}
+.card{
+  background:#fff;
+  border:1px solid #cbe6db;
+  border-radius:24px;
+  padding:24px;
+  box-shadow:0 10px 28px rgba(42,108,83,.11);
+}
+.qtag{
+  font-size:14px;
+  color:#63877a;
+  font-weight:900;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+.qtext{
+  margin:8px 0 20px;
+  font-size:23px;
+  line-height:1.5;
+  color:#174c3d;
+  font-weight:900;
+}
+.options{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.option{
+  border:2px solid #c9e4d8;
+  background:#f7fcfa;
+  border-radius:16px;
+  padding:15px 16px;
+  text-align:left;
+  cursor:pointer;
+  color:#2c5a4b;
+  font-size:17px;
+  font-weight:800;
+  transition:.2s;
+}
+.option:hover:not(:disabled){
+  transform:translateY(-2px);
+  background:#edf9f4;
+  border-color:#65b993;
+}
+.option.correct{
+  background:#ddf7e9;
+  border-color:#2fab70;
+  color:#17613f;
+}
+.option.wrong{
+  background:#ffe7e7;
+  border-color:#e36d6d;
+  color:#973737;
+  animation:shake .28s;
+}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-5px)}
+  75%{transform:translateX(5px)}
+}
+.feedback{
+  display:none;
+  margin-top:18px;
+  border-radius:16px;
+  padding:16px;
+  line-height:1.62;
+}
+.feedback.show{display:block}
+.feedback.good{
+  background:#eaf9f1;
+  border:1px solid #8fd1ae;
+  color:#205d43;
+}
+.feedback.bad{
+  background:#fff1f1;
+  border:1px solid #efb0b0;
+  color:#8a3838;
+}
+.explain{
+  margin-top:14px;
+  padding:15px 16px;
+  background:#fbfffd;
+  border:1px dashed #82bfa8;
+  border-radius:14px;
+  color:#285144;
+}
+.controls{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:18px;
+}
+.btn{
+  border:none;
+  border-radius:14px;
+  padding:12px 20px;
+  font-size:16px;
+  font-weight:900;
+  cursor:pointer;
+}
+.restart{background:#e0f3eb;color:#176a50}
+.next{background:#1b8c6d;color:#fff;display:none}
+.final{
+  display:none;
+  text-align:center;
+  padding:38px 20px;
+}
+.final.show{display:block}
+.final .icon{font-size:60px}
+.final h2{font-size:32px;color:#176d54}
+.final p{font-size:18px}
+@media(max-width:700px){
+  .options{grid-template-columns:1fr}
+  .panel{padding:16px}
+  .qtext{font-size:20px}
+}
+</style>
+</head>
+<body>
+<div class="wave w1"></div>
+<div class="wave w2"></div>
+<div class="leaf l1"></div>
+<div class="leaf l2"></div>
+<div class="leaf l3"></div>
+<div class="leaf l4"></div>
+
+<div class="wrap">
+  <div class="panel">
+    <h1>🍃 Mint River Workspace 💧</h1>
+    <div class="subtitle">Grade 12 - Unit 5 - Exercise 7 - Option C1</div>
+
+    <div class="status">
+      <div class="status-item">Question: <span id="counter">1 / 15</span></div>
+      <div class="status-item">Score: <span id="score">0</span></div>
+      <div class="status-item">Lives: <span id="hearts" class="hearts">❤️❤️❤️❤️❤️</span></div>
+    </div>
+    <div class="track"><span id="progress"></span></div>
+
+    <div class="instructions">
+      Mark the letter A, B, C, or D to indicate the correct answer to each of the following questions.
+    </div>
+
+    <div id="game" class="card">
+      <div class="qtag" id="qtag">Question 1</div>
+      <div class="qtext" id="qtext"></div>
+      <div id="options" class="options"></div>
+      <div id="feedback" class="feedback"></div>
+
+      <div class="controls">
+        <button class="btn restart" onclick="restartGame()">Restart</button>
+        <button id="nextBtn" class="btn next" onclick="nextQuestion()">Next ➜</button>
+      </div>
+    </div>
+
+    <div id="final" class="final">
+      <div class="icon">🏆🍃💧</div>
+      <h2>Excellent work!</h2>
+      <p>You completed all 15 questions.</p>
+      <p><b>Final score:</b> <span id="finalScore"></span>/15</p>
+      <button class="btn restart" onclick="restartGame()">Play Again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const questions = [
+{
+q:"The company continued to invest heavily in employee training ________ its profits had fallen considerably during the previous quarter.",
+options:["A. because","B. even though","C. provided that","D. in case"],
+answer:1,
+explanation:`<b>B. even though</b> is correct.<br><br>
+<b>even though + S + V</b> = mặc dù/cho dù.<br>
+The ideas contrast: profits had fallen, but the company still continued investing heavily in training.`
+},
+{
+q:"Graduates are encouraged to take part in voluntary projects, ________ such experience can help them develop skills that employers value.",
+options:["A. since","B. whereas","C. unless","D. despite"],
+answer:0,
+explanation:`<b>A. since</b> is correct.<br><br>
+Here <b>since = because</b> = bởi vì.<br>
+The second clause explains the reason graduates are encouraged to join voluntary projects.`
+},
+{
+q:"________ the applicant's impressive academic record, the recruitment panel remained concerned about his lack of practical experience.",
+options:["A. Although","B. In spite","C. Despite","D. Even though"],
+answer:2,
+explanation:`<b>C. Despite</b> is correct.<br><br>
+Structure: <b>Despite + noun / noun phrase / V-ing</b>.<br>
+After the blank is the noun phrase <i>the applicant's impressive academic record</i>.<br>
+<b>Although / Even though</b> require a full clause, while <b>in spite</b> would need <b>of</b>.`
+},
+{
+q:"Employees may work remotely ________ their performance continues to meet the standards established by the company.",
+options:["A. as though","B. even if","C. as long as","D. whereas"],
+answer:2,
+explanation:`<b>C. as long as</b> is correct.<br><br>
+<b>as long as = provided that</b> = miễn là/với điều kiện là.<br>
+Employees can work remotely on the condition that their performance remains satisfactory.`
+},
+{
+q:"The organisation has introduced a mentoring programme ________ newly recruited employees can receive guidance from more experienced colleagues.",
+options:["A. in order to","B. so as to","C. so that","D. because of"],
+answer:2,
+explanation:`<b>C. so that</b> is correct.<br><br>
+Purpose structure: <b>so that + S + can/could/will/would + V</b>.<br>
+After the blank comes the subject <i>newly recruited employees</i>, so a full clause is required.`
+},
+{
+q:"________ had the company announced the vacancies than hundreds of applications began arriving.",
+options:["A. Hardly","B. No sooner","C. Only after","D. Not until"],
+answer:1,
+explanation:`<b>B. No sooner</b> is correct.<br><br>
+Structure: <b>No sooner + had + S + V3 + than + S + V2</b> = vừa mới... thì...<br>
+Because the sentence uses <b>than</b>, <b>No sooner</b> is the correct choice.`
+},
+{
+q:"Some candidates possess excellent technical qualifications; ________, they may struggle to communicate their ideas effectively during an interview.",
+options:["A. consequently","B. likewise","C. nonetheless","D. hence"],
+answer:2,
+explanation:`<b>C. nonetheless</b> is correct.<br><br>
+<b>nonetheless = nevertheless</b> = tuy nhiên/dẫu vậy.<br>
+The contrast is between strong technical qualifications and weak interview communication.`
+},
+{
+q:"The supervisor expects every member of the team to complete the assigned tasks on time, ________ unexpected circumstances make this impossible.",
+options:["A. unless","B. provided that","C. because","D. so that"],
+answer:0,
+explanation:`<b>A. unless</b> is correct.<br><br>
+<b>unless = except if / if...not</b> = trừ khi.<br>
+Everyone must complete tasks on time except when unexpected circumstances make that impossible.`
+},
+{
+q:"Candidates should avoid exaggerating their achievements, ________ they may create expectations that they are unable to meet once they are employed.",
+options:["A. otherwise","B. therefore","C. moreover","D. similarly"],
+answer:0,
+explanation:`<b>A. otherwise</b> is correct.<br><br>
+<b>otherwise</b> = nếu không thì.<br>
+If candidates do exaggerate, they may create unrealistic expectations.`
+},
+{
+q:"The training course is intended for employees ________ responsibilities require them to deal directly with international customers.",
+options:["A. who","B. whom","C. whose","D. which"],
+answer:2,
+explanation:`<b>C. whose</b> is correct.<br><br>
+<b>whose + noun</b> expresses possession.<br>
+The responsibilities belong to the employees: <i>employees whose responsibilities...</i>`
+},
+{
+q:"________ carefully an applicant prepares for an interview, there is no guarantee that he or she will be offered the position.",
+options:["A. Although","B. However","C. Whatever","D. Despite"],
+answer:1,
+explanation:`<b>B. However</b> is correct.<br><br>
+Advanced structure: <b>However + adjective/adverb + S + V</b> = dù... đến mức nào.<br>
+Here <b>carefully</b> is an adverb: <i>However carefully an applicant prepares...</i>`
+},
+{
+q:"The manager will not approve the proposal ________ the project team can provide convincing evidence that the benefits outweigh the potential risks.",
+options:["A. if","B. once","C. unless","D. because"],
+answer:2,
+explanation:`<b>C. unless</b> is correct.<br><br>
+<b>not ... unless</b> = sẽ không... trừ khi...<br>
+Approval depends on the team providing convincing evidence.`
+},
+{
+q:"________ the salary nor the possibility of promotion was sufficient to persuade David to remain with the company.",
+options:["A. Either","B. Both","C. Neither","D. Not only"],
+answer:2,
+explanation:`<b>C. Neither</b> is correct.<br><br>
+Structure: <b>neither A nor B</b> = không A cũng không B.<br>
+The verb agrees with the nearer subject: <i>the possibility</i> is singular, so <b>was</b> is correct.`
+},
+{
+q:"The organisation decided to recruit internally ________ advertise the vacancy to external candidates, as several existing employees already possessed the necessary qualifications.",
+options:["A. instead of","B. rather than","C. owing to","D. apart from"],
+answer:1,
+explanation:`<b>B. rather than</b> is correct.<br><br>
+Structure: <b>do A rather than (do) B</b>.<br>
+So: <i>recruit internally rather than advertise externally</i>.<br>
+<b>Instead of</b> would normally be followed by <b>advertising</b>, not <i>advertise</i>.`
+},
+{
+q:"Only after several employees had complained about excessive workloads ________ the management introduce a more flexible working schedule.",
+options:["A. the management did","B. did the management","C. the management had","D. had the management"],
+answer:1,
+explanation:`<b>B. did the management</b> is correct.<br><br>
+When <b>Only + adverbial</b> comes first, the main clause uses inversion.<br>
+Structure: <b>Only after + clause + auxiliary + S + V</b>.<br>
+Therefore: <i>Only after ... did the management introduce...</i>`
+}
+];
+
+let current=0;
+let lives=5;
+let score=0;
+let answered=false;
+
+function updateHearts(){
+  document.getElementById("hearts").textContent="❤️".repeat(lives)+"🩶".repeat(5-lives);
+}
+function renderQuestion(){
+  answered=false;
+  const q=questions[current];
+  document.getElementById("counter").textContent=`${current+1} / ${questions.length}`;
+  document.getElementById("qtag").textContent=`Question ${current+1}`;
+  document.getElementById("qtext").textContent=q.q;
+  document.getElementById("progress").style.width=`${(current/questions.length)*100}%`;
+  document.getElementById("nextBtn").style.display="none";
+
+  const fb=document.getElementById("feedback");
+  fb.className="feedback";
+  fb.innerHTML="";
+
+  const box=document.getElementById("options");
+  box.innerHTML="";
+  q.options.forEach((text,index)=>{
+    const btn=document.createElement("button");
+    btn.className="option";
+    btn.textContent=text;
+    btn.onclick=()=>choose(index,btn);
+    box.appendChild(btn);
+  });
+  updateHearts();
+}
+function choose(index,btn){
+  if(answered) return;
+  const q=questions[current];
+  const fb=document.getElementById("feedback");
+
+  if(index===q.answer){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    document.querySelectorAll(".option").forEach(b=>b.disabled=true);
+    fb.className="feedback good show";
+    fb.innerHTML=`✅ <b>Correct!</b><div class="explain">${q.explanation}</div>`;
+    document.getElementById("nextBtn").style.display="inline-block";
+  }else{
+    lives--;
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    updateHearts();
+    fb.className="feedback bad show";
+    fb.innerHTML=`❌ <b>Incorrect.</b> Try again. You cannot move to the next question until you choose the correct answer.`;
+
+    if(lives<=0){
+      setTimeout(()=>{
+        alert("You have run out of hearts. The game will restart from Question 1.");
+        restartGame();
+      },250);
+    }
+  }
+}
+function nextQuestion(){
+  if(!answered) return;
+  current++;
+  if(current>=questions.length){
+    document.getElementById("progress").style.width="100%";
+    document.getElementById("game").style.display="none";
+    document.getElementById("final").classList.add("show");
+    document.getElementById("finalScore").textContent=score;
+  }else{
+    renderQuestion();
+  }
+}
+function restartGame(){
+  current=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  document.getElementById("game").style.display="block";
+  document.getElementById("final").classList.remove("show");
+  renderQuestion();
+}
+renderQuestion();
+</script>
+</body>
+</html>

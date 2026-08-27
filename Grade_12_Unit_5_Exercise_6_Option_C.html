@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Grade 12 - Unit 5 - Exercise 6 - Option C</title>
+<style>
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background:
+      radial-gradient(circle at 10% 10%, rgba(255,255,255,.65), transparent 25%),
+      radial-gradient(circle at 90% 20%, rgba(255,255,255,.35), transparent 25%),
+      linear-gradient(135deg,#dff7e7,#bfe8cf 50%,#d9f5e7);
+    min-height:100vh;
+    color:#163a2d;
+    overflow-x:hidden;
+  }
+  .leaf{
+    position:fixed;
+    width:18px;height:10px;
+    background:#61b985;
+    border-radius:100% 0 100% 0;
+    opacity:.22;
+    animation:floatLeaf 10s linear infinite;
+    z-index:0;
+  }
+  .leaf:nth-child(1){left:6%;top:15%;animation-delay:0s}
+  .leaf:nth-child(2){left:20%;top:70%;animation-delay:2s}
+  .leaf:nth-child(3){left:80%;top:18%;animation-delay:4s}
+  .leaf:nth-child(4){left:92%;top:72%;animation-delay:1s}
+  .leaf:nth-child(5){left:52%;top:8%;animation-delay:6s}
+  @keyframes floatLeaf{
+    0%{transform:translateY(0) rotate(0deg)}
+    50%{transform:translateY(-25px) rotate(160deg)}
+    100%{transform:translateY(0) rotate(320deg)}
+  }
+
+  .app{
+    position:relative;
+    z-index:2;
+    width:min(1100px,94%);
+    margin:28px auto 48px;
+  }
+  .hero{
+    background:rgba(255,255,255,.88);
+    border:1px solid #bfe0ca;
+    box-shadow:0 16px 40px rgba(38,103,70,.16);
+    border-radius:28px;
+    padding:28px;
+    backdrop-filter: blur(6px);
+  }
+  h1{
+    margin:0 0 8px;
+    color:#146b47;
+    font-size:clamp(26px,4vw,42px);
+    text-align:center;
+  }
+  .subtitle{
+    text-align:center;
+    color:#4a6f5d;
+    margin-bottom:22px;
+    font-weight:700;
+  }
+  .topbar{
+    display:flex;
+    gap:14px;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    align-items:center;
+    background:#effaf3;
+    border:1px solid #cfe9d8;
+    padding:12px 16px;
+    border-radius:18px;
+    margin-bottom:20px;
+  }
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-weight:800;
+    color:#176643;
+  }
+  .hearts{font-size:24px; letter-spacing:2px}
+  .progress{
+    height:12px;
+    background:#dceee2;
+    border-radius:999px;
+    overflow:hidden;
+    margin-top:10px;
+  }
+  .progress > div{
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg,#31a36c,#73c995);
+    transition:.35s;
+  }
+  .passage{
+    background:#f7fffa;
+    border-left:6px solid #48a978;
+    padding:20px 22px;
+    border-radius:18px;
+    line-height:1.72;
+    margin-bottom:22px;
+    font-size:17px;
+  }
+  .passage h2{
+    color:#176b48;
+    margin-top:0;
+    text-align:center;
+  }
+  .blank{
+    font-weight:900;
+    color:#08724b;
+    background:#dff5e8;
+    padding:1px 5px;
+    border-radius:6px;
+  }
+
+  .question-card{
+    background:#fff;
+    border:1px solid #cfe5d7;
+    border-radius:24px;
+    padding:24px;
+    box-shadow:0 10px 28px rgba(47,107,77,.12);
+  }
+  .qnum{
+    font-size:15px;
+    font-weight:900;
+    color:#4f826b;
+    text-transform:uppercase;
+    letter-spacing:.8px;
+  }
+  .question-title{
+    font-size:24px;
+    margin:8px 0 18px;
+    color:#174c37;
+    font-weight:900;
+  }
+  .options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+  .option{
+    border:2px solid #c8e2d2;
+    background:#f7fcf8;
+    border-radius:16px;
+    padding:15px 16px;
+    cursor:pointer;
+    text-align:left;
+    font-size:17px;
+    font-weight:800;
+    color:#285643;
+    transition:.2s;
+  }
+  .option:hover:not(:disabled){
+    transform:translateY(-2px);
+    border-color:#62b888;
+    background:#edf9f1;
+  }
+  .option.correct{
+    background:#d9f6e5;
+    border-color:#2da96c;
+    color:#11623d;
+  }
+  .option.wrong{
+    background:#ffe3e3;
+    border-color:#e16868;
+    color:#9a2d2d;
+    animation:shake .3s;
+  }
+  @keyframes shake{
+    0%,100%{transform:translateX(0)}
+    25%{transform:translateX(-5px)}
+    75%{transform:translateX(5px)}
+  }
+  .feedback{
+    margin-top:18px;
+    border-radius:16px;
+    padding:16px;
+    display:none;
+    line-height:1.6;
+  }
+  .feedback.show{display:block}
+  .feedback.good{
+    background:#e9f9ef;
+    border:1px solid #8fd0a8;
+    color:#195b3d;
+  }
+  .feedback.bad{
+    background:#fff0f0;
+    border:1px solid #efabab;
+    color:#8b3434;
+  }
+  .explain{
+    margin-top:14px;
+    background:#f8fff9;
+    border:1px dashed #7fbea0;
+    padding:15px 16px;
+    border-radius:14px;
+    color:#244f3b;
+  }
+  .controls{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:18px;
+    gap:10px;
+  }
+  button.nav{
+    border:none;
+    border-radius:14px;
+    padding:12px 20px;
+    font-weight:900;
+    font-size:16px;
+    cursor:pointer;
+  }
+  #nextBtn{
+    background:#1e8c5b;
+    color:white;
+    display:none;
+  }
+  #restartBtn{
+    background:#dff3e7;
+    color:#176746;
+  }
+  .final{
+    display:none;
+    text-align:center;
+    padding:35px 20px;
+  }
+  .final.show{display:block}
+  .final .big{font-size:56px}
+  .final h2{font-size:32px;color:#176b48}
+  .final p{font-size:18px}
+  @media(max-width:700px){
+    .options{grid-template-columns:1fr}
+    .hero{padding:16px}
+    .passage{font-size:16px;padding:16px}
+  }
+</style>
+</head>
+<body>
+<div class="leaf"></div><div class="leaf"></div><div class="leaf"></div><div class="leaf"></div><div class="leaf"></div>
+
+<div class="app">
+  <div class="hero">
+    <h1>🌿 Green Career Garden 🌿</h1>
+    <div class="subtitle">Grade 12 - Unit 5 - Exercise 6 - Option C</div>
+
+    <div class="topbar">
+      <div class="badge">Question: <span id="counter">1 / 6</span></div>
+      <div class="badge">Score: <span id="score">0</span></div>
+      <div class="badge">Lives: <span id="hearts" class="hearts">❤️❤️❤️❤️❤️</span></div>
+    </div>
+    <div class="progress"><div id="bar"></div></div>
+
+    <div class="passage">
+      <h2>BUILD YOUR CAREER WITH US</h2>
+      <p>Are you looking for an opportunity to develop professionally while making a meaningful contribution to a fast-growing organisation? Horizon Solutions is seeking ambitious individuals who are prepared to take on new responsibilities and <span class="blank">(1) ________</span> to the demands of a rapidly changing workplace.</p>
+
+      <p>We currently have vacancies in administration, customer relations, digital communications, and project coordination. Successful candidates will work closely with experienced colleagues and will be expected to demonstrate both initiative and a strong sense of <span class="blank">(2) ________</span> when carrying out their duties.</p>
+
+      <p><span class="blank">(3) ________</span> relevant qualifications are highly valued, practical experience is not always essential. Applicants who can demonstrate strong problem-solving abilities, effective communication skills, and a willingness to learn will also be seriously considered.</p>
+
+      <p>New employees are provided with comprehensive training during their first few weeks. This enables them to become familiar with company procedures and gradually take <span class="blank">(4) ________</span> greater responsibility for their work.</p>
+
+      <p>We are particularly interested in candidates who can work efficiently under pressure without compromising the quality of their performance. In return, the company offers competitive salaries, professional development opportunities, and a working environment in which employees are encouraged to reach their full <span class="blank">(5) ________</span>.</p>
+
+      <p>To apply, please submit an up-to-date résumé together with a cover letter outlining your relevant experience and explaining what makes you a suitable <span class="blank">(6) ________</span> for the position.</p>
+    </div>
+
+    <div id="gameArea" class="question-card">
+      <div class="qnum" id="qnum">Question 1</div>
+      <div class="question-title" id="questionTitle">Choose the best answer for blank (1).</div>
+      <div class="options" id="options"></div>
+      <div id="feedback" class="feedback"></div>
+      <div class="controls">
+        <button class="nav" id="restartBtn" onclick="restartGame()">Restart</button>
+        <button class="nav" id="nextBtn" onclick="nextQuestion()">Next ➜</button>
+      </div>
+    </div>
+
+    <div id="final" class="final">
+      <div class="big">🏆🌱</div>
+      <h2>Excellent work!</h2>
+      <p>You completed all 6 questions.</p>
+      <p><b>Final score:</b> <span id="finalScore"></span>/6</p>
+      <button class="nav" id="restartBtn2" onclick="restartGame()">Play Again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const questions = [
+  {
+    options:["A. adapt","B. adjust","C. accommodate","D. adopt"],
+    answer:0,
+    explanation:`<b>A. adapt</b> is correct.<br><br>
+    The standard collocation is <b>adapt to the demands of...</b> = thích nghi với những yêu cầu của...<br>
+    <b>adjust to</b> is close in meaning, but <b>adapt to a changing workplace / changing demands</b> is more natural when referring to longer-term adjustment to changing professional conditions.<br>
+    <b>accommodate</b> normally takes a direct object; <b>adopt</b> means “to take up/use”, not “to adapt”.`
+  },
+  {
+    options:["A. obligation","B. accountability","C. liability","D. commitment"],
+    answer:1,
+    explanation:`<b>B. accountability</b> is correct.<br><br>
+    <b>a strong sense of accountability</b> = ý thức trách nhiệm đối với kết quả công việc.<br>
+    <b>obligation</b> = nghĩa vụ; <b>liability</b> = trách nhiệm pháp lý / khoản nợ; <b>commitment</b> = sự tận tâm, cam kết.<br>
+    In the context of <i>carrying out their duties</i>, <b>accountability</b> is the most precise choice.`
+  },
+  {
+    options:["A. Provided that","B. Given that","C. Although","D. Unless"],
+    answer:2,
+    explanation:`<b>C. Although</b> is correct.<br><br>
+    The two clauses express contrast:<br>
+    <i>Although relevant qualifications are highly valued, practical experience is not always essential.</i><br>
+    = Mặc dù bằng cấp liên quan được đánh giá cao, kinh nghiệm thực tế không phải lúc nào cũng bắt buộc.<br>
+    <b>Provided that</b> = miễn là; <b>Given that</b> = xét rằng/vì rằng; <b>Unless</b> = trừ khi.`
+  },
+  {
+    options:["A. up","B. over","C. on","D. in"],
+    answer:2,
+    explanation:`<b>C. on</b> is correct.<br><br>
+    The fixed expression is <b>take on responsibility</b> = đảm nhận trách nhiệm.<br>
+    Therefore: <i>gradually take on greater responsibility</i> = dần đảm nhận nhiều trách nhiệm hơn.<br>
+    <b>take up responsibility</b> is not the natural collocation in this context.`
+  },
+  {
+    options:["A. capacity","B. potential","C. competence","D. capability"],
+    answer:1,
+    explanation:`<b>B. potential</b> is correct.<br><br>
+    The common collocation is <b>reach one’s full potential</b> = phát huy hết tiềm năng.<br>
+    Although <b>capacity</b>, <b>competence</b>, and <b>capability</b> are related to ability, they do not naturally fit this established expression.`
+  },
+  {
+    options:["A. applicant","B. candidate","C. participant","D. employee"],
+    answer:1,
+    explanation:`<b>B. candidate</b> is correct.<br><br>
+    The natural collocation is <b>a suitable candidate for the position</b> = ứng viên phù hợp cho vị trí.<br>
+    <b>Applicant</b> means a person who applies, but when evaluating whether someone is suitable for a job, <b>candidate</b> is more idiomatic and precise.<br>
+    <b>participant</b> = người tham gia; <b>employee</b> = nhân viên.`
+  }
+];
+
+let current = 0;
+let lives = 5;
+let score = 0;
+let answered = false;
+
+function render(){
+  answered=false;
+  document.getElementById("counter").textContent = `${current+1} / ${questions.length}`;
+  document.getElementById("qnum").textContent = `Question ${current+1}`;
+  document.getElementById("questionTitle").textContent = `Choose the best answer for blank (${current+1}).`;
+  document.getElementById("bar").style.width = `${(current/questions.length)*100}%`;
+  document.getElementById("nextBtn").style.display="none";
+
+  const fb=document.getElementById("feedback");
+  fb.className="feedback";
+  fb.innerHTML="";
+
+  const box=document.getElementById("options");
+  box.innerHTML="";
+  questions[current].options.forEach((op,i)=>{
+    const btn=document.createElement("button");
+    btn.className="option";
+    btn.textContent=op;
+    btn.onclick=()=>choose(i,btn);
+    box.appendChild(btn);
+  });
+  updateHearts();
+}
+
+function choose(index,btn){
+  if(answered) return;
+  const q=questions[current];
+  const fb=document.getElementById("feedback");
+
+  if(index===q.answer){
+    answered=true;
+    score++;
+    document.getElementById("score").textContent=score;
+    btn.classList.add("correct");
+    document.querySelectorAll(".option").forEach(b=>b.disabled=true);
+
+    fb.className="feedback good show";
+    fb.innerHTML=`✅ <b>Correct!</b>
+      <div class="explain">${q.explanation}</div>`;
+    document.getElementById("nextBtn").style.display="inline-block";
+  } else {
+    lives--;
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    updateHearts();
+
+    fb.className="feedback bad show";
+    fb.innerHTML=`❌ <b>Incorrect.</b> Try again. You cannot move to the next question until you choose the correct answer.`;
+
+    if(lives<=0){
+      setTimeout(()=>{
+        alert("You have run out of hearts. The game will restart from Question 1.");
+        restartGame();
+      },250);
+    }
+  }
+}
+
+function nextQuestion(){
+  if(!answered) return;
+  current++;
+  if(current>=questions.length){
+    document.getElementById("bar").style.width="100%";
+    document.getElementById("gameArea").style.display="none";
+    document.getElementById("final").classList.add("show");
+    document.getElementById("finalScore").textContent=score;
+  } else render();
+}
+
+function updateHearts(){
+  document.getElementById("hearts").textContent="❤️".repeat(lives)+"🩶".repeat(5-lives);
+}
+
+function restartGame(){
+  current=0;
+  lives=5;
+  score=0;
+  answered=false;
+  document.getElementById("score").textContent="0";
+  document.getElementById("gameArea").style.display="block";
+  document.getElementById("final").classList.remove("show");
+  render();
+}
+render();
+</script>
+</body>
+</html>

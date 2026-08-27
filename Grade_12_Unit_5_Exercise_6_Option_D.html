@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Grade 12 - Unit 5 - Exercise 6 - Option D</title>
+<style>
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family:"Segoe UI",Arial,sans-serif;
+    color:#123f3b;
+    background:
+      radial-gradient(circle at 15% 12%, rgba(255,255,255,.72), transparent 24%),
+      radial-gradient(circle at 85% 16%, rgba(255,255,255,.42), transparent 22%),
+      linear-gradient(135deg,#dffaf2 0%,#bfeee1 48%,#ccefd5 100%);
+    overflow-x:hidden;
+  }
+
+  .bubble,.leaf{
+    position:fixed;
+    z-index:0;
+    pointer-events:none;
+    opacity:.23;
+  }
+  .bubble{
+    border:2px solid #6fc9bd;
+    border-radius:50%;
+    animation:rise 11s linear infinite;
+  }
+  .bubble.b1{width:30px;height:30px;left:8%;bottom:-40px}
+  .bubble.b2{width:18px;height:18px;left:32%;bottom:-30px;animation-delay:2s}
+  .bubble.b3{width:42px;height:42px;left:74%;bottom:-50px;animation-delay:4s}
+  .bubble.b4{width:24px;height:24px;left:91%;bottom:-30px;animation-delay:1s}
+  @keyframes rise{
+    from{transform:translateY(0)}
+    to{transform:translateY(-115vh)}
+  }
+
+  .leaf{
+    width:22px;height:12px;
+    background:#55ad7a;
+    border-radius:100% 0 100% 0;
+    animation:drift 9s ease-in-out infinite;
+  }
+  .leaf.l1{left:10%;top:20%}
+  .leaf.l2{left:87%;top:28%;animation-delay:2s}
+  .leaf.l3{left:48%;top:7%;animation-delay:4s}
+  @keyframes drift{
+    0%,100%{transform:translateY(0) rotate(0deg)}
+    50%{transform:translateY(-22px) rotate(160deg)}
+  }
+
+  .wrap{
+    width:min(1120px,94%);
+    margin:28px auto 50px;
+    position:relative;
+    z-index:2;
+  }
+  .panel{
+    background:rgba(255,255,255,.9);
+    border:1px solid #b7dfd2;
+    border-radius:30px;
+    box-shadow:0 18px 48px rgba(26,96,78,.17);
+    padding:26px;
+    backdrop-filter:blur(7px);
+  }
+  h1{
+    margin:0;
+    text-align:center;
+    color:#126c60;
+    font-size:clamp(28px,4vw,43px);
+  }
+  .subtitle{
+    text-align:center;
+    margin:8px 0 22px;
+    color:#46776e;
+    font-weight:800;
+  }
+  .status{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    justify-content:space-between;
+    align-items:center;
+    background:#effcf8;
+    border:1px solid #cbe9df;
+    border-radius:18px;
+    padding:12px 16px;
+  }
+  .status-item{
+    font-weight:900;
+    color:#17685d;
+  }
+  .hearts{font-size:23px}
+  .track{
+    height:12px;
+    background:#d7eee7;
+    border-radius:999px;
+    overflow:hidden;
+    margin:12px 0 20px;
+  }
+  .track span{
+    display:block;
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg,#29a893,#72c894);
+    transition:.3s;
+  }
+  .passage{
+    background:linear-gradient(180deg,#f9fffd,#f1fbf6);
+    border:1px solid #cde8df;
+    border-top:6px solid #36a88f;
+    border-radius:20px;
+    padding:20px 22px;
+    line-height:1.72;
+    font-size:17px;
+    margin-bottom:22px;
+  }
+  .passage h2{
+    margin-top:0;
+    text-align:center;
+    color:#146b5d;
+  }
+  .blank{
+    background:#d9f5eb;
+    color:#08705e;
+    font-weight:900;
+    padding:2px 5px;
+    border-radius:6px;
+  }
+
+  .card{
+    background:#fff;
+    border:1px solid #cae5dc;
+    border-radius:24px;
+    padding:24px;
+    box-shadow:0 10px 28px rgba(27,103,84,.11);
+  }
+  .qtag{
+    color:#548179;
+    font-size:14px;
+    font-weight:900;
+    letter-spacing:1px;
+    text-transform:uppercase;
+  }
+  .qtitle{
+    font-size:24px;
+    font-weight:900;
+    margin:8px 0 18px;
+    color:#184f48;
+  }
+  .options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+  .option{
+    background:#f6fcfa;
+    border:2px solid #c8e4db;
+    border-radius:16px;
+    padding:15px 16px;
+    cursor:pointer;
+    text-align:left;
+    color:#2a5c54;
+    font-size:17px;
+    font-weight:850;
+    transition:.2s;
+  }
+  .option:hover:not(:disabled){
+    transform:translateY(-2px);
+    background:#eaf8f3;
+    border-color:#5cbca7;
+  }
+  .option.correct{
+    background:#dff7e8;
+    border-color:#2fad72;
+    color:#17633f;
+  }
+  .option.wrong{
+    background:#ffe7e7;
+    border-color:#e26f6f;
+    color:#973838;
+    animation:shake .28s;
+  }
+  @keyframes shake{
+    0%,100%{transform:translateX(0)}
+    25%{transform:translateX(-5px)}
+    75%{transform:translateX(5px)}
+  }
+  .feedback{
+    display:none;
+    margin-top:18px;
+    border-radius:16px;
+    padding:16px;
+    line-height:1.62;
+  }
+  .feedback.show{display:block}
+  .feedback.good{
+    background:#eaf9f1;
+    border:1px solid #8fd1ae;
+    color:#205c43;
+  }
+  .feedback.bad{
+    background:#fff1f1;
+    border:1px solid #efb0b0;
+    color:#8a3838;
+  }
+  .explain{
+    margin-top:14px;
+    padding:15px 16px;
+    border-radius:14px;
+    background:#fbfffd;
+    border:1px dashed #80bea6;
+    color:#285245;
+  }
+  .controls{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:18px;
+  }
+  .btn{
+    border:none;
+    border-radius:14px;
+    padding:12px 20px;
+    font-size:16px;
+    font-weight:900;
+    cursor:pointer;
+  }
+  .restart{background:#e1f4ec;color:#176b57}
+  .next{background:#168c78;color:white;display:none}
+
+  .final{
+    display:none;
+    text-align:center;
+    padding:36px 20px;
+  }
+  .final.show{display:block}
+  .final .icon{font-size:58px}
+  .final h2{font-size:32px;color:#156b5c}
+  .final p{font-size:18px}
+
+  @media(max-width:700px){
+    .options{grid-template-columns:1fr}
+    .panel{padding:16px}
+    .passage{padding:16px;font-size:16px}
+  }
+</style>
+</head>
+<body>
+
+<div class="bubble b1"></div>
+<div class="bubble b2"></div>
+<div class="bubble b3"></div>
+<div class="bubble b4"></div>
+<div class="leaf l1"></div>
+<div class="leaf l2"></div>
+<div class="leaf l3"></div>
+
+<div class="wrap">
+  <div class="panel">
+    <h1>💧 Aqua Forest Internship 🌿</h1>
+    <div class="subtitle">Grade 12 - Unit 5 - Exercise 6 - Option D</div>
+
+    <div class="status">
+      <div class="status-item">Question: <span id="counter">1 / 6</span></div>
+      <div class="status-item">Score: <span id="score">0</span></div>
+      <div class="status-item">Lives: <span id="hearts" class="hearts">❤️❤️❤️❤️❤️</span></div>
+    </div>
+    <div class="track"><span id="progress"></span></div>
+
+    <div class="passage">
+      <h2>INTERNSHIP OPPORTUNITY: TURN KNOWLEDGE INTO EXPERIENCE</h2>
+
+      <p>For many university students, completing an internship is an important step towards entering the professional world. NovaTech Industries is offering a twelve-week internship programme designed for students who want to gain practical experience while developing skills that will prove <span class="blank">(1) ________</span> in their future careers.</p>
+
+      <p>Rather than simply observing experienced employees, interns will be assigned genuine workplace tasks and encouraged to contribute ideas to ongoing projects. Each intern will work under the guidance of a senior employee who will provide regular feedback and ensure that assigned tasks are carried <span class="blank">(2) ________</span> to the required standard.</p>
+
+      <p>No previous professional experience is necessary. <span class="blank">(3) ________</span>, applicants are expected to demonstrate initiative, communicate effectively, and show that they can respond constructively to feedback. Preference may be given to candidates whose academic background is particularly relevant to the department for which they are applying.</p>
+
+      <p>The programme is demanding, and interns may occasionally find themselves dealing with several priorities simultaneously. They should therefore be capable of distinguishing urgent tasks from <span class="blank">(4) ________</span> that can reasonably be postponed. This ability is particularly important when deadlines are approaching and resources are limited.</p>
+
+      <p>At the end of the programme, interns will receive a detailed performance review. Those who have consistently demonstrated outstanding ability may also be <span class="blank">(5) ________</span> for permanent positions when suitable vacancies arise. However, participation in the programme does not guarantee future employment.</p>
+
+      <p>Applications must include a résumé and a brief statement explaining what applicants hope to gain from the programme. Candidates are advised to provide specific examples rather than make <span class="blank">(6) ________</span> claims about their strengths and abilities.</p>
+    </div>
+
+    <div id="game" class="card">
+      <div class="qtag" id="qtag">Question 1</div>
+      <div class="qtitle" id="qtitle">Choose the best answer for blank (1).</div>
+      <div id="options" class="options"></div>
+      <div id="feedback" class="feedback"></div>
+
+      <div class="controls">
+        <button class="btn restart" onclick="restartGame()">Restart</button>
+        <button id="nextBtn" class="btn next" onclick="nextQuestion()">Next ➜</button>
+      </div>
+    </div>
+
+    <div id="final" class="final">
+      <div class="icon">🏆💧🌿</div>
+      <h2>Great job!</h2>
+      <p>You completed all 6 questions.</p>
+      <p><b>Final score:</b> <span id="finalScore"></span>/6</p>
+      <button class="btn restart" onclick="restartGame()">Play Again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const questions = [
+  {
+    options:["A. valuable","B. valued","C. worthy","D. worthwhile"],
+    answer:0,
+    explanation:`<b>A. valuable</b> is correct.<br><br>
+    Sentence: <i>skills that will prove valuable in their future careers</i>.<br>
+    Structure: <b>prove + adjective</b> = tỏ ra/chứng tỏ là...<br>
+    <b>prove valuable</b> = tỏ ra có giá trị/hữu ích.<br><br>
+    • <b>valuable</b> = có giá trị, hữu ích ✓<br>
+    • <b>valued</b> = được coi trọng, e.g. <i>a valued employee</i><br>
+    • <b>worthy</b> thường dùng với <b>worthy of + N/V-ing</b><br>
+    • <b>worthwhile</b> thường nói về hoạt động/trải nghiệm: <i>a worthwhile experience</i>.`
+  },
+  {
+    options:["A. away","B. through","C. out","D. over"],
+    answer:2,
+    explanation:`<b>C. out</b> is correct.<br><br>
+    The fixed phrasal verb is <b>carry out</b> = thực hiện.<br>
+    Here: <i>assigned tasks are carried out to the required standard</i> = các nhiệm vụ được thực hiện theo tiêu chuẩn yêu cầu.<br><br>
+    Remember:<br>
+    • carry <b>out</b> a task ✓<br>
+    • carry <b>out</b> responsibilities ✓<br>
+    • carry <b>out</b> research ✓<br>
+    • carry <b>out</b> an investigation ✓`
+  },
+  {
+    options:["A. Nevertheless","B. Otherwise","C. Accordingly","D. Similarly"],
+    answer:0,
+    explanation:`<b>A. Nevertheless</b> is correct.<br><br>
+    Previous idea: <i>No previous professional experience is necessary.</i><br>
+    Next idea: applicants are still expected to show initiative and communicate effectively.<br>
+    These ideas contrast with each other, so <b>Nevertheless</b> = tuy nhiên/dẫu vậy is suitable.<br><br>
+    • <b>Otherwise</b> = nếu không thì<br>
+    • <b>Accordingly</b> = do đó/theo đó<br>
+    • <b>Similarly</b> = tương tự`
+  },
+  {
+    options:["A. another","B. others","C. the other","D. the others"],
+    answer:1,
+    explanation:`<b>B. others</b> is correct.<br><br>
+    Sentence: <i>distinguishing urgent tasks from others that can reasonably be postponed</i>.<br>
+    <b>others</b> replaces <b>other tasks</b> to avoid repetition.<br><br>
+    Compare:<br>
+    • <b>other + plural noun</b>: other tasks<br>
+    • <b>others</b>: những cái khác, no noun after it ✓<br>
+    • <b>the other</b>: cái/người còn lại trong hai<br>
+    • <b>the others</b>: những cái/người còn lại trong một nhóm xác định`
+  },
+  {
+    options:["A. regarded","B. considered","C. recognised","D. accounted"],
+    answer:1,
+    explanation:`<b>B. considered</b> is correct.<br><br>
+    Collocation: <b>consider somebody for a position/job</b> = cân nhắc ai cho một vị trí.<br>
+    Passive form: <b>be considered for + position</b>.<br>
+    Therefore: <i>may also be considered for permanent positions</i> is correct.<br><br>
+    • <b>regarded</b> usually goes with <b>as</b><br>
+    • <b>recognised</b> often goes with <b>as/for</b> in different meanings<br>
+    • <b>account for</b> = giải thích/chiếm`
+  },
+  {
+    options:["A. broad","B. general","C. vague","D. loose"],
+    answer:2,
+    explanation:`<b>C. vague</b> is correct.<br><br>
+    The key contrast is <b>specific examples ↔ vague claims</b>.<br>
+    <b>vague</b> = mơ hồ, thiếu cụ thể.<br>
+    <b>make vague claims</b> = đưa ra những tuyên bố chung chung/mơ hồ.<br><br>
+    Example of a vague claim: <i>“I am an excellent leader.”</i><br>
+    Better specific evidence: <i>“I led a five-member team that completed a project two weeks ahead of schedule.”</i>`
+  }
+];
+
+let current = 0;
+let lives = 5;
+let score = 0;
+let answered = false;
+
+function updateHearts(){
+  document.getElementById("hearts").textContent =
+    "❤️".repeat(lives) + "🩶".repeat(5-lives);
+}
+
+function renderQuestion(){
+  answered = false;
+  document.getElementById("counter").textContent = `${current+1} / ${questions.length}`;
+  document.getElementById("qtag").textContent = `Question ${current+1}`;
+  document.getElementById("qtitle").textContent = `Choose the best answer for blank (${current+1}).`;
+  document.getElementById("progress").style.width = `${(current/questions.length)*100}%`;
+  document.getElementById("nextBtn").style.display = "none";
+
+  const feedback = document.getElementById("feedback");
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+
+  const optionsBox = document.getElementById("options");
+  optionsBox.innerHTML = "";
+
+  questions[current].options.forEach((text,index)=>{
+    const btn = document.createElement("button");
+    btn.className = "option";
+    btn.textContent = text;
+    btn.onclick = ()=>chooseAnswer(index,btn);
+    optionsBox.appendChild(btn);
+  });
+
+  updateHearts();
+}
+
+function chooseAnswer(index,btn){
+  if(answered) return;
+
+  const q = questions[current];
+  const feedback = document.getElementById("feedback");
+
+  if(index === q.answer){
+    answered = true;
+    score++;
+    document.getElementById("score").textContent = score;
+
+    btn.classList.add("correct");
+    document.querySelectorAll(".option").forEach(b=>b.disabled=true);
+
+    feedback.className = "feedback good show";
+    feedback.innerHTML = `✅ <b>Correct!</b>
+      <div class="explain">${q.explanation}</div>`;
+
+    document.getElementById("nextBtn").style.display = "inline-block";
+  } else {
+    lives--;
+    btn.classList.add("wrong");
+    btn.disabled = true;
+    updateHearts();
+
+    feedback.className = "feedback bad show";
+    feedback.innerHTML = `❌ <b>Incorrect.</b> Try again. You cannot move to the next question until you choose the correct answer.`;
+
+    if(lives <= 0){
+      setTimeout(()=>{
+        alert("You have run out of hearts. The game will restart from Question 1.");
+        restartGame();
+      },250);
+    }
+  }
+}
+
+function nextQuestion(){
+  if(!answered) return;
+
+  current++;
+  if(current >= questions.length){
+    document.getElementById("progress").style.width = "100%";
+    document.getElementById("game").style.display = "none";
+    document.getElementById("final").classList.add("show");
+    document.getElementById("finalScore").textContent = score;
+  }else{
+    renderQuestion();
+  }
+}
+
+function restartGame(){
+  current = 0;
+  lives = 5;
+  score = 0;
+  answered = false;
+
+  document.getElementById("score").textContent = "0";
+  document.getElementById("game").style.display = "block";
+  document.getElementById("final").classList.remove("show");
+
+  renderQuestion();
+}
+
+renderQuestion();
+</script>
+</body>
+</html>
