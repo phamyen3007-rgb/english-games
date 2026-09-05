@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 11 - Unit 3 - Exercise 10 - Option B1</title>
+<style>
+:root{
+  --sky:#e7f8ff;
+  --sky2:#d6f2ff;
+  --lime:#e9f9d9;
+  --citrus:#fff2a8;
+  --leaf:#73c95a;
+  --leaf2:#a5da68;
+  --aqua:#46b9b1;
+  --blue:#48a4d3;
+  --ink:#244b55;
+  --muted:#6a838a;
+  --line:#dceee8;
+  --good:#24b86d;
+  --bad:#e95770;
+  --gold:#ffd35e;
+  --shadow:0 18px 46px rgba(61,127,119,.15);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 12% 8%,rgba(255,255,255,.98),transparent 22%),
+    radial-gradient(circle at 88% 10%,rgba(255,248,180,.74),transparent 19%),
+    linear-gradient(145deg,var(--sky),var(--sky2) 48%,var(--lime));
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"🍋        ☁️        🍃";
+  position:fixed;
+  top:30px;
+  left:0;right:0;
+  text-align:center;
+  font-size:42px;
+  opacity:.18;
+  pointer-events:none;
+  white-space:nowrap;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  left:0;right:0;bottom:0;
+  height:170px;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse at 10% 100%,#91db79 0 29%,transparent 30%),
+    radial-gradient(ellipse at 29% 100%,#a7e18c 0 27%,transparent 28%),
+    radial-gradient(ellipse at 50% 100%,#79cf68 0 31%,transparent 32%),
+    radial-gradient(ellipse at 72% 100%,#9fdc84 0 28%,transparent 29%),
+    radial-gradient(ellipse at 93% 100%,#82d46f 0 31%,transparent 32%);
+  opacity:.48;
+}
+
+.app{
+  width:min(1190px,94vw);
+  margin:0 auto;
+  padding:20px 0 76px;
+  position:relative;
+  z-index:2;
+}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.brand-icon{
+  width:54px;height:54px;
+  display:grid;place-items:center;
+  border-radius:18px;
+  font-size:28px;
+  background:linear-gradient(135deg,#8bd55f,#48b1d2);
+  box-shadow:0 10px 25px rgba(72,150,135,.22);
+}
+
+.brand h1{
+  margin:0;
+  color:#2b6062;
+  font-size:clamp(20px,3vw,29px);
+  line-height:1.08;
+}
+
+.brand p{
+  margin:5px 0 0;
+  color:#627f82;
+  font-size:13px;
+  font-weight:800;
+}
+
+.status{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  flex-wrap:wrap;
+}
+
+.pill{
+  padding:9px 13px;
+  border-radius:999px;
+  background:rgba(255,255,255,.88);
+  border:1px solid rgba(255,255,255,.98);
+  box-shadow:0 8px 20px rgba(68,135,126,.10);
+  color:#2e6668;
+  font-size:14px;
+  font-weight:900;
+}
+
+.progress-wrap{
+  height:11px;
+  border-radius:999px;
+  background:rgba(255,255,255,.73);
+  border:1px solid rgba(255,255,255,.97);
+  overflow:hidden;
+  margin-bottom:20px;
+}
+
+.progress{
+  height:100%;
+  width:0;
+  border-radius:inherit;
+  background:linear-gradient(90deg,#7dce60,#49b7ad,#46a3d0,#ffd35e);
+  transition:width .4s ease;
+}
+
+.layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.14fr) minmax(380px,.86fr);
+  gap:20px;
+  align-items:start;
+}
+
+.panel{
+  background:rgba(255,255,255,.95);
+  border:1px solid rgba(255,255,255,.98);
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+
+.panel-head{
+  padding:17px 20px;
+  background:linear-gradient(90deg,#f5fff1,#f0fbff,#fffbe9);
+  border-bottom:1px solid var(--line);
+}
+
+.panel-head h2{
+  margin:0;
+  color:#2f6968;
+  font-size:18px;
+}
+
+.passage{
+  padding:21px 23px 25px;
+  font-size:15.25px;
+  line-height:1.73;
+  max-height:72vh;
+  overflow:auto;
+}
+
+.passage p{margin:0 0 14px}
+
+.target-sentence{
+  text-decoration:underline;
+  text-decoration-thickness:2px;
+  text-underline-offset:3px;
+  text-decoration-color:#72bca7;
+}
+
+.quiz{padding:22px}
+
+.q-kicker{
+  color:#39946d;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-size:12px;
+  font-weight:900;
+}
+
+.q-title{
+  margin:7px 0 18px;
+  color:#244e57;
+  font-size:clamp(19px,2.7vw,26px);
+  line-height:1.28;
+}
+
+.options{
+  display:grid;
+  gap:12px;
+}
+
+.option{
+  width:100%;
+  padding:14px 15px;
+  border:2px solid #dceee8;
+  border-radius:16px;
+  background:#fbfffd;
+  color:#244d55;
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  text-align:left;
+  cursor:pointer;
+  font-size:14.8px;
+  font-weight:800;
+  line-height:1.42;
+  transition:.17s ease;
+}
+
+.option:hover:not(:disabled){
+  transform:translateY(-2px);
+  border-color:#8fd2a6;
+  box-shadow:0 8px 20px rgba(71,145,126,.10);
+}
+
+.option .letter{
+  width:35px;height:35px;
+  flex:0 0 35px;
+  display:grid;place-items:center;
+  border-radius:12px;
+  color:#fff;
+  background:linear-gradient(135deg,#7dce60,#45a8cf);
+  font-weight:900;
+}
+
+.option.correct{
+  border-color:#62d397;
+  background:#edfff5;
+}
+.option.correct .letter{background:var(--good)}
+
+.option.wrong{
+  border-color:#ffa1b2;
+  background:#fff2f5;
+  animation:shake .32s ease;
+}
+.option.wrong .letter{background:var(--bad)}
+.option:disabled{cursor:default}
+
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-6px)}
+  75%{transform:translateX(6px)}
+}
+
+.feedback{
+  display:none;
+  margin-top:17px;
+  padding:15px 16px;
+  border-radius:16px;
+  border:1px solid;
+  line-height:1.56;
+  font-size:14.5px;
+}
+
+.feedback.show{display:block;animation:fadeUp .28s ease}
+
+.feedback.good{
+  background:#ecfff4;
+  border-color:#a8e8c5;
+  color:#206947;
+}
+
+.feedback.bad{
+  background:#fff2f5;
+  border-color:#ffc3cf;
+  color:#8f3348;
+}
+
+.feedback-title{
+  font-weight:900;
+  margin-bottom:5px;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(7px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.reward-note{
+  display:none;
+  margin-top:12px;
+  padding:11px 13px;
+  border-radius:13px;
+  background:#fff9df;
+  border:1px solid #efdc8a;
+  color:#6f5c11;
+  font-weight:900;
+  font-size:13px;
+}
+.reward-note.show{display:block;animation:fadeUp .3s ease}
+
+.next-row{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:16px;
+}
+
+.next-btn,.restart-btn{
+  border:none;
+  border-radius:14px;
+  padding:12px 18px;
+  color:#fff;
+  font-size:15px;
+  font-weight:900;
+  cursor:pointer;
+  background:linear-gradient(135deg,#7acb61,#47b2a9,#46a1cf);
+  box-shadow:0 9px 22px rgba(45,147,158,.18);
+  transition:.17s ease;
+}
+
+.next-btn:hover,.restart-btn:hover{transform:translateY(-2px)}
+.next-btn[hidden]{display:none}
+
+.tip{
+  margin-top:16px;
+  padding:11px 13px;
+  border-radius:13px;
+  background:#f5fbf3;
+  border:1px solid #e2f0df;
+  color:#617f78;
+  font-size:13px;
+}
+
+.heart{
+  display:inline-block;
+  filter:drop-shadow(0 2px 2px rgba(0,0,0,.10));
+}
+
+.heart.pop{animation:heartPop .45s ease}
+
+@keyframes heartPop{
+  0%{transform:scale(.3)}
+  60%{transform:scale(1.35)}
+  100%{transform:scale(1)}
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:60;
+  display:none;
+  place-items:center;
+  padding:20px;
+  background:rgba(41,91,84,.42);
+  backdrop-filter:blur(8px);
+}
+
+.modal.show{display:grid}
+
+.modal-card{
+  width:min(520px,92vw);
+  background:#fff;
+  border-radius:28px;
+  padding:28px 24px;
+  text-align:center;
+  box-shadow:0 28px 80px rgba(42,95,88,.28);
+}
+
+.modal-icon{font-size:58px}
+
+.modal h3{
+  margin:8px 0 10px;
+  color:#2c6060;
+  font-size:28px;
+}
+
+.modal p{
+  margin:0 0 18px;
+  color:#647f7d;
+  line-height:1.55;
+}
+
+.summary{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:14px 0 20px;
+}
+
+.summary span{
+  padding:9px 12px;
+  border-radius:12px;
+  background:#f0fbf6;
+  border:1px solid #dceee6;
+  color:#32665d;
+  font-weight:900;
+}
+
+.toast{
+  position:fixed;
+  top:18px;
+  left:50%;
+  transform:translate(-50%,-18px);
+  z-index:80;
+  opacity:0;
+  pointer-events:none;
+  padding:10px 16px;
+  border-radius:999px;
+  background:#fff9df;
+  border:1px solid #efdd8b;
+  color:#6e5b10;
+  font-weight:900;
+  box-shadow:0 10px 28px rgba(57,118,112,.20);
+  transition:.25s ease;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+.confetti{
+  position:fixed;
+  inset:0;
+  z-index:70;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+.confetti i{
+  position:absolute;
+  top:-20px;
+  width:10px;height:18px;
+  border-radius:3px;
+  animation:fall 2.2s linear forwards;
+}
+
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(720deg)}
+}
+
+@media(max-width:930px){
+  .layout{grid-template-columns:1fr}
+  .passage{max-height:none}
+}
+
+@media(max-width:520px){
+  .app{width:95vw;padding-top:14px}
+  .brand-icon{width:46px;height:46px;border-radius:15px}
+  .status{width:100%}
+  .pill{font-size:13px;padding:8px 11px}
+  .quiz,.passage{padding:17px}
+  .option{font-size:14.3px;padding:12px}
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-icon">🍋</div>
+    <div>
+      <h1>Community Energy in Future Cities</h1>
+      <p>Grade 11 · Unit 3 · Exercise 10 · Option B1</p>
+    </div>
+  </div>
+
+  <div class="status">
+    <div class="pill">Question <span id="qNum">1</span>/8</div>
+    <div class="pill">✅ <span id="score">0</span>/8</div>
+    <div class="pill" id="hearts"></div>
+  </div>
+</header>
+
+<div class="progress-wrap"><div class="progress" id="progress"></div></div>
+
+<main class="layout">
+  <section class="panel">
+    <div class="panel-head"><h2>📖 Reading passage</h2></div>
+    <article class="passage">
+      <p>As cities search for cleaner sources of energy, some neighbourhoods are beginning to produce electricity locally rather than depending entirely on large power stations. Rooftop solar panels can generate energy for homes, schools and public buildings, while small community batteries can store electricity for later use. In some areas, residents can even share unused electricity with nearby households through local energy networks. Such systems can make electricity supplies more reliable, particularly when demand is high.</p>
+
+      <p>The environmental and financial advantages can be considerable. Producing electricity close to where it is used can reduce energy loss during transmission. Solar power also produces far fewer carbon emissions than electricity generated from fossil fuels. At the same time, households that generate some of their own electricity may reduce their monthly energy bills. Some community projects allow residents to sell extra electricity back to the local network, providing an additional financial benefit.</p>
+
+      <p>However, community energy systems also present challenges. Installing solar panels, batteries and digital equipment can require a large initial investment. Residents may also worry about who controls information collected by smart meters. In addition, not every building is suitable for solar panels because some roofs receive insufficient sunlight. City authorities therefore need to consider both technical and social factors before expanding these projects.</p>
+
+      <p><span class="target-sentence">Community energy networks are likely to become more common as technology makes locally generated power easier to manage and share.</span> Digital systems can automatically identify when electricity is available and direct it to buildings where it is most needed. Nevertheless, these networks are unlikely to replace national electricity systems completely. Instead, they may work alongside existing infrastructure to make future cities cleaner and more resilient.</p>
+    </article>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head"><h2>🎯 Choose the correct answer</h2></div>
+    <div class="quiz">
+      <div class="q-kicker" id="qKicker">Question 1</div>
+      <h2 class="q-title" id="qTitle"></h2>
+
+      <div class="options" id="options"></div>
+
+      <div class="feedback" id="feedback">
+        <div class="feedback-title" id="feedbackTitle"></div>
+        <div id="feedbackText"></div>
+      </div>
+
+      <div class="reward-note" id="rewardNote">
+        🎁 Bonus: You passed Question 5 and earned +1 heart!
+      </div>
+
+      <div class="next-row">
+        <button class="next-btn" id="nextBtn" hidden>Next question ➜</button>
+      </div>
+
+      <div class="tip">
+        💡 Chọn sai: mất 1 tim và chưa được qua câu. Chọn đúng: hiện giải thích và mở câu tiếp theo.
+      </div>
+    </div>
+  </section>
+</main>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <div class="modal-icon" id="modalIcon">🍋</div>
+    <h3 id="modalTitle">Excellent work!</h3>
+    <p id="modalText"></p>
+    <div class="summary" id="summary"></div>
+    <button class="restart-btn" id="restartBtn">Play again ↻</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="confetti" id="confetti"></div>
+
+<script>
+const questions=[
+{
+  title:"Which of the following is NOT mentioned as a benefit of community energy systems?",
+  options:[
+    "Reducing household electricity costs",
+    "Improving public transport services",
+    "Cutting carbon emissions",
+    "Making electricity supplies more reliable"
+  ],
+  answer:"Improving public transport services",
+  explanation:"Bài có đề cập: reduce monthly energy bills → giảm chi phí điện; fewer carbon emissions → giảm phát thải carbon; make electricity supplies more reliable → làm nguồn điện đáng tin cậy hơn. Không có thông tin nào về việc cải thiện public transport services. Vì vậy B là đáp án."
+},
+{
+  title:"The word “reliable” in paragraph 1 is OPPOSITE in meaning to __________.",
+  options:["efficient","available","stable","unreliable"],
+  answer:"unreliable",
+  explanation:"“reliable” = đáng tin cậy, ổn định. Từ trái nghĩa trực tiếp là “unreliable” = không đáng tin cậy, không ổn định."
+},
+{
+  title:"The word “considerable” in paragraph 2 could best be replaced by __________.",
+  options:["significant","uncertain","ordinary","temporary"],
+  answer:"significant",
+  explanation:"“considerable” = đáng kể, khá lớn. “significant” = đáng kể, quan trọng. Trong câu “The environmental and financial advantages can be considerable”, hai từ gần nghĩa nhất."
+},
+{
+  title:"The word “their” in paragraph 2 refers to __________.",
+  options:["local networks","fossil fuels","households","community projects"],
+  answer:"households",
+  explanation:"Câu trong bài: “households that generate some of their own electricity...” → “their” = “households”, tức là các hộ gia đình tự sản xuất một phần điện của họ."
+},
+{
+  title:"Which of the following best paraphrases the underlined sentence in paragraph 4?",
+  options:[
+    "Local energy networks will replace traditional electricity systems because technology is becoming cheaper.",
+    "Technological development may encourage wider use of community energy by making local electricity easier to control and distribute.",
+    "Communities will produce more electricity only when national power systems stop operating.",
+    "Advanced technology will allow every household to become completely independent from existing electricity networks."
+  ],
+  answer:"Technological development may encourage wider use of community energy by making local electricity easier to control and distribute.",
+  explanation:"“are likely to become more common” → may encourage wider use; “technology makes... easier” → technological development... making... easier; “manage and share” → control and distribute. Vì vậy B diễn đạt lại chính xác nhất. A và D dùng ý replace/completely independent quá tuyệt đối; C không xuất hiện trong bài."
+},
+{
+  title:"Which of the following is TRUE according to the passage?",
+  options:[
+    "Every urban building is suitable for installing solar panels.",
+    "Community energy networks will completely replace national electricity systems.",
+    "Smart meters eliminate all concerns about personal information.",
+    "Some households may earn money by supplying extra electricity to the local network."
+  ],
+  answer:"Some households may earn money by supplying extra electricity to the local network.",
+  explanation:"Paragraph 2 nói: “Some community projects allow residents to sell extra electricity back to the local network...” → người dân có thể bán lượng điện dư và nhận thêm lợi ích tài chính. A sai vì có mái nhà không đủ ánh sáng; B sai vì bài nói unlikely to replace completely; C sai vì người dân vẫn lo ngại về dữ liệu smart meters."
+},
+{
+  title:"In which paragraph does the writer mention both environmental and economic advantages for residents?",
+  options:["Paragraph 2","Paragraph 4","Paragraph 1","Paragraph 3"],
+  answer:"Paragraph 2",
+  explanation:"Paragraph 2 đề cập cả environmental benefits: less energy loss, fewer carbon emissions; và economic benefits: lower energy bills, income from selling extra electricity. Vì vậy đáp án là Paragraph 2."
+},
+{
+  title:"In which paragraph does the writer mention concerns that may limit the development of community energy systems?",
+  options:["Paragraph 4","Paragraph 1","Paragraph 3","Paragraph 2"],
+  answer:"Paragraph 3",
+  explanation:"Paragraph 3 nói về high initial investment, concerns about smart-meter information và some roofs unsuitable for solar panels. Đây chính là những yếu tố có thể cản trở việc mở rộng hệ thống."
+}
+];
+
+let current=0;
+let score=0;
+let hearts=5;
+let mistakes=0;
+let locked=false;
+let rewardGiven=false;
+
+const qNum=document.getElementById("qNum");
+const scoreEl=document.getElementById("score");
+const heartsEl=document.getElementById("hearts");
+const progress=document.getElementById("progress");
+const qKicker=document.getElementById("qKicker");
+const qTitle=document.getElementById("qTitle");
+const optionsEl=document.getElementById("options");
+const feedback=document.getElementById("feedback");
+const feedbackTitle=document.getElementById("feedbackTitle");
+const feedbackText=document.getElementById("feedbackText");
+const rewardNote=document.getElementById("rewardNote");
+const nextBtn=document.getElementById("nextBtn");
+const modal=document.getElementById("modal");
+const modalIcon=document.getElementById("modalIcon");
+const modalTitle=document.getElementById("modalTitle");
+const modalText=document.getElementById("modalText");
+const summary=document.getElementById("summary");
+const restartBtn=document.getElementById("restartBtn");
+const toast=document.getElementById("toast");
+const confetti=document.getElementById("confetti");
+
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function renderHearts(pop=false){
+  heartsEl.innerHTML="";
+  if(hearts<=0){
+    heartsEl.textContent="💔";
+    return;
+  }
+  for(let i=0;i<hearts;i++){
+    const h=document.createElement("span");
+    h.className="heart"+(pop && i===hearts-1?" pop":"");
+    h.textContent="❤️";
+    heartsEl.appendChild(h);
+  }
+}
+
+function showToast(message){
+  toast.textContent=message;
+  toast.classList.add("show");
+  setTimeout(()=>toast.classList.remove("show"),1500);
+}
+
+function renderQuestion(){
+  locked=false;
+  const q=questions[current];
+
+  qNum.textContent=current+1;
+  scoreEl.textContent=score;
+  progress.style.width=`${(current/questions.length)*100}%`;
+  qKicker.textContent=`Question ${current+1}`;
+  qTitle.textContent=q.title;
+
+  feedback.className="feedback";
+  feedbackTitle.textContent="";
+  feedbackText.textContent="";
+  rewardNote.classList.remove("show");
+  nextBtn.hidden=true;
+  optionsEl.innerHTML="";
+
+  const shuffled=shuffle(q.options);
+  const letters=["A","B","C","D"];
+
+  shuffled.forEach((choice,index)=>{
+    const btn=document.createElement("button");
+    btn.className="option";
+    btn.innerHTML=`<span class="letter">${letters[index]}</span><span>${choice}</span>`;
+    btn.addEventListener("click",()=>checkAnswer(btn,choice));
+    optionsEl.appendChild(btn);
+  });
+}
+
+function checkAnswer(button,choice){
+  if(locked) return;
+  const q=questions[current];
+
+  if(choice===q.answer){
+    locked=true;
+    score++;
+    scoreEl.textContent=score;
+
+    button.classList.add("correct");
+    [...optionsEl.children].forEach(btn=>btn.disabled=true);
+
+    feedback.className="feedback good show";
+    feedbackTitle.textContent="✅ Correct!";
+    feedbackText.textContent=q.explanation;
+
+    if(current===4 && !rewardGiven){
+      hearts++;
+      rewardGiven=true;
+      renderHearts(true);
+      rewardNote.classList.add("show");
+      showToast("🎁 +1 heart!");
+    }
+
+    progress.style.width=`${((current+1)/questions.length)*100}%`;
+    nextBtn.hidden=false;
+    nextBtn.textContent=current===questions.length-1
+      ? "See results 🎉"
+      : "Next question ➜";
+  }else{
+    mistakes++;
+    hearts--;
+    renderHearts();
+
+    button.classList.add("wrong");
+    button.disabled=true;
+
+    feedback.className="feedback bad show";
+    feedbackTitle.textContent="❌ Not correct — try again!";
+    feedbackText.textContent="Bạn chưa thể qua câu này. Hãy quay lại đoạn văn, tìm từ khóa hoặc thông tin tương ứng rồi chọn lại.";
+
+    if(hearts<=0){
+      setTimeout(showGameOver,350);
+    }
+  }
+}
+
+function nextQuestion(){
+  if(!locked) return;
+
+  if(current<questions.length-1){
+    current++;
+    renderQuestion();
+    window.scrollTo({top:0,behavior:"smooth"});
+  }else{
+    showFinish();
+  }
+}
+
+function showGameOver(){
+  modalIcon.textContent="💔";
+  modalTitle.textContent="Out of hearts!";
+  modalText.textContent="Bạn đã hết tim. Hãy làm lại từ câu 1 để luyện lại toàn bộ bài.";
+  summary.innerHTML=`<span>✅ Correct: ${score}/8</span><span>❌ Mistakes: ${mistakes}</span>`;
+  restartBtn.textContent="Restart from Question 1 ↻";
+  modal.classList.add("show");
+}
+
+function showFinish(){
+  modalIcon.textContent="🍋";
+  modalTitle.textContent="Community Energy Expert!";
+  modalText.textContent="Bạn đã hoàn thành cả 8 câu đọc hiểu.";
+  summary.innerHTML=`<span>✅ Score: ${score}/8</span><span>❤️ Hearts left: ${hearts}</span><span>❌ Mistakes: ${mistakes}</span>`;
+  restartBtn.textContent="Play again ↻";
+  modal.classList.add("show");
+  makeConfetti();
+}
+
+function makeConfetti(){
+  confetti.innerHTML="";
+  const colors=["#7dce60","#49b7ad","#46a3d0","#ffd35e","#ffffff","#a7df78"];
+  for(let i=0;i<70;i++){
+    const p=document.createElement("i");
+    p.style.left=Math.random()*100+"vw";
+    p.style.background=colors[Math.floor(Math.random()*colors.length)];
+    p.style.animationDelay=Math.random()*.7+"s";
+    p.style.animationDuration=(1.6+Math.random()*1.7)+"s";
+    confetti.appendChild(p);
+  }
+  setTimeout(()=>confetti.innerHTML="",3600);
+}
+
+function restart(){
+  current=0;
+  score=0;
+  hearts=5;
+  mistakes=0;
+  locked=false;
+  rewardGiven=false;
+  modal.classList.remove("show");
+  confetti.innerHTML="";
+  renderHearts();
+  renderQuestion();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+nextBtn.addEventListener("click",nextQuestion);
+restartBtn.addEventListener("click",restart);
+
+renderHearts();
+renderQuestion();
+</script>
+</body>
+</html>

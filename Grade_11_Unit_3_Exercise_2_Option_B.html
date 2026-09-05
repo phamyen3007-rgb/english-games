@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Grade 11 - Unit 3 - Exercise 2 - Option B</title>
+<style>
+  :root{
+    --bg1:#071a2d;
+    --bg2:#0d2d46;
+    --card:#ffffff;
+    --ink:#16324a;
+    --muted:#62798d;
+    --cyan:#28d7dc;
+    --violet:#7b61ff;
+    --green:#25c77a;
+    --red:#ef476f;
+    --yellow:#ffd166;
+    --line:#d9e8ef;
+    --shadow:0 18px 50px rgba(0,0,0,.22);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    color:#fff;
+    background:
+      radial-gradient(circle at 15% 15%, rgba(40,215,220,.18), transparent 28%),
+      radial-gradient(circle at 82% 10%, rgba(123,97,255,.23), transparent 30%),
+      linear-gradient(150deg,var(--bg1),var(--bg2));
+    overflow-x:hidden;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:auto 0 0;
+    height:150px;
+    pointer-events:none;
+    opacity:.35;
+    background:
+      linear-gradient(to top, rgba(5,14,25,.9), transparent),
+      repeating-linear-gradient(90deg,
+        transparent 0 45px,
+        rgba(40,215,220,.12) 46px 48px,
+        transparent 49px 95px);
+    clip-path:polygon(0 55%,4% 55%,4% 25%,8% 25%,8% 64%,12% 64%,12% 42%,16% 42%,16% 68%,21% 68%,21% 18%,26% 18%,26% 54%,31% 54%,31% 34%,36% 34%,36% 68%,41% 68%,41% 46%,46% 46%,46% 24%,52% 24%,52% 61%,58% 61%,58% 39%,64% 39%,64% 70%,70% 70%,70% 28%,76% 28%,76% 57%,82% 57%,82% 17%,88% 17%,88% 62%,94% 62%,94% 36%,100% 36%,100% 100%,0 100%);
+  }
+
+  .app{
+    width:min(1180px,94vw);
+    margin:0 auto;
+    padding:22px 0 70px;
+    position:relative;
+    z-index:1;
+  }
+
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-bottom:18px;
+  }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+
+  .brand-icon{
+    width:50px;
+    height:50px;
+    display:grid;
+    place-items:center;
+    border-radius:16px;
+    font-size:25px;
+    background:linear-gradient(135deg,var(--cyan),var(--violet));
+    box-shadow:0 10px 24px rgba(40,215,220,.24);
+  }
+
+  .brand h1{
+    margin:0;
+    font-size:clamp(18px,3vw,28px);
+    line-height:1.05;
+  }
+
+  .brand p{
+    margin:4px 0 0;
+    color:#b8d5e7;
+    font-size:13px;
+  }
+
+  .status{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+
+  .pill{
+    border:1px solid rgba(255,255,255,.16);
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    padding:9px 13px;
+    border-radius:999px;
+    font-weight:800;
+    font-size:14px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+  }
+
+  #hearts{letter-spacing:2px}
+  .heart{display:inline-block; filter:drop-shadow(0 2px 3px rgba(0,0,0,.18))}
+  .heart.pop{animation:heartPop .45s ease}
+  @keyframes heartPop{
+    0%{transform:scale(.3)}
+    60%{transform:scale(1.35)}
+    100%{transform:scale(1)}
+  }
+
+  .progress-wrap{
+    height:10px;
+    border-radius:999px;
+    background:rgba(255,255,255,.12);
+    overflow:hidden;
+    margin:10px 0 22px;
+  }
+
+  .progress{
+    height:100%;
+    width:0;
+    border-radius:inherit;
+    background:linear-gradient(90deg,var(--cyan),var(--violet));
+    transition:width .4s ease;
+  }
+
+  .layout{
+    display:grid;
+    grid-template-columns:minmax(0,1.13fr) minmax(360px,.87fr);
+    gap:20px;
+    align-items:start;
+  }
+
+  .panel{
+    background:rgba(255,255,255,.96);
+    color:var(--ink);
+    border-radius:24px;
+    box-shadow:var(--shadow);
+    border:1px solid rgba(255,255,255,.45);
+    overflow:hidden;
+  }
+
+  .panel-head{
+    padding:17px 20px;
+    background:linear-gradient(90deg,rgba(40,215,220,.12),rgba(123,97,255,.10));
+    border-bottom:1px solid var(--line);
+  }
+
+  .panel-head h2{
+    margin:0;
+    font-size:18px;
+  }
+
+  .passage{
+    padding:20px 22px 24px;
+    font-size:15.4px;
+    line-height:1.72;
+    max-height:72vh;
+    overflow:auto;
+  }
+
+  .passage p{margin:0 0 14px}
+  .blank{
+    display:inline-block;
+    min-width:72px;
+    text-align:center;
+    color:#4e4adb;
+    font-weight:800;
+    border-bottom:2px dashed #8e86ed;
+  }
+
+  .quiz{
+    padding:22px;
+  }
+
+  .q-kicker{
+    color:#5f55dc;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.13em;
+    font-weight:900;
+  }
+
+  .q-title{
+    margin:7px 0 18px;
+    font-size:clamp(20px,3vw,28px);
+    line-height:1.2;
+  }
+
+  .options{
+    display:grid;
+    gap:12px;
+  }
+
+  .option{
+    width:100%;
+    border:2px solid #dce8ee;
+    border-radius:16px;
+    background:#f9fcfd;
+    color:var(--ink);
+    padding:14px 15px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-align:left;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:750;
+    transition:transform .14s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+  }
+
+  .option:hover:not(:disabled){
+    transform:translateY(-2px);
+    border-color:#85dfe2;
+    box-shadow:0 8px 20px rgba(28,97,128,.10);
+  }
+
+  .option .letter{
+    width:34px;
+    height:34px;
+    flex:0 0 34px;
+    display:grid;
+    place-items:center;
+    border-radius:11px;
+    color:#fff;
+    background:linear-gradient(135deg,#309ea8,#6d5fee);
+    font-weight:900;
+  }
+
+  .option.correct{
+    border-color:#52ce8c;
+    background:#edfff5;
+  }
+  .option.correct .letter{background:var(--green)}
+
+  .option.wrong{
+    border-color:#ff87a3;
+    background:#fff1f5;
+    animation:shake .32s ease;
+  }
+  .option.wrong .letter{background:var(--red)}
+  @keyframes shake{
+    0%,100%{transform:translateX(0)}
+    25%{transform:translateX(-6px)}
+    75%{transform:translateX(6px)}
+  }
+
+  .option:disabled{cursor:default}
+
+  .feedback{
+    display:none;
+    margin-top:17px;
+    border-radius:16px;
+    padding:15px 16px;
+    line-height:1.55;
+    border:1px solid;
+  }
+
+  .feedback.show{display:block; animation:fadeUp .28s ease}
+  .feedback.good{
+    background:#edfff5;
+    border-color:#a6e7c5;
+    color:#1d6242;
+  }
+  .feedback.bad{
+    background:#fff1f5;
+    border-color:#ffc0cf;
+    color:#8b2b44;
+  }
+
+  @keyframes fadeUp{
+    from{opacity:0; transform:translateY(8px)}
+    to{opacity:1; transform:translateY(0)}
+  }
+
+  .feedback-title{
+    font-weight:900;
+    margin-bottom:5px;
+  }
+
+  .next-row{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:16px;
+  }
+
+  .next-btn, .restart-btn{
+    border:none;
+    border-radius:14px;
+    padding:12px 18px;
+    color:white;
+    font-weight:900;
+    font-size:15px;
+    cursor:pointer;
+    background:linear-gradient(135deg,var(--violet),#4f90ff);
+    box-shadow:0 9px 22px rgba(93,94,229,.25);
+    transition:.18s ease;
+  }
+  .next-btn:hover, .restart-btn:hover{transform:translateY(-2px)}
+  .next-btn[hidden]{display:none}
+
+  .tip{
+    margin-top:16px;
+    padding:11px 13px;
+    background:#f3f8fb;
+    border-radius:13px;
+    color:#658093;
+    font-size:13px;
+  }
+
+  .reward-note{
+    display:none;
+    margin-top:12px;
+    padding:10px 12px;
+    border-radius:12px;
+    background:#fff7d7;
+    border:1px solid #f3da80;
+    color:#715c00;
+    font-weight:800;
+    font-size:13px;
+  }
+  .reward-note.show{display:block; animation:fadeUp .3s ease}
+
+  .modal{
+    position:fixed;
+    inset:0;
+    z-index:50;
+    display:none;
+    place-items:center;
+    padding:20px;
+    background:rgba(4,16,27,.78);
+    backdrop-filter:blur(8px);
+  }
+  .modal.show{display:grid}
+
+  .modal-card{
+    width:min(520px,92vw);
+    text-align:center;
+    color:var(--ink);
+    background:#fff;
+    border-radius:26px;
+    padding:28px 24px;
+    box-shadow:0 28px 80px rgba(0,0,0,.38);
+  }
+
+  .modal-icon{font-size:58px}
+  .modal h3{font-size:28px; margin:8px 0 10px}
+  .modal p{color:#607789; line-height:1.55; margin:0 0 20px}
+
+  .summary{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:14px 0 20px;
+  }
+  .summary span{
+    background:#f2f7fa;
+    border:1px solid #deebf1;
+    border-radius:12px;
+    padding:9px 12px;
+    font-weight:800;
+  }
+
+  .toast{
+    position:fixed;
+    top:18px;
+    left:50%;
+    transform:translate(-50%,-18px);
+    z-index:70;
+    opacity:0;
+    pointer-events:none;
+    color:#14324a;
+    background:#fff7d7;
+    border:1px solid #f3da80;
+    border-radius:999px;
+    padding:10px 16px;
+    font-weight:900;
+    box-shadow:0 10px 30px rgba(0,0,0,.22);
+    transition:.25s ease;
+  }
+  .toast.show{opacity:1; transform:translate(-50%,0)}
+
+  .confetti{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:60;
+  }
+  .confetti i{
+    position:absolute;
+    top:-20px;
+    width:10px;
+    height:18px;
+    border-radius:3px;
+    animation:fall 2.2s linear forwards;
+  }
+  @keyframes fall{
+    to{transform:translateY(110vh) rotate(760deg)}
+  }
+
+  @media (max-width: 900px){
+    .layout{grid-template-columns:1fr}
+    .passage{max-height:none}
+  }
+
+  @media (max-width: 520px){
+    .app{width:min(95vw,1180px); padding-top:14px}
+    .brand-icon{width:44px;height:44px;border-radius:14px}
+    .status{width:100%}
+    .pill{font-size:13px;padding:8px 11px}
+    .quiz,.passage{padding:17px}
+    .option{font-size:15px;padding:12px}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-icon">🏙️</div>
+      <div>
+        <h1>Tomorrow’s Connected Neighbourhoods</h1>
+        <p>Grade 11 · Unit 3 · Exercise 2 · Option B</p>
+      </div>
+    </div>
+    <div class="status">
+      <div class="pill">Question <span id="qNum">1</span>/8</div>
+      <div class="pill">✅ <span id="score">0</span>/8</div>
+      <div class="pill" id="hearts" aria-label="Lives"></div>
+    </div>
+  </header>
+
+  <div class="progress-wrap"><div class="progress" id="progress"></div></div>
+
+  <main class="layout">
+    <section class="panel">
+      <div class="panel-head"><h2>📖 Reading passage</h2></div>
+      <article class="passage">
+        <p>As urban populations continue to grow, city planners are looking for new ways to make everyday life safer, cleaner and more convenient. In many future cities, digital systems will be used to <span class="blank">(1) ________</span> traffic and reduce long delays on busy roads. Sensors placed along streets will collect information about the number of vehicles and automatically adjust traffic lights.</p>
+
+        <p>Buildings are also expected to become more <span class="blank">(2) ________</span> by using better insulation, solar panels and intelligent lighting systems. These technologies can reduce electricity consumption while still providing comfortable living and working spaces. Public transport will become more <span class="blank">(3) ________</span>, allowing people of different ages and abilities to travel around the city more easily.</p>
+
+        <p>Green spaces will remain an important part of urban development. Parks, rooftop gardens and tree-lined streets can improve air quality and provide places where residents can <span class="blank">(4) ________</span> after a busy day. At the same time, many government services will be available through mobile applications, making them much easier to <span class="blank">(5) ________</span>.</p>
+
+        <p>Technology may also encourage citizens to take a more active role in improving their communities. Residents will be able to report local problems and <span class="blank">(6) ________</span> feedback directly to city authorities. <span class="blank">(7) ________</span>, they may use an app to inform officials about a damaged road or a broken streetlight.</p>
+
+        <p>If these systems are carefully planned and managed, future cities could become more efficient, inclusive and <span class="blank">(8) ________</span> for everyone.</p>
+      </article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><h2>🎯 Choose the best answer</h2></div>
+      <div class="quiz">
+        <div class="q-kicker" id="qKicker">Blank 1</div>
+        <h2 class="q-title" id="qTitle">Which word best fits blank (1)?</h2>
+
+        <div class="options" id="options"></div>
+
+        <div class="feedback" id="feedback">
+          <div class="feedback-title" id="feedbackTitle"></div>
+          <div id="feedbackText"></div>
+        </div>
+
+        <div class="reward-note" id="rewardNote">🎁 Bonus: You passed Question 5 and earned +1 heart!</div>
+
+        <div class="next-row">
+          <button class="next-btn" id="nextBtn" hidden>Next question ➜</button>
+        </div>
+
+        <div class="tip">💡 Wrong answer: lose 1 heart and try again. You cannot move on until you choose the correct answer.</div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <div class="modal-icon" id="modalIcon">🎉</div>
+    <h3 id="modalTitle">Excellent work!</h3>
+    <p id="modalText"></p>
+    <div class="summary" id="summary"></div>
+    <button class="restart-btn" id="restartBtn">Play again ↻</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="confetti" id="confetti"></div>
+
+<script>
+const questions = [
+  {
+    blank: 1,
+    options: ["manage","produce","destroy","divide"],
+    answer: "manage",
+    explanation: "“manage traffic” = quản lý/điều phối giao thông. Đây là collocation tự nhiên. “produce traffic” và “destroy traffic” không phù hợp nghĩa."
+  },
+  {
+    blank: 2,
+    options: ["traditional","energy-efficient","crowded","temporary"],
+    answer: "energy-efficient",
+    explanation: "Đoạn sau đề cập đến better insulation, solar panels và intelligent lighting systems → các công nghệ giúp tiết kiệm năng lượng. Vì vậy “energy-efficient” = tiết kiệm/hiệu quả năng lượng là phù hợp nhất."
+  },
+  {
+    blank: 3,
+    options: ["accessible","private","expensive","narrow"],
+    answer: "accessible",
+    explanation: "Cụm “allowing people of different ages and abilities to travel ... more easily” cho thấy giao thông sẽ dễ tiếp cận hơn. “accessible” = dễ tiếp cận, dễ sử dụng."
+  },
+  {
+    blank: 4,
+    options: ["compete","relax","operate","replace"],
+    answer: "relax",
+    explanation: "Công viên và không gian xanh là nơi cư dân có thể “relax after a busy day” = thư giãn sau một ngày bận rộn."
+  },
+  {
+    blank: 5,
+    options: ["access","prevent","waste","establish"],
+    answer: "access",
+    explanation: "Services will be available through mobile applications → người dân có thể “access services” = truy cập/sử dụng các dịch vụ dễ dàng hơn."
+  },
+  {
+    blank: 6,
+    options: ["provide","borrow","solve","refuse"],
+    answer: "provide",
+    explanation: "Cụm tự nhiên “provide feedback” = cung cấp/đưa ra phản hồi. Vì vậy: “report local problems and provide feedback”."
+  },
+  {
+    blank: 7,
+    options: ["However","Therefore","For example","Although"],
+    answer: "For example",
+    explanation: "Câu sau đưa ra một trường hợp cụ thể về việc sử dụng ứng dụng để báo đường hỏng hoặc đèn đường bị hư. Vì vậy cần “For example” = ví dụ."
+  },
+  {
+    blank: 8,
+    options: ["liveable","movable","predictable","replaceable"],
+    answer: "liveable",
+    explanation: "“liveable city” = thành phố đáng sống. Cụm “efficient, inclusive and liveable” đều mô tả những đặc điểm tích cực của thành phố tương lai."
+  }
+];
+
+let current = 0;
+let score = 0;
+let hearts = 5;
+let mistakes = 0;
+let locked = false;
+let rewardedAtFive = false;
+let currentOrder = [];
+
+const qNum = document.getElementById("qNum");
+const scoreEl = document.getElementById("score");
+const heartsEl = document.getElementById("hearts");
+const progress = document.getElementById("progress");
+const qKicker = document.getElementById("qKicker");
+const qTitle = document.getElementById("qTitle");
+const optionsEl = document.getElementById("options");
+const feedback = document.getElementById("feedback");
+const feedbackTitle = document.getElementById("feedbackTitle");
+const feedbackText = document.getElementById("feedbackText");
+const nextBtn = document.getElementById("nextBtn");
+const rewardNote = document.getElementById("rewardNote");
+const modal = document.getElementById("modal");
+const modalIcon = document.getElementById("modalIcon");
+const modalTitle = document.getElementById("modalTitle");
+const modalText = document.getElementById("modalText");
+const summary = document.getElementById("summary");
+const restartBtn = document.getElementById("restartBtn");
+const toast = document.getElementById("toast");
+const confetti = document.getElementById("confetti");
+
+function shuffle(array){
+  const arr = [...array];
+  for(let i = arr.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i],arr[j]] = [arr[j],arr[i]];
+  }
+  return arr;
+}
+
+function renderHearts(popLast = false){
+  heartsEl.innerHTML = "";
+  for(let i=0; i<hearts; i++){
+    const h = document.createElement("span");
+    h.className = "heart" + (popLast && i === hearts - 1 ? " pop" : "");
+    h.textContent = "❤️";
+    heartsEl.appendChild(h);
+  }
+  if(hearts === 0) heartsEl.textContent = "💔";
+}
+
+function showToast(message){
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(()=>toast.classList.remove("show"), 1500);
+}
+
+function renderQuestion(){
+  locked = false;
+  const q = questions[current];
+  qNum.textContent = current + 1;
+  scoreEl.textContent = score;
+  progress.style.width = `${(current / questions.length) * 100}%`;
+  qKicker.textContent = `Blank ${q.blank}`;
+  qTitle.textContent = `Which word or phrase best fits blank (${q.blank})?`;
+  feedback.className = "feedback";
+  feedbackTitle.textContent = "";
+  feedbackText.textContent = "";
+  rewardNote.classList.remove("show");
+  nextBtn.hidden = true;
+  optionsEl.innerHTML = "";
+
+  currentOrder = shuffle(q.options);
+  const letters = ["A","B","C","D"];
+
+  currentOrder.forEach((choice, index)=>{
+    const btn = document.createElement("button");
+    btn.className = "option";
+    btn.dataset.choice = choice;
+    btn.innerHTML = `<span class="letter">${letters[index]}</span><span>${choice}</span>`;
+    btn.addEventListener("click", ()=>checkAnswer(btn, choice));
+    optionsEl.appendChild(btn);
+  });
+}
+
+function checkAnswer(button, choice){
+  if(locked) return;
+  const q = questions[current];
+
+  if(choice === q.answer){
+    locked = true;
+    score++;
+    scoreEl.textContent = score;
+    button.classList.add("correct");
+
+    [...optionsEl.children].forEach(btn => btn.disabled = true);
+
+    feedback.className = "feedback good show";
+    feedbackTitle.textContent = `✅ Correct! Answer: ${q.answer}`;
+    feedbackText.textContent = q.explanation;
+
+    if(current === 4 && !rewardedAtFive){
+      hearts++;
+      rewardedAtFive = true;
+      renderHearts(true);
+      rewardNote.classList.add("show");
+      showToast("🎁 +1 heart!");
+    }
+
+    progress.style.width = `${((current + 1) / questions.length) * 100}%`;
+    nextBtn.hidden = false;
+    nextBtn.textContent = current === questions.length - 1 ? "See results 🎉" : "Next question ➜";
+  } else {
+    mistakes++;
+    hearts--;
+    renderHearts();
+    button.classList.add("wrong");
+    button.disabled = true;
+
+    feedback.className = "feedback bad show";
+    feedbackTitle.textContent = "❌ Not quite — try again!";
+    feedbackText.textContent = "Bạn chưa thể qua câu này. Hãy đọc lại ngữ cảnh và chọn một đáp án khác.";
+
+    if(hearts <= 0){
+      setTimeout(()=>showGameOver(), 350);
+    }
+  }
+}
+
+function nextQuestion(){
+  if(!locked) return;
+  if(current < questions.length - 1){
+    current++;
+    renderQuestion();
+    window.scrollTo({top:0, behavior:"smooth"});
+  }else{
+    showFinish();
+  }
+}
+
+function showGameOver(){
+  modalIcon.textContent = "💔";
+  modalTitle.textContent = "Out of hearts!";
+  modalText.textContent = "Bạn đã hết tim. Game sẽ bắt đầu lại từ câu 1 để luyện lại toàn bộ bài.";
+  summary.innerHTML = `<span>✅ Correct: ${score}/8</span><span>❌ Mistakes: ${mistakes}</span>`;
+  restartBtn.textContent = "Restart from Question 1 ↻";
+  modal.classList.add("show");
+}
+
+function showFinish(){
+  modalIcon.textContent = "🏆";
+  modalTitle.textContent = "Connected City Master!";
+  modalText.textContent = "Bạn đã hoàn thành cả 8 câu. Hãy chơi lại để thử một thứ tự đáp án mới.";
+  summary.innerHTML = `<span>✅ Score: ${score}/8</span><span>❤️ Hearts left: ${hearts}</span><span>❌ Mistakes: ${mistakes}</span>`;
+  restartBtn.textContent = "Play again ↻";
+  modal.classList.add("show");
+  makeConfetti();
+}
+
+function makeConfetti(){
+  confetti.innerHTML = "";
+  const colors = ["#28d7dc","#7b61ff","#25c77a","#ffd166","#ef476f","#ffffff"];
+  for(let i=0;i<70;i++){
+    const piece = document.createElement("i");
+    piece.style.left = Math.random()*100 + "vw";
+    piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+    piece.style.animationDelay = Math.random()*.7 + "s";
+    piece.style.animationDuration = (1.6 + Math.random()*1.7) + "s";
+    confetti.appendChild(piece);
+  }
+  setTimeout(()=>confetti.innerHTML="", 3600);
+}
+
+function restart(){
+  current = 0;
+  score = 0;
+  hearts = 5;
+  mistakes = 0;
+  locked = false;
+  rewardedAtFive = false;
+  modal.classList.remove("show");
+  confetti.innerHTML = "";
+  renderHearts();
+  renderQuestion();
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+nextBtn.addEventListener("click", nextQuestion);
+restartBtn.addEventListener("click", restart);
+
+renderHearts();
+renderQuestion();
+</script>
+</body>
+</html>

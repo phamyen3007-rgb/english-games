@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 11 - Unit 3 - Exercise 7 - Option B - Drag & Drop</title>
+<style>
+:root{
+  --sky:#dff7ff;
+  --lagoon:#bdeff1;
+  --meadow:#dff8d7;
+  --leaf:#58c96f;
+  --leaf-dark:#267d45;
+  --aqua:#2fb7bd;
+  --blue:#3d9ed6;
+  --ink:#204c58;
+  --muted:#66858c;
+  --card:#ffffff;
+  --line:#dbeff0;
+  --good:#24b86d;
+  --bad:#e95770;
+  --sun:#ffd86b;
+  --shadow:0 18px 45px rgba(49,126,128,.15);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 13% 8%,rgba(255,255,255,.96),transparent 22%),
+    radial-gradient(circle at 88% 10%,rgba(255,244,170,.62),transparent 18%),
+    linear-gradient(145deg,var(--sky),var(--lagoon) 50%,var(--meadow));
+  overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed;
+  left:-3%; right:-3%; bottom:-35px;
+  height:165px;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse at 8% 100%,#76d786 0 31%,transparent 32%),
+    radial-gradient(ellipse at 24% 100%,#8be39a 0 28%,transparent 29%),
+    radial-gradient(ellipse at 43% 100%,#63ce7b 0 32%,transparent 33%),
+    radial-gradient(ellipse at 61% 100%,#86dd93 0 27%,transparent 28%),
+    radial-gradient(ellipse at 80% 100%,#6ed184 0 31%,transparent 32%),
+    radial-gradient(ellipse at 97% 100%,#8adf99 0 29%,transparent 30%);
+  opacity:.72;
+}
+body::after{
+  content:"☁️        ☁️            ☁️";
+  position:fixed;
+  top:30px; left:0; right:0;
+  text-align:center;
+  font-size:48px;
+  opacity:.3;
+  pointer-events:none;
+  white-space:nowrap;
+}
+.app{
+  width:min(1120px,94vw);
+  margin:0 auto;
+  padding:20px 0 72px;
+  position:relative;
+  z-index:2;
+}
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.brand-icon{
+  width:54px;height:54px;
+  display:grid;place-items:center;
+  border-radius:18px;
+  font-size:28px;
+  background:linear-gradient(135deg,#62d57b,#38b7c4);
+  box-shadow:0 10px 25px rgba(54,154,151,.21);
+}
+.brand h1{
+  margin:0;
+  color:#205d68;
+  font-size:clamp(20px,3vw,29px);
+  line-height:1.08;
+}
+.brand p{
+  margin:5px 0 0;
+  color:#607f87;
+  font-size:13px;
+  font-weight:800;
+}
+.status{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  flex-wrap:wrap;
+}
+.pill{
+  padding:9px 13px;
+  border-radius:999px;
+  background:rgba(255,255,255,.84);
+  border:1px solid rgba(255,255,255,.96);
+  box-shadow:0 8px 20px rgba(62,135,139,.11);
+  color:#21636c;
+  font-size:14px;
+  font-weight:900;
+}
+.progress-wrap{
+  height:11px;
+  border-radius:999px;
+  background:rgba(255,255,255,.68);
+  border:1px solid rgba(255,255,255,.95);
+  overflow:hidden;
+  margin-bottom:20px;
+}
+.progress{
+  height:100%;
+  width:0;
+  border-radius:inherit;
+  background:linear-gradient(90deg,#58cd73,#38b9b8,#3c9fd4);
+  transition:width .35s ease;
+}
+.panel{
+  background:rgba(255,255,255,.95);
+  border:1px solid rgba(255,255,255,.96);
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  margin-bottom:20px;
+}
+.panel-head{
+  padding:17px 20px;
+  background:linear-gradient(90deg,#efffff,#f1fff1,#eefbff);
+  border-bottom:1px solid var(--line);
+}
+.panel-head h2{
+  margin:0;
+  color:#24676f;
+  font-size:18px;
+}
+.content{
+  padding:22px;
+}
+.summary-text{
+  font-size:16px;
+  line-height:2.05;
+  margin:0;
+}
+.dropzone{
+  display:inline-flex;
+  vertical-align:middle;
+  align-items:center;
+  justify-content:center;
+  min-width:190px;
+  min-height:44px;
+  margin:3px 5px;
+  padding:7px 10px;
+  border:2px dashed #55bfb8;
+  border-radius:13px;
+  background:#f3ffff;
+  color:#24706e;
+  font-weight:900;
+  transition:.18s ease;
+  cursor:pointer;
+}
+.dropzone .placeholder{
+  color:#65a5a3;
+  font-size:13px;
+}
+.dropzone.drag-over{
+  transform:scale(1.03);
+  border-color:#2b9fd2;
+  background:#eaf8ff;
+  box-shadow:0 7px 18px rgba(44,150,184,.15);
+}
+.dropzone.correct{
+  border-style:solid;
+  border-color:#55c981;
+  background:#ecfff3;
+  color:#216c45;
+}
+.dropzone.wrong{
+  border-color:#e95770;
+  background:#fff1f4;
+  animation:shake .32s ease;
+}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-6px)}
+  75%{transform:translateX(6px)}
+}
+.bank-title{
+  margin:0 0 12px;
+  color:#1d6a69;
+  font-size:15px;
+  font-weight:900;
+}
+.word-bank{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:11px;
+}
+.word{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:12px 13px;
+  background:#f8ffff;
+  border:2px solid #dcefed;
+  border-radius:14px;
+  color:#315f64;
+  font-weight:800;
+  font-size:14px;
+  cursor:grab;
+  user-select:none;
+  touch-action:none;
+  transition:.17s ease;
+}
+.word:hover{
+  transform:translateY(-2px);
+  border-color:#7ed4c8;
+  box-shadow:0 7px 17px rgba(47,147,142,.1);
+}
+.word.selected{
+  border-color:#2fa7d4;
+  background:#ecf9ff;
+  box-shadow:0 0 0 3px rgba(47,167,212,.12);
+}
+.word.used{
+  opacity:.35;
+  cursor:default;
+  pointer-events:none;
+}
+.badge{
+  width:31px;height:31px;
+  flex:0 0 31px;
+  display:grid;place-items:center;
+  border-radius:10px;
+  color:#fff;
+  background:linear-gradient(135deg,#54c978,#31aabf);
+  font-weight:900;
+}
+.explanations{
+  display:grid;
+  gap:10px;
+}
+.explanation{
+  display:none;
+  padding:13px 15px;
+  border-radius:14px;
+  background:#ecfff4;
+  border:1px solid #a9e8c5;
+  color:#246746;
+  line-height:1.55;
+  font-size:14px;
+}
+.explanation.show{
+  display:block;
+  animation:fadeUp .25s ease;
+}
+.explanation strong{
+  display:block;
+  margin-bottom:4px;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(7px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.instructions{
+  margin-top:14px;
+  padding:11px 13px;
+  border-radius:13px;
+  background:#f2fbfb;
+  border:1px solid #dff0f0;
+  color:#5f7f84;
+  font-size:13px;
+}
+.heart{
+  display:inline-block;
+  filter:drop-shadow(0 2px 2px rgba(0,0,0,.10));
+}
+.toast{
+  position:fixed;
+  top:18px;
+  left:50%;
+  transform:translate(-50%,-18px);
+  z-index:90;
+  opacity:0;
+  pointer-events:none;
+  padding:10px 16px;
+  border-radius:999px;
+  font-weight:900;
+  box-shadow:0 10px 26px rgba(48,108,111,.2);
+  transition:.24s ease;
+}
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+.toast.good{
+  background:#ecfff4;
+  border:1px solid #a9e8c5;
+  color:#216c45;
+}
+.toast.bad{
+  background:#fff1f4;
+  border:1px solid #ffc0cd;
+  color:#8e3347;
+}
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:80;
+  display:none;
+  place-items:center;
+  padding:20px;
+  background:rgba(31,91,96,.42);
+  backdrop-filter:blur(8px);
+}
+.modal.show{display:grid}
+.modal-card{
+  width:min(520px,92vw);
+  background:#fff;
+  border-radius:28px;
+  padding:28px 24px;
+  text-align:center;
+  box-shadow:0 28px 80px rgba(37,95,100,.28);
+}
+.modal-icon{font-size:58px}
+.modal h3{
+  margin:8px 0 10px;
+  color:#205f66;
+  font-size:28px;
+}
+.modal p{
+  margin:0 0 18px;
+  color:#637f84;
+  line-height:1.55;
+}
+.summary-stats{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:14px 0 20px;
+}
+.summary-stats span{
+  padding:9px 12px;
+  border-radius:12px;
+  background:#effbfb;
+  border:1px solid #dceff0;
+  color:#2b6369;
+  font-weight:900;
+}
+.restart-btn{
+  border:none;
+  border-radius:14px;
+  padding:12px 18px;
+  color:#fff;
+  font-size:15px;
+  font-weight:900;
+  cursor:pointer;
+  background:linear-gradient(135deg,#51c977,#32b6b5,#36a3d2);
+  box-shadow:0 9px 22px rgba(45,147,158,.20);
+}
+.confetti{
+  position:fixed;
+  inset:0;
+  z-index:85;
+  pointer-events:none;
+  overflow:hidden;
+}
+.confetti i{
+  position:absolute;
+  top:-20px;
+  width:10px;height:18px;
+  border-radius:3px;
+  animation:fall 2.2s linear forwards;
+}
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(720deg)}
+}
+@media(max-width:700px){
+  .word-bank{grid-template-columns:1fr}
+  .dropzone{
+    min-width:155px;
+    max-width:100%;
+  }
+  .content{padding:17px}
+  .summary-text{font-size:15px;line-height:2.2}
+  .status{width:100%}
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-icon">🏞️</div>
+      <div>
+        <h1>Challenges Facing Modern Cities</h1>
+        <p>Grade 11 · Unit 3 · Exercise 7 · Option B · Drag & Drop</p>
+      </div>
+    </div>
+    <div class="status">
+      <div class="pill">✅ <span id="score">0</span>/4</div>
+      <div class="pill">❌ <span id="mistakes">0</span></div>
+      <div class="pill" id="hearts"></div>
+    </div>
+  </header>
+
+  <div class="progress-wrap"><div class="progress" id="progress"></div></div>
+
+  <section class="panel">
+    <div class="panel-head"><h2>🧩 Drag the correct words into the blanks</h2></div>
+    <div class="content">
+      <p class="summary-text">
+        As more people move to urban areas, rapid
+        <span class="dropzone" data-blank="1"><span class="placeholder">(1) Drop here</span></span>
+        is creating pressure on housing, transport and public services.
+        One serious problem is the shortage of
+        <span class="dropzone" data-blank="2"><span class="placeholder">(2) Drop here</span></span>,
+        especially for young people and low-income families.
+        In addition, unreliable
+        <span class="dropzone" data-blank="3"><span class="placeholder">(3) Drop here</span></span>
+        can make daily travel difficult and increase traffic congestion.
+        To improve residents' well-being, many cities are creating more parks and other
+        <span class="dropzone" data-blank="4"><span class="placeholder">(4) Drop here</span></span>
+        where people can exercise, relax and spend time outdoors.
+      </p>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head"><h2>🌿 Word Bank A–H</h2></div>
+    <div class="content">
+      <div class="bank-title">Drag a word to a blank — or tap a word, then tap the blank.</div>
+      <div class="word-bank" id="wordBank"></div>
+      <div class="instructions">
+        💡 Chọn sai: mất 1 tim và từ sẽ quay lại ngân hàng từ. Chọn đúng: từ được khóa vào ô và hiện giải thích bên dưới. Hết tim: làm lại từ đầu.
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head"><h2>✅ Explanations</h2></div>
+    <div class="content">
+      <div class="explanations">
+        <div class="explanation" id="exp1">
+          <strong>Question 1 — E. population growth</strong>
+          “population growth” = sự gia tăng dân số. Cụm “rapid population growth” phù hợp với ý dân số đô thị tăng nhanh và gây áp lực lên nhà ở, giao thông và các dịch vụ công.
+        </div>
+        <div class="explanation" id="exp2">
+          <strong>Question 2 — F. affordable housing</strong>
+          “affordable housing” = nhà ở có giá phù hợp. Dấu hiệu là “young people and low-income families” → những nhóm thường gặp khó khăn trong việc tìm nhà ở vừa túi tiền.
+        </div>
+        <div class="explanation" id="exp3">
+          <strong>Question 3 — H. public transport</strong>
+          “unreliable public transport” = giao thông công cộng không đáng tin cậy/không ổn định. Điều này có thể làm việc đi lại khó khăn và khiến nhiều người sử dụng phương tiện cá nhân hơn.
+        </div>
+        <div class="explanation" id="exp4">
+          <strong>Question 4 — C. green spaces</strong>
+          “green spaces” = không gian xanh. Câu sau nhắc đến nơi người dân có thể “exercise, relax and spend time outdoors” → phù hợp với công viên và không gian xanh.
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <div class="modal-icon" id="modalIcon">🏆</div>
+    <h3 id="modalTitle">Great job!</h3>
+    <p id="modalText"></p>
+    <div class="summary-stats" id="summaryStats"></div>
+    <button class="restart-btn" id="restartBtn">Play again ↻</button>
+  </div>
+</div>
+
+<div class="confetti" id="confetti"></div>
+
+<script>
+const WORDS = [
+  {letter:"A", text:"noise pollution"},
+  {letter:"B", text:"employment opportunities"},
+  {letter:"C", text:"green spaces"},
+  {letter:"D", text:"recycling facilities"},
+  {letter:"E", text:"population growth"},
+  {letter:"F", text:"affordable housing"},
+  {letter:"G", text:"antisocial behaviour"},
+  {letter:"H", text:"public transport"}
+];
+
+const ANSWERS = {
+  1:"population growth",
+  2:"affordable housing",
+  3:"public transport",
+  4:"green spaces"
+};
+
+let hearts = 5;
+let score = 0;
+let mistakes = 0;
+let selectedWord = null;
+let draggedWord = null;
+
+const wordBank = document.getElementById("wordBank");
+const heartsEl = document.getElementById("hearts");
+const scoreEl = document.getElementById("score");
+const mistakesEl = document.getElementById("mistakes");
+const progress = document.getElementById("progress");
+const toast = document.getElementById("toast");
+const modal = document.getElementById("modal");
+const modalIcon = document.getElementById("modalIcon");
+const modalTitle = document.getElementById("modalTitle");
+const modalText = document.getElementById("modalText");
+const summaryStats = document.getElementById("summaryStats");
+const restartBtn = document.getElementById("restartBtn");
+const confetti = document.getElementById("confetti");
+
+function shuffle(arr){
+  const a = [...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function renderHearts(){
+  heartsEl.innerHTML="";
+  if(hearts<=0){
+    heartsEl.textContent="💔";
+    return;
+  }
+  for(let i=0;i<hearts;i++){
+    const h=document.createElement("span");
+    h.className="heart";
+    h.textContent="❤️";
+    heartsEl.appendChild(h);
+  }
+}
+
+function updateStatus(){
+  scoreEl.textContent=score;
+  mistakesEl.textContent=mistakes;
+  progress.style.width=`${(score/4)*100}%`;
+  renderHearts();
+}
+
+function showToast(message,type){
+  toast.textContent=message;
+  toast.className=`toast ${type} show`;
+  clearTimeout(showToast.timer);
+  showToast.timer=setTimeout(()=>toast.classList.remove("show"),1400);
+}
+
+function createWordBank(){
+  wordBank.innerHTML="";
+  shuffle(WORDS).forEach(item=>{
+    const chip=document.createElement("div");
+    chip.className="word";
+    chip.draggable=true;
+    chip.dataset.text=item.text;
+    chip.dataset.letter=item.letter;
+    chip.innerHTML=`<span class="badge">${item.letter}</span><span>${item.text}</span>`;
+
+    chip.addEventListener("dragstart",e=>{
+      if(chip.classList.contains("used")) return;
+      draggedWord=chip;
+      e.dataTransfer.setData("text/plain",item.text);
+      e.dataTransfer.effectAllowed="move";
+    });
+
+    chip.addEventListener("dragend",()=>{
+      draggedWord=null;
+      document.querySelectorAll(".dropzone").forEach(z=>z.classList.remove("drag-over"));
+    });
+
+    chip.addEventListener("click",()=>{
+      if(chip.classList.contains("used")) return;
+      document.querySelectorAll(".word").forEach(w=>w.classList.remove("selected"));
+      if(selectedWord===chip){
+        selectedWord=null;
+        return;
+      }
+      selectedWord=chip;
+      chip.classList.add("selected");
+      showToast("Đã chọn từ — chạm vào ô trống.", "good");
+    });
+
+    wordBank.appendChild(chip);
+  });
+}
+
+function setupDropzones(){
+  document.querySelectorAll(".dropzone").forEach(zone=>{
+    zone.addEventListener("dragover",e=>{
+      e.preventDefault();
+      if(zone.classList.contains("correct")) return;
+      zone.classList.add("drag-over");
+    });
+
+    zone.addEventListener("dragleave",()=>{
+      zone.classList.remove("drag-over");
+    });
+
+    zone.addEventListener("drop",e=>{
+      e.preventDefault();
+      zone.classList.remove("drag-over");
+      if(zone.classList.contains("correct")) return;
+
+      const text=e.dataTransfer.getData("text/plain");
+      const chip=[...document.querySelectorAll(".word")].find(w=>w.dataset.text===text && !w.classList.contains("used"));
+      if(chip) attemptDrop(chip,zone);
+    });
+
+    zone.addEventListener("click",()=>{
+      if(zone.classList.contains("correct")) return;
+      if(selectedWord){
+        attemptDrop(selectedWord,zone);
+      }else{
+        showToast("Hãy chọn một từ trước.", "bad");
+      }
+    });
+  });
+}
+
+function attemptDrop(chip,zone){
+  const blank=Number(zone.dataset.blank);
+  const choice=chip.dataset.text;
+
+  document.querySelectorAll(".word").forEach(w=>w.classList.remove("selected"));
+  selectedWord=null;
+
+  if(choice===ANSWERS[blank]){
+    zone.innerHTML=`<span>${chip.dataset.letter}. ${choice}</span>`;
+    zone.classList.remove("wrong");
+    zone.classList.add("correct");
+    chip.classList.add("used");
+    chip.draggable=false;
+
+    score++;
+    updateStatus();
+    document.getElementById(`exp${blank}`).classList.add("show");
+    showToast("✅ Chính xác!", "good");
+
+    if(score===4){
+      setTimeout(showFinish,500);
+    }
+  }else{
+    mistakes++;
+    hearts--;
+    updateStatus();
+
+    zone.classList.add("wrong");
+    setTimeout(()=>zone.classList.remove("wrong"),450);
+    showToast("❌ Chưa đúng — mất 1 tim.", "bad");
+
+    if(hearts<=0){
+      setTimeout(showGameOver,500);
+    }
+  }
+}
+
+function showGameOver(){
+  modalIcon.textContent="💔";
+  modalTitle.textContent="Out of hearts!";
+  modalText.textContent="Bạn đã hết tim. Game sẽ làm lại toàn bộ 4 ô từ đầu.";
+  summaryStats.innerHTML=`<span>✅ Correct: ${score}/4</span><span>❌ Mistakes: ${mistakes}</span>`;
+  restartBtn.textContent="Restart ↻";
+  modal.classList.add("show");
+}
+
+function showFinish(){
+  modalIcon.textContent="🏆";
+  modalTitle.textContent="Modern City Master!";
+  modalText.textContent="Bạn đã kéo thả đúng cả 4 đáp án.";
+  summaryStats.innerHTML=`<span>✅ Score: 4/4</span><span>❤️ Hearts left: ${hearts}</span><span>❌ Mistakes: ${mistakes}</span>`;
+  restartBtn.textContent="Play again ↻";
+  modal.classList.add("show");
+  makeConfetti();
+}
+
+function makeConfetti(){
+  confetti.innerHTML="";
+  const colors=["#58cd73","#38b9b8","#3c9fd4","#ffd86b","#ffffff","#86df91"];
+  for(let i=0;i<70;i++){
+    const p=document.createElement("i");
+    p.style.left=Math.random()*100+"vw";
+    p.style.background=colors[Math.floor(Math.random()*colors.length)];
+    p.style.animationDelay=Math.random()*.7+"s";
+    p.style.animationDuration=(1.6+Math.random()*1.7)+"s";
+    confetti.appendChild(p);
+  }
+  setTimeout(()=>confetti.innerHTML="",3600);
+}
+
+function restart(){
+  hearts=5;
+  score=0;
+  mistakes=0;
+  selectedWord=null;
+  draggedWord=null;
+
+  document.querySelectorAll(".dropzone").forEach(zone=>{
+    const n=zone.dataset.blank;
+    zone.className="dropzone";
+    zone.innerHTML=`<span class="placeholder">(${n}) Drop here</span>`;
+  });
+
+  document.querySelectorAll(".explanation").forEach(e=>e.classList.remove("show"));
+  modal.classList.remove("show");
+  confetti.innerHTML="";
+  createWordBank();
+  updateStatus();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+restartBtn.addEventListener("click",restart);
+
+createWordBank();
+setupDropzones();
+updateStatus();
+</script>
+</body>
+</html>
