@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Grade 11 - Unit 4 - Exercise 1 (41-60) - option B</title>
+<style>
+  :root{
+    --bg1:#eefbf7;
+    --bg2:#eaf2ff;
+    --card:#ffffff;
+    --text:#17324d;
+    --muted:#65758b;
+    --primary:#0f8f79;
+    --primary-dark:#087160;
+    --success:#1f9d63;
+    --danger:#e24b4b;
+    --warning:#f0a93b;
+    --line:#dbe7ee;
+    --shadow:0 14px 40px rgba(30,70,90,.12);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    color:var(--text);
+    background:
+      radial-gradient(circle at 10% 10%, rgba(81,212,178,.18), transparent 30%),
+      radial-gradient(circle at 90% 15%, rgba(87,145,255,.16), transparent 28%),
+      linear-gradient(135deg,var(--bg1),var(--bg2));
+  }
+  .app{max-width:980px;margin:0 auto;padding:24px 16px 40px}
+  .topbar{
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+    background:rgba(255,255,255,.86);backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.7);
+    padding:14px 16px;border-radius:20px;box-shadow:var(--shadow);
+    position:sticky;top:10px;z-index:20;
+  }
+  .brand h1{font-size:18px;margin:0 0 3px}
+  .brand p{font-size:13px;color:var(--muted);margin:0}
+  .stats{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+  .pill{
+    background:#f7fbfd;border:1px solid var(--line);border-radius:999px;
+    padding:9px 12px;font-size:14px;font-weight:700;white-space:nowrap;
+  }
+  .hearts{letter-spacing:2px}
+  .reset-btn{
+    border:none;background:var(--primary);color:#fff;padding:10px 14px;
+    border-radius:999px;font-weight:800;cursor:pointer;
+  }
+  .reset-btn:hover{background:var(--primary-dark)}
+  .progress-wrap{
+    margin:18px 2px 14px;background:#dfeaed;border-radius:999px;height:10px;overflow:hidden;
+  }
+  .progress{height:100%;width:0;background:linear-gradient(90deg,#17a589,#5c8df6);transition:.3s}
+  .card{
+    background:var(--card);border:1px solid rgba(255,255,255,.8);
+    border-radius:26px;box-shadow:var(--shadow);padding:28px;
+  }
+  .qmeta{
+    display:flex;justify-content:space-between;gap:12px;align-items:center;
+    color:var(--muted);font-size:14px;margin-bottom:14px
+  }
+  .tag{
+    font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+    color:#0b7867;background:#e9f9f5;padding:7px 10px;border-radius:999px;
+  }
+  .question{font-size:23px;line-height:1.5;font-weight:800;margin:8px 0 22px}
+  .options{display:grid;gap:12px}
+  .option{
+    width:100%;text-align:left;border:2px solid var(--line);background:#fbfdfe;
+    border-radius:16px;padding:15px 16px;font-size:17px;color:var(--text);
+    cursor:pointer;transition:.16s;display:flex;gap:12px;align-items:flex-start;
+  }
+  .option:hover:not(:disabled){transform:translateY(-1px);border-color:#90cfc4;background:#f4fffc}
+  .option:disabled{cursor:default}
+  .letter{
+    width:30px;height:30px;border-radius:50%;background:#edf4f7;display:grid;place-items:center;
+    font-weight:900;flex:0 0 30px
+  }
+  .option.correct{border-color:#7ad0a6;background:#edfbf4}
+  .option.correct .letter{background:var(--success);color:#fff}
+  .option.wrong{border-color:#f1a4a4;background:#fff2f2}
+  .option.wrong .letter{background:var(--danger);color:#fff}
+  .feedback{
+    display:none;margin-top:20px;border-radius:18px;padding:16px 18px;line-height:1.55;
+    border:1px solid var(--line);background:#f8fbfc
+  }
+  .feedback.show{display:block}
+  .feedback.good{border-color:#a9dfc2;background:#f0fbf5}
+  .feedback.bad{border-color:#efb3b3;background:#fff5f5}
+  .feedback strong{display:block;margin-bottom:6px}
+  .controls{display:flex;justify-content:flex-end;margin-top:18px}
+  .next-btn{
+    border:none;background:#17324d;color:white;padding:12px 18px;border-radius:14px;
+    font-weight:800;cursor:pointer;display:none
+  }
+  .next-btn.show{display:inline-block}
+  .footer{text-align:center;color:var(--muted);font-size:13px;margin-top:18px}
+  .modal{
+    position:fixed;inset:0;background:rgba(10,25,35,.55);display:none;place-items:center;
+    padding:18px;z-index:100;
+  }
+  .modal.show{display:grid}
+  .modal-card{
+    width:min(560px,100%);background:#fff;border-radius:26px;padding:28px;box-shadow:0 24px 70px rgba(0,0,0,.25)
+  }
+  .modal-card h2{margin:0 0 10px;font-size:28px}
+  .modal-card p{color:var(--muted);line-height:1.6}
+  .summary{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0
+  }
+  .summary div{background:#f5f9fb;border:1px solid var(--line);border-radius:16px;padding:14px;text-align:center}
+  .summary b{display:block;font-size:22px;margin-bottom:4px}
+  .modal-actions{display:flex;gap:10px;flex-wrap:wrap}
+  .primary,.secondary{
+    flex:1;border:none;border-radius:14px;padding:12px 14px;font-weight:800;cursor:pointer
+  }
+  .primary{background:var(--primary);color:#fff}
+  .secondary{background:#eef4f7;color:var(--text)}
+  .mistakes{max-height:240px;overflow:auto;margin-top:14px}
+  .mistake-item{border-top:1px solid var(--line);padding:12px 0;font-size:14px;line-height:1.45}
+  @media(max-width:700px){
+    .topbar{align-items:flex-start}
+    .brand h1{font-size:16px}
+    .stats{gap:6px}
+    .pill{padding:8px 9px;font-size:12px}
+    .card{padding:20px}
+    .question{font-size:20px}
+    .option{font-size:16px}
+    .summary{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand">
+      <h1>Grade 11 - Unit 4 - Exercise 1 (41-60) - option B</h1>
+      <p>UNIT 4 – CORE PRACTICE – SET 3</p>
+    </div>
+    <div class="stats">
+      <div class="pill">Score: <span id="score">0</span></div>
+      <div class="pill hearts" id="hearts">❤️❤️❤️❤️❤️</div>
+      <button class="reset-btn" id="resetBtn">↻ Reset</button>
+    </div>
+  </div>
+
+  <div class="progress-wrap"><div class="progress" id="progress"></div></div>
+
+  <main class="card">
+    <div class="qmeta">
+      <span id="counter">Question 1/15</span>
+      <span class="tag">5 lives</span>
+    </div>
+    <div class="question" id="question"></div>
+    <div class="options" id="options"></div>
+    <div class="feedback" id="feedback"></div>
+    <div class="controls">
+      <button class="next-btn" id="nextBtn">Next →</button>
+    </div>
+  </main>
+  <div class="footer">Reset = shuffle questions + shuffle answer choices</div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <h2 id="modalTitle"></h2>
+    <p id="modalText"></p>
+    <div class="summary" id="summary"></div>
+    <div class="mistakes" id="mistakes"></div>
+    <div class="modal-actions">
+      <button class="primary" id="restartBtn">Làm lại từ đầu</button>
+      <button class="secondary" id="closeBtn">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const QUESTION_BANK = [
+  {
+    "id": 1,
+    "q": "Several ASEAN initiatives provide additional resources for __________ communities where schools still lack modern facilities.",
+    "choices": [
+      "areas less developed",
+      "less developed",
+      "developed less",
+      "less development"
+    ],
+    "answer": "less developed",
+    "explanation": "Cụm đúng là less developed + noun = kém phát triển hơn. → less developed communities. Less đứng trước tính từ developed để tạo cụm tính từ so sánh mức độ."
+  },
+  {
+    "id": 2,
+    "q": "__________ is one of the main objectives of many youth programmes across Southeast Asia.",
+    "choices": [
+      "Promoting gender equality",
+      "Gender equality promote",
+      "Promote gender equality",
+      "Gender promoting equal"
+    ],
+    "answer": "Promoting gender equality",
+    "explanation": "Cả cụm làm chủ ngữ của câu nên dùng V-ing phrase. → Promoting gender equality is... Gender equality = bình đẳng giới."
+  },
+  {
+    "id": 3,
+    "q": "Spending a week with students from four ASEAN countries was an __________ experience for everyone involved.",
+    "choices": [
+      "eye-opened",
+      "open-eyed",
+      "eye-opening",
+      "opening-eye"
+    ],
+    "answer": "eye-opening",
+    "explanation": "Eye-opening là tính từ ghép, nghĩa là mở mang tầm mắt, giúp nhận ra nhiều điều mới. → an eye-opening experience."
+  },
+  {
+    "id": 4,
+    "q": "Researchers have examined the close __________ between educational opportunities and young people's future employment prospects.",
+    "choices": [
+      "relationship",
+      "separation",
+      "contrast",
+      "difference"
+    ],
+    "answer": "relationship",
+    "explanation": "The relationship between A and B = mối quan hệ giữa A và B. → the relationship between educational opportunities and employment prospects."
+  },
+  {
+    "id": 5,
+    "q": "Working as team leaders can help students develop confidence, communication skills and __________.",
+    "choices": [
+      "reading habits",
+      "leadership skills",
+      "current issues",
+      "cultural festivals"
+    ],
+    "answer": "leadership skills",
+    "explanation": "Leadership skills = kỹ năng lãnh đạo. Cụm này phù hợp với các yếu tố như confidence, communication skills, teamwork trong các chương trình phát triển thanh niên."
+  },
+  {
+    "id": 6,
+    "q": "Youth unemployment is still considered a serious __________ in several developing economies.",
+    "choices": [
+      "cultural exchange",
+      "traditional custom",
+      "current issue",
+      "training session"
+    ],
+    "answer": "current issue",
+    "explanation": "Current issue = vấn đề hiện tại/đang được quan tâm. → Youth unemployment is a serious current issue."
+  },
+  {
+    "id": 7,
+    "q": "Through __________, teenagers can learn directly about the customs, lifestyles and values of people from neighbouring countries.",
+    "choices": [
+      "cultural exchange",
+      "written tests",
+      "office meetings",
+      "private study"
+    ],
+    "answer": "cultural exchange",
+    "explanation": "Cultural exchange = giao lưu văn hóa. Hoạt động này giúp người học tiếp xúc trực tiếp với customs, lifestyles and values của nền văn hóa khác."
+  },
+  {
+    "id": 8,
+    "q": "Joint volunteer activities often help build a stronger __________ between students from different ASEAN nations.",
+    "choices": [
+      "calendar",
+      "interview",
+      "relationship",
+      "proposal"
+    ],
+    "answer": "relationship",
+    "explanation": "Build/strengthen a relationship = xây dựng/củng cố mối quan hệ. → build a stronger relationship between students."
+  },
+  {
+    "id": 9,
+    "q": "Regular cooperation between schools can __________ mutual understanding among young people in the region.",
+    "choices": [
+      "strength",
+      "strengthen",
+      "strongly",
+      "strong"
+    ],
+    "answer": "strengthen",
+    "explanation": "Sau động từ khuyết thiếu can cần động từ nguyên mẫu. Strengthen = củng cố, tăng cường. Strength = danh từ; strong = tính từ; strongly = trạng từ."
+  },
+  {
+    "id": 10,
+    "q": "The students organised the campaign with the __________ of encouraging local people to protect traditional crafts.",
+    "choices": [
+      "goal",
+      "risk",
+      "result",
+      "problem"
+    ],
+    "answer": "goal",
+    "explanation": "Cấu trúc with the goal of + V-ing = với mục tiêu làm gì. → with the goal of encouraging local people..."
+  },
+  {
+    "id": 11,
+    "q": "The organisation gives priority to young people living in __________ regions where access to training and employment is still limited.",
+    "choices": [
+      "developing",
+      "prosperous",
+      "wealthy",
+      "fully industrialised"
+    ],
+    "answer": "developing",
+    "explanation": "Developing regions = các khu vực đang phát triển. Chi tiết access to training and employment is still limited phù hợp với developing, không phù hợp với prosperous/wealthy."
+  },
+  {
+    "id": 12,
+    "q": "The documentary __________ several successful youth projects carried out in Viet Nam and other ASEAN countries.",
+    "choices": [
+      "arranges",
+      "features",
+      "decorates",
+      "reminds"
+    ],
+    "answer": "features",
+    "explanation": "Feature = giới thiệu, làm nổi bật, có sự xuất hiện của. → The documentary features several successful projects. Đây là cách dùng phổ biến khi nói về phim, bài báo hoặc chương trình."
+  },
+  {
+    "id": 13,
+    "q": "At the next meeting, the student council plans to __________ a new programme for protecting local heritage sites.",
+    "choices": [
+      "remind",
+      "propose",
+      "order",
+      "reply"
+    ],
+    "answer": "propose",
+    "explanation": "Propose a plan/programme/project = đề xuất một kế hoạch/chương trình/dự án. → propose a new programme."
+  },
+  {
+    "id": 14,
+    "q": "The school's new campaign __________ to encourage students to reduce single-use plastic.",
+    "choices": [
+      "aims",
+      "requests",
+      "tends",
+      "replies"
+    ],
+    "answer": "aims",
+    "explanation": "Cấu trúc aim to + verb = nhằm/mục đích làm gì. → The campaign aims to encourage students..."
+  },
+  {
+    "id": 15,
+    "q": "Organising a large community project usually __________ coordinating volunteers, managing money and solving unexpected problems.",
+    "choices": [
+      "separates",
+      "involves",
+      "avoids",
+      "prefers"
+    ],
+    "answer": "involves",
+    "explanation": "Involve + V-ing/noun = bao gồm, đòi hỏi việc gì. → involves coordinating volunteers, managing money and solving problems. Câu này kiểm tra cả nghĩa của involve và cấu trúc involve + V-ing."
+  }
+];
+
+const $ = id => document.getElementById(id);
+let game = [];
+let current = 0;
+let lives = 5;
+let score = 0;
+let locked = false;
+let mistakes = [];
+
+function shuffle(arr){
+  const a = [...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function makeGame(){
+  return shuffle(QUESTION_BANK).map(item => ({
+    ...item,
+    shuffledChoices: shuffle(item.choices)
+  }));
+}
+
+function startGame(){
+  game = makeGame();
+  current = 0;
+  lives = 5;
+  score = 0;
+  locked = false;
+  mistakes = [];
+  closeModal();
+  updateStats();
+  renderQuestion();
+}
+
+function updateStats(){
+  $("score").textContent = score;
+  $("hearts").textContent = "❤️".repeat(lives) + "🖤".repeat(5-lives);
+  $("progress").style.width = `${(current/game.length)*100}%`;
+}
+
+function renderQuestion(){
+  if(current >= game.length){
+    finishGame();
+    return;
+  }
+  locked = false;
+  const item = game[current];
+  $("counter").textContent = `Question ${current+1}/${game.length}`;
+  $("question").textContent = item.q;
+  $("feedback").className = "feedback";
+  $("feedback").innerHTML = "";
+  $("nextBtn").classList.remove("show");
+  $("options").innerHTML = "";
+
+  item.shuffledChoices.forEach((choice,index)=>{
+    const btn = document.createElement("button");
+    btn.className = "option";
+    btn.innerHTML = `<span class="letter">${String.fromCharCode(65+index)}</span><span>${choice}</span>`;
+    btn.addEventListener("click",()=>selectAnswer(choice,btn));
+    $("options").appendChild(btn);
+  });
+  updateStats();
+}
+
+function selectAnswer(choice, selectedBtn){
+  if(locked) return;
+  locked = true;
+
+  const item = game[current];
+  const buttons = [...document.querySelectorAll(".option")];
+  buttons.forEach(b=>b.disabled=true);
+
+  const isCorrect = choice === item.answer;
+  if(isCorrect){
+    score++;
+    selectedBtn.classList.add("correct");
+    $("feedback").className = "feedback show good";
+    $("feedback").innerHTML = `<strong>✅ Correct!</strong>${item.explanation}`;
+  }else{
+    lives--;
+    selectedBtn.classList.add("wrong");
+    buttons.forEach(btn=>{
+      const text = btn.querySelector("span:last-child").textContent;
+      if(text === item.answer) btn.classList.add("correct");
+    });
+    mistakes.push({
+      id:item.id,
+      q:item.q,
+      chosen:choice,
+      answer:item.answer
+    });
+    $("feedback").className = "feedback show bad";
+    $("feedback").innerHTML = `<strong>❌ Incorrect. Correct answer: ${item.answer}</strong>${item.explanation}`;
+  }
+  updateStats();
+
+  if(lives <= 0){
+    setTimeout(()=>showGameOver(),450);
+    return;
+  }
+
+  $("nextBtn").classList.add("show");
+  $("nextBtn").textContent = current === game.length-1 ? "Finish →" : "Next →";
+}
+
+$("nextBtn").addEventListener("click",()=>{
+  current++;
+  renderQuestion();
+});
+
+$("resetBtn").addEventListener("click", startGame);
+$("restartBtn").addEventListener("click", startGame);
+$("closeBtn").addEventListener("click", closeModal);
+
+function showGameOver(){
+  $("modalTitle").textContent = "💔 Hết 5 tim!";
+  $("modalText").textContent = "Em phải làm lại từ đầu. Khi bắt đầu lại, thứ tự câu hỏi và các đáp án A–D sẽ được trộn mới.";
+  $("summary").innerHTML = `
+    <div><b>${score}</b>Correct</div>
+    <div><b>${current+1}</b>Questions attempted</div>
+    <div><b>0</b>Lives left</div>`;
+  renderMistakes();
+  $("modal").classList.add("show");
+  $("closeBtn").style.display = "none";
+}
+
+function finishGame(){
+  $("progress").style.width = "100%";
+  $("modalTitle").textContent = score === game.length ? "🏆 Excellent!" : "🎉 Completed!";
+  $("modalText").textContent = "Em đã hoàn thành toàn bộ bài luyện tập.";
+  $("summary").innerHTML = `
+    <div><b>${score}/${game.length}</b>Correct</div>
+    <div><b>${Math.round(score/game.length*100)}%</b>Accuracy</div>
+    <div><b>${lives}</b>Lives left</div>`;
+  renderMistakes();
+  $("modal").classList.add("show");
+  $("closeBtn").style.display = "block";
+}
+
+function renderMistakes(){
+  if(!mistakes.length){
+    $("mistakes").innerHTML = `<div class="mistake-item"><b>Không có câu sai.</b></div>`;
+    return;
+  }
+  $("mistakes").innerHTML = `<b>Các câu đã sai:</b>` + mistakes.map(m=>`
+    <div class="mistake-item">
+      <b>Original Q${m.id}</b><br>
+      ${m.q}<br>
+      <span style="color:#b73737">Your answer: ${m.chosen}</span><br>
+      <span style="color:#147a4e">Correct answer: ${m.answer}</span>
+    </div>
+  `).join("");
+}
+
+function closeModal(){
+  $("modal").classList.remove("show");
+}
+
+startGame();
+</script>
+</body>
+</html>

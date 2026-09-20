@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 11 - Unit 4 - Exercise 2 - option B</title>
+<style>
+  :root{
+    --bg:#f3fbf8;
+    --card:#ffffff;
+    --text:#17324d;
+    --muted:#6c7b8c;
+    --primary:#138a72;
+    --primary-dark:#0d6f5c;
+    --line:#dce9e5;
+    --good:#1d9b62;
+    --bad:#dd4d4d;
+    --soft-good:#edf9f3;
+    --soft-bad:#fff1f1;
+    --shadow:0 16px 42px rgba(32,72,70,.12);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family:Inter,"Segoe UI",Arial,sans-serif;
+    color:var(--text);
+    background:
+      radial-gradient(circle at top left, rgba(77,201,167,.18), transparent 30%),
+      radial-gradient(circle at top right, rgba(92,139,255,.15), transparent 28%),
+      linear-gradient(135deg,#effaf7,#eef3ff);
+  }
+  .wrap{max-width:1050px;margin:0 auto;padding:24px 16px 42px}
+  .header{
+    background:rgba(255,255,255,.9);
+    border:1px solid rgba(255,255,255,.8);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+    padding:16px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    position:sticky;
+    top:10px;
+    z-index:10;
+    backdrop-filter:blur(10px);
+  }
+  .title h1{margin:0;font-size:20px}
+  .title p{margin:4px 0 0;color:var(--muted);font-size:13px}
+  .status{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+  .pill{
+    border:1px solid var(--line);
+    background:#f8fbfa;
+    border-radius:999px;
+    padding:9px 12px;
+    font-size:14px;
+    font-weight:800;
+  }
+  .hearts{letter-spacing:2px}
+  button{font:inherit}
+  .reset{
+    border:none;
+    background:var(--primary);
+    color:#fff;
+    border-radius:999px;
+    padding:10px 14px;
+    font-weight:800;
+    cursor:pointer;
+  }
+  .reset:hover{background:var(--primary-dark)}
+  .progress-wrap{
+    height:10px;
+    background:#dfeae7;
+    border-radius:999px;
+    overflow:hidden;
+    margin:18px 2px 14px;
+  }
+  .progress{
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg,#19a98b,#568ef4);
+    transition:.3s;
+  }
+  .layout{
+    display:grid;
+    grid-template-columns:1.25fr .85fr;
+    gap:18px;
+  }
+  .passage,.quiz{
+    background:var(--card);
+    border:1px solid rgba(255,255,255,.9);
+    border-radius:24px;
+    box-shadow:var(--shadow);
+    padding:24px;
+  }
+  .passage h2{margin:0 0 14px;font-size:21px}
+  .passage p{
+    font-size:16px;
+    line-height:1.75;
+    margin:0 0 14px;
+  }
+  .blank{
+    font-weight:900;
+    color:var(--primary-dark);
+    white-space:nowrap;
+  }
+  .qmeta{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:var(--muted);
+    font-size:14px;
+    margin-bottom:12px;
+  }
+  .tag{
+    font-size:12px;
+    font-weight:900;
+    text-transform:uppercase;
+    background:#e9f8f3;
+    color:#0f7964;
+    border-radius:999px;
+    padding:7px 10px;
+  }
+  .question-title{
+    font-size:22px;
+    font-weight:900;
+    margin:4px 0 18px;
+  }
+  .options{display:grid;gap:11px}
+  .option{
+    width:100%;
+    text-align:left;
+    border:2px solid var(--line);
+    background:#fbfdfc;
+    border-radius:16px;
+    padding:14px 15px;
+    cursor:pointer;
+    display:flex;
+    gap:11px;
+    align-items:flex-start;
+    transition:.15s;
+  }
+  .option:hover:not(:disabled){
+    transform:translateY(-1px);
+    border-color:#8bcabc;
+    background:#f4fffb;
+  }
+  .option:disabled{cursor:default}
+  .letter{
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    flex:0 0 30px;
+    background:#edf4f2;
+    font-weight:900;
+  }
+  .option.correct{
+    border-color:#83d4ad;
+    background:var(--soft-good);
+  }
+  .option.correct .letter{
+    background:var(--good);
+    color:#fff;
+  }
+  .option.wrong{
+    border-color:#efaaaa;
+    background:var(--soft-bad);
+  }
+  .option.wrong .letter{
+    background:var(--bad);
+    color:#fff;
+  }
+  .feedback{
+    display:none;
+    margin-top:16px;
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:15px 16px;
+    line-height:1.55;
+    background:#f8fbfa;
+  }
+  .feedback.show{display:block}
+  .feedback.good{
+    background:var(--soft-good);
+    border-color:#a9dfc4;
+  }
+  .feedback.bad{
+    background:var(--soft-bad);
+    border-color:#edb4b4;
+  }
+  .feedback strong{display:block;margin-bottom:6px}
+  .controls{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:16px;
+  }
+  .next{
+    display:none;
+    border:none;
+    background:#17324d;
+    color:#fff;
+    border-radius:14px;
+    padding:11px 17px;
+    font-weight:800;
+    cursor:pointer;
+  }
+  .next.show{display:inline-block}
+  .footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+    margin-top:18px;
+  }
+  .modal{
+    position:fixed;
+    inset:0;
+    background:rgba(8,24,31,.58);
+    display:none;
+    place-items:center;
+    padding:18px;
+    z-index:100;
+  }
+  .modal.show{display:grid}
+  .modal-card{
+    width:min(560px,100%);
+    background:#fff;
+    border-radius:24px;
+    padding:26px;
+    box-shadow:0 24px 70px rgba(0,0,0,.25);
+  }
+  .modal-card h2{margin:0 0 10px;font-size:28px}
+  .modal-card p{color:var(--muted);line-height:1.55}
+  .summary{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin:17px 0;
+  }
+  .summary div{
+    border:1px solid var(--line);
+    background:#f7faf9;
+    border-radius:15px;
+    padding:13px;
+    text-align:center;
+  }
+  .summary b{
+    display:block;
+    font-size:21px;
+    margin-bottom:3px;
+  }
+  .actions{display:flex;gap:10px}
+  .primary,.secondary{
+    flex:1;
+    border:none;
+    border-radius:14px;
+    padding:12px 14px;
+    font-weight:800;
+    cursor:pointer;
+  }
+  .primary{background:var(--primary);color:#fff}
+  .secondary{background:#eef4f2;color:var(--text)}
+  @media(max-width:800px){
+    .layout{grid-template-columns:1fr}
+    .header{align-items:flex-start}
+    .title h1{font-size:17px}
+    .pill{font-size:12px;padding:8px 9px}
+    .passage,.quiz{padding:20px}
+    .summary{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="header">
+    <div class="title">
+      <h1>Grade 11 - Unit 4 - Exercise 2 - option B</h1>
+      <p>ASEAN YOUTH LEADERSHIP PROJECT</p>
+    </div>
+    <div class="status">
+      <div class="pill">Score: <span id="score">0</span>/5</div>
+      <div class="pill hearts" id="hearts">❤️❤️❤️</div>
+      <button class="reset" id="resetBtn">↻ Reset</button>
+    </div>
+  </header>
+
+  <div class="progress-wrap"><div class="progress" id="progress"></div></div>
+
+  <div class="layout">
+    <section class="passage">
+      <h2>ASEAN YOUTH LEADERSHIP PROJECT</h2>
+
+      <p>
+        Young people who join regional leadership programmes are often expected to do more than simply attend workshops.
+        They may be asked to take responsibility for small projects, communicate with unfamiliar partners and respond effectively
+        to unexpected situations. For this reason, organisers usually select participants who are not only academically capable
+        but also sufficiently <span class="blank">(1) __________</span> to handle demanding tasks.
+      </p>
+
+      <p>
+        During the programme, students may work with peers whose customs, communication styles and opinions differ considerably
+        from their own. Learning to respect these differences is <span class="blank">(2) __________</span> to building trust within
+        an international team. Participants are also encouraged to identify local challenges and
+        <span class="blank">(3) __________</span> practical solutions rather than waiting for instructions from organisers.
+      </p>
+
+      <p>
+        By taking part in such activities, students can develop a <span class="blank">(4) __________</span> understanding of how
+        social and cultural issues are connected across Southeast Asia. The experience may require patience and flexibility,
+        but many participants regard it as highly <span class="blank">(5) __________</span> because it strengthens both their confidence
+        and their ability to cooperate with others.
+      </p>
+    </section>
+
+    <section class="quiz">
+      <div class="qmeta">
+        <span id="counter">Question 1/5</span>
+        <span class="tag">3 lives</span>
+      </div>
+
+      <div class="question-title" id="questionTitle">Choose the best answer for blank (1).</div>
+      <div class="options" id="options"></div>
+
+      <div class="feedback" id="feedback"></div>
+
+      <div class="controls">
+        <button class="next" id="nextBtn">Next →</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="footer">Question order stays fixed · Reset only shuffles A–D</div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <h2 id="modalTitle"></h2>
+    <p id="modalText"></p>
+    <div class="summary" id="summary"></div>
+    <div class="actions">
+      <button class="primary" id="restartBtn">Làm lại từ đầu</button>
+      <button class="secondary" id="closeBtn">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const QUESTION_BANK = [
+  {
+    id: 1,
+    choices: ["qualified", "qualifying", "qualification", "qualify"],
+    answer: "qualified",
+    explanation: "Sau sufficiently cần một tính từ. Qualified = có đủ năng lực/đủ tiêu chuẩn để làm việc gì. → sufficiently qualified to handle demanding tasks."
+  },
+  {
+    id: 2,
+    choices: ["essential", "essentially", "essence", "essentials"],
+    answer: "essential",
+    explanation: "Cấu trúc be essential to + noun/V-ing = rất cần thiết đối với việc gì. → is essential to building trust. Essentially là trạng từ; essence/essentials là danh từ."
+  },
+  {
+    id: 3,
+    choices: ["propose", "arrange", "approach", "respond"],
+    answer: "propose",
+    explanation: "Propose a solution = đề xuất một giải pháp. → identify local challenges and propose practical solutions."
+  },
+  {
+    id: 4,
+    choices: ["broadening", "broadened", "broader", "broadly"],
+    answer: "broader",
+    explanation: "Câu đã được chỉnh thành develop a broader understanding. Broader là tính từ so sánh, nghĩa là rộng hơn. → a broader understanding."
+  },
+  {
+    id: 5,
+    choices: ["rewarding", "rewarded", "rewardingly", "reward"],
+    answer: "rewarding",
+    explanation: "Sau regard it as highly cần tính từ. Rewarding = đáng giá, mang lại cảm giác có ích/thỏa mãn. → regard it as highly rewarding."
+  }
+];
+
+const $ = id => document.getElementById(id);
+
+let gameChoices = [];
+let current = 0;
+let score = 0;
+let lives = 3;
+let locked = false;
+
+function shuffle(arr){
+  const copy = [...arr];
+  for(let i = copy.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function prepareChoices(){
+  // Keep question order fixed; shuffle only the answer choices.
+  gameChoices = QUESTION_BANK.map(q => shuffle(q.choices));
+}
+
+function startGame(){
+  prepareChoices();
+  current = 0;
+  score = 0;
+  lives = 3;
+  locked = false;
+  closeModal();
+  updateStatus();
+  renderQuestion();
+}
+
+function updateStatus(){
+  $("score").textContent = score;
+  $("hearts").textContent = "❤️".repeat(lives) + "🖤".repeat(3 - lives);
+  $("progress").style.width = `${(current / QUESTION_BANK.length) * 100}%`;
+}
+
+function renderQuestion(){
+  if(current >= QUESTION_BANK.length){
+    finishGame();
+    return;
+  }
+
+  locked = false;
+  const q = QUESTION_BANK[current];
+  const choices = gameChoices[current];
+
+  $("counter").textContent = `Question ${current + 1}/5`;
+  $("questionTitle").textContent = `Choose the best answer for blank (${q.id}).`;
+  $("feedback").className = "feedback";
+  $("feedback").innerHTML = "";
+  $("nextBtn").classList.remove("show");
+  $("options").innerHTML = "";
+
+  choices.forEach((choice, index) => {
+    const btn = document.createElement("button");
+    btn.className = "option";
+    btn.innerHTML = `
+      <span class="letter">${String.fromCharCode(65 + index)}</span>
+      <span>${choice}</span>
+    `;
+    btn.addEventListener("click", () => selectAnswer(choice, btn));
+    $("options").appendChild(btn);
+  });
+
+  updateStatus();
+}
+
+function selectAnswer(choice, selectedBtn){
+  if(locked) return;
+  locked = true;
+
+  const q = QUESTION_BANK[current];
+  const buttons = [...document.querySelectorAll(".option")];
+  buttons.forEach(btn => btn.disabled = true);
+
+  const correct = choice === q.answer;
+
+  if(correct){
+    score++;
+    selectedBtn.classList.add("correct");
+    $("feedback").className = "feedback show good";
+    $("feedback").innerHTML = `<strong>✅ Correct!</strong>${q.explanation}`;
+  }else{
+    lives--;
+    selectedBtn.classList.add("wrong");
+
+    buttons.forEach(btn => {
+      const text = btn.querySelector("span:last-child").textContent;
+      if(text === q.answer) btn.classList.add("correct");
+    });
+
+    $("feedback").className = "feedback show bad";
+    $("feedback").innerHTML = `<strong>❌ Incorrect. Correct answer: ${q.answer}</strong>${q.explanation}`;
+  }
+
+  updateStatus();
+
+  if(lives <= 0){
+    setTimeout(showGameOver, 400);
+    return;
+  }
+
+  $("nextBtn").classList.add("show");
+  $("nextBtn").textContent = current === QUESTION_BANK.length - 1 ? "Finish →" : "Next →";
+}
+
+$("nextBtn").addEventListener("click", () => {
+  current++;
+  renderQuestion();
+});
+
+$("resetBtn").addEventListener("click", startGame);
+$("restartBtn").addEventListener("click", startGame);
+$("closeBtn").addEventListener("click", closeModal);
+
+function showGameOver(){
+  $("modalTitle").textContent = "💔 Hết 3 tim!";
+  $("modalText").textContent = "Em phải làm lại từ đầu. Thứ tự câu hỏi vẫn giữ nguyên 1→5, nhưng vị trí đáp án A–D sẽ được trộn lại.";
+  $("summary").innerHTML = `
+    <div><b>${score}</b>Correct</div>
+    <div><b>${current + 1}</b>Attempted</div>
+    <div><b>0</b>Lives left</div>
+  `;
+  $("closeBtn").style.display = "none";
+  $("modal").classList.add("show");
+}
+
+function finishGame(){
+  $("progress").style.width = "100%";
+  $("modalTitle").textContent = score === 5 ? "🏆 Excellent!" : "🎉 Completed!";
+  $("modalText").textContent = "Em đã hoàn thành ASEAN Youth Leadership Project.";
+  $("summary").innerHTML = `
+    <div><b>${score}/5</b>Correct</div>
+    <div><b>${Math.round(score / 5 * 100)}%</b>Accuracy</div>
+    <div><b>${lives}</b>Lives left</div>
+  `;
+  $("closeBtn").style.display = "block";
+  $("modal").classList.add("show");
+}
+
+function closeModal(){
+  $("modal").classList.remove("show");
+}
+
+startGame();
+</script>
+</body>
+</html>

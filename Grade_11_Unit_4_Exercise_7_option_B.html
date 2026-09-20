@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 11 - Unit 4 - Exercise 7 - option B</title>
+<style>
+  :root{
+    --bg1:#eefaf7;
+    --bg2:#edf3ff;
+    --card:#ffffff;
+    --text:#17324d;
+    --muted:#6d7c8e;
+    --primary:#128a72;
+    --primary-dark:#0c6e5c;
+    --line:#dce8e5;
+    --good:#1d9b62;
+    --bad:#dc4b4b;
+    --soft-good:#eefaf4;
+    --soft-bad:#fff1f1;
+    --shadow:0 16px 42px rgba(34,70,75,.12);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family:Inter,"Segoe UI",Arial,sans-serif;
+    color:var(--text);
+    background:
+      radial-gradient(circle at 10% 10%,rgba(76,205,171,.16),transparent 30%),
+      radial-gradient(circle at 90% 12%,rgba(92,143,255,.14),transparent 28%),
+      linear-gradient(135deg,var(--bg1),var(--bg2));
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:24px 16px 42px}
+  .header{
+    position:sticky;top:10px;z-index:20;
+    display:flex;justify-content:space-between;align-items:center;gap:14px;
+    background:rgba(255,255,255,.9);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.8);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+    padding:16px 18px;
+  }
+  .title h1{margin:0;font-size:20px}
+  .title p{margin:4px 0 0;color:var(--muted);font-size:13px}
+  .status{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+  .pill{
+    background:#f8fbfa;border:1px solid var(--line);border-radius:999px;
+    padding:9px 12px;font-size:14px;font-weight:800
+  }
+  .hearts{letter-spacing:2px}
+  .reset{
+    border:none;background:var(--primary);color:#fff;border-radius:999px;
+    padding:10px 14px;font-weight:800;cursor:pointer
+  }
+  .reset:hover{background:var(--primary-dark)}
+  .progress-wrap{
+    height:10px;background:#dfeae7;border-radius:999px;overflow:hidden;
+    margin:18px 2px 14px
+  }
+  .progress{
+    height:100%;width:0;background:linear-gradient(90deg,#1aa98c,#568ff4);
+    transition:.3s
+  }
+  .layout{
+    display:grid;
+    grid-template-columns:1.25fr .75fr;
+    gap:18px;
+  }
+  .passage,.quiz{
+    background:var(--card);border:1px solid rgba(255,255,255,.9);
+    border-radius:24px;box-shadow:var(--shadow);padding:24px
+  }
+  .passage h2{margin:0 0 8px;font-size:21px}
+  .instruction{margin:0 0 16px;color:var(--muted);font-weight:700;line-height:1.5}
+  .passage p{font-size:16px;line-height:1.78;margin:0 0 16px}
+  .qmeta{
+    display:flex;justify-content:space-between;align-items:center;
+    color:var(--muted);font-size:14px;margin-bottom:12px
+  }
+  .tag{
+    font-size:12px;font-weight:900;text-transform:uppercase;
+    background:#e9f8f3;color:#0f7964;border-radius:999px;padding:7px 10px
+  }
+  .prompt{font-size:19px;font-weight:900;line-height:1.45;margin:4px 0 16px}
+  .options{display:grid;gap:11px}
+  .option{
+    width:100%;text-align:left;border:2px solid var(--line);background:#fbfdfc;
+    border-radius:16px;padding:14px 15px;cursor:pointer;display:flex;gap:11px;
+    align-items:flex-start;transition:.15s;line-height:1.5
+  }
+  .option:hover:not(:disabled){
+    transform:translateY(-1px);border-color:#8ccabb;background:#f4fffb
+  }
+  .option:disabled{cursor:default}
+  .letter{
+    width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+    flex:0 0 30px;background:#edf4f2;font-weight:900
+  }
+  .option.correct{border-color:#82d3ac;background:var(--soft-good)}
+  .option.correct .letter{background:var(--good);color:#fff}
+  .option.wrong{border-color:#efa9a9;background:var(--soft-bad)}
+  .option.wrong .letter{background:var(--bad);color:#fff}
+  .feedback{
+    display:none;margin-top:16px;border:1px solid var(--line);
+    border-radius:16px;padding:15px 16px;line-height:1.55;background:#f8fbfa
+  }
+  .feedback.show{display:block}
+  .feedback.good{background:var(--soft-good);border-color:#a8dfc4}
+  .feedback.bad{background:var(--soft-bad);border-color:#edb4b4}
+  .feedback strong{display:block;margin-bottom:6px}
+  .controls{display:flex;justify-content:flex-end;margin-top:16px}
+  .next{
+    display:none;border:none;background:#17324d;color:#fff;border-radius:14px;
+    padding:11px 17px;font-weight:800;cursor:pointer
+  }
+  .next.show{display:inline-block}
+  .footer{text-align:center;color:var(--muted);font-size:13px;margin-top:18px}
+  .modal{
+    position:fixed;inset:0;background:rgba(8,24,31,.58);
+    display:none;place-items:center;padding:18px;z-index:100
+  }
+  .modal.show{display:grid}
+  .modal-card{
+    width:min(560px,100%);background:#fff;border-radius:24px;padding:26px;
+    box-shadow:0 24px 70px rgba(0,0,0,.25)
+  }
+  .modal-card h2{margin:0 0 10px;font-size:28px}
+  .modal-card p{color:var(--muted);line-height:1.55}
+  .summary{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:17px 0
+  }
+  .summary div{
+    border:1px solid var(--line);background:#f7faf9;border-radius:15px;
+    padding:13px;text-align:center
+  }
+  .summary b{display:block;font-size:21px;margin-bottom:3px}
+  .actions{display:flex;gap:10px}
+  .primary,.secondary{
+    flex:1;border:none;border-radius:14px;padding:12px 14px;
+    font-weight:800;cursor:pointer
+  }
+  .primary{background:var(--primary);color:#fff}
+  .secondary{background:#eef4f2;color:var(--text)}
+  @media(max-width:860px){
+    .layout{grid-template-columns:1fr}
+    .header{align-items:flex-start}
+    .title h1{font-size:17px}
+    .pill{font-size:12px;padding:8px 9px}
+    .passage,.quiz{padding:20px}
+    .summary{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="header">
+    <div class="title">
+      <h1>Grade 11 - Unit 4 - Exercise 7 - option B</h1>
+      <p>ASEAN YOUTH PROGRAMMES: LEARNING THROUGH COOPERATION</p>
+    </div>
+    <div class="status">
+      <div class="pill">Score: <span id="score">0</span>/8</div>
+      <div class="pill hearts" id="hearts">❤️❤️❤️</div>
+      <button class="reset" id="resetBtn">↻ Reset</button>
+    </div>
+  </header>
+
+  <div class="progress-wrap"><div class="progress" id="progress"></div></div>
+
+  <div class="layout">
+    <section class="passage">
+      <h2>ASEAN YOUTH PROGRAMMES: LEARNING THROUGH COOPERATION</h2>
+      <div class="instruction">Exercise 7: Read the passage and choose the best answer to each question.</div>
+
+      <p>
+        Regional youth programmes can offer much more than opportunities to travel or experience unfamiliar traditions. In many activities,
+        students from different ASEAN countries work in mixed teams to explore shared concerns such as plastic waste, access to education
+        or responsible use of technology. Rather than simply listening to presentations, participants may have to identify a problem,
+        compare how it affects different communities and design a practical response.
+      </p>
+
+      <p>
+        Working across cultures, however, is not always straightforward. A behaviour that appears perfectly normal in one community may be
+        interpreted differently in another. For example, remaining silent during a discussion might be seen as a sign of respect by one
+        person but as a lack of interest by someone else. Participants therefore need to explain their intentions, ask questions when they
+        are uncertain and adjust the way they communicate. Such interaction can challenge stereotypes, not because cultural differences
+        disappear, but because students learn to handle <strong>them</strong> more constructively.
+      </p>
+
+      <p>
+        These programmes can also develop practical skills. A student team may need to divide responsibilities, meet deadlines, present
+        ideas in English and revise a proposal after receiving feedback. In this context, leadership does not simply mean making decisions
+        for everyone else. An effective student leader may instead coordinate different strengths, encourage quieter members to contribute
+        and make sure that responsibility is shared. Even when a project does not produce the expected result, reflecting on what went wrong
+        can turn the experience into a useful learning opportunity.
+      </p>
+
+      <p>
+        The value of a youth project also depends on how closely it responds to the community it is intended to serve. A short activity may
+        attract attention but have little lasting effect if local needs have not been considered. Programmes are more likely to create
+        meaningful outcomes when students communicate with local partners, understand existing problems and leave behind resources or plans
+        that others can continue using.
+      </p>
+
+      <p>
+        Ultimately, the greatest value of regional youth programmes may lie not in the event itself but in what participants learn through
+        sustained cooperation. By negotiating differences, solving problems and reflecting on their experiences, young people can develop
+        skills that remain useful long after a particular programme has ended.
+      </p>
+    </section>
+
+    <section class="quiz">
+      <div class="qmeta">
+        <span id="counter">Question 1/8</span>
+        <span class="tag">3 lives</span>
+      </div>
+
+      <div class="prompt" id="prompt"></div>
+      <div class="options" id="options"></div>
+
+      <div class="feedback" id="feedback"></div>
+
+      <div class="controls">
+        <button class="next" id="nextBtn">Next →</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="footer">Question order stays fixed · Wrong answers stay hidden · Reset only shuffles A–D</div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <h2 id="modalTitle"></h2>
+    <p id="modalText"></p>
+    <div class="summary" id="summary"></div>
+    <div class="actions">
+      <button class="primary" id="restartBtn">Làm lại từ đầu</button>
+      <button class="secondary" id="closeBtn">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const QUESTION_BANK = [
+  {
+    id:1,
+    prompt:"What is the main idea of the passage?",
+    choices:[
+      "ASEAN youth programmes should mainly focus on international travel and cultural festivals.",
+      "Regional youth programmes can develop cultural understanding and practical skills through meaningful cooperation.",
+      "Students from different countries usually find it difficult to complete projects successfully.",
+      "Community projects are useful only when they produce immediate and measurable results."
+    ],
+    answer:"Regional youth programmes can develop cultural understanding and practical skills through meaningful cooperation.",
+    explanation:"Toàn bài tập trung vào việc các chương trình thanh niên giúp học sinh phát triển cross-cultural understanding, communication, leadership, problem-solving và responsibility thông qua hợp tác thực tế. A quá hẹp; C mang nghĩa tiêu cực không đúng; D trái với đoạn 3 vì ngay cả dự án chưa đạt kết quả mong đợi vẫn có thể tạo ra giá trị học tập."
+  },
+  {
+    id:2,
+    prompt:"According to paragraph 1, participants in some regional programmes may be required to __________.",
+    choices:[
+      "solve exactly the same problem in every ASEAN community",
+      "compare how a shared issue affects different communities",
+      "attend presentations without participating in discussions",
+      "avoid topics that involve social or environmental problems"
+    ],
+    answer:"compare how a shared issue affects different communities",
+    explanation:"Đoạn 1 nói học sinh có thể identify a problem, compare how it affects different communities and design a practical response. Vì vậy đáp án đúng diễn đạt chính xác thông tin trong bài."
+  },
+  {
+    id:3,
+    prompt:"The word “constructively” in paragraph 2 is closest in meaning to __________.",
+    choices:[
+      "in a way that helps improve a situation",
+      "in a way that completely removes differences",
+      "without paying attention to other people's opinions",
+      "according to a fixed set of cultural rules"
+    ],
+    answer:"in a way that helps improve a situation",
+    explanation:"Constructively = theo cách tích cực, có ích, hướng đến cải thiện hoặc giải quyết vấn đề. Trong bài, learn to handle them more constructively = học cách xử lý những khác biệt theo cách tích cực và hiệu quả hơn."
+  },
+  {
+    id:4,
+    prompt:"The word “them” in paragraph 2 refers to __________.",
+    choices:[
+      "intentions",
+      "stereotypes",
+      "cultural differences",
+      "participants"
+    ],
+    answer:"cultural differences",
+    explanation:"Câu đầy đủ là: not because cultural differences disappear, but because students learn to handle them more constructively. Vì vậy them = cultural differences."
+  },
+  {
+    id:5,
+    prompt:"Which statement about leadership is supported by paragraph 3?",
+    choices:[
+      "A good leader should make all important decisions without consulting the group.",
+      "Leadership is mainly the ability to speak English more confidently than others.",
+      "Effective leadership can involve coordinating people's strengths and sharing responsibility.",
+      "Students demonstrate leadership only when their projects achieve their original goals."
+    ],
+    answer:"Effective leadership can involve coordinating people's strengths and sharing responsibility.",
+    explanation:"Đoạn 3 nêu rõ leadership không đơn giản là quyết định thay mọi người. Người lãnh đạo hiệu quả có thể coordinate different strengths, encourage quieter members và make sure responsibility is shared."
+  },
+  {
+    id:6,
+    prompt:"Why does the writer mention “a short activity” in paragraph 4?",
+    choices:[
+      "To show that brief projects are always more attractive to local communities",
+      "To suggest that international programmes should be made as short as possible",
+      "To illustrate why an activity may have limited impact if community needs are ignored",
+      "To explain why local organisations rarely cooperate with young volunteers"
+    ],
+    answer:"To illustrate why an activity may have limited impact if community needs are ignored",
+    explanation:"Ngay sau đó tác giả viết rằng a short activity may attract attention but have little lasting effect if local needs have not been considered. Ví dụ này minh họa rằng hoạt động có thể gây chú ý nhưng không tạo tác động lâu dài nếu bỏ qua nhu cầu thực tế của cộng đồng."
+  },
+  {
+    id:7,
+    prompt:"What can be inferred from paragraph 3?",
+    choices:[
+      "A project that fails to reach its original target can still provide valuable learning.",
+      "Students should avoid difficult projects because failure damages their leadership skills.",
+      "Successful projects require one student to take responsibility for every task.",
+      "Reflection is useful only after a project has achieved its expected result."
+    ],
+    answer:"A project that fails to reach its original target can still provide valuable learning.",
+    explanation:"Bài viết nói: Even when a project does not produce the expected result, reflecting on what went wrong can turn the experience into a useful learning opportunity. Vì vậy không đạt mục tiêu ban đầu không đồng nghĩa với việc trải nghiệm đó vô ích."
+  },
+  {
+    id:8,
+    prompt:"Which of the following best describes the writer's view of an effective youth programme?",
+    choices:[
+      "It should concentrate mainly on making the event enjoyable for participants.",
+      "It should combine cooperation, reflection and attention to real community needs.",
+      "It should eliminate cultural differences before students begin working together.",
+      "It should measure success mainly by the number of countries represented."
+    ],
+    answer:"It should combine cooperation, reflection and attention to real community needs.",
+    explanation:"Toàn bài nhấn mạnh ba yếu tố xuyên suốt: cooperation, reflection và real community needs. Vì vậy phương án này thể hiện chính xác nhất quan điểm của tác giả."
+  }
+];
+
+const $ = id => document.getElementById(id);
+
+let shuffledChoices = [];
+let current = 0;
+let score = 0;
+let lives = 3;
+let locked = false;
+
+function shuffle(arr){
+  const copy=[...arr];
+  for(let i=copy.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [copy[i],copy[j]]=[copy[j],copy[i]];
+  }
+  return copy;
+}
+
+function prepareChoices(){
+  shuffledChoices = QUESTION_BANK.map(q => shuffle(q.choices));
+}
+
+function startGame(){
+  prepareChoices();
+  current=0;
+  score=0;
+  lives=3;
+  locked=false;
+  closeModal();
+  updateStatus();
+  renderQuestion();
+}
+
+function updateStatus(){
+  $("score").textContent=score;
+  $("hearts").textContent="❤️".repeat(lives)+"🖤".repeat(3-lives);
+  $("progress").style.width=`${(current/QUESTION_BANK.length)*100}%`;
+}
+
+function renderQuestion(){
+  if(current>=QUESTION_BANK.length){
+    finishGame();
+    return;
+  }
+
+  locked=false;
+  const q=QUESTION_BANK[current];
+  $("counter").textContent=`Question ${current+1}/8`;
+  $("prompt").textContent=q.prompt;
+  $("options").innerHTML="";
+  $("feedback").className="feedback";
+  $("feedback").innerHTML="";
+  $("nextBtn").classList.remove("show");
+
+  shuffledChoices[current].forEach((choice,index)=>{
+    const btn=document.createElement("button");
+    btn.className="option";
+    btn.innerHTML=`<span class="letter">${String.fromCharCode(65+index)}</span><span>${choice}</span>`;
+    btn.addEventListener("click",()=>selectAnswer(choice,btn));
+    $("options").appendChild(btn);
+  });
+
+  updateStatus();
+}
+
+function selectAnswer(choice,selectedBtn){
+  if(locked || selectedBtn.disabled) return;
+
+  const q=QUESTION_BANK[current];
+
+  if(choice===q.answer){
+    locked=true;
+    score++;
+    selectedBtn.classList.add("correct");
+
+    const buttons=[...document.querySelectorAll(".option")];
+    buttons.forEach(btn=>btn.disabled=true);
+
+    $("feedback").className="feedback show good";
+    $("feedback").innerHTML=`<strong>✅ Correct!</strong>${q.explanation}`;
+
+    updateStatus();
+    $("nextBtn").classList.add("show");
+    $("nextBtn").textContent=current===QUESTION_BANK.length-1 ? "Finish →" : "Next →";
+  }else{
+    lives--;
+    selectedBtn.classList.add("wrong");
+    selectedBtn.disabled=true;
+
+    $("feedback").className="feedback show bad";
+    $("feedback").innerHTML=`<strong>❌ Incorrect. Try again!</strong>Đáp án đúng chưa được hiển thị. Hãy chọn lại một phương án khác.`;
+
+    updateStatus();
+
+    if(lives<=0){
+      locked=true;
+      setTimeout(showGameOver,400);
+    }
+  }
+}
+
+$("nextBtn").addEventListener("click",()=>{
+  current++;
+  renderQuestion();
+});
+
+$("resetBtn").addEventListener("click",startGame);
+$("restartBtn").addEventListener("click",startGame);
+$("closeBtn").addEventListener("click",closeModal);
+
+function showGameOver(){
+  $("modalTitle").textContent="💔 Hết 3 tim!";
+  $("modalText").textContent="Em phải làm lại từ đầu. Thứ tự câu hỏi vẫn giữ nguyên 1→8, nhưng các phương án A–D sẽ được trộn lại.";
+  $("summary").innerHTML=`
+    <div><b>${score}</b>Correct</div>
+    <div><b>${current+1}</b>Attempted</div>
+    <div><b>0</b>Lives left</div>`;
+  $("closeBtn").style.display="none";
+  $("modal").classList.add("show");
+}
+
+function finishGame(){
+  $("progress").style.width="100%";
+  $("modalTitle").textContent=score===8 ? "🏆 Excellent!" : "🎉 Completed!";
+  $("modalText").textContent="Em đã hoàn thành Exercise 7.";
+  $("summary").innerHTML=`
+    <div><b>${score}/8</b>Correct</div>
+    <div><b>${Math.round(score/8*100)}%</b>Accuracy</div>
+    <div><b>${lives}</b>Lives left</div>`;
+  $("closeBtn").style.display="block";
+  $("modal").classList.add("show");
+}
+
+function closeModal(){
+  $("modal").classList.remove("show");
+}
+
+startGame();
+</script>
+</body>
+</html>

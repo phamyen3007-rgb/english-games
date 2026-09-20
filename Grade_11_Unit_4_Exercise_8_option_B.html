@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 11 - Unit 4 - Exercise 8 - option B</title>
+<style>
+  :root{
+    --bg1:#eefaf7;
+    --bg2:#edf3ff;
+    --card:#ffffff;
+    --text:#17324d;
+    --muted:#6d7c8e;
+    --primary:#128a72;
+    --primary-dark:#0c6e5c;
+    --line:#dce8e5;
+    --good:#1d9b62;
+    --bad:#dc4b4b;
+    --soft-good:#eefaf4;
+    --soft-bad:#fff1f1;
+    --shadow:0 16px 42px rgba(34,70,75,.12);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family:Inter,"Segoe UI",Arial,sans-serif;
+    color:var(--text);
+    background:
+      radial-gradient(circle at 10% 10%,rgba(76,205,171,.16),transparent 30%),
+      radial-gradient(circle at 90% 12%,rgba(92,143,255,.14),transparent 28%),
+      linear-gradient(135deg,var(--bg1),var(--bg2));
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:24px 16px 42px}
+  .header{
+    position:sticky;top:10px;z-index:20;
+    display:flex;justify-content:space-between;align-items:center;gap:14px;
+    background:rgba(255,255,255,.9);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.8);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+    padding:16px 18px;
+  }
+  .title h1{margin:0;font-size:20px}
+  .title p{margin:4px 0 0;color:var(--muted);font-size:13px}
+  .status{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+  .pill{
+    background:#f8fbfa;border:1px solid var(--line);border-radius:999px;
+    padding:9px 12px;font-size:14px;font-weight:800
+  }
+  .hearts{letter-spacing:2px}
+  .reset{
+    border:none;background:var(--primary);color:#fff;border-radius:999px;
+    padding:10px 14px;font-weight:800;cursor:pointer
+  }
+  .reset:hover{background:var(--primary-dark)}
+  .progress-wrap{
+    height:10px;background:#dfeae7;border-radius:999px;overflow:hidden;
+    margin:18px 2px 14px
+  }
+  .progress{
+    height:100%;width:0;background:linear-gradient(90deg,#1aa98c,#568ff4);
+    transition:.3s
+  }
+  .layout{
+    display:grid;
+    grid-template-columns:1.25fr .75fr;
+    gap:18px;
+  }
+  .passage,.quiz{
+    background:var(--card);border:1px solid rgba(255,255,255,.9);
+    border-radius:24px;box-shadow:var(--shadow);padding:24px
+  }
+  .passage h2{margin:0 0 8px;font-size:21px}
+  .instruction{margin:0 0 16px;color:var(--muted);font-weight:700;line-height:1.5}
+  .passage p{font-size:16px;line-height:1.78;margin:0 0 16px}
+  .qmeta{
+    display:flex;justify-content:space-between;align-items:center;
+    color:var(--muted);font-size:14px;margin-bottom:12px
+  }
+  .tag{
+    font-size:12px;font-weight:900;text-transform:uppercase;
+    background:#e9f8f3;color:#0f7964;border-radius:999px;padding:7px 10px
+  }
+  .prompt{font-size:19px;font-weight:900;line-height:1.45;margin:4px 0 16px}
+  .options{display:grid;gap:11px}
+  .option{
+    width:100%;text-align:left;border:2px solid var(--line);background:#fbfdfc;
+    border-radius:16px;padding:14px 15px;cursor:pointer;display:flex;gap:11px;
+    align-items:flex-start;transition:.15s;line-height:1.5
+  }
+  .option:hover:not(:disabled){
+    transform:translateY(-1px);border-color:#8ccabb;background:#f4fffb
+  }
+  .option:disabled{cursor:default}
+  .letter{
+    width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+    flex:0 0 30px;background:#edf4f2;font-weight:900
+  }
+  .option.correct{border-color:#82d3ac;background:var(--soft-good)}
+  .option.correct .letter{background:var(--good);color:#fff}
+  .option.wrong{border-color:#efa9a9;background:var(--soft-bad)}
+  .option.wrong .letter{background:var(--bad);color:#fff}
+  .feedback{
+    display:none;margin-top:16px;border:1px solid var(--line);
+    border-radius:16px;padding:15px 16px;line-height:1.55;background:#f8fbfa
+  }
+  .feedback.show{display:block}
+  .feedback.good{background:var(--soft-good);border-color:#a8dfc4}
+  .feedback.bad{background:var(--soft-bad);border-color:#edb4b4}
+  .feedback strong{display:block;margin-bottom:6px}
+  .controls{display:flex;justify-content:flex-end;margin-top:16px}
+  .next{
+    display:none;border:none;background:#17324d;color:#fff;border-radius:14px;
+    padding:11px 17px;font-weight:800;cursor:pointer
+  }
+  .next.show{display:inline-block}
+  .footer{text-align:center;color:var(--muted);font-size:13px;margin-top:18px}
+  .modal{
+    position:fixed;inset:0;background:rgba(8,24,31,.58);
+    display:none;place-items:center;padding:18px;z-index:100
+  }
+  .modal.show{display:grid}
+  .modal-card{
+    width:min(560px,100%);background:#fff;border-radius:24px;padding:26px;
+    box-shadow:0 24px 70px rgba(0,0,0,.25)
+  }
+  .modal-card h2{margin:0 0 10px;font-size:28px}
+  .modal-card p{color:var(--muted);line-height:1.55}
+  .summary{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:17px 0
+  }
+  .summary div{
+    border:1px solid var(--line);background:#f7faf9;border-radius:15px;
+    padding:13px;text-align:center
+  }
+  .summary b{display:block;font-size:21px;margin-bottom:3px}
+  .actions{display:flex;gap:10px}
+  .primary,.secondary{
+    flex:1;border:none;border-radius:14px;padding:12px 14px;
+    font-weight:800;cursor:pointer
+  }
+  .primary{background:var(--primary);color:#fff}
+  .secondary{background:#eef4f2;color:var(--text)}
+  @media(max-width:860px){
+    .layout{grid-template-columns:1fr}
+    .header{align-items:flex-start}
+    .title h1{font-size:17px}
+    .pill{font-size:12px;padding:8px 9px}
+    .passage,.quiz{padding:20px}
+    .summary{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="header">
+    <div class="title">
+      <h1>Grade 11 - Unit 4 - Exercise 8 - option B</h1>
+      <p>LEARNING ACROSS BORDERS IN ASEAN</p>
+    </div>
+    <div class="status">
+      <div class="pill">Score: <span id="score">0</span>/8</div>
+      <div class="pill hearts" id="hearts">❤️❤️❤️</div>
+      <button class="reset" id="resetBtn">↻ Reset</button>
+    </div>
+  </header>
+
+  <div class="progress-wrap"><div class="progress" id="progress"></div></div>
+
+  <div class="layout">
+    <section class="passage">
+      <h2>LEARNING ACROSS BORDERS IN ASEAN</h2>
+      <div class="instruction">Exercise 8: Read the passage and choose the best answer to each question.</div>
+
+      <p>
+        Regional youth cooperation does not always require students to travel abroad. Increasingly, schools in different ASEAN countries
+        organise joint projects in which students communicate online, investigate a shared issue and produce something together. A project
+        might involve comparing local environmental problems, interviewing community members or creating a digital exhibition about
+        traditional practices. Although participants remain in their own countries, they are still exposed to viewpoints that may differ
+        considerably from their own.
+      </p>
+
+      <p>
+        The educational value of these projects lies partly in the way students must <strong>negotiate meaning</strong>. When a group includes
+        members with different levels of English and different communication habits, misunderstandings are likely to occur. Students may need
+        to rephrase an idea, ask for clarification or check whether everyone has interpreted a message in the same way. Such difficulties can
+        initially slow the group down, but dealing with them successfully can make participants more flexible and attentive communicators.
+      </p>
+
+      <p>
+        Joint projects can also challenge assumptions. Students sometimes begin an exchange with simplified ideas about another country based
+        on social media, films or limited personal experience. Direct cooperation provides a more complicated picture. A student may discover,
+        for instance, that classmates in another country have very different traditions but similar concerns about exams, future careers or
+        environmental problems. <strong>This</strong> does not mean that cultural differences become unimportant. Rather, students learn that
+        similarity and difference can exist at the same time.
+      </p>
+
+      <p>
+        However, simply placing students in an international group does not guarantee meaningful learning. Teachers need to design tasks that
+        require genuine interaction instead of allowing group members to divide the work and complete separate sections independently. Reflection
+        is equally important. When students are encouraged to consider why a misunderstanding occurred or how their opinions changed, they are more
+        likely to recognise what they have learned from the experience.
+      </p>
+
+      <p>
+        Well-designed regional projects can therefore extend students' understanding beyond facts about individual ASEAN countries. They can help
+        young people become more comfortable with uncertainty, more willing to reconsider assumptions and better prepared to cooperate with people
+        whose experiences differ from their own.
+      </p>
+    </section>
+
+    <section class="quiz">
+      <div class="qmeta">
+        <span id="counter">Question 1/8</span>
+        <span class="tag">3 lives</span>
+      </div>
+
+      <div class="prompt" id="prompt"></div>
+      <div class="options" id="options"></div>
+
+      <div class="feedback" id="feedback"></div>
+
+      <div class="controls">
+        <button class="next" id="nextBtn">Next →</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="footer">Question order stays fixed · Wrong answers stay hidden · Reset only shuffles A–D</div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <h2 id="modalTitle"></h2>
+    <p id="modalText"></p>
+    <div class="summary" id="summary"></div>
+    <div class="actions">
+      <button class="primary" id="restartBtn">Làm lại từ đầu</button>
+      <button class="secondary" id="closeBtn">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const QUESTION_BANK = [
+  {
+    id:1,
+    prompt:"What is the passage mainly about?",
+    choices:[
+      "Why online learning should replace international travel among ASEAN students",
+      "How collaborative regional projects can develop students' intercultural understanding and communication skills",
+      "Why communication problems prevent ASEAN students from completing joint projects",
+      "How schools can teach students detailed facts about every ASEAN country"
+    ],
+    answer:"How collaborative regional projects can develop students' intercultural understanding and communication skills",
+    explanation:"Toàn bài tập trung vào cách joint regional projects giúp học sinh phát triển communication, cultural understanding, flexibility và ability to reconsider assumptions. A quá cực đoan; C chỉ tập trung vào khó khăn; D không phải trọng tâm của bài."
+  },
+  {
+    id:2,
+    prompt:"According to paragraph 1, which of the following is TRUE about regional youth cooperation?",
+    choices:[
+      "Students must visit another country before they can experience cultural differences.",
+      "Online cooperation can expose students to perspectives different from their own.",
+      "Schools mainly use joint projects to improve tourism between ASEAN countries.",
+      "Participants are expected to investigate only cultural traditions."
+    ],
+    answer:"Online cooperation can expose students to perspectives different from their own.",
+    explanation:"Đoạn 1 cho biết dù học sinh remain in their own countries, họ vẫn có thể tiếp xúc với viewpoints that may differ considerably from their own."
+  },
+  {
+    id:3,
+    prompt:"The phrase “negotiate meaning” in paragraph 2 is closest in meaning to __________.",
+    choices:[
+      "compete to make one's own interpretation accepted",
+      "work together to reach a clear shared understanding",
+      "translate every message into several languages",
+      "avoid discussing ideas that may cause disagreement"
+    ],
+    answer:"work together to reach a clear shared understanding",
+    explanation:"Ngữ cảnh ngay sau đó nói học sinh phải rephrase, ask for clarification và check interpretation. Vì vậy negotiate meaning ở đây nghĩa là cùng điều chỉnh cách giao tiếp để đạt được sự hiểu chung."
+  },
+  {
+    id:4,
+    prompt:"Why does the writer mention that communication difficulties can “slow the group down”?",
+    choices:[
+      "To argue that mixed-nationality groups are usually inefficient",
+      "To show that communication problems should always be avoided",
+      "To contrast an immediate difficulty with a possible long-term learning benefit",
+      "To suggest that students with weaker English should work separately"
+    ],
+    answer:"To contrast an immediate difficulty with a possible long-term learning benefit",
+    explanation:"Tác giả viết rằng khó khăn có thể initially slow the group down, but việc xử lý chúng thành công lại giúp học sinh trở thành người giao tiếp linh hoạt và chú ý hơn. Đây là sự đối lập giữa short-term difficulty và long-term benefit."
+  },
+  {
+    id:5,
+    prompt:"What can be inferred from paragraph 3?",
+    choices:[
+      "Real interaction may make students revise overly simple beliefs about other cultures.",
+      "Cultural exchange is successful only when students discover that they are similar.",
+      "Social media provides a more accurate picture of other cultures than direct contact.",
+      "Students should focus on similarities and pay less attention to cultural differences."
+    ],
+    answer:"Real interaction may make students revise overly simple beliefs about other cultures.",
+    explanation:"Đoạn 3 nói học sinh có thể bắt đầu bằng những simplified ideas, nhưng direct cooperation đem lại a more complicated picture. Có thể suy ra rằng tiếp xúc thực tế khiến các em xem xét lại những nhận định quá đơn giản trước đó."
+  },
+  {
+    id:6,
+    prompt:"The word “This” in paragraph 3 refers to the idea that __________.",
+    choices:[
+      "students often worry about examinations and future careers",
+      "students from different countries may share some concerns despite cultural differences",
+      "social media influences students' understanding of neighbouring countries",
+      "international projects usually focus on environmental problems"
+    ],
+    answer:"students from different countries may share some concerns despite cultural differences",
+    explanation:"Câu trước nêu rằng học sinh ở các nước khác nhau có thể có different traditions but similar concerns. This trong câu “This does not mean that cultural differences become unimportant” chỉ chính ý đó."
+  },
+  {
+    id:7,
+    prompt:"According to paragraph 4, which project design is LEAST likely to produce meaningful intercultural learning?",
+    choices:[
+      "Students discuss why their opinions changed during the project.",
+      "Group members regularly explain their ideas and respond to one another.",
+      "Each student completes an independent section with little interaction with the group.",
+      "Students reflect on misunderstandings that occurred while working together."
+    ],
+    answer:"Each student completes an independent section with little interaction with the group.",
+    explanation:"Tác giả nói nhiệm vụ phải yêu cầu genuine interaction, thay vì để các thành viên divide the work and complete separate sections independently. Vì vậy đây là kiểu thiết kế ít tạo ra học tập liên văn hóa có ý nghĩa nhất."
+  },
+  {
+    id:8,
+    prompt:"Which of the following best expresses the writer's overall view?",
+    choices:[
+      "The greatest benefit of regional projects comes from removing cultural differences among students.",
+      "International collaboration is valuable mainly because it improves students' factual knowledge of ASEAN.",
+      "Meaningful cooperation requires more than bringing students together; the quality of interaction and reflection matters.",
+      "Communication problems are evidence that students are not ready for regional cooperation."
+    ],
+    answer:"Meaningful cooperation requires more than bringing students together; the quality of interaction and reflection matters.",
+    explanation:"Đây là ý tổng hợp quan trọng của bài. Tác giả nhấn mạnh rằng simply placing students in an international group does not guarantee meaningful learning. Giá trị đến từ genuine interaction, dealing with differences và reflection."
+  }
+];
+
+const $ = id => document.getElementById(id);
+
+let shuffledChoices = [];
+let current = 0;
+let score = 0;
+let lives = 3;
+let locked = false;
+
+function shuffle(arr){
+  const copy=[...arr];
+  for(let i=copy.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [copy[i],copy[j]]=[copy[j],copy[i]];
+  }
+  return copy;
+}
+
+function prepareChoices(){
+  shuffledChoices = QUESTION_BANK.map(q => shuffle(q.choices));
+}
+
+function startGame(){
+  prepareChoices();
+  current=0;
+  score=0;
+  lives=3;
+  locked=false;
+  closeModal();
+  updateStatus();
+  renderQuestion();
+}
+
+function updateStatus(){
+  $("score").textContent=score;
+  $("hearts").textContent="❤️".repeat(lives)+"🖤".repeat(3-lives);
+  $("progress").style.width=`${(current/QUESTION_BANK.length)*100}%`;
+}
+
+function renderQuestion(){
+  if(current>=QUESTION_BANK.length){
+    finishGame();
+    return;
+  }
+
+  locked=false;
+  const q=QUESTION_BANK[current];
+  $("counter").textContent=`Question ${current+1}/8`;
+  $("prompt").textContent=q.prompt;
+  $("options").innerHTML="";
+  $("feedback").className="feedback";
+  $("feedback").innerHTML="";
+  $("nextBtn").classList.remove("show");
+
+  shuffledChoices[current].forEach((choice,index)=>{
+    const btn=document.createElement("button");
+    btn.className="option";
+    btn.innerHTML=`<span class="letter">${String.fromCharCode(65+index)}</span><span>${choice}</span>`;
+    btn.addEventListener("click",()=>selectAnswer(choice,btn));
+    $("options").appendChild(btn);
+  });
+
+  updateStatus();
+}
+
+function selectAnswer(choice,selectedBtn){
+  if(locked || selectedBtn.disabled) return;
+
+  const q=QUESTION_BANK[current];
+
+  if(choice===q.answer){
+    locked=true;
+    score++;
+    selectedBtn.classList.add("correct");
+
+    const buttons=[...document.querySelectorAll(".option")];
+    buttons.forEach(btn=>btn.disabled=true);
+
+    $("feedback").className="feedback show good";
+    $("feedback").innerHTML=`<strong>✅ Correct!</strong>${q.explanation}`;
+
+    updateStatus();
+    $("nextBtn").classList.add("show");
+    $("nextBtn").textContent=current===QUESTION_BANK.length-1 ? "Finish →" : "Next →";
+  }else{
+    lives--;
+    selectedBtn.classList.add("wrong");
+    selectedBtn.disabled=true;
+
+    $("feedback").className="feedback show bad";
+    $("feedback").innerHTML=`<strong>❌ Incorrect. Try again!</strong>Đáp án đúng chưa được hiển thị. Hãy chọn lại một phương án khác.`;
+
+    updateStatus();
+
+    if(lives<=0){
+      locked=true;
+      setTimeout(showGameOver,400);
+    }
+  }
+}
+
+$("nextBtn").addEventListener("click",()=>{
+  current++;
+  renderQuestion();
+});
+
+$("resetBtn").addEventListener("click",startGame);
+$("restartBtn").addEventListener("click",startGame);
+$("closeBtn").addEventListener("click",closeModal);
+
+function showGameOver(){
+  $("modalTitle").textContent="💔 Hết 3 tim!";
+  $("modalText").textContent="Em phải làm lại từ đầu. Thứ tự câu hỏi vẫn giữ nguyên 1→8, nhưng các phương án A–D sẽ được trộn lại.";
+  $("summary").innerHTML=`
+    <div><b>${score}</b>Correct</div>
+    <div><b>${current+1}</b>Attempted</div>
+    <div><b>0</b>Lives left</div>`;
+  $("closeBtn").style.display="none";
+  $("modal").classList.add("show");
+}
+
+function finishGame(){
+  $("progress").style.width="100%";
+  $("modalTitle").textContent=score===8 ? "🏆 Excellent!" : "🎉 Completed!";
+  $("modalText").textContent="Em đã hoàn thành Exercise 8.";
+  $("summary").innerHTML=`
+    <div><b>${score}/8</b>Correct</div>
+    <div><b>${Math.round(score/8*100)}%</b>Accuracy</div>
+    <div><b>${lives}</b>Lives left</div>`;
+  $("closeBtn").style.display="block";
+  $("modal").classList.add("show");
+}
+
+function closeModal(){
+  $("modal").classList.remove("show");
+}
+
+startGame();
+</script>
+</body>
+</html>
