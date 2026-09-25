@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0c5743">
+  <title>Grade 12 · Unit 6 · Exercise 1 (1–40) · Option C</title>
+  <style>
+    :root{--dark:#104835;--forest:#176247;--mint:#e8f7ed;--green:#168058;--lime:#c7e89c;--ink:#153d30;--muted:#567064;--red:#b33c46;--shadow:0 22px 65px rgba(18,82,56,.13)}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 10% 10%,#ddf4dc 0,transparent 30%),radial-gradient(circle at 90% 70%,#c6ebdd 0,transparent 40%),#f0f8ef;color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #e9ab3b;outline-offset:3px}
+    .shell{max-width:990px;margin:auto;padding:25px 20px 60px}.hero{position:relative;overflow:hidden;background:linear-gradient(125deg,#103e33,#176c51 65%,#298868);color:white;border-radius:30px;padding:33px 38px 37px;box-shadow:var(--shadow)}.hero:before,.hero:after{content:"";position:absolute;border-radius:60% 40% 60% 35%;pointer-events:none}.hero:before{width:300px;height:300px;background:#a5e7931e;right:-80px;top:-150px;transform:rotate(-30deg)}.hero:after{width:160px;height:160px;background:#daffb822;right:130px;bottom:-110px;transform:rotate(27deg)}.eyebrow{font-size:.75rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#c3f3cf}.hero h1{position:relative;margin:11px 0 7px;font-size:clamp(1.65rem,4vw,2.8rem);line-height:1.16}.hero p{position:relative;margin:0;color:#daf0e5;max-width:690px}.hero .leaf{position:absolute;right:36px;top:21px;font-size:3.1rem;opacity:.75}
+    .board{position:relative;margin-top:-1px;padding:24px 34px 26px;background:white;border:1px solid #dcefe1;border-radius:0 0 26px 26px;box-shadow:var(--shadow)}.stats{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:13px}.pill{display:inline-flex;align-items:center;gap:9px;border-radius:999px;padding:8px 14px;background:#e7f5ed;font-weight:750;color:var(--forest);font-size:.92rem}.hearts{letter-spacing:.07em;color:#e4475b;font-size:1.26rem;white-space:nowrap}.hearts .empty{color:#b9c9bf}.reset{border:1px solid #bddbc8;background:#fff;color:var(--forest);font-weight:750;padding:9px 15px;border-radius:12px}.reset:hover{background:var(--mint)}.progress{height:10px;margin:22px 0 6px;background:#e9f0e8;border-radius:30px;overflow:hidden}.progress>span{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#24a366,#8dc860);transition:width .35s}.small{color:var(--muted);font-size:.89rem}
+    .card{margin-top:19px;background:#fff;border:1px solid #dbebdf;border-radius:25px;box-shadow:var(--shadow);padding:32px 35px}.q-label{font-size:.77rem;text-transform:uppercase;letter-spacing:.12em;color:var(--green);font-weight:850}.question{font-size:clamp(1.12rem,2.5vw,1.45rem);font-weight:720;line-height:1.55;margin:11px 0 25px}.blank{display:inline-block;vertical-align:baseline;min-width:4.8em;border-bottom:2px dashed #42aa7a;height:1em}.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}.option{display:flex;align-items:center;gap:14px;width:100%;text-align:left;min-height:70px;padding:13px 15px;border:2px solid #dceee0;border-radius:15px;background:#f9fdf9;color:#183d2f;font-weight:580;transition:transform .15s,border-color .15s,background .15s}.option:hover:not(:disabled){transform:translateY(-2px);border-color:#5fb184;background:#eef9ef}.option .letter{flex:0 0 34px;height:34px;display:grid;place-items:center;background:#e1f1e5;border-radius:10px;color:var(--forest);font-weight:850}.option.wrong{background:#fff1f1;border-color:#e6a1a7;color:#96303c}.option.wrong .letter{background:#fad9db;color:#96303c}.option.correct{background:#e3f6e8;border-color:#36a46b;color:#0e673e}.option.correct .letter{background:#26a266;color:white}.option:disabled{cursor:default}.feedback{margin-top:18px;padding:15px 17px;border-radius:14px;font-weight:640}.feedback.bad{background:#fff2ef;color:#a23d43}.feedback.good{background:#e8f8ee;color:#146444}.feedback small{display:block;margin-top:5px;font-size:.91rem;font-weight:480;line-height:1.55;color:#305a43}.actions{display:flex;justify-content:flex-end;margin-top:19px}.primary{border:0;border-radius:13px;background:#197c54;color:#fff;padding:12px 23px;font-weight:800;box-shadow:0 7px 16px #197c5433}.primary:hover{background:#0d6644}.hint{font-size:.86rem;color:var(--muted);text-align:center;margin:20px 0 0}
+    .end{margin-top:19px;background:white;border:1px solid #d8ebdc;border-radius:25px;padding:42px 30px;text-align:center;box-shadow:var(--shadow)}.end .emoji{font-size:3.5rem}.end h2{margin:9px 0}.end p{max-width:560px;margin:0 auto 23px;color:#506b5c}.hidden{display:none!important}
+    @media(max-width:650px){.shell{padding:12px 12px 40px}.hero{border-radius:22px;padding:24px 22px 30px}.hero .leaf{right:14px;top:12px;font-size:2rem}.board{padding:20px 19px}.card{padding:23px 18px}.answers{grid-template-columns:1fr}.option{min-height:61px}.stats{gap:10px}.pill{padding:7px 10px;font-size:.84rem}.hearts{font-size:1.03rem}}
+  </style>
+</head>
+<body>
+<main class="shell">
+  <header class="hero">
+    <span class="leaf" aria-hidden="true">🌿</span>
+    <div class="eyebrow">Fresh green challenge · Grade 12</div>
+    <h1>Unit 6 · Exercise 1 · Option C</h1>
+    <p>Choose A, B, C, or D. A wrong choice costs one heart; find the correct answer before moving on.</p>
+  </header>
+  <section class="board" aria-label="Game status">
+    <div class="stats">
+      <span class="pill" id="counter">Question 1 / 15</span>
+      <span class="pill" aria-label="Remaining hearts">❤️ <span id="hearts" class="hearts"></span></span>
+      <button type="button" id="reset" class="reset">↻ Reset game</button>
+    </div>
+    <div class="progress" role="progressbar" aria-label="Questions completed" aria-valuemin="0" aria-valuemax="15" aria-valuenow="0" id="progress"><span id="progressFill"></span></div>
+    <div class="small" id="progressText">0 / 15 questions completed</div>
+  </section>
+  <section class="card" id="play" aria-labelledby="questionText">
+    <div class="q-label" id="questionLabel">QUESTION 01</div>
+    <div class="question" id="questionText"></div>
+    <div class="answers" id="answers" role="group" aria-label="Answer options"></div>
+    <div class="feedback hidden" id="feedback" role="status" aria-live="polite"></div>
+    <div class="actions"><button type="button" class="primary hidden" id="next">Next question →</button></div>
+  </section>
+  <section class="end hidden" id="end" aria-live="polite">
+    <div class="emoji" id="endEmoji" aria-hidden="true">🌱</div><h2 id="endTitle"></h2><p id="endText"></p>
+    <button type="button" class="primary" id="restart">↻ Play again</button>
+  </section>
+  <p class="hint">Exercise 1 (1–40) · Option C · Current game: the 15 supplied questions</p>
+</main>
+<script>
+'use strict';
+// Add Questions 16–40 here when their original text, options, and answer key are supplied.
+// Each entry stores the correct answer by index in its original, unshuffled options.
+const questions = [
+  {"q":"Some employees are concerned that increasingly sophisticated AI systems may eventually __________ many routine administrative tasks currently performed by humans.","o":["carry out","take over","turn on","drop out"],"a":1,"e":"take over: tiếp quản/thay thế việc đang do người hoặc hệ thống khác đảm nhiệm."},
+  {"q":"To remain effective in rapidly changing environments, intelligent systems must be able to __________ with newly available information and adjust their responses accordingly.","o":["come up","catch up","keep up","take up"],"a":2,"e":"keep up with: theo kịp sự thay đổi/thông tin mới."},
+  {"q":"Before the company submitted its annual report, it had all financial transactions __________ by AI-powered auditing software.","o":["review","reviewing","reviewed","to review"],"a":2,"e":"have + object + past participle: nhờ/cho một việc được thực hiện."},
+  {"q":"Rather than purchasing an existing system, the company got its software engineer __________ a chatbot tailored specifically to customer enquiries.","o":["develop","developed","developing","to develop"],"a":3,"e":"get + somebody + to V: nhờ/yêu cầu ai làm gì."},
+  {"q":"Researchers are constantly trying to __________ innovative solutions that allow AI systems to operate more efficiently while consuming less energy.","o":["get rid of","put up with","come up with","turn into"],"a":2,"e":"come up with a solution/idea: nghĩ ra, đề xuất giải pháp/ý tưởng."},
+  {"q":"As AI-generated content becomes increasingly sophisticated, even experienced readers may find it difficult to __________ between authentic and artificially produced material.","o":["distinguish","activate","automate","upgrade"],"a":0,"e":"distinguish between A and B: phân biệt A với B."},
+  {"q":"Although __________ recognition can improve security by identifying authorised users almost instantly, critics have raised concerns about how biometric data is stored.","o":["speech","facial","conversational","virtual"],"a":1,"e":"facial recognition: công nghệ nhận diện khuôn mặt."},
+  {"q":"The research institute is currently __________ a range of cutting-edge AI solutions designed to improve the early detection of complex diseases.","o":["devising","giving away","looking after","putting up with"],"a":0,"e":"devise a solution/system/plan: nghĩ ra hoặc phát triển một giải pháp/hệ thống."},
+  {"q":"Visitors to the technology __________ were particularly impressed by a robot capable of recognising facial expressions and responding appropriately.","o":["application","activation","exhibition","applicant"],"a":2,"e":"technology exhibition: triển lãm công nghệ."},
+  {"q":"Before using the voice-controlled features, users must __________ the speech-recognition function in the application settings.","o":["active","activation","activate","actively"],"a":2,"e":"Sau must dùng động từ nguyên mẫu: must activate."},
+  {"q":"Despite having no formal qualification in computer science, the __________ impressed the interview panel with an exceptionally sophisticated AI project.","o":["applicant","exhibitor","application","programmer"],"a":0,"e":"applicant: người nộp đơn/ứng viên. Câu nói về người được hội đồng phỏng vấn đánh giá."},
+  {"q":"Although the system is technologically __________, it still occasionally produces inaccurate results when it processes unfamiliar types of data.","o":["accurate","advanced","hands-on","various"],"a":1,"e":"technologically advanced: tiên tiến về công nghệ. Although tạo sự tương phản: tiên tiến nhưng vẫn có thể mắc lỗi."},
+  {"q":"After collecting thousands of comments from users, the researchers conducted a detailed __________ to identify recurring problems with the virtual assistant.","o":["evolution","interaction","analysis","exploration"],"a":2,"e":"conduct an analysis of data/feedback: tiến hành phân tích dữ liệu/phản hồi."},
+  {"q":"A well-designed educational platform can provide __________ learning by adjusting the difficulty and type of exercises according to each student's performance.","o":["personality","personalised","personally","personalising"],"a":1,"e":"personalised learning: học tập được cá nhân hóa theo nhu cầu và năng lực từng học sinh."},
+  {"q":"Excessive reliance on ready-made AI-generated answers may discourage students from developing the __________ skills needed to evaluate evidence and form independent judgments.","o":["time-management","leadership","critical-thinking","technical"],"a":2,"e":"critical-thinking skills: kỹ năng tư duy phản biện. evaluate evidence + form independent judgments là dấu hiệu rõ của tư duy phản biện."}
+];
+const $ = id => document.getElementById(id);
+let position = 0, hearts = 5, solved = false, choices = [];
+function shuffle(items) {
+  const result = items.slice();
+  for (let i=result.length-1;i>0;i--) {
+    const j=Math.floor(Math.random()*(i+1));
+    [result[i],result[j]]=[result[j],result[i]];
+  }
+  return result;
+}
+function updateStatus(){
+  $('counter').textContent=`Question ${Math.min(position+1,questions.length)} / ${questions.length}`;
+  $('hearts').replaceChildren();
+  for(let i=0;i<5;i++){
+    const heart=document.createElement('span');
+    heart.textContent=i<hearts?'♥':'♡';
+    heart.className=i<hearts?'':'empty';
+    $('hearts').append(heart);
+  }
+  $('progressFill').style.width=`${position/questions.length*100}%`;
+  $('progress').setAttribute('aria-valuenow',String(position));
+  $('progress').setAttribute('aria-valuemax',String(questions.length));
+  $('progressText').textContent=`${position} / ${questions.length} questions completed`;
+}
+function showFeedback(kind,main,detail=''){
+  const el=$('feedback');el.className=`feedback ${kind}`;
+  el.replaceChildren(document.createTextNode(main));
+  if(detail){const small=document.createElement('small');small.textContent=detail;el.append(small);}
+}
+function showQuestion(){
+  solved=false;choices=shuffle(questions[position].o.map((label,index)=>({label,index})));
+  $('play').classList.remove('hidden');$('end').classList.add('hidden');
+  $('feedback').className='feedback hidden';$('next').classList.add('hidden');
+  $('questionLabel').textContent=`QUESTION ${String(position+1).padStart(2,'0')}`;
+  const q=$('questionText');q.replaceChildren();
+  const [before,...after]=questions[position].q.split('__________');
+  q.append(document.createTextNode(before));
+  if(after.length){const blank=document.createElement('span');blank.className='blank';blank.setAttribute('aria-label','blank');q.append(blank,document.createTextNode(after.join('__________')));}
+  const box=$('answers');box.replaceChildren();
+  choices.forEach((choice,slot)=>{
+    const button=document.createElement('button');button.type='button';button.className='option';
+    const letter=document.createElement('span');letter.className='letter';letter.textContent='ABCD'[slot];
+    const label=document.createElement('span');label.textContent=choice.label;
+    button.append(letter,label);
+    button.addEventListener('click',()=>choose(button,choice));box.append(button);
+  });
+  updateStatus();
+}
+function choose(button,choice){
+  if(solved||hearts===0)return;
+  if(choice.index===questions[position].a){
+    solved=true;button.classList.add('correct');
+    for(const option of $('answers').children)option.disabled=true;
+    showFeedback('good','✓ Correct! ',questions[position].e);
+    $('next').textContent=position===questions.length-1?'See results →':'Next question →';
+    $('next').classList.remove('hidden');$('next').focus();
+  }else{
+    hearts--;button.disabled=true;button.classList.add('wrong');updateStatus();
+    if(hearts===0){
+      for(const option of $('answers').children)option.disabled=true;
+      showFeedback('bad','No hearts left. Start again from Question 1.');
+      $('play').classList.add('hidden');$('end').classList.remove('hidden');
+      $('endEmoji').textContent='🍃';$('endTitle').textContent='Out of hearts';
+      $('endText').textContent='Try again from Question 1. The answer order will be shuffled for every question.';
+      $('restart').focus();
+    }else{showFeedback('bad',`Not quite. You have ${hearts} ${hearts===1?'heart':'hearts'} left. Try another answer in this question.`);}
+  }
+}
+function restart(){position=0;hearts=5;showQuestion();}
+$('reset').addEventListener('click',restart);
+$('restart').addEventListener('click',restart);
+$('next').addEventListener('click',()=>{
+  if(!solved)return;
+  position++;
+  if(position<questions.length){showQuestion();return;}
+  updateStatus();$('counter').textContent='Completed · 15 / 15';
+  $('play').classList.add('hidden');$('end').classList.remove('hidden');
+  $('endEmoji').textContent='🌳';$('endTitle').textContent='Well done!';
+  $('endText').textContent=`You completed all ${questions.length} questions with ${hearts} ${hearts===1?'heart':'hearts'} remaining. Play again to get a fresh answer order.`;
+  $('restart').focus();
+});
+restart();
+</script>
+</body>
+</html>
