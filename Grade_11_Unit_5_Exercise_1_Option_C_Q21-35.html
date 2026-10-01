@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffd94f">
+  <title>Grade 11 · Unit 5 · Exercise 1 (21–35) · Option C</title>
+  <style>
+    :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:#352a14;background:#fff8df}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 14% 8%,#fff2a8 0,transparent 32%),radial-gradient(circle at 88% 80%,#ffe993 0,transparent 31%),#fff9e7}
+    button{font:inherit;cursor:pointer}.shell{width:min(1060px,calc(100% - 32px));margin:0 auto;padding:26px 0 60px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px}.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:-.04em;font-size:1.2rem}.sun{display:grid;place-items:center;width:43px;height:43px;background:#ffcb2f;border:2px solid #382b0b;border-radius:14px;box-shadow:3px 4px 0 #382b0b;transform:rotate(-6deg);font-size:1.45rem}.reset{border:2px solid #47350d;background:#fffdf3;color:#3e3113;border-radius:14px;padding:10px 15px;font-weight:800;box-shadow:3px 4px 0 #47350d}.reset:hover{background:#fff0b3}.reset:active,.next:active{transform:translate(2px,3px);box-shadow:1px 1px 0 #47350d}
+    .hero{position:relative;overflow:hidden;border:2px solid #43320b;border-radius:28px;background:#ffda55;padding:30px 34px 28px;box-shadow:7px 8px 0 #44330d}.hero:before,.hero:after{content:"";position:absolute;border:2px solid #765910;border-radius:50%;opacity:.22;pointer-events:none}.hero:before{width:240px;height:240px;right:-50px;top:-115px}.hero:after{width:125px;height:125px;right:140px;bottom:-90px}.eyebrow{display:inline-block;padding:6px 11px;border:1.5px solid #59430b;border-radius:99px;background:#fff4bb;font-size:.77rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.hero h1{position:relative;font-size:clamp(1.9rem,4vw,3.25rem);line-height:1.06;letter-spacing:-.055em;margin:16px 0 10px;max-width:720px}.hero p{position:relative;margin:0;color:#5e491c;line-height:1.55;max-width:650px}.hero .leaf{position:absolute;right:52px;top:47px;font-size:4.4rem;transform:rotate(-14deg)}
+    .dashboard{display:grid;grid-template-columns:1fr auto;gap:16px;margin:24px 0 18px}.status,.lives{border:2px solid #44330d;border-radius:20px;background:#fffdf5;padding:18px 20px;box-shadow:4px 5px 0 #e0c875}.statusline{display:flex;justify-content:space-between;gap:12px;font-weight:850}.meter{height:12px;margin-top:14px;border-radius:20px;background:#f5e9bf;overflow:hidden;border:1px solid #dac689}.meter>span{display:block;height:100%;width:0;background:linear-gradient(90deg,#f5b51a,#ffdc44);border-radius:20px;transition:width .25s}.lives{min-width:205px;text-align:center}.lives small{display:block;font-weight:850;color:#685529;margin-bottom:7px}.hearts{font-size:1.45rem;letter-spacing:2px;white-space:nowrap}.hearts .lost{filter:grayscale(1);opacity:.25}
+    .card{background:#fffefa;border:2px solid #44330d;border-radius:26px;box-shadow:6px 7px 0 #e5cc79;padding:clamp(22px,4vw,38px)}.cardhead{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:20px}.pill{display:inline-flex;align-items:center;gap:5px;border-radius:99px;background:#fff0b1;padding:7px 11px;color:#6a4a05;font-size:.8rem;font-weight:900}.muted{font-size:.85rem;color:#7b6a49;font-weight:700}.question{font-size:clamp(1.25rem,2.7vw,1.75rem);line-height:1.45;letter-spacing:-.02em;margin:0 0 23px;max-width:850px}.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}.answer{min-height:67px;display:flex;align-items:center;gap:14px;text-align:left;border:2px solid #e1d3a2;background:#fffdf6;border-radius:17px;padding:12px 16px;color:#352a14;line-height:1.35;transition:background .15s,border-color .15s,transform .15s}.answer:not(:disabled):hover{background:#fff2bc;border-color:#d0a219;transform:translateY(-2px)}.answer:disabled{cursor:default}.letter{flex:none;display:grid;place-items:center;width:34px;height:34px;background:#ffe89a;border-radius:10px;font-weight:900}.answer.good{border-color:#398452;background:#e6f8e9}.answer.good .letter{background:#53ae6a;color:white}.answer.bad{border-color:#d87967;background:#fff0eb}.answer.bad .letter{background:#df7968;color:white}.answer.locked{opacity:.62}.feedback{display:none;border-radius:16px;padding:16px 18px;margin-top:19px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#e8f8e9;border:1.5px solid #87c997}.feedback.bad{background:#fff0e8;border:1.5px solid #e7a28f}.feedback strong{display:block;margin-bottom:4px}.feedback p{margin:0}.actions{display:flex;justify-content:flex-end;margin-top:20px}.next{display:none;background:#ffcd32;border:2px solid #48360e;border-radius:14px;padding:13px 20px;font-weight:900;color:#372a10;box-shadow:3px 4px 0 #48360e}.next.show{display:inline-block}.next:hover{background:#ffd952}.foot{margin:22px 5px;text-align:center;color:#806f4e;font-size:.85rem}.overlay[hidden]{display:none}.overlay{position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:#352507a8;padding:20px}.modal{width:min(440px,100%);text-align:center;background:#fffcf0;border:2px solid #3d2e0e;box-shadow:8px 9px 0 #241b09;border-radius:25px;padding:33px 25px}.modal .icon{font-size:3.5rem}.modal h2{font-size:2rem;letter-spacing:-.04em;margin:12px 0 8px}.modal p{line-height:1.55;color:#695831;margin-bottom:22px}.modal .next{display:inline-block}
+    @media(max-width:650px){.shell{width:min(100% - 24px,1060px);padding-top:14px}.hero{padding:25px 22px}.hero .leaf{font-size:2.5rem;right:24px;top:25px;opacity:.6}.hero h1{padding-right:20px}.dashboard{grid-template-columns:1fr}.lives{text-align:left}.answers{grid-template-columns:1fr}.card{padding:22px}.answer{min-height:59px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="top"><div class="brand"><span class="sun" aria-hidden="true">☀️</span><span>Sunny English</span></div><button class="reset" id="reset" type="button">↻ Làm lại đề</button></header>
+    <section class="hero" aria-label="Giới thiệu bài tập"><span class="eyebrow">Grade 11 · Unit 5</span><span class="leaf" aria-hidden="true">🌿</span><h1>Environment Challenge</h1><p>Exercise 1 · Option C · Câu 21–35 (15 câu đã được cung cấp). Chọn đáp án đúng, xem giải thích và giữ lại 5 trái tim để hoàn thành bài.</p></section>
+    <div class="dashboard"><section class="status" aria-label="Tiến độ"><div class="statusline"><span id="progressText">Câu 1 / 15</span><span id="scoreText">Đúng 0 / 15</span></div><div class="meter" role="progressbar" aria-label="Câu đã hoàn thành" aria-valuemin="0" aria-valuemax="15" aria-valuenow="0" id="meter"><span id="fill"></span></div></section><section class="lives" aria-label="Số tim còn lại"><small>TRÁI TIM CÒN LẠI</small><div class="hearts" id="hearts" aria-live="polite"></div></section></div>
+    <section class="card" aria-labelledby="question"><div class="cardhead"><span class="pill" id="number">QUESTION 01</span><span class="muted">Choose the best answer</span></div><h2 class="question" id="question"></h2><div class="answers" id="answers" role="group" aria-label="Các lựa chọn"></div><div class="feedback" id="feedback" role="status" aria-live="polite"></div><div class="actions"><button class="next" id="next" type="button">Câu tiếp theo →</button></div></section>
+    <p class="foot">Mỗi lần làm lại, thứ tự câu hỏi và các lựa chọn sẽ được xáo trộn.</p>
+  </main>
+  <div class="overlay" id="overlay" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="icon" id="modalIcon" aria-hidden="true"></div><h2 id="modalTitle"></h2><p id="modalText"></p><button class="next" id="replay" type="button">↻ Chơi lại đề mới</button></div></div>
+  <script>
+    "use strict";
+    const QUESTIONS = [
+      {
+            "id": 21,
+            "q": "One effective way to lower greenhouse gas emissions is to reduce the amount of fossil fuels __________ for electricity generation.",
+            "a": [
+                  "consuming",
+                  "consumed",
+                  "escaping",
+                  "storing"
+            ],
+            "correct": 1,
+            "ex": "“Fossil fuels consumed for...” là nhiên liệu hóa thạch được sử dụng để sản xuất điện."
+      },
+      {
+            "id": 22,
+            "q": "Toxic gases may __________ into the atmosphere when industrial storage facilities are poorly maintained.",
+            "a": [
+                  "release",
+                  "restore",
+                  "escape",
+                  "prevent"
+            ],
+            "correct": 2,
+            "ex": "“Escape into the atmosphere” nghĩa là thoát hoặc rò rỉ vào khí quyển."
+      },
+      {
+            "id": 23,
+            "q": "Restoring damaged forests can have a significant positive __________ on biodiversity and soil quality.",
+            "a": [
+                  "consequence",
+                  "effect",
+                  "emission",
+                  "pollutant"
+            ],
+            "correct": 1,
+            "ex": "“Have an effect on” nghĩa là có ảnh hưởng đến."
+      },
+      {
+            "id": 24,
+            "q": "Introducing low-emission public transport has proved highly __________ in improving air quality.",
+            "a": [
+                  "effect",
+                  "effectively",
+                  "effective",
+                  "effectiveness"
+            ],
+            "correct": 2,
+            "ex": "Sau “proved highly” cần tính từ “effective”."
+      },
+      {
+            "id": 25,
+            "q": "Unlike solar and wind power, coal is considered a __________ source of energy because supplies are limited.",
+            "a": [
+                  "renewable",
+                  "sustainable",
+                  "non-renewable",
+                  "environmentally friendly"
+            ],
+            "correct": 2,
+            "ex": "Than đá là nguồn năng lượng không thể tái tạo nhanh chóng."
+      },
+      {
+            "id": 26,
+            "q": "Scientists predict that climate change may increase both the frequency and severity of natural __________.",
+            "a": [
+                  "disasters",
+                  "substances",
+                  "resources",
+                  "emissions"
+            ],
+            "correct": 0,
+            "ex": "“Natural disasters” nghĩa là thiên tai."
+      },
+      {
+            "id": 27,
+            "q": "Coastal communities are particularly vulnerable to __________ caused by intense storms and rising sea levels.",
+            "a": [
+                  "flooding",
+                  "burning",
+                  "pollution",
+                  "deforestation"
+            ],
+            "correct": 0,
+            "ex": "“Be vulnerable to flooding” nghĩa là dễ bị ngập lụt."
+      },
+      {
+            "id": 28,
+            "q": "Mature forests can __________ enormous quantities of carbon in vegetation and soil for long periods.",
+            "a": [
+                  "store",
+                  "escape",
+                  "warn",
+                  "emit"
+            ],
+            "correct": 0,
+            "ex": "“Store carbon” nghĩa là lưu trữ carbon."
+      },
+      {
+            "id": 29,
+            "q": "Black carbon is mainly produced through the incomplete __________ of fuels such as coal, wood and diesel.",
+            "a": [
+                  "combustion",
+                  "pollution",
+                  "storage",
+                  "restoration"
+            ],
+            "correct": 0,
+            "ex": "“Incomplete combustion” nghĩa là sự đốt cháy không hoàn toàn."
+      },
+      {
+            "id": 30,
+            "q": "Extended periods of unusually hot and dry weather greatly increase the likelihood of __________.",
+            "a": [
+                  "sea-level rise",
+                  "wildfires",
+                  "landfills",
+                  "reforestation"
+            ],
+            "correct": 1,
+            "ex": "Thời tiết nóng và khô kéo dài làm tăng nguy cơ cháy rừng."
+      },
+      {
+            "id": 31,
+            "q": "Local authorities have imposed a complete __________ on burning household waste outdoors.",
+            "a": [
+                  "balance",
+                  "ban",
+                  "warning",
+                  "consequence"
+            ],
+            "correct": 1,
+            "ex": "“Impose a ban on + V-ing/noun” nghĩa là ban hành lệnh cấm."
+      },
+      {
+            "id": 32,
+            "q": "Kitchen scraps, fallen leaves and other __________ materials can be turned into compost.",
+            "a": [
+                  "fossil",
+                  "organic",
+                  "renewable",
+                  "polluted"
+            ],
+            "correct": 1,
+            "ex": "“Organic materials” nghĩa là vật liệu hữu cơ."
+      },
+      {
+            "id": 33,
+            "q": "Climate experts have repeatedly __________ that delaying action could make future environmental damage more difficult to control.",
+            "a": [
+                  "warned",
+                  "escaped",
+                  "stored",
+                  "flooded"
+            ],
+            "correct": 0,
+            "ex": "“Warn that + clause” nghĩa là cảnh báo rằng..."
+      },
+      {
+            "id": 34,
+            "q": "Continued global warming could result __________ more frequent and more intense heatwaves.",
+            "a": [
+                  "from",
+                  "in",
+                  "with",
+                  "on"
+            ],
+            "correct": 1,
+            "ex": "“Result in” nghĩa là dẫn đến."
+      },
+      {
+            "id": 35,
+            "q": "A substantial proportion of current carbon emissions results __________ the burning of fossil fuels for transport and electricity.",
+            "a": [
+                  "in",
+                  "with",
+                  "from",
+                  "on"
+            ],
+            "correct": 2,
+            "ex": "“Result from” nghĩa là bắt nguồn từ một nguyên nhân."
+      }
+];
+    const $ = id => document.getElementById(id);
+    const els = {question:$("question"),answers:$("answers"),feedback:$("feedback"),next:$("next"),number:$("number"),progress:$("progressText"),score:$("scoreText"),hearts:$("hearts"),meter:$("meter"),fill:$("fill"),overlay:$("overlay")};
+    let deck=[],position=0,lives=5,solved=0,answered=false,lastQuestionOrder="",lastOptionOrders=new Map();
+    function randomIndex(max){if(globalThis.crypto?.getRandomValues){const array=new Uint32Array(1);globalThis.crypto.getRandomValues(array);return array[0]%max}return Math.floor(Math.random()*max)}
+    function shuffle(items){const copy=[...items];for(let i=copy.length-1;i>0;i--){const j=randomIndex(i+1);[copy[i],copy[j]]=[copy[j],copy[i]]}return copy}
+    function freshOrder(items,previous){let result=shuffle(items);if(result.map(x=>x.id??x.original).join("|")===previous&&result.length>1){[result[0],result[1]]=[result[1],result[0]]}return result}
+    function updateStatus(){els.progress.textContent=position<deck.length?`Câu ${position+1} / ${deck.length}`:`Hoàn thành ${deck.length} / ${deck.length}`;els.score.textContent=`Đúng ${solved} / ${deck.length}`;els.fill.style.width=`${Math.round(solved/deck.length*100)}%`;els.meter.setAttribute("aria-valuenow",String(solved));els.hearts.replaceChildren();for(let i=0;i<5;i++){const span=document.createElement("span");span.textContent="♥";span.className=i<lives?"":"lost";span.setAttribute("aria-hidden","true");els.hearts.append(span)}els.hearts.setAttribute("aria-label",`${lives} trên 5 trái tim còn lại`)}
+    function showFeedback(kind,title,body){els.feedback.className=`feedback show ${kind}`;els.feedback.replaceChildren();const strong=document.createElement("strong");strong.textContent=title;const p=document.createElement("p");p.textContent=body;els.feedback.append(strong,p)}
+    function render(){answered=false;const item=deck[position];els.number.textContent=`QUESTION ${String(item.id).padStart(2,"0")}`;els.question.textContent=item.q;els.answers.replaceChildren();els.feedback.className="feedback";els.feedback.replaceChildren();els.next.classList.remove("show");item.options.forEach((choice,i)=>{const button=document.createElement("button");button.type="button";button.className="answer";const badge=document.createElement("span");badge.className="letter";badge.textContent="ABCD"[i];const label=document.createElement("span");label.textContent=choice.text;button.append(badge,label);button.addEventListener("click",()=>choose(button,choice,item));els.answers.append(button)});updateStatus()}
+    function choose(button,choice,item){if(answered||button.disabled||lives===0)return;if(choice.original===item.correct){answered=true;solved++;button.classList.add("good");for(const option of els.answers.children)option.disabled=true;showFeedback("good","✓ Chính xác!",item.ex);els.next.textContent=position===deck.length-1?"Xem kết quả →":"Câu tiếp theo →";els.next.classList.add("show");updateStatus();els.next.focus()}else{button.classList.add("bad");button.disabled=true;lives--;updateStatus();if(lives===0){showModal(false);return}showFeedback("bad","Chưa đúng, thử lại nhé!",`Bạn còn ${lives} ${lives===1?"trái tim":"trái tim"}. Hãy chọn một đáp án khác.`)}}
+    function showModal(won){$("modalIcon").textContent=won?"🏆":"💛";$("modalTitle").textContent=won?"Hoàn thành xuất sắc!":"Hết 5 trái tim rồi!";$("modalText").textContent=won?`Bạn đã vượt qua toàn bộ ${deck.length} câu. Bấm chơi lại để luyện với thứ tự mới.`:`Bạn đã hoàn thành ${solved}/${deck.length} câu. Bấm chơi lại để làm một đề được xáo trộn mới.`;els.overlay.hidden=false;$("replay").focus()}
+    function start(){const questionOrder=freshOrder(QUESTIONS,lastQuestionOrder);lastQuestionOrder=questionOrder.map(x=>x.id).join("|");deck=questionOrder.map(item=>{const choices=item.a.map((text,original)=>({text,original}));const order=freshOrder(choices,lastOptionOrders.get(item.id)||"");lastOptionOrders.set(item.id,order.map(x=>x.original).join("|"));return {...item,options:order}});position=0;lives=5;solved=0;els.overlay.hidden=true;render()}
+    $("reset").addEventListener("click",start);$("replay").addEventListener("click",start);els.next.addEventListener("click",()=>{if(!answered)return;position++;if(position===deck.length){updateStatus();showModal(true)}else render()});
+    start();
+  </script>
+</body>
+</html>

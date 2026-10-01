@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffdc54">
+  <title>Grade 11 · Unit 5 · Exercise 8 · Option C</title>
+  <style>
+    :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:#382b12;background:#fff9e8}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 8% 5%,#fff2a5 0,transparent 29%),radial-gradient(circle at 95% 88%,#ffe68d 0,transparent 30%),#fff9e8}button{font:inherit;cursor:pointer}.shell{width:min(1220px,calc(100% - 32px));margin:0 auto;padding:24px 0 52px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:20px}.brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:-.04em;font-size:1.15rem}.sun{display:grid;place-items:center;width:43px;height:43px;background:#ffca29;border:2px solid #3f310e;border-radius:14px;box-shadow:3px 4px 0 #3f310e;transform:rotate(-6deg);font-size:1.4rem}.reset{border:2px solid #49370e;background:#fffdf3;color:#382b12;border-radius:14px;padding:10px 15px;font-weight:850;box-shadow:3px 4px 0 #49370e}.reset:hover{background:#fff0b1}.reset:active,.next:active{transform:translate(2px,3px);box-shadow:1px 1px 0 #49370e}
+    .hero{position:relative;overflow:hidden;border:2px solid #43320b;border-radius:27px;background:#ffdb59;padding:26px 32px;box-shadow:6px 7px 0 #44330d}.hero:before{content:"";position:absolute;width:220px;height:220px;border:2px solid #866b21;border-radius:50%;opacity:.25;right:-45px;top:-100px}.eyebrow{display:inline-block;padding:6px 11px;border:1.5px solid #59430b;border-radius:99px;background:#fff4bb;font-size:.76rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.hero h1{font-size:clamp(1.75rem,3.3vw,2.8rem);letter-spacing:-.055em;line-height:1.08;margin:14px 0 9px}.hero p{margin:0;color:#624b1b;line-height:1.5}.hero .leaf{position:absolute;right:60px;top:40px;font-size:3.8rem;transform:rotate(-14deg)}
+    .dashboard{display:grid;grid-template-columns:1fr auto;gap:15px;margin:22px 0 18px}.status,.lives{border:2px solid #44330d;border-radius:19px;background:#fffdf5;padding:16px 20px;box-shadow:4px 5px 0 #e0c875}.statusline{display:flex;justify-content:space-between;gap:12px;font-weight:850}.meter{height:11px;margin-top:13px;border-radius:20px;background:#f5e9bf;overflow:hidden;border:1px solid #dac689}.meter>span{display:block;height:100%;width:0;background:linear-gradient(90deg,#f5b51a,#ffdc44);border-radius:20px;transition:width .25s}.lives{min-width:196px;text-align:center}.lives small{display:block;font-weight:850;color:#685529;margin-bottom:6px}.hearts{font-size:1.4rem;letter-spacing:2px;white-space:nowrap}.hearts .lost{filter:grayscale(1);opacity:.25}
+    .layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(350px,.9fr);align-items:start;gap:19px}.panel{background:#fffefa;border:2px solid #44330d;border-radius:24px;box-shadow:5px 6px 0 #e5cc79;padding:clamp(20px,2.7vw,30px)}.reading{max-height:min(690px,calc(100vh - 95px));overflow:auto;scrollbar-color:#e4c558 #fff8df}.passage-title{font-size:1.36rem;line-height:1.25;letter-spacing:-.03em;margin:2px 0 18px}.reading p{font-size:1.02rem;line-height:1.85;margin:0 0 16px;color:#453a25}.reading p:last-child{margin-bottom:0}.blank{display:inline-block;white-space:nowrap;padding:0 5px;border-radius:7px;border:1px solid transparent;font-weight:800;color:#8e6d08}.blank.active{background:#ffda5d;border-color:#9d740b;box-shadow:0 2px 0 #9d740b;color:#3c2b05}.blank.done{background:#e8f7e5;color:#276b39;border-color:#9dd4a4}.blank.active.done{background:#ffda5d;color:#3c2b05}.tip{display:flex;align-items:flex-start;gap:9px;padding:11px 13px;margin-bottom:19px;background:#fff4c5;border-radius:13px;color:#6d581f;font-size:.88rem;line-height:1.45}
+    .quiz{position:sticky;top:18px}.pill{display:inline-flex;border-radius:99px;background:#fff0b1;padding:7px 11px;color:#6a4a05;font-size:.8rem;font-weight:900}.quiz h2{font-size:clamp(1.28rem,2.3vw,1.7rem);letter-spacing:-.03em;line-height:1.35;margin:18px 0 6px}.hint{margin:0 0 21px;color:#716042;line-height:1.5}.answers{display:grid;gap:10px}.answer{min-height:69px;width:100%;display:flex;align-items:center;gap:14px;text-align:left;border:2px solid #e1d3a2;background:#fffdf6;border-radius:15px;padding:10px 14px;color:#352a14;transition:background .15s,border-color .15s,transform .15s}.answer:not(:disabled):hover{background:#fff2bc;border-color:#d0a219;transform:translateY(-2px)}.answer:disabled{cursor:default}.letter{flex:none;display:grid;place-items:center;width:33px;height:33px;background:#ffe89a;border-radius:10px;font-weight:900}.answer.good{border-color:#398452;background:#e6f8e9}.answer.good .letter{background:#53ae6a;color:white}.answer.bad{border-color:#d87967;background:#fff0eb}.answer.bad .letter{background:#df7968;color:white}.feedback{display:none;border-radius:15px;padding:15px 17px;margin-top:17px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#e8f8e9;border:1.5px solid #87c997}.feedback.bad{background:#fff0e8;border:1.5px solid #e7a28f}.feedback strong{display:block;margin-bottom:3px}.feedback p{margin:0}.actions{display:flex;justify-content:flex-end;margin-top:19px}.next{display:none;background:#ffce34;border:2px solid #48360e;border-radius:14px;padding:12px 18px;font-weight:900;color:#372a10;box-shadow:3px 4px 0 #48360e}.next.show{display:inline-block}.next:hover{background:#ffdc60}.foot{margin:20px 4px;text-align:center;color:#806f4e;font-size:.85rem}
+    .overlay[hidden]{display:none}.overlay{position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:#352507a8;padding:20px}.modal{width:min(440px,100%);text-align:center;background:#fffcf0;border:2px solid #3d2e0e;box-shadow:8px 9px 0 #241b09;border-radius:25px;padding:33px 25px}.modal .icon{font-size:3.5rem}.modal h2{font-size:2rem;letter-spacing:-.04em;margin:12px 0 8px}.modal p{line-height:1.55;color:#695831;margin-bottom:22px}.modal .next{display:inline-block}
+    .slot{display:inline-block;padding:0 5px;background:#ffec9c;border:1px solid #d7b34c;border-radius:5px;color:#654800}
+    @media(max-width:850px){.layout{grid-template-columns:1fr}.reading{max-height:420px}.quiz{position:static}.hero .leaf{opacity:.45}}@media(max-width:600px){.shell{width:calc(100% - 24px);padding-top:13px}.hero{padding:24px 20px}.hero .leaf{font-size:2.4rem;right:21px;top:28px}.dashboard{grid-template-columns:1fr}.lives{text-align:left}.panel{padding:21px}.reading{max-height:370px}.reading p{font-size:.98rem;line-height:1.75}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="top"><div class="brand"><span class="sun" aria-hidden="true">☀️</span><span>Sunny English</span></div><button class="reset" id="reset" type="button">↻ Làm lại đề</button></header>
+    <section class="hero"><span class="eyebrow">Grade 11 · Unit 5</span><span class="leaf" aria-hidden="true">🌿</span><h1>Beyond a Single Solution</h1><p>Exercise 8 · Option C · Read the passage and choose the best answer to each question.</p></section>
+    <div class="dashboard"><section class="status" aria-label="Tiến độ"><div class="statusline"><span id="progressText">Câu 1 / 10</span><span id="scoreText">Đúng 0 / 10</span></div><div class="meter" role="progressbar" aria-label="Câu đã hoàn thành" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" id="meter"><span id="fill"></span></div></section><section class="lives" aria-label="Số tim còn lại"><small>TRÁI TIM CÒN LẠI</small><div class="hearts" id="hearts" aria-live="polite"></div></section></div>
+    <div class="layout">
+      <article class="panel reading" id="reading" aria-labelledby="passageTitle">
+        <h2 class="passage-title" id="passageTitle">BEYOND A SINGLE SOLUTION TO CLIMATE CHANGE</h2>
+        <div class="tip"><span aria-hidden="true">✦</span><span>Đọc bài bên trái rồi trả lời lần lượt 10 câu hỏi. Khi làm lại, thứ tự câu hỏi giữ nguyên và A/B/C/D được xáo trộn.</span></div>
+        <p>Climate change results from a combination of human activities, but the largest contribution comes from the release of greenhouse gases into the atmosphere. Burning fossil fuels for electricity, transport and industry releases large quantities of carbon dioxide, while agriculture and waste contribute other powerful greenhouse gases such as methane. Land-use change is another important factor. When forests are cleared, not only is stored carbon often released, but the Earth's capacity to remove carbon dioxide from the atmosphere is also reduced. These processes strengthen the natural greenhouse effect and gradually alter the planet's energy balance.</p>
+        <p>The consequences extend far beyond a simple rise in average temperature. A warmer atmosphere can hold more moisture, which may contribute to heavier rainfall in some regions, while changes in circulation and evaporation can make drought more severe elsewhere. Rising sea levels increase the risk of coastal flooding, and prolonged heat can threaten human health, reduce crop yields and place additional pressure on energy systems. Natural ecosystems are also affected. Some species can move or adjust their behaviour, but others may not adapt rapidly enough, particularly when climate change occurs alongside habitat loss, pollution and other environmental pressures.</p>
+        <p>Addressing these risks requires two complementary strategies. The first, mitigation, aims to limit the extent of future climate change by reducing greenhouse gas emissions or increasing the amount of carbon removed from the atmosphere. Replacing fossil fuels with low-carbon energy, improving energy efficiency, protecting forests and developing cleaner transportation systems are common examples. However, even extremely ambitious emission reductions cannot immediately eliminate all climate impacts because greenhouse gases already released into the atmosphere continue to influence the climate.</p>
+        <p><strong class="slot">[A]</strong> This makes adaptation equally necessary. <strong class="slot">[B]</strong> Adaptation involves adjusting human and natural systems to actual or expected climate effects. <strong class="slot">[C]</strong> For example, cities may expand green spaces to reduce extreme heat, farmers may adopt crops that tolerate drought, and coastal communities may improve flood defences. <strong class="slot">[D]</strong> Such measures do not stop climate change itself, but they can reduce the damage it causes.</p>
+        <p>Nevertheless, climate policies involve difficult choices. Resources are limited, and measures that appear effective at the national level may affect groups differently. For example, increasing energy prices may encourage efficiency but can create additional difficulties for low-income households unless appropriate support is provided. Similarly, communities that have contributed relatively little to global emissions may face particularly severe climate impacts. Effective climate policy therefore involves more than choosing technically efficient solutions; it also requires attention to who bears the costs, who receives the benefits and whether vulnerable groups have the resources to adapt.</p>
+        <p>Ultimately, neither mitigation nor adaptation is sufficient on its own. Strong mitigation reduces the scale of future changes, making adaptation more manageable, while effective adaptation protects people and ecosystems from impacts that cannot now be fully avoided. Treating the two approaches as competing alternatives may therefore weaken the overall response to climate change.</p>
+      </article>
+      <section class="panel quiz" aria-labelledby="question"><span class="pill" id="number">QUESTION 01</span><h2 id="question">Choose the best answer.</h2><p class="hint">Đọc đoạn văn bên cạnh rồi chọn một đáp án.</p><div class="answers" id="answers" role="group" aria-label="Các lựa chọn"></div><div class="feedback" id="feedback" role="status" aria-live="polite"></div><div class="actions"><button class="next" id="next" type="button">Câu tiếp theo →</button></div></section>
+    </div>
+    <p class="foot">Có 5 trái tim. Reset hoặc chơi lại giữ nguyên thứ tự câu hỏi và xáo trộn A/B/C/D.</p>
+  </main>
+  <div class="overlay" id="overlay" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="icon" id="modalIcon" aria-hidden="true"></div><h2 id="modalTitle"></h2><p id="modalText"></p><button class="next" id="replay" type="button">↻ Chơi lại đề mới</button></div></div>
+  <script>
+    "use strict";
+    const QUESTIONS = [
+      {
+            "id": 1,
+      "q": "Where would the following sentence best fit in paragraph 4? “Despite their different forms, all of these actions aim to reduce vulnerability rather than address the underlying cause of global warming.”",
+            "a": [
+                  "[A]",
+                  "[B]",
+                  "[C]",
+                  "[D]"
+            ],
+            "correct": 3,
+      "ex": "“All of these actions” quy chiếu tới ba ví dụ vừa nêu, nên câu này phù hợp nhất ở [D] trước “Such measures...”."
+      },
+      {
+            "id": 2,
+            "q": "The phrase “alter the planet's energy balance” in paragraph 1 is closest in meaning to __________.",
+            "a": [
+                  "change the relationship between energy entering and leaving the Earth",
+                  "reduce the amount of electricity used by human societies",
+                  "distribute energy resources more equally among countries",
+                  "increase the efficiency of renewable energy technologies"
+            ],
+            "correct": 0,
+            "ex": "“Energy balance” là cân bằng giữa năng lượng Trái Đất nhận vào và năng lượng thoát ra ngoài không gian."
+      },
+      {
+            "id": 3,
+            "q": "Why does the writer mention habitat loss and pollution in paragraph 2?",
+            "a": [
+                  "To suggest that these factors are more serious than climate change",
+                  "To explain why most species are capable of adapting to rising temperatures",
+                  "To show that climate change can combine with other pressures and make adaptation more difficult",
+                  "To demonstrate that environmental problems are caused mainly by natural ecosystems"
+            ],
+            "correct": 2,
+            "ex": "Một số loài khó thích nghi, nhất là khi biến đổi khí hậu đi kèm mất môi trường sống, ô nhiễm và các áp lực khác."
+      },
+      {
+            "id": 4,
+            "q": "Which of the following best describes the relationship between climate change and extreme weather presented in paragraph 2?",
+            "a": [
+                  "Climate change produces exactly the same weather effects in every region.",
+                  "Warming can influence environmental processes in ways that increase different risks in different places.",
+                  "Extreme weather is caused entirely by changes in atmospheric moisture.",
+                  "Climate change affects temperature but has little influence on rainfall or drought."
+            ],
+            "correct": 1,
+            "ex": "Không khí ấm có thể góp phần gây mưa lớn ở nơi này nhưng làm hạn hán nặng hơn ở nơi khác."
+      },
+      {
+            "id": 5,
+            "q": "According to the passage, why is adaptation still necessary even if countries greatly reduce greenhouse gas emissions?",
+            "a": [
+                  "Adaptation is generally cheaper than reducing emissions.",
+                  "Emission reduction has no effect on future climate conditions.",
+                  "Some climate impacts will continue because previously emitted greenhouse gases remain influential.",
+                  "Adaptation can remove greenhouse gases more effectively than renewable energy."
+            ],
+            "correct": 2,
+            "ex": "Khí nhà kính đã thải ra vẫn tiếp tục ảnh hưởng đến khí hậu, nên không thể tránh hoàn toàn mọi tác động."
+      },
+      {
+            "id": 6,
+            "q": "Which of the following correctly matches the action with the strategy it mainly represents?",
+            "a": [
+                  "Improving flood defences – mitigation; replacing fossil fuels – adaptation",
+                  "Using drought-tolerant crops – adaptation; improving energy efficiency – mitigation",
+                  "Expanding green urban spaces – mitigation; protecting forests – adaptation only",
+                  "Developing cleaner transport – adaptation; reducing coastal vulnerability – mitigation"
+            ],
+            "correct": 1,
+            "ex": "Cây trồng chịu hạn giúp thích ứng; sử dụng năng lượng hiệu quả giúp giảm phát thải."
+      },
+      {
+            "id": 7,
+            "q": "The word “complementary” in paragraph 3 most nearly suggests that mitigation and adaptation __________.",
+            "a": [
+                  "perform different functions that can support each other",
+                  "should be implemented separately to avoid conflict",
+                  "produce identical environmental results",
+                  "compete for resources and therefore cannot succeed together"
+            ],
+            "correct": 0,
+            "ex": "“Complementary” nghĩa là bổ trợ cho nhau: hai chiến lược có vai trò khác nhau nhưng cùng góp phần giải quyết vấn đề."
+      },
+      {
+            "id": 8,
+            "q": "Which of the following best summarises the passage?",
+            "a": [
+                  "Since climate impacts cannot be completely prevented, countries should gradually replace mitigation with adaptation.",
+                  "Human activities drive climate change, whose varied impacts require both emission reduction and adaptation, with attention to fairness.",
+                  "Climate change mainly threatens natural ecosystems, while its economic consequences remain relatively limited.",
+                  "Technological improvements alone can solve climate change if sufficient financial resources are available."
+            ],
+            "correct": 1,
+            "ex": "B tóm tắt chuỗi lập luận: nguyên nhân → tác động → giảm phát thải và thích ứng → công bằng."
+      },
+      {
+            "id": 9,
+            "q": "What can be inferred from paragraph 5 about a climate policy that is technically effective?",
+            "a": [
+                  "It will necessarily receive equal support from all social groups.",
+                  "It may still create unfair burdens if its social effects are ignored.",
+                  "It should always be preferred to policies designed to protect low-income households.",
+                  "Its environmental benefits are usually smaller than its economic costs."
+            ],
+            "correct": 1,
+            "ex": "Tăng giá năng lượng có thể khuyến khích tiết kiệm nhưng gây khó khăn cho hộ thu nhập thấp; hiệu quả kỹ thuật không đồng nghĩa với công bằng."
+      },
+      {
+            "id": 10,
+            "q": "Which title best fits the passage?",
+            "a": [
+                  "Climate Change: Why Mitigation, Adaptation and Fairness Must Work Together",
+                  "Why Adaptation Has Replaced Emission Reduction",
+                  "Extreme Weather: The Only Consequence of Global Warming",
+                  "How Renewable Energy Can Completely Prevent Climate Risks"
+            ],
+            "correct": 0,
+            "ex": "A bao quát các ý chính về biến đổi khí hậu, giảm phát thải, thích ứng và công bằng."
+      }
+];
+    const $=id=>document.getElementById(id);
+    const els={question:$("question"),answers:$("answers"),feedback:$("feedback"),next:$("next"),number:$("number"),progress:$("progressText"),score:$("scoreText"),hearts:$("hearts"),meter:$("meter"),fill:$("fill"),overlay:$("overlay")};
+    let deck=[],position=0,lives=5,solved=0,answered=false,lastOptionOrders=new Map();
+    function randomIndex(max){if(globalThis.crypto?.getRandomValues){const a=new Uint32Array(1);globalThis.crypto.getRandomValues(a);return a[0]%max}return Math.floor(Math.random()*max)}
+    function shuffle(items){const copy=[...items];for(let i=copy.length-1;i>0;i--){const j=randomIndex(i+1);[copy[i],copy[j]]=[copy[j],copy[i]]}return copy}
+    function updateStatus(){els.progress.textContent=position<deck.length?`Câu ${position+1} / ${deck.length}`:`Hoàn thành ${deck.length} / ${deck.length}`;els.score.textContent=`Đúng ${solved} / ${deck.length}`;els.fill.style.width=`${Math.round(solved/deck.length*100)}%`;els.meter.setAttribute("aria-valuenow",String(solved));els.hearts.replaceChildren();for(let i=0;i<5;i++){const span=document.createElement("span");span.textContent="♥";span.className=i<lives?"":"lost";span.setAttribute("aria-hidden","true");els.hearts.append(span)}els.hearts.setAttribute("aria-label",`${lives} trên 5 trái tim còn lại`)}
+    function showFeedback(kind,title,body){els.feedback.className=`feedback show ${kind}`;els.feedback.replaceChildren();const strong=document.createElement("strong");strong.textContent=title;const p=document.createElement("p");p.textContent=body;els.feedback.append(strong,p)}
+    function render(){answered=false;const item=deck[position];els.number.textContent=`QUESTION ${String(item.id).padStart(2,"0")}`;els.question.textContent=item.q;els.answers.replaceChildren();els.feedback.className="feedback";els.feedback.replaceChildren();els.next.classList.remove("show");item.options.forEach((choice,i)=>{const button=document.createElement("button");button.type="button";button.className="answer";const badge=document.createElement("span");badge.className="letter";badge.textContent="ABCD"[i];const label=document.createElement("span");label.textContent=choice.text;button.append(badge,label);button.addEventListener("click",()=>choose(button,choice,item));els.answers.append(button)});updateStatus()}
+    function choose(button,choice,item){if(answered||button.disabled||lives===0)return;if(choice.original===item.correct){answered=true;solved++;button.classList.add("good");for(const option of els.answers.children)option.disabled=true;showFeedback("good","✓ Chính xác!",item.ex);els.next.textContent=position===deck.length-1?"Xem kết quả →":"Câu tiếp theo →";els.next.classList.add("show");updateStatus();els.next.focus()}else{button.classList.add("bad");button.disabled=true;lives--;updateStatus();if(lives===0){showModal(false);return}showFeedback("bad","Chưa đúng, thử lại nhé!",`Bạn còn ${lives} trái tim. Hãy chọn một đáp án khác.`)}}
+    function showModal(won){$("modalIcon").textContent=won?"🏆":"💛";$("modalTitle").textContent=won?"Hoàn thành xuất sắc!":"Hết 5 trái tim rồi!";$("modalText").textContent=won?`Bạn đã hoàn thành ${deck.length} câu. Chơi lại để luyện với phương án mới.`:`Bạn đã hoàn thành ${solved}/${deck.length} câu. Chơi lại để làm đề với phương án mới.`;els.overlay.hidden=false;$("replay").focus()}
+    function start(){deck=QUESTIONS.map(item=>{let options=shuffle(item.a.map((text,original)=>({text,original})));const previous=lastOptionOrders.get(item.id);if(options.map(x=>x.original).join("|")===previous){[options[0],options[1]]=[options[1],options[0]]}lastOptionOrders.set(item.id,options.map(x=>x.original).join("|"));return {...item,options}});position=0;lives=5;solved=0;els.overlay.hidden=true;render()}
+    $("reset").addEventListener("click",start);$("replay").addEventListener("click",start);els.next.addEventListener("click",()=>{if(!answered)return;position++;if(position===deck.length){updateStatus();showModal(true)}else render()});start();
+  </script>
+</body>
+</html>
