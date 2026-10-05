@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 4 - Exercise 1 (61-80) - Option C</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:
+    radial-gradient(circle at 15% 12%,rgba(255,255,255,.96) 0 5%,transparent 6%),
+    linear-gradient(135deg,#fffef2,#fff3a8 52%,#e9f8be);
+  min-height:100vh;
+  color:#423d13
+}
+.wrap{width:min(940px,94vw);margin:auto;padding:24px 0 40px}
+.head,.card{background:#ffffffee;border:2px solid #efd85c;border-radius:24px;box-shadow:0 14px 32px #7660141d}
+.head{padding:20px;margin-bottom:18px}
+h1{margin:0;text-align:center;color:#6b6217;font-size:clamp(24px,4vw,36px);line-height:1.2}
+.sub{text-align:center;margin:8px 0 16px;font-weight:700;color:#77712b}
+.bar{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center}
+.track{height:15px;background:#fff2a2;border-radius:99px;overflow:hidden;border:1px solid #e4d260}
+#prog{height:100%;width:0;background:linear-gradient(90deg,#ffdc3f,#cbe75c);transition:.2s}
+#hearts{font-size:23px;white-space:nowrap;letter-spacing:2px}
+button{font:inherit}
+.reset{border:0;border-radius:13px;padding:10px 14px;background:#fff08f;color:#5a5211;font-weight:800;cursor:pointer;box-shadow:inset 0 0 0 2px #ddc94d}
+.card{padding:24px}
+.qnum{display:inline-block;background:#fff16d;border-radius:99px;padding:7px 13px;font-weight:900;color:#625910}
+.q{font-size:clamp(20px,2.5vw,27px);font-weight:800;line-height:1.5;margin:14px 0 20px}
+.opts{display:grid;gap:12px}
+.opt{width:100%;border:2px solid #ead45b;background:#fffdf4;border-radius:17px;padding:14px 16px;text-align:left;font-size:18px;cursor:pointer;display:flex;gap:12px;align-items:flex-start;transition:.15s}
+.opt:hover{background:#fff8cb;transform:translateY(-1px)}
+.letter{flex:0 0 34px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#ffec70;font-weight:900}
+.correct{background:#eff8d4!important;border-color:#99bc3b!important}
+.wrong{background:#fff0ec!important;border-color:#e77a63!important;animation:shake .25s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.feedback{display:none;margin-top:18px;padding:14px 16px;border-radius:15px;line-height:1.55;font-size:17px}
+.feedback.show{display:block}
+.good{background:#f1f8da;border:1px solid #b2cf58;color:#53631f}
+.bad{background:#fff1ee;border:1px solid #ee9d8d;color:#8c3f31}
+.next{display:none;margin:18px auto 0;border:0;border-radius:15px;padding:12px 22px;background:linear-gradient(135deg,#ffe04b,#d6ec61);font-weight:900;color:#4c4612;cursor:pointer}
+.next.show{display:block}
+.finish{text-align:center;padding:20px}
+.finish h2{font-size:34px;color:#676016}
+.modal{position:fixed;inset:0;background:#302b0b80;display:none;align-items:center;justify-content:center;padding:20px;z-index:10}
+.modal.show{display:flex}
+.box{width:min(460px,92vw);background:#fffef6;border:3px solid #efd65a;border-radius:24px;padding:26px;text-align:center;box-shadow:0 22px 55px rgba(0,0,0,.22)}
+.box button{border:0;border-radius:14px;background:#ffe359;padding:12px 20px;font-weight:900;cursor:pointer}
+.note{text-align:center;margin-top:12px;color:#716c32;font-size:14px}
+@media(max-width:650px){.bar{grid-template-columns:1fr auto}.track{grid-column:1/-1}.card{padding:18px}.opt{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="head">
+    <h1>Grade 10 - Unit 4 - Exercise 1 (61-80) - Option C</h1>
+    <div class="sub">Choose the correct answer. Wrong answer = lose 1 heart and try again.</div>
+    <div class="bar">
+      <div class="track"><div id="prog"></div></div>
+      <div id="hearts"></div>
+      <button class="reset" onclick="manualReset()">↻ Reset</button>
+    </div>
+  </section>
+
+  <section class="card" id="card"></section>
+  <div class="note">Reset hoặc hết tim sẽ làm lại từ đầu và trộn lại A/B/C/D. Thứ tự câu hỏi được giữ nguyên.</div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="box">
+    <h2>💛 Hết tim rồi!</h2>
+    <p>Bạn phải làm lại từ đầu. Các phương án trả lời sẽ được trộn lại.</p>
+    <button onclick="gameOverReset()">Làm lại bài</button>
+  </div>
+</div>
+
+<script>
+const original=[{"q": "To receive a certificate, each volunteer must ________ of the dates, tasks and hours completed during the project.", "options": ["make an effort", "keep a record", "take responsibility", "pay attention"], "answer": "keep a record", "explanation": "<em>Keep a record of something</em> nghĩa là ghi chép và lưu lại thông tin để theo dõi hoặc xác nhận."}, {"q": "Helping younger children learn to read gave Linh a sense of ________; she felt that her time and effort truly mattered.", "options": ["humour", "relief", "direction", "purpose"], "answer": "purpose", "explanation": "<em>A sense of purpose</em> là cảm giác việc mình làm có mục đích và ý nghĩa, phù hợp với vế sau."}, {"q": "The free online training course is available ________ anyone willing to support elderly people in their neighbourhood.", "options": ["to", "with", "at", "on"], "answer": "to", "explanation": "<em>Be available to somebody</em> nghĩa là được cung cấp hoặc dành cho ai sử dụng."}, {"q": "Candidates should apply ________ the youth foundation ________ financial support for their community projects.", "options": ["for – to", "with – for", "to – for", "at – to"], "answer": "to – for", "explanation": "<em>Apply to an organisation for something</em>: nộp đơn đến một tổ chức để xin điều gì."}, {"q": "When a child failed to return to the campsite, the volunteers split into small groups to ________ him along the nearby paths.", "options": ["look after", "search for", "look up", "get over"], "answer": "search for", "explanation": "<em>Search for somebody</em> nghĩa là tìm kiếm ai đang mất tích hoặc chưa xác định được vị trí."}, {"q": "Before opening the temporary kitchen, the team must ________ a safety inspection of the cooking area.", "options": ["put off", "take over", "bring up", "carry out"], "answer": "carry out", "explanation": "<em>Carry out an inspection</em> nghĩa là tiến hành một cuộc kiểm tra."}, {"q": "With only a small budget, the club decided to focus ________ repairing existing bicycles rather than buying new ones.", "options": ["on", "at", "to", "with"], "answer": "on", "explanation": "<em>Focus on + V-ing</em> nghĩa là tập trung vào việc gì."}, {"q": "Before submitting the form, please ________ all the blank sections with your contact details and previous volunteering experience.", "options": ["turn down", "hand out", "fill in", "put away"], "answer": "fill in", "explanation": "<em>Fill in</em> nghĩa là điền thông tin vào các phần còn trống của biểu mẫu."}, {"q": "The first-aid workshop prepares students ________ situations in which professional medical help may not arrive immediately.", "options": ["with", "for", "on", "about"], "answer": "for", "explanation": "<em>Prepare somebody for something</em>: chuẩn bị cho ai để đối phó với một tình huống."}, {"q": "The reuse project collects ________ household objects—things their owners no longer want but that others may still find useful.", "options": ["unwilling", "impatient", "inexperienced", "unwanted"], "answer": "unwanted", "explanation": "<em>Unwanted</em> nghĩa là không còn được muốn giữ hoặc sử dụng, đúng với phần giải thích sau dấu gạch ngang."}, {"q": "The mobile health team regularly visits patients ________ from long-term breathing problems.", "options": ["suffering", "suffered", "suffer", "who suffering"], "answer": "suffering", "explanation": "<em>Patients suffering from…</em> là dạng rút gọn của <em>patients who suffer/are suffering from…</em>."}, {"q": "After several months without stable employment, the family faced financial ________ and could no longer afford school supplies.", "options": ["confidence", "comfort", "hardship", "convenience"], "answer": "hardship", "explanation": "<em>Financial hardship</em> nghĩa là khó khăn tài chính, phù hợp với việc gia đình không đủ tiền mua đồ dùng học tập."}, {"q": "The centre operates as a ________ organisation: any money left after expenses is used to expand its free services rather than paid to owners.", "options": ["profitable", "non-profit", "profit-making", "commercial"], "answer": "non-profit", "explanation": "<em>Non-profit organisation</em> là tổ chức phi lợi nhuận; tiền dư được dùng để phục vụ mục tiêu của tổ chức."}, {"q": "The two delivery schedules were so ________ that several volunteers went to the wrong collection point.", "options": ["confused", "confuse", "confusion", "confusing"], "answer": "confusing", "explanation": "<em>Confusing</em> mô tả thứ gây bối rối; <em>confused</em> mô tả người cảm thấy bối rối."}, {"q": "By using ________, small charities can receive contributions from supporters living abroad.", "options": ["online donation platforms", "donation online platforms", "online platforms donation", "platforms online donation"], "answer": "online donation platforms", "explanation": "<em>Donation platforms</em> là các nền tảng quyên góp; <em>online</em> đứng trước cụm này để chỉ hình thức trực tuyến."}];
+const START=61;
+let qs=[],i=0,lives=5,correct=0,solved=false;
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const j=Math.floor(Math.random()*(x+1));
+    [a[x],a[j]]=[a[j],a[x]];
+  }
+  return a;
+}
+
+function build(mix=false){
+  qs=original.map(x=>({...x,options:mix?shuffle(x.options):[...x.options]}));
+}
+
+function hearts(){
+  document.getElementById('hearts').textContent='❤️'.repeat(lives)+'🤍'.repeat(5-lives);
+}
+
+function progress(){
+  document.getElementById('prog').style.width=(correct/qs.length*100)+'%';
+}
+
+function esc(s){
+  return String(s)
+    .replaceAll('&','&amp;')
+    .replaceAll('"','&quot;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;');
+}
+
+function render(){
+  solved=false;
+  hearts();
+  progress();
+  const card=document.getElementById('card');
+
+  if(i>=qs.length){
+    card.innerHTML=`<div class="finish">
+      <h2>🎉 Hoàn thành!</h2>
+      <p>Bạn đã trả lời đúng <strong>${correct}/${qs.length}</strong> câu.</p>
+      <p>Nhấn <strong>Reset</strong> để làm lại với các option được trộn mới.</p>
+    </div>`;
+    return;
+  }
+
+  const x=qs[i],labels=['A','B','C','D'];
+  card.innerHTML=`<div class="qnum">Question ${START+i}</div>
+    <div class="q">${x.q}</div>
+    <div class="opts">
+      ${x.options.map((o,k)=>`<button class="opt" data-v="${esc(o)}" onclick="choose(this)">
+        <span class="letter">${labels[k]}</span><span>${o}</span>
+      </button>`).join('')}
+    </div>
+    <div id="fb" class="feedback"></div>
+    <button id="next" class="next" onclick="nextQ()">Câu tiếp theo →</button>`;
+}
+
+function choose(btn){
+  if(solved)return;
+
+  const x=qs[i];
+  const v=btn.getAttribute('data-v');
+  const fb=document.getElementById('fb');
+
+  if(v===x.answer){
+    solved=true;
+    correct++;
+    btn.classList.add('correct');
+    document.querySelectorAll('.opt').forEach(b=>b.disabled=true);
+    fb.className='feedback show good';
+    fb.innerHTML='<strong>✅ Chính xác!</strong><br>'+x.explanation;
+    document.getElementById('next').classList.add('show');
+    progress();
+  }else{
+    lives--;
+    hearts();
+    btn.classList.add('wrong');
+    setTimeout(()=>btn.classList.remove('wrong'),450);
+    fb.className='feedback show bad';
+    fb.innerHTML='<strong>❌ Chưa đúng.</strong> Bạn mất 1 tim. Hãy chọn lại chính câu này cho đến khi đúng.';
+
+    if(lives<=0){
+      document.getElementById('modal').classList.add('show');
+    }
+  }
+}
+
+function nextQ(){
+  i++;
+  render();
+}
+
+function reset(mix=true){
+  i=0;
+  lives=5;
+  correct=0;
+  build(mix);
+  render();
+}
+
+function manualReset(){
+  if(confirm('Làm lại từ đầu? Các đáp án A/B/C/D sẽ được trộn lại.')) reset(true);
+}
+
+function gameOverReset(){
+  document.getElementById('modal').classList.remove('show');
+  reset(true);
+}
+
+build(false);
+render();
+</script>
+</body>
+</html>

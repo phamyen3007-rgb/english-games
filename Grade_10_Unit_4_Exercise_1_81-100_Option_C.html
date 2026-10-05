@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 4 - Exercise 1 (81-100) - Option C</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:
+    radial-gradient(circle at 15% 12%,rgba(255,255,255,.96) 0 5%,transparent 6%),
+    linear-gradient(135deg,#fffef2,#fff3a8 52%,#e9f8be);
+  min-height:100vh;
+  color:#423d13
+}
+.wrap{width:min(940px,94vw);margin:auto;padding:24px 0 40px}
+.head,.card{background:#ffffffee;border:2px solid #efd85c;border-radius:24px;box-shadow:0 14px 32px #7660141d}
+.head{padding:20px;margin-bottom:18px}
+h1{margin:0;text-align:center;color:#6b6217;font-size:clamp(24px,4vw,36px);line-height:1.2}
+.sub{text-align:center;margin:8px 0 16px;font-weight:700;color:#77712b}
+.bar{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center}
+.track{height:15px;background:#fff2a2;border-radius:99px;overflow:hidden;border:1px solid #e4d260}
+#prog{height:100%;width:0;background:linear-gradient(90deg,#ffdc3f,#cbe75c);transition:.2s}
+#hearts{font-size:23px;white-space:nowrap;letter-spacing:2px}
+button{font:inherit}
+.reset{border:0;border-radius:13px;padding:10px 14px;background:#fff08f;color:#5a5211;font-weight:800;cursor:pointer;box-shadow:inset 0 0 0 2px #ddc94d}
+.card{padding:24px}
+.qnum{display:inline-block;background:#fff16d;border-radius:99px;padding:7px 13px;font-weight:900;color:#625910}
+.q{font-size:clamp(20px,2.5vw,27px);font-weight:800;line-height:1.5;margin:14px 0 20px}
+.opts{display:grid;gap:12px}
+.opt{width:100%;border:2px solid #ead45b;background:#fffdf4;border-radius:17px;padding:14px 16px;text-align:left;font-size:18px;cursor:pointer;display:flex;gap:12px;align-items:flex-start;transition:.15s}
+.opt:hover{background:#fff8cb;transform:translateY(-1px)}
+.letter{flex:0 0 34px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#ffec70;font-weight:900}
+.correct{background:#eff8d4!important;border-color:#99bc3b!important}
+.wrong{background:#fff0ec!important;border-color:#e77a63!important;animation:shake .25s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.feedback{display:none;margin-top:18px;padding:14px 16px;border-radius:15px;line-height:1.55;font-size:17px}
+.feedback.show{display:block}
+.good{background:#f1f8da;border:1px solid #b2cf58;color:#53631f}
+.bad{background:#fff1ee;border:1px solid #ee9d8d;color:#8c3f31}
+.next{display:none;margin:18px auto 0;border:0;border-radius:15px;padding:12px 22px;background:linear-gradient(135deg,#ffe04b,#d6ec61);font-weight:900;color:#4c4612;cursor:pointer}
+.next.show{display:block}
+.finish{text-align:center;padding:20px}
+.finish h2{font-size:34px;color:#676016}
+.modal{position:fixed;inset:0;background:#302b0b80;display:none;align-items:center;justify-content:center;padding:20px;z-index:10}
+.modal.show{display:flex}
+.box{width:min(460px,92vw);background:#fffef6;border:3px solid #efd65a;border-radius:24px;padding:26px;text-align:center;box-shadow:0 22px 55px rgba(0,0,0,.22)}
+.box button{border:0;border-radius:14px;background:#ffe359;padding:12px 20px;font-weight:900;cursor:pointer}
+.note{text-align:center;margin-top:12px;color:#716c32;font-size:14px}
+@media(max-width:650px){.bar{grid-template-columns:1fr auto}.track{grid-column:1/-1}.card{padding:18px}.opt{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="head">
+    <h1>Grade 10 - Unit 4 - Exercise 1 (81-100) - Option C</h1>
+    <div class="sub">Choose the correct answer. Wrong answer = lose 1 heart and try again.</div>
+    <div class="bar">
+      <div class="track"><div id="prog"></div></div>
+      <div id="hearts"></div>
+      <button class="reset" onclick="manualReset()">↻ Reset</button>
+    </div>
+  </section>
+
+  <section class="card" id="card"></section>
+  <div class="note">Reset hoặc hết tim sẽ làm lại từ đầu và trộn lại A/B/C/D. Thứ tự câu hỏi được giữ nguyên.</div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="box">
+    <h2>💛 Hết tim rồi!</h2>
+    <p>Bạn phải làm lại từ đầu. Các phương án trả lời sẽ được trộn lại.</p>
+    <button onclick="gameOverReset()">Làm lại bài</button>
+  </div>
+</div>
+
+<script>
+const original=[{"q": "By using ________ to organise video meetings and manage online donations, the charity can support villages far from its main office.", "options": ["medical equipment", "public transport", "digital technology", "household appliances"], "answer": "digital technology", "explanation": "<em>Digital technology</em> là công nghệ số, dùng để họp trực tuyến và quản lý các khoản quyên góp online."}, {"q": "Although Mr Binh earns very little, he is remarkably ________ with his time, spending several evenings a week teaching children for free.", "options": ["generous", "generosity", "generously", "generate"], "answer": "generous", "explanation": "Sau <em>is remarkably</em> cần tính từ. <em>Generous with one's time</em> nghĩa là sẵn lòng dành nhiều thời gian giúp người khác."}, {"q": "During ________, students discussed why citizens should respect the law and take responsibility for their community.", "options": ["physical education lessons", "chemistry experiments", "music rehearsals", "civics lessons"], "answer": "civics lessons", "explanation": "<em>Civics lessons</em> là các tiết học giáo dục công dân, liên quan đến pháp luật và trách nhiệm công dân."}, {"q": "Neither of us knew the other would attend the volunteer fair; we met there entirely ________.", "options": ["on purpose", "by chance", "in advance", "on schedule"], "answer": "by chance", "explanation": "<em>By chance</em> nghĩa là tình cờ; hai người không biết trước hoặc sắp xếp cuộc gặp."}, {"q": "The coordinator emailed the wrong timetable ________; she had intended to send the updated version.", "options": ["on purpose", "in person", "by mistake", "on time"], "answer": "by mistake", "explanation": "<em>By mistake</em> nghĩa là do nhầm lẫn; người điều phối gửi nhầm phiên bản thời gian biểu."}, {"q": "Even after a tiring school day, Hoa is willing ________ an extra hour helping children with their homework.", "options": ["to spend", "spending", "spend", "spent"], "answer": "to spend", "explanation": "Cấu trúc <em>be willing to do something</em>: sẵn lòng làm việc gì."}, {"q": "The students are actively involved ________ designing a website that connects donors with local charities.", "options": ["to", "at", "with", "in"], "answer": "in", "explanation": "<em>Be involved in + V-ing</em> nghĩa là tham gia vào một hoạt động."}, {"q": "With most of the tickets already sold, the organisers are ________ that the concert will raise enough money to repair the school roof.", "options": ["doubtful", "hopeful", "hopeless", "indifferent"], "answer": "hopeful", "explanation": "<em>Be hopeful that + mệnh đề</em>: hy vọng, tin tưởng vào kết quả tích cực. Việc bán gần hết vé tạo cơ sở cho hy vọng đó."}, {"q": "The club secretary made an ________ explaining where volunteers should meet and what they needed to bring.", "options": ["announce", "announced", "announcement", "announcing"], "answer": "announcement", "explanation": "Sau <em>an</em> cần danh từ. <em>Make an announcement</em> nghĩa là đưa ra thông báo."}, {"q": "At 9 a.m. yesterday, the volunteers ________ donated books when the fire alarm suddenly ________.", "options": ["were sorting – rang", "sorted – was ringing", "are sorting – rings", "were sorting – ring"], "answer": "were sorting – rang", "explanation": "Quá khứ tiếp diễn diễn tả việc đang phân loại sách; quá khứ đơn diễn tả tiếng chuông bất ngờ xen vào."}, {"q": "At that moment, one group ________ the classroom walls while another group ________ the broken desks.", "options": ["paints – repairs", "was painting – repairs", "painted – is repairing", "was painting – was repairing"], "answer": "was painting – was repairing", "explanation": "Hai hành động đang diễn ra song song tại một thời điểm trong quá khứ nên đều dùng quá khứ tiếp diễn."}, {"q": "The students were interviewing a local shopkeeper ________ the electricity suddenly went off.", "options": ["during", "when", "at", "meanwhile"], "answer": "when", "explanation": "<em>When</em> nối hành động đang diễn ra với sự việc bất ngờ xen vào. <em>During</em> phải đi với danh từ, không đi trực tiếp với mệnh đề."}, {"q": "When I arrived at the donation centre yesterday afternoon, the manager ________ to a donor on the phone, so I waited outside her office.", "options": ["speaks", "has spoken", "was speaking", "is speaking"], "answer": "was speaking", "explanation": "Việc nói chuyện đang diễn ra tại thời điểm người kể đến nên dùng quá khứ tiếp diễn."}, {"q": "Last Saturday, we ________ the donated clothes, ________ them into boxes and delivered them to the shelter.", "options": ["checked – packed", "were checking – were packing", "check – pack", "have checked – have packed"], "answer": "checked – packed", "explanation": "Các hành động hoàn tất nối tiếp nhau trong quá khứ dùng quá khứ đơn: kiểm tra → đóng hộp → giao đồ."}, {"q": "While I ________ the attendance list, I suddenly ________ that one volunteer's name was missing.", "options": ["checked – was noticing", "am checking – notice", "was checking – was noticing", "was checking – noticed"], "answer": "was checking – noticed", "explanation": "<em>Was checking</em> là hành động đang diễn ra; <em>noticed</em> là việc bất chợt nhận ra trong lúc kiểm tra."}];
+const START=81;
+let qs=[],i=0,lives=5,correct=0,solved=false;
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const j=Math.floor(Math.random()*(x+1));
+    [a[x],a[j]]=[a[j],a[x]];
+  }
+  return a;
+}
+
+function build(mix=false){
+  qs=original.map(x=>({...x,options:mix?shuffle(x.options):[...x.options]}));
+}
+
+function hearts(){
+  document.getElementById('hearts').textContent='❤️'.repeat(lives)+'🤍'.repeat(5-lives);
+}
+
+function progress(){
+  document.getElementById('prog').style.width=(correct/qs.length*100)+'%';
+}
+
+function esc(s){
+  return String(s)
+    .replaceAll('&','&amp;')
+    .replaceAll('"','&quot;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;');
+}
+
+function render(){
+  solved=false;
+  hearts();
+  progress();
+  const card=document.getElementById('card');
+
+  if(i>=qs.length){
+    card.innerHTML=`<div class="finish">
+      <h2>🎉 Hoàn thành!</h2>
+      <p>Bạn đã trả lời đúng <strong>${correct}/${qs.length}</strong> câu.</p>
+      <p>Nhấn <strong>Reset</strong> để làm lại với các option được trộn mới.</p>
+    </div>`;
+    return;
+  }
+
+  const x=qs[i],labels=['A','B','C','D'];
+  card.innerHTML=`<div class="qnum">Question ${START+i}</div>
+    <div class="q">${x.q}</div>
+    <div class="opts">
+      ${x.options.map((o,k)=>`<button class="opt" data-v="${esc(o)}" onclick="choose(this)">
+        <span class="letter">${labels[k]}</span><span>${o}</span>
+      </button>`).join('')}
+    </div>
+    <div id="fb" class="feedback"></div>
+    <button id="next" class="next" onclick="nextQ()">Câu tiếp theo →</button>`;
+}
+
+function choose(btn){
+  if(solved || lives<=0)return;
+
+  const x=qs[i];
+  const v=btn.getAttribute('data-v');
+  const fb=document.getElementById('fb');
+
+  if(v===x.answer){
+    solved=true;
+    correct++;
+    btn.classList.add('correct');
+    document.querySelectorAll('.opt').forEach(b=>b.disabled=true);
+    fb.className='feedback show good';
+    fb.innerHTML='<strong>✅ Chính xác!</strong><br>'+x.explanation;
+    document.getElementById('next').classList.add('show');
+    progress();
+  }else{
+    lives--;
+    hearts();
+    btn.classList.add('wrong');
+    setTimeout(()=>btn.classList.remove('wrong'),450);
+    fb.className='feedback show bad';
+    fb.innerHTML='<strong>❌ Chưa đúng.</strong> Bạn mất 1 tim. Hãy chọn lại chính câu này cho đến khi đúng.';
+
+    if(lives<=0){
+      document.getElementById('modal').classList.add('show');
+    }
+  }
+}
+
+function nextQ(){
+  if(!solved || lives<=0)return;
+  i++;
+  render();
+}
+
+function reset(mix=true){
+  i=0;
+  lives=5;
+  correct=0;
+  build(mix);
+  render();
+}
+
+function manualReset(){
+  if(confirm('Làm lại từ đầu? Các đáp án A/B/C/D sẽ được trộn lại.')) reset(true);
+}
+
+function gameOverReset(){
+  document.getElementById('modal').classList.remove('show');
+  reset(true);
+}
+
+build(false);
+render();
+</script>
+</body>
+</html>

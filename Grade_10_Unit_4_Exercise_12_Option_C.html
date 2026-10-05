@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 4 - Exercise 12 - Option C</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:
+    radial-gradient(circle at 15% 12%,rgba(255,255,255,.96) 0 5%,transparent 6%),
+    linear-gradient(135deg,#fffef2,#fff3a8 52%,#e9f8be);
+  min-height:100vh;
+  color:#423d13
+}
+.wrap{width:min(940px,94vw);margin:auto;padding:24px 0 40px}
+.head,.card{background:#ffffffee;border:2px solid #efd85c;border-radius:24px;box-shadow:0 14px 32px #7660141d}
+.head{padding:20px;margin-bottom:18px}
+h1{margin:0;text-align:center;color:#6b6217;font-size:clamp(24px,4vw,36px);line-height:1.2}
+.sub{text-align:center;margin:8px 0 16px;font-weight:700;color:#77712b}
+.bar{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center}
+.track{height:15px;background:#fff2a2;border-radius:99px;overflow:hidden;border:1px solid #e4d260}
+#prog{height:100%;width:0;background:linear-gradient(90deg,#ffdc3f,#cbe75c);transition:.2s}
+#hearts{font-size:23px;white-space:nowrap;letter-spacing:2px}
+button{font:inherit}
+.reset{border:0;border-radius:13px;padding:10px 14px;background:#fff08f;color:#5a5211;font-weight:800;cursor:pointer;box-shadow:inset 0 0 0 2px #ddc94d}
+.card{padding:24px}
+.qnum{display:inline-block;background:#fff16d;border-radius:99px;padding:7px 13px;font-weight:900;color:#625910}
+.q{font-size:clamp(20px,2.5vw,27px);font-weight:800;line-height:1.5;margin:14px 0 20px}
+.utterances{font-size:clamp(18px,2.2vw,22px);font-weight:400;line-height:1.65}
+.utterances p{margin:0 0 12px}
+.utterances p:last-child{margin-bottom:0}
+.utterances strong{color:#625910}
+.opts{display:grid;gap:12px}
+.opt{width:100%;border:2px solid #ead45b;background:#fffdf4;border-radius:17px;padding:14px 16px;text-align:left;font-size:18px;cursor:pointer;display:flex;gap:12px;align-items:flex-start;transition:.15s}
+.opt:hover{background:#fff8cb;transform:translateY(-1px)}
+.letter{flex:0 0 34px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#ffec70;font-weight:900}
+.correct{background:#eff8d4!important;border-color:#99bc3b!important}
+.wrong{background:#fff0ec!important;border-color:#e77a63!important;animation:shake .25s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.feedback{display:none;margin-top:18px;padding:14px 16px;border-radius:15px;line-height:1.55;font-size:17px}
+.feedback.show{display:block}
+.good{background:#f1f8da;border:1px solid #b2cf58;color:#53631f}
+.bad{background:#fff1ee;border:1px solid #ee9d8d;color:#8c3f31}
+.next{display:none;margin:18px auto 0;border:0;border-radius:15px;padding:12px 22px;background:linear-gradient(135deg,#ffe04b,#d6ec61);font-weight:900;color:#4c4612;cursor:pointer}
+.next.show{display:block}
+.finish{text-align:center;padding:20px}
+.finish h2{font-size:34px;color:#676016}
+.modal{position:fixed;inset:0;background:#302b0b80;display:none;align-items:center;justify-content:center;padding:20px;z-index:10}
+.modal.show{display:flex}
+.box{width:min(460px,92vw);background:#fffef6;border:3px solid #efd65a;border-radius:24px;padding:26px;text-align:center;box-shadow:0 22px 55px rgba(0,0,0,.22)}
+.box button{border:0;border-radius:14px;background:#ffe359;padding:12px 20px;font-weight:900;cursor:pointer}
+.note{text-align:center;margin-top:12px;color:#716c32;font-size:14px}
+@media(max-width:650px){.bar{grid-template-columns:1fr auto}.track{grid-column:1/-1}.card{padding:18px}.opt{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="head">
+    <h1>Grade 10 - Unit 4 - Exercise 12 - Option C</h1>
+    <div class="sub">Exercise 12: Mark the letter A, B, C, or D to indicate the correct arrangement of the sentences or utterances to make a meaningful dialogue, letter, or paragraph.</div>
+    <div class="bar">
+      <div class="track"><div id="prog"></div></div>
+      <div id="hearts"></div>
+      <button class="reset" onclick="manualReset()">↻ Reset</button>
+    </div>
+  </section>
+
+  <section class="card" id="card"></section>
+  <div class="note">Reset hoặc hết tim sẽ làm lại từ đầu và trộn lại A/B/C/D. Thứ tự câu hỏi được giữ nguyên.</div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="box">
+    <h2>💛 Hết tim rồi!</h2>
+    <p>Bạn phải làm lại từ đầu. Các phương án trả lời sẽ được trộn lại.</p>
+    <button onclick="gameOverReset()">Làm lại bài</button>
+  </div>
+</div>
+
+<script>
+const original=[{"q": "<div class=\"utterances\">\n<p><strong>a.</strong> Nam: Yes, and we tested each repaired bike before giving it to a child who needed transport to school.</p>\n<p><strong>b.</strong> Hoa: So you did more than fix things—you also helped the children attend school more easily.</p>\n<p><strong>c.</strong> Hoa: I heard you joined the bicycle repair project. Did you actually get to work on the bikes?</p>\n</div>", "options": ["a – c – b", "c – b – a", "c – a – b", "b – a – c"], "answer": "c – a – b", "explanation": "Hoa hỏi về việc sửa xe ở <strong>c</strong> → Nam trả lời và nói thêm về người nhận xe ở <strong>a</strong> → Hoa rút ra ý nghĩa của hoạt động ở <strong>b</strong>."}, {"q": "<div class=\"utterances\">\n<p><strong>a.</strong> Linh: That would solve the transport problem. Shall we ask the librarian which afternoons would suit them?</p>\n<p><strong>b.</strong> David: Then perhaps we could deliver books to their homes instead of expecting them to come here.</p>\n<p><strong>c.</strong> David: Why were so few older residents able to attend yesterday’s reading session?</p>\n<p><strong>d.</strong> David: Yes, we’ll need her advice before arranging the first delivery round.</p>\n<p><strong>e.</strong> Linh: Several wanted to join, but they live too far away and cannot travel without assistance.</p>\n</div>", "options": ["c – e – b – a – d", "c – a – d – e – b", "e – b – c – d – a", "b – a – e – c – d"], "answer": "c – e – b – a – d", "explanation": "Câu hỏi <strong>c</strong> được giải đáp ở <strong>e</strong> → David đề xuất giao sách ở <strong>b</strong> → Linh đồng ý và đề nghị hỏi thủ thư ở <strong>a</strong> → David xác nhận ở <strong>d</strong>."}, {"q": "<div class=\"utterances\">\n<p><strong>a.</strong> Phuc: That explains why they asked us to count and label everything before packing.</p>\n<p><strong>b.</strong> Mai: Apparently, some boxes contained items that the centre already had, while basic cooking equipment was missing.</p>\n<p><strong>c.</strong> Mai: Exactly. With a clear list, the volunteers can send what is actually needed rather than just whatever is available.</p>\n<p><strong>d.</strong> Mai: Did you notice that the relief centre changed its donation instructions this morning?</p>\n<p><strong>e.</strong> Phuc: Yes, but I wasn’t sure why. Was there a problem with the previous collection?</p>\n</div>", "options": ["d – b – a – e – c", "e – b – d – c – a", "d – e – a – c – b", "d – e – b – a – c"], "answer": "d – e – b – a – c", "explanation": "Mai hỏi ở <strong>d</strong> → Phuc yêu cầu giải thích ở <strong>e</strong> → Mai nêu vấn đề ở <strong>b</strong> → Phuc hiểu lý do ở <strong>a</strong> → Mai khẳng định lợi ích của danh sách rõ ràng ở <strong>c</strong>."}, {"q": "<div class=\"utterances\">\n<p><strong>a.</strong> An: In that case, I could help write the instructions, since I’m not confident enough to lead a session yet.</p>\n<p><strong>b.</strong> Binh: It’s a workshop where teenagers help older residents use basic smartphone features.</p>\n<p><strong>c.</strong> Binh: That would be useful. Clear instructions will also give you something to refer to when you eventually demonstrate the steps yourself.</p>\n<p><strong>d.</strong> An: What does the “Connected Neighbours” project involve? I’m considering joining it.</p>\n<p><strong>e.</strong> Binh: You don’t have to teach immediately; new volunteers can first prepare simple guides and observe experienced helpers.</p>\n</div>", "options": ["d – e – a – b – c", "d – b – e – a – c", "b – a – c – d – e", "e – d – b – c – a"], "answer": "d – b – e – a – c", "explanation": "An hỏi về dự án ở <strong>d</strong> → Binh giới thiệu ở <strong>b</strong>, rồi giải thích vai trò người mới ở <strong>e</strong> → An chọn nhiệm vụ ở <strong>a</strong> → Binh phản hồi về lựa chọn đó ở <strong>c</strong>."}, {"q": "<div class=\"utterances\">\n<p>Hi Alex,</p>\n<p>I hope your exams went well.</p>\n<p><strong>a.</strong> If you can join us, please bring a pair of gardening gloves; we’ll provide the tools and drinking water.</p>\n<p><strong>b.</strong> To solve that problem, our volunteer club is holding a garden restoration day there next Saturday.</p>\n<p><strong>c.</strong> We’ll start by clearing the paths at 8:30 a.m., then plant vegetables in the space beside the kitchen.</p>\n<p><strong>d.</strong> I remember you enjoy growing things, so would you like to help with the planting after the paths are ready?</p>\n<p><strong>e.</strong> The community centre has a small garden, but its paths are overgrown and the vegetable beds have been unused for months.</p>\n<p>Let me know whether you’re free.</p>\n<p>Best,<br>Linh</p>\n</div>", "options": ["b – c – e – a – d", "e – d – a – b – c", "e – b – c – d – a", "c – b – d – e – a"], "answer": "e – b – c – d – a", "explanation": "Nêu tình trạng khu vườn ở <strong>e</strong> → giới thiệu hoạt động giải quyết vấn đề ở <strong>b</strong> → cung cấp lịch trình ở <strong>c</strong> → mời Alex ở <strong>d</strong> → hướng dẫn chuẩn bị ở <strong>a</strong>."}, {"q": "<div class=\"utterances\">\n<p><strong>a.</strong> After receiving that feedback, the students replaced the written directions with picture labels and added a short demonstration.</p>\n<p><strong>b.</strong> By the end of the month, more residents were sorting their waste correctly, showing the value of listening before expanding a project.</p>\n<p><strong>c.</strong> A school volunteer team introduced recycling bins at a local market, expecting shoppers to use them immediately.</p>\n<p><strong>d.</strong> To understand the poor response, the team interviewed stallholders, who explained that the instructions were difficult to follow.</p>\n<p><strong>e.</strong> However, during the first week, most rubbish still ended up in the general waste containers.</p>\n</div>", "options": ["c – e – d – a – b", "c – d – a – b – e", "e – c – a – d – b", "d – a – c – e – b"], "answer": "c – e – d – a – b", "explanation": "Giới thiệu dự án ở <strong>c</strong> → nêu kết quả ban đầu trái kỳ vọng ở <strong>e</strong> → tìm nguyên nhân ở <strong>d</strong> → điều chỉnh theo phản hồi ở <strong>a</strong> → kết quả và bài học ở <strong>b</strong>."}];
+const START=1;
+let qs=[],i=0,lives=5,correct=0,solved=false;
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const j=Math.floor(Math.random()*(x+1));
+    [a[x],a[j]]=[a[j],a[x]];
+  }
+  return a;
+}
+
+function build(mix=false){
+  qs=original.map(x=>({...x,options:mix?shuffle(x.options):[...x.options]}));
+}
+
+function hearts(){
+  document.getElementById('hearts').textContent='❤️'.repeat(lives)+'🤍'.repeat(5-lives);
+}
+
+function progress(){
+  document.getElementById('prog').style.width=(correct/qs.length*100)+'%';
+}
+
+function esc(s){
+  return String(s)
+    .replaceAll('&','&amp;')
+    .replaceAll('"','&quot;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;');
+}
+
+function render(){
+  solved=false;
+  hearts();
+  progress();
+  const card=document.getElementById('card');
+
+  if(i>=qs.length){
+    card.innerHTML=`<div class="finish">
+      <h2>🎉 Hoàn thành!</h2>
+      <p>Bạn đã trả lời đúng <strong>${correct}/${qs.length}</strong> câu.</p>
+      <p>Nhấn <strong>Reset</strong> để làm lại với các option được trộn mới.</p>
+    </div>`;
+    return;
+  }
+
+  const x=qs[i],labels=['A','B','C','D'];
+  card.innerHTML=`<div class="qnum">Question ${START+i}</div>
+    <div class="q">${x.q}</div>
+    <div class="opts">
+      ${x.options.map((o,k)=>`<button class="opt" data-v="${esc(o)}" onclick="choose(this)">
+        <span class="letter">${labels[k]}</span><span>${o}</span>
+      </button>`).join('')}
+    </div>
+    <div id="fb" class="feedback"></div>
+    <button id="next" class="next" onclick="nextQ()">Câu tiếp theo →</button>`;
+}
+
+function choose(btn){
+  if(solved || lives<=0)return;
+
+  const x=qs[i];
+  const v=btn.getAttribute('data-v');
+  const fb=document.getElementById('fb');
+
+  if(v===x.answer){
+    solved=true;
+    correct++;
+    btn.classList.add('correct');
+    document.querySelectorAll('.opt').forEach(b=>b.disabled=true);
+    fb.className='feedback show good';
+    fb.innerHTML='<strong>✅ Chính xác!</strong><br>'+x.explanation;
+    document.getElementById('next').classList.add('show');
+    progress();
+  }else{
+    lives--;
+    hearts();
+    btn.classList.add('wrong');
+    setTimeout(()=>btn.classList.remove('wrong'),450);
+    fb.className='feedback show bad';
+    fb.innerHTML='<strong>❌ Chưa đúng.</strong> Bạn mất 1 tim. Hãy chọn lại chính câu này cho đến khi đúng.';
+
+    if(lives<=0){
+      document.getElementById('modal').classList.add('show');
+    }
+  }
+}
+
+function nextQ(){
+  if(!solved || lives<=0)return;
+  i++;
+  render();
+}
+
+function reset(mix=true){
+  i=0;
+  lives=5;
+  correct=0;
+  build(mix);
+  render();
+}
+
+function manualReset(){
+  if(confirm('Làm lại từ đầu? Các đáp án A/B/C/D sẽ được trộn lại.')) reset(true);
+}
+
+function gameOverReset(){
+  document.getElementById('modal').classList.remove('show');
+  reset(true);
+}
+
+build(false);
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 4 - Exercise 9 - Option C</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:
+    radial-gradient(circle at 15% 12%,rgba(255,255,255,.96) 0 5%,transparent 6%),
+    linear-gradient(135deg,#fffef2,#fff3a8 52%,#e9f8be);
+  min-height:100vh;
+  color:#423d13
+}
+.wrap{width:min(940px,94vw);margin:auto;padding:24px 0 40px}
+.head,.card{background:#ffffffee;border:2px solid #efd85c;border-radius:24px;box-shadow:0 14px 32px #7660141d}
+.head{padding:20px;margin-bottom:18px}
+h1{margin:0;text-align:center;color:#6b6217;font-size:clamp(24px,4vw,36px);line-height:1.2}
+.sub{text-align:center;margin:8px 0 16px;font-weight:700;color:#77712b}
+.bar{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center}
+.track{height:15px;background:#fff2a2;border-radius:99px;overflow:hidden;border:1px solid #e4d260}
+#prog{height:100%;width:0;background:linear-gradient(90deg,#ffdc3f,#cbe75c);transition:.2s}
+#hearts{font-size:23px;white-space:nowrap;letter-spacing:2px}
+button{font:inherit}
+.reset{border:0;border-radius:13px;padding:10px 14px;background:#fff08f;color:#5a5211;font-weight:800;cursor:pointer;box-shadow:inset 0 0 0 2px #ddc94d}
+.card{padding:24px}
+.answer-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%}
+.answer-fields .answer-label{display:block;margin-bottom:8px}
+@media(max-width:650px){.answer-fields{grid-template-columns:1fr}}
+.answer-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.answer-label{flex:0 0 100%;font-weight:700;font-size:17px}
+.answer-input{flex:1 1 220px;min-width:0;width:100%;border:2px solid #ead45b;background:#fffdf4;border-radius:17px;padding:14px 16px;font:inherit;font-size:18px;color:#423d13}
+.answer-input:focus{outline:3px solid #e9d259;outline-offset:2px}
+.answer-row .reset{padding:14px 18px}
+button:disabled{cursor:default}
+.qnum{display:inline-block;background:#fff16d;border-radius:99px;padding:7px 13px;font-weight:900;color:#625910}
+.q{font-size:clamp(20px,2.5vw,27px);font-weight:800;line-height:1.5;margin:14px 0 20px}
+.opts{display:grid;gap:12px}
+.opt{width:100%;border:2px solid #ead45b;background:#fffdf4;border-radius:17px;padding:14px 16px;text-align:left;font-size:18px;cursor:pointer;display:flex;gap:12px;align-items:flex-start;transition:.15s}
+.opt:hover{background:#fff8cb;transform:translateY(-1px)}
+.letter{flex:0 0 34px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#ffec70;font-weight:900}
+.correct{background:#eff8d4!important;border-color:#99bc3b!important}
+.wrong{background:#fff0ec!important;border-color:#e77a63!important;animation:shake .25s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.feedback{display:none;margin-top:18px;padding:14px 16px;border-radius:15px;line-height:1.55;font-size:17px}
+.feedback.show{display:block}
+.good{background:#f1f8da;border:1px solid #b2cf58;color:#53631f}
+.bad{background:#fff1ee;border:1px solid #ee9d8d;color:#8c3f31}
+.next{display:none;margin:18px auto 0;border:0;border-radius:15px;padding:12px 22px;background:linear-gradient(135deg,#ffe04b,#d6ec61);font-weight:900;color:#4c4612;cursor:pointer}
+.next.show{display:block}
+.finish{text-align:center;padding:20px}
+.finish h2{font-size:34px;color:#676016}
+.modal{position:fixed;inset:0;background:#302b0b80;display:none;align-items:center;justify-content:center;padding:20px;z-index:10}
+.modal.show{display:flex}
+.box{width:min(460px,92vw);background:#fffef6;border:3px solid #efd65a;border-radius:24px;padding:26px;text-align:center;box-shadow:0 22px 55px rgba(0,0,0,.22)}
+.box button{border:0;border-radius:14px;background:#ffe359;padding:12px 20px;font-weight:900;cursor:pointer}
+.note{text-align:center;margin-top:12px;color:#716c32;font-size:14px}
+@media(max-width:650px){.bar{grid-template-columns:1fr auto}.track{grid-column:1/-1}.card{padding:18px}.opt{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="head">
+    <h1>Grade 10 - Unit 4 - Exercise 9 - Option C</h1>
+    <div class="sub">Exercise 9: Complete the sentences using the correct past simple or past continuous forms of the verbs in brackets.</div>
+    <div class="bar">
+      <div class="track"><div id="prog"></div></div>
+      <div id="hearts"></div>
+      <button class="reset" onclick="manualReset()">↻ Reset</button>
+    </div>
+  </section>
+
+  <section class="card" id="card"></section>
+  <div class="note">Nhập đáp án theo thứ tự hai chỗ trống rồi nhấn Kiểm tra hoặc Enter. Mỗi lần kiểm tra sai mất 1 tim. Đúng cả hai ô mới được sang câu tiếp theo.</div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="box">
+    <h2>💛 Hết tim rồi!</h2>
+    <p>Bạn phải làm lại từ câu đầu với 5 tim.</p>
+    <button id="retry" onclick="gameOverReset()">Làm lại bài</button>
+  </div>
+</div>
+
+<script>
+const original=[{"q": "While our team (discuss) ________ how to deliver books to the island, Mai suddenly (suggest) ________ asking a local boat owner for help.", "accepted": [["was discussing"], ["suggested"]], "answer": "was discussing – suggested", "explanation": "Cuộc thảo luận đang diễn ra dùng quá khứ tiếp diễn; lời đề xuất bất chợt dùng quá khứ đơn. <em>Our team</em> được xem là một tập thể số ít."}, {"q": "When we (reach) ________ the community centre yesterday morning, several volunteers (still / arrange) ________ the chairs, so we joined them.", "accepted": [["reached"], ["were still arranging"]], "answer": "reached – were still arranging", "explanation": "Việc đến nơi đã xảy ra dùng quá khứ đơn; hoạt động xếp ghế vẫn đang diễn ra lúc đó dùng quá khứ tiếp diễn."}, {"q": "At this time last Saturday, some students (record) ________ stories told by older residents while others (take) ________ photographs for the exhibition.", "accepted": [["were recording"], ["were taking"]], "answer": "were recording – were taking", "explanation": "Hai hoạt động diễn ra song song tại một thời điểm xác định trong quá khứ nên đều dùng quá khứ tiếp diễn."}, {"q": "I (not / use) ________ my phone when the coordinator (call) ________ yesterday; I was carrying supplies upstairs and could not answer.", "accepted": [["was not using", "wasn't using"], ["called"]], "answer": "was not using / wasn’t using – called", "explanation": "Phủ định hành động đang diễn ra lúc đó dùng <em>wasn’t using</em>; cuộc gọi xen vào dùng <em>called</em>."}, {"q": "While the children (practise) ________ their performance, the teacher suddenly (notice) ________ that one of the stage lights was loose.", "accepted": [["were practising", "were practicing"], ["noticed"]], "answer": "were practising – noticed", "explanation": "Việc luyện tập là hành động nền; việc bất chợt nhận thấy đèn bị lỏng là sự việc xảy ra tại một thời điểm."}, {"q": "After yesterday’s charity sale ended, we (count) ________ the money and then (lock) ________ it in the office safe.", "accepted": [["counted"], ["locked"]], "answer": "counted – locked", "explanation": "Hai hành động đã hoàn tất, diễn ra nối tiếp nhau: đếm tiền rồi cất và khóa lại. Cả hai dùng quá khứ đơn."}, {"q": "What (you / do) ________ at the exact moment the fire alarm (go) ________ off during yesterday’s training session?", "accepted": [["were you doing"], ["went"]], "answer": "were you doing – went", "explanation": "<em>Were you doing</em> hỏi về hành động đang diễn ra tại thời điểm chuông báo cháy vang lên. <em>Go off</em> có dạng quá khứ là <em>went off</em>."}, {"q": "We (drive) ________ towards the village when we suddenly (realise) ________ that the main road was blocked by fallen trees.", "accepted": [["were driving"], ["realised", "realized"]], "answer": "were driving – realised", "explanation": "Việc lái xe đang diễn ra dùng quá khứ tiếp diễn; việc đột nhiên nhận ra đường bị chặn dùng quá khứ đơn."}];
+const START=1;
+let qs=[],i=0,lives=5,correct=0,solved=false;
+
+function build(){
+  qs=original.map(x=>({...x}));
+}
+
+function hearts(){
+  document.getElementById('hearts').textContent='❤️'.repeat(lives)+'🤍'.repeat(5-lives);
+}
+
+function progress(){
+  document.getElementById('prog').style.width=(correct/qs.length*100)+'%';
+}
+
+function esc(s){
+  return String(s)
+    .replaceAll('&','&amp;')
+    .replaceAll('"','&quot;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;');
+}
+
+function render(){
+  solved=false;
+  hearts();
+  progress();
+  const card=document.getElementById('card');
+
+  if(i>=qs.length){
+    card.innerHTML=`<div class="finish">
+      <h2>🎉 Hoàn thành!</h2>
+      <p>Bạn đã trả lời đúng <strong>${correct}/${qs.length}</strong> câu.</p>
+      <p>Nhấn <strong>Reset</strong> để làm lại từ câu đầu.</p>
+    </div>`;
+    return;
+  }
+
+  const x=qs[i];
+  card.innerHTML=`<div class="qnum">Question ${START+i}</div>
+    <div class="q">${x.q}</div>
+    <form class="answer-row" onsubmit="checkAnswer(event)">
+      <div class="answer-fields">
+        <div><label class="answer-label" for="answer1">Chỗ trống 1:</label>
+          <input id="answer1" class="answer-input" type="text" placeholder="Dạng đúng của động từ thứ nhất…" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" aria-describedby="fb"></div>
+        <div><label class="answer-label" for="answer2">Chỗ trống 2:</label>
+          <input id="answer2" class="answer-input" type="text" placeholder="Dạng đúng của động từ thứ hai…" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" aria-describedby="fb"></div>
+      </div>
+      <button id="check" class="reset" type="submit">Kiểm tra ✓</button>
+    </form>
+    <div id="fb" class="feedback"></div>
+    <button id="next" class="next" onclick="nextQ()">Câu tiếp theo →</button>`;
+}
+
+function normalizeAnswer(value){
+  return value.trim().toLowerCase().replace(/[’‘]/g,"'").replace(/\s+/g,' ');
+}
+
+function checkAnswer(event){
+  if(event)event.preventDefault();
+  if(solved || lives<=0 || i>=qs.length)return;
+  const x=qs[i];
+  const inputs=[document.getElementById('answer1'),document.getElementById('answer2')];
+  const values=inputs.map(input=>normalizeAnswer(input.value));
+  const fb=document.getElementById('fb');
+  inputs.forEach(input=>input.classList.remove('wrong'));
+  const empty=values.findIndex(value=>!value);
+  if(empty>=0){
+    fb.className='feedback show bad';
+    fb.textContent='Hãy nhập đủ đáp án cho cả hai chỗ trống trước khi kiểm tra.';
+    inputs[empty].focus();
+    return;
+  }
+  const matches=values.map((value,k)=>x.accepted[k].some(answer=>normalizeAnswer(answer)===value));
+  if(matches.every(Boolean)){
+    solved=true;
+    correct++;
+    inputs.forEach(input=>{input.classList.add('correct');input.disabled=true;});
+    document.getElementById('check').disabled=true;
+    fb.className='feedback show good';
+    fb.innerHTML='<strong>✅ Chính xác! Đáp án: '+esc(x.answer)+'</strong><br>'+x.explanation;
+    document.getElementById('next').classList.add('show');
+    document.getElementById('next').focus();
+    progress();
+  }else{
+    lives--;
+    hearts();
+    inputs.forEach((input,k)=>{if(!matches[k])input.classList.add('wrong');});
+    fb.className='feedback show bad';
+    fb.innerHTML='<strong>❌ Chưa đúng.</strong> Bạn mất 1 tim. Hãy sửa ô được đánh dấu; cần đúng cả hai chỗ trống để tiếp tục.';
+    if(lives<=0){
+      inputs.forEach(input=>input.disabled=true);
+      document.getElementById('check').disabled=true;
+      document.getElementById('modal').classList.add('show');
+      document.getElementById('retry').focus();
+    }else{
+      const firstWrong=inputs[matches.findIndex(match=>!match)];
+      firstWrong.focus();
+      firstWrong.select();
+    }
+  }
+}
+
+function nextQ(){
+  if(!solved || lives<=0)return;
+  i++;
+  render();
+}
+
+function reset(){
+  i=0;
+  lives=5;
+  correct=0;
+  build();
+  render();
+}
+
+function manualReset(){
+  if(confirm('Làm lại từ đầu với 5 tim?')) reset();
+}
+
+function gameOverReset(){
+  document.getElementById('modal').classList.remove('show');
+  reset();
+}
+
+build();
+render();
+</script>
+</body>
+</html>

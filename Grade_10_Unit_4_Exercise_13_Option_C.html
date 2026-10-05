@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 4 - Exercise 13 - Option C</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:
+    radial-gradient(circle at 15% 12%,rgba(255,255,255,.96) 0 5%,transparent 6%),
+    linear-gradient(135deg,#fffef2,#fff3a8 52%,#e9f8be);
+  min-height:100vh;
+  color:#423d13
+}
+.wrap{width:min(940px,94vw);margin:auto;padding:24px 0 40px}
+.head,.card{background:#ffffffee;border:2px solid #efd85c;border-radius:24px;box-shadow:0 14px 32px #7660141d}
+.head{padding:20px;margin-bottom:18px}
+h1{margin:0;text-align:center;color:#6b6217;font-size:clamp(24px,4vw,36px);line-height:1.2}
+.sub{text-align:center;margin:8px 0 16px;font-weight:700;color:#77712b}
+.bar{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center}
+.track{height:15px;background:#fff2a2;border-radius:99px;overflow:hidden;border:1px solid #e4d260}
+#prog{height:100%;width:0;background:linear-gradient(90deg,#ffdc3f,#cbe75c);transition:.2s}
+#hearts{font-size:23px;white-space:nowrap;letter-spacing:2px}
+button{font:inherit}
+.reset{border:0;border-radius:13px;padding:10px 14px;background:#fff08f;color:#5a5211;font-weight:800;cursor:pointer;box-shadow:inset 0 0 0 2px #ddc94d}
+.card{padding:24px}
+.reading{margin-bottom:18px;font-size:18px;line-height:1.8}
+.reading h2{margin:0 0 14px;text-align:center;color:#6b6217;font-size:24px;line-height:1.3}
+.reading p{margin:0 0 14px}
+.reading p:last-child{margin-bottom:0}
+.reading .source-note{font-size:14px;font-style:italic;color:#716c32}
+.reading .instruction{font-size:16px;font-weight:700;line-height:1.55;color:#77712b}
+.reading strong{white-space:nowrap;color:#625910;background:#fff5b0;border-radius:5px;padding:2px 4px}
+.qnum{display:inline-block;background:#fff16d;border-radius:99px;padding:7px 13px;font-weight:900;color:#625910}
+.q{font-size:clamp(20px,2.5vw,27px);font-weight:800;line-height:1.5;margin:14px 0 20px}
+.opts{display:grid;gap:12px}
+.opt{width:100%;border:2px solid #ead45b;background:#fffdf4;border-radius:17px;padding:14px 16px;text-align:left;font-size:18px;cursor:pointer;display:flex;gap:12px;align-items:flex-start;transition:.15s}
+.opt:hover{background:#fff8cb;transform:translateY(-1px)}
+.letter{flex:0 0 34px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#ffec70;font-weight:900}
+.correct{background:#eff8d4!important;border-color:#99bc3b!important}
+.wrong{background:#fff0ec!important;border-color:#e77a63!important;animation:shake .25s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.feedback{display:none;margin-top:18px;padding:14px 16px;border-radius:15px;line-height:1.55;font-size:17px}
+.feedback.show{display:block}
+.good{background:#f1f8da;border:1px solid #b2cf58;color:#53631f}
+.bad{background:#fff1ee;border:1px solid #ee9d8d;color:#8c3f31}
+.next{display:none;margin:18px auto 0;border:0;border-radius:15px;padding:12px 22px;background:linear-gradient(135deg,#ffe04b,#d6ec61);font-weight:900;color:#4c4612;cursor:pointer}
+.next.show{display:block}
+.finish{text-align:center;padding:20px}
+.finish h2{font-size:34px;color:#676016}
+.modal{position:fixed;inset:0;background:#302b0b80;display:none;align-items:center;justify-content:center;padding:20px;z-index:10}
+.modal.show{display:flex}
+.box{width:min(460px,92vw);background:#fffef6;border:3px solid #efd65a;border-radius:24px;padding:26px;text-align:center;box-shadow:0 22px 55px rgba(0,0,0,.22)}
+.box button{border:0;border-radius:14px;background:#ffe359;padding:12px 20px;font-weight:900;cursor:pointer}
+.note{text-align:center;margin-top:12px;color:#716c32;font-size:14px}
+@media(max-width:650px){.bar{grid-template-columns:1fr auto}.track{grid-column:1/-1}.card{padding:18px}.opt{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="head">
+    <h1>Grade 10 - Unit 4 - Exercise 13 - Option C</h1>
+    <div class="sub">Choose the correct answer. Wrong answer = lose 1 heart and try again.</div>
+    <div class="bar">
+      <div class="track"><div id="prog"></div></div>
+      <div id="hearts"></div>
+      <button class="reset" onclick="manualReset()">↻ Reset</button>
+    </div>
+  </section>
+
+  <section class="card reading" aria-labelledby="passage-title">
+    <p class="instruction">Exercise 13: Read the following passage and mark the letter A, B, C, or D to indicate the correct answer to each of the questions.</p>
+    <p class="source-note">Tổ chức và sự kiện trong bài là giả định.</p>
+    <h2 id="passage-title">THE NEIGHBOURHOOD REPAIR FUND</h2>
+    <p>Every autumn, residents of Brookfield see bright blue repair stands appear outside the public library. Together with posters inviting people to bring damaged household objects, these stands mark the return of the Neighbourhood Repair Fund’s annual campaign. Rather than encouraging people to replace everything they own, the campaign helps families repair essential items they cannot afford to replace. For many residents, its arrival has become a familiar sign that the town’s autumn community festival is approaching.</p>
+    <p>During the six-week campaign, a local newsletter describes the <strong>hardship</strong> faced by selected households. One report may feature a parent whose broken cooker makes preparing meals difficult; another may describe an older resident who cannot safely use a damaged wheelchair. Before publishing anything, volunteers obtain permission and remove unnecessary personal details. The aim is to explain why support is needed without making the people receiving it feel uncomfortable. Readers can contribute money, spare parts or professional repair skills.</p>
+    <p>The idea began in 2018 when a bicycle mechanic discovered that a schoolboy was regularly walking several kilometres to school because his bicycle was broken. After repairing it free of charge, she realised that other families might face similar problems. She invited several tradespeople to organise a small repair day. When more residents arrived than the volunteers could assist, the organisers created a fund to pay for replacement parts and arrange repairs throughout the year.</p>
+    <p>Since then, the fund has expanded beyond bicycles to include basic appliances and mobility equipment. <strong>Its</strong> supporters range from secondary-school students to retired engineers and small business owners. A local business association pays the campaign’s publicity and payment-processing expenses, allowing all financial donations to cover repair materials and necessary specialist services. Although the fund cannot accept every request, priority is given to repairs that improve safety or help residents attend school, work or medical appointments.</p>
+  </section>
+
+
+
+
+
+  <section class="card" id="card"></section>
+  <div class="note">Reset hoặc hết tim sẽ làm lại từ đầu và trộn lại A/B/C/D. Thứ tự câu hỏi được giữ nguyên.</div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="box">
+    <h2>💛 Hết tim rồi!</h2>
+    <p>Bạn phải làm lại từ đầu. Các phương án trả lời sẽ được trộn lại.</p>
+    <button onclick="gameOverReset()">Làm lại bài</button>
+  </div>
+</div>
+
+<script>
+const original=[{"q": "Which of the following is <strong>NOT mentioned</strong> in the passage?", "options": ["Residents can support the campaign by offering repair skills.", "Volunteers ask for permission before publishing household stories.", "A business association covers certain campaign expenses.", "Families must repay the fund after their financial situation improves."], "answer": "Families must repay the fund after their financial situation improves.", "explanation": "Bài không đề cập việc các gia đình phải hoàn trả tiền. Nội dung về kỹ năng sửa chữa và xin phép trước khi đăng câu chuyện có ở đoạn 2; việc hiệp hội doanh nghiệp chi trả một số chi phí có ở đoạn 4."}, {"q": "The word <strong>“hardship”</strong> in paragraph 2 is closest in meaning to ________.", "options": ["achievement", "difficulty", "responsibility", "disagreement"], "answer": "difficulty", "explanation": "<em>Hardship</em> nghĩa là hoàn cảnh khó khăn, thể hiện qua việc các gia đình không thể sửa hoặc thay thế đồ dùng thiết yếu."}, {"q": "The word <strong>“Its”</strong> in paragraph 4 refers to ________.", "options": ["the fund", "the local business association", "the mobility equipment", "the town’s community festival"], "answer": "the fund", "explanation": "Câu trước nói quỹ đã mở rộng hoạt động; <em>Its supporters</em> là những người ủng hộ quỹ đó."}, {"q": "According to the passage, which of the following is <strong>TRUE</strong>?", "options": ["The newsletter publishes household information without asking the residents.", "The organisers planned a year-round repair service before holding their first event.", "The number of people seeking help at the first repair day exceeded the volunteers’ capacity.", "Financial donations are used mainly to advertise the annual campaign."], "answer": "The number of people seeking help at the first repair day exceeded the volunteers’ capacity.", "explanation": "Đoạn 3 cho biết số người đến nhiều hơn khả năng hỗ trợ của tình nguyện viên. Điều này khiến ban tổ chức thành lập quỹ."}, {"q": "In which paragraph does the author explain how an individual act of kindness developed into an organised community project?", "options": ["Paragraph 1", "Paragraph 2", "Paragraph 3", "Paragraph 4"], "answer": "Paragraph 3", "explanation": "Đoạn 3 kể việc sửa xe miễn phí cho một học sinh dẫn đến ngày hội sửa chữa, rồi phát triển thành quỹ hỗ trợ."}, {"q": "In which paragraph does the author describe the campaign as a seasonal signal recognised by local residents?", "options": ["Paragraph 1", "Paragraph 2", "Paragraph 3", "Paragraph 4"], "answer": "Paragraph 1", "explanation": "Đoạn 1 nói sự xuất hiện của chiến dịch là dấu hiệu quen thuộc cho thấy lễ hội cộng đồng mùa thu sắp đến."}];
+const START=1;
+let qs=[],i=0,lives=5,correct=0,solved=false;
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const j=Math.floor(Math.random()*(x+1));
+    [a[x],a[j]]=[a[j],a[x]];
+  }
+  return a;
+}
+
+function build(mix=false){
+  qs=original.map(x=>({...x,options:mix?shuffle(x.options):[...x.options]}));
+}
+
+function hearts(){
+  document.getElementById('hearts').textContent='❤️'.repeat(lives)+'🤍'.repeat(5-lives);
+}
+
+function progress(){
+  document.getElementById('prog').style.width=(correct/qs.length*100)+'%';
+}
+
+function esc(s){
+  return String(s)
+    .replaceAll('&','&amp;')
+    .replaceAll('"','&quot;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;');
+}
+
+function render(){
+  solved=false;
+  hearts();
+  progress();
+  const card=document.getElementById('card');
+
+  if(i>=qs.length){
+    card.innerHTML=`<div class="finish">
+      <h2>🎉 Hoàn thành!</h2>
+      <p>Bạn đã trả lời đúng <strong>${correct}/${qs.length}</strong> câu.</p>
+      <p>Nhấn <strong>Reset</strong> để làm lại với các option được trộn mới.</p>
+    </div>`;
+    return;
+  }
+
+  const x=qs[i],labels=['A','B','C','D'];
+  card.innerHTML=`<div class="qnum">Question ${START+i}</div>
+    <div class="q">${x.q}</div>
+    <div class="opts">
+      ${x.options.map((o,k)=>`<button class="opt" data-v="${esc(o)}" onclick="choose(this)">
+        <span class="letter">${labels[k]}</span><span>${o}</span>
+      </button>`).join('')}
+    </div>
+    <div id="fb" class="feedback"></div>
+    <button id="next" class="next" onclick="nextQ()">Câu tiếp theo →</button>`;
+}
+
+function choose(btn){
+  if(solved || lives<=0)return;
+
+  const x=qs[i];
+  const v=btn.getAttribute('data-v');
+  const fb=document.getElementById('fb');
+
+  if(v===x.answer){
+    solved=true;
+    correct++;
+    btn.classList.add('correct');
+    document.querySelectorAll('.opt').forEach(b=>b.disabled=true);
+    fb.className='feedback show good';
+    fb.innerHTML='<strong>✅ Chính xác!</strong><br>'+x.explanation;
+    document.getElementById('next').classList.add('show');
+    progress();
+  }else{
+    lives--;
+    hearts();
+    btn.classList.add('wrong');
+    setTimeout(()=>btn.classList.remove('wrong'),450);
+    fb.className='feedback show bad';
+    fb.innerHTML='<strong>❌ Chưa đúng.</strong> Bạn mất 1 tim. Hãy chọn lại chính câu này cho đến khi đúng.';
+
+    if(lives<=0){
+      document.getElementById('modal').classList.add('show');
+    }
+  }
+}
+
+function nextQ(){
+  if(!solved || lives<=0)return;
+  i++;
+  render();
+}
+
+function reset(mix=true){
+  i=0;
+  lives=5;
+  correct=0;
+  build(mix);
+  render();
+}
+
+function manualReset(){
+  if(confirm('Làm lại từ đầu? Các đáp án A/B/C/D sẽ được trộn lại.')) reset(true);
+}
+
+function gameOverReset(){
+  document.getElementById('modal').classList.remove('show');
+  reset(true);
+}
+
+build(false);
+render();
+</script>
+</body>
+</html>

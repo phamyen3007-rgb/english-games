@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 4 - Advanced Exercise 2 - Option C</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:
+    radial-gradient(circle at 15% 12%,rgba(255,255,255,.96) 0 5%,transparent 6%),
+    linear-gradient(135deg,#fffef2,#fff3a8 52%,#e9f8be);
+  min-height:100vh;
+  color:#423d13
+}
+.wrap{width:min(940px,94vw);margin:auto;padding:24px 0 40px}
+.head,.card{background:#ffffffee;border:2px solid #efd85c;border-radius:24px;box-shadow:0 14px 32px #7660141d}
+.head{padding:20px;margin-bottom:18px}
+h1{margin:0;text-align:center;color:#6b6217;font-size:clamp(24px,4vw,36px);line-height:1.2}
+.sub{text-align:center;margin:8px 0 16px;font-weight:700;color:#77712b}
+.bar{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center}
+.track{height:15px;background:#fff2a2;border-radius:99px;overflow:hidden;border:1px solid #e4d260}
+#prog{height:100%;width:0;background:linear-gradient(90deg,#ffdc3f,#cbe75c);transition:.2s}
+#hearts{font-size:23px;white-space:nowrap;letter-spacing:2px}
+button{font:inherit}
+.reset{border:0;border-radius:13px;padding:10px 14px;background:#fff08f;color:#5a5211;font-weight:800;cursor:pointer;box-shadow:inset 0 0 0 2px #ddc94d}
+.card{padding:24px}
+.reading{margin-bottom:18px;font-size:18px;line-height:1.8}
+.reading h2{margin:0 0 14px;text-align:center;color:#6b6217;font-size:24px;line-height:1.3}
+.reading p{margin:0 0 14px}
+.reading p:last-child{margin-bottom:0}
+.reading .instruction{font-size:16px;font-weight:700;line-height:1.55;color:#77712b}
+.reading strong{white-space:normal;color:#625910;background:#fff5b0;border-radius:5px;padding:2px 4px}
+.reading .marker{white-space:nowrap}
+.qnum{display:inline-block;background:#fff16d;border-radius:99px;padding:7px 13px;font-weight:900;color:#625910}
+.q{font-size:clamp(20px,2.5vw,27px);font-weight:800;line-height:1.5;margin:14px 0 20px}
+.opts{display:grid;gap:12px}
+.opt{width:100%;border:2px solid #ead45b;background:#fffdf4;border-radius:17px;padding:14px 16px;text-align:left;font-size:18px;cursor:pointer;display:flex;gap:12px;align-items:flex-start;transition:.15s}
+.opt:hover{background:#fff8cb;transform:translateY(-1px)}
+.letter{flex:0 0 34px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#ffec70;font-weight:900}
+.correct{background:#eff8d4!important;border-color:#99bc3b!important}
+.wrong{background:#fff0ec!important;border-color:#e77a63!important;animation:shake .25s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.feedback{display:none;margin-top:18px;padding:14px 16px;border-radius:15px;line-height:1.55;font-size:17px}
+.feedback.show{display:block}
+.good{background:#f1f8da;border:1px solid #b2cf58;color:#53631f}
+.bad{background:#fff1ee;border:1px solid #ee9d8d;color:#8c3f31}
+.next{display:none;margin:18px auto 0;border:0;border-radius:15px;padding:12px 22px;background:linear-gradient(135deg,#ffe04b,#d6ec61);font-weight:900;color:#4c4612;cursor:pointer}
+.next.show{display:block}
+.finish{text-align:center;padding:20px}
+.finish h2{font-size:34px;color:#676016}
+.modal{position:fixed;inset:0;background:#302b0b80;display:none;align-items:center;justify-content:center;padding:20px;z-index:10}
+.modal.show{display:flex}
+.box{width:min(460px,92vw);background:#fffef6;border:3px solid #efd65a;border-radius:24px;padding:26px;text-align:center;box-shadow:0 22px 55px rgba(0,0,0,.22)}
+.box button{border:0;border-radius:14px;background:#ffe359;padding:12px 20px;font-weight:900;cursor:pointer}
+.note{text-align:center;margin-top:12px;color:#716c32;font-size:14px}
+@media(max-width:650px){.bar{grid-template-columns:1fr auto}.track{grid-column:1/-1}.card{padding:18px}.opt{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="head">
+    <h1>Grade 10 - Unit 4 - Advanced Exercise 2 - Option C</h1>
+    <div class="sub">Choose the correct answer. Wrong answer = lose 1 heart and try again.</div>
+    <div class="bar">
+      <div class="track"><div id="prog"></div></div>
+      <div id="hearts"></div>
+      <button class="reset" onclick="manualReset()">↻ Reset</button>
+    </div>
+  </section>
+
+  <section class="card reading" aria-labelledby="passage-title">
+    <p class="instruction">Read the following passage and mark the letter A, B, C, or D to indicate the correct answer to each of the questions.</p>
+    <h2 id="passage-title">FROM RECEIVING HELP TO BUILDING A STRONGER COMMUNITY</h2>
+    <p>Volunteering can begin with an immediate problem, but its value often extends beyond solving that problem. When residents struggle to complete online forms, repair essential belongings or understand school notices, volunteers can make everyday services more accessible. Such assistance is especially valuable when professional support is limited or difficult to reach. However, effective volunteers do not assume that every household needs the same solution. They listen first and adapt their support to people’s actual circumstances.</p>
+    <p>Working together also brings residents into contact with people outside their usual social circles. A teenager helping at a repair workshop may cooperate with a retired mechanic, while a newly arrived parent may organise refreshments with a long-term resident. <strong>These partnerships</strong> allow people who rarely meet to exchange ideas and recognise one another’s abilities. <strong class="marker">[I]</strong> Over time, repeated cooperation can build trust, making it easier for neighbours to ask for help before a small difficulty becomes a serious problem.</p>
+    <p>Lasting support should strengthen people’s independence rather than create permanent dependence. <strong class="marker">[II]</strong> For example, a volunteer might guide a resident through an online application and then let that person complete a second form with less assistance. Other projects offer language practice, basic budgeting workshops and training in repairing household items. <strong>By gradually reducing assistance as participants gain confidence, volunteers help them become more capable of handling similar tasks independently.</strong> Success is therefore measured not only by the number of tasks completed but also by what participants can do afterwards.</p>
+    <p><strong class="marker">[III]</strong> In one community project, several adults who had learned to use online appointment systems later helped their neighbours book clinic visits. Their contribution <strong>lightened the load</strong> on the original volunteers and made support available to more households. Seeing familiar people take on these roles also encouraged residents who had previously believed they had nothing useful to offer.</p>
+    <p>The people providing assistance can learn as well. Explaining a process clearly requires patience, and working with unfamiliar residents may challenge assumptions about age, income or ability. <strong class="marker">[IV]</strong> Nevertheless, the benefits are not automatic. If organisers assign too many duties to a small group, volunteering can become exhausting. Clear responsibilities, realistic schedules and opportunities to discuss difficulties help keep participation manageable.</p>
+    <p>A strong culture of service therefore depends on more than enthusiasm. Communities need projects that respond to genuine needs, welcome different abilities and allow participants to influence decisions. When these conditions are present, volunteering becomes a shared process of learning and contribution, rather than a one-way transfer of help.</p>
+  </section>
+
+
+
+
+
+
+  <section class="card" id="card"></section>
+  <div class="note">Reset hoặc hết tim sẽ làm lại từ đầu và trộn lại A/B/C/D. Thứ tự câu hỏi được giữ nguyên.</div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="box">
+    <h2>💛 Hết tim rồi!</h2>
+    <p>Bạn phải làm lại từ đầu. Các phương án trả lời sẽ được trộn lại.</p>
+    <button onclick="gameOverReset()">Làm lại bài</button>
+  </div>
+</div>
+
+<script>
+const original=[{"q": "Where in the passage does the following sentence best fit?<br><em>“Some participants eventually move from receiving guidance to offering it themselves.”</em>", "options": ["[I]", "[II]", "[III]", "[IV]"], "answer": "[III]", "explanation": "Câu này giới thiệu việc người nhận hỗ trợ trở thành người giúp đỡ. Ví dụ ngay sau đó nói những người đã được hướng dẫn đặt lịch trực tuyến giúp hàng xóm làm việc tương tự."}, {"q": "The word <strong>“accessible”</strong> in paragraph 1 is <strong>OPPOSITE</strong> in meaning to ________.", "options": ["convenient to use", "difficult to obtain", "widely available", "easy to reach"], "answer": "difficult to obtain", "explanation": "<em>Accessible</em> nghĩa là dễ tiếp cận hoặc sử dụng; trái nghĩa là khó có được hoặc khó tiếp cận."}, {"q": "The phrase <strong>“These partnerships”</strong> in paragraph 2 refers to ________.", "options": ["relationships between professional service providers and their customers", "connections among residents who already share the same social circle", "agreements requiring experienced residents to lead every community activity", "cooperation between residents of different ages or backgrounds"], "answer": "cooperation between residents of different ages or backgrounds", "explanation": "Cụm này thay cho sự hợp tác giữa thiếu niên và thợ máy nghỉ hưu, giữa phụ huynh mới đến và cư dân lâu năm."}, {"q": "Which of the following is <strong>NOT mentioned</strong> as a way projects help participants become more independent?", "options": ["Providing loans to start small businesses.", "Offering opportunities to practise a language.", "Teaching basic budgeting skills.", "Training people to repair household items."], "answer": "Providing loans to start small businesses.", "explanation": "Đoạn 3 đề cập luyện ngôn ngữ, học quản lý ngân sách và sửa đồ dùng; không đề cập cho vay để kinh doanh."}, {"q": "What is the main idea of paragraph 1?", "options": ["Volunteers should offer identical services to ensure that all households receive equal treatment.", "Community projects are most effective when volunteers replace professional workers completely.", "Volunteers can improve access to everyday services by responding to residents’ specific needs.", "Online difficulties are the main reason residents become dependent on community assistance."], "answer": "Volunteers can improve access to everyday services by responding to residents’ specific needs.", "explanation": "Đoạn 1 nhấn mạnh việc hỗ trợ tiếp cận dịch vụ và điều chỉnh cách giúp đỡ theo hoàn cảnh thực tế của từng người."}, {"q": "The phrase <strong>“lightened the load”</strong> in paragraph 4 could best be replaced by ________.", "options": ["made the duties less important", "reduced the amount of work", "removed the need for planning", "shortened the training period"], "answer": "reduced the amount of work", "explanation": "Khi người từng nhận hỗ trợ giúp thêm hàng xóm, khối lượng công việc của nhóm tình nguyện viên ban đầu giảm xuống."}, {"q": "According to the passage, which of the following is <strong>TRUE</strong>?", "options": ["Participants are considered successful only when they complete tasks without any initial guidance.", "People who receive support must become volunteers before they can join further activities.", "Organisers should give the most enthusiastic volunteers as many duties as possible.", "Volunteer work may become tiring if responsibilities are concentrated on too few people."], "answer": "Volunteer work may become tiring if responsibilities are concentrated on too few people.", "explanation": "Đoạn 5 nói việc giao quá nhiều nhiệm vụ cho một nhóm nhỏ có thể khiến hoạt động tình nguyện trở nên mệt mỏi."}, {"q": "Which of the following best paraphrases the <strong>bold sentence in paragraph 3</strong>?", "options": ["Volunteers support independence by offering less help as participants become more confident and able to manage similar tasks.", "Volunteers build confidence by completing increasingly difficult tasks on behalf of participants.", "Participants become independent when volunteers stop helping them before they understand a task.", "Participants should receive the same level of assistance regardless of their progress."], "answer": "Volunteers support independence by offering less help as participants become more confident and able to manage similar tasks.", "explanation": "Câu gốc nói giảm hỗ trợ từng bước khi người tham gia tự tin hơn, giúp họ tự xử lý những nhiệm vụ tương tự."}, {"q": "Which of the following can most reasonably be <strong>inferred</strong> from the passage?", "options": ["Professional services become unnecessary once residents learn to assist one another.", "Community projects should select only participants who already have practical skills.", "Teaching useful skills can extend a project’s impact beyond the people initially supported.", "The number of completed tasks is a more reliable measure than participants’ later abilities."], "answer": "Teaching useful skills can extend a project’s impact beyond the people initially supported.", "explanation": "Người được hướng dẫn có thể truyền kỹ năng và hỗ trợ người khác, như ví dụ đặt lịch khám ở đoạn 4; tác động vì thế được mở rộng."}, {"q": "Which of the following best <strong>summarises</strong> the passage?", "options": ["Volunteering mainly solves short-term problems, while independence and cooperation depend on professional services.", "Well-designed volunteering meets real needs, develops independence and relationships, and benefits both participants and helpers.", "Community service succeeds when experienced volunteers make decisions and less skilled residents follow their instructions.", "Volunteering strengthens communities primarily by increasing the number of tasks completed, even when helpers become overworked."], "answer": "Well-designed volunteering meets real needs, develops independence and relationships, and benefits both participants and helpers.", "explanation": "Phương án đúng bao quát các ý chính: đáp ứng nhu cầu thực tế, phát triển khả năng tự lập, xây dựng quan hệ và tạo lợi ích hai chiều."}];
+const START=1;
+let qs=[],i=0,lives=5,correct=0,solved=false;
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const j=Math.floor(Math.random()*(x+1));
+    [a[x],a[j]]=[a[j],a[x]];
+  }
+  return a;
+}
+
+function build(mix=false){
+  qs=original.map(x=>({...x,options:mix?shuffle(x.options):[...x.options]}));
+}
+
+function hearts(){
+  document.getElementById('hearts').textContent='❤️'.repeat(lives)+'🤍'.repeat(5-lives);
+}
+
+function progress(){
+  document.getElementById('prog').style.width=(correct/qs.length*100)+'%';
+}
+
+function esc(s){
+  return String(s)
+    .replaceAll('&','&amp;')
+    .replaceAll('"','&quot;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;');
+}
+
+function render(){
+  solved=false;
+  hearts();
+  progress();
+  const card=document.getElementById('card');
+
+  if(i>=qs.length){
+    card.innerHTML=`<div class="finish">
+      <h2>🎉 Hoàn thành!</h2>
+      <p>Bạn đã trả lời đúng <strong>${correct}/${qs.length}</strong> câu.</p>
+      <p>Nhấn <strong>Reset</strong> để làm lại với các option được trộn mới.</p>
+    </div>`;
+    return;
+  }
+
+  const x=qs[i],labels=['A','B','C','D'];
+  card.innerHTML=`<div class="qnum">Question ${START+i}</div>
+    <div class="q">${x.q}</div>
+    <div class="opts">
+      ${x.options.map((o,k)=>`<button class="opt" data-v="${esc(o)}" onclick="choose(this)">
+        <span class="letter">${labels[k]}</span><span>${o}</span>
+      </button>`).join('')}
+    </div>
+    <div id="fb" class="feedback"></div>
+    <button id="next" class="next" onclick="nextQ()">Câu tiếp theo →</button>`;
+}
+
+function choose(btn){
+  if(solved || lives<=0)return;
+
+  const x=qs[i];
+  const v=btn.getAttribute('data-v');
+  const fb=document.getElementById('fb');
+
+  if(v===x.answer){
+    solved=true;
+    correct++;
+    btn.classList.add('correct');
+    document.querySelectorAll('.opt').forEach(b=>b.disabled=true);
+    fb.className='feedback show good';
+    fb.innerHTML='<strong>✅ Chính xác!</strong><br>'+x.explanation;
+    document.getElementById('next').classList.add('show');
+    progress();
+  }else{
+    lives--;
+    hearts();
+    btn.classList.add('wrong');
+    setTimeout(()=>btn.classList.remove('wrong'),450);
+    fb.className='feedback show bad';
+    fb.innerHTML='<strong>❌ Chưa đúng.</strong> Bạn mất 1 tim. Hãy chọn lại chính câu này cho đến khi đúng.';
+
+    if(lives<=0){
+      document.getElementById('modal').classList.add('show');
+    }
+  }
+}
+
+function nextQ(){
+  if(!solved || lives<=0)return;
+  i++;
+  render();
+}
+
+function reset(mix=true){
+  i=0;
+  lives=5;
+  correct=0;
+  build(mix);
+  render();
+}
+
+function manualReset(){
+  if(confirm('Làm lại từ đầu? Các đáp án A/B/C/D sẽ được trộn lại.')) reset(true);
+}
+
+function gameOverReset(){
+  document.getElementById('modal').classList.remove('show');
+  reset(true);
+}
+
+build(false);
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 5 - Exercise 1 (21-40) - Option C</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:
+    radial-gradient(circle at 15% 12%,rgba(255,255,255,.96) 0 5%,transparent 6%),
+    linear-gradient(135deg,#fffef2,#fff3a8 52%,#e9f8be);
+  min-height:100vh;
+  color:#423d13
+}
+.wrap{width:min(940px,94vw);margin:auto;padding:24px 0 40px}
+.head,.card{background:#ffffffee;border:2px solid #efd85c;border-radius:24px;box-shadow:0 14px 32px #7660141d}
+.head{padding:20px;margin-bottom:18px}
+h1{margin:0;text-align:center;color:#6b6217;font-size:clamp(24px,4vw,36px);line-height:1.2}
+.sub{text-align:center;margin:8px 0 16px;font-weight:700;color:#77712b}
+.bar{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center}
+.track{height:15px;background:#fff2a2;border-radius:99px;overflow:hidden;border:1px solid #e4d260}
+#prog{height:100%;width:0;background:linear-gradient(90deg,#ffdc3f,#cbe75c);transition:.2s}
+#hearts{font-size:23px;white-space:nowrap;letter-spacing:2px}
+button{font:inherit}
+.reset{border:0;border-radius:13px;padding:10px 14px;background:#fff08f;color:#5a5211;font-weight:800;cursor:pointer;box-shadow:inset 0 0 0 2px #ddc94d}
+.card{padding:24px}
+.qnum{display:inline-block;background:#fff16d;border-radius:99px;padding:7px 13px;font-weight:900;color:#625910}
+.q{font-size:clamp(20px,2.5vw,27px);font-weight:800;line-height:1.5;margin:14px 0 20px}
+.opts{display:grid;gap:12px}
+.opt{width:100%;border:2px solid #ead45b;background:#fffdf4;border-radius:17px;padding:14px 16px;text-align:left;font-size:18px;cursor:pointer;display:flex;gap:12px;align-items:flex-start;transition:.15s}
+.opt:hover{background:#fff8cb;transform:translateY(-1px)}
+.letter{flex:0 0 34px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#ffec70;font-weight:900}
+.correct{background:#eff8d4!important;border-color:#99bc3b!important}
+.wrong{background:#fff0ec!important;border-color:#e77a63!important;animation:shake .25s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.feedback{display:none;margin-top:18px;padding:14px 16px;border-radius:15px;line-height:1.55;font-size:17px}
+.feedback.show{display:block}
+.good{background:#f1f8da;border:1px solid #b2cf58;color:#53631f}
+.bad{background:#fff1ee;border:1px solid #ee9d8d;color:#8c3f31}
+.next{display:none;margin:18px auto 0;border:0;border-radius:15px;padding:12px 22px;background:linear-gradient(135deg,#ffe04b,#d6ec61);font-weight:900;color:#4c4612;cursor:pointer}
+.next.show{display:block}
+.finish{text-align:center;padding:20px}
+.finish h2{font-size:34px;color:#676016}
+.modal{position:fixed;inset:0;background:#302b0b80;display:none;align-items:center;justify-content:center;padding:20px;z-index:10}
+.modal.show{display:flex}
+.box{width:min(460px,92vw);background:#fffef6;border:3px solid #efd65a;border-radius:24px;padding:26px;text-align:center;box-shadow:0 22px 55px rgba(0,0,0,.22)}
+.box button{border:0;border-radius:14px;background:#ffe359;padding:12px 20px;font-weight:900;cursor:pointer}
+.note{text-align:center;margin-top:12px;color:#716c32;font-size:14px}
+@media(max-width:650px){.bar{grid-template-columns:1fr auto}.track{grid-column:1/-1}.card{padding:18px}.opt{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="head">
+    <h1>Grade 10 - Unit 5 - Exercise 1 (21-40) - Option C</h1>
+    <div class="sub">Exercise 1 – Computer Technology and Modern Devices<br>Mark the letter A, B, C, or D to indicate the correct answer to each of the following questions.</div>
+    <div class="bar">
+      <div class="track"><div id="prog"></div></div>
+      <div id="hearts"></div>
+      <button class="reset" onclick="manualReset()">↻ Reset</button>
+    </div>
+  </section>
+
+  <section class="card" id="card"></section>
+  <div class="note">Reset hoặc hết tim sẽ làm lại từ đầu và trộn lại A/B/C/D. Thứ tự câu hỏi được giữ nguyên.</div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="box">
+    <h2>💛 Hết tim rồi!</h2>
+    <p>Bạn phải làm lại từ đầu. Các phương án trả lời sẽ được trộn lại.</p>
+    <button onclick="gameOverReset()">Làm lại bài</button>
+  </div>
+</div>
+
+<script>
+const original=[{"q": "Replacing a damaged keyboard changes the computer’s ________, whereas installing a new operating system changes its software.", "options": ["network", "hardware", "database", "storage"], "answer": "hardware", "explanation": "<em>Hardware</em> là phần cứng — các bộ phận vật lý như bàn phím; hệ điều hành thuộc phần mềm."}, {"q": "The scanner itself was working properly, but the ________ controlling it needed an update before it could recognise the new file format.", "options": ["battery", "cable", "screen", "software"], "answer": "software", "explanation": "<em>Software</em> là phần mềm điều khiển thiết bị; việc cập nhật để nhận dạng định dạng tệp mới thuộc chức năng của phần mềm."}, {"q": "Students do not need advanced technical knowledge, but a ________ understanding of electricity will help them build the model safely.", "options": ["basic", "basically", "basis", "basics"], "answer": "basic", "explanation": "Trước danh từ <em>understanding</em> cần tính từ. <em>A basic understanding of…</em> nghĩa là hiểu biết cơ bản về điều gì."}, {"q": "The team selected a faster ________ so that the computer could carry out complex instructions with fewer delays.", "options": ["procession", "processing", "processor", "processed"], "answer": "processor", "explanation": "<em>Processor</em> là bộ xử lý, thực hiện các lệnh của máy tính. Sau <em>a faster</em> cần danh từ số ít."}, {"q": "When several applications are open, the computer uses ________ to hold the data they are currently working with; this data is lost when the power is turned off.", "options": ["ROM", "RAM", "a hard drive", "a memory card"], "answer": "RAM", "explanation": "RAM lưu tạm dữ liệu của các ứng dụng đang hoạt động và mất dữ liệu khi tắt nguồn."}, {"q": "The device’s rechargeable ________ allows it to operate without being connected to a power socket.", "options": ["sensor", "speaker", "processor", "battery"], "answer": "battery", "explanation": "<em>Rechargeable battery</em> là pin sạc, cung cấp năng lượng khi thiết bị không cắm điện."}, {"q": "The production line is now ________ automated: machines handle every stage, and no manual work is required.", "options": ["completely", "partly", "occasionally", "slightly"], "answer": "completely", "explanation": "<em>Completely automated</em> nghĩa là tự động hóa hoàn toàn, phù hợp với việc máy móc xử lý tất cả các công đoạn."}, {"q": "Because several measurements were missing, the researchers could not draw a reliable conclusion from the ________ data.", "options": ["precise", "sufficient", "incomplete", "consistent"], "answer": "incomplete", "explanation": "<em>Incomplete data</em> là dữ liệu chưa đầy đủ; việc thiếu các số đo khiến kết luận không đáng tin cậy."}, {"q": "Before choosing a design, the students needed to ________ whether a touch screen would be suitable for elderly users.", "options": ["tell", "discuss", "speak", "talk"], "answer": "discuss", "explanation": "<em>Discuss</em> đi trực tiếp với nội dung được thảo luận: <em>discuss whether…</em>. <em>Talk</em> thường cần giới từ <em>about</em>."}, {"q": "One major ________ of storing documents digitally is that users can search for a specific file without checking every folder by hand.", "options": ["advanced", "advancement", "advantageous", "advantage"], "answer": "advantage", "explanation": "Sau <em>one major</em> cần danh từ đếm được số ít. <em>An advantage of + V-ing</em> là một ưu điểm của việc gì."}, {"q": "To find out which material resisted heat better, the students carried out a controlled ________ under the same conditions.", "options": ["experiment", "invention", "exhibition", "advertisement"], "answer": "experiment", "explanation": "<em>Carry out a controlled experiment</em> nghĩa là tiến hành thí nghiệm có kiểm soát để so sánh và kiểm chứng."}, {"q": "The design club encourages members to ________ with different materials before selecting the most suitable one.", "options": ["experimental", "experimenting", "experiment", "experiments"], "answer": "experiment", "explanation": "Sau <em>encourage somebody to</em> dùng động từ nguyên mẫu. <em>Experiment with something</em>: thử nghiệm với thứ gì."}, {"q": "Saving your work regularly can help you avoid ________ important changes if the programme suddenly crashes.", "options": ["lose", "losing", "to lose", "lost"], "answer": "losing", "explanation": "<em>Avoid + V-ing</em>: tránh làm hoặc gặp điều gì. Lưu thường xuyên giúp tránh mất các thay đổi quan trọng."}, {"q": "Unlike a simple list of frequently asked questions, a ________ allows learners to type follow-up questions and receive conversational responses.", "options": ["circuit diagram", "battery charger", "computer case", "chatbot"], "answer": "chatbot", "explanation": "<em>Chatbot</em> là chương trình có thể tương tác với người dùng bằng hội thoại, bao gồm phản hồi câu hỏi tiếp theo."}, {"q": "Before manufacturing the new device, the company assessed its possible effect ________ the environment, especially the amount of electronic waste it might create.", "options": ["on", "to", "for", "with"], "answer": "on", "explanation": "Cấu trúc <em>the effect of something on something</em>: ảnh hưởng của một thứ đối với thứ khác."}];
+const START=21;
+let qs=[],i=0,lives=5,correct=0,solved=false;
+
+function shuffle(a){
+  a=[...a];
+  for(let x=a.length-1;x>0;x--){
+    const j=Math.floor(Math.random()*(x+1));
+    [a[x],a[j]]=[a[j],a[x]];
+  }
+  return a;
+}
+
+function build(mix=false){
+  qs=original.map(x=>({...x,options:mix?shuffle(x.options):[...x.options]}));
+}
+
+function hearts(){
+  document.getElementById('hearts').textContent='❤️'.repeat(lives)+'🤍'.repeat(5-lives);
+}
+
+function progress(){
+  document.getElementById('prog').style.width=(correct/qs.length*100)+'%';
+}
+
+function esc(s){
+  return String(s)
+    .replaceAll('&','&amp;')
+    .replaceAll('"','&quot;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;');
+}
+
+function render(){
+  solved=false;
+  hearts();
+  progress();
+  const card=document.getElementById('card');
+
+  if(i>=qs.length){
+    card.innerHTML=`<div class="finish">
+      <h2>🎉 Hoàn thành!</h2>
+      <p>Bạn đã trả lời đúng <strong>${correct}/${qs.length}</strong> câu.</p>
+      <p>Nhấn <strong>Reset</strong> để làm lại với các option được trộn mới.</p>
+    </div>`;
+    return;
+  }
+
+  const x=qs[i],labels=['A','B','C','D'];
+  card.innerHTML=`<div class="qnum">Question ${START+i}</div>
+    <div class="q">${x.q}</div>
+    <div class="opts">
+      ${x.options.map((o,k)=>`<button class="opt" data-v="${esc(o)}" onclick="choose(this)">
+        <span class="letter">${labels[k]}</span><span>${o}</span>
+      </button>`).join('')}
+    </div>
+    <div id="fb" class="feedback"></div>
+    <button id="next" class="next" onclick="nextQ()">Câu tiếp theo →</button>`;
+}
+
+function choose(btn){
+  if(solved || lives<=0)return;
+
+  const x=qs[i];
+  const v=btn.getAttribute('data-v');
+  const fb=document.getElementById('fb');
+
+  if(v===x.answer){
+    solved=true;
+    correct++;
+    btn.classList.add('correct');
+    document.querySelectorAll('.opt').forEach(b=>b.disabled=true);
+    fb.className='feedback show good';
+    fb.innerHTML='<strong>✅ Chính xác!</strong><br>'+x.explanation;
+    document.getElementById('next').classList.add('show');
+    progress();
+  }else{
+    lives--;
+    hearts();
+    btn.classList.add('wrong');
+    setTimeout(()=>btn.classList.remove('wrong'),450);
+    fb.className='feedback show bad';
+    fb.innerHTML='<strong>❌ Chưa đúng.</strong> Bạn mất 1 tim. Hãy chọn lại chính câu này cho đến khi đúng.';
+
+    if(lives<=0){
+      document.getElementById('modal').classList.add('show');
+    }
+  }
+}
+
+function nextQ(){
+  if(!solved || lives<=0)return;
+  i++;
+  render();
+}
+
+function reset(mix=true){
+  i=0;
+  lives=5;
+  correct=0;
+  build(mix);
+  render();
+}
+
+function manualReset(){
+  if(confirm('Làm lại từ đầu? Các đáp án A/B/C/D sẽ được trộn lại.')) reset(true);
+}
+
+function gameOverReset(){
+  document.getElementById('modal').classList.remove('show');
+  reset(true);
+}
+
+build(false);
+render();
+</script>
+</body>
+</html>

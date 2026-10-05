@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade 10 - Unit 4 - Exercise 1 (1-20) - Option C</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.95) 0 5%, transparent 6%),
+        linear-gradient(135deg, #fffdf0, #fff6a9 52%, #e9f7b8);
+      min-height: 100vh;
+      color: #4b4618;
+    }
+
+    .app {
+      width: min(960px, 94vw);
+      margin: 0 auto;
+      padding: 24px 0 40px;
+    }
+
+    .header {
+      background: rgba(255,255,255,.88);
+      border: 2px solid #f2db58;
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 0 12px 28px rgba(130, 111, 20, .12);
+      margin-bottom: 18px;
+    }
+
+    .title {
+      margin: 0;
+      text-align: center;
+      font-size: clamp(24px, 4vw, 38px);
+      line-height: 1.2;
+      color: #6e6515;
+    }
+
+    .subtitle {
+      text-align: center;
+      margin-top: 8px;
+      font-weight: 700;
+      color: #7a752b;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 12px;
+      align-items: center;
+      margin-top: 18px;
+    }
+
+    .progress-wrap {
+      width: 100%;
+      height: 16px;
+      border-radius: 999px;
+      background: #fff4aa;
+      overflow: hidden;
+      border: 1px solid #eadb72;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ffdf3f, #c9e65a);
+      transition: width .25s ease;
+    }
+
+    .hearts {
+      white-space: nowrap;
+      font-size: 24px;
+      letter-spacing: 2px;
+    }
+
+    .reset-btn {
+      border: 0;
+      border-radius: 14px;
+      padding: 10px 14px;
+      background: #fff09a;
+      color: #5f5714;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: inset 0 0 0 2px #e3cd4e;
+    }
+
+    .reset-btn:hover { transform: translateY(-1px); }
+
+    .card {
+      background: rgba(255,255,255,.94);
+      border-radius: 26px;
+      padding: 24px;
+      border: 2px solid #f0dc6b;
+      box-shadow: 0 16px 35px rgba(114, 95, 17, .14);
+    }
+
+    .question-number {
+      display: inline-block;
+      background: #fff173;
+      color: #665d11;
+      border-radius: 999px;
+      padding: 7px 13px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .question {
+      font-size: clamp(20px, 2.5vw, 27px);
+      font-weight: 800;
+      line-height: 1.5;
+      margin: 6px 0 20px;
+      color: #413d14;
+    }
+
+    .options {
+      display: grid;
+      gap: 12px;
+    }
+
+    .option {
+      width: 100%;
+      border: 2px solid #ead55c;
+      border-radius: 18px;
+      padding: 15px 16px;
+      background: #fffdf2;
+      text-align: left;
+      font-size: 18px;
+      color: #4b4516;
+      cursor: pointer;
+      transition: .15s ease;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .option:hover {
+      transform: translateY(-1px);
+      background: #fff9ce;
+      border-color: #d9c240;
+    }
+
+    .option .letter {
+      flex: 0 0 34px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #ffed73;
+      font-weight: 900;
+      color: #665c12;
+    }
+
+    .option.correct {
+      background: #eef9cf;
+      border-color: #98bd36;
+    }
+
+    .option.wrong {
+      background: #fff0ec;
+      border-color: #e77b63;
+      animation: shake .25s ease;
+    }
+
+    .option:disabled {
+      cursor: default;
+      opacity: .95;
+    }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    .feedback {
+      margin-top: 18px;
+      min-height: 48px;
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: none;
+      line-height: 1.55;
+      font-size: 17px;
+    }
+
+    .feedback.show { display: block; }
+    .feedback.bad {
+      background: #fff1ee;
+      border: 1px solid #ee9d8d;
+      color: #8d3f31;
+    }
+
+    .feedback.good {
+      background: #f0f8d8;
+      border: 1px solid #b2cf58;
+      color: #53631f;
+    }
+
+    .next-btn {
+      display: none;
+      margin: 18px auto 0;
+      border: 0;
+      border-radius: 16px;
+      padding: 13px 22px;
+      background: linear-gradient(135deg, #ffe14d, #d5eb60);
+      color: #4e4813;
+      font-size: 17px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 7px 18px rgba(111, 96, 20, .18);
+    }
+
+    .next-btn.show { display: block; }
+
+    .finish {
+      text-align: center;
+      padding: 10px 0 2px;
+    }
+
+    .finish h2 {
+      font-size: 34px;
+      margin-bottom: 10px;
+      color: #6b6419;
+    }
+
+    .finish p {
+      font-size: 19px;
+      line-height: 1.6;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(53, 47, 10, .48);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 20;
+    }
+
+    .modal.show { display: flex; }
+
+    .modal-box {
+      width: min(480px, 92vw);
+      background: #fffef6;
+      border: 3px solid #f1d85e;
+      border-radius: 26px;
+      padding: 26px;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0,0,0,.24);
+    }
+
+    .modal-box h2 {
+      margin-top: 0;
+      color: #6e6414;
+    }
+
+    .modal-box button {
+      margin-top: 10px;
+      border: none;
+      border-radius: 15px;
+      padding: 12px 20px;
+      background: #ffe45d;
+      font-weight: 900;
+      color: #574f11;
+      cursor: pointer;
+    }
+
+    .tiny-note {
+      text-align: center;
+      margin-top: 14px;
+      color: #777235;
+      font-size: 14px;
+    }
+
+    @media (max-width: 650px) {
+      .topbar { grid-template-columns: 1fr auto; }
+      .progress-wrap { grid-column: 1 / -1; }
+      .card { padding: 18px; }
+      .option { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="header">
+      <h1 class="title">Grade 10 - Unit 4 - Exercise 1 (1-20) - Option C</h1>
+      <div class="subtitle">Choose the correct answer. A wrong answer costs 1 heart — try again until you are correct!</div>
+
+      <div class="topbar">
+        <div class="progress-wrap" aria-label="Progress">
+          <div id="progress" class="progress"></div>
+        </div>
+        <div id="hearts" class="hearts" aria-label="Lives"></div>
+        <button class="reset-btn" onclick="manualReset()">↻ Reset</button>
+      </div>
+    </section>
+
+    <section class="card" id="gameCard"></section>
+
+    <div class="tiny-note">Reset or running out of hearts restarts the game and reshuffles the answer options.</div>
+  </main>
+
+  <div id="gameOverModal" class="modal">
+    <div class="modal-box">
+      <h2>💛 Hết tim rồi!</h2>
+      <p>Bạn cần làm lại từ đầu. Các đáp án A/B/C/D sẽ được trộn lại.</p>
+      <button onclick="restartAfterGameOver()">Làm lại bài</button>
+    </div>
+  </div>
+
+  <script>
+    const originalQuestions = [
+      {
+        q: "Rather than receive payment, several university students offered to ________ elderly patients to their medical appointments.",
+        options: ["voluntary", "volunteer", "voluntarily", "volunteerism"],
+        answer: "volunteer",
+        explanation: "Sau <em>offer to</em> dùng động từ nguyên mẫu. <em>Volunteer to do something</em> nghĩa là tình nguyện làm việc gì."
+      },
+      {
+        q: "Participation in the book collection campaign is entirely ________; students can choose whether to join.",
+        options: ["compulsory", "competitive", "voluntary", "professional"],
+        answer: "voluntary",
+        explanation: "<em>Voluntary</em> nghĩa là tự nguyện, phù hợp với việc học sinh được quyền lựa chọn tham gia."
+      },
+      {
+        q: "The coordinator spoke slowly so that she could communicate the safety instructions ________ the new helpers.",
+        options: ["to", "for", "at", "on"],
+        answer: "to",
+        explanation: "Cấu trúc <em>communicate something to somebody</em>: truyền đạt điều gì cho ai."
+      },
+      {
+        q: "The village needs a long-term plan for ________, including better roads, safer drinking water and more job opportunities.",
+        options: ["developing community", "development community", "community developing", "community development"],
+        answer: "community development",
+        explanation: "Cụm danh từ <em>community development</em> nghĩa là phát triển cộng đồng; <em>community</em> bổ nghĩa cho <em>development</em>."
+      },
+      {
+        q: "Instead of giving teenagers ready-made solutions, the project helps them ________ the skills needed to solve problems independently.",
+        options: ["deliver", "develop", "donate", "display"],
+        answer: "develop",
+        explanation: "<em>Develop skills</em> nghĩa là phát triển kỹ năng, phù hợp với mục tiêu giúp thanh thiếu niên tự giải quyết vấn đề."
+      },
+      {
+        q: "Online lessons remain difficult to access in some ________ regions where electricity and internet services are still limited.",
+        options: ["development", "developer", "developing", "developed"],
+        answer: "developing",
+        explanation: "<em>Developing regions</em> là các khu vực đang phát triển, phù hợp với tình trạng hạ tầng còn hạn chế."
+      },
+      {
+        q: "To reach people who had never heard of the programme, the centre decided to ________ its free evening classes on local radio.",
+        options: ["advertise", "investigate", "interview", "donate"],
+        answer: "advertise",
+        explanation: "<em>Advertise</em> nghĩa là quảng bá, giúp nhiều người biết đến các lớp học miễn phí."
+      },
+      {
+        q: "Students wishing to join the summer service team must apply ________ a place before the end of April.",
+        options: ["to", "with", "in", "for"],
+        answer: "for",
+        explanation: "<em>Apply for something</em> nghĩa là đăng ký hoặc nộp đơn xin một vị trí, cơ hội."
+      },
+      {
+        q: "Of the forty ________ interviewed, only twelve were selected to support the reading programme.",
+        options: ["applications", "applicants", "applying", "applicable"],
+        answer: "applicants",
+        explanation: "Chỗ trống cần danh từ chỉ người được phỏng vấn. <em>Applicants</em> là những người nộp đơn; <em>applications</em> là các đơn đăng ký."
+      },
+      {
+        q: "Although Mai knew the material well, she lacked the ________ to explain it to a large audience.",
+        options: ["confident", "confidently", "confidence", "confide"],
+        answer: "confidence",
+        explanation: "Sau <em>the</em> cần danh từ. <em>Lack the confidence to do something</em> nghĩa là thiếu tự tin để làm việc gì."
+      },
+      {
+        q: "After leading several small workshops, Nam felt more ________ about answering unexpected questions.",
+        options: ["confident", "confidence", "confidently", "confide"],
+        answer: "confident",
+        explanation: "Sau <em>felt more</em> cần tính từ. <em>Confident about doing something</em> nghĩa là tự tin khi làm việc gì."
+      },
+      {
+        q: "Students can become involved ________ recording audio books for people with visual impairments.",
+        options: ["with", "to", "for", "in"],
+        answer: "in",
+        explanation: "Cấu trúc <em>become involved in + V-ing</em>: tham gia vào một hoạt động."
+      },
+      {
+        q: "The guest speaker is an ________ who studies how human activities affect wildlife and campaigns to protect natural habitats.",
+        options: ["electrician", "environmentalist", "economist", "employer"],
+        answer: "environmentalist",
+        explanation: "<em>Environmentalist</em> là nhà hoạt động hoặc người quan tâm đến việc bảo vệ môi trường, phù hợp với hoạt động bảo vệ sinh cảnh."
+      },
+      {
+        q: "The foundation provides ________ assistance, using donated funds to supply meals and medicine rather than earn a profit.",
+        options: ["charity", "charitably", "charitable", "charities"],
+        answer: "charitable",
+        explanation: "Trước danh từ <em>assistance</em> cần tính từ. <em>Charitable assistance</em> nghĩa là sự hỗ trợ mang tính từ thiện."
+      },
+      {
+        q: "Instead of throwing away their old laptops, employees donated them ________ a centre that teaches computer skills to disadvantaged teenagers.",
+        options: ["to", "for", "with", "into"],
+        answer: "to",
+        explanation: "Cấu trúc <em>donate something to somebody/an organisation</em>: quyên góp thứ gì cho ai hoặc tổ chức nào."
+      }
+    ];
+
+    let questions = [];
+    let current = 0;
+    let lives = 5;
+    let correctCount = 0;
+    let questionSolved = false;
+
+    function shuffle(array) {
+      const a = [...array];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function buildQuestions(shuffleOptions = false) {
+      questions = originalQuestions.map(item => ({
+        ...item,
+        options: shuffleOptions ? shuffle(item.options) : [...item.options]
+      }));
+    }
+
+    function renderHearts() {
+      const full = "❤️".repeat(lives);
+      const empty = "🤍".repeat(5 - lives);
+      document.getElementById("hearts").textContent = full + empty;
+    }
+
+    function updateProgress() {
+      const pct = questions.length ? (correctCount / questions.length) * 100 : 0;
+      document.getElementById("progress").style.width = pct + "%";
+    }
+
+    function renderQuestion() {
+      questionSolved = false;
+      renderHearts();
+      updateProgress();
+
+      const card = document.getElementById("gameCard");
+
+      if (current >= questions.length) {
+        card.innerHTML = `
+          <div class="finish">
+            <h2>🎉 Hoàn thành!</h2>
+            <p>Bạn đã trả lời đúng <strong>${correctCount}/${questions.length}</strong> câu.</p>
+            <p>Nhấn <strong>Reset</strong> để làm lại. Các phương án trả lời sẽ được trộn lại.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const item = questions[current];
+      const labels = ["A", "B", "C", "D"];
+
+      card.innerHTML = `
+        <div class="question-number">Question ${current + 1} / ${questions.length}</div>
+        <div class="question">${item.q}</div>
+        <div id="options" class="options">
+          ${item.options.map((opt, idx) => `
+            <button class="option" data-value="${escapeHtml(opt)}" onclick="selectOption(this)">
+              <span class="letter">${labels[idx]}</span>
+              <span>${opt}</span>
+            </button>
+          `).join("")}
+        </div>
+        <div id="feedback" class="feedback"></div>
+        <button id="nextBtn" class="next-btn" onclick="nextQuestion()">Câu tiếp theo →</button>
+      `;
+    }
+
+    function selectOption(button) {
+      if (questionSolved) return;
+
+      const value = button.getAttribute("data-value");
+      const item = questions[current];
+      const feedback = document.getElementById("feedback");
+
+      if (value === item.answer) {
+        questionSolved = true;
+        correctCount++;
+        button.classList.remove("wrong");
+        button.classList.add("correct");
+
+        document.querySelectorAll(".option").forEach(btn => btn.disabled = true);
+
+        feedback.className = "feedback show good";
+        feedback.innerHTML = `<strong>✅ Chính xác!</strong><br>${item.explanation}`;
+
+        document.getElementById("nextBtn").classList.add("show");
+        updateProgress();
+      } else {
+        lives--;
+        renderHearts();
+
+        button.classList.remove("wrong");
+        void button.offsetWidth;
+        button.classList.add("wrong");
+
+        feedback.className = "feedback show bad";
+        feedback.innerHTML = `<strong>❌ Chưa đúng.</strong> Bạn mất 1 tim. Hãy chọn lại cho đến khi đúng.`;
+
+        setTimeout(() => button.classList.remove("wrong"), 450);
+
+        if (lives <= 0) {
+          document.getElementById("gameOverModal").classList.add("show");
+        }
+      }
+    }
+
+    function nextQuestion() {
+      current++;
+      renderQuestion();
+    }
+
+    function manualReset() {
+      if (!confirm("Làm lại từ đầu? Các đáp án A/B/C/D sẽ được trộn lại.")) return;
+      resetGame(true);
+    }
+
+    function restartAfterGameOver() {
+      document.getElementById("gameOverModal").classList.remove("show");
+      resetGame(true);
+    }
+
+    function resetGame(shuffleOptions = true) {
+      current = 0;
+      lives = 5;
+      correctCount = 0;
+      buildQuestions(shuffleOptions);
+      renderQuestion();
+    }
+
+    function escapeHtml(text) {
+      return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+    }
+
+    buildQuestions(false);
+    renderQuestion();
+  </script>
+</body>
+</html>

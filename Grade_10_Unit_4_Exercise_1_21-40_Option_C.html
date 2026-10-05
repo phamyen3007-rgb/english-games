@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 - Unit 4 - Exercise 1 (21-40) - Option C</title>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:linear-gradient(135deg,#fffef2,#fff3a6,#eaf8bd);min-height:100vh;color:#423d13}
+.wrap{width:min(940px,94vw);margin:auto;padding:24px 0 40px}
+.head,.card{background:#ffffffed;border:2px solid #efd85c;border-radius:24px;box-shadow:0 14px 32px #7660141d}
+.head{padding:20px;margin-bottom:18px} h1{margin:0;text-align:center;color:#6b6217;font-size:clamp(24px,4vw,36px)}
+.sub{text-align:center;margin:8px 0 16px;font-weight:700;color:#77712b}
+.bar{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center} .track{height:15px;background:#fff2a2;border-radius:99px;overflow:hidden;border:1px solid #e4d260}
+#prog{height:100%;width:0;background:linear-gradient(90deg,#ffdc3f,#cbe75c);transition:.2s}
+#hearts{font-size:23px;white-space:nowrap} button{font:inherit}
+.reset{border:0;border-radius:13px;padding:10px 14px;background:#fff08f;color:#5a5211;font-weight:800;cursor:pointer;box-shadow:inset 0 0 0 2px #ddc94d}
+.card{padding:24px} .qnum{display:inline-block;background:#fff16d;border-radius:99px;padding:7px 13px;font-weight:900;color:#625910}
+.q{font-size:clamp(20px,2.5vw,27px);font-weight:800;line-height:1.5;margin:14px 0 20px}
+.opts{display:grid;gap:12px} .opt{width:100%;border:2px solid #ead45b;background:#fffdf4;border-radius:17px;padding:14px 16px;text-align:left;font-size:18px;cursor:pointer;display:flex;gap:12px;align-items:flex-start}
+.opt:hover{background:#fff8cb;transform:translateY(-1px)} .letter{flex:0 0 34px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#ffec70;font-weight:900}
+.correct{background:#eff8d4!important;border-color:#99bc3b!important} .wrong{background:#fff0ec!important;border-color:#e77a63!important;animation:shake .25s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.feedback{display:none;margin-top:18px;padding:14px 16px;border-radius:15px;line-height:1.55;font-size:17px}
+.feedback.show{display:block} .good{background:#f1f8da;border:1px solid #b2cf58;color:#53631f} .bad{background:#fff1ee;border:1px solid #ee9d8d;color:#8c3f31}
+.next{display:none;margin:18px auto 0;border:0;border-radius:15px;padding:12px 22px;background:linear-gradient(135deg,#ffe04b,#d6ec61);font-weight:900;color:#4c4612;cursor:pointer}
+.next.show{display:block} .finish{text-align:center;padding:20px} .finish h2{font-size:34px;color:#676016}
+.modal{position:fixed;inset:0;background:#302b0b80;display:none;align-items:center;justify-content:center;padding:20px} .modal.show{display:flex}
+.box{width:min(460px,92vw);background:#fffef6;border:3px solid #efd65a;border-radius:24px;padding:26px;text-align:center} .box button{border:0;border-radius:14px;background:#ffe359;padding:12px 20px;font-weight:900;cursor:pointer}
+.note{text-align:center;margin-top:12px;color:#716c32;font-size:14px}
+@media(max-width:650px){.bar{grid-template-columns:1fr auto}.track{grid-column:1/-1}.card{padding:18px}.opt{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="head">
+    <h1>Grade 10 - Unit 4 - Exercise 1 (21-40) - Option C</h1>
+    <div class="sub">Choose the correct answer. Wrong answer = lose 1 heart and try again.</div>
+    <div class="bar">
+      <div class="track"><div id="prog"></div></div>
+      <div id="hearts"></div>
+      <button class="reset" onclick="manualReset()">↻ Reset</button>
+    </div>
+  </section>
+  <section class="card" id="card"></section>
+  <div class="note">Reset hoặc hết tim sẽ làm lại từ đầu và trộn lại A/B/C/D. Thứ tự câu hỏi được giữ nguyên.</div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="box">
+    <h2>💛 Hết tim rồi!</h2>
+    <p>Bạn phải làm lại từ đầu. Các phương án trả lời sẽ được trộn lại.</p>
+    <button onclick="gameOverReset()">Làm lại bài</button>
+  </div>
+</div>
+
+<script>
+const original=[{"q": "Thanks to an anonymous ________, the mobile library can now deliver books to three remote villages.", "options": ["application", "advertisement", "donation", "invitation"], "answer": "donation", "explanation": "<em>Donation</em> là khoản quyên góp, phù hợp với việc cung cấp kinh phí để thư viện hoạt động."}, {"q": "The amount of time volunteers can offer may ________ from week to week, depending on their school schedules.", "options": ["vary", "maintain", "settle", "preserve"], "answer": "vary", "explanation": "<em>Vary from week to week</em> nghĩa là thay đổi theo từng tuần; thời gian tình nguyện phụ thuộc vào lịch học."}, {"q": "Because demand for emergency accommodation is highly ________, the centre keeps extra beds available.", "options": ["variety", "various", "variation", "variable"], "answer": "variable", "explanation": "Sau <em>is highly</em> cần tính từ. <em>Variable</em> nghĩa là thường thay đổi; <em>various</em> nghĩa là nhiều, đa dạng."}, {"q": "Before choosing where to volunteer, students were introduced to ________ operating in their district.", "options": ["local various charities", "various local charities", "charities various local", "local charities various"], "answer": "various local charities", "explanation": "Trật tự đúng là <em>various + local + charities</em>: nhiều tổ chức từ thiện tại địa phương."}, {"q": "Students who cannot attend in person can still participate ________ the discussion through a video call.", "options": ["at", "for", "in", "on"], "answer": "in", "explanation": "<em>Participate in something</em> nghĩa là tham gia một hoạt động, kể cả khi tham gia trực tuyến."}, {"q": "Each ________ in the training session must demonstrate the first-aid technique before receiving a certificate.", "options": ["participant", "participation", "participating", "participate"], "answer": "participant", "explanation": "Sau <em>each</em> cần danh từ số ít chỉ người. <em>Participant</em> là người tham gia buổi tập huấn."}, {"q": "To prevent mistakes during distribution, volunteers attached a label to every donated ________, including blankets, jackets and cooking pots.", "options": ["donor", "fund", "duty", "item"], "answer": "item", "explanation": "<em>Item</em> nghĩa là món đồ riêng lẻ; chăn, áo khoác và nồi đều là các vật phẩm được quyên góp."}, {"q": "After the river burst its banks, rescue teams delivered drinking water to several ________.", "options": ["affected-flood villages", "flood-affected villages", "villages flood-affected", "flood-affecting villages"], "answer": "flood-affected villages", "explanation": "<em>Flood-affected</em> là tính từ ghép nghĩa là bị ảnh hưởng bởi lũ lụt, đứng trước <em>villages</em>."}, {"q": "The shelter remained open throughout the winter because of the ________ of residents who contributed money and supplies.", "options": ["generously", "generous", "generosity", "generosity’s"], "answer": "generosity", "explanation": "Cấu trúc <em>the + danh từ + of</em>. <em>Generosity</em> nghĩa là lòng hào phóng."}, {"q": "Days of heavy rain loosened the soil on the hillside, increasing the risk of ________ that could bury houses below.", "options": ["landslides", "droughts", "heatwaves", "thunderstorms"], "answer": "landslides", "explanation": "Đất trên sườn đồi bị yếu đi và có thể trượt xuống vùi lấp nhà cửa là nguy cơ <em>landslides</em> — sạt lở đất."}, {"q": "Clean drinking water is ________ to preventing disease after a flood; without it, infections can spread quickly.", "options": ["additional", "temporary", "optional", "essential"], "answer": "essential", "explanation": "<em>Be essential to + V-ing</em> nghĩa là thiết yếu đối với việc gì. Vế sau nhấn mạnh vai trò không thể thiếu của nước sạch."}, {"q": "Working alongside experienced rescue workers helps young volunteers ________ practical knowledge of emergency response.", "options": ["make", "gain", "raise", "perform"], "answer": "gain", "explanation": "Cụm đúng là <em>gain knowledge</em>: thu nhận kiến thức thông qua học tập hoặc trải nghiệm."}, {"q": "When the shelter ran out of blankets, its manager submitted a written request ________ additional supplies.", "options": ["with", "of", "for", "into"], "answer": "for", "explanation": "<em>A request for something</em> nghĩa là một yêu cầu xin hoặc đề nghị cung cấp thứ gì."}, {"q": "Before the relief trip, the team checked that it had enough ________ to work safely in the damaged buildings.", "options": ["high-quality protective equipment", "protective high-quality equipment", "high-quality equipment protective", "equipment protective high-quality"], "answer": "high-quality protective equipment", "explanation": "<em>High-quality</em> chỉ chất lượng, đứng trước cụm <em>protective equipment</em> — thiết bị bảo hộ. <em>Equipment</em> là danh từ không đếm được."}, {"q": "The organisers would appreciate ________ informed in advance if any volunteer is unable to attend.", "options": ["be", "to be", "been", "being"], "answer": "being", "explanation": "<em>Appreciate + V-ing</em>; ở dạng bị động dùng <em>being + V3</em>. <em>Appreciate being informed</em> nghĩa là trân trọng việc được thông báo."}];
+const START=21;
+let qs=[],i=0,lives=5,correct=0,solved=false;
+
+function shuffle(a){a=[...a];for(let x=a.length-1;x>0;x--){const j=Math.floor(Math.random()*(x+1));[a[x],a[j]]=[a[j],a[x]]}return a}
+function build(mix=false){qs=original.map(x=>({...x,options:mix?shuffle(x.options):[...x.options]}))}
+function hearts(){document.getElementById('hearts').textContent='❤️'.repeat(lives)+'🤍'.repeat(5-lives)}
+function progress(){document.getElementById('prog').style.width=(correct/qs.length*100)+'%'}
+function esc(s){return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;')}
+
+function render(){
+  solved=false; hearts(); progress();
+  const card=document.getElementById('card');
+  if(i>=qs.length){
+    card.innerHTML=`<div class="finish"><h2>🎉 Hoàn thành!</h2><p>Bạn đã trả lời đúng <strong>${correct}/${qs.length}</strong> câu.</p><p>Nhấn Reset để làm lại với các option được trộn mới.</p></div>`;
+    return;
+  }
+  const x=qs[i], labels=['A','B','C','D'];
+  card.innerHTML=`<div class="qnum">Question ${START+i}</div>
+  <div class="q">${x.q}</div>
+  <div class="opts">${x.options.map((o,k)=>`<button class="opt" data-v="${esc(o)}" onclick="choose(this)"><span class="letter">${labels[k]}</span><span>${o}</span></button>`).join('')}</div>
+  <div id="fb" class="feedback"></div>
+  <button id="next" class="next" onclick="nextQ()">Câu tiếp theo →</button>`;
+}
+
+function choose(btn){
+  if(solved)return;
+  const x=qs[i],v=btn.getAttribute('data-v'),fb=document.getElementById('fb');
+  if(v===x.answer){
+    solved=true;correct++;btn.classList.add('correct');
+    document.querySelectorAll('.opt').forEach(b=>b.disabled=true);
+    fb.className='feedback show good';fb.innerHTML='<strong>✅ Chính xác!</strong><br>'+x.explanation;
+    document.getElementById('next').classList.add('show');progress();
+  }else{
+    lives--;hearts();btn.classList.add('wrong');
+    setTimeout(()=>btn.classList.remove('wrong'),450);
+    fb.className='feedback show bad';fb.innerHTML='<strong>❌ Chưa đúng.</strong> Bạn mất 1 tim. Hãy chọn lại chính câu này cho đến khi đúng.';
+    if(lives<=0)document.getElementById('modal').classList.add('show');
+  }
+}
+function nextQ(){i++;render()}
+function reset(mix=true){i=0;lives=5;correct=0;build(mix);render()}
+function manualReset(){if(confirm('Làm lại từ đầu? Các đáp án A/B/C/D sẽ được trộn lại.'))reset(true)}
+function gameOverReset(){document.getElementById('modal').classList.remove('show');reset(true)}
+build(false);render();
+</script>
+</body>
+</html>
