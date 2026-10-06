@@ -34,12 +34,13 @@
           <li><span class="tick">✓</span><span><b>Part I · Multiple Choice:</b> 15 questions · 5 marks.</span></li>
           <li><span class="tick">✓</span><span><b>Part II · Written:</b> 5 article-completion questions + 5 sentence-rewriting questions · 5 marks.</span></li>
           <li><span class="tick">✓</span><span>Switch between parts freely. Your answers stay available during the current session.</span></li>
-          <li><span class="tick">✓</span><span>Complete every question in a part, then select <b>Check Answers</b> to see its score and explanations.</span></li>
-          <li><span class="tick">✓</span><span>Complete both parts to receive your <b>Overall Score /10</b>.</span></li>
+          <li><span class="tick">✓</span><span>Select <b>Check</b> for each question to see the answer and explanation immediately. Checked answers are locked. You can also select <b>View Part Result</b> to submit the whole part without checking each question.</span></li>
+          <li><span class="tick">✓</span><span>Submit both parts to receive your <b>Overall Score /10</b>, student name and submission time.</span></li>
         </ul>
       </div>
       <div class="startbox">
-        <div class="field"><label for="studentName">Student name (optional)</label><input id="studentName" maxlength="50" autocomplete="name" placeholder="Enter your name"></div>
+        <div class="field"><label for="studentName">Student name (required)</label><input id="studentName" required maxlength="50" autocomplete="name" placeholder="Enter your name"></div>
+        <div id="nameMessage" class="warning hidden" role="alert">Please enter your name before starting.</div>
         <button id="startBtn" class="btn primary wide" type="button">Start a set</button>
         <div style="font-size:12px;color:var(--muted);line-height:1.55;margin-top:10px">New Set cycles through all 20 sets before repeating. Multiple-choice question order stays fixed; A/B/C/D options are shuffled.</div>
       </div>
@@ -63,7 +64,7 @@
         <button id="writtenBtn" class="btn primary wide" type="button">Start Written Practice</button>
       </div>
     </div>
-    <div id="overallBox" class="overall hidden"><span>Overall Score</span><b id="overallScore"></b><p id="overallDetail"></p></div>
+    <div id="overallBox" class="overall hidden" role="status" aria-live="polite"></div>
     <div class="result-actions"><button id="newSetBtn" class="btn secondary" type="button">New Set</button></div>
   </section>
   <main id="partScreen">
@@ -73,9 +74,9 @@
     </section>
     <section class="card qcard">
       <div id="questionsArea"></div>
-      <div id="incompleteMessage" role="alert" class="warning hidden">Please answer every question in this part before checking.</div>
-      <div class="actions sticky-actions"><button id="checkPartBtn" class="btn primary" type="button">Check Answers</button></div>
-      <div class="note">Answers and explanations will appear after you complete and check this part.</div>
+      <div class="actions sticky-actions"><button id="checkPartBtn" class="btn primary" type="button">View Part Result</button></div>
+      <div class="note">Check individual questions, or select View Part Result to submit this part. Submitted answers are locked; unanswered questions receive 0 marks.</div>
+      <div id="completionBox" class="overall hidden" role="status" aria-live="polite"></div>
     </section>
   </main>
   <section id="resultScreen" class="card result">
@@ -87,8 +88,9 @@
       <div class="mini"><b id="timeResult">00:00</b><span>Time</span></div>
       <div class="mini"><b>✓</b><span>Part completed</span></div>
     </div>
+    <div id="resultCompletionBox" class="overall hidden" role="status" aria-live="polite"></div>
     <div class="review"><h3>Answer key & explanations</h3><div id="reviewList"></div></div>
-    <div class="result-actions"><button id="returnPartsBtn" class="btn primary" type="button">Back to Parts</button><button id="redoPartBtn" class="btn secondary" type="button">Redo This Part</button></div>
+    <div class="result-actions"><button id="returnPartsBtn" class="btn primary" type="button">Back to Parts</button></div>
   </section>
   <div class="footer">Grade 12 · Unit 2 Review · 20 sets · 500 questions</div>
 </div>
@@ -6897,6 +6899,7 @@ const state = {
   studentName: '', currentSet: null, currentPart: null,
   responses: {mcq: {}, written: {}},
   results: {mcq: null, written: null},
+  checked: {mcq: {}, written: {}}, submittedAt: null,
   optionOrder: {}, timeSpent: {mcq: 0, written: 0},
   timerStartedAt: null, timerId: null
 };
@@ -7030,6 +7033,8 @@ function resetSetState() {
   state.currentPart = null;
   state.responses = {mcq: {}, written: {}};
   state.results = {mcq: null, written: null};
+  state.checked = {mcq: {}, written: {}};
+  state.submittedAt = null;
   state.optionOrder = {};
   state.timeSpent = {mcq: 0, written: 0};
   state.timerStartedAt = null;
@@ -7062,7 +7067,14 @@ function showScreen(id) {
   });
 }
 function startPractice() {
-  state.studentName = $('studentName').value.trim();
+  const name = $('studentName').value.trim();
+  if (!name) {
+    $('nameMessage').classList.remove('hidden');
+    $('studentName').focus();
+    return;
+  }
+  $('nameMessage').classList.add('hidden');
+  state.studentName = name;
   resetSetState();
   state.currentSet = chooseNewSet();
   showMenu();
@@ -7087,7 +7099,8 @@ function updatePartCard(part) {
   } else {
     card.classList.remove('completed'); status.className = 'part-status'; score.textContent = '—';
     const count = countResponses(part);
-    status.textContent = count ? count + '/' + state.currentSet[part].length + ' answered' : 'Not completed';
+    const checked = countChecked(part);
+    status.textContent = count ? checked + '/' + state.currentSet[part].length + ' checked · ' + count + ' answered' : 'Not completed';
     button.textContent = count ? 'Continue Part' : part === 'mcq' ? 'Start Multiple Choice' : 'Start Written Practice';
   }
 }
@@ -7100,16 +7113,18 @@ function openPart(part) {
   // Accumulate the previous part's timer before changing currentPart.
   stopTimer();
   showScreen('partScreen');
-  $('incompleteMessage').classList.add('hidden');
   $('partTitle').textContent = part === 'mcq' ? 'Part I · Multiple Choice' : 'Part II · Written';
   $('partSubtitle').textContent = part === 'mcq'
     ? '15 questions · Vocabulary · 5 marks' : '10 questions · Articles & Sentence rewriting · 5 marks';
   if (part === 'mcq') renderMCQ(); else renderWritten();
   startTimer(part);
+  updatePartCheckButton(part);
+  updateOverall();
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 function questionBox(item, index) {
   const box = document.createElement('div'); box.className = 'question-box';
+  box.id = 'question_' + item.id;
   const meta = document.createElement('div'); meta.className = 'qmeta';
   const number = document.createElement('div'); number.className = 'qnumber';
   number.textContent = 'Question ' + (index + 1);
@@ -7132,6 +7147,7 @@ function renderMCQ() {
       const selected = state.responses.mcq[item.id] === optionText;
       button.classList.toggle('selected', selected); button.setAttribute('aria-pressed', String(selected));
       button.addEventListener('click', () => {
+        if (state.checked.mcq[item.id]) return;
         options.querySelectorAll('.option').forEach(other => {
           other.classList.remove('selected'); other.setAttribute('aria-pressed', 'false');
         });
@@ -7140,7 +7156,9 @@ function renderMCQ() {
       });
       options.appendChild(button);
     });
-    box.appendChild(options); area.appendChild(box);
+    box.appendChild(options);
+    appendQuestionCheck(box, item, 'mcq');
+    area.appendChild(box);
   });
 }
 function renderWritten() {
@@ -7162,6 +7180,7 @@ function renderWritten() {
         input.placeholder = item.type === 'article' ? 'a / an / the / Ø' : item.answers.length > 1 ? 'Answer for blank ' + (blankIndex + 1) : 'Type all required words in the correct form';
         input.value = saved[blankIndex] || '';
         input.addEventListener('input', () => {
+          if (state.checked.written[item.id]) { input.value = state.responses.written[item.id][blankIndex]; return; }
           if (!Array.isArray(state.responses.written[item.id]))
             state.responses.written[item.id] = new Array(item.answers.length).fill('');
           state.responses.written[item.id][blankIndex] = input.value;
@@ -7172,6 +7191,7 @@ function renderWritten() {
           zero.className = 'btn secondary zero-article-btn'; zero.textContent = 'Ø';
           zero.setAttribute('aria-label', 'Insert no-article symbol for Question ' + (index + 1));
           zero.addEventListener('click', () => {
+            if (state.checked.written[item.id]) return;
             input.value = 'Ø';
             if (!Array.isArray(state.responses.written[item.id]))
               state.responses.written[item.id] = new Array(item.answers.length).fill('');
@@ -7186,11 +7206,76 @@ function renderWritten() {
       const input = document.createElement('input'); input.className = 'answer-input'; input.autocomplete = 'off';
       input.placeholder = 'Write the complete sentence'; input.setAttribute('aria-label', 'Answer for Question ' + (index + 1));
       input.value = typeof state.responses.written[item.id] === 'string' ? state.responses.written[item.id] : '';
-      input.addEventListener('input', () => { state.responses.written[item.id] = input.value; });
+      input.addEventListener('input', () => {
+        if (state.checked.written[item.id]) { input.value = state.responses.written[item.id]; return; }
+        state.responses.written[item.id] = input.value;
+      });
       box.appendChild(input);
     }
+    appendQuestionCheck(box, item, 'written');
     area.appendChild(box);
   });
+}
+function countChecked(part) {
+  return state.currentSet[part].filter(item => !!state.checked[part][item.id]).length;
+}
+function appendQuestionCheck(box, item, part) {
+  const actions = document.createElement('div'); actions.className = 'actions';
+  const button = document.createElement('button'); button.type = 'button';
+  button.className = 'btn primary question-check'; button.textContent = 'Check';
+  button.setAttribute('aria-label', 'Check Question ' + item.number);
+  const message = document.createElement('div'); message.className = 'warning hidden';
+  message.setAttribute('role', 'alert');
+  message.textContent = part === 'mcq' ? 'Please select an answer before checking.' : 'Please complete every blank in this question before checking.';
+  const feedback = document.createElement('div'); feedback.className = 'feedback hidden';
+  feedback.setAttribute('role', 'status'); feedback.setAttribute('aria-live', 'polite');
+  actions.appendChild(button); box.append(actions, message, feedback);
+  button.addEventListener('click', () => checkQuestion(part, item, box));
+  if (state.checked[part][item.id]) showQuestionFeedback(part, item, box);
+}
+function checkQuestion(part, item, box) {
+  if (state.currentPart !== part || state.checked[part][item.id] || state.results[part]) return;
+  const answered = part === 'mcq' ? !!state.responses.mcq[item.id] : isWrittenAnswered(item);
+  if (!answered) {
+    box.querySelector('.warning').classList.remove('hidden');
+    const input = box.querySelector('input:not(:disabled), .option:not(:disabled)');
+    if (input) input.focus();
+    return;
+  }
+  const response = state.responses[part][item.id];
+  const user = Array.isArray(response) ? Object.freeze([...response]) : response;
+  const correct = part === 'mcq' ? normalize(user) === normalize(item.correct) : checkWrittenItem(item, user).correct;
+  state.checked[part][item.id] = Object.freeze({item, user, correct});
+  showQuestionFeedback(part, item, box);
+  if (countChecked(part) === state.currentSet[part].length) {
+    if (part === 'mcq') finishMCQ(); else finishWritten();
+  }
+  updatePartCheckButton(part);
+  updateOverall();
+}
+function showQuestionFeedback(part, item, box) {
+  const entry = state.checked[part][item.id];
+  box.querySelectorAll('input, button').forEach(control => { control.disabled = true; });
+  box.querySelector('.question-check').textContent = 'Checked · Locked';
+  box.querySelector('.warning').classList.add('hidden');
+  const feedback = box.querySelector('.feedback');
+  feedback.className = 'feedback ' + (entry.correct ? 'ok' : 'bad'); feedback.innerHTML = '';
+  const title = document.createElement('div'); title.className = 'feedback-title';
+  title.textContent = entry.correct ? '✓ Correct · Answer locked' : '✗ Incorrect · Answer locked';
+  feedback.appendChild(title);
+  const correctAnswer = part === 'mcq'
+    ? 'ABCD'[state.optionOrder[item.id].indexOf(item.correct)] + '. ' + item.correct
+    : getCorrectAnswerText(item);
+  [['Your answer: ', getUserAnswerText(entry.user) || '(no answer)'], ['Correct answer: ', correctAnswer], ['Explanation: ', item.explanation]].forEach(([label, value]) => {
+    const line = document.createElement('div'); line.className = 'feedback-line';
+    const bold = document.createElement('b'); bold.textContent = label;
+    const text = document.createElement('span'); text.textContent = value;
+    line.append(bold, text); feedback.appendChild(line);
+  });
+}
+function updatePartCheckButton(part) {
+  $('checkPartBtn').disabled = false;
+  $('checkPartBtn').textContent = 'View Part Result';
 }
 function isWrittenAnswered(item) {
   const response = state.responses.written[item.id];
@@ -7218,13 +7303,27 @@ function getCorrectAnswerText(item) {
 function getUserAnswerText(response) { return Array.isArray(response) ? response.join(' / ') : String(response ?? ''); }
 function checkCurrentPart() {
   const part = state.currentPart;
-  if (!part || state.results[part]) return;
-  if (!allAnswered(part)) {
-    $('incompleteMessage').classList.remove('hidden'); scrollToFirstIncomplete(part); return;
+  if (!part) return;
+  if (!state.results[part]) {
+    // Preserve individually checked answers; submit every remaining answer once.
+    state.currentSet[part].forEach(item => {
+      if (!state.checked[part][item.id]) {
+        const response = state.responses[part][item.id];
+        const user = Array.isArray(response) ? Object.freeze([...response]) : response ?? '';
+        const correct = part === 'mcq'
+          ? normalize(user) === normalize(item.correct)
+          : checkWrittenItem(item, user).correct;
+        state.checked[part][item.id] = Object.freeze({item, user, correct});
+      }
+      const box = $('question_' + item.id);
+      if (box) showQuestionFeedback(part, item, box);
+    });
+    if (part === 'mcq') finishMCQ(); else finishWritten();
+    updatePartCheckButton(part);
   }
-  $('incompleteMessage').classList.add('hidden');
-  if (part === 'mcq') finishMCQ(); else finishWritten();
+  showStoredResult(part);
 }
+
 function scrollToFirstIncomplete(part) {
   const index = state.currentSet[part].findIndex(item => part === 'mcq'
     ? !state.responses.mcq[item.id] : !isWrittenAnswered(item));
@@ -7233,24 +7332,18 @@ function scrollToFirstIncomplete(part) {
 }
 function finishMCQ() {
   stopTimer();
-  const review = state.currentSet.mcq.map(item => {
-    const user = state.responses.mcq[item.id];
-    return {item, user, correct: normalize(user) === normalize(item.correct)};
-  });
+  const review = state.currentSet.mcq.map(item => state.checked.mcq[item.id]);
   const correct = review.filter(entry => entry.correct).length;
   state.results.mcq = {correct, total: CONFIG.mcqCount, score: correct / 3, elapsed: state.timeSpent.mcq, review};
-  showStoredResult('mcq');
 }
+
 function finishWritten() {
   stopTimer();
-  const review = state.currentSet.written.map(item => {
-    const user = state.responses.written[item.id];
-    return {item, user, correct: checkWrittenItem(item, user).correct};
-  });
+  const review = state.currentSet.written.map(item => state.checked.written[item.id]);
   const correct = review.filter(entry => entry.correct).length;
   state.results.written = {correct, total: CONFIG.writtenCount, score: correct * 0.5, elapsed: state.timeSpent.written, review};
-  showStoredResult('written');
 }
+
 function showStoredResult(part) {
   stopTimer();
   const result = state.results[part]; if (!result) return;
@@ -7262,7 +7355,7 @@ function showStoredResult(part) {
   $('partScoreMini').textContent = scoreText(result.score, 5);
   $('timeResult').textContent = formatTime(result.elapsed);
   $('scoreRing').style.background = 'conic-gradient(var(--brand) ' + (result.score / 5 * 360) + 'deg,#dbe5f3 0deg)';
-  renderReview(result.review); window.scrollTo({top: 0, behavior: 'smooth'});
+  renderReview(result.review); updateOverall(); window.scrollTo({top: 0, behavior: 'smooth'});
 }
 function renderReview(review) {
   const list = $('reviewList'); list.innerHTML = '';
@@ -7270,7 +7363,7 @@ function renderReview(review) {
     const div = document.createElement('div'); div.className = 'review-item ' + (entry.correct ? 'ok' : 'bad');
     const head = document.createElement('div'); head.className = 'review-head';
     const q = document.createElement('div'); q.className = 'review-q'; q.textContent = (index + 1) + '. ' + entry.item.question;
-    const tag = document.createElement('span'); tag.className = 'tag'; tag.textContent = entry.correct ? 'Correct' : 'Check again';
+    const tag = document.createElement('span'); tag.className = 'tag'; tag.textContent = entry.correct ? 'Correct' : 'Incorrect';
     head.append(q, tag); div.appendChild(head);
     [['Your answer: ', getUserAnswerText(entry.user) || '(no answer)'], ['Correct answer: ', getCorrectAnswerText(entry.item)]].forEach(([label, value]) => {
       const line = document.createElement('div'); line.className = 'review-line';
@@ -7283,29 +7376,38 @@ function renderReview(review) {
 }
 function updateOverall() {
   const mcq = state.results.mcq, written = state.results.written;
-  if (!mcq || !written) { $('overallBox').classList.add('hidden'); return; }
-  $('overallScore').textContent = roundForDisplay(mcq.score + written.score) + ' / ' + CONFIG.totalMax;
-  $('overallDetail').textContent = 'MCQ: ' + scoreText(mcq.score, 5) + ' · Written: ' + scoreText(written.score, 5);
-  $('overallBox').classList.remove('hidden');
+  if (mcq && written && state.submittedAt === null) state.submittedAt = new Date().toISOString();
+  ['overallBox', 'completionBox', 'resultCompletionBox'].forEach(id => {
+    const box = $(id);
+    if (!mcq || !written) { box.classList.add('hidden'); box.replaceChildren(); return; }
+    box.replaceChildren();
+    const heading = document.createElement('h3'); heading.textContent = 'Completed · Set ' + state.currentSet.set;
+    const score = document.createElement('b'); score.textContent = 'Overall Score: ' + roundForDisplay(mcq.score + written.score) + ' / ' + CONFIG.totalMax;
+    const name = document.createElement('p'); name.textContent = 'Student name: ' + state.studentName;
+    const submitted = document.createElement('p');
+    submitted.textContent = 'Submitted at: ' + new Intl.DateTimeFormat('vi-VN', {
+      timeZone: 'Asia/Ho_Chi_Minh', year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23'
+    }).format(new Date(state.submittedAt)) + ' (Vietnam time, UTC+7)';
+    const detail = document.createElement('p');
+    detail.textContent = 'MCQ: ' + scoreText(mcq.score, 5) + ' · Written: ' + scoreText(written.score, 5)
+      + ' · Practice time: ' + formatTime(mcq.elapsed + written.elapsed);
+    box.append(heading, name, submitted, score, detail); box.classList.remove('hidden');
+  });
 }
-function redoCurrentPart() {
-  const part = state.currentPart; if (!part) return;
-  stopTimer(); state.results[part] = null; state.timeSpent[part] = 0; state.responses[part] = {};
-  if (part === 'mcq') state.currentSet.mcq.forEach(item => { delete state.optionOrder[item.id]; });
-  openPart(part);
-}
+
 function newSet() {
   const hasProgress = countResponses('mcq') > 0 || countResponses('written') > 0 || state.results.mcq || state.results.written;
   if (hasProgress && !window.confirm('Start a new set? Your current answers and scores will be cleared.')) return;
   resetSetState(); state.currentSet = chooseNewSet(); showMenu();
 }
 $('startBtn').addEventListener('click', startPractice);
+$('studentName').addEventListener('keydown', event => { if (event.key === 'Enter') startPractice(); });
 $('mcqBtn').addEventListener('click', () => openPart('mcq'));
 $('writtenBtn').addEventListener('click', () => openPart('written'));
 $('backMenuBtn').addEventListener('click', showMenu);
 $('checkPartBtn').addEventListener('click', checkCurrentPart);
 $('returnPartsBtn').addEventListener('click', showMenu);
-$('redoPartBtn').addEventListener('click', redoCurrentPart);
 $('newSetBtn').addEventListener('click', newSet);
 try { validateBank(); }
 catch (error) {
