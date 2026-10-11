@@ -15,6 +15,7 @@
 .article-hint{margin:0 0 8px;color:var(--muted);font-size:14px;line-height:1.6}.zero-article-btn{margin-left:8px;padding:3px 9px;font-size:13px;vertical-align:middle}.blank-label{display:inline-block}
 
 .passage{border:1px solid var(--line);border-radius:17px;padding:20px;margin-top:16px;background:linear-gradient(145deg,#f8fbff,#faf8ff);line-height:1.75;overflow-wrap:anywhere}.passage h3{margin:12px 0 8px;font-size:21px;line-height:1.35}.passage p{margin:10px 0}.passage .instructions{font-size:14px;color:var(--muted)}.passage strong{font-weight:900}.part-divider{margin:26px 0 8px}.part-divider p{color:var(--muted);line-height:1.6}.audio-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:16px 0 12px}.audio-progress{display:flex;gap:12px;align-items:center}.audio-progress progress{width:100%;height:9px;accent-color:var(--brand)}#audioTime{white-space:nowrap;font-size:13px;font-weight:800;color:var(--muted)}.audio-error{color:var(--bad)!important}.transcript{margin:20px 0 0;border:1px solid var(--line);border-radius:16px;padding:16px;background:#f8fafc;line-height:1.7}.transcript summary{cursor:pointer;font-weight:850;color:var(--brand)}.transcript p{white-space:pre-wrap;margin:12px 0 0}.question-box .question{overflow-wrap:anywhere}.writing-answer{resize:vertical;min-height:88px;line-height:1.55}textarea{font:inherit}textarea:focus{border-color:var(--brand);box-shadow:0 0 0 4px rgba(29,78,216,.1)}textarea:disabled{opacity:.78;cursor:not-allowed}@media(max-width:720px){.passage{padding:16px}.audio-progress{gap:8px}.brand h1{font-size:28px}}
+.rewrite-cue{margin:-4px 0 12px;font-size:15px;font-weight:850;color:#1d4ed8;background:#eff6ff;border-radius:10px;padding:10px 12px}
 </style>
 </head>
 <body>
@@ -646,7 +647,7 @@ const BANK = {
           "accepted": [
             "Monday"
           ],
-          "explanation": ""
+          "explanation": "Bài nghe nói nhóm đi bộ gặp nhau vào every Monday, ngay sau tiết học cuối."
         },
         {
           "id": "1101_2",
@@ -657,7 +658,7 @@ const BANK = {
           "accepted": [
             "stairs"
           ],
-          "explanation": ""
+          "explanation": "Bài nghe gợi ý sử dụng stairs thay vì chờ lift vào những ngày đi học bình thường."
         },
         {
           "id": "1101_3",
@@ -686,12 +687,12 @@ const BANK = {
           "number": 37,
           "section": "Writing · Sentence rewriting",
           "type": "rewrite",
-          "question": "It has been three months since Lan last visited the health club.\nComplete the sentence using LAST.",
+          "question": "Lan hasn't visited the health club for three months.\nRewrite using LAST.",
           "cue": "Lan last",
           "accepted": [
             "Lan last visited the health club three months ago."
           ],
-          "explanation": "It has been + khoảng thời gian + since sự kiện cuối chuyển thành chủ ngữ + last + quá khứ đơn + khoảng thời gian ago."
+          "explanation": "Chuyển hiện tại hoàn thành phủ định chỉ khoảng thời gian không xảy ra một hành động sang last + quá khứ đơn + khoảng thời gian + ago (hoặc in + mốc thời gian). Giữ nguyên thời gian, hành động và chủ ngữ."
         },
         {
           "id": "1101_38",
@@ -702,7 +703,9 @@ const BANK = {
           "cue": "Minh",
           "accepted": [
             "Minh has been a member of the walking group since September.",
-            "Minh has been in the walking group since September."
+            "Minh has been in the walking group since September.",
+            "Minh has been part of the walking group since September.",
+            "Minh has been a walking group member since September."
           ],
           "explanation": "Joined là hành động bắt đầu; is still a member xác nhận trạng thái tiếp tục. Dùng has been a member since September, không dùng has joined ... since cho trạng thái kéo dài."
         },
@@ -726,7 +729,8 @@ const BANK = {
           "question": "It is a good idea for parents to discuss a household rule before changing it.\nRewrite using SHOULD without changing the meaning.",
           "cue": "Parents",
           "accepted": [
-            "Parents should discuss a household rule before changing it."
+            "Parents should discuss a household rule before changing it.",
+            "Parents should discuss a household rule before they change it."
           ],
           "explanation": "It is a good idea thể hiện lời khuyên, dùng should; must hoặc have to sẽ làm mức độ bắt buộc mạnh hơn câu gốc."
         }
@@ -1262,7 +1266,7 @@ const BANK = {
           "accepted": [
             "calendar"
           ],
-          "explanation": ""
+          "explanation": "Các quyết định trong gia đình được ghi trên một calendar đặt trong nhà bếp."
         },
         {
           "id": "1102_3",
@@ -1291,12 +1295,12 @@ const BANK = {
           "number": 37,
           "section": "Writing · Sentence rewriting",
           "type": "rewrite",
-          "question": "The family has not held another planning meeting since its last one in August.\nComplete the sentence using LAST.",
+          "question": "The family's most recent planning meeting took place in August.\nRewrite using LAST.",
           "cue": "The family last",
           "accepted": [
             "The family last held a planning meeting in August."
           ],
-          "explanation": "Chưa họp lại sau lần cuối tháng Tám: last held ... in August giữ nguyên mốc thời gian."
+          "explanation": "The most recent meeting was in August: dùng last + quá khứ đơn để diễn đạt lần gần nhất, không đổi mốc thời gian."
         },
         {
           "id": "1102_38",
@@ -1307,7 +1311,12 @@ const BANK = {
           "cue": "Nam",
           "accepted": [
             "Nam has exercised regularly for six months.",
-            "Nam has done regular exercise for six months."
+            "Nam has done regular exercise for six months.",
+            "Nam has been exercising regularly for six months.",
+            "Nam has regularly exercised for six months.",
+            "Nam has been doing regular exercise for six months.",
+            "Nam has worked out regularly for six months.",
+            "Nam has been working out regularly for six months."
           ],
           "explanation": "Thói quen bắt đầu sáu tháng trước và còn tiếp tục: has exercised ... for six months."
         },
@@ -1319,7 +1328,8 @@ const BANK = {
           "question": "Entering the roof garden without permission is strictly forbidden.\nRewrite using MUST NOT without changing the meaning.",
           "cue": "Visitors",
           "accepted": [
-            "Visitors must not enter the roof garden without permission."
+            "Visitors must not enter the roof garden without permission.",
+            "Visitors must not enter the roof garden unless they have permission."
           ],
           "explanation": "Strictly forbidden diễn tả cấm: must not + V. Do not have to là không cần, không phải cấm."
         },
@@ -1898,12 +1908,12 @@ const BANK = {
           "number": 37,
           "section": "Writing · Sentence rewriting",
           "type": "rewrite",
-          "question": "It has been two months since Hoa last visited the sports centre.\nComplete the sentence using LAST.",
+          "question": "Hoa hasn't visited the sports centre for two months.\nRewrite using LAST.",
           "cue": "Hoa last",
           "accepted": [
             "Hoa last visited the sports centre two months ago."
           ],
-          "explanation": "Since lần cuối đổi thành last + quá khứ đơn + khoảng thời gian ago."
+          "explanation": "Chuyển hiện tại hoàn thành phủ định chỉ khoảng thời gian không xảy ra một hành động sang last + quá khứ đơn + khoảng thời gian + ago (hoặc in + mốc thời gian). Giữ nguyên thời gian, hành động và chủ ngữ."
         },
         {
           "id": "1103_38",
@@ -1913,7 +1923,8 @@ const BANK = {
           "question": "Bao started playing the family game in July and still plays it.\nComplete the sentence using HAS and SINCE.",
           "cue": "Bao",
           "accepted": [
-            "Bao has played the family game since July."
+            "Bao has played the family game since July.",
+            "Bao has been playing the family game since July."
           ],
           "explanation": "Thói quen bắt đầu trong quá khứ và vẫn tiếp tục: has played + since July."
         },
@@ -1925,7 +1936,8 @@ const BANK = {
           "question": "The cycle team strictly forbids riders from using phones while moving.\nRewrite using MUST NOT without changing the meaning.",
           "cue": "Riders",
           "accepted": [
-            "Riders must not use phones while moving."
+            "Riders must not use phones while moving.",
+            "Riders must not use their phones while moving."
           ],
           "explanation": "Strictly forbids là cấm; dùng must not + V."
         },
@@ -2504,12 +2516,12 @@ const BANK = {
           "number": 37,
           "section": "Writing · Sentence rewriting",
           "type": "rewrite",
-          "question": "It has been six weeks since Nam last bought a sugary drink.\nComplete the sentence using LAST.",
+          "question": "Nam hasn't bought a sugary drink for six weeks.\nRewrite using LAST.",
           "cue": "Nam last",
           "accepted": [
             "Nam last bought a sugary drink six weeks ago."
           ],
-          "explanation": "Mốc lần cuối đổi sang quá khứ đơn với ago."
+          "explanation": "Chuyển hiện tại hoàn thành phủ định chỉ khoảng thời gian không xảy ra một hành động sang last + quá khứ đơn + khoảng thời gian + ago (hoặc in + mốc thời gian). Giữ nguyên thời gian, hành động và chủ ngữ."
         },
         {
           "id": "1104_38",
@@ -2519,7 +2531,8 @@ const BANK = {
           "question": "The committee began using the new menu card in March and still uses it.\nComplete the sentence using HAS and SINCE.",
           "cue": "The committee",
           "accepted": [
-            "The committee has used the new menu card since March."
+            "The committee has used the new menu card since March.",
+            "The committee has been using the new menu card since March."
           ],
           "explanation": "Việc bắt đầu trong quá khứ còn tiếp tục dùng hiện tại hoàn thành."
         },
@@ -3110,12 +3123,12 @@ const BANK = {
           "number": 37,
           "section": "Writing · Sentence rewriting",
           "type": "rewrite",
-          "question": "It has been four weeks since Mai last posted a family photograph.\nComplete the sentence using LAST.",
+          "question": "Mai hasn't posted a family photograph for four weeks.\nRewrite using LAST.",
           "cue": "Mai last",
           "accepted": [
             "Mai last posted a family photograph four weeks ago."
           ],
-          "explanation": "Since lần cuối đổi thành last + quá khứ đơn + ago."
+          "explanation": "Chuyển hiện tại hoàn thành phủ định chỉ khoảng thời gian không xảy ra một hành động sang last + quá khứ đơn + khoảng thời gian + ago (hoặc in + mốc thời gian). Giữ nguyên thời gian, hành động và chủ ngữ."
         },
         {
           "id": "1105_38",
@@ -3125,7 +3138,8 @@ const BANK = {
           "question": "Lan moved into this building in January and still lives here.\nComplete the sentence using HAS and SINCE.",
           "cue": "Lan",
           "accepted": [
-            "Lan has lived in this building since January."
+            "Lan has lived in this building since January.",
+            "Lan has been living in this building since January."
           ],
           "explanation": "Moved đánh dấu bắt đầu; still lives yêu cầu trạng thái tiếp tục."
         },
@@ -3137,7 +3151,8 @@ const BANK = {
           "question": "Posting photographs without the owner's permission is strictly forbidden.\nRewrite using MUST NOT without changing the meaning.",
           "cue": "Users",
           "accepted": [
-            "Users must not post photographs without the owner's permission."
+            "Users must not post photographs without the owner's permission.",
+            "Users must not post photographs unless they have the owner's permission."
           ],
           "explanation": "Forbidden là cấm; must not giữ đúng nghĩa."
         },
@@ -3716,12 +3731,12 @@ const BANK = {
           "number": 37,
           "section": "Writing · Sentence rewriting",
           "type": "rewrite",
-          "question": "It has been five months since Linh last missed an exercise session.\nComplete the sentence using LAST.",
+          "question": "Linh hasn't missed an exercise session for five months.\nRewrite using LAST.",
           "cue": "Linh last",
           "accepted": [
             "Linh last missed an exercise session five months ago."
           ],
-          "explanation": "Mốc lần cuối đổi sang last + quá khứ đơn + ago."
+          "explanation": "Chuyển hiện tại hoàn thành phủ định chỉ khoảng thời gian không xảy ra một hành động sang last + quá khứ đơn + khoảng thời gian + ago (hoặc in + mốc thời gian). Giữ nguyên thời gian, hành động và chủ ngữ."
         },
         {
           "id": "1106_38",
@@ -3731,7 +3746,10 @@ const BANK = {
           "question": "Nam started preparing his breakfast regularly four months ago and still does so.\nComplete the sentence using HAS and FOR.",
           "cue": "Nam",
           "accepted": [
-            "Nam has prepared his breakfast regularly for four months."
+            "Nam has prepared his breakfast regularly for four months.",
+            "Nam has been preparing his breakfast regularly for four months.",
+            "Nam has regularly prepared his breakfast for four months.",
+            "Nam has been regularly preparing his breakfast for four months."
           ],
           "explanation": "Thói quen tiếp tục dùng hiện tại hoàn thành và for + khoảng thời gian."
         },
@@ -4322,12 +4340,12 @@ const BANK = {
           "number": 37,
           "section": "Writing · Sentence rewriting",
           "type": "rewrite",
-          "question": "It has been three weeks since Phuc last followed the original long timetable.\nComplete the sentence using LAST.",
+          "question": "Phuc hasn't followed the original long timetable for three weeks.\nRewrite using LAST.",
           "cue": "Phuc last",
           "accepted": [
             "Phuc last followed the original long timetable three weeks ago."
           ],
-          "explanation": "Mốc lần cuối đổi thành last + quá khứ đơn + ago."
+          "explanation": "Chuyển hiện tại hoàn thành phủ định chỉ khoảng thời gian không xảy ra một hành động sang last + quá khứ đơn + khoảng thời gian + ago (hoặc in + mốc thời gian). Giữ nguyên thời gian, hành động và chủ ngữ."
         },
         {
           "id": "1107_38",
@@ -4337,7 +4355,9 @@ const BANK = {
           "question": "Hoa became a member of the student crossing team in April and is still a member.\nComplete the sentence using HAS BEEN.",
           "cue": "Hoa",
           "accepted": [
-            "Hoa has been a member of the student crossing team since April."
+            "Hoa has been a member of the student crossing team since April.",
+            "Hoa has been on the student crossing team since April.",
+            "Hoa has been part of the student crossing team since April."
           ],
           "explanation": "Trạng thái thành viên tiếp tục dùng has been a member since."
         },
@@ -4349,7 +4369,8 @@ const BANK = {
           "question": "The observation rules strictly forbid students from standing in the road.\nRewrite using MUST NOT without changing the meaning.",
           "cue": "Students",
           "accepted": [
-            "Students must not stand in the road."
+            "Students must not stand in the road.",
+            "Students must not stand on the road."
           ],
           "explanation": "Strictly forbid là cấm; must not + V."
         },
@@ -4361,7 +4382,8 @@ const BANK = {
           "question": "It is advisable for Phuc to leave room for unexpected family tasks.\nRewrite using SHOULD without changing the meaning.",
           "cue": "Phuc",
           "accepted": [
-            "Phuc should leave room for unexpected family tasks."
+            "Phuc should leave room for unexpected family tasks.",
+            "Phuc should allow time for unexpected family tasks."
           ],
           "explanation": "Advisable diễn tả lời khuyên, dùng should."
         }
@@ -4928,12 +4950,12 @@ const BANK = {
           "number": 37,
           "section": "Writing · Sentence rewriting",
           "type": "rewrite",
-          "question": "It has been seven weeks since Nam last forgot to give notice of a schedule change.\nComplete the sentence using LAST.",
+          "question": "Nam hasn't forgotten to give notice of a schedule change for seven weeks.\nRewrite using LAST.",
           "cue": "Nam last",
           "accepted": [
             "Nam last forgot to give notice of a schedule change seven weeks ago."
           ],
-          "explanation": "Since lần cuối đổi thành last + quá khứ đơn + ago."
+          "explanation": "Chuyển hiện tại hoàn thành phủ định chỉ khoảng thời gian không xảy ra một hành động sang last + quá khứ đơn + khoảng thời gian + ago (hoặc in + mốc thời gian). Giữ nguyên thời gian, hành động và chủ ngữ."
         },
         {
           "id": "1108_38",
@@ -4943,7 +4965,10 @@ const BANK = {
           "question": "Mai started checking food labels regularly in May and still does so.\nComplete the sentence using HAS and SINCE.",
           "cue": "Mai",
           "accepted": [
-            "Mai has checked food labels regularly since May."
+            "Mai has checked food labels regularly since May.",
+            "Mai has been checking food labels regularly since May.",
+            "Mai has regularly checked food labels since May.",
+            "Mai has been regularly checking food labels since May."
           ],
           "explanation": "Thói quen còn tiếp tục: hiện tại hoàn thành với since."
         },
@@ -5534,12 +5559,12 @@ const BANK = {
           "number": 37,
           "section": "Writing · Sentence rewriting",
           "type": "rewrite",
-          "question": "It has been nine days since Bao last uploaded a photograph.\nComplete the sentence using LAST.",
+          "question": "Bao hasn't uploaded a photograph for nine days.\nRewrite using LAST.",
           "cue": "Bao last",
           "accepted": [
             "Bao last uploaded a photograph nine days ago."
           ],
-          "explanation": "Mốc lần cuối đổi sang last + quá khứ đơn + ago."
+          "explanation": "Chuyển hiện tại hoàn thành phủ định chỉ khoảng thời gian không xảy ra một hành động sang last + quá khứ đơn + khoảng thời gian + ago (hoặc in + mốc thời gian). Giữ nguyên thời gian, hành động và chủ ngữ."
         },
         {
           "id": "1109_38",
@@ -5549,7 +5574,8 @@ const BANK = {
           "question": "The market started using the printed service list in June and still uses it.\nComplete the sentence using HAS and SINCE.",
           "cue": "The market",
           "accepted": [
-            "The market has used the printed service list since June."
+            "The market has used the printed service list since June.",
+            "The market has been using the printed service list since June."
           ],
           "explanation": "Hành động còn tiếp tục dùng hiện tại hoàn thành và since."
         },
@@ -5561,7 +5587,8 @@ const BANK = {
           "question": "The family rule requires every relative to ask permission before sharing a photograph.\nRewrite using MUST without changing the meaning.",
           "cue": "Every relative",
           "accepted": [
-            "Every relative must ask permission before sharing a photograph."
+            "Every relative must ask permission before sharing a photograph.",
+            "Every relative must ask for permission before sharing a photograph."
           ],
           "explanation": "Requires diễn tả nghĩa vụ; must + V."
         },
@@ -6140,12 +6167,12 @@ const BANK = {
           "number": 37,
           "section": "Writing · Sentence rewriting",
           "type": "rewrite",
-          "question": "It has been eight months since Huong last used the original morning timetable.\nComplete the sentence using LAST.",
+          "question": "Huong hasn't used the original morning timetable for eight months.\nRewrite using LAST.",
           "cue": "Huong last",
           "accepted": [
             "Huong last used the original morning timetable eight months ago."
           ],
-          "explanation": "Mốc lần cuối đổi sang last + quá khứ đơn + ago."
+          "explanation": "Chuyển hiện tại hoàn thành phủ định chỉ khoảng thời gian không xảy ra một hành động sang last + quá khứ đơn + khoảng thời gian + ago (hoặc in + mốc thời gian). Giữ nguyên thời gian, hành động và chủ ngữ."
         },
         {
           "id": "1110_38",
@@ -6155,7 +6182,8 @@ const BANK = {
           "question": "Mai started sharing this computer with her father two years ago and still does so.\nComplete the sentence using HAS and FOR.",
           "cue": "Mai",
           "accepted": [
-            "Mai has shared this computer with her father for two years."
+            "Mai has shared this computer with her father for two years.",
+            "Mai has been sharing this computer with her father for two years."
           ],
           "explanation": "Hành động tiếp tục dùng hiện tại hoàn thành với for + khoảng thời gian."
         },
@@ -6167,7 +6195,9 @@ const BANK = {
           "question": "The library service strictly forbids users from sharing another person's password.\nRewrite using MUST NOT without changing the meaning.",
           "cue": "Users",
           "accepted": [
-            "Users must not share another person's password."
+            "Users must not share another person's password.",
+            "Users must not share somebody else's password.",
+            "Users must not share other people's passwords."
           ],
           "explanation": "Strictly forbids diễn tả cấm; must not."
         },
@@ -6250,8 +6280,9 @@ function normalize(text) {
   for (const [us, uk] of Object.entries(spellings)) {
     value = value.replace(new RegExp('\\b' + us + '\\b', 'g'), uk);
   }
-  return value.replace(/\s+([,;:])/g, '$1')
-    .replace(/([,;:])\s*/g, '$1 ').replace(/[.?!]+$/g, '').replace(/\s+/g, ' ').trim();
+  // Punctuation and capitalization are not being assessed in sentence rewriting.
+  // Apostrophes are retained because they distinguish possessives.
+  return value.replace(/[.,!?;:]+/g, ' ').replace(/\s+/g, ' ').trim();
 }
 function normalizeArticle(text) {
   const value = normalize(text);
@@ -6298,6 +6329,10 @@ function validateBank() {
         throw new Error(item.id + ': invalid written answers.');
       if (item.type === 'listening' && item.accepted.some(a => /\s/.test(a.trim())))
         throw new Error(item.id + ': listening requires one word.');
+      if (item.type === 'rewrite' && (!item.cue || item.accepted.some(a => {
+        const answer = normalize(a), beginning = normalize(item.cue);
+        return !(answer === beginning || answer.startsWith(beginning + ' '));
+      }))) throw new Error(item.id + ': rewrite answer must begin with its cue.');
     });
     if (set.written.filter(q => q.type === 'listening').length !== 4
       || set.written.filter(q => q.type === 'rewrite').length !== 4)
@@ -6488,6 +6523,12 @@ function renderWritten() {
       if (state.checked.written[item.id]) { input.value = state.responses.written[item.id] || ''; return; }
       state.responses.written[item.id] = input.value;
     });
+    if (item.type === 'rewrite' && item.cue) {
+      const cue = document.createElement('div');
+      cue.className = 'rewrite-cue';
+      cue.textContent = 'Begin with: ' + item.cue + ' ...';
+      box.appendChild(cue);
+    }
     box.append(label,input);
     appendQuestionCheck(box, item, 'written');
     area.appendChild(box);
@@ -6544,7 +6585,7 @@ function showQuestionFeedback(part, item, box) {
   const correctAnswer = part === 'mcq'
     ? 'ABCD'[state.optionOrder[item.id].indexOf(item.correct)] + '. ' + item.correct
     : getCorrectAnswerText(item);
-  [['Your answer: ', getUserAnswerText(entry.user) || '(no answer)'], ['Correct answer: ', correctAnswer], ['Explanation: ', item.explanation]].forEach(([label, value]) => {
+  [['Your answer: ', getUserAnswerText(entry.user) || '(no answer)'], [part === 'written' && item.type === 'rewrite' ? 'Sample correct answer: ' : 'Correct answer: ', correctAnswer], ['Explanation: ', item.explanation]].forEach(([label, value]) => {
     const line = document.createElement('div'); line.className = 'feedback-line';
     const bold = document.createElement('b'); bold.textContent = label;
     const text = document.createElement('span'); text.textContent = value;
@@ -6569,6 +6610,11 @@ function checkWrittenItem(item, response) {
   const value = normalize(response);
   if (item.type === 'listening' && /\s/.test(value)) return {correct: false};
   
+  if (item.type === 'rewrite' && item.cue) {
+    const start = normalize(item.cue);
+    if (!(value === start || value.startsWith(start + ' '))) return {correct: false};
+  }
+  // Only teacher-approved, semantically equivalent answers pass; no fuzzy word matching.
   return {correct: item.accepted.some(answer => normalize(answer) === value)};
 }
 
@@ -6647,7 +6693,7 @@ function renderReview(review) {
     const q = document.createElement('div'); q.className = 'review-q'; q.textContent = entry.item.number + '. ' + entry.item.question;
     const tag = document.createElement('span'); tag.className = 'tag'; tag.textContent = entry.correct ? 'Correct' : 'Incorrect';
     head.append(q, tag); div.appendChild(head);
-    [['Your answer: ', getUserAnswerText(entry.user) || '(no answer)'], ['Correct answer: ', getCorrectAnswerText(entry.item)]].forEach(([label, value]) => {
+    [['Your answer: ', getUserAnswerText(entry.user) || '(no answer)'], [entry.item.type === 'rewrite' ? 'Sample correct answer: ' : 'Correct answer: ', getCorrectAnswerText(entry.item)]].forEach(([label, value]) => {
       const line = document.createElement('div'); line.className = 'review-line';
       const bold = document.createElement('b'); bold.textContent = label;
       const text = document.createElement('span'); text.textContent = value; line.append(bold, text); div.appendChild(line);
