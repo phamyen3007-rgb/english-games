@@ -15,6 +15,7 @@
 .article-hint{margin:0 0 8px;color:var(--muted);font-size:14px;line-height:1.6}.zero-article-btn{margin-left:8px;padding:3px 9px;font-size:13px;vertical-align:middle}.blank-label{display:inline-block}
 
 .passage{border:1px solid var(--line);border-radius:17px;padding:20px;margin-top:16px;background:linear-gradient(145deg,#f8fbff,#faf8ff);line-height:1.75;overflow-wrap:anywhere}.passage h3{margin:12px 0 8px;font-size:21px;line-height:1.35}.passage p{margin:10px 0}.passage .instructions{font-size:14px;color:var(--muted)}.passage strong{font-weight:900}.part-divider{margin:26px 0 8px}.part-divider p{color:var(--muted);line-height:1.6}.audio-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:16px 0 12px}.audio-progress{display:flex;gap:12px;align-items:center}.audio-progress progress{width:100%;height:9px;accent-color:var(--brand)}#audioTime{white-space:nowrap;font-size:13px;font-weight:800;color:var(--muted)}.audio-error{color:var(--bad)!important}.transcript{margin:20px 0 0;border:1px solid var(--line);border-radius:16px;padding:16px;background:#f8fafc;line-height:1.7}.transcript summary{cursor:pointer;font-weight:850;color:var(--brand)}.transcript p{white-space:pre-wrap;margin:12px 0 0}.question-box .question{overflow-wrap:anywhere}.writing-answer{resize:vertical;min-height:88px;line-height:1.55}textarea{font:inherit}textarea:focus{border-color:var(--brand);box-shadow:0 0 0 4px rgba(29,78,216,.1)}textarea:disabled{opacity:.78;cursor:not-allowed}@media(max-width:720px){.passage{padding:16px}.audio-progress{gap:8px}.brand h1{font-size:28px}}
+.rewrite-cue{margin:-4px 0 15px;padding:8px 12px;border-left:3px solid var(--brand);background:var(--soft);border-radius:8px;font-size:14px;font-weight:800}
 </style>
 </head>
 <body>
@@ -690,7 +691,8 @@ const BANK = {
           "question": "My brother's usual routine is to walk to school.\nRewrite using USUALLY.",
           "cue": "My brother",
           "accepted": [
-            "My brother usually walks to school."
+            "My brother usually walks to school.",
+            "Usually, my brother walks to school."
           ],
           "explanation": "Dùng hiện tại đơn cho thói quen; usually đứng trước động từ thường walks. Chủ ngữ số ít nên động từ có -s. Usual routine và usually giữ cùng ý thói quen thông thường."
         },
@@ -714,7 +716,9 @@ const BANK = {
           "question": "The environmental club is collecting used batteries this week.\nRewrite in the passive voice. Keep the agent.",
           "cue": "Used batteries",
           "accepted": [
-            "Used batteries are being collected by the environmental club this week."
+            "Used batteries are being collected by the environmental club this week.",
+            "Used batteries are being collected this week by the environmental club.",
+            "This week, used batteries are being collected by the environmental club."
           ],
           "explanation": "Bị động hiện tại tiếp diễn: are being + V3. Used batteries số nhiều; giữ tác nhân environmental club và thời gian this week."
         },
@@ -726,7 +730,9 @@ const BANK = {
           "question": "The music club will organise a charity concert next month.\nRewrite in the passive voice. Keep the agent.",
           "cue": "A charity concert",
           "accepted": [
-            "A charity concert will be organised by the music club next month."
+            "A charity concert will be organised by the music club next month.",
+            "A charity concert will be organised next month by the music club.",
+            "Next month, a charity concert will be organised by the music club."
           ],
           "explanation": "Bị động tương lai đơn: will be + V3. Giữ tác nhân the music club và thời gian next month."
         }
@@ -1295,7 +1301,8 @@ const BANK = {
           "question": "We have a plan to reuse these decorations at the next concert.\nRewrite using ARE GOING TO.",
           "cue": "We",
           "accepted": [
-            "We are going to reuse these decorations at the next concert."
+            "We are going to reuse these decorations at the next concert.",
+            "At the next concert, we are going to reuse these decorations."
           ],
           "explanation": "Be going to + động từ nguyên mẫu diễn tả dự định đã có. Chủ ngữ we đi với are; giữ hành động reuse và thời gian."
         },
@@ -1304,12 +1311,13 @@ const BANK = {
           "number": 38,
           "section": "Writing · Sentence rewriting",
           "type": "rewrite",
-          "question": "Joining the music club is what Lan hopes to do this term.\nRewrite using HOPES.",
+          "question": "Lan's hope is to join the music club this term.\nRewrite using HOPES.",
           "cue": "Lan",
           "accepted": [
-            "Lan hopes to join the music club this term."
+            "Lan hopes to join the music club this term.",
+            "This term, Lan hopes to join the music club."
           ],
-          "explanation": "Hope + to-infinitive: hy vọng làm việc gì. Dùng hopes với chủ ngữ Lan; giữ nội dung tham gia câu lạc bộ và this term."
+          "explanation": "Chuyển danh từ hope thành động từ hopes + to-infinitive; giữ this term."
         },
         {
           "id": "1002_39",
@@ -1319,7 +1327,9 @@ const BANK = {
           "question": "The students sorted the household waste yesterday.\nRewrite in the passive voice. Keep the agent.",
           "cue": "The household waste",
           "accepted": [
-            "The household waste was sorted by the students yesterday."
+            "The household waste was sorted by the students yesterday.",
+            "The household waste was sorted yesterday by the students.",
+            "Yesterday, the household waste was sorted by the students."
           ],
           "explanation": "Bị động quá khứ đơn: was/were + V3. Waste không đếm được nên dùng was sorted; giữ by the students và yesterday."
         },
@@ -1331,7 +1341,9 @@ const BANK = {
           "question": "The school is going to install new recycling bins next week.\nRewrite in the passive voice. Keep the agent.",
           "cue": "New recycling bins",
           "accepted": [
-            "New recycling bins are going to be installed by the school next week."
+            "New recycling bins are going to be installed by the school next week.",
+            "New recycling bins are going to be installed next week by the school.",
+            "Next week, new recycling bins are going to be installed by the school."
           ],
           "explanation": "Bị động tương lai gần: am/is/are going to be + V3. New recycling bins số nhiều nên dùng are; giữ tác nhân và thời gian."
         }
@@ -1900,7 +1912,9 @@ const BANK = {
           "question": "It is part of Lan's daily routine to feed the cat before school.\nRewrite using EVERY DAY.",
           "cue": "Lan",
           "accepted": [
-            "Lan feeds the cat before school every day."
+            "Lan feeds the cat before school every day.",
+            "Lan feeds the cat every day before school.",
+            "Every day, Lan feeds the cat before school."
           ],
           "explanation": "Thói quen dùng hiện tại đơn; Lan số ít nên feed thành feeds."
         },
@@ -1924,7 +1938,9 @@ const BANK = {
           "question": "The green club checks the recycling bins every Friday.\nRewrite in the passive voice. Keep the agent.",
           "cue": "The recycling bins",
           "accepted": [
-            "The recycling bins are checked by the green club every Friday."
+            "The recycling bins are checked by the green club every Friday.",
+            "The recycling bins are checked every Friday by the green club.",
+            "Every Friday, the recycling bins are checked by the green club."
           ],
           "explanation": "Bị động hiện tại đơn: are checked; bins số nhiều, giữ tác nhân và tần suất."
         },
@@ -1936,7 +1952,9 @@ const BANK = {
           "question": "The students will decorate the music room tomorrow.\nRewrite in the passive voice. Keep the agent.",
           "cue": "The music room",
           "accepted": [
-            "The music room will be decorated by the students tomorrow."
+            "The music room will be decorated by the students tomorrow.",
+            "The music room will be decorated tomorrow by the students.",
+            "Tomorrow, the music room will be decorated by the students."
           ],
           "explanation": "Bị động tương lai đơn: will be decorated; giữ tomorrow và by the students."
         }
@@ -2502,12 +2520,13 @@ const BANK = {
           "number": 37,
           "section": "Writing · Sentence rewriting",
           "type": "rewrite",
-          "question": "At this moment, my father is busy washing the dishes.\nRewrite using IS WASHING.",
+          "question": "At this moment, my father is doing the washing-up.\nRewrite using IS WASHING.",
           "cue": "My father",
           "accepted": [
-            "My father is washing the dishes at this moment."
+            "My father is washing the dishes at this moment.",
+            "At this moment, my father is washing the dishes."
           ],
-          "explanation": "Hiện tại tiếp diễn diễn tả hành động đang xảy ra; giữ at this moment."
+          "explanation": "Đổi do the washing-up thành is washing the dishes (hiện tại tiếp diễn); giữ trạng ngữ at this moment."
         },
         {
           "id": "1004_38",
@@ -2529,7 +2548,9 @@ const BANK = {
           "question": "The volunteers repaired the cloth bags yesterday.\nRewrite in the passive voice. Keep the agent.",
           "cue": "The cloth bags",
           "accepted": [
-            "The cloth bags were repaired by the volunteers yesterday."
+            "The cloth bags were repaired by the volunteers yesterday.",
+            "The cloth bags were repaired yesterday by the volunteers.",
+            "Yesterday, the cloth bags were repaired by the volunteers."
           ],
           "explanation": "Bị động quá khứ đơn: were repaired với bags số nhiều."
         },
@@ -2541,7 +2562,9 @@ const BANK = {
           "question": "The green club is going to display the repaired items next Monday.\nRewrite in the passive voice. Keep the agent.",
           "cue": "The repaired items",
           "accepted": [
-            "The repaired items are going to be displayed by the green club next Monday."
+            "The repaired items are going to be displayed by the green club next Monday.",
+            "The repaired items are going to be displayed next Monday by the green club.",
+            "Next Monday, the repaired items are going to be displayed by the green club."
           ],
           "explanation": "Bị động tương lai gần: are going to be displayed; giữ tác nhân và thời gian."
         }
@@ -3110,7 +3133,8 @@ const BANK = {
           "question": "The band's plan is to rehearse in the hall this evening.\nRewrite using IS GOING TO.",
           "cue": "The band",
           "accepted": [
-            "The band is going to rehearse in the hall this evening."
+            "The band is going to rehearse in the hall this evening.",
+            "This evening, the band is going to rehearse in the hall."
           ],
           "explanation": "Be going to diễn tả dự định; band số ít nên dùng is."
         },
@@ -3134,7 +3158,9 @@ const BANK = {
           "question": "The students are moving the concert chairs now.\nRewrite in the passive voice. Keep the agent.",
           "cue": "The concert chairs",
           "accepted": [
-            "The concert chairs are being moved by the students now."
+            "The concert chairs are being moved by the students now.",
+            "The concert chairs are being moved now by the students.",
+            "Now, the concert chairs are being moved by the students."
           ],
           "explanation": "Bị động hiện tại tiếp diễn: are being moved; giữ now và tác nhân."
         },
@@ -3146,7 +3172,9 @@ const BANK = {
           "question": "The music teacher will check the sound system before the concert.\nRewrite in the passive voice. Keep the agent.",
           "cue": "The sound system",
           "accepted": [
-            "The sound system will be checked by the music teacher before the concert."
+            "The sound system will be checked by the music teacher before the concert.",
+            "The sound system will be checked before the concert by the music teacher.",
+            "Before the concert, the sound system will be checked by the music teacher."
           ],
           "explanation": "Will be + V3 là bị động tương lai đơn; giữ mốc before the concert."
         }
@@ -3739,7 +3767,9 @@ const BANK = {
           "question": "The students collect the journey forms after each lesson.\nRewrite in the passive voice. Keep the agent.",
           "cue": "The journey forms",
           "accepted": [
-            "The journey forms are collected by the students after each lesson."
+            "The journey forms are collected by the students after each lesson.",
+            "The journey forms are collected after each lesson by the students.",
+            "After each lesson, the journey forms are collected by the students."
           ],
           "explanation": "Bị động hiện tại đơn: are collected; giữ tần suất after each lesson."
         },
@@ -3751,7 +3781,9 @@ const BANK = {
           "question": "The club is going to print new travel posters on Monday.\nRewrite in the passive voice. Keep the agent.",
           "cue": "New travel posters",
           "accepted": [
-            "New travel posters are going to be printed by the club on Monday."
+            "New travel posters are going to be printed by the club on Monday.",
+            "New travel posters are going to be printed on Monday by the club.",
+            "On Monday, new travel posters are going to be printed by the club."
           ],
           "explanation": "Posters số nhiều; bị động tương lai gần are going to be printed."
         }
@@ -4320,7 +4352,8 @@ const BANK = {
           "question": "Checking the cupboard on Sundays is part of our family routine.\nRewrite using EVERY SUNDAY.",
           "cue": "Our family",
           "accepted": [
-            "Our family checks the cupboard every Sunday."
+            "Our family checks the cupboard every Sunday.",
+            "Every Sunday, our family checks the cupboard."
           ],
           "explanation": "Thói quen dùng hiện tại đơn; chủ ngữ our family số ít dùng checks."
         },
@@ -4329,12 +4362,12 @@ const BANK = {
           "number": 38,
           "section": "Writing · Sentence rewriting",
           "type": "rewrite",
-          "question": "Learning the simple chorus is what the children want to do.\nRewrite using WANT TO.",
+          "question": "It is the children's wish to learn the simple chorus.\nRewrite using WANT TO.",
           "cue": "The children",
           "accepted": [
             "The children want to learn the simple chorus."
           ],
-          "explanation": "Want + to-infinitive; children số nhiều dùng want."
+          "explanation": "Chuyển ý “the children’s wish” thành “the children want to”; dùng to + động từ nguyên mẫu."
         },
         {
           "id": "1007_39",
@@ -4344,7 +4377,9 @@ const BANK = {
           "question": "The father prepared a simple meal last night.\nRewrite in the passive voice. Keep the agent.",
           "cue": "A simple meal",
           "accepted": [
-            "A simple meal was prepared by the father last night."
+            "A simple meal was prepared by the father last night.",
+            "A simple meal was prepared last night by the father.",
+            "Last night, a simple meal was prepared by the father."
           ],
           "explanation": "Bị động quá khứ đơn: was prepared; giữ by the father và last night."
         },
@@ -4356,7 +4391,9 @@ const BANK = {
           "question": "The children will clean the kitchen after dinner.\nRewrite in the passive voice. Keep the agent.",
           "cue": "The kitchen",
           "accepted": [
-            "The kitchen will be cleaned by the children after dinner."
+            "The kitchen will be cleaned by the children after dinner.",
+            "The kitchen will be cleaned after dinner by the children.",
+            "After dinner, the kitchen will be cleaned by the children."
           ],
           "explanation": "Will be cleaned là bị động tương lai đơn; giữ thời gian và tác nhân."
         }
@@ -4922,24 +4959,26 @@ const BANK = {
           "number": 37,
           "section": "Writing · Sentence rewriting",
           "type": "rewrite",
-          "question": "At present, the club is busy choosing songs for the broadcast.\nRewrite using IS CHOOSING.",
+          "question": "At present, the club is selecting songs for the broadcast.\nRewrite using IS CHOOSING.",
           "cue": "The club",
           "accepted": [
-            "The club is choosing songs for the broadcast at present."
+            "The club is choosing songs for the broadcast at present.",
+            "At present, the club is choosing songs for the broadcast."
           ],
-          "explanation": "Hiện tại tiếp diễn diễn tả hành động đang diễn ra; giữ at present."
+          "explanation": "Select songs = choose songs; dùng is choosing ở hiện tại tiếp diễn, giữ at present."
         },
         {
           "id": "1008_38",
           "number": 38,
           "section": "Writing · Sentence rewriting",
           "type": "rewrite",
-          "question": "Joining the radio team next term is what Hoa hopes to do.\nRewrite using HOPES TO.",
+          "question": "It is Hoa's hope to join the radio team next term.\nRewrite using HOPES TO.",
           "cue": "Hoa",
           "accepted": [
-            "Hoa hopes to join the radio team next term."
+            "Hoa hopes to join the radio team next term.",
+            "Next term, Hoa hopes to join the radio team."
           ],
-          "explanation": "Hope + to-infinitive; giữ kế hoạch tham gia và next term."
+          "explanation": "Chuyển danh từ hope thành động từ hopes to + động từ nguyên mẫu, giữ next term."
         },
         {
           "id": "1008_39",
@@ -4949,7 +4988,9 @@ const BANK = {
           "question": "The radio team is testing the song sequence now.\nRewrite in the passive voice. Keep the agent.",
           "cue": "The song sequence",
           "accepted": [
-            "The song sequence is being tested by the radio team now."
+            "The song sequence is being tested by the radio team now.",
+            "The song sequence is being tested now by the radio team.",
+            "Now, the song sequence is being tested by the radio team."
           ],
           "explanation": "Bị động hiện tại tiếp diễn: is being tested; sequence số ít."
         },
@@ -4961,7 +5002,9 @@ const BANK = {
           "question": "The teacher is going to record the introductions tomorrow.\nRewrite in the passive voice. Keep the agent.",
           "cue": "The introductions",
           "accepted": [
-            "The introductions are going to be recorded by the teacher tomorrow."
+            "The introductions are going to be recorded by the teacher tomorrow.",
+            "The introductions are going to be recorded tomorrow by the teacher.",
+            "Tomorrow, the introductions are going to be recorded by the teacher."
           ],
           "explanation": "Bị động tương lai gần với danh từ số nhiều: are going to be recorded."
         }
@@ -5530,7 +5573,8 @@ const BANK = {
           "question": "The club's plan is to organise a uniform exchange next Saturday.\nRewrite using IS GOING TO.",
           "cue": "The club",
           "accepted": [
-            "The club is going to organise a uniform exchange next Saturday."
+            "The club is going to organise a uniform exchange next Saturday.",
+            "Next Saturday, the club is going to organise a uniform exchange."
           ],
           "explanation": "Dự định đã có dùng is going to organise với club số ít."
         },
@@ -5554,7 +5598,9 @@ const BANK = {
           "question": "The helpers checked all the jackets yesterday.\nRewrite in the passive voice. Keep the agent.",
           "cue": "All the jackets",
           "accepted": [
-            "All the jackets were checked by the helpers yesterday."
+            "All the jackets were checked by the helpers yesterday.",
+            "All the jackets were checked yesterday by the helpers.",
+            "Yesterday, all the jackets were checked by the helpers."
           ],
           "explanation": "Bị động quá khứ đơn: were checked vì jackets số nhiều."
         },
@@ -5566,7 +5612,9 @@ const BANK = {
           "question": "The school will display the size chart near the entrance.\nRewrite in the passive voice. Keep the agent.",
           "cue": "The size chart",
           "accepted": [
-            "The size chart will be displayed by the school near the entrance."
+            "The size chart will be displayed by the school near the entrance.",
+            "The size chart will be displayed near the entrance by the school.",
+            "Near the entrance, the size chart will be displayed by the school."
           ],
           "explanation": "Will be displayed là bị động tương lai đơn; giữ tác nhân và vị trí."
         }
@@ -6132,12 +6180,13 @@ const BANK = {
           "number": 37,
           "section": "Writing · Sentence rewriting",
           "type": "rewrite",
-          "question": "Right now, my brother is busy feeding the cat.\nRewrite using IS FEEDING.",
+          "question": "Right now, my brother is giving the cat some food.\nRewrite using IS FEEDING.",
           "cue": "My brother",
           "accepted": [
-            "My brother is feeding the cat right now."
+            "My brother is feeding the cat right now.",
+            "Right now, my brother is feeding the cat."
           ],
-          "explanation": "Hiện tại tiếp diễn dùng is feeding với hành động đang diễn ra."
+          "explanation": "Give the cat some food = feed the cat; dùng is feeding ở hiện tại tiếp diễn, giữ right now."
         },
         {
           "id": "1010_38",
@@ -6159,7 +6208,9 @@ const BANK = {
           "question": "The parents discuss the housework plan every Sunday.\nRewrite in the passive voice. Keep the agent.",
           "cue": "The housework plan",
           "accepted": [
-            "The housework plan is discussed by the parents every Sunday."
+            "The housework plan is discussed by the parents every Sunday.",
+            "The housework plan is discussed every Sunday by the parents.",
+            "Every Sunday, the housework plan is discussed by the parents."
           ],
           "explanation": "Bị động hiện tại đơn: is discussed; plan số ít, giữ tần suất và tác nhân."
         },
@@ -6171,7 +6222,9 @@ const BANK = {
           "question": "The band is going to perform three songs at the family evening.\nRewrite in the passive voice. Keep the agent.",
           "cue": "Three songs",
           "accepted": [
-            "Three songs are going to be performed by the band at the family evening."
+            "Three songs are going to be performed by the band at the family evening.",
+            "Three songs are going to be performed at the family evening by the band.",
+            "At the family evening, three songs are going to be performed by the band."
           ],
           "explanation": "Bị động tương lai gần: are going to be performed; giữ số bài, tác nhân và sự kiện."
         }
@@ -6242,8 +6295,7 @@ function normalize(text) {
   for (const [us, uk] of Object.entries(spellings)) {
     value = value.replace(new RegExp('\\b' + us + '\\b', 'g'), uk);
   }
-  return value.replace(/\s+([,;:])/g, '$1')
-    .replace(/([,;:])\s*/g, '$1 ').replace(/[.?!]+$/g, '').replace(/\s+/g, ' ').trim();
+  return value.replace(/[,;:]/g, ' ').replace(/[.?!]+$/g, '').replace(/\s+/g, ' ').trim();
 }
 function normalizeArticle(text) {
   const value = normalize(text);
@@ -6464,8 +6516,14 @@ function renderMCQ() {
 function renderWritten() {
   const area = $('questionsArea'); area.replaceChildren();
   state.currentSet.written.forEach((item, index) => {
-    if (item.number === 37) appendDivider(area, 'Writing · Questions 37–40', 'Rewrite the complete sentence using the given beginning. Preserve the original meaning and follow the instruction.');
+    if (item.number === 37) appendDivider(area, 'Writing · Questions 37–40', 'Rewrite the complete sentence using the given beginning. Preserve the original meaning. Common correct time/place word orders are accepted.');
     const box = questionBox(item, index);
+    if (item.type === 'rewrite' && item.cue) {
+      const cue = document.createElement('div');
+      cue.className = 'rewrite-cue';
+      cue.textContent = 'Begin with: ' + item.cue + ' …';
+      box.appendChild(cue);
+    }
     const label = document.createElement('label'); label.className = 'blank-label';
     label.textContent = item.type === 'listening' ? 'Your answer · ONE WORD' : 'Your complete sentence';
     const input = document.createElement(item.type === 'listening' ? 'input' : 'textarea');
@@ -6531,12 +6589,16 @@ function showQuestionFeedback(part, item, box) {
   const feedback = box.querySelector('.feedback');
   feedback.className = 'feedback ' + (entry.correct ? 'ok' : 'bad'); feedback.innerHTML = '';
   const title = document.createElement('div'); title.className = 'feedback-title';
-  title.textContent = entry.correct ? '✓ Correct · Answer locked' : '✗ Incorrect · Answer locked';
+  const validAlternative = part === 'written' && item.type === 'rewrite' && entry.correct
+    && normalize(entry.user) !== normalize(item.accepted[0]);
+  title.textContent = entry.correct
+    ? (validAlternative ? '✓ Correct · Valid alternative · Answer locked' : '✓ Correct · Answer locked')
+    : '✗ Incorrect · Answer locked';
   feedback.appendChild(title);
   const correctAnswer = part === 'mcq'
     ? 'ABCD'[state.optionOrder[item.id].indexOf(item.correct)] + '. ' + item.correct
     : getCorrectAnswerText(item);
-  [['Your answer: ', getUserAnswerText(entry.user) || '(no answer)'], ['Correct answer: ', correctAnswer], ['Explanation: ', item.explanation]].forEach(([label, value]) => {
+  [['Your answer: ', getUserAnswerText(entry.user) || '(no answer)'], [item.type === 'rewrite' ? 'Model answer: ' : 'Correct answer: ', correctAnswer], ['Explanation: ', item.explanation]].forEach(([label, value]) => {
     const line = document.createElement('div'); line.className = 'feedback-line';
     const bold = document.createElement('b'); bold.textContent = label;
     const text = document.createElement('span'); text.textContent = value;
@@ -6639,7 +6701,7 @@ function renderReview(review) {
     const q = document.createElement('div'); q.className = 'review-q'; q.textContent = entry.item.number + '. ' + entry.item.question;
     const tag = document.createElement('span'); tag.className = 'tag'; tag.textContent = entry.correct ? 'Correct' : 'Incorrect';
     head.append(q, tag); div.appendChild(head);
-    [['Your answer: ', getUserAnswerText(entry.user) || '(no answer)'], ['Correct answer: ', getCorrectAnswerText(entry.item)]].forEach(([label, value]) => {
+    [['Your answer: ', getUserAnswerText(entry.user) || '(no answer)'], [entry.item.type === 'rewrite' ? 'Model answer: ' : 'Correct answer: ', getCorrectAnswerText(entry.item)]].forEach(([label, value]) => {
       const line = document.createElement('div'); line.className = 'review-line';
       const bold = document.createElement('b'); bold.textContent = label;
       const text = document.createElement('span'); text.textContent = value; line.append(bold, text); div.appendChild(line);
