@@ -374,23 +374,11 @@
       <div class="section-title">
         <h2>📘 Grade 10</h2>
         <div class="section-actions">
-          <span class="count">59 games</span>
+          <span class="count"></span>
           <button class="grade-lock" type="button" data-unlock-grade="10">🔒 Log in</button>
         </div>
       </div>
       <div class="grid">
-
-<!-- GRADE 10 - MIDTERM I - 10 SETS -->
-<a class="game-card locked"
-   data-grade="10"
-   data-title="grade 10 midterm 1 10 test codes listening writing"
-   href="Grade_10_Midterm_1_10_Ma.html">
-  <div class="icon orange">🎧</div>
-  <h3>Midterm 1 – 10 Test Codes</h3>
-  <p>10 practice tests with Listening, multiple-choice questions and Writing.</p>
-  <span class="play">Play now →</span>
-</a>
-
 <!-- ================= UNIT 1 REVIEW ================= -->
 
 <a class="game-card locked"
@@ -841,6 +829,17 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
 </a>
 
 
+<!-- ================= GRADE 10 – UNIT 3 REVIEW – 10 SETS ================= -->
+<a class="game-card locked"
+   data-grade="10"
+   data-title="grade 10 unit 3 music review 10 sets on tap kiem tra tieng anh 10"
+   href="Grade_10_Unit_3_Review_10_Sets.html">
+  <div class="icon purple">🎵</div>
+  <h3>Unit 3 Review – 10 Sets</h3>
+  <p>Music – 10 bộ bài luyện tập ôn tập Unit 3.</p>
+  <span class="play">Play now →</span>
+</a>
+
 <!-- ================= UNIT 3 - EXERCISE 1 ================= -->
 
 <a class="game-card locked"
@@ -1156,6 +1155,17 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
 
   <span class="play">Play now →</span>
 </a>
+<!-- ================= GRADE 10 – UNIT 4 REVIEW – 10 SETS ================= -->
+<a class="game-card locked"
+   data-grade="10"
+   data-title="grade 10 unit 4 for a better community review 10 sets on tap kiem tra tieng anh 10"
+   href="Grade_10_Unit_4_Review_10_Sets.html">
+  <div class="icon green">🤝</div>
+  <h3>Unit 4 Review – 10 Sets</h3>
+  <p>For a Better Community – 10 bộ bài luyện tập ôn tập Unit 4.</p>
+  <span class="play">Play now →</span>
+</a>
+
 <!-- ================= GRADE 10 - UNIT 4 - OPTION C ================= -->
 
 <a class="game-card locked" data-grade="10"
@@ -1406,23 +1416,11 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
       <div class="section-title">
         <h2>📗 Grade 11</h2>
         <div class="section-actions">
-          <span class="count">108 games</span>
+          <span class="count"></span>
           <button class="grade-lock" type="button" data-unlock-grade="11">🔒 Log in</button>
         </div>
       </div>
       <div class="grid">
-
-<!-- GRADE 11 - MIDTERM I - 10 SETS -->
-<a class="game-card locked"
-   data-grade="11"
-   data-title="grade 11 midterm 1 10 test codes listening writing"
-   href="Grade_11_Midterm_1_10_Ma.html">
-  <div class="icon orange">🎧</div>
-  <h3>Midterm 1 – 10 Test Codes</h3>
-  <p>10 practice tests with Listening, multiple-choice questions and Writing.</p>
-  <span class="play">Play now →</span>
-</a>
-
 <!-- ================= UNIT 1 REVIEW ================= -->
 
 <a class="game-card locked"
@@ -2803,28 +2801,11 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
       <div class="section-title">
         <h2>📕 Grade 12</h2>
         <div class="section-actions">
-          <span class="count">125 games</span>
+          <span class="count"></span>
           <button class="grade-lock" type="button" data-unlock-grade="12">🔒 Log in</button>
         </div>
       </div>
       <div class="grid">
-
-<!-- GRADE 12 – MIDTERM 1 – 10 TEST CODES -->
-<a class="game-card locked"
-   data-grade="12"
-   data-title="grade 12 midterm 1 10 test codes listening writing"
-   href="Grade_12_Midterm_1_10_Ma.html">
-
-  <div class="icon orange">🎧</div>
-
-  <h3>Midterm 1 – 10 Test Codes</h3>
-
-  <p>10 practice tests with Listening,
-     multiple-choice questions and Writing.</p>
-
-  <span class="play">Play now →</span>
-</a>
-
 <!-- ================= UNIT 1 REVIEW ================= -->
 
 <a class="game-card locked"
@@ -3029,6 +3010,17 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
     <span class="play">Play now →</span>
 
 </a>
+<!-- ================= GRADE 12 – UNIT 3 REVIEW – 10 SETS ================= -->
+<a class="game-card locked"
+   data-grade="12"
+   data-title="grade 12 unit 3 green living review 10 sets on tap kiem tra tieng anh 12"
+   href="Grade_12_Unit_3_Review_10_Sets.html">
+  <div class="icon green">🌱</div>
+  <h3>Unit 3 Review – 10 Sets</h3>
+  <p>Green Living – 10 bộ bài luyện tập ôn tập Unit 3.</p>
+  <span class="play">Play now →</span>
+</a>
+
 <a class="game-card locked"
    data-grade="12"
    data-title="grade 12 unit 3 exercise 1 1-20 option c"
@@ -4300,6 +4292,11 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
 
     const searchInput = document.getElementById("search");
     const cards = [...document.querySelectorAll(".game-card")];
+    // Automatically update the game counts whenever new cards are added.
+    document.querySelectorAll(".grade-section").forEach(section => {
+      const count = section.querySelector(".count");
+      if(count) count.textContent = section.querySelectorAll(".game-card").length + " games";
+    });
     const gradeButtons = [...document.querySelectorAll("[data-unlock-grade]")];
     const backdrop = document.getElementById("loginBackdrop");
     const loginForm = document.getElementById("loginForm");
