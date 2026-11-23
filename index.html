@@ -352,6 +352,19 @@
     grid-template-columns:repeat(4,1fr);
   }
 }
+
+/* Grade 10 unit navigation, retaining the original card design */
+.unit-nav{display:flex;flex-wrap:wrap;gap:9px;margin:0 0 16px}
+.unit-tab{border:1px solid #dbeafe;background:rgba(255,255,255,.9);border-radius:12px;
+  padding:10px 13px;font:700 14px Arial,sans-serif;color:#334155;cursor:pointer;
+  box-shadow:0 5px 13px rgba(15,23,42,.05);transition:transform .18s ease,background .18s ease}
+.unit-tab:hover{transform:translateY(-2px)}
+.unit-tab.active{color:white;border-color:transparent;background:linear-gradient(135deg,#2563eb,#7c3aed)}
+.unit-heading{grid-column:1/-1;display:flex;gap:12px;align-items:center;justify-content:space-between;
+  margin:6px 0 -3px;padding:12px 16px;border-radius:14px;font-weight:800;font-size:19px;
+  color:#1e40af;background:linear-gradient(90deg,#dbeafe,#f8faff)}
+.unit-heading small{font-size:13px;font-weight:700;color:#64748b}
+@media(max-width:560px){.unit-nav{gap:7px}.unit-tab{font-size:13px;padding:9px 11px}.unit-heading{font-size:17px}}
 </style>
 </head>
 <body>
@@ -378,58 +391,21 @@
           <button class="grade-lock" type="button" data-unlock-grade="10">🔒 Log in</button>
         </div>
       </div>
+      <nav class="unit-nav" aria-label="Chọn Unit lớp 10">
+      <button class="unit-tab active" type="button" data-filter-unit="all" aria-pressed="true">Tất cả (165)</button>
+      <button class="unit-tab" type="button" data-filter-unit="1" aria-pressed="false">Unit 1 (7)</button>
+      <button class="unit-tab" type="button" data-filter-unit="2" aria-pressed="false">Unit 2 (25)</button>
+      <button class="unit-tab" type="button" data-filter-unit="3" aria-pressed="false">Unit 3 (28)</button>
+      <button class="unit-tab" type="button" data-filter-unit="4" aria-pressed="false">Unit 4 (16)</button>
+      <button class="unit-tab" type="button" data-filter-unit="5" aria-pressed="false">Unit 5 (10)</button>
+      <button class="unit-tab" type="button" data-filter-unit="6" aria-pressed="false">Unit 6 (34)</button>
+      <button class="unit-tab" type="button" data-filter-unit="7" aria-pressed="false">Unit 7 (45)</button>
+      </nav>
       <div class="grid">
-<!-- GRADE 10 UNIT 7 - NEW SETS B/C/D -->
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 1 1-15 set B từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_1-15_Set_B.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 1 (1-15) - Set B</h3><p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 1 1-15 set C từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_1-15_Set_C.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 1 (1-15) - Set C</h3><p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 1 1-15 set D từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_1-15_Set_D.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 1 (1-15) - Set D</h3><p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 1 16-30 set B từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_16-30_Set_B.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 1 (16-30) - Set B</h3><p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 1 16-30 set C từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_16-30_Set_C.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 1 (16-30) - Set C</h3><p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 1 16-30 set D từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_16-30_Set_D.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 1 (16-30) - Set D</h3><p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 1 31-45 set B từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_31-45_Set_B.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 1 (31-45) - Set B</h3><p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 1 31-45 set C từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_31-45_Set_C.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 1 (31-45) - Set C</h3><p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 1 31-45 set D từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_31-45_Set_D.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 1 (31-45) - Set D</h3><p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 1 46-60 set B từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_46-60_Set_B.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 1 (46-60) - Set B</h3><p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 1 46-60 set C từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_46-60_Set_C.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 1 (46-60) - Set C</h3><p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 1 46-60 set D từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_46-60_Set_D.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 1 (46-60) - Set D</h3><p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 1 61-75 set B từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_61-75_Set_B.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 1 (61-75) - Set B</h3><p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 1 61-75 set C từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_61-75_Set_C.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 1 (61-75) - Set C</h3><p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 1 61-75 set D từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_61-75_Set_D.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 1 (61-75) - Set D</h3><p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 2  set B điền đoạn" href="Grade_10_Unit_7_Exercise_2_Set_B.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 2 - Set B</h3><p>Điền đoạn · 5 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 2  set C điền đoạn" href="Grade_10_Unit_7_Exercise_2_Set_C.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 2 - Set C</h3><p>Điền đoạn · 5 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 2  set D điền đoạn" href="Grade_10_Unit_7_Exercise_2_Set_D.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 2 - Set D</h3><p>Điền đoạn · 5 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 3  set B điền đoạn" href="Grade_10_Unit_7_Exercise_3_Set_B.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 3 - Set B</h3><p>Điền đoạn · 5 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 3  set C điền đoạn" href="Grade_10_Unit_7_Exercise_3_Set_C.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 3 - Set C</h3><p>Điền đoạn · 5 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 3  set D điền đoạn" href="Grade_10_Unit_7_Exercise_3_Set_D.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 3 - Set D</h3><p>Điền đoạn · 5 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 4  set B điền đoạn" href="Grade_10_Unit_7_Exercise_4_Set_B.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 4 - Set B</h3><p>Điền đoạn · 5 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 4  set C điền đoạn" href="Grade_10_Unit_7_Exercise_4_Set_C.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 4 - Set C</h3><p>Điền đoạn · 5 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 4  set D điền đoạn" href="Grade_10_Unit_7_Exercise_4_Set_D.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 4 - Set D</h3><p>Điền đoạn · 5 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 5  set B sắp xếp câu" href="Grade_10_Unit_7_Exercise_5_Set_B.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 5 - Set B</h3><p>Sắp xếp câu · 6 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 5  set C sắp xếp câu" href="Grade_10_Unit_7_Exercise_5_Set_C.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 5 - Set C</h3><p>Sắp xếp câu · 6 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 5  set D sắp xếp câu" href="Grade_10_Unit_7_Exercise_5_Set_D.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 5 - Set D</h3><p>Sắp xếp câu · 6 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 6  set B hoàn thành đoạn" href="Grade_10_Unit_7_Exercise_6_Set_B.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 6 - Set B</h3><p>Hoàn thành đoạn · 5 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 6  set C hoàn thành đoạn" href="Grade_10_Unit_7_Exercise_6_Set_C.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 6 - Set C</h3><p>Hoàn thành đoạn · 5 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 6  set D hoàn thành đoạn" href="Grade_10_Unit_7_Exercise_6_Set_D.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 6 - Set D</h3><p>Hoàn thành đoạn · 5 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 7  set B đọc hiểu" href="Grade_10_Unit_7_Exercise_7_Set_B.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 7 - Set B</h3><p>Đọc hiểu · 8 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 7  set C đọc hiểu" href="Grade_10_Unit_7_Exercise_7_Set_C.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 7 - Set C</h3><p>Đọc hiểu · 8 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 7  set D đọc hiểu" href="Grade_10_Unit_7_Exercise_7_Set_D.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 7 - Set D</h3><p>Đọc hiểu · 8 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 8  set B đọc hiểu" href="Grade_10_Unit_7_Exercise_8_Set_B.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 8 - Set B</h3><p>Đọc hiểu · 8 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 8  set C đọc hiểu" href="Grade_10_Unit_7_Exercise_8_Set_C.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 8 - Set C</h3><p>Đọc hiểu · 8 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 8  set D đọc hiểu" href="Grade_10_Unit_7_Exercise_8_Set_D.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 8 - Set D</h3><p>Đọc hiểu · 8 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 9  set B nghe đúng/sai" href="Grade_10_Unit_7_Exercise_9_Set_B.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 9 - Set B</h3><p>Nghe Đúng/Sai · 5 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 9  set C nghe đúng/sai" href="Grade_10_Unit_7_Exercise_9_Set_C.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 9 - Set C</h3><p>Nghe Đúng/Sai · 5 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 9  set D nghe đúng/sai" href="Grade_10_Unit_7_Exercise_9_Set_D.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 9 - Set D</h3><p>Nghe Đúng/Sai · 5 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 10  set B nghe trắc nghiệm" href="Grade_10_Unit_7_Exercise_10_Set_B.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 10 - Set B</h3><p>Nghe trắc nghiệm · 5 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 10  set C nghe trắc nghiệm" href="Grade_10_Unit_7_Exercise_10_Set_C.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 10 - Set C</h3><p>Nghe trắc nghiệm · 5 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 10  set D nghe trắc nghiệm" href="Grade_10_Unit_7_Exercise_10_Set_D.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 10 - Set D</h3><p>Nghe trắc nghiệm · 5 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 11  set B giao tiếp" href="Grade_10_Unit_7_Exercise_11_Set_B.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 11 - Set B</h3><p>Giao tiếp · 5 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 11  set C giao tiếp" href="Grade_10_Unit_7_Exercise_11_Set_C.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 11 - Set C</h3><p>Giao tiếp · 5 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 7 exercise 11  set D giao tiếp" href="Grade_10_Unit_7_Exercise_11_Set_D.html"><div class="icon green">U7</div><h3>Unit 7 - Exercise 11 - Set D</h3><p>Giao tiếp · 5 câu · Giải thích tiếng Việt.</p><span class="play">Play now</span></a>
-
-<!-- ================= UNIT 1 REVIEW ================= -->
-
+<!-- GRADE 10: UNIT 1 -->
+<div class="unit-heading" data-unit-heading="1"><span>📘 Unit 1</span><small>7 games</small></div>
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="1"
    data-title="grade 10 unit 1 review 10 set questions grammar vocabulary test review"
    href="Grade10_Unit1_Review_10_Set_Questions.html">
 
@@ -442,22 +418,20 @@
   <span class="play">Play now →</span>
 
 </a>
-        <a class="game-card locked" data-grade="10" data-title="exercise 6 option b grade 10" href="exercise_6_option_b_game.html">
+<a class="game-card locked" data-grade="10" data-unit="1" data-title="unit 1 exercise 6 option b grade 10" href="exercise_6_option_b_game.html">
           <div class="icon blue">🧩</div>
-          <h3>Exercise 6 – Option B</h3>
+          <h3>Unit 1 – Exercise 6 – Option B</h3>
           <p>Interactive reading and vocabulary practice.</p>
           <span class="play">Play now →</span>
         </a>
-
-        <a class="game-card locked" data-grade="10" data-title="exercise 8 option c grade 10" href="exercise_8_option_c_game.html">
+<a class="game-card locked" data-grade="10" data-unit="1" data-title="unit 1 exercise 8 option c grade 10" href="exercise_8_option_c_game.html">
           <div class="icon green">📖</div>
-          <h3>Exercise 8 – Option C</h3>
+          <h3>Unit 1 – Exercise 8 – Option C</h3>
           <p>Practice reading comprehension with instant feedback.</p>
           <span class="play">Play now →</span>
         </a>
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="1"
    data-title="grade 10 unit 1 exercise 7 option b"
    href="grade_10_unit_1_exercise_7_option_b.html">
 
@@ -469,10 +443,8 @@
 
     <span class="play">Play now →</span>
 </a>
-
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="1"
    data-title="grade 10 unit 1 exercise 7 option c"
    href="grade_10_unit_1_exercise_7_option_c.html">
 
@@ -484,10 +456,8 @@
 
     <span class="play">Play now →</span>
 </a>
-
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="1"
    data-title="grade 10 unit 1 exercise 8 option b"
    href="grade_10_unit_1_exercise_8_option_b.html">
 
@@ -499,10 +469,8 @@
 
     <span class="play">Play now →</span>
 </a>
-
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="1"
    data-title="grade 10 unit 1 exercise 8 option c"
    href="grade_10_unit_1_exercise_8_option_c.html">
 
@@ -514,11 +482,10 @@
 
     <span class="play">Play now →</span>
 </a>
-<!-- ================= UNIT 2 ================= -->
-
-<!-- GRADE 10 – UNIT 2 REVIEW – 20 SETS -->
+<!-- GRADE 10: UNIT 2 -->
+<div class="unit-heading" data-unit-heading="2"><span>📘 Unit 2</span><small>25 games</small></div>
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="2"
    data-title="grade 10 unit 2 review 20 sets 500 questions green living vocabulary future forms passive voice on tap"
    href="Grade_10_Unit_2_Review_20_Sets.html">
 
@@ -533,7 +500,7 @@
   <span class="play">Play now →</span>
 </a>
 <a class="game-card locked"
-data-grade="10"
+data-grade="10" data-unit="2"
 data-title="grade 10 unit 2 exercise 1 21-40 option b"
 href="Grade_10_Unit_2_Exercise_1_21_40_Option_B.html">
 
@@ -546,10 +513,8 @@ href="Grade_10_Unit_2_Exercise_1_21_40_Option_B.html">
 <span class="play">Play now →</span>
 
 </a>
-
-
 <a class="game-card locked"
-data-grade="10"
+data-grade="10" data-unit="2"
 data-title="grade 10 unit 2 exercise 1 21-40 option c"
 href="Grade_10_Unit_2_Exercise_1_21_40_Option_C.html">
 
@@ -562,10 +527,8 @@ href="Grade_10_Unit_2_Exercise_1_21_40_Option_C.html">
 <span class="play">Play now →</span>
 
 </a>
-
-
 <a class="game-card locked"
-data-grade="10"
+data-grade="10" data-unit="2"
 data-title="grade 10 unit 2 exercise 1 41-60 option b"
 href="Grade_10_Unit_2_Exercise_1_41_60_Option_B.html">
 
@@ -578,10 +541,8 @@ href="Grade_10_Unit_2_Exercise_1_41_60_Option_B.html">
 <span class="play">Play now →</span>
 
 </a>
-
-
 <a class="game-card locked"
-data-grade="10"
+data-grade="10" data-unit="2"
 data-title="grade 10 unit 2 exercise 1 41-60 option c"
 href="Grade_10_Unit_2_Exercise_1_41_60_Option_C.html">
 
@@ -594,10 +555,8 @@ href="Grade_10_Unit_2_Exercise_1_41_60_Option_C.html">
 <span class="play">Play now →</span>
 
 </a>
-
-
 <a class="game-card locked"
-data-grade="10"
+data-grade="10" data-unit="2"
 data-title="grade 10 unit 2 exercise 1 61-80 option b"
 href="Grade_10_Unit_2_Exercise_1_61_80_Option_B.html">
 
@@ -610,10 +569,8 @@ href="Grade_10_Unit_2_Exercise_1_61_80_Option_B.html">
 <span class="play">Play now →</span>
 
 </a>
-
-
 <a class="game-card locked"
-data-grade="10"
+data-grade="10" data-unit="2"
 data-title="grade 10 unit 2 exercise 1 61-80 option c"
 href="Grade_10_Unit_2_Exercise_1_61_80_Option_C.html">
 
@@ -626,10 +583,8 @@ href="Grade_10_Unit_2_Exercise_1_61_80_Option_C.html">
 <span class="play">Play now →</span>
 
 </a>
-
-
 <a class="game-card locked"
-data-grade="10"
+data-grade="10" data-unit="2"
 data-title="grade 10 unit 2 exercise 1 81-100 option b"
 href="Grade_10_Unit_2_Exercise_1_81_100_Option_B.html">
 
@@ -642,10 +597,8 @@ href="Grade_10_Unit_2_Exercise_1_81_100_Option_B.html">
 <span class="play">Play now →</span>
 
 </a>
-
-
 <a class="game-card locked"
-data-grade="10"
+data-grade="10" data-unit="2"
 data-title="grade 10 unit 2 exercise 1 81-100 option c"
 href="Grade_10_Unit_2_Exercise_1_81_100_Option_C.html">
 
@@ -658,10 +611,8 @@ href="Grade_10_Unit_2_Exercise_1_81_100_Option_C.html">
 <span class="play">Play now →</span>
 
 </a>
-
-
 <a class="game-card locked"
-data-grade="10"
+data-grade="10" data-unit="2"
 data-title="grade 10 unit 2 exercise 1 100-132 option b"
 href="Grade_10_Unit_2_Exercise_1_100_132_Option_B.html">
 
@@ -674,10 +625,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_B.html">
 <span class="play">Play now →</span>
 
 </a>
-
-
 <a class="game-card locked"
-data-grade="10"
+data-grade="10" data-unit="2"
 data-title="grade 10 unit 2 exercise 1 100-132 option c"
 href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
 
@@ -690,11 +639,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
 <span class="play">Play now →</span>
 
 </a>
-
-<!-- ================= UNIT 2 - EXERCISE 2 ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="2"
    data-title="grade 10 unit 2 exercise 2 option b spiders"
    href="Grade_10_Unit_2_Exercise_2_Option_B.html">
 
@@ -703,10 +649,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
     <p>Spiders environmental challenge with XP, combo, hearts and explanations.</p>
     <span class="play">Play now →</span>
 </a>
-
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="2"
    data-title="grade 10 unit 2 exercise 2 option c blue wave"
    href="Grade_10_Unit_2_Exercise_2_Option_C.html">
 
@@ -715,12 +659,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
     <p>Blue Wave environmental challenge with XP, combo, hearts and explanations.</p>
     <span class="play">Play now →</span>
 </a>
-
-
-<!-- ================= UNIT 2 - EXERCISE 3 ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="2"
    data-title="grade 10 unit 2 exercise 3 option b horizon"
    href="Grade_10_Unit_2_Exercise_3_Option_B.html">
 
@@ -729,10 +669,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
     <p>Horizon energy-saving challenge with XP, combo, hearts and explanations.</p>
     <span class="play">Play now →</span>
 </a>
-
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="2"
    data-title="grade 10 unit 2 exercise 3 option c deep sea"
    href="Grade_10_Unit_2_Exercise_3_Option_C.html">
 
@@ -741,12 +679,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
     <p>Deep Sea environmental challenge with XP, combo, hearts and explanations.</p>
     <span class="play">Play now →</span>
 </a>
-
-
-<!-- ================= UNIT 2 - EXERCISE 4 ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="2"
    data-title="grade 10 unit 2 exercise 4 option b sherlock holmes detective"
    href="Grade_10_Unit_2_Exercise_4_Option_B.html">
 
@@ -755,10 +689,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
     <p>Sherlock Holmes detective reading challenge with XP, combo, hearts and explanations.</p>
     <span class="play">Play now →</span>
 </a>
-
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="2"
    data-title="grade 10 unit 2 exercise 4 option c salt milk coffee"
    href="Grade_10_Unit_2_Exercise_4_Option_C.html">
 
@@ -767,10 +699,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
     <p>Salt Milk Coffee reading challenge with XP, combo, hearts and explanations.</p>
     <span class="play">Play now →</span>
 </a>
-<!-- ================= UNIT 2 - EXERCISE 5 ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="2"
    data-title="grade 10 unit 2 exercise 5 option b"
    href="Grade10_Unit2_Exercise5_OptionB.html">
 
@@ -782,10 +712,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
 
     <span class="play">Play now →</span>
 </a>
-
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="2"
    data-title="grade 10 unit 2 exercise 5 option c"
    href="Grade10_Unit2_Exercise5_OptionC.html">
 
@@ -797,12 +725,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
 
     <span class="play">Play now →</span>
 </a>
-
-
-<!-- ================= UNIT 2 - EXERCISE 6 ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="2"
    data-title="grade 10 unit 2 exercise 6 option b"
    href="Grade10_Unit2_Exercise6_OptionB.html">
 
@@ -814,10 +738,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
 
     <span class="play">Play now →</span>
 </a>
-
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="2"
    data-title="grade 10 unit 2 exercise 6 option c"
    href="Grade10_Unit2_Exercise6_OptionC.html">
 
@@ -829,11 +751,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
 
     <span class="play">Play now →</span>
 </a>
-
-<!-- ================= UNIT 2 - EXERCISE 7 ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="2"
    data-title="grade 10 unit 2 exercise 7 option b"
    href="Grade10_Unit2_Exercise7_OptionB.html">
     <div class="icon blue">🌿</div>
@@ -841,9 +760,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
     <p>Interactive English challenge with XP, hearts and explanations.</p>
     <span class="play">Play now →</span>
 </a>
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="2"
    data-title="grade 10 unit 2 exercise 7 option c"
    href="Grade10_Unit2_Exercise7_OptionC.html">
     <div class="icon green">🌱</div>
@@ -851,12 +769,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
     <p>Interactive English challenge with XP, hearts and explanations.</p>
     <span class="play">Play now →</span>
 </a>
-
-
-<!-- ================= UNIT 2 - EXERCISE 8 ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="2"
    data-title="grade 10 unit 2 exercise 8 option b"
    href="Grade10_Unit2_Exercise8_OptionB.html">
     <div class="icon blue">🌊</div>
@@ -864,9 +778,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
     <p>Reading challenge with XP, hearts and explanations.</p>
     <span class="play">Play now →</span>
 </a>
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="2"
    data-title="grade 10 unit 2 exercise 8 option c"
    href="Grade10_Unit2_Exercise8_OptionC.html">
     <div class="icon purple">🎌</div>
@@ -874,11 +787,10 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
     <p>Reading challenge with XP, hearts and explanations.</p>
     <span class="play">Play now →</span>
 </a>
-
-
-<!-- ================= GRADE 10 – UNIT 3 REVIEW – 10 SETS ================= -->
+<!-- GRADE 10: UNIT 3 -->
+<div class="unit-heading" data-unit-heading="3"><span>📘 Unit 3</span><small>28 games</small></div>
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 music review 10 sets on tap kiem tra tieng anh 10"
    href="Grade_10_Unit_3_Review_10_Sets.html">
   <div class="icon purple">🎵</div>
@@ -886,11 +798,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
   <p>Music – 10 bộ bài luyện tập ôn tập Unit 3.</p>
   <span class="play">Play now →</span>
 </a>
-
-<!-- ================= UNIT 3 - EXERCISE 1 ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 1 1-20 option b"
    href="Grade10_Unit3_Exercise1_1-20_OptionB.html">
     <div class="icon purple">🎵</div>
@@ -898,9 +807,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
     <p>Music vocabulary challenge with XP, combo, hearts and explanations.</p>
     <span class="play">Play now →</span>
 </a>
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 1 1-20 option c"
    href="Grade10_Unit3_Exercise1_1-20_OptionC.html">
     <div class="icon blue">🎶</div>
@@ -908,10 +816,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
     <p>Music vocabulary challenge with XP, combo, hearts and explanations.</p>
     <span class="play">Play now →</span>
 </a>
-<!-- ================= UNIT 3 - EXERCISE 1 (21-40) ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 1 21-40 option b"
    href="Grade10_Unit3_Exercise1_21-40_OptionB.html">
 
@@ -920,9 +826,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
     <p>Music vocabulary challenge with XP, combo, hearts and explanations.</p>
     <span class="play">Play now →</span>
 </a>
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 1 21-40 option c"
    href="Grade10_Unit3_Exercise1_21-40_OptionC.html">
 
@@ -931,12 +836,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
     <p>Music vocabulary challenge with XP, combo, hearts and explanations.</p>
     <span class="play">Play now →</span>
 </a>
-
-
-<!-- ================= UNIT 3 - EXERCISE 1 (41-60) ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 1 41-60 option b"
    href="Grade10_Unit3_Exercise1_41-60_OptionB.html">
 
@@ -945,9 +846,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
     <p>Music vocabulary challenge with XP, combo, hearts and explanations.</p>
     <span class="play">Play now →</span>
 </a>
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 1 41-60 option c"
    href="Grade10_Unit3_Exercise1_41-60_OptionC.html">
 
@@ -956,11 +856,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
     <p>Music vocabulary challenge with XP, combo, hearts and explanations.</p>
     <span class="play">Play now →</span>
 </a>
-
-<!-- ================= UNIT 3 - EXERCISE 1 (61-80) ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 1 61-80 option b"
    href="Grade10_Unit3_Exercise1_61-80_OptionB.html">
   <div class="icon purple">🎤</div>
@@ -968,9 +865,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
   <p>Music practice with XP, combo, hearts and explanations.</p>
   <span class="play">Play now →</span>
 </a>
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 1 61-80 option c"
    href="Grade10_Unit3_Exercise1_61-80_OptionC.html">
   <div class="icon blue">🎧</div>
@@ -978,12 +874,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
   <p>Music practice with XP, combo, hearts and explanations.</p>
   <span class="play">Play now →</span>
 </a>
-
-
-<!-- ================= UNIT 3 - EXERCISE 1 (81-100) ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 1 81-100 option b"
    href="Grade10_Unit3_Exercise1_81-100_OptionB.html">
   <div class="icon orange">🎸</div>
@@ -991,9 +883,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
   <p>Music practice with XP, combo, hearts and explanations.</p>
   <span class="play">Play now →</span>
 </a>
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 1 81-100 option c"
    href="Grade10_Unit3_Exercise1_81-100_OptionC.html">
   <div class="icon pink">🎹</div>
@@ -1001,12 +892,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
   <p>Music practice with XP, combo, hearts and explanations.</p>
   <span class="play">Play now →</span>
 </a>
-
-
-<!-- ================= UNIT 3 - EXERCISE 1 (101-120) ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 1 101-120 option b"
    href="Grade10_Unit3_Exercise1_101-120_OptionB.html">
   <div class="icon green">🎼</div>
@@ -1014,9 +901,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
   <p>Music practice with XP, combo, hearts and explanations.</p>
   <span class="play">Play now →</span>
 </a>
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 1 101-120 option c"
    href="Grade10_Unit3_Exercise1_101-120_OptionC.html">
   <div class="icon purple">🎵</div>
@@ -1024,12 +910,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
   <p>Music practice with XP, combo, hearts and explanations.</p>
   <span class="play">Play now →</span>
 </a>
-
-
-<!-- ================= UNIT 3 - EXERCISE 2 ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 2 option b"
    href="Grade10_Unit3_Exercise2_OptionB.html">
   <div class="icon blue">🎧</div>
@@ -1037,9 +919,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
   <p>Music cloze challenge with instant feedback and explanations.</p>
   <span class="play">Play now →</span>
 </a>
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 2 option c"
    href="Grade10_Unit3_Exercise2_OptionC.html">
   <div class="icon orange">🎶</div>
@@ -1047,12 +928,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
   <p>Music cloze challenge with instant feedback and explanations.</p>
   <span class="play">Play now →</span>
 </a>
-
-
-<!-- ================= UNIT 3 - EXERCISE 3 ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 3 option b"
    href="Grade10_Unit3_Exercise3_OptionB.html">
   <div class="icon pink">🎤</div>
@@ -1060,9 +937,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
   <p>Music cloze practice with XP, hearts and explanations.</p>
   <span class="play">Play now →</span>
 </a>
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 3 option c"
    href="Grade10_Unit3_Exercise3_OptionC.html">
   <div class="icon green">🎸</div>
@@ -1070,12 +946,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
   <p>Music cloze practice with XP, hearts and explanations.</p>
   <span class="play">Play now →</span>
 </a>
-
-
-<!-- ================= UNIT 3 - EXERCISE 4 ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 4 option b"
    href="Grade10_Unit3_Exercise4_OptionB.html">
   <div class="icon purple">🧩</div>
@@ -1083,9 +955,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
   <p>Sentence arrangement challenge with instant feedback.</p>
   <span class="play">Play now →</span>
 </a>
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 4 option c"
    href="Grade10_Unit3_Exercise4_OptionC.html">
   <div class="icon blue">🧩</div>
@@ -1093,12 +964,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
   <p>Sentence arrangement challenge with instant feedback.</p>
   <span class="play">Play now →</span>
 </a>
-
-
-<!-- ================= UNIT 3 - EXERCISE 6 ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 6 option b"
    href="Grade10_Unit3_Exercise6_OptionB.html">
   <div class="icon orange">🎼</div>
@@ -1106,12 +973,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
   <p>Reading and sentence insertion challenge.</p>
   <span class="play">Play now →</span>
 </a>
-
-
-<!-- ================= UNIT 3 - EXERCISE 7 ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 7 option b"
    href="Grade10_Unit3_Exercise7_OptionB.html">
   <div class="icon green">🎧</div>
@@ -1119,12 +982,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
   <p>Reading completion challenge with instant feedback.</p>
   <span class="play">Play now →</span>
 </a>
-
-
-<!-- ================= UNIT 3 - EXERCISE 8 ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 8 option b"
    href="Grade10_Unit3_Exercise8_OptionB.html">
   <div class="icon pink">📖</div>
@@ -1132,9 +991,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
   <p>Reading comprehension with XP, hearts and explanations.</p>
   <span class="play">Play now →</span>
 </a>
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 8 option c"
    href="Grade10_Unit3_Exercise8_OptionC.html">
   <div class="icon purple">📚</div>
@@ -1142,12 +1000,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
   <p>Reading comprehension with XP, hearts and explanations.</p>
   <span class="play">Play now →</span>
 </a>
-
-
-<!-- ================= UNIT 3 - EXERCISE 9 ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 9 option c"
    href="Grade10_Unit3_Exercise9_OptionC.html">
   <div class="icon blue">🎵</div>
@@ -1155,10 +1009,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
   <p>Reading comprehension challenge with detailed feedback.</p>
   <span class="play">Play now →</span>
 </a>
-<!-- ================= UNIT 3 - EXERCISE 10 ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 10 option b listening"
    href="Grade_10_Unit_3_Exercise_10_Option_B.html">
 
@@ -1170,10 +1022,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
 
   <span class="play">Play now →</span>
 </a>
-
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 10 option c listening"
    href="Grade_10_Unit_3_Exercise_10_Option_C.html">
 
@@ -1185,12 +1035,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
 
   <span class="play">Play now →</span>
 </a>
-
-
-<!-- ================= UNIT 3 - EXERCISE 11 ================= -->
-
 <a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 11 option b listening"
    href="Grade_10_Unit_3_Exercise_11_Option_B.html">
 
@@ -1202,248 +1048,8 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
 
   <span class="play">Play now →</span>
 </a>
-<!-- ================= GRADE 10 – UNIT 4 REVIEW – 10 SETS ================= -->
 <a class="game-card locked"
-   data-grade="10"
-   data-title="grade 10 unit 4 for a better community review 10 sets on tap kiem tra tieng anh 10"
-   href="Grade_10_Unit_4_Review_10_Sets.html">
-  <div class="icon green">🤝</div>
-  <h3>Unit 4 Review – 10 Sets</h3>
-  <p>For a Better Community – 10 bộ bài luyện tập ôn tập Unit 4.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<!-- ================= GRADE 10 - UNIT 4 - OPTION C ================= -->
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 4 exercise 1 1-20 option c"
-   href="Grade_10_Unit_4_Exercise_1_1-20_Option_C.html">
-  <div class="icon blue">🧩</div>
-  <h3>Unit 4 – Exercise 1 (1–20) – Option C</h3>
-  <p>Vocabulary and grammar practice.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 4 exercise 1 21-40 option c"
-   href="Grade_10_Unit_4_Exercise_1_21-40_Option_C.html">
-  <div class="icon blue">🧩</div>
-  <h3>Unit 4 – Exercise 1 (21–40) – Option C</h3>
-  <p>Vocabulary and grammar practice.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 4 exercise 1 41-60 option c"
-   href="Grade_10_Unit_4_Exercise_1_41-60_Option_C.html">
-  <div class="icon blue">🧩</div>
-  <h3>Unit 4 – Exercise 1 (41–60) – Option C</h3>
-  <p>Vocabulary and grammar practice.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 4 exercise 1 61-80 option c"
-   href="Grade_10_Unit_4_Exercise_1_61-80_Option_C.html">
-  <div class="icon blue">🧩</div>
-  <h3>Unit 4 – Exercise 1 (61–80) – Option C</h3>
-  <p>Vocabulary and grammar practice.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 4 exercise 1 81-100 option c"
-   href="Grade_10_Unit_4_Exercise_1_81-100_Option_C.html">
-  <div class="icon blue">🧩</div>
-  <h3>Unit 4 – Exercise 1 (81–100) – Option C</h3>
-  <p>Vocabulary and grammar practice.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 4 exercise 1 101-116 option c"
-   href="Grade_10_Unit_4_Exercise_1_101-116_Option_C.html">
-  <div class="icon blue">🧩</div>
-  <h3>Unit 4 – Exercise 1 (101–116) – Option C</h3>
-  <p>Vocabulary and grammar practice.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 4 exercise 2 option c bringing learning closer"
-   href="Grade_10_Unit_4_Exercise_2_Option_C.html">
-  <div class="icon green">📖</div>
-  <h3>Unit 4 – Exercise 2 – Option C</h3>
-  <p>Bringing Learning Closer: reading gap-fill.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 4 exercise 3 option c small projects lasting changes"
-   href="Grade_10_Unit_4_Exercise_3_Option_C.html">
-  <div class="icon green">📖</div>
-  <h3>Unit 4 – Exercise 3 – Option C</h3>
-  <p>Small Projects, Lasting Changes: reading gap-fill.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 4 exercise 4 option c more than a few hours of help"
-   href="Grade_10_Unit_4_Exercise_4_Option_C.html">
-  <div class="icon green">📖</div>
-  <h3>Unit 4 – Exercise 4 – Option C</h3>
-  <p>More Than a Few Hours of Help: reading gap-fill.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 4 exercise 8 option c word formation"
-   href="Grade_10_Unit_4_Exercise_8_Option_C.html">
-  <div class="icon green">✍️</div>
-  <h3>Unit 4 – Exercise 8 – Option C</h3>
-  <p>Word formation practice.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 4 exercise 9 option c past simple past continuous"
-   href="Grade_10_Unit_4_Exercise_9_Option_C.html">
-  <div class="icon green">⏳</div>
-  <h3>Unit 4 – Exercise 9 – Option C</h3>
-  <p>Past simple and past continuous practice.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 4 exercise 12 option c arrangement dialogue letter paragraph"
-   href="Grade_10_Unit_4_Exercise_12_Option_C.html">
-  <div class="icon green">💬</div>
-  <h3>Unit 4 – Exercise 12 – Option C</h3>
-  <p>Arrange dialogues, a letter and a paragraph.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 4 exercise 13 option c neighbourhood repair fund"
-   href="Grade_10_Unit_4_Exercise_13_Option_C.html">
-  <div class="icon green">📚</div>
-  <h3>Unit 4 – Exercise 13 – Option C</h3>
-  <p>The Neighbourhood Repair Fund: reading comprehension.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 4 advanced exercise 1 option c making community service meaningful"
-   href="Grade_10_Unit_4_Advanced_Exercise_1_Option_C.html">
-  <div class="icon purple">🌟</div>
-  <h3>Unit 4 – Advanced Exercise 1 – Option C</h3>
-  <p>Making Community Service Meaningful: advanced reading gap-fill.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 4 advanced exercise 2 option c from receiving help to building a stronger community"
-   href="Grade_10_Unit_4_Advanced_Exercise_2_Option_C.html">
-  <div class="icon purple">🌟</div>
-  <h3>Unit 4 – Advanced Exercise 2 – Option C</h3>
-  <p>From Receiving Help to Building a Stronger Community: advanced reading.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<!-- ================= GRADE 10 - UNIT 5 - OPTION C ================= -->
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 5 exercise 1 1-20 option c"
-   href="Grade_10_Unit_5_Exercise_1_1-20_Option_C.html">
-  <div class="icon blue">🧩</div>
-  <h3>Unit 5 – Exercise 1 (1–20) – Option C</h3>
-  <p>Inventions: vocabulary and grammar practice.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 5 exercise 1 21-40 option c"
-   href="Grade_10_Unit_5_Exercise_1_21-40_Option_C.html">
-  <div class="icon blue">💻</div>
-  <h3>Unit 5 – Exercise 1 (21–40) – Option C</h3>
-  <p>Computer technology and modern devices.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 5 exercise 1 41-60 option c"
-   href="Grade_10_Unit_5_Exercise_1_41-60_Option_C.html">
-  <div class="icon blue">🤖</div>
-  <h3>Unit 5 – Exercise 1 (41–60) – Option C</h3>
-  <p>Technology vocabulary and verb forms.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 5 exercise 1 61-80 option c"
-   href="Grade_10_Unit_5_Exercise_1_61-80_Option_C.html">
-  <div class="icon blue">⏳</div>
-  <h3>Unit 5 – Exercise 1 (61–80) – Option C</h3>
-  <p>Past simple and present perfect practice.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 5 exercise 1 81-94 option c"
-   href="Grade_10_Unit_5_Exercise_1_81-94_Option_C.html">
-  <div class="icon blue">⏳</div>
-  <h3>Unit 5 – Exercise 1 (81–94) – Option C</h3>
-  <p>Present perfect practice.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 5 exercise 2 option c smart notebooks"
-   href="Grade_10_Unit_5_Exercise_2_Option_C.html">
-  <div class="icon orange">📖</div>
-  <h3>Unit 5 – Exercise 2 – Option C</h3>
-  <p>Smart Notebooks: reading gap-fill.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 5 exercise 6 option c technology verb forms present perfect"
-   href="Grade_10_Unit_5_Exercise_6_Option_C.html">
-  <div class="icon orange">⏳</div>
-  <h3>Unit 5 – Exercise 6 – Option C</h3>
-  <p>Technology: verb forms and the present perfect.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 5 exercise 7 option c digital tools collaborative learning"
-   href="Grade_10_Unit_5_Exercise_7_Option_C.html">
-  <div class="icon orange">📖</div>
-  <h3>Unit 5 – Exercise 7 – Option C</h3>
-  <p>Digital Tools for Collaborative Learning: reading gap-fill.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 5 exercise 8 option c arrangement dialogues paragraphs technology"
-   href="Grade_10_Unit_5_Exercise_8_Option_C.html">
-  <div class="icon orange">💬</div>
-  <h3>Unit 5 – Exercise 8 – Option C</h3>
-  <p>Arrange dialogues and paragraphs about technology.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked" data-grade="10"
-   data-title="grade 10 unit 5 exercise 11 option c designing technology for real needs"
-   href="Grade_10_Unit_5_Exercise_11_Option_C.html">
-  <div class="icon orange">💡</div>
-  <h3>Unit 5 – Exercise 11 – Option C</h3>
-  <p>Designing Technology for Real Needs: reading gap-fill.</p>
-  <span class="play">Play now →</span>
-</a>
-
-<a class="game-card locked"
-   data-grade="10"
+   data-grade="10" data-unit="3"
    data-title="grade 10 unit 3 exercise 11 option c listening"
    href="Grade_10_Unit_3_Exercise_11_Option_C.html">
 
@@ -1455,215 +1061,697 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
 
   <span class="play">Play now →</span>
 </a>
-
-
-
-<!-- BEGIN GRADE 10 UNIT 6 - SETS B AND C (34 LESSONS) -->
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 1 (1-15) - set b equality, rights and career vocabulary" href="Grade_10_Unit_6_Exercise_1_1-15_Set_B.html">
+<!-- GRADE 10: UNIT 4 -->
+<div class="unit-heading" data-unit-heading="4"><span>📘 Unit 4</span><small>16 games</small></div>
+<a class="game-card locked"
+   data-grade="10" data-unit="4"
+   data-title="grade 10 unit 4 for a better community review 10 sets on tap kiem tra tieng anh 10"
+   href="Grade_10_Unit_4_Review_10_Sets.html">
+  <div class="icon green">🤝</div>
+  <h3>Unit 4 Review – 10 Sets</h3>
+  <p>For a Better Community – 10 bộ bài luyện tập ôn tập Unit 4.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="4"
+   data-title="grade 10 unit 4 exercise 1 1-20 option c"
+   href="Grade_10_Unit_4_Exercise_1_1-20_Option_C.html">
+  <div class="icon blue">🧩</div>
+  <h3>Unit 4 – Exercise 1 (1–20) – Option C</h3>
+  <p>Vocabulary and grammar practice.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="4"
+   data-title="grade 10 unit 4 exercise 1 21-40 option c"
+   href="Grade_10_Unit_4_Exercise_1_21-40_Option_C.html">
+  <div class="icon blue">🧩</div>
+  <h3>Unit 4 – Exercise 1 (21–40) – Option C</h3>
+  <p>Vocabulary and grammar practice.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="4"
+   data-title="grade 10 unit 4 exercise 1 41-60 option c"
+   href="Grade_10_Unit_4_Exercise_1_41-60_Option_C.html">
+  <div class="icon blue">🧩</div>
+  <h3>Unit 4 – Exercise 1 (41–60) – Option C</h3>
+  <p>Vocabulary and grammar practice.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="4"
+   data-title="grade 10 unit 4 exercise 1 61-80 option c"
+   href="Grade_10_Unit_4_Exercise_1_61-80_Option_C.html">
+  <div class="icon blue">🧩</div>
+  <h3>Unit 4 – Exercise 1 (61–80) – Option C</h3>
+  <p>Vocabulary and grammar practice.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="4"
+   data-title="grade 10 unit 4 exercise 1 81-100 option c"
+   href="Grade_10_Unit_4_Exercise_1_81-100_Option_C.html">
+  <div class="icon blue">🧩</div>
+  <h3>Unit 4 – Exercise 1 (81–100) – Option C</h3>
+  <p>Vocabulary and grammar practice.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="4"
+   data-title="grade 10 unit 4 exercise 1 101-116 option c"
+   href="Grade_10_Unit_4_Exercise_1_101-116_Option_C.html">
+  <div class="icon blue">🧩</div>
+  <h3>Unit 4 – Exercise 1 (101–116) – Option C</h3>
+  <p>Vocabulary and grammar practice.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="4"
+   data-title="grade 10 unit 4 exercise 2 option c bringing learning closer"
+   href="Grade_10_Unit_4_Exercise_2_Option_C.html">
+  <div class="icon green">📖</div>
+  <h3>Unit 4 – Exercise 2 – Option C</h3>
+  <p>Bringing Learning Closer: reading gap-fill.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="4"
+   data-title="grade 10 unit 4 exercise 3 option c small projects lasting changes"
+   href="Grade_10_Unit_4_Exercise_3_Option_C.html">
+  <div class="icon green">📖</div>
+  <h3>Unit 4 – Exercise 3 – Option C</h3>
+  <p>Small Projects, Lasting Changes: reading gap-fill.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="4"
+   data-title="grade 10 unit 4 exercise 4 option c more than a few hours of help"
+   href="Grade_10_Unit_4_Exercise_4_Option_C.html">
+  <div class="icon green">📖</div>
+  <h3>Unit 4 – Exercise 4 – Option C</h3>
+  <p>More Than a Few Hours of Help: reading gap-fill.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="4"
+   data-title="grade 10 unit 4 exercise 8 option c word formation"
+   href="Grade_10_Unit_4_Exercise_8_Option_C.html">
+  <div class="icon green">✍️</div>
+  <h3>Unit 4 – Exercise 8 – Option C</h3>
+  <p>Word formation practice.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="4"
+   data-title="grade 10 unit 4 exercise 9 option c past simple past continuous"
+   href="Grade_10_Unit_4_Exercise_9_Option_C.html">
+  <div class="icon green">⏳</div>
+  <h3>Unit 4 – Exercise 9 – Option C</h3>
+  <p>Past simple and past continuous practice.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="4"
+   data-title="grade 10 unit 4 exercise 12 option c arrangement dialogue letter paragraph"
+   href="Grade_10_Unit_4_Exercise_12_Option_C.html">
+  <div class="icon green">💬</div>
+  <h3>Unit 4 – Exercise 12 – Option C</h3>
+  <p>Arrange dialogues, a letter and a paragraph.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="4"
+   data-title="grade 10 unit 4 exercise 13 option c neighbourhood repair fund"
+   href="Grade_10_Unit_4_Exercise_13_Option_C.html">
+  <div class="icon green">📚</div>
+  <h3>Unit 4 – Exercise 13 – Option C</h3>
+  <p>The Neighbourhood Repair Fund: reading comprehension.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="4"
+   data-title="grade 10 unit 4 advanced exercise 1 option c making community service meaningful"
+   href="Grade_10_Unit_4_Advanced_Exercise_1_Option_C.html">
+  <div class="icon purple">🌟</div>
+  <h3>Unit 4 – Advanced Exercise 1 – Option C</h3>
+  <p>Making Community Service Meaningful: advanced reading gap-fill.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="4"
+   data-title="grade 10 unit 4 advanced exercise 2 option c from receiving help to building a stronger community"
+   href="Grade_10_Unit_4_Advanced_Exercise_2_Option_C.html">
+  <div class="icon purple">🌟</div>
+  <h3>Unit 4 – Advanced Exercise 2 – Option C</h3>
+  <p>From Receiving Help to Building a Stronger Community: advanced reading.</p>
+  <span class="play">Play now →</span>
+</a>
+<!-- GRADE 10: UNIT 5 -->
+<div class="unit-heading" data-unit-heading="5"><span>📘 Unit 5</span><small>10 games</small></div>
+<a class="game-card locked" data-grade="10" data-unit="5"
+   data-title="grade 10 unit 5 exercise 1 1-20 option c"
+   href="Grade_10_Unit_5_Exercise_1_1-20_Option_C.html">
+  <div class="icon blue">🧩</div>
+  <h3>Unit 5 – Exercise 1 (1–20) – Option C</h3>
+  <p>Inventions: vocabulary and grammar practice.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="5"
+   data-title="grade 10 unit 5 exercise 1 21-40 option c"
+   href="Grade_10_Unit_5_Exercise_1_21-40_Option_C.html">
+  <div class="icon blue">💻</div>
+  <h3>Unit 5 – Exercise 1 (21–40) – Option C</h3>
+  <p>Computer technology and modern devices.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="5"
+   data-title="grade 10 unit 5 exercise 1 41-60 option c"
+   href="Grade_10_Unit_5_Exercise_1_41-60_Option_C.html">
+  <div class="icon blue">🤖</div>
+  <h3>Unit 5 – Exercise 1 (41–60) – Option C</h3>
+  <p>Technology vocabulary and verb forms.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="5"
+   data-title="grade 10 unit 5 exercise 1 61-80 option c"
+   href="Grade_10_Unit_5_Exercise_1_61-80_Option_C.html">
+  <div class="icon blue">⏳</div>
+  <h3>Unit 5 – Exercise 1 (61–80) – Option C</h3>
+  <p>Past simple and present perfect practice.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="5"
+   data-title="grade 10 unit 5 exercise 1 81-94 option c"
+   href="Grade_10_Unit_5_Exercise_1_81-94_Option_C.html">
+  <div class="icon blue">⏳</div>
+  <h3>Unit 5 – Exercise 1 (81–94) – Option C</h3>
+  <p>Present perfect practice.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="5"
+   data-title="grade 10 unit 5 exercise 2 option c smart notebooks"
+   href="Grade_10_Unit_5_Exercise_2_Option_C.html">
+  <div class="icon orange">📖</div>
+  <h3>Unit 5 – Exercise 2 – Option C</h3>
+  <p>Smart Notebooks: reading gap-fill.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="5"
+   data-title="grade 10 unit 5 exercise 6 option c technology verb forms present perfect"
+   href="Grade_10_Unit_5_Exercise_6_Option_C.html">
+  <div class="icon orange">⏳</div>
+  <h3>Unit 5 – Exercise 6 – Option C</h3>
+  <p>Technology: verb forms and the present perfect.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="5"
+   data-title="grade 10 unit 5 exercise 7 option c digital tools collaborative learning"
+   href="Grade_10_Unit_5_Exercise_7_Option_C.html">
+  <div class="icon orange">📖</div>
+  <h3>Unit 5 – Exercise 7 – Option C</h3>
+  <p>Digital Tools for Collaborative Learning: reading gap-fill.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="5"
+   data-title="grade 10 unit 5 exercise 8 option c arrangement dialogues paragraphs technology"
+   href="Grade_10_Unit_5_Exercise_8_Option_C.html">
+  <div class="icon orange">💬</div>
+  <h3>Unit 5 – Exercise 8 – Option C</h3>
+  <p>Arrange dialogues and paragraphs about technology.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="5"
+   data-title="grade 10 unit 5 exercise 11 option c designing technology for real needs"
+   href="Grade_10_Unit_5_Exercise_11_Option_C.html">
+  <div class="icon orange">💡</div>
+  <h3>Unit 5 – Exercise 11 – Option C</h3>
+  <p>Designing Technology for Real Needs: reading gap-fill.</p>
+  <span class="play">Play now →</span>
+</a>
+<!-- GRADE 10: UNIT 6 -->
+<div class="unit-heading" data-unit-heading="6"><span>📘 Unit 6</span><small>34 games</small></div>
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 1 (1-15) - set b equality, rights and career vocabulary" href="Grade_10_Unit_6_Exercise_1_1-15_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 6 – Exercise 1 (1-15) – Set B</h3>
   <p>Equality, rights and career vocabulary. 15 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 1 (1-15) - set c equality vocabulary in fuller contexts" href="Grade_10_Unit_6_Exercise_1_1-15_Set_C.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 1 (1-15) - set c equality vocabulary in fuller contexts" href="Grade_10_Unit_6_Exercise_1_1-15_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 6 – Exercise 1 (1-15) – Set C</h3>
   <p>Equality vocabulary in fuller contexts. 15 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 1 (16-30) - set b jobs, influence and useful structures" href="Grade_10_Unit_6_Exercise_1_16-30_Set_B.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 1 (16-30) - set b jobs, influence and useful structures" href="Grade_10_Unit_6_Exercise_1_16-30_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 6 – Exercise 1 (16-30) – Set B</h3>
   <p>Jobs, influence and useful structures. 15 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 1 (16-30) - set c jobs and structures in connected contexts" href="Grade_10_Unit_6_Exercise_1_16-30_Set_C.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 1 (16-30) - set c jobs and structures in connected contexts" href="Grade_10_Unit_6_Exercise_1_16-30_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 6 – Exercise 1 (16-30) – Set C</h3>
   <p>Jobs and structures in connected contexts. 15 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 1 (31-45) - set b collocations and modal meanings" href="Grade_10_Unit_6_Exercise_1_31-45_Set_B.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 1 (31-45) - set b collocations and modal meanings" href="Grade_10_Unit_6_Exercise_1_31-45_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 6 – Exercise 1 (31-45) – Set B</h3>
   <p>Collocations and modal meanings. 15 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 1 (31-45) - set c choosing structures from context" href="Grade_10_Unit_6_Exercise_1_31-45_Set_C.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 1 (31-45) - set c choosing structures from context" href="Grade_10_Unit_6_Exercise_1_31-45_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 6 – Exercise 1 (31-45) – Set C</h3>
   <p>Choosing structures from context. 15 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 1 (46-60) - set b modals and passive voice" href="Grade_10_Unit_6_Exercise_1_46-60_Set_B.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 1 (46-60) - set b modals and passive voice" href="Grade_10_Unit_6_Exercise_1_46-60_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 6 – Exercise 1 (46-60) – Set B</h3>
   <p>Modals and passive voice. 15 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 1 (46-60) - set c modal meanings and active-passive contrasts" href="Grade_10_Unit_6_Exercise_1_46-60_Set_C.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 1 (46-60) - set c modal meanings and active-passive contrasts" href="Grade_10_Unit_6_Exercise_1_46-60_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 6 – Exercise 1 (46-60) – Set C</h3>
   <p>Modal meanings and active-passive contrasts. 15 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 1 (61-75) - set b core review: passive transformations, vocabulary and useful structures" href="Grade_10_Unit_6_Exercise_1_61-75_Set_B.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 1 (61-75) - set b core review: passive transformations, vocabulary and useful structures" href="Grade_10_Unit_6_Exercise_1_61-75_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 6 – Exercise 1 (61-75) – Set B</h3>
   <p>Core review: passive transformations, vocabulary and useful structures. 15 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 1 (61-75) - set c core review: passive transformations, vocabulary and useful structures" href="Grade_10_Unit_6_Exercise_1_61-75_Set_C.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 1 (61-75) - set c core review: passive transformations, vocabulary and useful structures" href="Grade_10_Unit_6_Exercise_1_61-75_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 6 – Exercise 1 (61-75) – Set C</h3>
   <p>Core review: passive transformations, vocabulary and useful structures. 15 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 2 - set b main stress in three-syllable words" href="Grade_10_Unit_6_Exercise_2_Set_B.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 2 - set b main stress in three-syllable words" href="Grade_10_Unit_6_Exercise_2_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 6 – Exercise 2 – Set B</h3>
   <p>Main stress in three-syllable words. 12 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 2 - set c compare stress patterns in three-syllable words" href="Grade_10_Unit_6_Exercise_2_Set_C.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 2 - set c compare stress patterns in three-syllable words" href="Grade_10_Unit_6_Exercise_2_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 6 – Exercise 2 – Set C</h3>
   <p>Compare stress patterns in three-syllable words. 12 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 3 - set b a reading club with a wider view" href="Grade_10_Unit_6_Exercise_3_Set_B.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 3 - set b a reading club with a wider view" href="Grade_10_Unit_6_Exercise_3_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 6 – Exercise 3 – Set B</h3>
   <p>A reading club with a wider view. 5 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 3 - set c reading beyond the obvious message" href="Grade_10_Unit_6_Exercise_3_Set_C.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 3 - set c reading beyond the obvious message" href="Grade_10_Unit_6_Exercise_3_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 6 – Exercise 3 – Set C</h3>
   <p>Reading beyond the obvious message. 5 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 4 - set b training for a rescue career" href="Grade_10_Unit_6_Exercise_4_Set_B.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 4 - set b training for a rescue career" href="Grade_10_Unit_6_Exercise_4_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 6 – Exercise 4 – Set B</h3>
   <p>Training for a rescue career. 5 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 4 - set c the same test for every applicant" href="Grade_10_Unit_6_Exercise_4_Set_C.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 4 - set c the same test for every applicant" href="Grade_10_Unit_6_Exercise_4_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 6 – Exercise 4 – Set C</h3>
   <p>The same test for every applicant. 5 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 5 - set b a fair school policy" href="Grade_10_Unit_6_Exercise_5_Set_B.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 5 - set b a fair school policy" href="Grade_10_Unit_6_Exercise_5_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 6 – Exercise 5 – Set B</h3>
   <p>A fair school policy. 5 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 5 - set c from policy to daily practice" href="Grade_10_Unit_6_Exercise_5_Set_C.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 5 - set c from policy to daily practice" href="Grade_10_Unit_6_Exercise_5_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 6 – Exercise 5 – Set C</h3>
   <p>From policy to daily practice. 5 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 6 - set b small changes, fairer chances" href="Grade_10_Unit_6_Exercise_6_Set_B.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 6 - set b small changes, fairer chances" href="Grade_10_Unit_6_Exercise_6_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 6 – Exercise 6 – Set B</h3>
   <p>Small changes, fairer chances. 5 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 6 - set c an invitation is only the beginning" href="Grade_10_Unit_6_Exercise_6_Set_C.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 6 - set c an invitation is only the beginning" href="Grade_10_Unit_6_Exercise_6_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 6 – Exercise 6 – Set C</h3>
   <p>An invitation is only the beginning. 5 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 7 - set b arrange dialogues, an email and paragraphs" href="Grade_10_Unit_6_Exercise_7_Set_B.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 7 - set b arrange dialogues, an email and paragraphs" href="Grade_10_Unit_6_Exercise_7_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 6 – Exercise 7 – Set B</h3>
   <p>Arrange dialogues, an email and paragraphs. 6 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 7 - set c cohesion and reference in arrangement" href="Grade_10_Unit_6_Exercise_7_Set_C.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 7 - set c cohesion and reference in arrangement" href="Grade_10_Unit_6_Exercise_7_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 6 – Exercise 7 – Set C</h3>
   <p>Cohesion and reference in arrangement. 6 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 8 - set b complete a passage: a careers week" href="Grade_10_Unit_6_Exercise_8_Set_B.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 8 - set b complete a passage: a careers week" href="Grade_10_Unit_6_Exercise_8_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 6 – Exercise 8 – Set B</h3>
   <p>Complete a passage: a careers week. 5 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 8 - set c complete a passage: access and participation" href="Grade_10_Unit_6_Exercise_8_Set_C.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 8 - set c complete a passage: access and participation" href="Grade_10_Unit_6_Exercise_8_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 6 – Exercise 8 – Set C</h3>
   <p>Complete a passage: access and participation. 5 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 9 - set b reading: discovering a wider range of careers" href="Grade_10_Unit_6_Exercise_9_Set_B.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 9 - set b reading: discovering a wider range of careers" href="Grade_10_Unit_6_Exercise_9_Set_B.html">
   <div class="icon orange">📖</div>
   <h3>Unit 6 – Exercise 9 – Set B</h3>
   <p>Reading: discovering a wider range of careers. 8 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 9 - set c reading: when fair invitations are not enough" href="Grade_10_Unit_6_Exercise_9_Set_C.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 9 - set c reading: when fair invitations are not enough" href="Grade_10_Unit_6_Exercise_9_Set_C.html">
   <div class="icon green">📖</div>
   <h3>Unit 6 – Exercise 9 – Set C</h3>
   <p>Reading: when fair invitations are not enough. 8 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 10 - set b everyday english: opinions and polite responses" href="Grade_10_Unit_6_Exercise_10_Set_B.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 10 - set b everyday english: opinions and polite responses" href="Grade_10_Unit_6_Exercise_10_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 6 – Exercise 10 – Set B</h3>
   <p>Everyday English: opinions and polite responses. 6 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 10 - set c everyday english: agreement, reasons and qualifications" href="Grade_10_Unit_6_Exercise_10_Set_C.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 10 - set c everyday english: agreement, reasons and qualifications" href="Grade_10_Unit_6_Exercise_10_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 6 – Exercise 10 – Set C</h3>
   <p>Everyday English: agreement, reasons and qualifications. 6 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 12 - set b optional reading: discussing stories fairly" href="Grade_10_Unit_6_Exercise_12_Set_B.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 12 - set b optional reading: discussing stories fairly" href="Grade_10_Unit_6_Exercise_12_Set_B.html">
   <div class="icon orange">📖</div>
   <h3>Unit 6 – Exercise 12 – Set B</h3>
   <p>Optional reading: discussing stories fairly. 8 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 12 - set c optional reading: when a revision creates a new problem" href="Grade_10_Unit_6_Exercise_12_Set_C.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 12 - set c optional reading: when a revision creates a new problem" href="Grade_10_Unit_6_Exercise_12_Set_C.html">
   <div class="icon green">📖</div>
   <h3>Unit 6 – Exercise 12 – Set C</h3>
   <p>Optional reading: when a revision creates a new problem. 8 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 13 - set b listening: a role model in space" href="Grade_10_Unit_6_Exercise_13_Set_B.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 13 - set b listening: a role model in space" href="Grade_10_Unit_6_Exercise_13_Set_B.html">
   <div class="icon orange">🎧</div>
   <h3>Unit 6 – Exercise 13 – Set B</h3>
   <p>Listening: a role model in space. 5 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 13 - set c listening: what a role model can and cannot prove" href="Grade_10_Unit_6_Exercise_13_Set_C.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 13 - set c listening: what a role model can and cannot prove" href="Grade_10_Unit_6_Exercise_13_Set_C.html">
   <div class="icon green">🎧</div>
   <h3>Unit 6 – Exercise 13 – Set C</h3>
   <p>Listening: what a role model can and cannot prove. 5 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 14 - set b listening: a school careers event" href="Grade_10_Unit_6_Exercise_14_Set_B.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 14 - set b listening: a school careers event" href="Grade_10_Unit_6_Exercise_14_Set_B.html">
   <div class="icon orange">🎧</div>
   <h3>Unit 6 – Exercise 14 – Set B</h3>
   <p>Listening: a school careers event. 5 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="10" data-title="grade 10 unit 6 - exercise 14 - set c listening: a change to the workshop arrangements" href="Grade_10_Unit_6_Exercise_14_Set_C.html">
+<a class="game-card locked" data-grade="10" data-unit="6" data-title="grade 10 unit 6 - exercise 14 - set c listening: a change to the workshop arrangements" href="Grade_10_Unit_6_Exercise_14_Set_C.html">
   <div class="icon green">🎧</div>
   <h3>Unit 6 – Exercise 14 – Set C</h3>
   <p>Listening: a change to the workshop arrangements. 5 questions; 5 hearts, feedback and Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<!-- END GRADE 10 UNIT 6 - SETS B AND C -->
+<!-- GRADE 10: UNIT 7 -->
+<div class="unit-heading" data-unit-heading="7"><span>📘 Unit 7</span><small>45 games</small></div>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 1 1-15 set b từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_1-15_Set_B.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 1 (1-15) – Set B</h3>
+  <p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 1 1-15 set c từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_1-15_Set_C.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 1 (1-15) – Set C</h3>
+  <p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 1 1-15 set d từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_1-15_Set_D.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 1 (1-15) – Set D</h3>
+  <p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 1 16-30 set b từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_16-30_Set_B.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 1 (16-30) – Set B</h3>
+  <p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 1 16-30 set c từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_16-30_Set_C.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 1 (16-30) – Set C</h3>
+  <p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 1 16-30 set d từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_16-30_Set_D.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 1 (16-30) – Set D</h3>
+  <p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 1 31-45 set b từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_31-45_Set_B.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 1 (31-45) – Set B</h3>
+  <p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 1 31-45 set c từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_31-45_Set_C.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 1 (31-45) – Set C</h3>
+  <p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 1 31-45 set d từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_31-45_Set_D.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 1 (31-45) – Set D</h3>
+  <p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 1 46-60 set b từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_46-60_Set_B.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 1 (46-60) – Set B</h3>
+  <p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 1 46-60 set c từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_46-60_Set_C.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 1 (46-60) – Set C</h3>
+  <p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 1 46-60 set d từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_46-60_Set_D.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 1 (46-60) – Set D</h3>
+  <p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 1 61-75 set b từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_61-75_Set_B.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 1 (61-75) – Set B</h3>
+  <p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 1 61-75 set c từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_61-75_Set_C.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 1 (61-75) – Set C</h3>
+  <p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 1 61-75 set d từ vựng và so sánh" href="Grade_10_Unit_7_Exercise_1_61-75_Set_D.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 1 (61-75) – Set D</h3>
+  <p>Từ vựng và so sánh · 15 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 2  set b điền đoạn" href="Grade_10_Unit_7_Exercise_2_Set_B.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 2 – Set B</h3>
+  <p>Điền đoạn · 5 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 2  set c điền đoạn" href="Grade_10_Unit_7_Exercise_2_Set_C.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 2 – Set C</h3>
+  <p>Điền đoạn · 5 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 2  set d điền đoạn" href="Grade_10_Unit_7_Exercise_2_Set_D.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 2 – Set D</h3>
+  <p>Điền đoạn · 5 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 3  set b điền đoạn" href="Grade_10_Unit_7_Exercise_3_Set_B.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 3 – Set B</h3>
+  <p>Điền đoạn · 5 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 3  set c điền đoạn" href="Grade_10_Unit_7_Exercise_3_Set_C.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 3 – Set C</h3>
+  <p>Điền đoạn · 5 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 3  set d điền đoạn" href="Grade_10_Unit_7_Exercise_3_Set_D.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 3 – Set D</h3>
+  <p>Điền đoạn · 5 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 4  set b điền đoạn" href="Grade_10_Unit_7_Exercise_4_Set_B.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 4 – Set B</h3>
+  <p>Điền đoạn · 5 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 4  set c điền đoạn" href="Grade_10_Unit_7_Exercise_4_Set_C.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 4 – Set C</h3>
+  <p>Điền đoạn · 5 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 4  set d điền đoạn" href="Grade_10_Unit_7_Exercise_4_Set_D.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 4 – Set D</h3>
+  <p>Điền đoạn · 5 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 5  set b sắp xếp câu" href="Grade_10_Unit_7_Exercise_5_Set_B.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 5 – Set B</h3>
+  <p>Sắp xếp câu · 6 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 5  set c sắp xếp câu" href="Grade_10_Unit_7_Exercise_5_Set_C.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 5 – Set C</h3>
+  <p>Sắp xếp câu · 6 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 5  set d sắp xếp câu" href="Grade_10_Unit_7_Exercise_5_Set_D.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 5 – Set D</h3>
+  <p>Sắp xếp câu · 6 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 6  set b hoàn thành đoạn" href="Grade_10_Unit_7_Exercise_6_Set_B.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 6 – Set B</h3>
+  <p>Hoàn thành đoạn · 5 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 6  set c hoàn thành đoạn" href="Grade_10_Unit_7_Exercise_6_Set_C.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 6 – Set C</h3>
+  <p>Hoàn thành đoạn · 5 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 6  set d hoàn thành đoạn" href="Grade_10_Unit_7_Exercise_6_Set_D.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 6 – Set D</h3>
+  <p>Hoàn thành đoạn · 5 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 7  set b đọc hiểu" href="Grade_10_Unit_7_Exercise_7_Set_B.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 7 – Set B</h3>
+  <p>Đọc hiểu · 8 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 7  set c đọc hiểu" href="Grade_10_Unit_7_Exercise_7_Set_C.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 7 – Set C</h3>
+  <p>Đọc hiểu · 8 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 7  set d đọc hiểu" href="Grade_10_Unit_7_Exercise_7_Set_D.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 7 – Set D</h3>
+  <p>Đọc hiểu · 8 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 8  set b đọc hiểu" href="Grade_10_Unit_7_Exercise_8_Set_B.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 8 – Set B</h3>
+  <p>Đọc hiểu · 8 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 8  set c đọc hiểu" href="Grade_10_Unit_7_Exercise_8_Set_C.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 8 – Set C</h3>
+  <p>Đọc hiểu · 8 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 8  set d đọc hiểu" href="Grade_10_Unit_7_Exercise_8_Set_D.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 8 – Set D</h3>
+  <p>Đọc hiểu · 8 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 9  set b nghe đúng/sai" href="Grade_10_Unit_7_Exercise_9_Set_B.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 9 – Set B</h3>
+  <p>Nghe Đúng/Sai · 5 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 9  set c nghe đúng/sai" href="Grade_10_Unit_7_Exercise_9_Set_C.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 9 – Set C</h3>
+  <p>Nghe Đúng/Sai · 5 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 9  set d nghe đúng/sai" href="Grade_10_Unit_7_Exercise_9_Set_D.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 9 – Set D</h3>
+  <p>Nghe Đúng/Sai · 5 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 10  set b nghe trắc nghiệm" href="Grade_10_Unit_7_Exercise_10_Set_B.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 10 – Set B</h3>
+  <p>Nghe trắc nghiệm · 5 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 10  set c nghe trắc nghiệm" href="Grade_10_Unit_7_Exercise_10_Set_C.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 10 – Set C</h3>
+  <p>Nghe trắc nghiệm · 5 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 10  set d nghe trắc nghiệm" href="Grade_10_Unit_7_Exercise_10_Set_D.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 10 – Set D</h3>
+  <p>Nghe trắc nghiệm · 5 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 11  set b giao tiếp" href="Grade_10_Unit_7_Exercise_11_Set_B.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 11 – Set B</h3>
+  <p>Giao tiếp · 5 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 11  set c giao tiếp" href="Grade_10_Unit_7_Exercise_11_Set_C.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 11 – Set C</h3>
+  <p>Giao tiếp · 5 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
+<a class="game-card locked" data-grade="10" data-unit="7" data-title="grade 10 unit 7 exercise 11  set d giao tiếp" href="Grade_10_Unit_7_Exercise_11_Set_D.html">
+  <div class="icon green">U7</div>
+  <h3>Unit 7 – Exercise 11 – Set D</h3>
+  <p>Giao tiếp · 5 câu · Giải thích tiếng Việt.</p>
+  <span class="play">Play now →</span>
+</a>
       </div>
     </section>
     <section class="grade-section">
@@ -5539,588 +5627,585 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
   <span class="play">Play now →</span>
 </a>
 <!-- END GRADE 12 UNIT 8 - SETS B C D -->
-
-<!-- BEGIN GRADE 12 UNIT 9 - SETS B C D (45 LESSONS) -->
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 1 (1-15) - set b jobs, training and transferable skills" href="Grade_12_Unit_9_Exercise_1_1-15_Set_B.html">
+      
+<!-- BEGIN GRADE 12 UNITS 9 AND 10: PRESERVED CURRENT GAME LINKS -->
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 1 1-15 set b jobs, training and transferable skills" href="Grade_12_Unit_9_Exercise_1_1-15_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 9 – Exercise 1 (1-15) – Set B</h3>
   <p>Jobs, training and transferable skills. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 1 (1-15) - set c jobs, training and transferable skills" href="Grade_12_Unit_9_Exercise_1_1-15_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 1 1-15 set c jobs, training and transferable skills" href="Grade_12_Unit_9_Exercise_1_1-15_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 9 – Exercise 1 (1-15) – Set C</h3>
   <p>Jobs, training and transferable skills. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 1 (1-15) - set d jobs, training and transferable skills" href="Grade_12_Unit_9_Exercise_1_1-15_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 1 1-15 set d jobs, training and transferable skills" href="Grade_12_Unit_9_Exercise_1_1-15_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 9 – Exercise 1 (1-15) – Set D</h3>
   <p>Jobs, training and transferable skills. 15 questions; THPT 2026-oriented practice.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 1 (16-30) - set b qualifications, applications and recruitment" href="Grade_12_Unit_9_Exercise_1_16-30_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 1 16-30 set b qualifications, applications and recruitment" href="Grade_12_Unit_9_Exercise_1_16-30_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 9 – Exercise 1 (16-30) – Set B</h3>
   <p>Qualifications, applications and recruitment. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 1 (16-30) - set c qualifications, applications and recruitment" href="Grade_12_Unit_9_Exercise_1_16-30_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 1 16-30 set c qualifications, applications and recruitment" href="Grade_12_Unit_9_Exercise_1_16-30_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 9 – Exercise 1 (16-30) – Set C</h3>
   <p>Qualifications, applications and recruitment. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 1 (16-30) - set d qualifications, applications and recruitment" href="Grade_12_Unit_9_Exercise_1_16-30_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 1 16-30 set d qualifications, applications and recruitment" href="Grade_12_Unit_9_Exercise_1_16-30_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 9 – Exercise 1 (16-30) – Set D</h3>
   <p>Qualifications, applications and recruitment. 15 questions; THPT 2026-oriented practice.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 1 (31-45) - set b changing work, technology and career choices" href="Grade_12_Unit_9_Exercise_1_31-45_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 1 31-45 set b changing work, technology and career choices" href="Grade_12_Unit_9_Exercise_1_31-45_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 9 – Exercise 1 (31-45) – Set B</h3>
   <p>Changing work, technology and career choices. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 1 (31-45) - set c changing work, technology and career choices" href="Grade_12_Unit_9_Exercise_1_31-45_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 1 31-45 set c changing work, technology and career choices" href="Grade_12_Unit_9_Exercise_1_31-45_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 9 – Exercise 1 (31-45) – Set C</h3>
   <p>Changing work, technology and career choices. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 1 (31-45) - set d changing work, technology and career choices" href="Grade_12_Unit_9_Exercise_1_31-45_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 1 31-45 set d changing work, technology and career choices" href="Grade_12_Unit_9_Exercise_1_31-45_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 9 – Exercise 1 (31-45) – Set D</h3>
   <p>Changing work, technology and career choices. 15 questions; THPT 2026-oriented practice.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 1 (46-60) - set b career collocations and phrasal verbs in context" href="Grade_12_Unit_9_Exercise_1_46-60_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 1 46-60 set b career collocations and phrasal verbs in context" href="Grade_12_Unit_9_Exercise_1_46-60_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 9 – Exercise 1 (46-60) – Set B</h3>
   <p>Career collocations and phrasal verbs in context. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 1 (46-60) - set c career collocations and phrasal verbs in context" href="Grade_12_Unit_9_Exercise_1_46-60_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 1 46-60 set c career collocations and phrasal verbs in context" href="Grade_12_Unit_9_Exercise_1_46-60_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 9 – Exercise 1 (46-60) – Set C</h3>
   <p>Career collocations and phrasal verbs in context. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 1 (46-60) - set d career collocations and phrasal verbs in context" href="Grade_12_Unit_9_Exercise_1_46-60_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 1 46-60 set d career collocations and phrasal verbs in context" href="Grade_12_Unit_9_Exercise_1_46-60_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 9 – Exercise 1 (46-60) – Set D</h3>
   <p>Career collocations and phrasal verbs in context. 15 questions; THPT 2026-oriented practice.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 1 (61-75) - set b three-part verbs: meaning, structure and contrasts" href="Grade_12_Unit_9_Exercise_1_61-75_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 1 61-75 set b three-part verbs: meaning, structure and contrasts" href="Grade_12_Unit_9_Exercise_1_61-75_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 9 – Exercise 1 (61-75) – Set B</h3>
   <p>Three-part verbs: meaning, structure and contrasts. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 1 (61-75) - set c three-part verbs: meaning, structure and contrasts" href="Grade_12_Unit_9_Exercise_1_61-75_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 1 61-75 set c three-part verbs: meaning, structure and contrasts" href="Grade_12_Unit_9_Exercise_1_61-75_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 9 – Exercise 1 (61-75) – Set C</h3>
   <p>Three-part verbs: meaning, structure and contrasts. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 1 (61-75) - set d three-part verbs: meaning, structure and contrasts" href="Grade_12_Unit_9_Exercise_1_61-75_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 1 61-75 set d three-part verbs: meaning, structure and contrasts" href="Grade_12_Unit_9_Exercise_1_61-75_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 9 – Exercise 1 (61-75) – Set D</h3>
   <p>Three-part verbs: meaning, structure and contrasts. 15 questions; THPT 2026-oriented practice.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 2 - set b exploring a career before choosing a route" href="Grade_12_Unit_9_Exercise_2_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 2  set b exploring a career before choosing a route" href="Grade_12_Unit_9_Exercise_2_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 9 – Exercise 2 – Set B</h3>
   <p>Exploring a career before choosing a route. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 2 - set c turning interests into questions to investigate" href="Grade_12_Unit_9_Exercise_2_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 2  set c exploring a career before choosing a route" href="Grade_12_Unit_9_Exercise_2_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 9 – Exercise 2 – Set C</h3>
-  <p>Turning interests into questions to investigate. 5 questions; Vietnamese explanations.</p>
+  <p>Exploring a career before choosing a route. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 2 - set d comparing opportunities without treating a forecast as a guarantee" href="Grade_12_Unit_9_Exercise_2_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 2  set d exploring a career before choosing a route" href="Grade_12_Unit_9_Exercise_2_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 9 – Exercise 2 – Set D</h3>
-  <p>Comparing opportunities without treating a forecast as a guarantee. 5 questions; THPT 2026-oriented practice.</p>
+  <p>Exploring a career before choosing a route. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 3 - set b different routes after leaving school" href="Grade_12_Unit_9_Exercise_3_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 3  set b different routes after leaving school" href="Grade_12_Unit_9_Exercise_3_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 9 – Exercise 3 – Set B</h3>
   <p>Different routes after leaving school. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 3 - set c a diploma route and an apprenticeship" href="Grade_12_Unit_9_Exercise_3_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 3  set c different routes after leaving school" href="Grade_12_Unit_9_Exercise_3_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 9 – Exercise 3 – Set C</h3>
-  <p>A diploma route and an apprenticeship. 5 questions; Vietnamese explanations.</p>
+  <p>Different routes after leaving school. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 3 - set d a change of route supported by reasons" href="Grade_12_Unit_9_Exercise_3_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 3  set d different routes after leaving school" href="Grade_12_Unit_9_Exercise_3_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 9 – Exercise 3 – Set D</h3>
-  <p>A change of route supported by reasons. 5 questions; THPT 2026-oriented practice.</p>
+  <p>Different routes after leaving school. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 4 - set b what a software team does" href="Grade_12_Unit_9_Exercise_4_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 4  set b what a software team does" href="Grade_12_Unit_9_Exercise_4_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 9 – Exercise 4 – Set B</h3>
-  <p>What a software team does. 5 questions; Vietnamese explanations.</p>
+  <p>What a software team does. 8 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 4 - set c explaining a software work sample" href="Grade_12_Unit_9_Exercise_4_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 4  set c what a software team does" href="Grade_12_Unit_9_Exercise_4_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 9 – Exercise 4 – Set C</h3>
-  <p>Explaining a software work sample. 5 questions; Vietnamese explanations.</p>
+  <p>What a software team does. 8 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 4 - set d using a digital tool without outsourcing judgement" href="Grade_12_Unit_9_Exercise_4_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 4  set d what a software team does" href="Grade_12_Unit_9_Exercise_4_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 9 – Exercise 4 – Set D</h3>
-  <p>Using a digital tool without outsourcing judgement. 5 questions; THPT 2026-oriented practice.</p>
+  <p>What a software team does. 8 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 5 - set b preparing for a changing workplace" href="Grade_12_Unit_9_Exercise_5_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 5  set b preparing for a changing workplace" href="Grade_12_Unit_9_Exercise_5_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 9 – Exercise 5 – Set B</h3>
-  <p>Preparing for a changing workplace. 8 questions; Vietnamese explanations.</p>
+  <p>Preparing for a changing workplace. 6 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 5 - set c tasks change before job labels tell the whole story" href="Grade_12_Unit_9_Exercise_5_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 5  set c preparing for a changing workplace" href="Grade_12_Unit_9_Exercise_5_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 9 – Exercise 5 – Set C</h3>
-  <p>Tasks change before job labels tell the whole story. 8 questions; Vietnamese explanations.</p>
+  <p>Preparing for a changing workplace. 6 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 5 - set d reading a prediction about future work" href="Grade_12_Unit_9_Exercise_5_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 5  set d preparing for a changing workplace" href="Grade_12_Unit_9_Exercise_5_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 9 – Exercise 5 – Set D</h3>
-  <p>Reading a prediction about future work. 8 questions; THPT 2026-oriented practice.</p>
+  <p>Preparing for a changing workplace. 6 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 6 - set b coherent career dialogues, emails and paragraphs" href="Grade_12_Unit_9_Exercise_6_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 6  set b coherent career dialogues, emails and paragraphs" href="Grade_12_Unit_9_Exercise_6_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 9 – Exercise 6 – Set B</h3>
   <p>Coherent career dialogues, emails and paragraphs. 10 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 6 - set c coherent career dialogues, emails and paragraphs" href="Grade_12_Unit_9_Exercise_6_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 6  set c coherent career dialogues, emails and paragraphs" href="Grade_12_Unit_9_Exercise_6_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 9 – Exercise 6 – Set C</h3>
   <p>Coherent career dialogues, emails and paragraphs. 10 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 6 - set d coherent career dialogues, emails and paragraphs" href="Grade_12_Unit_9_Exercise_6_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 6  set d coherent career dialogues, emails and paragraphs" href="Grade_12_Unit_9_Exercise_6_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 9 – Exercise 6 – Set D</h3>
-  <p>Coherent career dialogues, emails and paragraphs. 10 questions; THPT 2026-oriented practice.</p>
+  <p>Coherent career dialogues, emails and paragraphs. 10 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 7 - set b preparing a focused application" href="Grade_12_Unit_9_Exercise_7_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 7  set b preparing a focused application" href="Grade_12_Unit_9_Exercise_7_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 9 – Exercise 7 – Set B</h3>
   <p>Preparing a focused application. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 7 - set c evidence and attribution in an application" href="Grade_12_Unit_9_Exercise_7_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 7  set c preparing a focused application" href="Grade_12_Unit_9_Exercise_7_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 9 – Exercise 7 – Set C</h3>
-  <p>Evidence and attribution in an application. 5 questions; Vietnamese explanations.</p>
+  <p>Preparing a focused application. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 7 - set d a selective description is not a false description" href="Grade_12_Unit_9_Exercise_7_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 7  set d preparing a focused application" href="Grade_12_Unit_9_Exercise_7_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 9 – Exercise 7 – Set D</h3>
-  <p>A selective description is not a false description. 5 questions; THPT 2026-oriented practice.</p>
+  <p>Preparing a focused application. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 8 - set b a first step in career exploration" href="Grade_12_Unit_9_Exercise_8_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 8  set b a first step in career exploration" href="Grade_12_Unit_9_Exercise_8_Set_B.html">
   <div class="icon orange">📖</div>
   <h3>Unit 9 – Exercise 8 – Set B</h3>
   <p>A first step in career exploration. 8 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 8 - set c reviewing an assumption about a creative role" href="Grade_12_Unit_9_Exercise_8_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 8  set c a first step in career exploration" href="Grade_12_Unit_9_Exercise_8_Set_C.html">
   <div class="icon green">📖</div>
   <h3>Unit 9 – Exercise 8 – Set C</h3>
-  <p>Reviewing an assumption about a creative role. 8 questions; Vietnamese explanations.</p>
+  <p>A first step in career exploration. 8 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 8 - set d when a revised preference shows better reasoning" href="Grade_12_Unit_9_Exercise_8_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 8  set d a first step in career exploration" href="Grade_12_Unit_9_Exercise_8_Set_D.html">
   <div class="icon purple">📖</div>
   <h3>Unit 9 – Exercise 8 – Set D</h3>
-  <p>When a revised preference shows better reasoning. 8 questions; THPT 2026-oriented practice.</p>
+  <p>A first step in career exploration. 8 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 9 - set b a fictional freelancer plans her work" href="Grade_12_Unit_9_Exercise_9_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 9  set b a fictional freelancer plans her work" href="Grade_12_Unit_9_Exercise_9_Set_B.html">
   <div class="icon orange">📖</div>
   <h3>Unit 9 – Exercise 9 – Set B</h3>
   <p>A fictional freelancer plans her work. 10 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 9 - set c two accounts with different meanings of flexibility" href="Grade_12_Unit_9_Exercise_9_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 9  set c a fictional freelancer plans her work" href="Grade_12_Unit_9_Exercise_9_Set_C.html">
   <div class="icon green">📖</div>
   <h3>Unit 9 – Exercise 9 – Set C</h3>
-  <p>Two accounts with different meanings of flexibility. 10 questions; Vietnamese explanations.</p>
+  <p>A fictional freelancer plans her work. 10 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 9 - set d a universal claim tested against particular careers" href="Grade_12_Unit_9_Exercise_9_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 9  set d a fictional freelancer plans her work" href="Grade_12_Unit_9_Exercise_9_Set_D.html">
   <div class="icon purple">📖</div>
   <h3>Unit 9 – Exercise 9 – Set D</h3>
-  <p>A universal claim tested against particular careers. 10 questions; THPT 2026-oriented practice.</p>
+  <p>A fictional freelancer plans her work. 10 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 10 - set b a chef describes his route into work" href="Grade_12_Unit_9_Exercise_10_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 10  set b a chef describes his route into work" href="Grade_12_Unit_9_Exercise_10_Set_B.html">
   <div class="icon orange">🎧</div>
   <h3>Unit 9 – Exercise 10 – Set B</h3>
   <p>A chef describes his route into work. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 10 - set c learning, feedback and responsibility in a kitchen" href="Grade_12_Unit_9_Exercise_10_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 10  set c a chef describes his route into work" href="Grade_12_Unit_9_Exercise_10_Set_C.html">
   <div class="icon green">🎧</div>
   <h3>Unit 9 – Exercise 10 – Set C</h3>
-  <p>Learning, feedback and responsibility in a kitchen. 5 questions; Vietnamese explanations.</p>
+  <p>A chef describes his route into work. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 10 - set d what training records and workplace examples establish" href="Grade_12_Unit_9_Exercise_10_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 10  set d a chef describes his route into work" href="Grade_12_Unit_9_Exercise_10_Set_D.html">
   <div class="icon purple">🎧</div>
   <h3>Unit 9 – Exercise 10 – Set D</h3>
-  <p>What training records and workplace examples establish. 5 questions; Vietnamese explanations.</p>
+  <p>A chef describes his route into work. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 11 - set b a career adviser on interview preparation" href="Grade_12_Unit_9_Exercise_11_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 11  set b a career adviser on interview preparation" href="Grade_12_Unit_9_Exercise_11_Set_B.html">
   <div class="icon orange">🎧</div>
   <h3>Unit 9 – Exercise 11 – Set B</h3>
   <p>A career adviser on interview preparation. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 11 - set c selecting evidence for an interview answer" href="Grade_12_Unit_9_Exercise_11_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 11  set c a career adviser on interview preparation" href="Grade_12_Unit_9_Exercise_11_Set_C.html">
   <div class="icon green">🎧</div>
   <h3>Unit 9 – Exercise 11 – Set C</h3>
-  <p>Selecting evidence for an interview answer. 5 questions; Vietnamese explanations.</p>
+  <p>A career adviser on interview preparation. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 - exercise 11 - set d explaining a sample without overstating the contribution" href="Grade_12_Unit_9_Exercise_11_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 9 exercise 11  set d a career adviser on interview preparation" href="Grade_12_Unit_9_Exercise_11_Set_D.html">
   <div class="icon purple">🎧</div>
   <h3>Unit 9 – Exercise 11 – Set D</h3>
-  <p>Explaining a sample without overstating the contribution. 5 questions; Vietnamese explanations.</p>
+  <p>A career adviser on interview preparation. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<!-- END GRADE 12 UNIT 9 - SETS B C D -->
-
-<!-- BEGIN GRADE 12 UNIT 10 - SETS B C D (51 LESSONS) -->
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 1 (1-15) - set b learning, participation and motivation" href="Grade_12_Unit_10_Exercise_1_1-15_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 1 1-15 set b learning, participation and motivation" href="Grade_12_Unit_10_Exercise_1_1-15_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 10 – Exercise 1 (1-15) – Set B</h3>
   <p>Learning, participation and motivation. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 1 (1-15) - set c learning, participation and motivation" href="Grade_12_Unit_10_Exercise_1_1-15_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 1 1-15 set c learning, participation and motivation" href="Grade_12_Unit_10_Exercise_1_1-15_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 10 – Exercise 1 (1-15) – Set C</h3>
   <p>Learning, participation and motivation. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 1 (1-15) - set d learning, participation and motivation" href="Grade_12_Unit_10_Exercise_1_1-15_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 1 1-15 set d learning, participation and motivation" href="Grade_12_Unit_10_Exercise_1_1-15_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 10 – Exercise 1 (1-15) – Set D</h3>
   <p>Learning, participation and motivation. 15 questions; THPT 2026-oriented practice.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 1 (16-30) - set b education routes, work and learning records" href="Grade_12_Unit_10_Exercise_1_16-30_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 1 16-30 set b education routes, work and learning records" href="Grade_12_Unit_10_Exercise_1_16-30_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 10 – Exercise 1 (16-30) – Set B</h3>
   <p>Education routes, work and learning records. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 1 (16-30) - set c education routes, work and learning records" href="Grade_12_Unit_10_Exercise_1_16-30_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 1 16-30 set c education routes, work and learning records" href="Grade_12_Unit_10_Exercise_1_16-30_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 10 – Exercise 1 (16-30) – Set C</h3>
   <p>Education routes, work and learning records. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 1 (16-30) - set d education routes, work and learning records" href="Grade_12_Unit_10_Exercise_1_16-30_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 1 16-30 set d education routes, work and learning records" href="Grade_12_Unit_10_Exercise_1_16-30_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 10 – Exercise 1 (16-30) – Set D</h3>
   <p>Education routes, work and learning records. 15 questions; THPT 2026-oriented practice.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 1 (31-45) - set b study habits, feedback and obstacles" href="Grade_12_Unit_10_Exercise_1_31-45_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 1 31-45 set b study habits, feedback and obstacles" href="Grade_12_Unit_10_Exercise_1_31-45_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 10 – Exercise 1 (31-45) – Set B</h3>
   <p>Study habits, feedback and obstacles. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 1 (31-45) - set c study habits, feedback and obstacles" href="Grade_12_Unit_10_Exercise_1_31-45_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 1 31-45 set c study habits, feedback and obstacles" href="Grade_12_Unit_10_Exercise_1_31-45_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 10 – Exercise 1 (31-45) – Set C</h3>
   <p>Study habits, feedback and obstacles. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 1 (31-45) - set d study habits, feedback and obstacles" href="Grade_12_Unit_10_Exercise_1_31-45_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 1 31-45 set d study habits, feedback and obstacles" href="Grade_12_Unit_10_Exercise_1_31-45_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 10 – Exercise 1 (31-45) – Set D</h3>
   <p>Study habits, feedback and obstacles. 15 questions; THPT 2026-oriented practice.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 1 (46-60) - set b collocations, verb patterns and noun phrases" href="Grade_12_Unit_10_Exercise_1_46-60_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 1 46-60 set b collocations, verb patterns and noun phrases" href="Grade_12_Unit_10_Exercise_1_46-60_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 10 – Exercise 1 (46-60) – Set B</h3>
   <p>Collocations, verb patterns and noun phrases. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 1 (46-60) - set c collocations, verb patterns and noun phrases" href="Grade_12_Unit_10_Exercise_1_46-60_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 1 46-60 set c collocations, verb patterns and noun phrases" href="Grade_12_Unit_10_Exercise_1_46-60_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 10 – Exercise 1 (46-60) – Set C</h3>
   <p>Collocations, verb patterns and noun phrases. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 1 (46-60) - set d collocations, verb patterns and noun phrases" href="Grade_12_Unit_10_Exercise_1_46-60_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 1 46-60 set d collocations, verb patterns and noun phrases" href="Grade_12_Unit_10_Exercise_1_46-60_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 10 – Exercise 1 (46-60) – Set D</h3>
   <p>Collocations, verb patterns and noun phrases. 15 questions; THPT 2026-oriented practice.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 1 (61-75) - set b reporting orders, requests and reminders" href="Grade_12_Unit_10_Exercise_1_61-75_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 1 61-75 set b reporting orders, requests and reminders" href="Grade_12_Unit_10_Exercise_1_61-75_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 10 – Exercise 1 (61-75) – Set B</h3>
   <p>Reporting orders, requests and reminders. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 1 (61-75) - set c reporting orders, requests and reminders" href="Grade_12_Unit_10_Exercise_1_61-75_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 1 61-75 set c reporting orders, requests and reminders" href="Grade_12_Unit_10_Exercise_1_61-75_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 10 – Exercise 1 (61-75) – Set C</h3>
   <p>Reporting orders, requests and reminders. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 1 (61-75) - set d reporting orders, requests and reminders" href="Grade_12_Unit_10_Exercise_1_61-75_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 1 61-75 set d reporting orders, requests and reminders" href="Grade_12_Unit_10_Exercise_1_61-75_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 10 – Exercise 1 (61-75) – Set D</h3>
   <p>Reporting orders, requests and reminders. 15 questions; THPT 2026-oriented practice.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 1 (76-90) - set b reporting advice, warnings and permission" href="Grade_12_Unit_10_Exercise_1_76-90_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 1 76-90 set b reporting advice, warnings and permission" href="Grade_12_Unit_10_Exercise_1_76-90_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 10 – Exercise 1 (76-90) – Set B</h3>
   <p>Reporting advice, warnings and permission. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 1 (76-90) - set c reporting advice, warnings and permission" href="Grade_12_Unit_10_Exercise_1_76-90_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 1 76-90 set c reporting advice, warnings and permission" href="Grade_12_Unit_10_Exercise_1_76-90_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 10 – Exercise 1 (76-90) – Set C</h3>
   <p>Reporting advice, warnings and permission. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 1 (76-90) - set d reporting advice, warnings and permission" href="Grade_12_Unit_10_Exercise_1_76-90_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 1 76-90 set d reporting advice, warnings and permission" href="Grade_12_Unit_10_Exercise_1_76-90_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 10 – Exercise 1 (76-90) – Set D</h3>
   <p>Reporting advice, warnings and permission. 15 questions; THPT 2026-oriented practice.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 1 (91-105) - set b offers, agreements and accurate reporting" href="Grade_12_Unit_10_Exercise_1_91-105_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 1 91-105 set b offers, agreements and accurate reporting" href="Grade_12_Unit_10_Exercise_1_91-105_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 10 – Exercise 1 (91-105) – Set B</h3>
   <p>Offers, agreements and accurate reporting. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 1 (91-105) - set c offers, agreements and accurate reporting" href="Grade_12_Unit_10_Exercise_1_91-105_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 1 91-105 set c offers, agreements and accurate reporting" href="Grade_12_Unit_10_Exercise_1_91-105_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 10 – Exercise 1 (91-105) – Set C</h3>
   <p>Offers, agreements and accurate reporting. 15 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 1 (91-105) - set d offers, agreements and accurate reporting" href="Grade_12_Unit_10_Exercise_1_91-105_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 1 91-105 set d offers, agreements and accurate reporting" href="Grade_12_Unit_10_Exercise_1_91-105_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 10 – Exercise 1 (91-105) – Set D</h3>
   <p>Offers, agreements and accurate reporting. 15 questions; THPT 2026-oriented practice.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 2 - set b checking what a learner can remember" href="Grade_12_Unit_10_Exercise_2_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 2  set b checking what a learner can remember" href="Grade_12_Unit_10_Exercise_2_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 10 – Exercise 2 – Set B</h3>
   <p>Checking what a learner can remember. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 2 - set c using a memory check to identify the next task" href="Grade_12_Unit_10_Exercise_2_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 2  set c checking what a learner can remember" href="Grade_12_Unit_10_Exercise_2_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 10 – Exercise 2 – Set C</h3>
-  <p>Using a memory check to identify the next task. 5 questions; Vietnamese explanations.</p>
+  <p>Checking what a learner can remember. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 2 - set d distinguishing an observation from a comparison of methods" href="Grade_12_Unit_10_Exercise_2_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 2  set d checking what a learner can remember" href="Grade_12_Unit_10_Exercise_2_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 10 – Exercise 2 – Set D</h3>
-  <p>Distinguishing an observation from a comparison of methods. 5 questions; THPT 2026-oriented practice.</p>
+  <p>Checking what a learner can remember. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 3 - set b learning beyond formal classes" href="Grade_12_Unit_10_Exercise_3_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 3  set b learning beyond formal classes" href="Grade_12_Unit_10_Exercise_3_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 10 – Exercise 3 – Set B</h3>
   <p>Learning beyond formal classes. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 3 - set c choosing a learning activity that fits a purpose" href="Grade_12_Unit_10_Exercise_3_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 3  set c learning beyond formal classes" href="Grade_12_Unit_10_Exercise_3_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 10 – Exercise 3 – Set C</h3>
-  <p>Choosing a learning activity that fits a purpose. 5 questions; Vietnamese explanations.</p>
+  <p>Learning beyond formal classes. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 3 - set d a flexible option is useful only when its conditions are understood" href="Grade_12_Unit_10_Exercise_3_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 3  set d learning beyond formal classes" href="Grade_12_Unit_10_Exercise_3_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 10 – Exercise 3 – Set D</h3>
-  <p>A flexible option is useful only when its conditions are understood. 5 questions; THPT 2026-oriented practice.</p>
+  <p>Learning beyond formal classes. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 4 - set b a fictional learner returns to study after retirement" href="Grade_12_Unit_10_Exercise_4_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 4  set b a fictional learner returns to study after retirement" href="Grade_12_Unit_10_Exercise_4_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 10 – Exercise 4 – Set B</h3>
   <p>A fictional learner returns to study after retirement. 8 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 4 - set c an older learner develops a local-history project" href="Grade_12_Unit_10_Exercise_4_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 4  set c a fictional learner returns to study after retirement" href="Grade_12_Unit_10_Exercise_4_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 10 – Exercise 4 – Set C</h3>
-  <p>An older learner develops a local-history project. 8 questions; Vietnamese explanations.</p>
+  <p>A fictional learner returns to study after retirement. 8 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 4 - set d what an older learner can demonstrate after a course" href="Grade_12_Unit_10_Exercise_4_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 4  set d a fictional learner returns to study after retirement" href="Grade_12_Unit_10_Exercise_4_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 10 – Exercise 4 – Set D</h3>
-  <p>What an older learner can demonstrate after a course. 8 questions; THPT 2026-oriented practice.</p>
+  <p>A fictional learner returns to study after retirement. 8 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 5 - set b an advertisement for a fictional adult-learning programme" href="Grade_12_Unit_10_Exercise_5_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 5  set b an advertisement for a fictional adult-learning programme" href="Grade_12_Unit_10_Exercise_5_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 10 – Exercise 5 – Set B</h3>
   <p>An advertisement for a fictional adult-learning programme. 6 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 5 - set c checking the support in a learning advertisement" href="Grade_12_Unit_10_Exercise_5_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 5  set c an advertisement for a fictional adult-learning programme" href="Grade_12_Unit_10_Exercise_5_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 10 – Exercise 5 – Set C</h3>
-  <p>Checking the support in a learning advertisement. 6 questions; Vietnamese explanations.</p>
+  <p>An advertisement for a fictional adult-learning programme. 6 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 5 - set d interpreting what a programme advertisement promises" href="Grade_12_Unit_10_Exercise_5_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 5  set d an advertisement for a fictional adult-learning programme" href="Grade_12_Unit_10_Exercise_5_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 10 – Exercise 5 – Set D</h3>
-  <p>Interpreting what a programme advertisement promises. 6 questions; THPT 2026-oriented practice.</p>
+  <p>An advertisement for a fictional adult-learning programme. 6 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 6 - set b coherent learning dialogues, emails and paragraphs" href="Grade_12_Unit_10_Exercise_6_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 6  set b coherent learning dialogues, emails and paragraphs" href="Grade_12_Unit_10_Exercise_6_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 10 – Exercise 6 – Set B</h3>
   <p>Coherent learning dialogues, emails and paragraphs. 10 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 6 - set c coherent learning dialogues, emails and paragraphs" href="Grade_12_Unit_10_Exercise_6_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 6  set c coherent learning dialogues, emails and paragraphs" href="Grade_12_Unit_10_Exercise_6_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 10 – Exercise 6 – Set C</h3>
   <p>Coherent learning dialogues, emails and paragraphs. 10 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 6 - set d coherent learning dialogues, emails and paragraphs" href="Grade_12_Unit_10_Exercise_6_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 6  set d coherent learning dialogues, emails and paragraphs" href="Grade_12_Unit_10_Exercise_6_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 10 – Exercise 6 – Set D</h3>
-  <p>Coherent learning dialogues, emails and paragraphs. 10 questions; THPT 2026-oriented practice.</p>
+  <p>Coherent learning dialogues, emails and paragraphs. 10 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 7 - set b a practical plan for continuing to learn" href="Grade_12_Unit_10_Exercise_7_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 7  set b a practical plan for continuing to learn" href="Grade_12_Unit_10_Exercise_7_Set_B.html">
   <div class="icon orange">🧩</div>
   <h3>Unit 10 – Exercise 7 – Set B</h3>
   <p>A practical plan for continuing to learn. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 7 - set c revising a learning plan after feedback" href="Grade_12_Unit_10_Exercise_7_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 7  set c a practical plan for continuing to learn" href="Grade_12_Unit_10_Exercise_7_Set_C.html">
   <div class="icon green">🧩</div>
   <h3>Unit 10 – Exercise 7 – Set C</h3>
-  <p>Revising a learning plan after feedback. 5 questions; Vietnamese explanations.</p>
+  <p>A practical plan for continuing to learn. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 7 - set d a record of participation is not a complete account of learning" href="Grade_12_Unit_10_Exercise_7_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 7  set d a practical plan for continuing to learn" href="Grade_12_Unit_10_Exercise_7_Set_D.html">
   <div class="icon purple">🧩</div>
   <h3>Unit 10 – Exercise 7 – Set D</h3>
-  <p>A record of participation is not a complete account of learning. 5 questions; THPT 2026-oriented practice.</p>
+  <p>A practical plan for continuing to learn. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 8 - set b beginning a realistic learning routine" href="Grade_12_Unit_10_Exercise_8_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 8  set b beginning a realistic learning routine" href="Grade_12_Unit_10_Exercise_8_Set_B.html">
   <div class="icon orange">📖</div>
   <h3>Unit 10 – Exercise 8 – Set B</h3>
   <p>Beginning a realistic learning routine. 8 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 8 - set c changing a routine while keeping a learning goal" href="Grade_12_Unit_10_Exercise_8_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 8  set c beginning a realistic learning routine" href="Grade_12_Unit_10_Exercise_8_Set_C.html">
   <div class="icon green">📖</div>
   <h3>Unit 10 – Exercise 8 – Set C</h3>
-  <p>Changing a routine while keeping a learning goal. 8 questions; Vietnamese explanations.</p>
+  <p>Beginning a realistic learning routine. 8 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 8 - set d interpreting progress without making ability a fixed label" href="Grade_12_Unit_10_Exercise_8_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 8  set d beginning a realistic learning routine" href="Grade_12_Unit_10_Exercise_8_Set_D.html">
   <div class="icon purple">📖</div>
   <h3>Unit 10 – Exercise 8 – Set D</h3>
-  <p>Interpreting progress without making ability a fixed label. 8 questions; THPT 2026-oriented practice.</p>
+  <p>Beginning a realistic learning routine. 8 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 9 - set b different purposes and shared support for lifelong learning" href="Grade_12_Unit_10_Exercise_9_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 9  set b different purposes and shared support for lifelong learning" href="Grade_12_Unit_10_Exercise_9_Set_B.html">
   <div class="icon orange">📖</div>
   <h3>Unit 10 – Exercise 9 – Set B</h3>
   <p>Different purposes and shared support for lifelong learning. 10 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 9 - set c participation and practical access to continuing education" href="Grade_12_Unit_10_Exercise_9_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 9  set c different purposes and shared support for lifelong learning" href="Grade_12_Unit_10_Exercise_9_Set_C.html">
   <div class="icon green">📖</div>
   <h3>Unit 10 – Exercise 9 – Set C</h3>
-  <p>Participation and practical access to continuing education. 10 questions; Vietnamese explanations.</p>
+  <p>Different purposes and shared support for lifelong learning. 10 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 9 - set d what counts as progress in a continuing-learning programme?" href="Grade_12_Unit_10_Exercise_9_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 9  set d different purposes and shared support for lifelong learning" href="Grade_12_Unit_10_Exercise_9_Set_D.html">
   <div class="icon purple">📖</div>
   <h3>Unit 10 – Exercise 9 – Set D</h3>
-  <p>What counts as progress in a continuing-learning programme?. 10 questions; THPT 2026-oriented practice.</p>
+  <p>Different purposes and shared support for lifelong learning. 10 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 10 - set b a study adviser discusses a revision plan" href="Grade_12_Unit_10_Exercise_10_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 10  set b a study adviser discusses a revision plan" href="Grade_12_Unit_10_Exercise_10_Set_B.html">
   <div class="icon orange">🎧</div>
   <h3>Unit 10 – Exercise 10 – Set B</h3>
   <p>A study adviser discusses a revision plan. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 10 - set c comparing confidence with a check of understanding" href="Grade_12_Unit_10_Exercise_10_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 10  set c a study adviser discusses a revision plan" href="Grade_12_Unit_10_Exercise_10_Set_C.html">
   <div class="icon green">🎧</div>
   <h3>Unit 10 – Exercise 10 – Set C</h3>
-  <p>Comparing confidence with a check of understanding. 5 questions; Vietnamese explanations.</p>
+  <p>A study adviser discusses a revision plan. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 10 - set d what a better answer can and cannot establish" href="Grade_12_Unit_10_Exercise_10_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 10  set d a study adviser discusses a revision plan" href="Grade_12_Unit_10_Exercise_10_Set_D.html">
   <div class="icon purple">🎧</div>
   <h3>Unit 10 – Exercise 10 – Set D</h3>
-  <p>What a better answer can and cannot establish. 5 questions; Vietnamese explanations.</p>
+  <p>A study adviser discusses a revision plan. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 11 - set b clarifying a message while learning a language" href="Grade_12_Unit_10_Exercise_11_Set_B.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 11  set b clarifying a message while learning a language" href="Grade_12_Unit_10_Exercise_11_Set_B.html">
   <div class="icon orange">🎧</div>
   <h3>Unit 10 – Exercise 11 – Set B</h3>
   <p>Clarifying a message while learning a language. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 11 - set c asking a precise question instead of requesting the whole message again" href="Grade_12_Unit_10_Exercise_11_Set_C.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 11  set c clarifying a message while learning a language" href="Grade_12_Unit_10_Exercise_11_Set_C.html">
   <div class="icon green">🎧</div>
   <h3>Unit 10 – Exercise 11 – Set C</h3>
-  <p>Asking a precise question instead of requesting the whole message again. 5 questions; Vietnamese explanations.</p>
+  <p>Clarifying a message while learning a language. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 - exercise 11 - set d checking who is offering to act and what has been requested" href="Grade_12_Unit_10_Exercise_11_Set_D.html">
+<a class="game-card locked" data-grade="12" data-title="grade 12 unit 10 exercise 11  set d clarifying a message while learning a language" href="Grade_12_Unit_10_Exercise_11_Set_D.html">
   <div class="icon purple">🎧</div>
   <h3>Unit 10 – Exercise 11 – Set D</h3>
-  <p>Checking who is offering to act and what has been requested. 5 questions; Vietnamese explanations.</p>
+  <p>Clarifying a message while learning a language. 5 questions; Vietnamese explanations.</p>
   <span class="play">Play now →</span>
 </a>
-<!-- END GRADE 12 UNIT 10 - SETS B C D -->
+<!-- END GRADE 12 UNITS 9 AND 10 -->
       </div>
     </section>
 
@@ -6271,13 +6356,34 @@ href="Grade_10_Unit_2_Exercise_1_100_132_Option_C.html">
       if(event.key === "Escape" && backdrop.classList.contains("show")) closeLogin();
     });
 
-    searchInput.addEventListener("input", () => {
+    // Combined search and Grade 10 Unit selector. Never changes game URLs or login state.
+    let selectedUnit10 = "all";
+    const unitTabs10 = [...document.querySelectorAll(".unit-tab")];
+    function applyCardFilters(){
       const keyword = searchInput.value.trim().toLowerCase();
       cards.forEach(card => {
-        const title = card.dataset.title.toLowerCase();
-        card.style.display = title.includes(keyword) ? "block" : "none";
+        const searchable = ((card.dataset.title || "") + " " + (card.querySelector("h3")?.textContent || "")).toLowerCase();
+        const searchMatches = searchable.includes(keyword);
+        const unitMatches = card.dataset.grade !== "10" || selectedUnit10 === "all" || card.dataset.unit === selectedUnit10;
+        card.style.display = searchMatches && unitMatches ? "" : "none";
       });
-    });
+      document.querySelectorAll('[data-unit-heading]').forEach(heading => {
+        const unit = heading.dataset.unitHeading;
+        const hasVisible = [...document.querySelectorAll('.game-card[data-grade="10"][data-unit="'+unit+'"]')]
+          .some(card => card.style.display !== "none");
+        heading.style.display = hasVisible ? "flex" : "none";
+      });
+    }
+    searchInput.addEventListener("input", applyCardFilters);
+    unitTabs10.forEach(tab => tab.addEventListener("click", () => {
+      selectedUnit10 = tab.dataset.filterUnit;
+      unitTabs10.forEach(item => {
+        const active = item === tab;
+        item.classList.toggle("active", active);
+        item.setAttribute("aria-pressed", String(active));
+      });
+      applyCardFilters();
+    }));
 // ===== CHỌN GRADE =====
 
 const gradeTabs = [...document.querySelectorAll(".grade-tab")];
